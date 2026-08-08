@@ -1,9 +1,18 @@
 # Exam-Quiz
-Quiz Exam Haiti est une application mobile android concu pour aider les eleves Haitiens a reviser les examens sous forme de jeu 
-objectif du jeu 
-Apprendre en jouant 
-reviser sans stresse 
-tester les connaissances comme dans un vrai jeu
-Ameliore ses scores a chaque partie
-Principe du jeu
-Choisir un examen ,un matiere ,repondre au question 
+
+Exam-Quiz est une application web simple de quiz en français, conçue pour aider les élèves à réviser de façon ludique.
+
+## Fonctionnalités
+- Questions en français
+- Interface simple et claire
+- Score affiché à la fin du quiz
+
+## Lancer l’application
+1. Ouvrez le fichier index.html dans votre navigateur.
+2. Répondez aux questions.
+3. Consultez votre score à la fin.
+
+## Structure du projet
+- index.html : interface du quiz
+- src/quizLogic.js : logique du quiz
+- test/quizLogic.test.js : tests de validation
