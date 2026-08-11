@@ -4,6 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Exam-Quiz</title>
+    <!-- Google Analytics (GA4) - Remplacez G-XXXXXXX par votre Measurement ID -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);} 
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXX'); // <-- Remplacez G-XXXXXXX par votre ID de mesure GA4
+    </script>
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -153,6 +161,22 @@
       // Coins (récompenses)
       let coins = Number(localStorage.getItem('exam_quiz_coins') || 0);
       const levelReward = 5; // pièces accordées par niveau réussi
+      // Compteur de visites local (privé — seulement visible dans ton navigateur)
+      let localVisits = Number(localStorage.getItem('exam_quiz_local_visits') || 0) + 1;
+      localStorage.setItem('exam_quiz_local_visits', String(localVisits));
+      // Mode admin local (sessionStorage) — toggle via Ctrl+Shift+V
+      let adminMode = sessionStorage.getItem('exam_quiz_admin') === '1';
+      function toggleAdminMode() {
+        adminMode = !adminMode;
+        sessionStorage.setItem('exam_quiz_admin', adminMode ? '1' : '0');
+        render();
+      }
+
+      window.addEventListener('keydown', (e) => {
+        if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'v') {
+          toggleAdminMode();
+        }
+      });
 
       function renderLanding() {
         const container = document.getElementById('quiz-container');
@@ -186,6 +210,8 @@
               <p>- Vous êtes capables — avancez pas à pas et faites confiance à vos connaissances.</p>
             </div>
             <div>Pièces : 🪙 ${coins}</div>
+            ${adminMode ? `<div style="margin-top:0.6rem; padding:0.6rem; border-radius:8px; background:#f1f5f9;">(Admin) Visites locales sur ce navigateur : <strong>${localVisits}</strong></div>` : ''}
+            <div style="margin-top:0.4rem; font-size:0.85rem; color:#475569;">Astuce : presse <strong>Ctrl+Shift+V</strong> pour afficher le compteur admin (visible seulement pour toi).</div>
             <button class="start-btn" id="start-btn">Démarrer</button>
           </div>
         `;
