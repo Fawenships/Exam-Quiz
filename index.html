@@ -135,7 +135,7 @@
   <body>
     <div class="card">
       <h1>Exam-Quiz</h1>
-      <p>Bienvenue dans votre quiz dΓÇÖentra├«nement en fran├ºais.</p>
+      <p>Bienvenue dans votre quiz d’entraînement en français.</p>
       <div id="quiz-container"></div>
     </div>
 
@@ -145,14 +145,14 @@
 
       const questions = baccQuestions;
       const totalLevels = Math.ceil(questions.length / 5);
-      const unlockThreshold = 4; // score minimum requis pour d├⌐bloquer le niveau suivant
+      const unlockThreshold = 4; // score minimum requis pour débloquer le niveau suivant
       const unlockedLevels = new Set([1]);
       let selectedLevel = null;
       let quiz = null;
       let showLanding = true;
-      // Coins (r├⌐compenses)
+      // Coins (récompenses)
       let coins = Number(localStorage.getItem('exam_quiz_coins') || 0);
-      const levelReward = 5; // pi├¿ces accord├⌐es par niveau r├⌐ussi
+      const levelReward = 5; // pièces accordées par niveau réussi
 
       function renderLanding() {
         const container = document.getElementById('quiz-container');
@@ -174,19 +174,19 @@
               </svg>
             </div>
             <h2>Bienvenue sur Exam-Quiz</h2>
-            <p>Entra├«ne-toi par niveaux et d├⌐bloque les suivants en r├⌐ussissant.</p>
-            <p><strong>D├⌐velopp├⌐ par :</strong> Ing. Fawenbert R├⌐gis</p>
-            <p>Teste tes connaissances, progresse ├⌐tape par ├⌐tape et rel├¿ve les d├⌐fis.</p>
-            <p>Conseil : lis attentivement chaque ├⌐nonc├⌐ et prends ton temps.</p>
+            <p>Entraîne-toi par niveaux et débloque les suivants en réussissant.</p>
+            <p><strong>Développé par :</strong> Ing. Fawenbert Régis</p>
+            <p>Teste tes connaissances, progresse étape par étape et relève les défis.</p>
+            <p>Conseil : lis attentivement chaque énoncé et prends ton temps.</p>
             <div class="reassure">
-              <p><strong>Pour les ├⌐l├¿ves NS4 ΓÇö Rassurez-vous :</strong></p>
+              <p><strong>Pour les élèves NS4 — Rassurez-vous :</strong></p>
               <p>- Prenez une grande respiration avant de commencer.</p>
-              <p>- Si vous faites une erreur, ce nΓÇÖest pas grave : recommencez et apprenez.</p>
-              <p>- Jouez en ├⌐tant concentr├⌐ : un moment calme aide ├á mieux retenir.</p>
-              <p>- Vous ├¬tes capables ΓÇö avancez pas ├á pas et faites confiance ├á vos connaissances.</p>
+              <p>- Si vous faites une erreur, ce n’est pas grave : recommencez et apprenez.</p>
+              <p>- Jouez en étant concentré : un moment calme aide à mieux retenir.</p>
+              <p>- Vous êtes capables — avancez pas à pas et faites confiance à vos connaissances.</p>
             </div>
-            <div>Pi├¿ces : ≡ƒ¬Ö ${coins}</div>
-            <button class="start-btn" id="start-btn">D├⌐marrer</button>
+            <div>Pièces : 🪙 ${coins}</div>
+            <button class="start-btn" id="start-btn">Démarrer</button>
           </div>
         `;
 
@@ -205,15 +205,15 @@
         const container = document.getElementById('quiz-container');
         const levels = Array.from({ length: totalLevels }, (_, index) => index + 1);
         container.innerHTML = `
-          <div class="progress">Choisissez un niveau ├á d├⌐bloquer :</div>
-          <div style="margin-bottom:0.6rem">Vos pi├¿ces : ≡ƒ¬Ö ${coins}</div>
+          <div class="progress">Choisissez un niveau à débloquer :</div>
+          <div style="margin-bottom:0.6rem">Vos pièces : 🪙 ${coins}</div>
           ${levels
             .map((level) => {
               const unlocked = unlockedLevels.has(level);
-              return `<button class="level-btn${unlocked ? '' : ' locked'}" data-level="${level}" ${unlocked ? '' : 'disabled'}>${unlocked ? `Niveau ${level}` : `Niveau ${level} (verrouill├⌐)`}</button>`;
+              return `<button class="level-btn${unlocked ? '' : ' locked'}" data-level="${level}" ${unlocked ? '' : 'disabled'}>${unlocked ? `Niveau ${level}` : `Niveau ${level} (verrouillé)`}</button>`;
             })
             .join('')}
-          <div class="result">Niveau 1 disponible. Terminez chaque niveau pour d├⌐bloquer le suivant.</div>
+          <div class="result">Niveau 1 disponible. Terminez chaque niveau pour débloquer le suivant.</div>
         `;
 
         container.querySelectorAll('.level-btn').forEach((button) => {
@@ -241,13 +241,13 @@
         }
         if (quiz.failed) {
           const failedQuestion = getCurrentQuestion(quiz);
-          const failedAnswerText = failedQuestion?.options[quiz.failedAnswer] ?? 'R├⌐ponse inconnue';
-          const correctAnswerText = failedQuestion?.options[failedQuestion?.correctAnswer] ?? 'R├⌐ponse correcte inconnue';
+          const failedAnswerText = failedQuestion?.options[quiz.failedAnswer] ?? 'Réponse inconnue';
+          const correctAnswerText = failedQuestion?.options[failedQuestion?.correctAnswer] ?? 'Réponse correcte inconnue';
 
           container.innerHTML = `
-            <div class="result">├ëchec du niveau ${selectedLevel}.</div>
+            <div class="result">Échec du niveau ${selectedLevel}.</div>
             <div class="result">Vous avez choisi : ${failedAnswerText}</div>
-            <div class="result">Bonne r├⌐ponse : ${correctAnswerText}</div>
+            <div class="result">Bonne réponse : ${correctAnswerText}</div>
             <div class="result">Recommencez le niveau pour progresser.</div>
             <button class="restart-btn" id="retry-btn">Recommencer le niveau ${selectedLevel}</button>
             <button class="restart-btn" id="back-btn">Retour aux niveaux</button>
@@ -276,12 +276,12 @@
           }
 
           container.innerHTML = `
-            <div class="result">Quiz termin├⌐ ! Niveau choisi : ${selectedLevel}</div>
+            <div class="result">Quiz terminé ! Niveau choisi : ${selectedLevel}</div>
             <div class="result">Votre score : ${quiz.score}/${quiz.questions.length}</div>
             <div class="result">${getLevel(quiz.score, quiz.questions.length)}</div>
-            ${canUnlock && nextLevel <= totalLevels ? `<div class="badge">Niveau ${selectedLevel} termin├⌐ et niveau ${nextLevel} d├⌐bloqu├⌐ !</div>` : `<div class="badge" style="background:#f59e0b;">Score n├⌐cessaire : ${unlockThreshold}/5 pour d├⌐bloquer le niveau suivant.</div>`}
-            ${earned > 0 ? `<div style="margin-top:0.6rem">Vous gagnez ${earned} pi├¿ces ! ≡ƒ¬Ö</div>` : ''}
-            <div style="margin-top:0.6rem">Total pi├¿ces : ≡ƒ¬Ö ${coins}</div>
+            ${canUnlock && nextLevel <= totalLevels ? `<div class="badge">Niveau ${selectedLevel} terminé et niveau ${nextLevel} débloqué !</div>` : `<div class="badge" style="background:#f59e0b;">Score nécessaire : ${unlockThreshold}/5 pour débloquer le niveau suivant.</div>`}
+            ${earned > 0 ? `<div style="margin-top:0.6rem">Vous gagnez ${earned} pièces ! 🪙</div>` : ''}
+            <div style="margin-top:0.6rem">Total pièces : 🪙 ${coins}</div>
             <button class="restart-btn" id="restart-btn">Revenir aux niveaux</button>
           `;
           document.getElementById('restart-btn').addEventListener('click', () => {
@@ -294,7 +294,7 @@
 
         const question = getCurrentQuestion(quiz);
         container.innerHTML = `
-          <div class="progress">Niveau ${selectedLevel} ΓÇö ${getProgress(quiz)}</div>
+          <div class="progress">Niveau ${selectedLevel} — ${getProgress(quiz)}</div>
           <h2>${question.question}</h2>
           ${question.options.map((option, index) => `<button data-index="${index}">${option}</button>`).join('')}
           <div class="ai-panel">
