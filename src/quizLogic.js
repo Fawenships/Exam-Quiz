@@ -1,3 +1,5 @@
+export const QUESTIONS_PER_LEVEL = 5;
+
 export function createQuiz(questions) {
   return {
     questions,
@@ -11,7 +13,7 @@ export function createQuiz(questions) {
 function normalizeQuestionsWithLevels(questions) {
   return questions.map((question, index) => ({
     ...question,
-    level: typeof question.level === 'number' ? question.level : Math.ceil((index + 1) / 5),
+    level: typeof question.level === 'number' ? question.level : Math.ceil((index + 1) / QUESTIONS_PER_LEVEL),
   }));
 }
 
@@ -22,7 +24,7 @@ export function selectQuestionsByLevel(questions, level) {
   }
 
   const questionsWithLevels = normalizeQuestionsWithLevels(questions);
-  return questionsWithLevels.filter((question) => question.level === normalizedLevel).slice(0, 5);
+  return questionsWithLevels.filter((question) => question.level === normalizedLevel).slice(0, QUESTIONS_PER_LEVEL);
 }
 
 export function getCurrentQuestion(quiz) {

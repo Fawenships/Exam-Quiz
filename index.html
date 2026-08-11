@@ -122,6 +122,15 @@
         margin-top: 0.6rem;
       }
       .start-btn:hover { background:#059669 }
+      .levels-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 0.7rem;
+      }
+      .level-btn {
+        padding: 0.75rem;
+        font-size: 0.95rem;
+      }
       .reassure {
         color: #064e3b;
         background: rgba(34,197,94,0.06);
@@ -140,12 +149,12 @@
     </div>
 
     <script type="module">
-      import { createQuiz, selectQuestionsByLevel, answerQuestion, getCurrentQuestion, getLevel, getProgress, getAiHint, getAiFeedback, isFinished } from './src/quizLogic.js';
+      import { createQuiz, selectQuestionsByLevel, answerQuestion, getCurrentQuestion, getLevel, getProgress, getAiHint, getAiFeedback, isFinished, QUESTIONS_PER_LEVEL } from './src/quizLogic.js';
       import { baccQuestions } from './src/baccQuestions.js';
 
       const questions = baccQuestions;
-      const totalLevels = Math.ceil(questions.length / 5);
-      const unlockThreshold = 4; // score minimum requis pour débloquer le niveau suivant
+      const totalLevels = Math.ceil(questions.length / QUESTIONS_PER_LEVEL);
+      const unlockThreshold = Math.max(1, QUESTIONS_PER_LEVEL - 1); // score minimum requis pour débloquer le niveau suivant
       const unlockedLevels = new Set([1]);
       let selectedLevel = null;
       let quiz = null;
@@ -207,12 +216,14 @@
         container.innerHTML = `
           <div class="progress">Choisissez un niveau à débloquer :</div>
           <div style="margin-bottom:0.6rem">Vos pièces : 🪙 ${coins}</div>
-          ${levels
-            .map((level) => {
-              const unlocked = unlockedLevels.has(level);
-              return `<button class="level-btn${unlocked ? '' : ' locked'}" data-level="${level}" ${unlocked ? '' : 'disabled'}>${unlocked ? `Niveau ${level}` : `Niveau ${level} (verrouillé)`}</button>`;
-            })
-            .join('')}
+          <div class="levels-grid">
+            ${levels
+              .map((level) => {
+                const unlocked = unlockedLevels.has(level);
+                return `<button class="level-btn${unlocked ? '' : ' locked'}" data-level="${level}" ${unlocked ? '' : 'disabled'}>${unlocked ? `Niveau ${level}` : `Niveau ${level} (verrouillé)`}</button>`;
+              })
+              .join('')}
+          </div>
           <div class="result">Niveau 1 disponible. Terminez chaque niveau pour débloquer le suivant.</div>
         `;
 

@@ -1,4 +1,4 @@
-export const baccQuestions = [
+const baseQuestions = [
   {
     id: 1,
     question: 'Quelle est la fonction principale des mitochondries dans une cellule ?',
@@ -600,3 +600,181 @@ export const baccQuestions = [
     correctAnswer: 1,
   },
 ];
+
+function makeOptions(correct, wrong1, wrong2, wrong3) {
+  return [String(correct), String(wrong1), String(wrong2), String(wrong3)];
+}
+
+function generateExtraQuestions() {
+  const questions = [];
+  const grammarQuestions = [
+    { question: 'Quel est le synonyme de “rapide” ?', options: ['Lent', 'Vite', 'Faible', 'Triste'], correctAnswer: 1 },
+    { question: 'Quel est l’antonyme de “noir” ?', options: ['Blanc', 'Gris', 'Bleu', 'Brun'], correctAnswer: 0 },
+    { question: 'Quel est le synonyme de “grand” ?', options: ['Petit', 'Large', 'Haut', 'Étroit'], correctAnswer: 2 },
+    { question: 'Quel est l’antonyme de “fort” ?', options: ['Faible', 'Solide', 'Courageux', 'Rapide'], correctAnswer: 0 },
+    { question: 'Comment conjugue-t-on “être” à la première personne du singulier ?','options': ['Es', 'Sommes', 'Suis', 'Êtes'], correctAnswer: 2 },
+    { question: 'Comment conjugue-t-on “aller” à la troisième personne du singulier ?','options': ['Allons', 'Vont', 'Vas', 'Va'], correctAnswer: 3 },
+    { question: 'Quel est le synonyme de “content” ?', options: ['Triste', 'Satisfait', 'Paresseux', 'Nerveux'], correctAnswer: 1 },
+    { question: 'Quel est l’antonyme de “difficile” ?', options: ['Facile', 'Long', 'Penible', 'Rare'], correctAnswer: 0 },
+    { question: 'Comment conjugue-t-on “finir” avec “nous” ?','options': ['Finissons', 'Finissez', 'Finissent', 'Finit'], correctAnswer: 0 },
+    { question: 'Comment conjugue-t-on “prendre” avec “elles” ?','options': ['Prenent', 'Prenez', 'Prend', 'Prenons'], correctAnswer: 0 },
+    { question: 'Quel est le synonyme de “triste” ?', options: ['Mélancolique', 'Joyeux', 'Rapide', 'Léger'], correctAnswer: 0 },
+    { question: 'Quel est l’antonyme de “chaud” ?', options: ['Froid', 'Tendre', 'Sombre', 'Sec'], correctAnswer: 0 },
+    { question: 'Comment conjugue-t-on “avoir” avec “tu” ?','options': ['As', 'Avez', 'Ont', 'Ai'], correctAnswer: 0 },
+    { question: 'Quel est le synonyme de “beau” ?', options: ['Joli', 'Sec', 'Lent', 'Clair'], correctAnswer: 0 },
+    { question: 'Quel est l’antonyme de “lent” ?', options: ['Rapide', 'Calme', 'Mince', 'Grand'], correctAnswer: 0 },
+    { question: 'Comment conjugue-t-on “faire” à la troisième personne du singulier ?','options': ['Fait', 'Fais', 'Faisons', 'Font'], correctAnswer: 0 },
+    { question: 'Quel est le synonyme de “sombre” ?', options: ['Obscur', 'Brillant', 'Doux', 'Léger'], correctAnswer: 0 },
+    { question: 'Quel est l’antonyme de “facile” ?', options: ['Difficile', 'Plus', 'Claire', 'Lourd'], correctAnswer: 0 },
+    { question: 'Comment conjugue-t-on “aller” à la première personne du singulier ?','options': ['Allons', 'Vais', 'Vas', 'Vont'], correctAnswer: 1 },
+    { question: 'Quel est le synonyme de “heureux” ?', options: ['Jaloux', 'Triste', 'Joyeux', 'Rouge'], correctAnswer: 2 },
+  ];
+
+  const geographyQuestions = [
+    { question: 'Quelle est la capitale de l’Italie ?', options: ['Rome', 'Milan', 'Venise', 'Florence'], correctAnswer: 0 },
+    { question: 'Quelle est la capitale de l’Égypte ?', options: ['Le Caire', 'Alexandrie', 'Gizeh', 'Louqsor'], correctAnswer: 0 },
+    { question: 'Quel fleuve traverse la France ?', options: ['La Loire', 'Le Danube', 'Le Nil', 'Le Rhin'], correctAnswer: 0 },
+    { question: 'Quel est le plus haut sommet d’Afrique ?', options: ['Kilimandjaro', 'Mont Elbrouz', 'Mont Kenya', 'Atlas'], correctAnswer: 0 },
+    { question: 'Quel est le plus grand continent ?', options: ['Afrique', 'Europe', 'Asie', 'Océanie'], correctAnswer: 2 },
+    { question: 'Quel pays a un drapeau rouge avec un croissant blanc ?', options: ['Turquie', 'Canada', 'Chine', 'Suisse'], correctAnswer: 0 },
+    { question: 'Quel est l’océan le plus profond ?', options: ['Océan Atlantique', 'Océan Indien', 'Océan Pacifique', 'Océan Arctique'], correctAnswer: 2 },
+    { question: 'Quelle est la capitale du Canada ?', options: ['Toronto', 'Ottawa', 'Montréal', 'Vancouver'], correctAnswer: 1 },
+    { question: 'Quel est le plus grand pays d’Amérique du Sud ?', options: ['Argentine', 'Brésil', 'Pérou', 'Chili'], correctAnswer: 1 },
+    { question: 'Dans quel pays se trouvent les pyramides de Gizeh ?', options: ['Égypte', 'Mexique', 'Grèce', 'Turquie'], correctAnswer: 0 },
+    { question: 'À quelle date a eu lieu la prise de la Bastille ?', options: ['14 juillet 1789', '1er mai 1789', '4 juillet 1776', '11 novembre 1918'], correctAnswer: 0 },
+    { question: 'En quelle année la Seconde Guerre mondiale s’est-elle terminée en Europe ?', options: ['1944', '1945', '1946', '1947'], correctAnswer: 1 },
+    { question: 'Où se trouve la Tour Eiffel ?', options: ['Londres', 'Paris', 'Rome', 'Madrid'], correctAnswer: 1 },
+    { question: 'Qui a inventé l’imprimerie moderne ?', options: ['Edison', 'Gutenberg', 'Tesla', 'Newton'], correctAnswer: 1 },
+    { question: 'Quel pays a Tokyo comme capitale ?', options: ['Chine', 'Japon', 'Corée du Sud', 'Thaïlande'], correctAnswer: 1 },
+    { question: 'Quel désert est considéré comme le plus grand désert chaud ?', options: ['Sahara', 'Gobi', 'Kalahari', 'Atacama'], correctAnswer: 0 },
+    { question: 'Quel pays est célèbre pour ses kangourous ?', options: ['Australie', 'Inde', 'Canada', 'Brésil'], correctAnswer: 0 },
+    { question: 'Quelle est la capitale de l’Espagne ?', options: ['Barcelone', 'Madrid', 'Séville', 'Valence'], correctAnswer: 1 },
+    { question: 'Quel est la capitale du Portugal ?', options: ['Lisbonne', 'Porto', 'Coimbra', 'Faro'], correctAnswer: 0 },
+    { question: 'Quelle est la capitale de l’Indonésie ?', options: ['Singapour', 'Jakarta', 'Manille', 'Kuala Lumpur'], correctAnswer: 1 },
+  ];
+
+  const scienceQuestions = [
+    { question: 'Quel est le symbole chimique de l’eau ?', options: ['HO', 'H2O', 'O2H', 'OH2'], correctAnswer: 1 },
+    { question: 'Quel gaz respirons-nous pour vivre ?', options: ['Nitrogène', 'Oxygène', 'Hydrogène', 'Dioxyde de carbone'], correctAnswer: 1 },
+    { question: 'Quel est le symbole chimique du fer ?', options: ['Fe', 'Ir', 'Fr', 'Fi'], correctAnswer: 0 },
+    { question: 'Quelle planète est la plus proche du Soleil ?', options: ['Vénus', 'Mars', 'Mercure', 'Terre'], correctAnswer: 2 },
+    { question: 'Quelle unité mesure l’intensité électrique ?', options: ['Volt', 'Watt', 'Ampère', 'Ohm'], correctAnswer: 2 },
+    { question: 'Quel organe pompe le sang ?', options: ['Le foie', 'Le poumon', 'Le cœur', 'Le rein'], correctAnswer: 2 },
+    { question: 'Quel est l’état de l’eau à 0°C ?', options: ['Gazeux', 'Solide', 'Liquide', 'Plasma'], correctAnswer: 2 },
+    { question: 'Quel est le principal gaz contenu dans l’air ?', options: ['Oxygène', 'Hydrogène', 'Nitrogène', 'Dioxyde de carbone'], correctAnswer: 2 },
+    { question: 'Quel type d’énergie provient du Soleil ?', options: ['Éolienne', 'Solaire', 'Hydraulique', 'Géothermique'], correctAnswer: 1 },
+    { question: 'Quel animal est un mammifère marin ?', options: ['Requin', 'Dauphin', 'Calmar', 'Poisson-lune'], correctAnswer: 1 },
+    { question: 'Qu’est-ce que la photosynthèse produit principalement ?', options: ['Gaz carbonique', 'Oxygène', 'Eau', 'Feu'], correctAnswer: 1 },
+    { question: 'Quel est le principal métal dans l’acier ?', options: ['Aluminium', 'Fer', 'Cuivre', 'Platine'], correctAnswer: 1 },
+    { question: 'Quelle est la vitesse approximative du son dans l’air ?', options: ['340 m/s', '150 m/s', '1000 m/s', '30 m/s'], correctAnswer: 0 },
+    { question: 'Quel est l’organisme producteur de pollen ?', options: ['L’arbre', 'La fleur', 'Le champignon', 'La roche'], correctAnswer: 1 },
+    { question: 'Quel est le liquide qui transporte le sang ?', options: ['Plasma', 'Lymphe', 'Salive', 'Urine'], correctAnswer: 0 },
+    { question: 'Quel est le plus grand organe du corps humain ?', options: ['Le cuir chevelu', 'La peau', 'Le foie', 'Le cœur'], correctAnswer: 1 },
+    { question: 'Quel est l’élément principal de l’ADN ?', options: ['Protéine', 'Acide aminé', 'Nucléotide', 'Lipide'], correctAnswer: 2 },
+    { question: 'Quel est le nom d’un animal qui est un reptile ?', options: ['Grenouille', 'Serpent', 'Chien', 'Aigle'], correctAnswer: 1 },
+    { question: 'Quel est le principal organe de la respiration ?', options: ['Le foie', 'Le cœur', 'Les poumons', 'La rate'], correctAnswer: 2 },
+    { question: 'Quel est le phénomène où la lumière change de direction ?', options: ['Réflexion', 'Réfraction', 'Diffusion', 'Absorption'], correctAnswer: 1 },
+  ];
+
+  const advancedMathQuestions = [
+    { question: 'Quel est 15% de 200 ?', options: ['15', '20', '30', '50'], correctAnswer: 2 },
+    { question: 'Quel est le prochain nombre premier après 31 ?', options: ['33', '35', '37', '39'], correctAnswer: 2 },
+    { question: 'Que vaut 7² ?', options: ['42', '49', '56', '63'], correctAnswer: 1 },
+    { question: 'Quel est 3/4 de 100 ?', options: ['50', '60', '75', '80'], correctAnswer: 2 },
+    { question: 'Que vaut 0,5 + 0,25 ?', options: ['0,55', '0,60', '0,75', '0,80'], correctAnswer: 2 },
+    { question: 'Que vaut 12 × 12 ?', options: ['124', '144', '154', '164'], correctAnswer: 1 },
+    { question: 'Quel est 25% de 80 ?', options: ['15', '18', '20', '25'], correctAnswer: 2 },
+    { question: 'Que vaut 5³ ?', options: ['25', '50', '100', '125'], correctAnswer: 3 },
+    { question: 'Que vaut 9² ?', options: ['72', '81', '90', '99'], correctAnswer: 1 },
+    { question: 'Si x=2, que vaut 3x+4 ?', options: ['6', '8', '10', '12'], correctAnswer: 2 },
+    { question: 'Combien font 45 ÷ 9 ?', options: ['3', '4', '5', '6'], correctAnswer: 2 },
+    { question: 'Que vaut 8 × 7 ?', options: ['48', '54', '56', '58'], correctAnswer: 2 },
+    { question: 'Combien font 18 ÷ 3 ?', options: ['5', '6', '7', '8'], correctAnswer: 1 },
+    { question: 'Que vaut 14 + 28 ?', options: ['32', '38', '42', '48'], correctAnswer: 2 },
+    { question: 'Que vaut 11 × 11 ?', options: ['111', '121', '131', '141'], correctAnswer: 1 },
+    { question: 'Quel est 1/2 de 50 ?', options: ['10', '15', '25', '30'], correctAnswer: 2 },
+    { question: 'Quel est 30% de 60 ?', options: ['12', '15', '18', '20'], correctAnswer: 2 },
+    { question: 'Quel est le double de 24 ?', options: ['44', '46', '48', '50'], correctAnswer: 2 },
+    { question: 'Combien vaut 7 × 8 ?', options: ['48', '52', '56', '60'], correctAnswer: 2 },
+    { question: 'Combien vaut 100 - 37 ?', options: ['63', '67', '73', '77'], correctAnswer: 0 },
+  ];
+
+  const hardQuestions = [
+    { question: 'Combien de faces a un cube ?', options: ['4', '6', '8', '12'], correctAnswer: 1 },
+    { question: 'Combien de côtés a un octogone ?', options: ['6', '7', '8', '9'], correctAnswer: 2 },
+    { question: 'Combien de faces a un dodécaèdre ?', options: ['10', '12', '14', '16'], correctAnswer: 1 },
+    { question: 'Quelle est la formule de l’aire d’un cercle ?', options: ['2πr', 'πr²', 'πd', '2r²'], correctAnswer: 1 },
+    { question: 'Quelle planète a un jour plus long que son année ?', options: ['Mercure', 'Venus', 'Mars', 'Jupiter'], correctAnswer: 1 },
+    { question: 'Quel est l’état du dioxyde de carbone à -79°C ?', options: ['Gazeux', 'Liquide', 'Solide', 'Plasma'], correctAnswer: 2 },
+    { question: 'Quel est le symbole du sodium ?', options: ['So', 'Na', 'Sd', 'Ns'], correctAnswer: 1 },
+    { question: 'Combien de minutes y a-t-il dans une heure ?', options: ['45', '50', '55', '60'], correctAnswer: 3 },
+    { question: 'Combien d’heures y a-t-il dans deux jours ?', options: ['24', '36', '48', '72'], correctAnswer: 2 },
+    { question: 'Combien de zéros y a-t-il dans un million ?', options: ['4', '5', '6', '7'], correctAnswer: 2 },
+  ];
+
+  for (let index = 0; index < 150; index += 1) {
+    const id = 101 + index;
+    let question = '';
+    let options = [];
+    let correctAnswer = 0;
+
+    if (id <= 120) {
+      const a = 6 + (index % 10);
+      const b = 2 + Math.floor(index / 10);
+      const correct = a * b;
+      question = `Quel est le produit de ${a} et ${b} ?`;
+      options = makeOptions(correct, correct + 2, correct - 2, correct + 5);
+    } else if (id <= 140) {
+      const subIndex = index - 20;
+      const divisor = 2 + (subIndex % 10);
+      const quotient = 2 + Math.floor(subIndex / 2);
+      const dividend = divisor * quotient;
+      question = `Quel est le résultat de ${dividend} ÷ ${divisor} ?`;
+      options = makeOptions(quotient, quotient + 1, Math.max(1, quotient - 1), quotient + 2);
+    } else if (id <= 160) {
+      const subIndex = index - 40;
+      if (subIndex < 10) {
+        const n = 11 + subIndex;
+        const correct = n * n;
+        question = `Que vaut ${n}² ?`;
+        options = makeOptions(correct, correct - n, correct + n, correct - n - 1);
+      } else {
+        const meters = 6 + (subIndex - 10);
+        const correct = meters * 100;
+        question = `Combien de centimètres y a-t-il dans ${meters} mètres ?`;
+        options = makeOptions(correct, correct - 50, correct + 50, correct + 100);
+      }
+    } else if (id <= 180) {
+      const item = grammarQuestions[id - 161];
+      question = item.question;
+      options = item.options;
+      correctAnswer = item.correctAnswer;
+    } else if (id <= 200) {
+      const item = geographyQuestions[id - 181];
+      question = item.question;
+      options = item.options;
+      correctAnswer = item.correctAnswer;
+    } else if (id <= 220) {
+      const item = scienceQuestions[id - 201];
+      question = item.question;
+      options = item.options;
+      correctAnswer = item.correctAnswer;
+    } else if (id <= 240) {
+      const item = advancedMathQuestions[id - 221];
+      question = item.question;
+      options = item.options;
+      correctAnswer = item.correctAnswer;
+    } else {
+      const item = hardQuestions[id - 241];
+      question = item.question;
+      options = item.options;
+      correctAnswer = item.correctAnswer;
+    }
+
+    questions.push({ id, question, options, correctAnswer });
+  }
+
+  return questions;
+}
+
+export const baccQuestions = baseQuestions.concat(generateExtraQuestions());
