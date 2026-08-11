@@ -125,6 +125,14 @@
         margin-top: 0.6rem;
       }
       .start-btn:hover { background:#059669 }
+      .install-btn {
+        background: #f59e0b;
+        color: white;
+        margin-top: 0.6rem;
+      }
+      .install-btn:hover {
+        background: #d97706;
+      }
       .levels-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
@@ -199,6 +207,8 @@
             </div>
             <div>Pièces : 🪙 ${coins}</div>
             <button class="start-btn" id="start-btn">Démarrer</button>
+            <button class="install-btn" id="install-btn" disabled>Installer l’application</button>
+            <p id="install-note" style="margin-top:0.5rem;color:#475569;font-size:0.95rem;">Le bouton sera activé lorsque le navigateur détectera que l’application peut être installée.</p>
           </div>
         `;
 
@@ -345,6 +355,48 @@
             setTimeout(render, 400);
           });
         });
+      }
+
+      let deferredPrompt = null;
+
+      window.addEventListener('beforeinstallprompt', (event) => {
+        event.preventDefault();
+        deferredPrompt = event;
+        showInstallButton();
+      });
+
+      function hideInstallButton() {
+        const installBtn = document.getElementById('install-btn');
+        const installNote = document.getElementById('install-note');
+        if (installBtn) {
+          installBtn.disabled = true;
+        }
+        if (installNote) {
+          installNote.textContent = 'Le navigateur n’a pas encore autorisé l’installation de la PWA.';
+        }
+      }
+
+      function showInstallButton() {
+        const installBtn = document.getElementById('install-btn');
+        const installNote = document.getElementById('install-note');
+        if (installBtn) {
+          installBtn.disabled = false;
+          installBtn.addEventListener('click', async () => {
+            if (!deferredPrompt) {
+              return;
+            }
+            deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            if (outcome === 'accepted') {
+              console.log('PWA installée.');
+            }
+            deferredPrompt = null;
+            hideInstallButton();
+          }, { once: true });
+        }
+        if (installNote) {
+          installNote.textContent = 'Cliquez sur le bouton pour installer l’application.';
+        }
       }
 
       render();
