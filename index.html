@@ -95,6 +95,33 @@
         color: white;
         font-weight: bold;
       }
+      .hero {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        text-align: center;
+        padding: 2.5rem 1rem;
+        border-radius: 12px;
+        background: linear-gradient(180deg, rgba(34,197,94,0.06), rgba(59,130,246,0.05));
+      }
+      .hero .illustration {
+        width: 220px;
+        height: 140px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, #60a5fa, #34d399);
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        box-shadow: 0 10px 30px rgba(2,6,23,0.12);
+      }
+      .hero h2 { margin: 0; color: #0f172a; }
+      .start-btn {
+        background: #10b981;
+        margin-top: 0.6rem;
+      }
+      .start-btn:hover { background:#059669 }
     </style>
   </head>
   <body>
@@ -114,6 +141,41 @@
       const unlockedLevels = new Set([1]);
       let selectedLevel = null;
       let quiz = null;
+      let showLanding = true;
+
+      function renderLanding() {
+        const container = document.getElementById('quiz-container');
+        container.innerHTML = `
+          <div class="hero">
+            <div class="illustration">
+              <svg width="140" height="100" viewBox="0 0 140 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="140" height="100" rx="12" fill="url(#g)"/>
+                <g fill="white" opacity="0.95">
+                  <circle cx="36" cy="50" r="8" />
+                  <rect x="56" y="40" width="58" height="20" rx="4" />
+                </g>
+                <defs>
+                  <linearGradient id="g" x1="0" x2="1">
+                    <stop offset="0" stop-color="#60A5FA"/>
+                    <stop offset="1" stop-color="#34D399"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+            <h2>Bienvenue sur Exam-Quiz</h2>
+            <p>Entraîne-toi par niveaux et débloque les suivants en réussissant.</p>
+            <p><strong>Développé par :</strong> Ing. Fawenbert Régis</p>
+            <p>Teste tes connaissances, progresse étape par étape et relève les défis.</p>
+            <p>Conseil : lis attentivement chaque énoncé et prends ton temps.</p>
+            <button class="start-btn" id="start-btn">Démarrer</button>
+          </div>
+        `;
+
+        document.getElementById('start-btn').addEventListener('click', () => {
+          showLanding = false;
+          render();
+        });
+      }
 
       function startQuiz(level) {
         const levelQuestions = selectQuestionsByLevel(questions, level);
@@ -148,6 +210,11 @@
 
       function render() {
         const container = document.getElementById('quiz-container');
+        if (showLanding) {
+          renderLanding();
+          return;
+        }
+
         if (!quiz) {
           renderLevelSelection();
           return;
