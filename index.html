@@ -301,6 +301,22 @@
             localStorage.setItem('exam_quiz_coins', String(coins));
           }
 
+          // Envoi d'événements simples à Google Analytics (si configuré)
+          try {
+            if (typeof gtag === 'function') {
+              gtag('event', 'level_completed', {
+                level: selectedLevel,
+                score: quiz.score,
+                unlocked: canUnlock
+              });
+              if (earned > 0) {
+                gtag('event', 'coins_total', { total: coins, coins_earned: earned });
+              }
+            }
+          } catch (e) {
+            // ignore si gtag non disponible
+          }
+
           container.innerHTML = `
             <div class="result">Quiz terminé ! Niveau choisi : ${selectedLevel}</div>
             <div class="result">Votre score : ${quiz.score}/${quiz.questions.length}</div>
