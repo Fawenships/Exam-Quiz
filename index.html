@@ -122,6 +122,14 @@
         margin-top: 0.6rem;
       }
       .start-btn:hover { background:#059669 }
+      .reassure {
+        color: #064e3b;
+        background: rgba(34,197,94,0.06);
+        padding: 0.5rem 0.75rem;
+        border-radius: 8px;
+        font-style: italic;
+        max-width: 520px;
+      }
     </style>
   </head>
   <body>
@@ -142,6 +150,9 @@
       let selectedLevel = null;
       let quiz = null;
       let showLanding = true;
+      // Coins (récompenses)
+      let coins = Number(localStorage.getItem('exam_quiz_coins') || 0);
+      const levelReward = 5; // pièces accordées par niveau réussi
 
       function renderLanding() {
         const container = document.getElementById('quiz-container');
@@ -167,6 +178,14 @@
             <p><strong>Développé par :</strong> Ing. Fawenbert Régis</p>
             <p>Teste tes connaissances, progresse étape par étape et relève les défis.</p>
             <p>Conseil : lis attentivement chaque énoncé et prends ton temps.</p>
+            <div class="reassure">
+              <p><strong>Pour les élèves NS4 — Rassurez-vous :</strong></p>
+              <p>- Prenez une grande respiration avant de commencer.</p>
+              <p>- Si vous faites une erreur, ce n’est pas grave : recommencez et apprenez.</p>
+              <p>- Jouez en étant concentré : un moment calme aide à mieux retenir.</p>
+              <p>- Vous êtes capables — avancez pas à pas et faites confiance à vos connaissances.</p>
+            </div>
+            <div>Pièces : 🪙 ${coins}</div>
             <button class="start-btn" id="start-btn">Démarrer</button>
           </div>
         `;
@@ -187,6 +206,7 @@
         const levels = Array.from({ length: totalLevels }, (_, index) => index + 1);
         container.innerHTML = `
           <div class="progress">Choisissez un niveau à débloquer :</div>
+          <div style="margin-bottom:0.6rem">Vos pièces : 🪙 ${coins}</div>
           ${levels
             .map((level) => {
               const unlocked = unlockedLevels.has(level);
@@ -247,8 +267,12 @@
         if (isFinished(quiz)) {
           const nextLevel = selectedLevel + 1;
           const canUnlock = quiz.score >= unlockThreshold;
+          let earned = 0;
           if (canUnlock && nextLevel <= totalLevels) {
             unlockedLevels.add(nextLevel);
+            earned = levelReward;
+            coins += earned;
+            localStorage.setItem('exam_quiz_coins', String(coins));
           }
 
           container.innerHTML = `
@@ -256,6 +280,8 @@
             <div class="result">Votre score : ${quiz.score}/${quiz.questions.length}</div>
             <div class="result">${getLevel(quiz.score, quiz.questions.length)}</div>
             ${canUnlock && nextLevel <= totalLevels ? `<div class="badge">Niveau ${selectedLevel} terminé et niveau ${nextLevel} débloqué !</div>` : `<div class="badge" style="background:#f59e0b;">Score nécessaire : ${unlockThreshold}/5 pour débloquer le niveau suivant.</div>`}
+            ${earned > 0 ? `<div style="margin-top:0.6rem">Vous gagnez ${earned} pièces ! 🪙</div>` : ''}
+            <div style="margin-top:0.6rem">Total pièces : 🪙 ${coins}</div>
             <button class="restart-btn" id="restart-btn">Revenir aux niveaux</button>
           `;
           document.getElementById('restart-btn').addEventListener('click', () => {
