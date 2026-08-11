@@ -6,6 +6,8 @@ Exam-Quiz est une application web simple de quiz en français, conçue pour aide
 - Questions en français
 - Interface simple et claire
 - Score affiché à la fin du quiz
+- 100 questions de révision liées au baccalauréat
+- Assistant IA pour obtenir des conseils pendant le quiz
 
 ## Lancer l’application
 1. Ouvrez le fichier index.html dans votre navigateur.

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { createQuiz, answerQuestion, getCurrentQuestion, getLevel, getProgress, isFinished } from '../src/quizLogic.js';
+import { createQuiz, selectQuestionsByLevel, answerQuestion, getCurrentQuestion, getLevel, getProgress, getAiHint, getAiFeedback, isFinished } from '../src/quizLogic.js';
 
 const questions = [
   {
@@ -22,6 +22,20 @@ test('createQuiz initialise la première question', () => {
   assert.equal(quiz.score, 0);
   assert.equal(quiz.currentIndex, 0);
   assert.deepEqual(getCurrentQuestion(quiz), questions[0]);
+});
+
+test('selectQuestionsByLevel renvoie les 5 questions du niveau choisi', () => {
+  const levelQuestions = Array.from({ length: 10 }, (_, index) => ({
+    id: index + 1,
+    question: `Question ${index + 1}`,
+    options: ['A', 'B', 'C', 'D'],
+    correctAnswer: 0,
+  }));
+
+  const selected = selectQuestionsByLevel(levelQuestions, 2);
+  assert.equal(selected.length, 5);
+  assert.equal(selected[0].id, 6);
+  assert.equal(selected[4].id, 10);
 });
 
 test('answerQuestion met à jour le score et passe à la question suivante', () => {
@@ -48,4 +62,18 @@ test('getLevel retourne le bon niveau selon le score', () => {
   assert.equal(getLevel(4, 5), 'Niveau : Excellent');
   assert.equal(getLevel(3, 5), 'Niveau : Bien');
   assert.equal(getLevel(1, 5), 'Niveau : À améliorer');
+});
+
+test('getAiHint retourne un conseil adapté à la question', () => {
+  const hint = getAiHint(questions[0]);
+  assert.match(hint, /Port-au-Prince/);
+  assert.match(hint, /capitale/i);
+});
+
+test('getAiFeedback donne un retour en fonction de la réponse', () => {
+  const correctFeedback = getAiFeedback(questions[0], 0);
+  assert.match(correctFeedback, /bonne réponse/i);
+
+  const wrongFeedback = getAiFeedback(questions[0], 1);
+  assert.match(wrongFeedback, /réviser/i);
 });
