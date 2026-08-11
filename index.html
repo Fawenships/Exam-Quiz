@@ -183,35 +183,20 @@
     </div>
 
     <script type="module">
-      import { createQuiz, selectQuestionsByLevel, answerQuestion, getCurrentQuestion, getLevel, getProgress, getAiHint, getAiFeedback, isFinished } from './src/quizLogic.js';
+      import { createQuiz, selectQuestionsByGrade, selectQuestionsByGradeAndLevel, selectQuestionsByLevel, answerQuestion, getCurrentQuestion, getLevel, getProgress, getAiHint, getAiFeedback, isFinished } from './src/quizLogic.js';
       import { baccQuestions } from './src/baccQuestions.js';
 
       const questions = baccQuestions;
-      const totalLevels = Math.ceil(questions.length / 5);
+      const grades = ['9ème', 'Terminale'];
       const unlockThreshold = 4; // score minimum requis pour débloquer le niveau suivant
       const unlockedLevels = new Set([1]);
+      let selectedGrade = null;
       let selectedLevel = null;
       let quiz = null;
       let showLanding = true;
       // Coins (récompenses)
       let coins = Number(localStorage.getItem('exam_quiz_coins') || 0);
       const levelReward = 5; // pièces accordées par niveau réussi
-      // Compteur de visites local (privé — seulement visible dans ton navigateur)
-      let localVisits = Number(localStorage.getItem('exam_quiz_local_visits') || 0) + 1;
-      localStorage.setItem('exam_quiz_local_visits', String(localVisits));
-      // Mode admin local (sessionStorage) — toggle via Ctrl+Shift+V
-      let adminMode = sessionStorage.getItem('exam_quiz_admin') === '1';
-      function toggleAdminMode() {
-        adminMode = !adminMode;
-        sessionStorage.setItem('exam_quiz_admin', adminMode ? '1' : '0');
-        render();
-      }
-
-      window.addEventListener('keydown', (e) => {
-        if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'v') {
-          toggleAdminMode();
-        }
-      });
 
       function renderLanding() {
         const container = document.getElementById('quiz-container');
@@ -245,8 +230,6 @@
               <p>- Vous êtes capables — avancez pas à pas et faites confiance à vos connaissances.</p>
             </div>
             <div>Pièces : 🪙 ${coins}</div>
-            ${adminMode ? `<div style="margin-top:0.6rem; padding:0.6rem; border-radius:8px; background:#f1f5f9;">(Admin) Visites locales sur ce navigateur : <strong>${localVisits}</strong></div>` : ''}
-            ${adminMode && typeof getMockGAStats === 'function' ? (function(){ const s = getMockGAStats(); return `<div style="margin-top:0.5rem; padding:0.6rem; border-radius:8px; background:#eef2ff;">(Mock GA) Pages vues: <strong>${s.page_views}</strong> — Niveaux complétés: <strong>${s.level_completed}</strong> — Pièces totales (dernière): <strong>${s.coins_total}</strong> — Pièces gagnées (session): <strong>${s.coins_earned}</strong></div>`; })() : ''}
             <button class="start-btn" id="start-btn">Démarrer</button>
           </div>
         `;
@@ -258,22 +241,44 @@
       }
 
       function startQuiz(level) {
-        const levelQuestions = selectQuestionsByLevel(questions, level);
+        const levelQuestions = selectQuestionsByGradeAndLevel(questions, selectedGrade, level);
         return createQuiz(levelQuestions);
+      }
+
+      function renderGradeSelection() {
+        const container = document.getElementById('quiz-container');
+        container.innerHTML = `
+          <div class="progress">Choisissez votre section :</div>
+          <div style="margin-bottom:0.6rem">Vos pièces : 🪙 ${coins}</div>
+          ${grades
+            .map((grade) => `<button class="level-btn" data-grade="${grade}">${grade}</button>`)
+            .join('')}
+        `;
+
+        container.querySelectorAll('.level-btn').forEach((button) => {
+          button.addEventListener('click', () => {
+            selectedGrade = button.dataset.grade;
+            render();
+          });
+        });
       }
 
       function renderLevelSelection() {
         const container = document.getElementById('quiz-container');
-        const levels = Array.from({ length: totalLevels }, (_, index) => index + 1);
+        const gradeQuestions = selectQuestionsByGrade(questions, selectedGrade);
+        const totalLevels = Math.max(1, Math.ceil(gradeQuestions.length / 5));
+
         container.innerHTML = `
+          <div class="progress">Section : ${selectedGrade}</div>
           <div class="progress">Choisissez un niveau à débloquer :</div>
           <div style="margin-bottom:0.6rem">Vos pièces : 🪙 ${coins}</div>
-          ${levels
+          ${Array.from({ length: totalLevels }, (_, index) => index + 1)
             .map((level) => {
               const unlocked = unlockedLevels.has(level);
               return `<button class="level-btn${unlocked ? '' : ' locked'}" data-level="${level}" ${unlocked ? '' : 'disabled'}>${unlocked ? `Niveau ${level}` : `Niveau ${level} (verrouillé)`}</button>`;
             })
             .join('')}
+          <button class="restart-btn" id="change-grade-btn">Changer de section</button>
           <div class="result">Niveau 1 disponible. Terminez chaque niveau pour débloquer le suivant.</div>
         `;
 
@@ -287,12 +292,22 @@
             render();
           });
         });
+
+        document.getElementById('change-grade-btn').addEventListener('click', () => {
+          selectedGrade = null;
+          render();
+        });
       }
 
       function render() {
         const container = document.getElementById('quiz-container');
         if (showLanding) {
           renderLanding();
+          return;
+        }
+
+        if (!selectedGrade) {
+          renderGradeSelection();
           return;
         }
 
