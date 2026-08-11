@@ -247,7 +247,6 @@
             <div>Pièces : 🪙 ${coins}</div>
             ${adminMode ? `<div style="margin-top:0.6rem; padding:0.6rem; border-radius:8px; background:#f1f5f9;">(Admin) Visites locales sur ce navigateur : <strong>${localVisits}</strong></div>` : ''}
             ${adminMode && typeof getMockGAStats === 'function' ? (function(){ const s = getMockGAStats(); return `<div style="margin-top:0.5rem; padding:0.6rem; border-radius:8px; background:#eef2ff;">(Mock GA) Pages vues: <strong>${s.page_views}</strong> — Niveaux complétés: <strong>${s.level_completed}</strong> — Pièces totales (dernière): <strong>${s.coins_total}</strong> — Pièces gagnées (session): <strong>${s.coins_earned}</strong></div>`; })() : ''}
-            <div style="margin-top:0.4rem; font-size:0.85rem; color:#475569;">Astuce : presse <strong>Ctrl+Shift+V</strong> pour afficher le compteur admin (visible seulement pour toi).</div>
             <button class="start-btn" id="start-btn">Démarrer</button>
           </div>
         `;
