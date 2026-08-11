@@ -12,6 +12,41 @@
       gtag('js', new Date());
       gtag('config', 'G-XXXXXXX'); // <-- Remplacez G-XXXXXXX par votre ID de mesure GA4
     </script>
+    <!-- Mock local analytics if GA not configured: stores events in localStorage and exposes getMockGAStats() -->
+    <script>
+      (function(){
+        try {
+          if (typeof gtag !== 'function') throw 0;
+        } catch (e) {
+          window._mockGAEvents = JSON.parse(localStorage.getItem('exam_quiz_ga_events') || '[]');
+          window.gtag = function(){
+            const args = Array.from(arguments);
+            // gtag('event', name, payload)
+            const type = args[0] || 'unknown';
+            const name = args[1] || 'unknown';
+            const payload = args[2] || {};
+            window._mockGAEvents.push({ type, name, payload, ts: Date.now() });
+            try { localStorage.setItem('exam_quiz_ga_events', JSON.stringify(window._mockGAEvents)); } catch(_){}
+            console.info('[mock gtag]', name, payload);
+          };
+          // record a page_view
+          window.gtag('event', 'page_view', { page_location: location.href });
+          window.getMockGAStats = function(){
+            const events = window._mockGAEvents || [];
+            let page_views = 0, level_completed = 0, coins_total = 0, coins_earned = 0;
+            events.forEach(e => {
+              if (e.name === 'page_view') page_views++;
+              if (e.name === 'level_completed') level_completed++;
+              if (e.name === 'coins_total') {
+                if (typeof e.payload.total === 'number') coins_total = e.payload.total;
+                if (typeof e.payload.coins_earned === 'number') coins_earned += e.payload.coins_earned;
+              }
+            });
+            return { page_views, level_completed, coins_total, coins_earned };
+          };
+        }
+      })();
+    </script>
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -211,6 +246,7 @@
             </div>
             <div>Pièces : 🪙 ${coins}</div>
             ${adminMode ? `<div style="margin-top:0.6rem; padding:0.6rem; border-radius:8px; background:#f1f5f9;">(Admin) Visites locales sur ce navigateur : <strong>${localVisits}</strong></div>` : ''}
+            ${adminMode && typeof getMockGAStats === 'function' ? (function(){ const s = getMockGAStats(); return `<div style="margin-top:0.5rem; padding:0.6rem; border-radius:8px; background:#eef2ff;">(Mock GA) Pages vues: <strong>${s.page_views}</strong> — Niveaux complétés: <strong>${s.level_completed}</strong> — Pièces totales (dernière): <strong>${s.coins_total}</strong> — Pièces gagnées (session): <strong>${s.coins_earned}</strong></div>`; })() : ''}
             <div style="margin-top:0.4rem; font-size:0.85rem; color:#475569;">Astuce : presse <strong>Ctrl+Shift+V</strong> pour afficher le compteur admin (visible seulement pour toi).</div>
             <button class="start-btn" id="start-btn">Démarrer</button>
           </div>
