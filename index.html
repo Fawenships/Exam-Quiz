@@ -359,18 +359,52 @@
 
       let deferredPrompt = null;
 
-      window.addEventListener('beforeinstallprompt', (event) => {
-        event.preventDefault();
-        deferredPrompt = event;
-        showInstallButton();
-      });
+function isAppInstalled() {
+  return window.matchMedia('(display-mode: standalone)').matches
+    || window.navigator.standalone === true; // iOS Safari
+}
 
-      function hideInstallButton() {
-        const installBtn = document.getElementById('install-btn');
-        const installNote = document.getElementById('install-note');
-        if (installBtn) {
-          installBtn.disabled = true;
-        }
+function markAsInstalled() {
+  const installBtn = document.getElementById('install-btn');
+  const installNote = document.getElementById('install-note');
+  if (installBtn) {
+    installBtn.disabled = true;
+    installBtn.textContent = 'Application déjà installée ✓';
+  }
+  if (installNote) {
+    installNote.textContent = 'Vous utilisez déjà l’application installée.';
+  }
+}
+
+window.addEventListener('beforeinstallprompt', (event) => {
+  event.preventDefault();
+  deferredPrompt = event;
+  if (!isAppInstalled()) {
+    showInstallButton();
+  }
+});
+
+window.addEventListener('appinstalled', () => {
+  deferredPrompt = null;
+  markAsInstalled();
+});
+
+function hideInstallButton() {
+  const installBtn = document.getElementById('install-btn');
+  const installNote = document.getElementById('install-note');
+  if (installBtn) {
+    installBtn.disabled = true;
+  }
+  if (installNote) {
+    installNote.textContent = 'Le navigateur n’a pas encore autorisé l’installation de la PWA.';
+  }
+}
+    installBtn.disabled = true;
+  }
+  if (installNote) {
+    installNote.textContent = 'Le navigateur n’a pas encore autorisé l’installation de la PWA.';
+  }
+}
         if (installNote) {
           installNote.textContent = 'Le navigateur n’a pas encore autorisé l’installation de la PWA.';
         }
