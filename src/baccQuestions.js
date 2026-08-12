@@ -777,4 +777,255 @@ function generateExtraQuestions() {
   return questions;
 }
 
-export const baccQuestions = baseQuestions.concat(generateExtraQuestions());
+// Nouvelles questions ajoutées : Biologie, Géologie, Chimie et Histoire nationale d'Haïti
+const haitiQuestions = [
+  // Biologie
+  {
+    id: 251,
+    question: 'Quelle est la fonction principale des globules rouges ?',
+    options: ['Transporter l’oxygène', 'Combattre les infections', 'Coaguler le sang', 'Digérer les aliments'],
+    correctAnswer: 0,
+  },
+  {
+    id: 252,
+    question: 'Quel organite cellulaire est responsable de la photosynthèse chez les plantes ?',
+    options: ['La mitochondrie', 'Le chloroplaste', 'Le noyau', 'Le ribosome'],
+    correctAnswer: 1,
+  },
+  {
+    id: 253,
+    question: 'Comment appelle-t-on le processus par lequel une cellule se divise en deux cellules identiques ?',
+    options: ['La méiose', 'La mitose', 'La fécondation', 'La photosynthèse'],
+    correctAnswer: 1,
+  },
+  {
+    id: 254,
+    question: 'Quel est le rôle principal des enzymes dans la digestion ?',
+    options: ['Stocker l’énergie', 'Accélérer les réactions chimiques', 'Transporter l’oxygène', 'Combattre les microbes'],
+    correctAnswer: 1,
+  },
+  {
+    id: 255,
+    question: 'Quel groupe sanguin est considéré comme donneur universel ?',
+    options: ['A positif', 'AB positif', 'O négatif', 'B positif'],
+    correctAnswer: 2,
+  },
+  {
+    id: 256,
+    question: 'Quel insecte est responsable de la transmission du paludisme (malaria) ?',
+    options: ['La mouche tsé-tsé', 'Le moustique Anophèle', 'La punaise', 'Le moustique Aedes'],
+    correctAnswer: 1,
+  },
+  {
+    id: 257,
+    question: 'Quel organe du corps humain produit l’insuline ?',
+    options: ['Le foie', 'Le pancréas', 'Le rein', 'La rate'],
+    correctAnswer: 1,
+  },
+  {
+    id: 258,
+    question: 'Quelle vitamine la peau produit-elle grâce à l’exposition au soleil ?',
+    options: ['Vitamine A', 'Vitamine B12', 'Vitamine C', 'Vitamine D'],
+    correctAnswer: 3,
+  },
+  {
+    id: 259,
+    question: 'Comment appelle-t-on l’ensemble formé par les êtres vivants et leur environnement ?',
+    options: ['Une biosphère', 'Un écosystème', 'Une population', 'Une chaîne alimentaire'],
+    correctAnswer: 1,
+  },
+  {
+    id: 260,
+    question: 'Quel est le rôle principal des globules blancs dans l’organisme ?',
+    options: ['Transporter l’oxygène', 'Défendre l’organisme contre les infections', 'Coaguler le sang', 'Produire de l’énergie'],
+    correctAnswer: 1,
+  },
+
+  // Géologie
+  {
+    id: 261,
+    question: 'Comment appelle-t-on la zone de contact entre deux plaques tectoniques ?',
+    options: ['Une dorsale', 'Une faille', 'Un cratère', 'Un bassin'],
+    correctAnswer: 1,
+  },
+  {
+    id: 262,
+    question: 'Sur quelle faille sismique majeure Haïti est-elle en partie située ?',
+    options: ['La faille de San Andreas', 'La faille Enriquillo-Plantain Garden', 'La faille de l’Anatolie', 'La faille du Rift est-africain'],
+    correctAnswer: 1,
+  },
+  {
+    id: 263,
+    question: 'Comment appelle-t-on une roche formée par le refroidissement du magma ?',
+    options: ['Roche sédimentaire', 'Roche métamorphique', 'Roche ignée (magmatique)', 'Roche calcaire'],
+    correctAnswer: 2,
+  },
+  {
+    id: 264,
+    question: 'Quel événement géologique majeur a frappé Haïti le 12 janvier 2010 ?',
+    options: ['Une éruption volcanique', 'Un séisme (tremblement de terre)', 'Un tsunami sans séisme', 'Une éruption de geyser'],
+    correctAnswer: 1,
+  },
+  {
+    id: 265,
+    question: 'Comment appelle-t-on l’étude scientifique des tremblements de terre ?',
+    options: ['La météorologie', 'La sismologie', 'La volcanologie', 'La géodésie'],
+    correctAnswer: 1,
+  },
+  {
+    id: 266,
+    question: 'Quelle est la couche la plus externe de la Terre ?',
+    options: ['Le noyau', 'Le manteau', 'La croûte terrestre', 'L’asthénosphère'],
+    correctAnswer: 2,
+  },
+  {
+    id: 267,
+    question: 'Comment appelle-t-on une roche formée par l’accumulation de sédiments ?',
+    options: ['Roche ignée', 'Roche sédimentaire', 'Roche métamorphique', 'Roche volcanique'],
+    correctAnswer: 1,
+  },
+  {
+    id: 268,
+    question: 'Quelle est la principale cause des éruptions volcaniques ?',
+    options: ['La remontée de magma', 'Le vent', 'La marée', 'La pluie'],
+    correctAnswer: 0,
+  },
+  {
+    id: 269,
+    question: 'Quelle échelle est couramment utilisée pour mesurer la magnitude d’un séisme ?',
+    options: ['L’échelle de Beaufort', 'L’échelle de Richter', 'L’échelle Celsius', 'L’échelle de Mercalli uniquement'],
+    correctAnswer: 1,
+  },
+  {
+    id: 270,
+    question: 'Quelles sont les deux plaques tectoniques dont le mouvement affecte particulièrement Haïti ?',
+    options: ['La plaque pacifique et la plaque africaine', 'La plaque Caraïbe et la plaque nord-américaine', 'La plaque eurasienne et la plaque indienne', 'La plaque sud-américaine et la plaque antarctique'],
+    correctAnswer: 1,
+  },
+
+  // Chimie
+  {
+    id: 271,
+    question: 'Quel est le symbole chimique de l’oxygène ?',
+    options: ['Ox', 'O', 'Og', 'O2'],
+    correctAnswer: 1,
+  },
+  {
+    id: 272,
+    question: 'Combien d’électrons possède un atome d’hydrogène neutre ?',
+    options: ['1', '2', '3', '0'],
+    correctAnswer: 0,
+  },
+  {
+    id: 273,
+    question: 'Quel est le pH de l’eau pure à température ambiante ?',
+    options: ['0', '7', '14', '10'],
+    correctAnswer: 1,
+  },
+  {
+    id: 274,
+    question: 'Comment appelle-t-on une substance qui accélère une réaction chimique sans être consommée ?',
+    options: ['Un réactif', 'Un catalyseur', 'Un solvant', 'Un précipité'],
+    correctAnswer: 1,
+  },
+  {
+    id: 275,
+    question: 'Comment appelle-t-on la réaction chimique entre un acide et une base ?',
+    options: ['Oxydation', 'Combustion', 'Neutralisation', 'Fermentation'],
+    correctAnswer: 2,
+  },
+  {
+    id: 276,
+    question: 'Quelle est la formule chimique du sel de table ?',
+    options: ['NaCl', 'KCl', 'CaCO3', 'H2SO4'],
+    correctAnswer: 0,
+  },
+  {
+    id: 277,
+    question: 'Combien de protons contient un atome de carbone ?',
+    options: ['4', '6', '8', '12'],
+    correctAnswer: 1,
+  },
+  {
+    id: 278,
+    question: 'Quel gaz est principalement produit lors de la combustion complète du carbone ?',
+    options: ['Monoxyde de carbone', 'Dioxyde de carbone', 'Méthane', 'Azote'],
+    correctAnswer: 1,
+  },
+  {
+    id: 279,
+    question: 'Dans quel état de la matière les particules sont-elles les plus rapprochées ?',
+    options: ['Gazeux', 'Liquide', 'Solide', 'Plasma'],
+    correctAnswer: 2,
+  },
+  {
+    id: 280,
+    question: 'Comment appelle-t-on le tableau qui classe les éléments chimiques ?',
+    options: ['Le tableau atomique', 'Le tableau périodique', 'Le tableau moléculaire', 'Le tableau isotopique'],
+    correctAnswer: 1,
+  },
+
+  // Histoire nationale d'Haïti
+  {
+    id: 281,
+    question: 'En quelle année Haïti a-t-elle proclamé son indépendance ?',
+    options: ['1791', '1804', '1815', '1825'],
+    correctAnswer: 1,
+  },
+  {
+    id: 282,
+    question: 'Qui est considéré comme le père fondateur de l’indépendance haïtienne, ayant proclamé l’indépendance en 1804 ?',
+    options: ['Toussaint Louverture', 'Jean-Jacques Dessalines', 'Alexandre Pétion', 'Henri Christophe'],
+    correctAnswer: 1,
+  },
+  {
+    id: 283,
+    question: 'Quelle bataille est considérée comme décisive pour l’indépendance d’Haïti ?',
+    options: ['La bataille de Crête-à-Pierrot', 'La bataille de Vertières', 'La bataille de Savannah', 'Le siège de Jacmel'],
+    correctAnswer: 1,
+  },
+  {
+    id: 284,
+    question: 'Qui a mené la révolution haïtienne avant d’être capturé et déporté en France en 1802 ?',
+    options: ['Jean-Jacques Dessalines', 'Toussaint Louverture', 'Alexandre Pétion', 'Vincent Ogé'],
+    correctAnswer: 1,
+  },
+  {
+    id: 285,
+    question: 'Quel nom portait le territoire d’Haïti avant l’indépendance, sous la colonisation française ?',
+    options: ['Hispaniola', 'Saint-Domingue', 'La Navidad', 'Port Royal'],
+    correctAnswer: 1,
+  },
+  {
+    id: 286,
+    question: 'En quelle année a eu lieu la bataille de Vertières ?',
+    options: ['1791', '1798', '1803', '1806'],
+    correctAnswer: 2,
+  },
+  {
+    id: 287,
+    question: 'Qui fut le premier empereur d’Haïti après l’indépendance ?',
+    options: ['Henri Christophe', 'Alexandre Pétion', 'Jean-Jacques Dessalines', 'Jean-Pierre Boyer'],
+    correctAnswer: 2,
+  },
+  {
+    id: 288,
+    question: 'À quelle date exacte l’indépendance d’Haïti a-t-elle été proclamée ?',
+    options: ['1er janvier 1804', '14 juillet 1804', '18 novembre 1803', '4 juillet 1804'],
+    correctAnswer: 0,
+  },
+  {
+    id: 289,
+    question: 'Qui est traditionnellement crédité de la rédaction de l’Acte de l’Indépendance d’Haïti ?',
+    options: ['Boisrond-Tonnerre', 'Alexandre Pétion', 'Vincent Ogé', 'Charles Rivière-Hérard'],
+    correctAnswer: 0,
+  },
+  {
+    id: 290,
+    question: 'Quelle puissance coloniale Haïti a-t-elle vaincue pour obtenir son indépendance ?',
+    options: ['L’Espagne', 'La France', 'Le Royaume-Uni', 'Le Portugal'],
+    correctAnswer: 1,
+  },
+];
+
+export const baccQuestions = baseQuestions.concat(generateExtraQuestions()).concat(haitiQuestions);
