@@ -20,6 +20,7 @@
 </script>
 
 <style>
+
 :root{
   --primary:#063b35;
   --primary2:#087f6c;
@@ -39,7 +40,6 @@
 
 html{
   scroll-behavior:smooth;
-  scroll-padding-top:80px;
 }
 
 body{
@@ -222,6 +222,10 @@ a{
   color:#effffb;
 }
 
+/* =========================
+   DEVELOPER
+========================= */
+
 .developer-signature{
   display:inline-flex;
   flex-direction:column;
@@ -255,7 +259,6 @@ a{
 }
 
 .primary-btn{
-  display:inline-block;
   border:0;
   border-radius:40px;
   padding:18px 48px;
@@ -470,31 +473,38 @@ a{
 }
 
 /* =========================
-   CATEGORIES
+   CATEGORIES NS4
 ========================= */
 
 .categories{
   display:grid;
-  grid-template-columns:repeat(4,1fr);
+  grid-template-columns:repeat(3,1fr);
   gap:20px;
   max-width:1100px;
   margin:auto;
 }
 
 .category{
+  width:100%;
+  border:1px solid #e0ece9;
   background:white;
   border-radius:18px;
   padding:26px 20px;
   text-align:center;
   box-shadow:0 8px 25px rgba(0,0,0,.06);
-  border:1px solid #e0ece9;
   transition:.2s;
+  cursor:pointer;
+  color:var(--text);
 }
 
 .category:hover{
   transform:translateY(-5px);
   border-color:var(--accent);
   box-shadow:0 14px 30px rgba(6,59,53,.1);
+}
+
+.category:active{
+  transform:scale(.98);
 }
 
 .category .emoji{
@@ -511,6 +521,15 @@ a{
   margin:0;
   color:#777;
   line-height:1.5;
+}
+
+#category-quiz-container{
+  max-width:900px;
+  margin:40px auto 0;
+}
+
+#category-quiz-container:empty{
+  display:none;
 }
 
 /* =========================
@@ -723,7 +742,9 @@ footer p{
   .developer-signature strong{
     font-size:19px;
   }
+
 }
+
 </style>
 </head>
 
@@ -746,8 +767,7 @@ footer p{
 <button
 class="menu-btn"
 id="menu-btn"
-aria-label="Ouvrir le menu"
-aria-expanded="false">
+aria-label="Ouvrir le menu">
 ☰
 </button>
 
@@ -765,10 +785,6 @@ aria-expanded="false">
 
 <main>
 
-<!-- =========================
-     ACCUEIL
-========================= -->
-
 <section class="hero" id="accueil">
 
 <div class="hero-content">
@@ -783,15 +799,18 @@ APPRENDS, TESTE TES CONNAISSANCES ET PROGRESSE
 </h1>
 
 <p>
-Une plateforme éducative haïtienne pour réviser, pratiquer
-et relever des défis à travers des quiz adaptés à plusieurs niveaux.
+Une plateforme éducative haïtienne pour réviser,
+pratiquer et relever des défis à travers des quiz
+adaptés à plusieurs niveaux.
 </p>
 
 <div class="developer-signature">
 
 <span>CRÉÉ ET DÉVELOPPÉ PAR</span>
 
-<strong>Ing. Fawenbert Régis</strong>
+<strong>
+Ing. Fawenbert Régis
+</strong>
 
 <small>
 Développeur &amp; créateur d’ExamQuiz
@@ -799,28 +818,28 @@ Développeur &amp; créateur d’ExamQuiz
 
 </div>
 
-<a href="#quiz" class="primary-btn">
+<a href="#quiz">
+
+<button class="primary-btn">
 COMMENCER LE QUIZ
+</button>
+
 </a>
 
 </div>
 
 </section>
 
-
-<!-- =========================
-     QUIZ
-========================= -->
-
-<section class="section" id="quiz">
+<section class="section" id="apropos">
 
 <h2 class="section-title">
-Quiz ExamQuiz
+Bienvenue à ExamQuiz
 </h2>
 
 <p class="section-intro">
-Choisis ton niveau, réponds aux questions et progresse
-niveau après niveau.
+ExamQuiz rassemble des questions d'entraînement
+dans plusieurs domaines afin de permettre aux élèves
+de réviser de manière simple, interactive et progressive.
 </p>
 
 <div class="quiz-shell landing-card">
@@ -834,8 +853,8 @@ Apprends en jouant
 </h2>
 
 <p>
-Réponds correctement aux questions pour débloquer
-progressivement les niveaux suivants.
+Choisis ton niveau, réponds aux questions
+et progresse progressivement.
 </p>
 
 <div class="reassure">
@@ -853,159 +872,147 @@ et utilise chaque erreur comme une occasion d'apprendre.
 
 </section>
 
-
 <!-- =========================
-     A PROPOS
-========================= -->
-
-<section class="section" id="apropos">
-
-<h2 class="section-title">
-À propos d'ExamQuiz
-</h2>
-
-<p class="section-intro">
-ExamQuiz est une plateforme éducative haïtienne créée pour aider
-les élèves à réviser, tester leurs connaissances et progresser
-grâce à des quiz interactifs.
-</p>
-
-<div class="quiz-shell landing-card">
-
-<div class="quiz-icon">
-📚
-</div>
-
-<h2>
-Une nouvelle façon de réviser
-</h2>
-
-<p>
-ExamQuiz rassemble des questions dans plusieurs domaines
-afin de permettre aux élèves de s'entraîner de manière
-simple, interactive et progressive.
-</p>
-
-</div>
-
-</section>
-
-
-<!-- =========================
-     CATEGORIES
+     CATÉGORIES NS4
 ========================= -->
 
 <section class="section alt" id="categories">
 
 <h2 class="section-title">
-Nos catégories
+Matières NS4
 </h2>
 
 <p class="section-intro">
-Découvre les différentes matières et domaines disponibles sur ExamQuiz.
+Choisis une matière pour t'entraîner avec des questions
+adaptées au niveau NS4 et à la préparation du Baccalauréat haïtien.
 </p>
 
 <div class="categories">
 
-<div class="category">
-<div class="emoji">🇭🇹</div>
-<h3>Histoire d’Haïti</h3>
-<p>Teste tes connaissances sur l'histoire nationale.</p>
+<button
+type="button"
+class="category"
+data-category="biologie">
+
+<div class="emoji">
+🧬
 </div>
 
-<div class="category">
-<div class="emoji">🌍</div>
-<h3>Géographie</h3>
-<p>Pays, villes, territoires et monde.</p>
+<h3>
+Biologie
+</h3>
+
+<p>
+Sciences de la vie, cellule,
+génétique et physiologie.
+</p>
+
+</button>
+
+
+<button
+type="button"
+class="category"
+data-category="geologie">
+
+<div class="emoji">
+🌋
 </div>
 
-<div class="category">
-<div class="emoji">⚽</div>
-<h3>Sport</h3>
-<p>Actualités et connaissances sportives.</p>
+<h3>
+Géologie
+</h3>
+
+<p>
+Terre, roches, évolution
+et phénomènes géologiques.
+</p>
+
+</button>
+
+
+<button
+type="button"
+class="category"
+data-category="chimie">
+
+<div class="emoji">
+⚗️
 </div>
 
-<div class="category">
-<div class="emoji">🔬</div>
-<h3>Sciences</h3>
-<p>Biologie, physique, chimie et sciences générales.</p>
+<h3>
+Chimie
+</h3>
+
+<p>
+Matière, réactions,
+solutions et chimie générale.
+</p>
+
+</button>
+
+
+<button
+type="button"
+class="category"
+data-category="economie">
+
+<div class="emoji">
+📊
 </div>
 
-<div class="category">
-<div class="emoji">🧠</div>
-<h3>Culture générale</h3>
-<p>Des questions variées pour élargir tes connaissances.</p>
+<h3>
+Économie
+</h3>
+
+<p>
+Marché, production,
+monnaie et développement.
+</p>
+
+</button>
+
+
+<button
+type="button"
+class="category"
+data-category="histoire">
+
+<div class="emoji">
+🇭🇹
 </div>
 
-<div class="category">
-<div class="emoji">📖</div>
-<h3>Français</h3>
-<p>Langue, vocabulaire et compréhension.</p>
-</div>
+<h3>
+Histoire
+</h3>
 
-<div class="category">
-<div class="emoji">🇭🇹</div>
-<h3>Kreyòl</h3>
-<p>Révise et teste tes connaissances en kreyòl.</p>
-</div>
+<p>
+Histoire d'Haïti
+et histoire générale.
+</p>
 
-<div class="category">
-<div class="emoji">🎓</div>
-<h3>Baccalauréat</h3>
-<p>Entraîne-toi avec des questions de niveau examen.</p>
-</div>
+</button>
 
 </div>
+
+<div id="category-quiz-container"></div>
 
 </section>
 
-
-<!-- =========================
-     CONTACT
-========================= -->
-
 <section class="social-section" id="contact">
 
-<h2>
-Suivez ExamQuiz
-</h2>
-
 <p>
-Cliquez sur une icône pour retrouver ExamQuiz sur les réseaux sociaux
-et ne manquer aucune nouveauté.
+Cliquez sur une icône et suivez ExamQuiz sur les réseaux sociaux
+pour ne manquer aucune nouveauté et aucune nouvelle épreuve publiée.
 </p>
 
 <div class="socials">
 
-<a href="#"
-aria-label="Facebook"
-title="Facebook">
-f
-</a>
-
-<a href="#"
-aria-label="X"
-title="X">
-𝕏
-</a>
-
-<a href="#"
-aria-label="Instagram"
-title="Instagram">
-◎
-</a>
-
-<a href="#"
-aria-label="YouTube"
-title="YouTube">
-▶
-</a>
-
-<a href="#"
-aria-label="TikTok"
-title="TikTok">
-♪
-</a>
+<a href="#" aria-label="Facebook">f</a>
+<a href="#" aria-label="X">𝕏</a>
+<a href="#" aria-label="Instagram">◎</a>
+<a href="#" aria-label="YouTube">▶</a>
+<a href="#" aria-label="TikTok">♪</a>
 
 </div>
 
@@ -1013,48 +1020,56 @@ title="TikTok">
 
 </main>
 
-
-<!-- =========================
-     FOOTER
-========================= -->
-
 <footer>
 
 <div class="footer-grid">
 
 <div>
 
-<h3>À PROPOS DE NOUS</h3>
+<h3>
+À PROPOS DE NOUS
+</h3>
 
 <p>
-ExamQuiz est une plateforme éducative destinée à aider les élèves
-à apprendre, réviser et tester leurs connaissances à travers des quiz.
+ExamQuiz est une plateforme éducative destinée
+à aider les élèves à apprendre, réviser et tester
+leurs connaissances à travers des quiz.
 </p>
 
 </div>
 
 <div class="footer-links">
 
-<h3>MENU</h3>
+<h3>
+MENU
+</h3>
 
-<a href="#accueil">Accueil</a>
-<a href="#quiz">Quiz</a>
-<a href="#categories">Catégories</a>
-<a href="#apropos">À propos</a>
-<a href="#contact">Contact</a>
+<a href="#quiz">
+Quiz
+</a>
+
+<a href="#categories">
+Catégories
+</a>
+
+<a href="#apropos">
+À propos
+</a>
+
+<a href="#contact">
+Contact
+</a>
 
 </div>
 
 <div>
 
-<h3>CRÉATEUR</h3>
+<h3>
+CRÉATEUR
+</h3>
 
 <p>
 Ing. Fawenbert Régis
-</p>
-
-<p>
-Développeur &amp; créateur d'ExamQuiz
 </p>
 
 </div>
@@ -1069,13 +1084,21 @@ Développeur &amp; créateur d'ExamQuiz
 
 <div class="footer-socials">
 
-<a href="#" aria-label="Facebook">f</a>
+<a href="#" aria-label="Facebook">
+f
+</a>
 
-<a href="#" aria-label="Instagram">◎</a>
+<a href="#" aria-label="Instagram">
+◎
+</a>
 
-<a href="#" aria-label="YouTube">▶</a>
+<a href="#" aria-label="YouTube">
+▶
+</a>
 
-<a href="#" aria-label="TikTok">♪</a>
+<a href="#" aria-label="TikTok">
+♪
+</a>
 
 </div>
 
@@ -1086,96 +1109,65 @@ Développeur &amp; créateur d'ExamQuiz
 
 <script type="module">
 
-/* =====================================================
-   IMPORTATION DU SYSTEME DE QUIZ
-===================================================== */
-
 import {
-  createQuiz,
-  selectQuestionsByLevel,
-  answerQuestion,
-  getCurrentQuestion,
-  getLevel,
-  getProgress,
-  getAiHint,
-  getAiFeedback,
-  isFinished,
-  QUESTIONS_PER_LEVEL
+createQuiz,
+selectQuestionsByLevel,
+answerQuestion,
+getCurrentQuestion,
+getLevel,
+getProgress,
+getAiHint,
+getAiFeedback,
+isFinished,
+QUESTIONS_PER_LEVEL
 } from './src/quizLogic.js';
 
 import {
-  baccQuestions
+baccQuestions
 } from './src/baccQuestions.js';
 
 
-/* =====================================================
-   QUESTIONS
-===================================================== */
+/* =========================
+   QUIZ BACCALAURÉAT
+========================= */
 
-const questions = baccQuestions;
-
-
-/* =====================================================
-   NIVEAUX
-===================================================== */
+const questions =
+baccQuestions;
 
 const totalLevels =
-  Math.ceil(
-    questions.length / QUESTIONS_PER_LEVEL
-  );
+Math.ceil(
+questions.length /
+QUESTIONS_PER_LEVEL
+);
 
 const unlockThreshold =
-  Math.max(
-    1,
-    QUESTIONS_PER_LEVEL - 1
-  );
+Math.max(
+1,
+QUESTIONS_PER_LEVEL - 1
+);
 
-
-/* =====================================================
-   NIVEAUX DEBLOQUES
-===================================================== */
-
-let savedUnlockedLevels;
-
-try {
-
-  savedUnlockedLevels =
-    JSON.parse(
-      localStorage.getItem(
-        'exam_quiz_unlocked_levels'
-      ) || '[1]'
-    );
-
-} catch(error){
-
-  savedUnlockedLevels = [1];
-
-}
-
+const savedUnlockedLevels =
+JSON.parse(
+localStorage.getItem(
+'exam_quiz_unlocked_levels'
+) || '[1]'
+);
 
 const unlockedLevels =
-  new Set(savedUnlockedLevels);
-
-
-/* =====================================================
-   SAUVEGARDE
-===================================================== */
+new Set(
+savedUnlockedLevels
+);
 
 function saveUnlockedLevels(){
 
-  localStorage.setItem(
-    'exam_quiz_unlocked_levels',
-    JSON.stringify(
-      Array.from(unlockedLevels)
-    )
-  );
+localStorage.setItem(
+'exam_quiz_unlocked_levels',
+JSON.stringify(
+Array.from(unlockedLevels)
+)
+);
 
 }
-
-
-/* =====================================================
-   VARIABLES DU QUIZ
-===================================================== */
 
 let selectedLevel = null;
 
@@ -1183,950 +1175,724 @@ let quiz = null;
 
 let showLanding = true;
 
-
-/* =====================================================
-   PIECES
-===================================================== */
-
 let coins =
-  Number(
-    localStorage.getItem(
-      'exam_quiz_coins'
-    ) || 0
-  );
+Number(
+localStorage.getItem(
+'exam_quiz_coins'
+) || 0
+);
 
 const levelReward = 5;
 
 
-/* =====================================================
-   INSTALLATION PWA
-===================================================== */
-
-let deferredPrompt = null;
-
-
-/* =====================================================
-   AFFICHER L'ACCUEIL DU QUIZ
-===================================================== */
+/* =========================
+   LANDING
+========================= */
 
 function renderLanding(){
 
-  const container =
-    document.getElementById(
-      'quiz-container'
-    );
+const container =
+document.getElementById(
+'quiz-container'
+);
 
-  if(!container)return;
+container.innerHTML = `
 
+<div style="margin:18px 0;font-weight:bold">
+🪙 ${coins} pièces
+</div>
 
-  container.innerHTML = `
+<button
+class="start-btn"
+id="start-btn">
 
-    <div style="margin:18px 0;font-weight:bold">
-      🪙 ${coins} pièces
-    </div>
+DÉMARRER
 
-    <button
-      class="start-btn"
-      id="start-btn">
+</button>
 
-      DÉMARRER
+<button
+class="install-btn"
+id="install-btn"
+disabled>
 
-    </button>
+INSTALLER L'APPLICATION
 
-    <button
-      class="install-btn"
-      id="install-btn"
-      disabled>
+</button>
 
-      INSTALLER L'APPLICATION
+<p
+id="install-note"
+style="color:#777;font-size:14px">
 
-    </button>
+Le bouton d'installation sera activé
+si le navigateur autorise l'installation.
 
-    <p
-      id="install-note"
-      style="color:#777;font-size:14px">
+</p>
 
-      Le bouton d'installation sera activé
-      si le navigateur autorise l'installation.
+`;
 
-    </p>
+document
+.getElementById('start-btn')
+.addEventListener(
+'click',
+()=>{
 
-  `;
+showLanding = false;
 
+render();
 
-  document
-    .getElementById('start-btn')
-    .addEventListener(
-      'click',
-      () => {
-
-        showLanding = false;
-
-        render();
-
-      }
-    );
-
-
-  updateInstallButton();
+});
 
 }
 
 
-/* =====================================================
-   DEMARRER UN QUIZ
-===================================================== */
+/* =========================
+   START QUIZ
+========================= */
 
 function startQuiz(level){
 
-  const levelQuestions =
-    selectQuestionsByLevel(
-      questions,
-      level
-    );
+const levelQuestions =
+selectQuestionsByLevel(
+questions,
+level
+);
 
-  return createQuiz(
-    levelQuestions
-  );
+return createQuiz(
+levelQuestions
+);
 
 }
 
 
-/* =====================================================
-   AFFICHER LES NIVEAUX
-===================================================== */
+/* =========================
+   LEVELS
+========================= */
 
 function renderLevelSelection(){
 
-  const container =
-    document.getElementById(
-      'quiz-container'
-    );
+const container =
+document.getElementById(
+'quiz-container'
+);
 
-  if(!container)return;
+const levels =
+Array.from(
+{
+length:totalLevels
+},
+(_,i)=>i+1
+);
 
+container.innerHTML = `
 
-  const levels =
-    Array.from(
-      {length:totalLevels},
-      (_,i)=>i+1
-    );
+<div class="quiz-progress">
+Choisissez un niveau :
+</div>
 
+<div style="margin-bottom:15px">
+Vos pièces : 🪙 ${coins}
+</div>
 
-  container.innerHTML = `
+<div class="levels-grid">
 
-    <div class="quiz-progress">
-      Choisissez un niveau :
-    </div>
+${levels.map(level=>{
 
-    <div style="margin-bottom:15px">
-      Vos pièces : 🪙 ${coins}
-    </div>
+const unlocked =
+unlockedLevels.has(level);
 
-    <div class="levels-grid">
+return `
 
-      ${levels.map(level => {
+<button
+class="level-btn${unlocked?'':' locked'}"
+data-level="${level}"
+${unlocked?'':'disabled'}>
 
-        const unlocked =
-          unlockedLevels.has(level);
+${unlocked
+?`Niveau ${level}`
+:`Niveau ${level} 🔒`}
 
-        return `
+</button>
 
-          <button
-            class="level-btn${unlocked ? '' : ' locked'}"
-            data-level="${level}"
-            ${unlocked ? '' : 'disabled'}>
+`;
 
-            ${
-              unlocked
-              ? `Niveau ${level}`
-              : `Niveau ${level} 🔒`
-            }
+}).join('')}
 
-          </button>
+</div>
 
-        `;
+<div class="result">
+Terminez un niveau pour débloquer le suivant.
+</div>
 
-      }).join('')}
+`;
 
-    </div>
+container
+.querySelectorAll('.level-btn')
+.forEach(button=>{
 
-    <div class="result">
+if(button.disabled)return;
 
-      Terminez un niveau pour
-      débloquer le suivant.
+button.addEventListener(
+'click',
+()=>{
 
-    </div>
+selectedLevel =
+Number(
+button.dataset.level
+);
 
-  `;
+quiz =
+startQuiz(
+selectedLevel
+);
 
+render();
 
-  container
-    .querySelectorAll('.level-btn')
-    .forEach(button => {
+});
 
-      if(button.disabled)return;
-
-
-      button.addEventListener(
-        'click',
-        () => {
-
-          selectedLevel =
-            Number(
-              button.dataset.level
-            );
-
-          quiz =
-            startQuiz(
-              selectedLevel
-            );
-
-          render();
-
-        }
-      );
-
-    });
+});
 
 }
 
 
-/* =====================================================
-   RENDU PRINCIPAL
-===================================================== */
+/* =========================
+   MAIN QUIZ RENDER
+========================= */
 
 function render(){
 
-  const container =
-    document.getElementById(
-      'quiz-container'
-    );
+const container =
+document.getElementById(
+'quiz-container'
+);
 
-  if(!container)return;
+if(showLanding){
 
+renderLanding();
 
-  /* ACCUEIL */
-
-  if(showLanding){
-
-    renderLanding();
-
-    return;
-
-  }
-
-
-  /* CHOIX DES NIVEAUX */
-
-  if(!quiz){
-
-    renderLevelSelection();
-
-    return;
-
-  }
-
-
-  /* ===================================================
-     ECHEC
-  =================================================== */
-
-  if(quiz.failed){
-
-    const failedQuestion =
-      getCurrentQuestion(
-        quiz
-      );
-
-
-    const failedAnswerText =
-      failedQuestion?.options[
-        quiz.failedAnswer
-      ] ?? 'Réponse inconnue';
-
-
-    const correctAnswerText =
-      failedQuestion?.options[
-        failedQuestion?.correctAnswer
-      ] ?? 'Réponse inconnue';
-
-
-    container.innerHTML = `
-
-      <div class="result">
-        ❌ Échec du niveau ${selectedLevel}
-      </div>
-
-      <div class="result">
-        Votre réponse :
-        ${failedAnswerText}
-      </div>
-
-      <div class="result">
-        Bonne réponse :
-        ${correctAnswerText}
-      </div>
-
-      <div class="result">
-        Recommencez le niveau pour progresser.
-      </div>
-
-      <button
-        class="restart-btn"
-        id="retry-btn">
-
-        RECOMMENCER
-
-      </button>
-
-      <button
-        class="restart-btn"
-        id="back-btn">
-
-        RETOUR AUX NIVEAUX
-
-      </button>
-
-    `;
-
-
-    document
-      .getElementById('retry-btn')
-      .addEventListener(
-        'click',
-        () => {
-
-          quiz =
-            startQuiz(
-              selectedLevel
-            );
-
-          render();
-
-        }
-      );
-
-
-    document
-      .getElementById('back-btn')
-      .addEventListener(
-        'click',
-        () => {
-
-          selectedLevel = null;
-
-          quiz = null;
-
-          render();
-
-        }
-      );
-
-
-    return;
-
-  }
-
-
-  /* ===================================================
-     QUIZ TERMINE
-  =================================================== */
-
-  if(isFinished(quiz)){
-
-    const nextLevel =
-      selectedLevel + 1;
-
-
-    const canUnlock =
-      quiz.score >= unlockThreshold;
-
-
-    let earned = 0;
-
-
-    if(
-      canUnlock &&
-      nextLevel <= totalLevels &&
-      !unlockedLevels.has(nextLevel)
-    ){
-
-      unlockedLevels.add(
-        nextLevel
-      );
-
-      saveUnlockedLevels();
-
-
-      earned =
-        levelReward;
-
-
-      coins += earned;
-
-
-      localStorage.setItem(
-        'exam_quiz_coins',
-        String(coins)
-      );
-
-    }
-
-
-    container.innerHTML = `
-
-      <div class="result">
-        🎉 Quiz terminé !
-      </div>
-
-      <div class="result">
-        Score :
-        ${quiz.score}/${quiz.questions.length}
-      </div>
-
-      <div class="result">
-
-        ${getLevel(
-          quiz.score,
-          quiz.questions.length
-        )}
-
-      </div>
-
-
-      ${
-        canUnlock &&
-        nextLevel <= totalLevels
-
-        ? `
-
-          <div class="badge">
-            Niveau ${nextLevel} débloqué !
-          </div>
-
-        `
-
-        : `
-
-          <div
-            class="badge"
-            style="background:#e99619">
-
-            Score nécessaire :
-            ${unlockThreshold}/${quiz.questions.length}
-
-          </div>
-
-        `
-      }
-
-
-      ${
-        earned > 0
-
-        ? `
-
-          <div style="margin-top:12px">
-            +${earned} pièces 🪙
-          </div>
-
-        `
-
-        : ''
-      }
-
-
-      <div style="margin-top:10px">
-        Total : 🪙 ${coins}
-      </div>
-
-
-      <button
-        class="restart-btn"
-        id="restart-btn">
-
-        RETOUR AUX NIVEAUX
-
-      </button>
-
-    `;
-
-
-    document
-      .getElementById('restart-btn')
-      .addEventListener(
-        'click',
-        () => {
-
-          selectedLevel = null;
-
-          quiz = null;
-
-          render();
-
-        }
-      );
-
-
-    return;
-
-  }
-
-
-  /* ===================================================
-     QUESTION
-  =================================================== */
-
-  const question =
-    getCurrentQuestion(
-      quiz
-    );
-
-
-  if(!question){
-
-    quiz = null;
-
-    render();
-
-    return;
-
-  }
-
-
-  container.innerHTML = `
-
-    <div class="quiz-progress">
-
-      Niveau ${selectedLevel}
-      —
-      ${getProgress(quiz)}
-
-    </div>
-
-
-    <h2>
-      ${question.question}
-    </h2>
-
-
-    <div class="answers">
-
-      ${question.options.map(
-        (option,index) => `
-
-          <button
-            class="answer-btn"
-            data-index="${index}">
-
-            ${option}
-
-          </button>
-
-        `
-      ).join('')}
-
-    </div>
-
-
-    <div class="ai-panel">
-
-      <h3>
-        🤖 Assistant IA
-      </h3>
-
-      <p id="ai-feedback">
-        ${getAiHint(question)}
-      </p>
-
-      <button
-        class="hint-btn"
-        id="hint-btn">
-
-        DEMANDER UN CONSEIL
-
-      </button>
-
-    </div>
-
-  `;
-
-
-  /* ===================================================
-     REPONSES
-  =================================================== */
-
-  container
-    .querySelectorAll('.answer-btn')
-    .forEach(button => {
-
-      button.addEventListener(
-        'click',
-        () => {
-
-          const selectedIndex =
-            Number(
-              button.dataset.index
-            );
-
-
-          const feedback =
-            document.getElementById(
-              'ai-feedback'
-            );
-
-
-          const isCorrect =
-            selectedIndex ===
-            question.correctAnswer;
-
-
-          if(isCorrect){
-
-            feedback.textContent =
-              getAiFeedback(
-                question,
-                selectedIndex
-              );
-
-
-            quiz =
-              answerQuestion(
-                quiz,
-                selectedIndex
-              );
-
-
-            setTimeout(
-              render,
-              400
-            );
-
-
-            return;
-
-          }
-
-
-          feedback.textContent =
-            getAiFeedback(
-              question,
-              selectedIndex
-            );
-
-
-          quiz = {
-            ...quiz,
-            failed: true,
-            failedAnswer: selectedIndex
-          };
-
-
-          setTimeout(
-            render,
-            500
-          );
-
-        }
-      );
-
-    });
-
-
-  /* ===================================================
-     CONSEIL
-  =================================================== */
-
-  document
-    .getElementById('hint-btn')
-    .addEventListener(
-      'click',
-      () => {
-
-        document
-          .getElementById(
-            'ai-feedback'
-          )
-          .textContent =
-          getAiHint(question);
-
-      }
-    );
+return;
 
 }
 
+if(!quiz){
 
-/* =====================================================
-   PWA : BOUTON INSTALLATION
-===================================================== */
+renderLevelSelection();
 
-function updateInstallButton(){
-
-  const installBtn =
-    document.getElementById(
-      'install-btn'
-    );
-
-  const installNote =
-    document.getElementById(
-      'install-note'
-    );
-
-
-  if(!installBtn)return;
-
-
-  if(deferredPrompt){
-
-    installBtn.disabled = false;
-
-    if(installNote){
-
-      installNote.textContent =
-        "Cliquez pour installer l'application.";
-
-    }
-
-
-    installBtn.onclick =
-      async () => {
-
-        if(!deferredPrompt)return;
-
-
-        deferredPrompt.prompt();
-
-
-        try{
-
-          await deferredPrompt.userChoice;
-
-        }catch(error){
-
-          console.warn(
-            'Installation annulée :',
-            error
-          );
-
-        }
-
-
-        deferredPrompt = null;
-
-        installBtn.disabled = true;
-
-
-        if(installNote){
-
-          installNote.textContent =
-            "Installation terminée ou annulée.";
-
-        }
-
-      };
-
-  }
+return;
 
 }
 
+if(quiz.failed){
 
-/* =====================================================
-   EVENEMENT INSTALLATION
-===================================================== */
-
-window.addEventListener(
-  'beforeinstallprompt',
-  event => {
-
-    event.preventDefault();
-
-    deferredPrompt = event;
-
-    updateInstallButton();
-
-  }
+const failedQuestion =
+getCurrentQuestion(
+quiz
 );
 
+const failedAnswerText =
+failedQuestion?.options[
+quiz.failedAnswer
+] ?? 'Réponse inconnue';
 
-/* =====================================================
-   APPLICATION DEJA INSTALLEE
-===================================================== */
+const correctAnswerText =
+failedQuestion?.options[
+failedQuestion?.correctAnswer
+] ?? 'Réponse inconnue';
 
-window.addEventListener(
-  'appinstalled',
-  () => {
+container.innerHTML = `
 
-    deferredPrompt = null;
+<div class="result">
+❌ Échec du niveau ${selectedLevel}
+</div>
 
-    const installBtn =
-      document.getElementById(
-        'install-btn'
-      );
+<div class="result">
+Votre réponse : ${failedAnswerText}
+</div>
 
-    const installNote =
-      document.getElementById(
-        'install-note'
-      );
+<div class="result">
+Bonne réponse : ${correctAnswerText}
+</div>
 
+<div class="result">
+Recommencez le niveau pour progresser.
+</div>
 
-    if(installBtn){
+<button
+class="restart-btn"
+id="retry-btn">
 
-      installBtn.disabled = true;
+RECOMMENCER
 
-    }
+</button>
 
+<button
+class="restart-btn"
+id="back-btn">
 
-    if(installNote){
+RETOUR AUX NIVEAUX
 
-      installNote.textContent =
-        "ExamQuiz est installé sur votre appareil.";
+</button>
 
-    }
-
-  }
-);
-
-
-/* =====================================================
-   MENU MOBILE
-===================================================== */
-
-const menuBtn =
-  document.getElementById(
-    'menu-btn'
-  );
-
-const mobileNav =
-  document.getElementById(
-    'mobile-nav'
-  );
-
-
-menuBtn.addEventListener(
-  'click',
-  () => {
-
-    const isOpen =
-      mobileNav.classList.toggle(
-        'open'
-      );
-
-
-    menuBtn.setAttribute(
-      'aria-expanded',
-      isOpen ? 'true' : 'false'
-    );
-
-  }
-);
-
-
-/* Fermer le menu après clic */
+`;
 
 document
-  .querySelectorAll(
-    '.mobile-nav a'
-  )
-  .forEach(link => {
+.getElementById('retry-btn')
+.addEventListener(
+'click',
+()=>{
 
-    link.addEventListener(
-      'click',
-      () => {
-
-        mobileNav.classList.remove(
-          'open'
-        );
-
-
-        menuBtn.setAttribute(
-          'aria-expanded',
-          'false'
-        );
-
-      }
-    );
-
-  });
-
-
-/* =====================================================
-   FERMER LE MENU EN CLIQUANT AILLEURS
-===================================================== */
-
-document.addEventListener(
-  'click',
-  event => {
-
-    if(
-      !mobileNav.contains(event.target) &&
-      !menuBtn.contains(event.target)
-    ){
-
-      mobileNav.classList.remove(
-        'open'
-      );
-
-
-      menuBtn.setAttribute(
-        'aria-expanded',
-        'false'
-      );
-
-    }
-
-  }
+quiz =
+startQuiz(
+selectedLevel
 );
 
+render();
 
-/* =====================================================
-   SERVICE WORKER
-===================================================== */
+});
 
-if(
-  'serviceWorker' in navigator
-){
+document
+.getElementById('back-btn')
+.addEventListener(
+'click',
+()=>{
 
-  window.addEventListener(
-    'load',
-    () => {
+selectedLevel = null;
 
-      navigator.serviceWorker
-        .register(
-          '/service-worker.js'
-        )
-        .then(
-          registration => {
+quiz = null;
 
-            console.log(
-              'Service Worker actif :',
-              registration.scope
-            );
+render();
 
-          }
-        )
-        .catch(
-          error => {
+});
 
-            console.warn(
-              'Service worker registration failed:',
-              error
-            );
-
-          }
-        );
-
-    }
-  );
+return;
 
 }
 
 
-/* =====================================================
-   DEMARRAGE
-===================================================== */
+/* =========================
+   FIN DU QUIZ
+========================= */
+
+if(isFinished(quiz)){
+
+const nextLevel =
+selectedLevel + 1;
+
+const canUnlock =
+quiz.score >= unlockThreshold;
+
+let earned = 0;
+
+if(
+canUnlock &&
+nextLevel <= totalLevels &&
+!unlockedLevels.has(nextLevel)
+){
+
+unlockedLevels.add(
+nextLevel
+);
+
+saveUnlockedLevels();
+
+earned =
+levelReward;
+
+coins += earned;
+
+localStorage.setItem(
+'exam_quiz_coins',
+String(coins)
+);
+
+}
+
+container.innerHTML = `
+
+<div class="result">
+🎉 Quiz terminé !
+</div>
+
+<div class="result">
+Score :
+${quiz.score}/${quiz.questions.length}
+</div>
+
+<div class="result">
+${getLevel(
+quiz.score,
+quiz.questions.length
+)}
+</div>
+
+${
+canUnlock &&
+nextLevel <= totalLevels
+
+?`
+
+<div class="badge">
+Niveau ${nextLevel} débloqué !
+</div>
+
+`
+
+:`
+
+<div
+class="badge"
+style="background:#e99619">
+
+Score nécessaire :
+${unlockThreshold}/${quiz.questions.length}
+
+</div>
+
+`
+}
+
+${
+earned > 0
+
+?`
+
+<div style="margin-top:12px">
++${earned} pièces 🪙
+</div>
+
+`
+
+:''
+}
+
+<div style="margin-top:10px">
+Total : 🪙 ${coins}
+</div>
+
+<button
+class="restart-btn"
+id="restart-btn">
+
+RETOUR AUX NIVEAUX
+
+</button>
+
+`;
+
+document
+.getElementById(
+'restart-btn'
+)
+.addEventListener(
+'click',
+()=>{
+
+selectedLevel = null;
+
+quiz = null;
 
 render();
+
+});
+
+return;
+
+}
+
+
+/* =========================
+   QUESTION
+========================= */
+
+const question =
+getCurrentQuestion(
+quiz
+);
+
+container.innerHTML = `
+
+<div class="quiz-progress">
+
+Niveau ${selectedLevel}
+—
+${getProgress(quiz)}
+
+</div>
+
+<h2>
+${question.question}
+</h2>
+
+<div class="answers">
+
+${question.options.map(
+(option,index)=>`
+
+<button
+class="answer-btn"
+data-index="${index}">
+
+${option}
+
+</button>
+
+`
+).join('')}
+
+</div>
+
+<div class="ai-panel">
+
+<h3>
+🤖 Assistant IA
+</h3>
+
+<p id="ai-feedback">
+${getAiHint(question)}
+</p>
+
+<button
+class="hint-btn"
+id="hint-btn">
+
+DEMANDER UN CONSEIL
+
+</button>
+
+</div>
+
+`;
+
+container
+.querySelectorAll(
+'.answer-btn'
+)
+.forEach(button=>{
+
+button.addEventListener(
+'click',
+()=>{
+
+const selectedIndex =
+Number(
+button.dataset.index
+);
+
+const feedback =
+document.getElementById(
+'ai-feedback'
+);
+
+feedback.textContent =
+getAiFeedback(
+question,
+selectedIndex
+);
+
+const isCorrect =
+selectedIndex ===
+question.correctAnswer;
+
+if(!isCorrect){
+
+quiz = {
+...quiz,
+failed:true,
+failedAnswer:
+selectedIndex
+};
+
+setTimeout(
+render,
+500
+);
+
+return;
+
+}
+
+quiz =
+answerQuestion(
+quiz,
+selectedIndex
+);
+
+setTimeout(
+render,
+400
+);
+
+});
+
+});
+
+
+document
+.getElementById(
+'hint-btn'
+)
+.addEventListener(
+'click',
+()=>{
+
+document
+.getElementById(
+'ai-feedback'
+)
+.textContent =
+getAiHint(
+question
+);
+
+});
+
+}
+
+
+/* =========================
+   PWA INSTALLATION
+========================= */
+
+let deferredPrompt = null;
+
+window.addEventListener(
+'beforeinstallprompt',
+event=>{
+
+event.preventDefault();
+
+deferredPrompt =
+event;
+
+const installBtn =
+document.getElementById(
+'install-btn'
+);
+
+const installNote =
+document.getElementById(
+'install-note'
+);
+
+if(installBtn){
+
+installBtn.disabled =
+false;
+
+installNote.textContent =
+"Cliquez pour installer l'application.";
+
+installBtn.addEventListener(
+'click',
+async()=>{
+
+if(!deferredPrompt)return;
+
+deferredPrompt.prompt();
+
+await deferredPrompt.userChoice;
+
+deferredPrompt = null;
+
+installBtn.disabled =
+true;
+
+installNote.textContent =
+"Installation terminée ou annulée.";
+
+},
+{
+once:true
+}
+);
+
+}
+
+}
+);
+
+
+/* =========================
+   MENU MOBILE
+========================= */
+
+document
+.getElementById(
+'menu-btn'
+)
+.addEventListener(
+'click',
+()=>{
+
+document
+.getElementById(
+'mobile-nav'
+)
+.classList.toggle(
+'open'
+);
+
+});
+
+
+document
+.querySelectorAll(
+'.mobile-nav a'
+)
+.forEach(link=>{
+
+link.addEventListener(
+'click',
+()=>{
+
+document
+.getElementById(
+'mobile-nav'
+)
+.classList.remove(
+'open'
+);
+
+});
+
+});
+
+
+/* =========================
+   START
+========================= */
+
+render();
+
+
+/* =========================
+   SERVICE WORKER
+========================= */
+
+if(
+'serviceWorker'
+in navigator
+){
+
+window.addEventListener(
+'load',
+()=>{
+
+navigator.serviceWorker
+.register(
+'/service-worker.js'
+)
+.catch(error=>{
+
+console.warn(
+'Service worker registration failed:',
+error
+);
+
+});
+
+});
+
+}
 
 </script>
 
