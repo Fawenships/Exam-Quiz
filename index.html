@@ -1,1094 +1,332 @@
+<!-- =========================
+     CATÉGORIES EXAMQUIZ
+========================= -->
+
+<section class="section alt" id="categories">
+
+  <h2 class="section-title">Nos catégories</h2>
+
+  <p class="section-intro">
+    Choisis une matière et teste tes connaissances avec des quiz
+    progressifs et interactifs.
+  </p>
+
+  <div class="categories">
+
+    <!-- HISTOIRE -->
+    <div class="category">
+      <div class="emoji">🇭🇹</div>
+      <h3>Histoire</h3>
+      <p>
+        Histoire d'Haïti, histoire mondiale, personnages et événements.
+      </p>
+      <button class="category-btn" data-category="histoire">
+        JOUER
+      </button>
+    </div>
+
+    <!-- BIOLOGIE -->
+    <div class="category">
+      <div class="emoji">🧬</div>
+      <h3>Biologie</h3>
+      <p>
+        Cellule, génétique, corps humain, environnement et êtres vivants.
+      </p>
+      <button class="category-btn" data-category="biologie">
+        JOUER
+      </button>
+    </div>
+
+    <!-- GÉOLOGIE -->
+    <div class="category">
+      <div class="emoji">🌋</div>
+      <h3>Géologie</h3>
+      <p>
+        Roches, volcans, séismes, plaques tectoniques et structure de la Terre.
+      </p>
+      <button class="category-btn" data-category="geologie">
+        JOUER
+      </button>
+    </div>
+
+    <!-- CHIMIE -->
+    <div class="category">
+      <div class="emoji">⚗️</div>
+      <h3>Chimie</h3>
+      <p>
+        Atomes, molécules, éléments, réactions chimiques, acides et bases.
+      </p>
+      <button class="category-btn" data-category="chimie">
+        JOUER
+      </button>
+    </div>
+
+    <!-- SPORT -->
+    <div class="category">
+      <div class="emoji">⚽</div>
+      <h3>Sport</h3>
+      <p>
+        Football, basketball, athlétisme et connaissances sportives.
+      </p>
+      <button class="category-btn" data-category="sport">
+        JOUER
+      </button>
+    </div>
+
+    <!-- CULTURE GÉNÉRALE -->
+    <div class="category">
+      <div class="emoji">🧠</div>
+      <h3>Culture générale</h3>
+      <p>
+        Des questions variées pour développer tes connaissances.
+      </p>
+      <button class="category-btn" data-category="culture">
+        JOUER
+      </button>
+    </div>
+
+    <!-- GÉOGRAPHIE -->
+    <div class="category">
+      <div class="emoji">🌍</div>
+      <h3>Géographie</h3>
+      <p>
+        Pays, capitales, continents, villes et territoires.
+      </p>
+      <button class="category-btn" data-category="geographie">
+        JOUER
+      </button>
+    </div>
+
+    <!-- BACCALAURÉAT -->
+    <div class="category">
+      <div class="emoji">🎓</div>
+      <h3>Baccalauréat</h3>
+      <p>
+        Entraîne-toi avec des questions adaptées au niveau du Baccalauréat.
+      </p>
+      <button class="category-btn" data-category="bacc">
+        JOUER
+      </button>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- =========================
+     STYLE DES CATÉGORIES
+========================= -->
+
+<style>
+
+.categories{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:22px;
+  max-width:1100px;
+  margin:auto;
+}
+
+.category{
+  background:#fff;
+  border:1px solid #dee2e6;
+  border-radius:18px;
+  padding:28px 20px;
+  text-align:center;
+  box-shadow:0 7px 22px rgba(0,0,0,.06);
+  transition:.25s ease;
+}
+
+.category:hover{
+  transform:translateY(-6px);
+  box-shadow:0 14px 30px rgba(0,0,0,.11);
+  border-color:#adb5bd;
+}
+
+.category .emoji{
+  font-size:45px;
+  margin-bottom:14px;
+}
+
+.category h3{
+  margin:8px 0 10px;
+  color:#343a40;
+  font-size:20px;
+}
+
+.category p{
+  min-height:70px;
+  margin:0;
+  color:#6c757d;
+  line-height:1.55;
+}
+
+.category-btn{
+  width:100%;
+  margin-top:18px;
+  padding:13px 18px;
+  border:0;
+  border-radius:10px;
+  background:#343a40;
+  color:#fff;
+  font-weight:bold;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.category-btn:hover{
+  background:#212529;
+  transform:translateY(-2px);
+}
+
+.category-btn:active{
+  transform:scale(.98);
+}
+
+@media(max-width:800px){
+
+  .categories{
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+  }
+
+}
+
+@media(max-width:480px){
+
+  .categories{
+    grid-template-columns:1fr;
+  }
+
+  .category p{
+    min-height:auto;
+  }
+
+}
+
+</style>
+
+
+<!-- =========================
+     CONNEXION DES QUESTIONS
+========================= -->
+
 <script type="module">
-  /* =========================================================
-     1. IMPORTS
-     ========================================================= */
 
-  import {
-    createQuiz,
-    selectQuestionsByLevel,
-    answerQuestion,
-    getCurrentQuestion,
-    getLevel,
-    getProgress,
-    getAiHint,
-    getAiFeedback,
-    isFinished,
-    QUESTIONS_PER_LEVEL
-  } from './src/quizLogic.js';
+/*
+  Chaque matière possède son propre fichier.
+  Aucune question n'est placée ici.
+*/
 
-  import { baccQuestions } from './src/baccQuestions.js';
-  import { histoireQuestions } from './src/histoireQuestions.js';
-  import { sportQuestions } from './src/sportQuestions.js';
-  import { cultureQuestions } from './src/cultureQuestions.js';
-  import { sciencesQuestions } from './src/sciencesQuestions.js';
-  import { geographieQuestions } from './src/geographieQuestions.js';
-  import { francaisQuestions } from './src/francaisQuestions.js';
-  import { kreolQuestions } from './src/kreolQuestions.js';
+import { histoireQuestions }
+  from './src/histoireQuestions.js';
+
+import { biologieQuestions }
+  from './src/biologieQuestions.js';
+
+import { geologieQuestions }
+  from './src/geologieQuestions.js';
+
+import { chimieQuestions }
+  from './src/chimieQuestions.js';
 
 
-  /* =========================================================
-     2. CATÉGORIES
-     
-     IMPORTANT :
-     Les questions restent dans leurs fichiers.
-     Elles ne sont PAS copiées dans le HTML.
-     ========================================================= */
-
-  const categories = {
-    "Baccalauréat": baccQuestions,
-    "Histoire d'Haïti": histoireQuestions,
-    "Sport": sportQuestions,
-    "Culture générale": cultureQuestions,
-    "Sciences": sciencesQuestions,
-    "Géographie": geographieQuestions,
-    "Français": francaisQuestions,
-    "Kreyòl": kreolQuestions
-  };
+/*
+  Les autres fichiers pourront être ajoutés
+  de la même manière.
+*/
 
 
-  /* =========================================================
-     3. VARIABLES DU QUIZ
-     ========================================================= */
+const questionBanks = {
 
-  let selectedCategory = null;
-  let questions = [];
+  histoire: histoireQuestions,
 
-  let selectedLevel = null;
-  let quiz = null;
+  biologie: biologieQuestions,
 
-  let showLanding = true;
+  geologie: geologieQuestions,
 
-  let coins = Number(
-    localStorage.getItem('exam_quiz_coins') || 0
-  );
+  chimie: chimieQuestions
 
-  const levelReward = 5;
+};
 
 
-  /* =========================================================
-     4. NIVEAUX DÉBLOQUÉS
-     
-     Chaque catégorie possède ses propres niveaux.
-     ========================================================= */
+/*
+  Lorsqu'on clique sur une catégorie,
+  on récupère le fichier correspondant.
+*/
 
-  function getUnlockedLevels(categoryName) {
+document.querySelectorAll('.category-btn').forEach(button => {
 
-    const key =
-      'exam_quiz_unlocked_levels_' +
-      encodeURIComponent(categoryName);
+  button.addEventListener('click', () => {
 
-    const saved = JSON.parse(
-      localStorage.getItem(key) || '[1]'
-    );
+    const category = button.dataset.category;
 
-    return new Set(saved);
-  }
+    if (!questionBanks[category]) {
 
+      if(category === 'bacc'){
+        window.location.hash = '#quiz';
+        return;
+      }
 
-  function saveUnlockedLevels(categoryName, unlockedLevels) {
-
-    const key =
-      'exam_quiz_unlocked_levels_' +
-      encodeURIComponent(categoryName);
-
-    localStorage.setItem(
-      key,
-      JSON.stringify(Array.from(unlockedLevels))
-    );
-  }
-
-
-  /* =========================================================
-     5. CHOISIR UNE CATÉGORIE
-     ========================================================= */
-
-  function selectCategory(categoryName) {
-
-    if (!categories[categoryName]) {
-      console.error(
-        'Catégorie introuvable :',
-        categoryName
+      alert(
+        'Cette catégorie n’est pas encore disponible.'
       );
+
       return;
     }
 
-    selectedCategory = categoryName;
+
+    const questions = questionBanks[category];
+
 
     /*
-      Ici on récupère uniquement les questions
-      du fichier correspondant.
+      On enregistre temporairement la catégorie
+      et ses questions pour le système de quiz.
     */
 
-    questions = categories[categoryName];
+    window.examQuizCategory = category;
 
-    selectedLevel = null;
-    quiz = null;
+    window.examQuizQuestions = questions;
 
-    showLanding = false;
 
-    render();
-  }
+    /*
+      Retour vers la zone du quiz.
+    */
 
+    const quizSection = document.getElementById('quiz');
 
-  /* =========================================================
-     6. DÉMARRER UN NIVEAU
-     ========================================================= */
+    if(quizSection){
 
-  function startQuiz(level) {
-
-    const levelQuestions =
-      selectQuestionsByLevel(
-        questions,
-        level
-      );
-
-    return createQuiz(levelQuestions);
-  }
-
-
-  /* =========================================================
-     7. AFFICHER LES CATÉGORIES
-     ========================================================= */
-
-  function renderCategories() {
-
-    const container =
-      document.getElementById('quiz-container');
-
-    const categoryIcons = {
-      "Baccalauréat": "🎓",
-      "Histoire d'Haïti": "🇭🇹",
-      "Sport": "⚽",
-      "Culture générale": "🧠",
-      "Sciences": "🔬",
-      "Géographie": "🌍",
-      "Français": "📖",
-      "Kreyòl": "🇭🇹"
-    };
-
-    container.innerHTML = `
-
-      <h2 style="margin-bottom:20px">
-        Choisissez une catégorie
-      </h2>
-
-      <div class="levels-grid">
-
-        ${Object.keys(categories).map(category => {
-
-          const numberQuestions =
-            Array.isArray(categories[category])
-              ? categories[category].length
-              : 0;
-
-          return `
-
-            <button
-              class="level-btn"
-              data-category="${category}"
-              style="
-                min-height:100px;
-                font-size:16px;
-              "
-            >
-
-              <div style="font-size:30px;margin-bottom:7px">
-                ${categoryIcons[category] || '📚'}
-              </div>
-
-              <strong>
-                ${category}
-              </strong>
-
-              <div style="
-                font-size:12px;
-                opacity:.85;
-                margin-top:5px;
-              ">
-                ${numberQuestions} questions
-              </div>
-
-            </button>
-
-          `;
-
-        }).join('')}
-
-      </div>
-
-      <div style="
-        margin-top:20px;
-        color:#777;
-        line-height:1.6;
-      ">
-        Chaque catégorie possède ses propres questions
-        et ses propres niveaux.
-      </div>
-    `;
-
-
-    container
-      .querySelectorAll('[data-category]')
-      .forEach(button => {
-
-        button.addEventListener(
-          'click',
-          () => {
-
-            const category =
-              button.dataset.category;
-
-            selectCategory(category);
-          }
-        );
-
-      });
-  }
-
-
-  /* =========================================================
-     8. PAGE D'ACCUEIL DU QUIZ
-     ========================================================= */
-
-  function renderLanding() {
-
-    const container =
-      document.getElementById('quiz-container');
-
-    container.innerHTML = `
-
-      <div style="
-        margin:18px 0;
-        font-weight:bold;
-      ">
-        🪙 ${coins} pièces
-      </div>
-
-      <button
-        class="start-btn"
-        id="start-btn"
-      >
-        CHOISIR UNE CATÉGORIE
-      </button>
-
-      <button
-        class="install-btn"
-        id="install-btn"
-        disabled
-      >
-        INSTALLER L'APPLICATION
-      </button>
-
-      <p
-        id="install-note"
-        style="
-          color:#777;
-          font-size:14px;
-        "
-      >
-        Le bouton d'installation sera activé
-        si le navigateur autorise l'installation.
-      </p>
-    `;
-
-
-    document
-      .getElementById('start-btn')
-      .addEventListener(
-        'click',
-        () => {
-
-          showLanding = false;
-
-          selectedCategory = null;
-          questions = [];
-          selectedLevel = null;
-          quiz = null;
-
-          render();
-
-        }
-      );
-  }
-
-
-  /* =========================================================
-     9. AFFICHER LES NIVEAUX
-     ========================================================= */
-
-  function renderLevelSelection() {
-
-    const container =
-      document.getElementById('quiz-container');
-
-    if (!selectedCategory) {
-      renderCategories();
-      return;
-    }
-
-
-    const totalLevels =
-      Math.ceil(
-        questions.length /
-        QUESTIONS_PER_LEVEL
-      );
-
-
-    const unlockThreshold =
-      Math.max(
-        1,
-        QUESTIONS_PER_LEVEL - 1
-      );
-
-
-    const unlockedLevels =
-      getUnlockedLevels(
-        selectedCategory
-      );
-
-
-    const levels =
-      Array.from(
-        { length: totalLevels },
-        (_, index) => index + 1
-      );
-
-
-    container.innerHTML = `
-
-      <div style="
-        display:flex;
-        justify-content:space-between;
-        align-items:center;
-        gap:10px;
-        flex-wrap:wrap;
-        margin-bottom:15px;
-      ">
-
-        <div class="quiz-progress">
-          ${selectedCategory}
-        </div>
-
-        <div>
-          🪙 ${coins} pièces
-        </div>
-
-      </div>
-
-      <h2>
-        Choisissez votre niveau
-      </h2>
-
-      <p style="
-        color:#777;
-        line-height:1.6;
-      ">
-        ${questions.length} questions disponibles
-        dans cette catégorie.
-      </p>
-
-      <div class="levels-grid">
-
-        ${levels.map(level => {
-
-          const unlocked =
-            unlockedLevels.has(level);
-
-          return `
-
-            <button
-              class="level-btn ${unlocked ? '' : 'locked'}"
-              data-level="${level}"
-              ${unlocked ? '' : 'disabled'}
-            >
-
-              ${unlocked
-                ? `Niveau ${level}`
-                : `Niveau ${level} 🔒`
-              }
-
-            </button>
-
-          `;
-
-        }).join('')}
-
-      </div>
-
-      <div class="result">
-        Il faut obtenir au moins
-        ${unlockThreshold}/${QUESTIONS_PER_LEVEL}
-        pour débloquer le niveau suivant.
-      </div>
-
-      <button
-        class="restart-btn"
-        id="back-categories"
-      >
-        ← CHANGER DE CATÉGORIE
-      </button>
-    `;
-
-
-    container
-      .querySelectorAll('[data-level]')
-      .forEach(button => {
-
-        if (button.disabled) return;
-
-        button.addEventListener(
-          'click',
-          () => {
-
-            selectedLevel =
-              Number(
-                button.dataset.level
-              );
-
-            quiz =
-              startQuiz(
-                selectedLevel
-              );
-
-            render();
-
-          }
-        );
-
+      quizSection.scrollIntoView({
+        behavior:'smooth'
       });
 
+    }else{
 
-    document
-      .getElementById('back-categories')
-      .addEventListener(
-        'click',
-        () => {
+      window.location.hash = '#quiz';
 
-          selectedCategory = null;
-          questions = [];
-          selectedLevel = null;
-          quiz = null;
+    }
 
-          render();
 
+    /*
+      Permet au système principal du quiz
+      de savoir quelle banque utiliser.
+    */
+
+    window.dispatchEvent(
+      new CustomEvent(
+        'examquiz-category-selected',
+        {
+          detail:{
+            category:category,
+            questions:questions
+          }
         }
-      );
-  }
-
-
-  /* =========================================================
-     10. AFFICHER LE QUIZ
-     ========================================================= */
-
-  function render() {
-
-    const container =
-      document.getElementById('quiz-container');
-
-
-    /* Accueil */
-
-    if (showLanding) {
-      renderLanding();
-      return;
-    }
-
-
-    /* Choix de catégorie */
-
-    if (!selectedCategory) {
-      renderCategories();
-      return;
-    }
-
-
-    /* Choix de niveau */
-
-    if (!quiz) {
-      renderLevelSelection();
-      return;
-    }
-
-
-    /* =====================================================
-       ÉCHEC
-       ===================================================== */
-
-    if (quiz.failed) {
-
-      const failedQuestion =
-        getCurrentQuestion(quiz);
-
-
-      const failedAnswerText =
-        failedQuestion?.options[
-          quiz.failedAnswer
-        ] ?? 'Réponse inconnue';
-
-
-      const correctAnswerText =
-        failedQuestion?.options[
-          failedQuestion?.correctAnswer
-        ] ?? 'Réponse inconnue';
-
-
-      container.innerHTML = `
-
-        <div class="result">
-          ❌ Échec du niveau ${selectedLevel}
-        </div>
-
-        <div class="result">
-          Catégorie :
-          ${selectedCategory}
-        </div>
-
-        <div class="result">
-          Votre réponse :
-          ${failedAnswerText}
-        </div>
-
-        <div class="result">
-          Bonne réponse :
-          ${correctAnswerText}
-        </div>
-
-        <div class="result">
-          Recommencez le niveau pour progresser.
-        </div>
-
-        <button
-          class="restart-btn"
-          id="retry-btn"
-        >
-          RECOMMENCER
-        </button>
-
-        <button
-          class="restart-btn"
-          id="back-btn"
-        >
-          RETOUR AUX NIVEAUX
-        </button>
-
-      `;
-
-
-      document
-        .getElementById('retry-btn')
-        .addEventListener(
-          'click',
-          () => {
-
-            quiz =
-              startQuiz(
-                selectedLevel
-              );
-
-            render();
-
-          }
-        );
-
-
-      document
-        .getElementById('back-btn')
-        .addEventListener(
-          'click',
-          () => {
-
-            selectedLevel = null;
-            quiz = null;
-
-            render();
-
-          }
-        );
-
-      return;
-    }
-
-
-    /* =====================================================
-       FIN DU QUIZ
-       ===================================================== */
-
-    if (isFinished(quiz)) {
-
-      const nextLevel =
-        selectedLevel + 1;
-
-
-      const unlockThreshold =
-        Math.max(
-          1,
-          QUESTIONS_PER_LEVEL - 1
-        );
-
-
-      const canUnlock =
-        quiz.score >= unlockThreshold;
-
-
-      const unlockedLevels =
-        getUnlockedLevels(
-          selectedCategory
-        );
-
-
-      let earned = 0;
-
-
-      const totalLevels =
-        Math.ceil(
-          questions.length /
-          QUESTIONS_PER_LEVEL
-        );
-
-
-      if (
-        canUnlock &&
-        nextLevel <= totalLevels &&
-        !unlockedLevels.has(nextLevel)
-      ) {
-
-        unlockedLevels.add(
-          nextLevel
-        );
-
-        saveUnlockedLevels(
-          selectedCategory,
-          unlockedLevels
-        );
-
-
-        earned =
-          levelReward;
-
-
-        coins += earned;
-
-
-        localStorage.setItem(
-          'exam_quiz_coins',
-          String(coins)
-        );
-      }
-
-
-      container.innerHTML = `
-
-        <div class="result">
-          🎉 Quiz terminé !
-        </div>
-
-        <div class="result">
-          ${selectedCategory}
-        </div>
-
-        <div class="result">
-          Niveau ${selectedLevel}
-        </div>
-
-        <div class="result">
-          Score :
-          ${quiz.score}/${quiz.questions.length}
-        </div>
-
-        <div class="result">
-          ${getLevel(
-            quiz.score,
-            quiz.questions.length
-          )}
-        </div>
-
-        ${
-          canUnlock &&
-          nextLevel <= totalLevels
-
-          ? `
-            <div class="badge">
-              Niveau ${nextLevel}
-              débloqué !
-            </div>
-          `
-
-          : `
-            <div
-              class="badge"
-              style="background:#e99619"
-            >
-              Score nécessaire :
-              ${unlockThreshold}/${quiz.questions.length}
-            </div>
-          `
-        }
-
-        ${
-          earned > 0
-
-          ? `
-            <div style="margin-top:12px">
-              +${earned} pièces 🪙
-            </div>
-          `
-
-          : ''
-        }
-
-        <div style="margin-top:10px">
-          Total : 🪙 ${coins}
-        </div>
-
-        <button
-          class="restart-btn"
-          id="restart-level"
-        >
-          RETOUR AUX NIVEAUX
-        </button>
-
-        <button
-          class="restart-btn"
-          id="change-category"
-        >
-          CHANGER DE CATÉGORIE
-        </button>
-
-      `;
-
-
-      document
-        .getElementById('restart-level')
-        .addEventListener(
-          'click',
-          () => {
-
-            selectedLevel = null;
-            quiz = null;
-
-            render();
-
-          }
-        );
-
-
-      document
-        .getElementById('change-category')
-        .addEventListener(
-          'click',
-          () => {
-
-            selectedCategory = null;
-            questions = [];
-            selectedLevel = null;
-            quiz = null;
-
-            render();
-
-          }
-        );
-
-
-      return;
-    }
-
-
-    /* =====================================================
-       QUESTION ACTUELLE
-       ===================================================== */
-
-    const question =
-      getCurrentQuestion(quiz);
-
-
-    if (!question) {
-      quiz = null;
-      render();
-      return;
-    }
-
-
-    container.innerHTML = `
-
-      <div class="quiz-progress">
-
-        ${selectedCategory}
-        —
-        Niveau ${selectedLevel}
-        —
-        ${getProgress(quiz)}
-
-      </div>
-
-      <h2>
-        ${question.question}
-      </h2>
-
-      <div class="answers">
-
-        ${question.options
-          .map(
-            (option, index) => `
-
-              <button
-                class="answer-btn"
-                data-index="${index}"
-              >
-                ${option}
-              </button>
-
-            `
-          )
-          .join('')}
-
-      </div>
-
-
-      <div class="ai-panel">
-
-        <h3>
-          🤖 Assistant IA
-        </h3>
-
-        <p id="ai-feedback">
-          ${getAiHint(question)}
-        </p>
-
-        <button
-          class="hint-btn"
-          id="hint-btn"
-        >
-          DEMANDER UN CONSEIL
-        </button>
-
-      </div>
-    `;
-
-
-    /* =====================================================
-       RÉPONSES
-       ===================================================== */
-
-    container
-      .querySelectorAll('.answer-btn')
-      .forEach(button => {
-
-        button.addEventListener(
-          'click',
-          () => {
-
-            const selectedIndex =
-              Number(
-                button.dataset.index
-              );
-
-
-            const feedback =
-              document.getElementById(
-                'ai-feedback'
-              );
-
-
-            feedback.textContent =
-              getAiFeedback(
-                question,
-                selectedIndex
-              );
-
-
-            const isCorrect =
-              selectedIndex ===
-              question.correctAnswer;
-
-
-            if (!isCorrect) {
-
-              quiz = {
-                ...quiz,
-                failed: true,
-                failedAnswer:
-                  selectedIndex
-              };
-
-
-              setTimeout(
-                render,
-                500
-              );
-
-              return;
-            }
-
-
-            quiz =
-              answerQuestion(
-                quiz,
-                selectedIndex
-              );
-
-
-            setTimeout(
-              render,
-              400
-            );
-
-          }
-        );
-
-      });
-
-
-    /* =====================================================
-       BOUTON CONSEIL IA
-       ===================================================== */
-
-    document
-      .getElementById('hint-btn')
-      .addEventListener(
-        'click',
-        () => {
-
-          document
-            .getElementById(
-              'ai-feedback'
-            )
-            .textContent =
-              getAiHint(question);
-
-        }
-      );
-  }
-
-
-  /* =========================================================
-     11. INSTALLATION PWA
-     ========================================================= */
-
-  let deferredPrompt = null;
-
-
-  window.addEventListener(
-    'beforeinstallprompt',
-    event => {
-
-      event.preventDefault();
-
-      deferredPrompt = event;
-
-
-      const installBtn =
-        document.getElementById(
-          'install-btn'
-        );
-
-      const installNote =
-        document.getElementById(
-          'install-note'
-        );
-
-
-      if (installBtn) {
-
-        installBtn.disabled = false;
-
-        installNote.textContent =
-          "Cliquez pour installer l'application.";
-
-
-        installBtn.addEventListener(
-          'click',
-          async () => {
-
-            if (!deferredPrompt) return;
-
-            deferredPrompt.prompt();
-
-            await deferredPrompt.userChoice;
-
-            deferredPrompt = null;
-
-            installBtn.disabled = true;
-
-            installNote.textContent =
-              "Installation terminée ou annulée.";
-
-          },
-          { once: true }
-        );
-      }
-    }
-  );
-
-
-  /* =========================================================
-     12. MENU MOBILE
-     ========================================================= */
-
-  document
-    .getElementById('menu-btn')
-    .addEventListener(
-      'click',
-      () => {
-
-        document
-          .getElementById('mobile-nav')
-          .classList.toggle('open');
-
-      }
+      )
     );
 
+  });
 
-  document
-    .querySelectorAll('.mobile-nav a')
-    .forEach(link => {
-
-      link.addEventListener(
-        'click',
-        () => {
-
-          document
-            .getElementById('mobile-nav')
-            .classList.remove('open');
-
-        }
-      );
-
-    });
-
-
-  /* =========================================================
-     13. LANCEMENT
-     ========================================================= */
-
-  render();
-
-
-  /* =========================================================
-     14. SERVICE WORKER
-     ========================================================= */
-
-  if ('serviceWorker' in navigator) {
-
-    window.addEventListener(
-      'load',
-      () => {
-
-        navigator.serviceWorker
-          .register(
-            '/service-worker.js'
-          )
-          .catch(error => {
-
-            console.warn(
-              'Service worker registration failed:',
-              error
-            );
-
-          });
-
-      }
-    );
-
-  }
+});
 
 </script>
