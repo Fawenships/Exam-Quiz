@@ -1,717 +1,1584 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#063b35">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+
+<title>ExamQuiz — Apprendre en jouant</title>
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Organization",
+  "name":"ExamQuiz Haiti",
+  "url":"https://examquizhaiti.com",
+  "logo":"https://examquizhaiti.com/icons/icon-192.png"
+}
+</script>
+
+<style>
+:root{
+  --primary:#063b35;
+  --primary2:#087f6c;
+  --accent:#18c7a1;
+  --accent2:#7cebd4;
+  --light:#f4faf8;
+  --text:#172321;
+  --muted:#687774;
+  --card:#ffffff;
+  --dark:#061d1a;
+  --border:#dcebe7;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--text);
+  background:var(--light);
+}
+
+button,a{
+  font:inherit;
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.site-header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  height:76px;
+  background:var(--primary);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 6%;
+  box-shadow:0 3px 15px rgba(0,0,0,.15);
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  min-width:0;
+}
+
+.logo img{
+  width:170px;
+  max-width:55vw;
+  height:auto;
+  display:block;
+}
+
+.desktop-nav{
+  display:flex;
+  align-items:center;
+  gap:28px;
+  color:white;
+  font-size:15px;
+}
+
+.desktop-nav a{
+  opacity:.9;
+  transition:.2s;
+}
+
+.desktop-nav a:hover{
+  opacity:1;
+  color:var(--accent2);
+}
+
+.menu-btn{
+  display:none;
+  border:0;
+  background:transparent;
+  color:white;
+  font-size:34px;
+  cursor:pointer;
+  padding:4px;
+}
+
+.mobile-nav{
+  display:none;
+  position:absolute;
+  top:76px;
+  left:0;
+  right:0;
+  background:var(--primary);
+  padding:14px 7%;
+  box-shadow:0 8px 18px rgba(0,0,0,.2);
+}
+
+.mobile-nav.open{
+  display:block;
+}
+
+.mobile-nav a{
+  display:block;
+  color:white;
+  padding:14px 0;
+  border-bottom:1px solid rgba(255,255,255,.1);
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+  min-height:650px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:white;
+  padding:80px 20px 100px;
+  background:
+    radial-gradient(circle at 80% 20%,rgba(24,199,161,.35),transparent 30%),
+    linear-gradient(145deg,#063b35 0%,#087f6c 52%,#0ca98d 100%);
+  position:relative;
+  overflow:hidden;
+}
+
+.hero:before,
+.hero:after{
+  content:"";
+  position:absolute;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.1);
+}
+
+.hero:before{
+  width:430px;
+  height:430px;
+  top:-240px;
+  right:-100px;
+}
+
+.hero:after{
+  width:330px;
+  height:330px;
+  bottom:-220px;
+  left:-120px;
+}
+
+.hero-content{
+  max-width:850px;
+  position:relative;
+  z-index:1;
+}
+
+.hero-brand{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:12px;
+  font-size:64px;
+  font-weight:300;
+  margin-bottom:24px;
+  letter-spacing:-2px;
+}
+
+.hero-brand span{
+  width:4px;
+  height:72px;
+  background:var(--accent);
+  display:inline-block;
+  border-radius:4px;
+}
+
+.hero h1{
+  margin:0 auto 24px;
+  font-size:22px;
+  letter-spacing:5px;
+  line-height:1.8;
+  color:var(--accent2);
+  max-width:760px;
+  text-transform:uppercase;
+}
+
+.hero p{
+  font-size:17px;
+  line-height:1.8;
+  max-width:680px;
+  margin:0 auto 30px;
+  color:#effffb;
+}
+
+/* SIGNATURE UNIQUE */
+
+.developer-signature{
+  display:inline-flex;
+  flex-direction:column;
+  align-items:center;
+  gap:7px;
+  margin:8px auto 30px;
+  padding:17px 32px;
+  border-left:3px solid var(--accent);
+  border-right:3px solid var(--accent);
+  background:rgba(0,0,0,.13);
+  border-radius:14px;
+  box-shadow:0 8px 25px rgba(0,0,0,.12);
+}
+
+.developer-signature span{
+  font-size:11px;
+  letter-spacing:4px;
+  color:#bff9eb;
+  font-weight:bold;
+}
+
+.developer-signature strong{
+  font-size:25px;
+  color:white;
+  letter-spacing:.5px;
+}
+
+.developer-signature small{
+  color:#d8fff6;
+  font-size:13px;
+}
+
+.primary-btn{
+  border:0;
+  border-radius:40px;
+  padding:18px 48px;
+  background:var(--accent);
+  color:#063b35;
+  font-weight:bold;
+  letter-spacing:3px;
+  cursor:pointer;
+  box-shadow:0 8px 25px rgba(0,0,0,.2);
+  transition:.2s;
+}
+
+.primary-btn:hover{
+  transform:translateY(-3px);
+  background:#5be4c5;
+}
+
+/* =========================
+   SECTIONS
+========================= */
+
+.section{
+  padding:85px 7%;
+  background:white;
+}
+
+.section.alt{
+  background:#f4faf8;
+}
+
+.section-title{
+  text-align:center;
+  font-size:42px;
+  font-weight:400;
+  margin:0 0 22px;
+  text-transform:uppercase;
+  color:var(--primary);
+}
+
+.section-intro{
+  max-width:850px;
+  margin:0 auto 45px;
+  color:#596966;
+  text-align:center;
+  font-size:18px;
+  line-height:1.8;
+}
+
+/* =========================
+   QUIZ
+========================= */
+
+.quiz-shell{
+  max-width:900px;
+  margin:0 auto;
+  background:white;
+  border-radius:22px;
+  padding:30px;
+  box-shadow:0 12px 40px rgba(6,59,53,.10);
+  border:1px solid var(--border);
+}
+
+.quiz-progress{
+  color:#687774;
+  margin-bottom:15px;
+  font-weight:bold;
+}
+
+.quiz-shell h2{
+  line-height:1.5;
+  margin:10px 0 24px;
+}
+
+.answers{
+  display:grid;
+  gap:12px;
+}
+
+.answer-btn{
+  width:100%;
+  border:1px solid #d7e5e1;
+  background:white;
+  color:#222;
+  padding:16px 18px;
+  border-radius:12px;
+  text-align:left;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.answer-btn:hover{
+  border-color:var(--accent);
+  background:#effcf8;
+  transform:translateX(2px);
+}
+
+.levels-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:12px;
+}
+
+.level-btn{
+  border:0;
+  border-radius:12px;
+  padding:15px;
+  background:var(--primary2);
+  color:white;
+  cursor:pointer;
+}
+
+.level-btn:hover{
+  background:var(--accent);
+  color:var(--primary);
+}
+
+.level-btn.locked{
+  background:#aeb9b6;
+  cursor:not-allowed;
+}
+
+.result{
+  margin:12px 0;
+  font-weight:bold;
+  line-height:1.5;
+}
+
+.restart-btn,
+.hint-btn,
+.start-btn,
+.install-btn{
+  width:100%;
+  border:0;
+  border-radius:12px;
+  padding:15px;
+  color:white;
+  cursor:pointer;
+  margin-top:10px;
+}
+
+.restart-btn{
+  background:var(--primary2);
+}
+
+.hint-btn{
+  background:#087f6c;
+}
+
+.start-btn{
+  background:var(--primary);
+}
+
+.install-btn{
+  background:#e79a18;
+}
+
+.install-btn:disabled{
+  opacity:.45;
+  cursor:not-allowed;
+}
+
+.badge{
+  display:inline-block;
+  margin-top:12px;
+  padding:10px 15px;
+  border-radius:30px;
+  background:#17a673;
+  color:white;
+  font-weight:bold;
+}
+
+.ai-panel{
+  margin-top:22px;
+  padding:18px;
+  border-radius:15px;
+  background:#effaf7;
+  border:1px solid #cdebe4;
+}
+
+.ai-panel h3{
+  margin-top:0;
+  color:var(--primary2);
+}
+
+.landing-card{
+  text-align:center;
+}
+
+.landing-card .quiz-icon{
+  width:120px;
+  height:120px;
+  border-radius:30px;
+  margin:0 auto 22px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  color:white;
+  font-size:52px;
+  box-shadow:0 10px 25px rgba(6,59,53,.2);
+}
+
+.reassure{
+  margin:20px auto;
+  max-width:650px;
+  padding:18px;
+  border-radius:15px;
+  background:#effaf5;
+  color:#205b48;
+  line-height:1.6;
+  text-align:left;
+}
+
+/* =========================
+   CATEGORIES
+========================= */
+
+.categories{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:20px;
+  max-width:1100px;
+  margin:auto;
+}
+
+.category{
+  background:white;
+  border-radius:18px;
+  padding:26px 20px;
+  text-align:center;
+  box-shadow:0 8px 25px rgba(0,0,0,.06);
+  border:1px solid #e0ece9;
+  transition:.2s;
+}
+
+.category:hover{
+  transform:translateY(-5px);
+  border-color:var(--accent);
+  box-shadow:0 14px 30px rgba(6,59,53,.1);
+}
+
+.category .emoji{
+  font-size:40px;
+  margin-bottom:12px;
+}
+
+.category h3{
+  margin:8px 0;
+  font-size:19px;
+}
+
+.category p{
+  margin:0;
+  color:#777;
+  line-height:1.5;
+}
+
+/* =========================
+   SOCIAL
+========================= */
+
+.social-section{
+  background:var(--dark);
+  color:white;
+  text-align:center;
+  padding:75px 7%;
+}
+
+.social-section p{
+  max-width:700px;
+  margin:0 auto 35px;
+  font-size:18px;
+  line-height:1.8;
+}
+
+.socials{
+  display:flex;
+  justify-content:center;
+  gap:30px;
+  flex-wrap:wrap;
+}
+
+.socials a{
+  font-size:34px;
+  color:white;
+  transition:.2s;
+}
+
+.socials a:hover{
+  color:var(--accent);
+  transform:scale(1.08);
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+  background:#041411;
+  color:white;
+  padding:60px 7% 25px;
+  border-top:1px solid #16352f;
+}
+
+.footer-grid{
+  max-width:1100px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:1.4fr 1fr 1fr;
+  gap:50px;
+}
+
+footer h3{
+  letter-spacing:4px;
+  font-size:17px;
+  font-weight:400;
+  margin-top:0;
+}
+
+footer p{
+  color:#aebfbb;
+  line-height:1.8;
+}
+
+.footer-links a{
+  display:block;
+  color:var(--accent2);
+  margin:16px 0;
+}
+
+.footer-bottom{
+  max-width:1100px;
+  margin:50px auto 0;
+  padding-top:25px;
+  border-top:1px solid #1b3732;
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  color:#899c98;
+  font-size:14px;
+}
+
+.footer-socials{
+  display:flex;
+  gap:20px;
+}
+
+.footer-socials a{
+  color:#899c98;
+  font-size:22px;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:800px){
+
+  .site-header{
+    padding:0 5%;
+    height:70px;
+  }
+
+  .desktop-nav{
+    display:none;
+  }
+
+  .menu-btn{
+    display:block;
+  }
+
+  .mobile-nav{
+    top:70px;
+  }
+
+  .hero{
+    min-height:620px;
+    padding:65px 20px 85px;
+  }
+
+  .hero-brand{
+    font-size:48px;
+  }
+
+  .hero-brand span{
+    height:58px;
+  }
+
+  .developer-signature{
+    padding:14px 20px;
+  }
+
+  .developer-signature strong{
+    font-size:21px;
+  }
+
+  .hero h1{
+    font-size:15px;
+    letter-spacing:3px;
+    line-height:2;
+  }
+
+  .hero p{
+    font-size:16px;
+  }
+
+  .section{
+    padding:65px 6%;
+  }
+
+  .section-title{
+    font-size:34px;
+  }
+
+  .categories{
+    grid-template-columns:repeat(2,1fr);
+    gap:14px;
+  }
+
+  .footer-grid{
+    grid-template-columns:1fr;
+    gap:25px;
+  }
+
+  .footer-bottom{
+    flex-direction:column;
+  }
+}
+
+@media(max-width:480px){
+
+  .logo img{
+    width:145px;
+  }
+
+  .hero-brand{
+    font-size:40px;
+  }
+
+  .hero-brand span{
+    height:48px;
+  }
+
+  .hero h1{
+    font-size:13px;
+    letter-spacing:2px;
+  }
+
+  .primary-btn{
+    padding:16px 30px;
+  }
+
+  .quiz-shell{
+    padding:20px;
+  }
+
+  .categories{
+    grid-template-columns:1fr;
+  }
+
+  .section-title{
+    font-size:29px;
+  }
+
+  .developer-signature strong{
+    font-size:19px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="site-header">
+
+<a class="logo" href="#accueil" aria-label="ExamQuiz accueil">
+<img src="logo.png" alt="ExamQuiz Haiti">
+</a>
+
+<nav class="desktop-nav">
+<a href="#accueil">Accueil</a>
+<a href="#quiz">Quiz</a>
+<a href="#categories">Catégories</a>
+<a href="#apropos">À propos</a>
+<a href="#contact">Contact</a>
+</nav>
+
+<button class="menu-btn" id="menu-btn" aria-label="Ouvrir le menu">☰</button>
+
+<nav class="mobile-nav" id="mobile-nav">
+<a href="#accueil">Accueil</a>
+<a href="#quiz">Quiz</a>
+<a href="#categories">Catégories</a>
+<a href="#apropos">À propos</a>
+<a href="#contact">Contact</a>
+</nav>
+
+</header>
+
+<main>
+
+<section class="hero" id="accueil">
+
+<div class="hero-content">
+
+<div class="hero-brand">
+<span></span>
+ExamQuiz
+</div>
+
+<h1>
+APPRENDS, TESTE TES CONNAISSANCES ET PROGRESSE
+</h1>
+
+<p>
+Une plateforme éducative haïtienne pour réviser, pratiquer
+et relever des défis à travers des quiz adaptés à plusieurs niveaux.
+</p>
+
+<div class="developer-signature">
+<span>CRÉÉ ET DÉVELOPPÉ PAR</span>
+<strong>Ing. Fawenbert Régis</strong>
+<small>Développeur &amp; créateur d’ExamQuiz</small>
+</div>
+
+<a href="#quiz">
+<button class="primary-btn">
+COMMENCER LE QUIZ
+</button>
+</a>
+
+</div>
+
+</section>
+
+<section class="section" id="apropos">
+
+<h2 class="section-title">
+Bienvenue à ExamQuiz
+</h2>
+
+<p class="section-intro">
+ExamQuiz rassemble des questions d'entraînement dans plusieurs domaines
+afin de permettre aux élèves de réviser de manière simple,
+interactive et progressive.
+</p>
+
+<div class="quiz-shell landing-card">
+
+<div class="quiz-icon">
+🎓
+</div>
+
+<h2>
+Apprends en jouant
+</h2>
+
+<p>
+Choisis ton niveau, réponds aux questions et débloque progressivement
+les niveaux suivants.
+</p>
+
+<div class="reassure">
+<strong>Pour les élèves :</strong><br>
+Prends ton temps, lis attentivement les questions et utilise chaque
+erreur comme une occasion d'apprendre.
+</div>
+
+<div id="quiz-container"></div>
+
+</div>
+
+</section>
+
+<section class="section alt" id="categories">
+
+<h2 class="section-title">
+Nos catégories
+</h2>
+
+<p class="section-intro">
+Découvre les différentes matières et domaines disponibles sur ExamQuiz.
+</p>
+
+<div class="categories">
+
+<div class="category">
+<div class="emoji">🇭🇹</div>
+<h3>Histoire d’Haïti</h3>
+<p>Teste tes connaissances sur l'histoire nationale.</p>
+</div>
+
+<div class="category">
+<div class="emoji">🌍</div>
+<h3>Géographie</h3>
+<p>Pays, villes, territoires et monde.</p>
+</div>
+
+<div class="category">
+<div class="emoji">⚽</div>
+<h3>Sport</h3>
+<p>Actualités et connaissances sportives.</p>
+</div>
+
+<div class="category">
+<div class="emoji">🔬</div>
+<h3>Sciences</h3>
+<p>Biologie, physique, chimie et sciences générales.</p>
+</div>
+
+<div class="category">
+<div class="emoji">🧠</div>
+<h3>Culture générale</h3>
+<p>Des questions variées pour élargir tes connaissances.</p>
+</div>
+
+<div class="category">
+<div class="emoji">📖</div>
+<h3>Français</h3>
+<p>Langue, vocabulaire et compréhension.</p>
+</div>
+
+<div class="category">
+<div class="emoji">🇭🇹</div>
+<h3>Kreyòl</h3>
+<p>Révise et teste tes connaissances en kreyòl.</p>
+</div>
+
+<div class="category">
+<div class="emoji">🎓</div>
+<h3>Baccalauréat</h3>
+<p>Entraîne-toi avec des questions de niveau examen.</p>
+</div>
+
+</div>
+
+</section>
+
+<section class="social-section" id="contact">
+
+<p>
+Cliquez sur une icône et suivez ExamQuiz sur les réseaux sociaux
+pour ne manquer aucune nouveauté et aucune nouvelle épreuve publiée.
+</p>
+
+<div class="socials">
+<a href="#" aria-label="Facebook">f</a>
+<a href="#" aria-label="X">𝕏</a>
+<a href="#" aria-label="Instagram">◎</a>
+<a href="#" aria-label="YouTube">▶</a>
+<a href="#" aria-label="TikTok">♪</a>
+</div>
+
+</section>
+
+</main>
+
+<footer>
+
+<div class="footer-grid">
+
+<div>
+
+<h3>À PROPOS DE NOUS</h3>
+
+<p>
+ExamQuiz est une plateforme éducative destinée à aider les élèves
+à apprendre, réviser et tester leurs connaissances à travers des quiz.
+</p>
+
+</div>
+
+<div class="footer-links">
+
+<h3>MENU</h3>
+
+<a href="#quiz">Quiz</a>
+<a href="#categories">Catégories</a>
+<a href="#apropos">À propos</a>
+<a href="#contact">Contact</a>
+
+</div>
+
+<div>
+
+<h3>CRÉATEUR</h3>
+
+<p>
+Ing. Fawenbert Régis
+</p>
+
+</div>
+
+</div>
+
+<div class="footer-bottom">
+
+<div>
+© 2026 ExamQuiz • Tous droits réservés
+</div>
+
+<div class="footer-socials">
+<a href="#" aria-label="Facebook">f</a>
+<a href="#" aria-label="Instagram">◎</a>
+<a href="#" aria-label="YouTube">▶</a>
+<a href="#" aria-label="TikTok">♪</a>
+</div>
+
+</div>
+
+</footer>
+
 <script type="module">
 
-  import {
-    createQuiz,
-    selectQuestionsByLevel,
-    answerQuestion,
-    getCurrentQuestion,
-    getLevel,
-    getProgress,
-    getAiHint,
-    getAiFeedback,
-    isFinished,
-    QUESTIONS_PER_LEVEL
-  } from './src/quizLogic.js';
+import {
+createQuiz,
+selectQuestionsByLevel,
+answerQuestion,
+getCurrentQuestion,
+getLevel,
+getProgress,
+getAiHint,
+getAiFeedback,
+isFinished,
+QUESTIONS_PER_LEVEL
+} from './src/quizLogic.js';
 
-  import {
-    baccQuestions
-  } from './src/baccQuestions.js';
+import { baccQuestions } from './src/baccQuestions.js';
 
+const questions = baccQuestions;
 
-  /* =========================
-     QUESTIONS
-  ========================= */
+const totalLevels =
+Math.ceil(questions.length / QUESTIONS_PER_LEVEL);
 
-  const questions = baccQuestions;
+const unlockThreshold =
+Math.max(1, QUESTIONS_PER_LEVEL - 1);
 
-  const totalLevels =
-    Math.ceil(
-      questions.length / QUESTIONS_PER_LEVEL
-    );
+const savedUnlockedLevels =
+JSON.parse(
+localStorage.getItem('exam_quiz_unlocked_levels') || '[1]'
+);
 
-  const unlockThreshold =
-    Math.max(
-      1,
-      QUESTIONS_PER_LEVEL - 1
-    );
+const unlockedLevels =
+new Set(savedUnlockedLevels);
 
+function saveUnlockedLevels(){
 
-  /* =========================
-     NIVEAUX SAUVEGARDÉS
-  ========================= */
+localStorage.setItem(
+'exam_quiz_unlocked_levels',
+JSON.stringify(Array.from(unlockedLevels))
+);
 
-  const savedUnlockedLevels =
-    JSON.parse(
-      localStorage.getItem(
-        'exam_quiz_unlocked_levels'
-      ) || '[1]'
-    );
+}
 
-  const unlockedLevels =
-    new Set(savedUnlockedLevels);
+let selectedLevel = null;
+let quiz = null;
+let showLanding = true;
 
+let coins =
+Number(
+localStorage.getItem('exam_quiz_coins') || 0
+);
 
-  function saveUnlockedLevels(){
+const levelReward = 5;
 
-    localStorage.setItem(
-      'exam_quiz_unlocked_levels',
-      JSON.stringify(
-        Array.from(unlockedLevels)
-      )
-    );
+function renderLanding(){
 
-  }
+const container =
+document.getElementById('quiz-container');
 
+container.innerHTML = `
 
-  /* =========================
-     ÉTAT DU QUIZ
-  ========================= */
+<div style="margin:18px 0;font-weight:bold">
+🪙 ${coins} pièces
+</div>
 
-  let selectedLevel = null;
+<button class="start-btn" id="start-btn">
+DÉMARRER
+</button>
 
-  let quiz = null;
+<button class="install-btn"
+id="install-btn"
+disabled>
+INSTALLER L'APPLICATION
+</button>
 
-  let showLanding = true;
+<p id="install-note"
+style="color:#777;font-size:14px">
 
+Le bouton d'installation sera activé
+si le navigateur autorise l'installation.
 
-  /* =========================
-     PIÈCES
-  ========================= */
+</p>
 
-  let coins =
-    Number(
-      localStorage.getItem(
-        'exam_quiz_coins'
-      ) || 0
-    );
+`;
 
-  const levelReward = 5;
+document
+.getElementById('start-btn')
+.addEventListener('click',()=>{
 
+showLanding=false;
 
-  /* =========================
-     ACCUEIL DU QUIZ
-  ========================= */
+render();
 
-  function renderLanding(){
+});
 
-    const container =
-      document.getElementById(
-        'quiz-container'
-      );
+}
 
-    container.innerHTML = `
+function startQuiz(level){
 
-      <div style="
-        margin:18px 0;
-        font-weight:bold;
-        font-size:18px;
-      ">
-        🪙 ${coins} pièces
-      </div>
+const levelQuestions =
+selectQuestionsByLevel(
+questions,
+level
+);
 
-      <button
-        class="start-btn"
-        id="start-btn">
+return createQuiz(levelQuestions);
 
-        DÉMARRER
+}
 
-      </button>
+function renderLevelSelection(){
 
-      <button
-        class="install-btn"
-        id="install-btn"
-        disabled>
+const container =
+document.getElementById('quiz-container');
 
-        INSTALLER L'APPLICATION
+const levels =
+Array.from(
+{length:totalLevels},
+(_,i)=>i+1
+);
 
-      </button>
+container.innerHTML = `
 
-      <p
-        id="install-note"
-        style="
-          color:#777;
-          font-size:14px;
-        ">
+<div class="quiz-progress">
+Choisissez un niveau :
+</div>
 
-        Le bouton d'installation sera activé
-        si le navigateur autorise l'installation.
+<div style="margin-bottom:15px">
+Vos pièces : 🪙 ${coins}
+</div>
 
-      </p>
+<div class="levels-grid">
 
-    `;
+${levels.map(level=>{
 
-    document
-      .getElementById('start-btn')
-      .addEventListener(
-        'click',
-        () => {
+const unlocked =
+unlockedLevels.has(level);
 
-          showLanding = false;
+return `
 
-          render();
+<button
+class="level-btn${unlocked?'':' locked'}"
+data-level="${level}"
+${unlocked?'':'disabled'}>
 
-        }
-      );
+${unlocked
+?`Niveau ${level}`
+:`Niveau ${level} 🔒`}
 
-  }
+</button>
 
+`;
 
-  /* =========================
-     DÉMARRER UN NIVEAU
-  ========================= */
+}).join('')}
 
-  function startQuiz(level){
+</div>
 
-    const levelQuestions =
-      selectQuestionsByLevel(
-        questions,
-        level
-      );
+<div class="result">
+Terminez un niveau pour débloquer le suivant.
+</div>
 
-    return createQuiz(
-      levelQuestions
-    );
+`;
 
-  }
+container
+.querySelectorAll('.level-btn')
+.forEach(button=>{
 
+if(button.disabled)return;
 
-  /* =========================
-     SÉLECTION DES NIVEAUX
-  ========================= */
+button.addEventListener('click',()=>{
 
-  function renderLevelSelection(){
+selectedLevel =
+Number(button.dataset.level);
 
-    const container =
-      document.getElementById(
-        'quiz-container'
-      );
+quiz =
+startQuiz(selectedLevel);
 
-    const levels =
-      Array.from(
-        {
-          length: totalLevels
-        },
-        (_, i) => i + 1
-      );
+render();
 
-    container.innerHTML = `
+});
 
-      <div class="quiz-progress">
-        Choisissez un niveau :
-      </div>
+});
 
-      <div style="
-        margin-bottom:15px;
-        font-weight:bold;
-      ">
-        Vos pièces : 🪙 ${coins}
-      </div>
+}
 
-      <div class="levels-grid">
+function render(){
 
-        ${levels.map(level => {
+const container =
+document.getElementById('quiz-container');
 
-          const unlocked =
-            unlockedLevels.has(level);
+if(showLanding){
 
-          return `
+renderLanding();
 
-            <button
-              class="level-btn${unlocked ? '' : ' locked'}"
-              data-level="${level}"
-              ${unlocked ? '' : 'disabled'}>
+return;
 
-              ${
-                unlocked
-                  ? `Niveau ${level}`
-                  : `Niveau ${level} 🔒`
-              }
+}
 
-            </button>
+if(!quiz){
 
-          `;
+renderLevelSelection();
 
-        }).join('')}
+return;
 
-      </div>
+}
 
-      <div class="result">
-        Terminez un niveau pour débloquer le suivant.
-      </div>
+if(quiz.failed){
 
-    `;
+const failedQuestion =
+getCurrentQuestion(quiz);
 
-    container
-      .querySelectorAll('.level-btn')
-      .forEach(button => {
+const failedAnswerText =
+failedQuestion?.options[quiz.failedAnswer]
+?? 'Réponse inconnue';
 
-        if(button.disabled) return;
+const correctAnswerText =
+failedQuestion?.options[
+failedQuestion?.correctAnswer
+]
+?? 'Réponse inconnue';
 
-        button.addEventListener(
-          'click',
-          () => {
+container.innerHTML = `
 
-            selectedLevel =
-              Number(
-                button.dataset.level
-              );
+<div class="result">
+❌ Échec du niveau ${selectedLevel}
+</div>
 
-            quiz =
-              startQuiz(
-                selectedLevel
-              );
+<div class="result">
+Votre réponse : ${failedAnswerText}
+</div>
 
-            render();
+<div class="result">
+Bonne réponse : ${correctAnswerText}
+</div>
 
-          }
-        );
+<div class="result">
+Recommencez le niveau pour progresser.
+</div>
 
-      });
+<button class="restart-btn" id="retry-btn">
+RECOMMENCER
+</button>
 
-  }
+<button class="restart-btn" id="back-btn">
+RETOUR AUX NIVEAUX
+</button>
 
+`;
 
-  /* =========================
-     AFFICHAGE PRINCIPAL
-  ========================= */
+document
+.getElementById('retry-btn')
+.addEventListener('click',()=>{
 
-  function render(){
+quiz =
+startQuiz(selectedLevel);
 
-    const container =
-      document.getElementById(
-        'quiz-container'
-      );
+render();
 
-    if(showLanding){
+});
 
-      renderLanding();
+document
+.getElementById('back-btn')
+.addEventListener('click',()=>{
 
-      return;
+selectedLevel=null;
+quiz=null;
 
-    }
+render();
 
-    if(!quiz){
+});
 
-      renderLevelSelection();
+return;
 
-      return;
+}
 
-    }
+if(isFinished(quiz)){
 
+const nextLevel =
+selectedLevel+1;
 
-    /* =========================
-       ÉCHEC
-    ========================= */
+const canUnlock =
+quiz.score>=unlockThreshold;
 
-    if(quiz.failed){
+let earned=0;
 
-      const failedQuestion =
-        getCurrentQuestion(
-          quiz
-        );
+if(
+canUnlock &&
+nextLevel<=totalLevels &&
+!unlockedLevels.has(nextLevel)
+){
 
-      const failedAnswerText =
-        failedQuestion?.options[
-          quiz.failedAnswer
-        ] ?? 'Réponse inconnue';
+unlockedLevels.add(nextLevel);
 
-      const correctAnswerText =
-        failedQuestion?.options[
-          failedQuestion?.correctAnswer
-        ] ?? 'Réponse inconnue';
+saveUnlockedLevels();
 
-      container.innerHTML = `
+earned=levelReward;
 
-        <div class="result">
-          ❌ Échec du niveau ${selectedLevel}
-        </div>
+coins+=earned;
 
-        <div class="result">
-          Votre réponse :
-          ${failedAnswerText}
-        </div>
+localStorage.setItem(
+'exam_quiz_coins',
+String(coins)
+);
 
-        <div class="result">
-          Bonne réponse :
-          ${correctAnswerText}
-        </div>
+}
 
-        <div class="result">
-          Recommencez le niveau pour progresser.
-        </div>
+container.innerHTML = `
 
-        <button
-          class="restart-btn"
-          id="retry-btn">
+<div class="result">
+🎉 Quiz terminé !
+</div>
 
-          RECOMMENCER
+<div class="result">
+Score :
+${quiz.score}/${quiz.questions.length}
+</div>
 
-        </button>
+<div class="result">
+${getLevel(
+quiz.score,
+quiz.questions.length
+)}
+</div>
 
-        <button
-          class="restart-btn"
-          id="back-btn">
+${
+canUnlock && nextLevel<=totalLevels
 
-          RETOUR AUX NIVEAUX
+?`
 
-        </button>
+<div class="badge">
+Niveau ${nextLevel} débloqué !
+</div>
 
-      `;
+`
 
-      document
-        .getElementById('retry-btn')
-        .addEventListener(
-          'click',
-          () => {
+:`
 
-            quiz =
-              startQuiz(
-                selectedLevel
-              );
+<div
+class="badge"
+style="background:#e99619">
 
-            render();
+Score nécessaire :
+${unlockThreshold}/${quiz.questions.length}
 
-          }
-        );
+</div>
 
-      document
-        .getElementById('back-btn')
-        .addEventListener(
-          'click',
-          () => {
+`
+}
 
-            selectedLevel = null;
+${
+earned>0
 
-            quiz = null;
+?`
 
-            render();
+<div style="margin-top:12px">
++${earned} pièces 🪙
+</div>
 
-          }
-        );
+`
 
-      return;
+:''
+}
 
-    }
+<div style="margin-top:10px">
+Total : 🪙 ${coins}
+</div>
 
+<button
+class="restart-btn"
+id="restart-btn">
 
-    /* =========================
-       QUIZ TERMINÉ
-    ========================= */
+RETOUR AUX NIVEAUX
 
-    if(isFinished(quiz)){
+</button>
 
-      const nextLevel =
-        selectedLevel + 1;
+`;
 
-      const canUnlock =
-        quiz.score >=
-        unlockThreshold;
+document
+.getElementById('restart-btn')
+.addEventListener('click',()=>{
 
-      let earned = 0;
+selectedLevel=null;
+quiz=null;
 
-      if(
-        canUnlock &&
-        nextLevel <= totalLevels &&
-        !unlockedLevels.has(nextLevel)
-      ){
+render();
 
-        unlockedLevels.add(
-          nextLevel
-        );
+});
 
-        saveUnlockedLevels();
+return;
 
-        earned =
-          levelReward;
+}
 
-        coins += earned;
+const question =
+getCurrentQuestion(quiz);
 
-        localStorage.setItem(
-          'exam_quiz_coins',
-          String(coins)
-        );
+container.innerHTML = `
 
-      }
+<div class="quiz-progress">
 
-      container.innerHTML = `
+Niveau ${selectedLevel}
+—
+${getProgress(quiz)}
 
-        <div class="result">
-          🎉 Quiz terminé !
-        </div>
+</div>
 
-        <div class="result">
-          Score :
-          ${quiz.score}/${quiz.questions.length}
-        </div>
+<h2>
+${question.question}
+</h2>
 
-        <div class="result">
-          ${getLevel(
-            quiz.score,
-            quiz.questions.length
-          )}
-        </div>
+<div class="answers">
 
-        ${
-          canUnlock &&
-          nextLevel <= totalLevels
+${question.options.map(
+(option,index)=>`
 
-          ?
+<button
+class="answer-btn"
+data-index="${index}">
 
-          `<div class="badge">
-            Niveau ${nextLevel} débloqué !
-          </div>`
+${option}
 
-          :
+</button>
 
-          `<div
-            class="badge"
-            style="background:#e99619">
+`
+).join('')}
 
-            Score nécessaire :
-            ${unlockThreshold}/${quiz.questions.length}
+</div>
 
-          </div>`
-        }
+<div class="ai-panel">
 
-        ${
-          earned > 0
+<h3>
+🤖 Assistant IA
+</h3>
 
-          ?
+<p id="ai-feedback">
+${getAiHint(question)}
+</p>
 
-          `<div style="margin-top:12px">
-            +${earned} pièces 🪙
-          </div>`
+<button
+class="hint-btn"
+id="hint-btn">
 
-          :
+DEMANDER UN CONSEIL
 
-          ''
-        }
+</button>
 
-        <div style="margin-top:10px">
-          Total : 🪙 ${coins}
-        </div>
+</div>
 
-        <button
-          class="restart-btn"
-          id="restart-btn">
+`;
 
-          RETOUR AUX NIVEAUX
+container
+.querySelectorAll('.answer-btn')
+.forEach(button=>{
 
-        </button>
+button.addEventListener(
+'click',
+()=>{
 
-      `;
+const selectedIndex =
+Number(button.dataset.index);
 
-      document
-        .getElementById('restart-btn')
-        .addEventListener(
-          'click',
-          () => {
+const feedback =
+document.getElementById(
+'ai-feedback'
+);
 
-            selectedLevel = null;
+feedback.textContent =
+getAiFeedback(
+question,
+selectedIndex
+);
 
-            quiz = null;
+const isCorrect =
+selectedIndex ===
+question.correctAnswer;
 
-            render();
+if(!isCorrect){
 
-          }
-        );
+quiz={
+...quiz,
+failed:true,
+failedAnswer:selectedIndex
+};
 
-      return;
+setTimeout(render,500);
 
-    }
+return;
 
+}
 
-    /* =========================
-       QUESTION
-    ========================= */
+quiz =
+answerQuestion(
+quiz,
+selectedIndex
+);
 
-    const question =
-      getCurrentQuestion(
-        quiz
-      );
+setTimeout(render,400);
 
-    container.innerHTML = `
+});
 
-      <div class="quiz-progress">
+});
 
-        Niveau ${selectedLevel}
-        —
-        ${getProgress(quiz)}
+document
+.getElementById('hint-btn')
+.addEventListener('click',()=>{
 
-      </div>
+document
+.getElementById('ai-feedback')
+.textContent =
+getAiHint(question);
 
-      <h2>
-        ${question.question}
-      </h2>
+});
 
-      <div class="answers">
+}
 
-        ${question.options.map(
-          (option,index) => `
+let deferredPrompt=null;
 
-          <button
-            class="answer-btn"
-            data-index="${index}">
+window.addEventListener(
+'beforeinstallprompt',
+event=>{
 
-            ${option}
+event.preventDefault();
 
-          </button>
+deferredPrompt=event;
 
-        `
-        ).join('')}
+const installBtn =
+document.getElementById(
+'install-btn'
+);
 
-      </div>
+const installNote =
+document.getElementById(
+'install-note'
+);
 
-      <div class="ai-panel">
+if(installBtn){
 
-        <h3>
-          🤖 Assistant IA
-        </h3>
+installBtn.disabled=false;
 
-        <p id="ai-feedback">
-          ${getAiHint(question)}
-        </p>
+installNote.textContent =
+" Cliquez pour installer l'application.";
 
-        <button
-          class="hint-btn"
-          id="hint-btn">
+installBtn.addEventListener(
+'click',
+async()=>{
 
-          DEMANDER UN CONSEIL
+if(!deferredPrompt)return;
 
-        </button>
+deferredPrompt.prompt();
 
-      </div>
+await deferredPrompt.userChoice;
 
-    `;
+deferredPrompt=null;
 
+installBtn.disabled=true;
 
-    /* =========================
-       RÉPONSES
-    ========================= */
+installNote.textContent =
+"Installation terminée ou annulée.";
 
-    container
-      .querySelectorAll('.answer-btn')
-      .forEach(button => {
+},
+{once:true}
+);
 
-        button.addEventListener(
-          'click',
-          () => {
+}
 
-            const selectedIndex =
-              Number(
-                button.dataset.index
-              );
+}
+);
 
-            const feedback =
-              document.getElementById(
-                'ai-feedback'
-              );
+document
+.getElementById('menu-btn')
+.addEventListener('click',()=>{
 
-            feedback.textContent =
-              getAiFeedback(
-                question,
-                selectedIndex
-              );
+document
+.getElementById('mobile-nav')
+.classList.toggle('open');
 
-            const isCorrect =
-              selectedIndex ===
-              question.correctAnswer;
+});
 
-            if(!isCorrect){
+document
+.querySelectorAll('.mobile-nav a')
+.forEach(link=>{
 
-              quiz = {
-                ...quiz,
-                failed:true,
-                failedAnswer:selectedIndex
-              };
+link.addEventListener('click',()=>{
 
-              setTimeout(
-                render,
-                500
-              );
+document
+.getElementById('mobile-nav')
+.classList.remove('open');
 
-              return;
+});
 
-            }
+});
 
-            quiz =
-              answerQuestion(
-                quiz,
-                selectedIndex
-              );
+render();
 
-            setTimeout(
-              render,
-              400
-            );
+if('serviceWorker' in navigator){
 
-          }
-        );
+window.addEventListener('load',()=>{
 
-      });
+navigator.serviceWorker
+.register('/service-worker.js')
+.catch(error=>{
 
+console.warn(
+'Service worker registration failed:',
+error
+);
 
-    /* =========================
-       CONSEIL IA
-    ========================= */
+});
 
-    document
-      .getElementById('hint-btn')
-      .addEventListener(
-        'click',
-        () => {
+});
 
-          document
-            .getElementById(
-              'ai-feedback'
-            )
-            .textContent =
-            getAiHint(question);
-
-        }
-      );
-
-  }
-
-
-  /* =========================
-     LANCEMENT
-  ========================= */
-
-  render();
-
-
-  /* =========================
-     SERVICE WORKER
-  ========================= */
-
-  if(
-    'serviceWorker'
-    in navigator
-  ){
-
-    window.addEventListener(
-      'load',
-      () => {
-
-        navigator.serviceWorker
-          .register(
-            '/service-worker.js'
-          )
-          .catch(
-            error => {
-
-              console.warn(
-                'Service worker registration failed:',
-                error
-              );
-
-            }
-          );
-
-      }
-    );
-
-  }
+}
 
 </script>
+
+</body>
+</html>
