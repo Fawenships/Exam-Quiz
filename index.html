@@ -1,41 +1,18 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#063b35">
-<link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" href="icons/icon-192.png">
-
-<title>ExamQuiz — Apprendre en jouant</title>
-
-<script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@type":"Organization",
-  "name":"ExamQuiz Haiti",
-  "url":"https://examquizhaiti.com",
-  "logo":"https://examquizhaiti.com/icons/icon-192.png"
-}
-</script>
-
 <style>
 :root{
-  --primary:#063b35;
-  --primary2:#087f6c;
-  --accent:#18c7a1;
-  --accent2:#7cebd4;
-  --light:#f4faf8;
-  --text:#172321;
-  --muted:#687774;
+  --dark:#343a40;
+  --dark2:#495057;
+  --gray:#6c757d;
+  --gray2:#adb5bd;
+  --light:#f1f3f5;
+  --lighter:#f8f9fa;
+  --text:#212529;
+  --muted:#6c757d;
   --card:#ffffff;
-  --dark:#061d1a;
-  --border:#dcebe7;
+  --border:#dee2e6;
 }
 
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 html{
   scroll-behavior:smooth;
@@ -66,12 +43,12 @@ a{
   top:0;
   z-index:1000;
   height:76px;
-  background:var(--primary);
+  background:#343a40;
   display:flex;
   align-items:center;
   justify-content:space-between;
   padding:0 6%;
-  box-shadow:0 3px 15px rgba(0,0,0,.15);
+  box-shadow:0 2px 12px rgba(0,0,0,.15);
 }
 
 .logo{
@@ -91,7 +68,7 @@ a{
   display:flex;
   align-items:center;
   gap:28px;
-  color:white;
+  color:#fff;
   font-size:15px;
 }
 
@@ -102,15 +79,16 @@ a{
 
 .desktop-nav a:hover{
   opacity:1;
-  color:var(--accent2);
+  color:#ced4da;
 }
 
 .menu-btn{
   display:none;
   border:0;
   background:transparent;
-  color:white;
+  color:#fff;
   font-size:34px;
+  line-height:1;
   cursor:pointer;
   padding:4px;
 }
@@ -121,9 +99,9 @@ a{
   top:76px;
   left:0;
   right:0;
-  background:var(--primary);
+  background:#343a40;
   padding:14px 7%;
-  box-shadow:0 8px 18px rgba(0,0,0,.2);
+  box-shadow:0 8px 18px rgba(0,0,0,.18);
 }
 
 .mobile-nav.open{
@@ -132,9 +110,9 @@ a{
 
 .mobile-nav a{
   display:block;
-  color:white;
+  color:#fff;
   padding:14px 0;
-  border-bottom:1px solid rgba(255,255,255,.1);
+  border-bottom:1px solid rgba(255,255,255,.12);
 }
 
 /* =========================
@@ -142,16 +120,19 @@ a{
 ========================= */
 
 .hero{
-  min-height:650px;
+  min-height:610px;
   display:flex;
   align-items:center;
   justify-content:center;
   text-align:center;
-  color:white;
+  color:#fff;
   padding:80px 20px 100px;
-  background:
-    radial-gradient(circle at 80% 20%,rgba(24,199,161,.35),transparent 30%),
-    linear-gradient(145deg,#063b35 0%,#087f6c 52%,#0ca98d 100%);
+  background:linear-gradient(
+    135deg,
+    #343a40 0%,
+    #495057 50%,
+    #6c757d 100%
+  );
   position:relative;
   overflow:hidden;
 }
@@ -161,25 +142,25 @@ a{
   content:"";
   position:absolute;
   border-radius:50%;
-  border:1px solid rgba(255,255,255,.1);
+  background:rgba(255,255,255,.06);
 }
 
 .hero:before{
-  width:430px;
-  height:430px;
-  top:-240px;
-  right:-100px;
+  width:420px;
+  height:420px;
+  top:-230px;
+  right:-120px;
 }
 
 .hero:after{
-  width:330px;
-  height:330px;
-  bottom:-220px;
-  left:-120px;
+  width:300px;
+  height:300px;
+  bottom:-200px;
+  left:-100px;
 }
 
 .hero-content{
-  max-width:850px;
+  max-width:820px;
   position:relative;
   z-index:1;
 }
@@ -188,89 +169,93 @@ a{
   display:flex;
   justify-content:center;
   align-items:center;
-  gap:12px;
+  gap:10px;
   font-size:64px;
   font-weight:300;
-  margin-bottom:24px;
+  margin-bottom:25px;
   letter-spacing:-2px;
 }
 
 .hero-brand span{
-  width:4px;
+  width:3px;
   height:72px;
-  background:var(--accent);
+  background:#fff;
   display:inline-block;
-  border-radius:4px;
 }
 
 .hero h1{
   margin:0 auto 24px;
-  font-size:22px;
-  letter-spacing:5px;
+  font-size:23px;
+  letter-spacing:6px;
   line-height:1.8;
-  color:var(--accent2);
+  color:#e9ecef;
   max-width:760px;
   text-transform:uppercase;
 }
 
 .hero p{
   font-size:17px;
-  line-height:1.8;
-  max-width:680px;
+  line-height:1.7;
+  max-width:650px;
   margin:0 auto 30px;
-  color:#effffb;
+  color:#f1f3f5;
 }
 
-/* SIGNATURE UNIQUE */
+/* =========================
+   DEVELOPPEUR
+========================= */
 
-.developer-signature{
+.developer-hero{
   display:inline-flex;
   flex-direction:column;
   align-items:center;
-  gap:7px;
-  margin:8px auto 30px;
-  padding:17px 32px;
-  border-left:3px solid var(--accent);
-  border-right:3px solid var(--accent);
-  background:rgba(0,0,0,.13);
-  border-radius:14px;
-  box-shadow:0 8px 25px rgba(0,0,0,.12);
+  gap:5px;
+  margin:5px auto 28px;
+  padding:16px 28px;
+  border:1px solid rgba(255,255,255,.28);
+  border-radius:18px;
+  background:rgba(0,0,0,.15);
+  box-shadow:0 8px 25px rgba(0,0,0,.15);
 }
 
-.developer-signature span{
+.developer-hero span{
   font-size:11px;
   letter-spacing:4px;
-  color:#bff9eb;
+  color:#ced4da;
   font-weight:bold;
 }
 
-.developer-signature strong{
+.developer-hero strong{
   font-size:25px;
-  color:white;
+  color:#fff;
   letter-spacing:.5px;
 }
 
-.developer-signature small{
-  color:#d8fff6;
+.developer-hero small{
+  color:#e9ecef;
   font-size:13px;
 }
+
+/* =========================
+   BOUTON PRINCIPAL
+========================= */
 
 .primary-btn{
   border:0;
   border-radius:40px;
   padding:18px 48px;
-  background:var(--accent);
-  color:#063b35;
+  background:#212529;
+  color:#fff;
   font-weight:bold;
-  letter-spacing:3px;
+  letter-spacing:4px;
   cursor:pointer;
-  box-shadow:0 8px 25px rgba(0,0,0,.2);
+  box-shadow:0 8px 25px rgba(0,0,0,.22);
   transition:.2s;
 }
 
 .primary-btn:hover{
-  transform:translateY(-3px);
-  background:#5be4c5;
+  transform:translateY(-2px);
+  background:#000;
 }
 
 /* =========================
@@ -279,26 +264,26 @@ a{
 
 .section{
   padding:85px 7%;
-  background:white;
+  background:#fff;
 }
 
 .section.alt{
-  background:#f4faf8;
+  background:#f1f3f5;
 }
 
 .section-title{
   text-align:center;
-  font-size:42px;
+  font-size:44px;
   font-weight:400;
   margin:0 0 22px;
   text-transform:uppercase;
-  color:var(--primary);
+  color:#343a40;
 }
 
 .section-intro{
   max-width:850px;
   margin:0 auto 45px;
-  color:#596966;
+  color:#6c757d;
   text-align:center;
   font-size:18px;
   line-height:1.8;
@@ -311,15 +296,15 @@ a{
 .quiz-shell{
   max-width:900px;
   margin:0 auto;
-  background:white;
+  background:#fff;
   border-radius:22px;
   padding:30px;
-  box-shadow:0 12px 40px rgba(6,59,53,.10);
-  border:1px solid var(--border);
+  box-shadow:0 12px 40px rgba(25,35,60,.09);
+  border:1px solid #dee2e6;
 }
 
 .quiz-progress{
-  color:#687774;
+  color:#6c757d;
   margin-bottom:15px;
   font-weight:bold;
 }
@@ -336,9 +321,9 @@ a{
 
 .answer-btn{
   width:100%;
-  border:1px solid #d7e5e1;
-  background:white;
-  color:#222;
+  border:1px solid #dee2e6;
+  background:#fff;
+  color:#212529;
   padding:16px 18px;
   border-radius:12px;
   text-align:left;
@@ -347,10 +332,14 @@ a{
 }
 
 .answer-btn:hover{
-  border-color:var(--accent);
-  background:#effcf8;
+  border-color:#6c757d;
+  background:#f1f3f5;
   transform:translateX(2px);
 }
+
+/* =========================
+   NIVEAUX
+========================= */
 
 .levels-grid{
   display:grid;
@@ -362,18 +351,19 @@ a{
   border:0;
   border-radius:12px;
   padding:15px;
-  background:var(--primary2);
-  color:white;
+  background:#495057;
+  color:#fff;
   cursor:pointer;
+  transition:.2s;
 }
 
 .level-btn:hover{
-  background:var(--accent);
-  color:var(--primary);
+  background:#343a40;
+  transform:translateY(-2px);
 }
 
 .level-btn.locked{
-  background:#aeb9b6;
+  background:#adb5bd;
   cursor:not-allowed;
 }
 
@@ -383,6 +373,10 @@ a{
   line-height:1.5;
 }
 
+/* =========================
+   BOUTONS QUIZ
+========================= */
+
 .restart-btn,
 .hint-btn,
 .start-btn,
@@ -391,25 +385,41 @@ a{
   border:0;
   border-radius:12px;
   padding:15px;
-  color:white;
+  color:#fff;
   cursor:pointer;
   margin-top:10px;
 }
 
 .restart-btn{
-  background:var(--primary2);
+  background:#343a40;
+}
+
+.restart-btn:hover{
+  background:#212529;
 }
 
 .hint-btn{
-  background:#087f6c;
+  background:#6c757d;
+}
+
+.hint-btn:hover{
+  background:#495057;
 }
 
 .start-btn{
-  background:var(--primary);
+  background:#343a40;
+}
+
+.start-btn:hover{
+  background:#212529;
 }
 
 .install-btn{
-  background:#e79a18;
+  background:#868e96;
+}
+
+.install-btn:hover{
+  background:#6c757d;
 }
 
 .install-btn:disabled{
@@ -417,28 +427,40 @@ a{
   cursor:not-allowed;
 }
 
+/* =========================
+   BADGE
+========================= */
+
 .badge{
   display:inline-block;
   margin-top:12px;
   padding:10px 15px;
   border-radius:30px;
-  background:#17a673;
-  color:white;
+  background:#495057;
+  color:#fff;
   font-weight:bold;
 }
+
+/* =========================
+   ASSISTANT IA
+========================= */
 
 .ai-panel{
   margin-top:22px;
   padding:18px;
   border-radius:15px;
-  background:#effaf7;
-  border:1px solid #cdebe4;
+  background:#f1f3f5;
+  border:1px solid #dee2e6;
 }
 
 .ai-panel h3{
   margin-top:0;
-  color:var(--primary2);
+  color:#343a40;
 }
+
+/* =========================
+   CARTE QUIZ
+========================= */
 
 .landing-card{
   text-align:center;
@@ -452,10 +474,10 @@ a{
   display:flex;
   align-items:center;
   justify-content:center;
-  background:linear-gradient(135deg,var(--primary),var(--accent));
-  color:white;
+  background:linear-gradient(135deg,#343a40,#6c757d);
+  color:#fff;
   font-size:52px;
-  box-shadow:0 10px 25px rgba(6,59,53,.2);
+  box-shadow:0 10px 25px rgba(0,0,0,.16);
 }
 
 .reassure{
@@ -463,14 +485,47 @@ a{
   max-width:650px;
   padding:18px;
   border-radius:15px;
-  background:#effaf5;
-  color:#205b48;
+  background:#f1f3f5;
+  color:#495057;
   line-height:1.6;
   text-align:left;
 }
 
 /* =========================
-   CATEGORIES
+   CARTE DEVELOPPEUR
+========================= */
+
+.developer-card{
+  max-width:520px;
+  margin:20px auto 25px;
+  padding:18px;
+  border-radius:16px;
+  background:linear-gradient(135deg,#343a40,#6c757d);
+  color:#fff;
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+  box-shadow:0 10px 25px rgba(0,0,0,.14);
+}
+
+.developer-card span{
+  font-size:11px;
+  letter-spacing:3px;
+  font-weight:bold;
+  color:#dee2e6;
+}
+
+.developer-card strong{
+  font-size:23px;
+}
+
+.developer-card small{
+  font-size:14px;
+  color:#e9ecef;
+}
+
+/* =========================
+   CATÉGORIES
 ========================= */
 
 .categories{
@@ -482,19 +537,19 @@ a{
 }
 
 .category{
-  background:white;
+  background:#fff;
   border-radius:18px;
   padding:26px 20px;
   text-align:center;
   box-shadow:0 8px 25px rgba(0,0,0,.06);
-  border:1px solid #e0ece9;
+  border:1px solid #dee2e6;
   transition:.2s;
 }
 
 .category:hover{
   transform:translateY(-5px);
-  border-color:var(--accent);
-  box-shadow:0 14px 30px rgba(6,59,53,.1);
+  border-color:#adb5bd;
+  box-shadow:0 14px 30px rgba(0,0,0,.10);
 }
 
 .category .emoji{
@@ -509,17 +564,17 @@ a{
 
 .category p{
   margin:0;
-  color:#777;
+  color:#6c757d;
   line-height:1.5;
 }
 
 /* =========================
-   SOCIAL
+   RÉSEAUX SOCIAUX
 ========================= */
 
 .social-section{
-  background:var(--dark);
-  color:white;
+  background:#212529;
+  color:#fff;
   text-align:center;
   padding:75px 7%;
 }
@@ -529,6 +584,7 @@ a{
   margin:0 auto 35px;
   font-size:18px;
   line-height:1.8;
+  color:#dee2e6;
 }
 
 .socials{
@@ -540,12 +596,12 @@ a{
 
 .socials a{
   font-size:34px;
-  color:white;
+  color:#fff;
   transition:.2s;
 }
 
 .socials a:hover{
-  color:var(--accent);
+  color:#ced4da;
   transform:scale(1.08);
 }
 
@@ -554,10 +610,10 @@ a{
 ========================= */
 
 footer{
-  background:#041411;
-  color:white;
+  background:#212529;
+  color:#fff;
   padding:60px 7% 25px;
-  border-top:1px solid #16352f;
+  border-top:1px solid #495057;
 }
 
 .footer-grid{
@@ -569,32 +625,36 @@ footer{
 }
 
 footer h3{
-  letter-spacing:4px;
-  font-size:17px;
+  letter-spacing:5px;
+  font-size:18px;
   font-weight:400;
   margin-top:0;
 }
 
 footer p{
-  color:#aebfbb;
+  color:#adb5bd;
   line-height:1.8;
 }
 
 .footer-links a{
   display:block;
-  color:var(--accent2);
+  color:#dee2e6;
   margin:16px 0;
+}
+
+.footer-links a:hover{
+  color:#fff;
 }
 
 .footer-bottom{
   max-width:1100px;
   margin:50px auto 0;
   padding-top:25px;
-  border-top:1px solid #1b3732;
+  border-top:1px solid #495057;
   display:flex;
   justify-content:space-between;
   gap:20px;
-  color:#899c98;
+  color:#adb5bd;
   font-size:14px;
 }
 
@@ -604,8 +664,12 @@ footer p{
 }
 
 .footer-socials a{
-  color:#899c98;
+  color:#adb5bd;
   font-size:22px;
+}
+
+.footer-socials a:hover{
+  color:#fff;
 }
 
 /* =========================
@@ -632,7 +696,7 @@ footer p{
   }
 
   .hero{
-    min-height:620px;
+    min-height:610px;
     padding:65px 20px 85px;
   }
 
@@ -640,21 +704,21 @@ footer p{
     font-size:48px;
   }
 
+  .developer-hero strong{
+    font-size:21px;
+  }
+
+  .developer-hero{
+    padding:14px 20px;
+  }
+
   .hero-brand span{
     height:58px;
   }
 
-  .developer-signature{
-    padding:14px 20px;
-  }
-
-  .developer-signature strong{
-    font-size:21px;
-  }
-
   .hero h1{
-    font-size:15px;
-    letter-spacing:3px;
+    font-size:16px;
+    letter-spacing:4px;
     line-height:2;
   }
 
@@ -700,12 +764,12 @@ footer p{
   }
 
   .hero h1{
-    font-size:13px;
-    letter-spacing:2px;
+    font-size:14px;
+    letter-spacing:3px;
   }
 
   .primary-btn{
-    padding:16px 30px;
+    padding:16px 34px;
   }
 
   .quiz-shell{
@@ -719,866 +783,5 @@ footer p{
   .section-title{
     font-size:29px;
   }
-
-  .developer-signature strong{
-    font-size:19px;
-  }
 }
 </style>
-</head>
-
-<body>
-
-<header class="site-header">
-
-<a class="logo" href="#accueil" aria-label="ExamQuiz accueil">
-<img src="logo.png" alt="ExamQuiz Haiti">
-</a>
-
-<nav class="desktop-nav">
-<a href="#accueil">Accueil</a>
-<a href="#quiz">Quiz</a>
-<a href="#categories">Catégories</a>
-<a href="#apropos">À propos</a>
-<a href="#contact">Contact</a>
-</nav>
-
-<button class="menu-btn" id="menu-btn" aria-label="Ouvrir le menu">☰</button>
-
-<nav class="mobile-nav" id="mobile-nav">
-<a href="#accueil">Accueil</a>
-<a href="#quiz">Quiz</a>
-<a href="#categories">Catégories</a>
-<a href="#apropos">À propos</a>
-<a href="#contact">Contact</a>
-</nav>
-
-</header>
-
-<main>
-
-<section class="hero" id="accueil">
-
-<div class="hero-content">
-
-<div class="hero-brand">
-<span></span>
-ExamQuiz
-</div>
-
-<h1>
-APPRENDS, TESTE TES CONNAISSANCES ET PROGRESSE
-</h1>
-
-<p>
-Une plateforme éducative haïtienne pour réviser, pratiquer
-et relever des défis à travers des quiz adaptés à plusieurs niveaux.
-</p>
-
-<div class="developer-signature">
-<span>CRÉÉ ET DÉVELOPPÉ PAR</span>
-<strong>Ing. Fawenbert Régis</strong>
-<small>Développeur &amp; créateur d’ExamQuiz</small>
-</div>
-
-<a href="#quiz">
-<button class="primary-btn">
-COMMENCER LE QUIZ
-</button>
-</a>
-
-</div>
-
-</section>
-
-<section class="section" id="apropos">
-
-<h2 class="section-title">
-Bienvenue à ExamQuiz
-</h2>
-
-<p class="section-intro">
-ExamQuiz rassemble des questions d'entraînement dans plusieurs domaines
-afin de permettre aux élèves de réviser de manière simple,
-interactive et progressive.
-</p>
-
-<div class="quiz-shell landing-card">
-
-<div class="quiz-icon">
-🎓
-</div>
-
-<h2>
-Apprends en jouant
-</h2>
-
-<p>
-Choisis ton niveau, réponds aux questions et débloque progressivement
-les niveaux suivants.
-</p>
-
-<div class="reassure">
-<strong>Pour les élèves :</strong><br>
-Prends ton temps, lis attentivement les questions et utilise chaque
-erreur comme une occasion d'apprendre.
-</div>
-
-<div id="quiz-container"></div>
-
-</div>
-
-</section>
-
-<section class="section alt" id="categories">
-
-<h2 class="section-title">
-Nos catégories
-</h2>
-
-<p class="section-intro">
-Découvre les différentes matières et domaines disponibles sur ExamQuiz.
-</p>
-
-<div class="categories">
-
-<div class="category">
-<div class="emoji">🇭🇹</div>
-<h3>Histoire d’Haïti</h3>
-<p>Teste tes connaissances sur l'histoire nationale.</p>
-</div>
-
-<div class="category">
-<div class="emoji">🌍</div>
-<h3>Géographie</h3>
-<p>Pays, villes, territoires et monde.</p>
-</div>
-
-<div class="category">
-<div class="emoji">⚽</div>
-<h3>Sport</h3>
-<p>Actualités et connaissances sportives.</p>
-</div>
-
-<div class="category">
-<div class="emoji">🔬</div>
-<h3>Sciences</h3>
-<p>Biologie, physique, chimie et sciences générales.</p>
-</div>
-
-<div class="category">
-<div class="emoji">🧠</div>
-<h3>Culture générale</h3>
-<p>Des questions variées pour élargir tes connaissances.</p>
-</div>
-
-<div class="category">
-<div class="emoji">📖</div>
-<h3>Français</h3>
-<p>Langue, vocabulaire et compréhension.</p>
-</div>
-
-<div class="category">
-<div class="emoji">🇭🇹</div>
-<h3>Kreyòl</h3>
-<p>Révise et teste tes connaissances en kreyòl.</p>
-</div>
-
-<div class="category">
-<div class="emoji">🎓</div>
-<h3>Baccalauréat</h3>
-<p>Entraîne-toi avec des questions de niveau examen.</p>
-</div>
-
-</div>
-
-</section>
-
-<section class="social-section" id="contact">
-
-<p>
-Cliquez sur une icône et suivez ExamQuiz sur les réseaux sociaux
-pour ne manquer aucune nouveauté et aucune nouvelle épreuve publiée.
-</p>
-
-<div class="socials">
-<a href="#" aria-label="Facebook">f</a>
-<a href="#" aria-label="X">𝕏</a>
-<a href="#" aria-label="Instagram">◎</a>
-<a href="#" aria-label="YouTube">▶</a>
-<a href="#" aria-label="TikTok">♪</a>
-</div>
-
-</section>
-
-</main>
-
-<footer>
-
-<div class="footer-grid">
-
-<div>
-
-<h3>À PROPOS DE NOUS</h3>
-
-<p>
-ExamQuiz est une plateforme éducative destinée à aider les élèves
-à apprendre, réviser et tester leurs connaissances à travers des quiz.
-</p>
-
-</div>
-
-<div class="footer-links">
-
-<h3>MENU</h3>
-
-<a href="#quiz">Quiz</a>
-<a href="#categories">Catégories</a>
-<a href="#apropos">À propos</a>
-<a href="#contact">Contact</a>
-
-</div>
-
-<div>
-
-<h3>CRÉATEUR</h3>
-
-<p>
-Ing. Fawenbert Régis
-</p>
-
-</div>
-
-</div>
-
-<div class="footer-bottom">
-
-<div>
-© 2026 ExamQuiz • Tous droits réservés
-</div>
-
-<div class="footer-socials">
-<a href="#" aria-label="Facebook">f</a>
-<a href="#" aria-label="Instagram">◎</a>
-<a href="#" aria-label="YouTube">▶</a>
-<a href="#" aria-label="TikTok">♪</a>
-</div>
-
-</div>
-
-</footer>
-
-<script type="module">
-
-import {
-createQuiz,
-selectQuestionsByLevel,
-answerQuestion,
-getCurrentQuestion,
-getLevel,
-getProgress,
-getAiHint,
-getAiFeedback,
-isFinished,
-QUESTIONS_PER_LEVEL
-} from './src/quizLogic.js';
-
-import { baccQuestions } from './src/baccQuestions.js';
-
-const questions = baccQuestions;
-
-const totalLevels =
-Math.ceil(questions.length / QUESTIONS_PER_LEVEL);
-
-const unlockThreshold =
-Math.max(1, QUESTIONS_PER_LEVEL - 1);
-
-const savedUnlockedLevels =
-JSON.parse(
-localStorage.getItem('exam_quiz_unlocked_levels') || '[1]'
-);
-
-const unlockedLevels =
-new Set(savedUnlockedLevels);
-
-function saveUnlockedLevels(){
-
-localStorage.setItem(
-'exam_quiz_unlocked_levels',
-JSON.stringify(Array.from(unlockedLevels))
-);
-
-}
-
-let selectedLevel = null;
-let quiz = null;
-let showLanding = true;
-
-let coins =
-Number(
-localStorage.getItem('exam_quiz_coins') || 0
-);
-
-const levelReward = 5;
-
-function renderLanding(){
-
-const container =
-document.getElementById('quiz-container');
-
-container.innerHTML = `
-
-<div style="margin:18px 0;font-weight:bold">
-🪙 ${coins} pièces
-</div>
-
-<button class="start-btn" id="start-btn">
-DÉMARRER
-</button>
-
-<button class="install-btn"
-id="install-btn"
-disabled>
-INSTALLER L'APPLICATION
-</button>
-
-<p id="install-note"
-style="color:#777;font-size:14px">
-
-Le bouton d'installation sera activé
-si le navigateur autorise l'installation.
-
-</p>
-
-`;
-
-document
-.getElementById('start-btn')
-.addEventListener('click',()=>{
-
-showLanding=false;
-
-render();
-
-});
-
-}
-
-function startQuiz(level){
-
-const levelQuestions =
-selectQuestionsByLevel(
-questions,
-level
-);
-
-return createQuiz(levelQuestions);
-
-}
-
-function renderLevelSelection(){
-
-const container =
-document.getElementById('quiz-container');
-
-const levels =
-Array.from(
-{length:totalLevels},
-(_,i)=>i+1
-);
-
-container.innerHTML = `
-
-<div class="quiz-progress">
-Choisissez un niveau :
-</div>
-
-<div style="margin-bottom:15px">
-Vos pièces : 🪙 ${coins}
-</div>
-
-<div class="levels-grid">
-
-${levels.map(level=>{
-
-const unlocked =
-unlockedLevels.has(level);
-
-return `
-
-<button
-class="level-btn${unlocked?'':' locked'}"
-data-level="${level}"
-${unlocked?'':'disabled'}>
-
-${unlocked
-?`Niveau ${level}`
-:`Niveau ${level} 🔒`}
-
-</button>
-
-`;
-
-}).join('')}
-
-</div>
-
-<div class="result">
-Terminez un niveau pour débloquer le suivant.
-</div>
-
-`;
-
-container
-.querySelectorAll('.level-btn')
-.forEach(button=>{
-
-if(button.disabled)return;
-
-button.addEventListener('click',()=>{
-
-selectedLevel =
-Number(button.dataset.level);
-
-quiz =
-startQuiz(selectedLevel);
-
-render();
-
-});
-
-});
-
-}
-
-function render(){
-
-const container =
-document.getElementById('quiz-container');
-
-if(showLanding){
-
-renderLanding();
-
-return;
-
-}
-
-if(!quiz){
-
-renderLevelSelection();
-
-return;
-
-}
-
-if(quiz.failed){
-
-const failedQuestion =
-getCurrentQuestion(quiz);
-
-const failedAnswerText =
-failedQuestion?.options[quiz.failedAnswer]
-?? 'Réponse inconnue';
-
-const correctAnswerText =
-failedQuestion?.options[
-failedQuestion?.correctAnswer
-]
-?? 'Réponse inconnue';
-
-container.innerHTML = `
-
-<div class="result">
-❌ Échec du niveau ${selectedLevel}
-</div>
-
-<div class="result">
-Votre réponse : ${failedAnswerText}
-</div>
-
-<div class="result">
-Bonne réponse : ${correctAnswerText}
-</div>
-
-<div class="result">
-Recommencez le niveau pour progresser.
-</div>
-
-<button class="restart-btn" id="retry-btn">
-RECOMMENCER
-</button>
-
-<button class="restart-btn" id="back-btn">
-RETOUR AUX NIVEAUX
-</button>
-
-`;
-
-document
-.getElementById('retry-btn')
-.addEventListener('click',()=>{
-
-quiz =
-startQuiz(selectedLevel);
-
-render();
-
-});
-
-document
-.getElementById('back-btn')
-.addEventListener('click',()=>{
-
-selectedLevel=null;
-quiz=null;
-
-render();
-
-});
-
-return;
-
-}
-
-if(isFinished(quiz)){
-
-const nextLevel =
-selectedLevel+1;
-
-const canUnlock =
-quiz.score>=unlockThreshold;
-
-let earned=0;
-
-if(
-canUnlock &&
-nextLevel<=totalLevels &&
-!unlockedLevels.has(nextLevel)
-){
-
-unlockedLevels.add(nextLevel);
-
-saveUnlockedLevels();
-
-earned=levelReward;
-
-coins+=earned;
-
-localStorage.setItem(
-'exam_quiz_coins',
-String(coins)
-);
-
-}
-
-container.innerHTML = `
-
-<div class="result">
-🎉 Quiz terminé !
-</div>
-
-<div class="result">
-Score :
-${quiz.score}/${quiz.questions.length}
-</div>
-
-<div class="result">
-${getLevel(
-quiz.score,
-quiz.questions.length
-)}
-</div>
-
-${
-canUnlock && nextLevel<=totalLevels
-
-?`
-
-<div class="badge">
-Niveau ${nextLevel} débloqué !
-</div>
-
-`
-
-:`
-
-<div
-class="badge"
-style="background:#e99619">
-
-Score nécessaire :
-${unlockThreshold}/${quiz.questions.length}
-
-</div>
-
-`
-}
-
-${
-earned>0
-
-?`
-
-<div style="margin-top:12px">
-+${earned} pièces 🪙
-</div>
-
-`
-
-:''
-}
-
-<div style="margin-top:10px">
-Total : 🪙 ${coins}
-</div>
-
-<button
-class="restart-btn"
-id="restart-btn">
-
-RETOUR AUX NIVEAUX
-
-</button>
-
-`;
-
-document
-.getElementById('restart-btn')
-.addEventListener('click',()=>{
-
-selectedLevel=null;
-quiz=null;
-
-render();
-
-});
-
-return;
-
-}
-
-const question =
-getCurrentQuestion(quiz);
-
-container.innerHTML = `
-
-<div class="quiz-progress">
-
-Niveau ${selectedLevel}
-—
-${getProgress(quiz)}
-
-</div>
-
-<h2>
-${question.question}
-</h2>
-
-<div class="answers">
-
-${question.options.map(
-(option,index)=>`
-
-<button
-class="answer-btn"
-data-index="${index}">
-
-${option}
-
-</button>
-
-`
-).join('')}
-
-</div>
-
-<div class="ai-panel">
-
-<h3>
-🤖 Assistant IA
-</h3>
-
-<p id="ai-feedback">
-${getAiHint(question)}
-</p>
-
-<button
-class="hint-btn"
-id="hint-btn">
-
-DEMANDER UN CONSEIL
-
-</button>
-
-</div>
-
-`;
-
-container
-.querySelectorAll('.answer-btn')
-.forEach(button=>{
-
-button.addEventListener(
-'click',
-()=>{
-
-const selectedIndex =
-Number(button.dataset.index);
-
-const feedback =
-document.getElementById(
-'ai-feedback'
-);
-
-feedback.textContent =
-getAiFeedback(
-question,
-selectedIndex
-);
-
-const isCorrect =
-selectedIndex ===
-question.correctAnswer;
-
-if(!isCorrect){
-
-quiz={
-...quiz,
-failed:true,
-failedAnswer:selectedIndex
-};
-
-setTimeout(render,500);
-
-return;
-
-}
-
-quiz =
-answerQuestion(
-quiz,
-selectedIndex
-);
-
-setTimeout(render,400);
-
-});
-
-});
-
-document
-.getElementById('hint-btn')
-.addEventListener('click',()=>{
-
-document
-.getElementById('ai-feedback')
-.textContent =
-getAiHint(question);
-
-});
-
-}
-
-let deferredPrompt=null;
-
-window.addEventListener(
-'beforeinstallprompt',
-event=>{
-
-event.preventDefault();
-
-deferredPrompt=event;
-
-const installBtn =
-document.getElementById(
-'install-btn'
-);
-
-const installNote =
-document.getElementById(
-'install-note'
-);
-
-if(installBtn){
-
-installBtn.disabled=false;
-
-installNote.textContent =
-" Cliquez pour installer l'application.";
-
-installBtn.addEventListener(
-'click',
-async()=>{
-
-if(!deferredPrompt)return;
-
-deferredPrompt.prompt();
-
-await deferredPrompt.userChoice;
-
-deferredPrompt=null;
-
-installBtn.disabled=true;
-
-installNote.textContent =
-"Installation terminée ou annulée.";
-
-},
-{once:true}
-);
-
-}
-
-}
-);
-
-document
-.getElementById('menu-btn')
-.addEventListener('click',()=>{
-
-document
-.getElementById('mobile-nav')
-.classList.toggle('open');
-
-});
-
-document
-.querySelectorAll('.mobile-nav a')
-.forEach(link=>{
-
-link.addEventListener('click',()=>{
-
-document
-.getElementById('mobile-nav')
-.classList.remove('open');
-
-});
-
-});
-
-render();
-
-if('serviceWorker' in navigator){
-
-window.addEventListener('load',()=>{
-
-navigator.serviceWorker
-.register('/service-worker.js')
-.catch(error=>{
-
-console.warn(
-'Service worker registration failed:',
-error
-);
-
-});
-
-});
-
-}
-
-</script>
-
-</body>
-</html>
