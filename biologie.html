@@ -1,1 +1,12 @@
+<script type="module">
+import { biologieQuestions } from './src/biologieQuestions.js';
 
+const container = document.getElementById('questions');
+
+container.innerHTML = biologieQuestions.map((q, i) => `
+  <div class="question">
+    <h3>${i + 1}. ${q.question}</h3>
+    <p><strong>Réponse :</strong> ${q.answer}</p>
+  </div>
+`).join('');
+</script>
