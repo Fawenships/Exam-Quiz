@@ -6,9 +6,12 @@
 <meta name="theme-color" content="#24113f">
 
 <title>Sciences NS4 — ExamQuiz Haiti</title>
+<meta name="description" content="Questions et réponses de biologie, géologie et chimie niveau NS4.">
 
 <style>
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+}
 
 body{
   margin:0;
@@ -28,6 +31,7 @@ header{
 header img{
   width:150px;
   max-width:50vw;
+  display:block;
 }
 
 header a{
@@ -61,15 +65,17 @@ header a{
   padding:0 20px;
 }
 
+/* CATÉGORIES */
+
 .categories{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
+  grid-template-columns:repeat(3,1fr);
   gap:20px;
 }
 
 .category-btn{
   border:0;
-  background:white;
+  background:#fff;
   border-radius:18px;
   padding:30px 20px;
   cursor:pointer;
@@ -79,27 +85,32 @@ header a{
 }
 
 .category-btn:hover{
-  transform:translateY(-4px);
+  transform:translateY(-5px);
+  box-shadow:0 14px 30px rgba(0,0,0,.12);
 }
 
 .emoji{
   font-size:50px;
+  margin-bottom:12px;
 }
 
 .category-btn h2{
-  margin:12px 0 8px;
+  margin:10px 0;
 }
 
 .category-btn p{
   color:#666;
+  line-height:1.5;
 }
+
+/* PAGE QUESTIONS */
 
 #questions-page{
   display:none;
 }
 
 .topbar{
-  background:white;
+  background:#fff;
   border-radius:16px;
   padding:20px;
   margin-bottom:25px;
@@ -121,10 +132,13 @@ header a{
   background:#24113f;
   color:white;
   cursor:pointer;
+  font-weight:bold;
 }
 
+/* QUESTIONS */
+
 .question-card{
-  background:white;
+  background:#fff;
   border-radius:16px;
   padding:25px;
   margin-bottom:18px;
@@ -152,6 +166,16 @@ header a{
   line-height:1.6;
 }
 
+.empty{
+  background:#fff;
+  padding:25px;
+  border-radius:15px;
+  text-align:center;
+  color:#666;
+}
+
+/* FOOTER */
+
 footer{
   background:#000;
   color:#aaa;
@@ -161,17 +185,19 @@ footer{
 }
 
 footer strong{
-  color:white;
+  color:#fff;
 }
 
-@media(max-width:650px){
+/* MOBILE */
+
+@media(max-width:800px){
 
   .categories{
     grid-template-columns:1fr;
   }
 
   .hero h1{
-    font-size:30px;
+    font-size:32px;
   }
 
   .topbar{
@@ -183,14 +209,23 @@ footer strong{
     width:100%;
   }
 }
+
+@media(min-width:801px) and (max-width:950px){
+
+  .categories{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
 </style>
 </head>
 
 <body>
 
+<!-- HEADER -->
+
 <header>
 
-  <a href="index.html">
+  <a href="index.html" aria-label="Retour à l'accueil">
     <img src="logo.png" alt="ExamQuiz Haiti">
   </a>
 
@@ -198,22 +233,30 @@ footer strong{
 
 </header>
 
+
+<!-- HERO -->
+
 <section class="hero">
 
   <h1>🔬 Sciences NS4</h1>
 
   <p>
-    Révise tes cours avec les questions et réponses
-    de niveau NS4.
+    Révise les sciences avec des questions et réponses
+    adaptées au niveau NS4.
   </p>
 
 </section>
 
+
 <main class="container">
 
-  <!-- CHOIX DES MATIÈRES -->
+
+  <!-- LES 3 MATIÈRES -->
 
   <div id="categories" class="categories">
+
+
+    <!-- BIOLOGIE -->
 
     <button class="category-btn" id="biologyBtn">
 
@@ -229,6 +272,8 @@ footer strong{
     </button>
 
 
+    <!-- GÉOLOGIE -->
+
     <button class="category-btn" id="geologyBtn">
 
       <div class="emoji">🌍</div>
@@ -242,10 +287,27 @@ footer strong{
 
     </button>
 
+
+    <!-- CHIMIE -->
+
+    <button class="category-btn" id="chemistryBtn">
+
+      <div class="emoji">⚗️</div>
+
+      <h2>Chimie</h2>
+
+      <p>
+        Questions et réponses de chimie
+        niveau NS4.
+      </p>
+
+    </button>
+
+
   </div>
 
 
-  <!-- PAGE QUESTIONS -->
+  <!-- ZONE DES QUESTIONS -->
 
   <div id="questions-page">
 
@@ -254,17 +316,21 @@ footer strong{
       <h2 id="title"></h2>
 
       <button class="back-btn" id="backBtn">
-        ← Retour
+        ← Retour aux matières
       </button>
 
     </div>
+
 
     <div id="questions"></div>
 
   </div>
 
+
 </main>
 
+
+<!-- FOOTER -->
 
 <footer>
 
@@ -283,34 +349,68 @@ footer strong{
 
 <script type="module">
 
-import { biologieQuestions } 
-from "./src/biologieQuestions.js";
+/*
+==================================================
+FICHIERS DES QUESTIONS
+==================================================
 
-import { geologieQuestions } 
-from "./src/geologieQuestions.js";
+Cette page ne touche PAS à quizLogic.js.
 
+Elle utilise uniquement les trois fichiers :
+- biologieQuestions.js
+- geologieQuestions.js
+- chimieQuestions.js
+*/
+
+import {
+  biologieQuestions
+} from "./src/biologieQuestions.js";
+
+import {
+  geologieQuestions
+} from "./src/geologieQuestions.js";
+
+import {
+  chimieQuestions
+} from "./src/chimieQuestions.js";
+
+
+/*
+==================================================
+ÉLÉMENTS HTML
+==================================================
+*/
 
 const categories =
-document.getElementById("categories");
+  document.getElementById("categories");
 
 const questionsPage =
-document.getElementById("questions-page");
+  document.getElementById("questions-page");
 
 const questionsContainer =
-document.getElementById("questions");
+  document.getElementById("questions");
 
 const title =
-document.getElementById("title");
+  document.getElementById("title");
 
 const biologyBtn =
-document.getElementById("biologyBtn");
+  document.getElementById("biologyBtn");
 
 const geologyBtn =
-document.getElementById("geologyBtn");
+  document.getElementById("geologyBtn");
+
+const chemistryBtn =
+  document.getElementById("chemistryBtn");
 
 const backBtn =
-document.getElementById("backBtn");
+  document.getElementById("backBtn");
 
+
+/*
+==================================================
+AFFICHER LES QUESTIONS
+==================================================
+*/
 
 function afficherQuestions(liste, nom){
 
@@ -323,17 +423,22 @@ function afficherQuestions(liste, nom){
   questionsContainer.innerHTML = "";
 
 
+  /*
+  Vérification du fichier
+  */
+
   if(!Array.isArray(liste) || liste.length === 0){
 
     questionsContainer.innerHTML = `
-      <div class="question-card">
-        <div class="question-text">
-          Aucune question trouvée.
-        </div>
+      <div class="empty">
 
-        <div class="answer">
-          Vérifie le contenu du fichier JavaScript.
-        </div>
+        <h3>Aucune question trouvée</h3>
+
+        <p>
+          Vérifie que le fichier de questions
+          contient bien les données.
+        </p>
+
       </div>
     `;
 
@@ -341,23 +446,39 @@ function afficherQuestions(liste, nom){
   }
 
 
+  /*
+  Affichage de chaque question
+  */
+
   liste.forEach((item,index)=>{
+
+    /*
+    Accepte plusieurs noms possibles
+    pour la question.
+    */
 
     const question =
       item.question ??
       item.Question ??
+      item.q ??
       "";
+
+
+    /*
+    Accepte plusieurs noms possibles
+    pour la réponse.
+    */
 
     const answer =
       item.answer ??
       item.reponse ??
       item.response ??
-      item.answerText ??
+      item.r ??
       "";
 
 
     const card =
-    document.createElement("div");
+      document.createElement("div");
 
     card.className = "question-card";
 
@@ -373,8 +494,11 @@ function afficherQuestions(liste, nom){
       </div>
 
       <div class="answer">
+
         <strong>Réponse :</strong><br>
+
         ${answer}
+
       </div>
 
     `;
@@ -387,6 +511,12 @@ function afficherQuestions(liste, nom){
 }
 
 
+/*
+==================================================
+BOUTON BIOLOGIE
+==================================================
+*/
+
 biologyBtn.addEventListener("click",()=>{
 
   afficherQuestions(
@@ -396,6 +526,12 @@ biologyBtn.addEventListener("click",()=>{
 
 });
 
+
+/*
+==================================================
+BOUTON GÉOLOGIE
+==================================================
+*/
 
 geologyBtn.addEventListener("click",()=>{
 
@@ -407,6 +543,28 @@ geologyBtn.addEventListener("click",()=>{
 });
 
 
+/*
+==================================================
+BOUTON CHIMIE
+==================================================
+*/
+
+chemistryBtn.addEventListener("click",()=>{
+
+  afficherQuestions(
+    chimieQuestions,
+    "⚗️ Chimie — NS4"
+  );
+
+});
+
+
+/*
+==================================================
+RETOUR
+==================================================
+*/
+
 backBtn.addEventListener("click",()=>{
 
   questionsPage.style.display = "none";
@@ -414,6 +572,8 @@ backBtn.addEventListener("click",()=>{
   categories.style.display = "grid";
 
   questionsContainer.innerHTML = "";
+
+  title.textContent = "";
 
 });
 
