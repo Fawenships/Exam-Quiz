@@ -1,268 +1,486 @@
 export const chimieQuestions = [
-
   {
-    question: "Qu'est-ce qu'un atome ?",
-    answer: "La plus petite unité d'un élément chimique qui conserve les propriétés de cet élément."
-  },
-  {
-    question: "Quelles sont les principales particules constituant l'atome ?",
-    answer: "Les protons, les neutrons et les électrons."
-  },
-  {
-    question: "Quelle est la charge électrique du proton ?",
-    answer: "Positive."
-  },
-  {
-    question: "Quelle est la charge électrique de l'électron ?",
-    answer: "Négative."
-  },
-  {
-    question: "Quelle est la charge électrique du neutron ?",
-    answer: "Nulle."
-  },
-  {
-    question: "Où se trouve le noyau de l'atome ?",
-    answer: "Au centre de l'atome."
-  },
-  {
-    question: "Quelles particules trouve-t-on dans le noyau ?",
-    answer: "Les protons et les neutrons."
-  },
-  {
-    question: "Qu'est-ce que le numéro atomique d'un élément ?",
-    answer: "Le nombre de protons contenus dans le noyau de ses atomes."
-  },
-  {
-    question: "Qu'est-ce que le nombre de masse ?",
-    answer: "La somme du nombre de protons et de neutrons."
-  },
-  {
-    question: "Qu'est-ce qu'un isotope ?",
-    answer: "Un atome d'un même élément possédant le même nombre de protons mais un nombre différent de neutrons."
+    question: "Qu'est-ce qu'une mole ?",
+    answer: "Une mole est une quantité de matière contenant environ 6,022 × 10²³ entités."
   },
 
   {
-    question: "Qu'est-ce qu'un élément chimique ?",
-    answer: "Un ensemble d'atomes ayant le même numéro atomique."
-  },
-  {
-    question: "Qu'est-ce qu'une molécule ?",
-    answer: "Un assemblage d'au moins deux atomes liés chimiquement."
-  },
-  {
-    question: "Qu'est-ce qu'un ion ?",
-    answer: "Un atome ou un groupe d'atomes qui possède une charge électrique."
-  },
-  {
-    question: "Comment obtient-on un cation ?",
-    answer: "Par perte d'un ou plusieurs électrons."
-  },
-  {
-    question: "Comment obtient-on un anion ?",
-    answer: "Par gain d'un ou plusieurs électrons."
-  },
-  {
-    question: "Qu'est-ce qu'une liaison covalente ?",
-    answer: "Une liaison chimique résultant du partage d'électrons entre des atomes."
-  },
-  {
-    question: "Qu'est-ce qu'une liaison ionique ?",
-    answer: "Une liaison résultant de l'attraction entre des ions de charges opposées."
-  },
-  {
-    question: "Qu'est-ce qu'une réaction chimique ?",
-    answer: "Une transformation au cours de laquelle des substances initiales donnent de nouvelles substances."
-  },
-  {
-    question: "Comment appelle-t-on les substances présentes avant une réaction chimique ?",
-    answer: "Les réactifs."
-  },
-  {
-    question: "Comment appelle-t-on les substances formées après une réaction chimique ?",
-    answer: "Les produits."
-
+    question: "Qu'est-ce que la masse molaire ?",
+    answer: "C'est la masse d'une mole d'une espèce chimique, exprimée en g·mol⁻¹."
   },
 
   {
-    question: "Qu'est-ce qu'une équation chimique équilibrée ?",
-    answer: "Une équation où le nombre d'atomes de chaque élément est identique des deux côtés."
+    question: "Quelle est la masse molaire de l'eau H₂O ?",
+    answer: "18 g·mol⁻¹."
   },
+
   {
-    question: "Quelle loi est respectée lors d'une réaction chimique ?",
-    answer: "La loi de conservation de la matière."
+    question: "Quelle est la masse molaire du dioxyde de carbone CO₂ ?",
+    answer: "44 g·mol⁻¹."
   },
+
   {
-    question: "Qu'est-ce qu'une réaction de combustion ?",
-    answer: "Une réaction d'une substance avec le dioxygène produisant généralement de l'énergie."
+    question: "Quelle est la formule de la concentration molaire ?",
+    answer: "C = n / V."
   },
+
   {
-    question: "Quels sont les produits de la combustion complète d'un hydrocarbure ?",
-    answer: "Le dioxyde de carbone et l'eau."
+    question: "Quelle relation permet de calculer la quantité de matière ?",
+    answer: "n = m / M."
   },
+
   {
-    question: "Quel gaz est nécessaire à une combustion ?",
-    answer: "Le dioxygène."
+    question: "Qu'est-ce qu'un acide selon Brønsted-Lowry ?",
+    answer: "Une espèce chimique capable de céder un proton H⁺."
   },
+
   {
-    question: "Qu'est-ce qu'une réaction de synthèse ?",
-    answer: "Une réaction dans laquelle plusieurs substances se combinent pour former un produit."
+    question: "Qu'est-ce qu'une base selon Brønsted-Lowry ?",
+    answer: "Une espèce chimique capable de capter un proton H⁺."
   },
+
   {
-    question: "Qu'est-ce qu'une réaction de décomposition ?",
-    answer: "Une réaction dans laquelle une substance se transforme en plusieurs substances."
+    question: "Quel est le pH d'une solution neutre à 25 °C ?",
+    answer: "7."
   },
+
+  {
+    question: "Une solution de pH 3 est-elle acide ou basique ?",
+    answer: "Elle est acide."
+  },
+
+  {
+    question: "Qu'est-ce qu'une oxydation ?",
+    answer: "Une perte d'électrons."
+  },
+
+  {
+    question: "Qu'est-ce qu'une réduction ?",
+    answer: "Un gain d'électrons."
+  },
+
+  {
+    question: "Qu'est-ce qu'un oxydant ?",
+    answer: "Une espèce qui capte des électrons."
+  },
+
+  {
+    question: "Qu'est-ce qu'un réducteur ?",
+    answer: "Une espèce qui cède des électrons."
+  },
+
+  {
+    question: "Qu'est-ce qu'une réaction d'oxydoréduction ?",
+    answer: "Une réaction au cours de laquelle il y a transfert d'électrons."
+  },
+
+  {
+    question: "Équilibrer : H₂ + O₂ → H₂O.",
+    answer: "2H₂ + O₂ → 2H₂O."
+  },
+
+  {
+    question: "Équilibrer : Fe + O₂ → Fe₂O₃.",
+    answer: "4Fe + 3O₂ → 2Fe₂O₃."
+  },
+
+  {
+    question: "Équilibrer : CH₄ + O₂ → CO₂ + H₂O.",
+    answer: "CH₄ + 2O₂ → CO₂ + 2H₂O."
+  },
+
   {
     question: "Qu'est-ce qu'un catalyseur ?",
-    answer: "Une substance qui accélère une réaction chimique sans être consommée."
+    answer: "Une substance qui accélère une réaction chimique sans être consommée globalement."
   },
+
   {
     question: "Qu'est-ce qu'une réaction exothermique ?",
     answer: "Une réaction qui libère de l'énergie, généralement sous forme de chaleur."
   },
+
   {
     question: "Qu'est-ce qu'une réaction endothermique ?",
-    answer: "Une réaction qui absorbe de l'énergie."
+    answer: "Une réaction qui absorbe de l'énergie thermique."
+  },
 
+  {
+    question: "Qu'est-ce qu'un hydrocarbure ?",
+    answer: "Un composé constitué uniquement de carbone et d'hydrogène."
+  },
+
+  {
+    question: "Quelle est la formule générale d'un alcane acyclique ?",
+    answer: "CₙH₂ₙ₊₂."
+  },
+
+  {
+    question: "Quelle est la formule générale d'un alcène acyclique à une double liaison ?",
+    answer: "CₙH₂ₙ."
+  },
+
+  {
+    question: "Quelle est la formule générale d'un alcyne acyclique à une triple liaison ?",
+    answer: "CₙH₂ₙ₋₂."
+  },
+
+  {
+    question: "Quel groupe fonctionnel caractérise un alcool ?",
+    answer: "Le groupe hydroxyle –OH."
+  },
+
+  {
+    question: "Quel groupe fonctionnel caractérise un acide carboxylique ?",
+    answer: "Le groupe carboxyle –COOH."
+  },
+
+  {
+    question: "Qu'est-ce qu'une estérification ?",
+    answer: "Une réaction entre un acide carboxylique et un alcool qui forme un ester et de l'eau."
+  },
+
+  {
+    question: "Qu'est-ce qu'un polymère ?",
+    answer: "Une macromolécule constituée par la répétition d'unités appelées monomères."
   },
 
   {
     question: "Qu'est-ce qu'une solution ?",
     answer: "Un mélange homogène constitué d'un solvant et d'un ou plusieurs solutés."
   },
+
+  {
+    question: "Qu'est-ce qu'un soluté ?",
+    answer: "Une substance dissoute dans un solvant."
+  },
+
   {
     question: "Qu'est-ce qu'un solvant ?",
     answer: "La substance qui dissout le soluté."
   },
-  {
-    question: "Qu'est-ce qu'un soluté ?",
-    answer: "La substance dissoute dans le solvant."
-  },
-  {
-    question: "Quel est le solvant le plus courant dans les solutions aqueuses ?",
-    answer: "L'eau."
-  },
-  {
-    question: "Qu'est-ce qu'une solution aqueuse ?",
-    answer: "Une solution dont le solvant est l'eau."
-  },
-  {
-    question: "Qu'est-ce que la concentration molaire ?",
-    answer: "La quantité de matière du soluté par unité de volume de solution."
-  },
-  {
-    question: "Quelle est l'unité courante de la concentration molaire ?",
-    answer: "La mole par litre (mol/L)."
-  },
-  {
-    question: "Qu'est-ce qu'une solution saturée ?",
-    answer: "Une solution qui contient la quantité maximale de soluté pouvant être dissoute dans les conditions données."
-  },
+
   {
     question: "Qu'est-ce qu'une dilution ?",
     answer: "Une opération qui diminue la concentration d'une solution en ajoutant du solvant."
   },
-  {
-    question: "Lors d'une dilution, quelle grandeur de soluté reste constante ?",
-    answer: "La quantité de matière du soluté, si aucune perte n'a lieu."
-
-  },
 
   {
-    question: "Qu'est-ce qu'un acide selon la définition d'Arrhenius ?",
-    answer: "Une substance qui libère des ions H⁺ en solution aqueuse."
+    question: "Quelle relation utilise-t-on lors d'une dilution ?",
+    answer: "C₁V₁ = C₂V₂."
   },
+
   {
-    question: "Qu'est-ce qu'une base selon Arrhenius ?",
-    answer: "Une substance qui libère des ions OH⁻ en solution aqueuse."
+    question: "Qu'est-ce qu'une réaction de précipitation ?",
+    answer: "Une réaction qui forme un solide peu soluble dans une solution."
   },
+
   {
-    question: "Quelle est l'échelle utilisée pour mesurer l'acidité d'une solution ?",
-    answer: "L'échelle du pH."
+    question: "Qu'est-ce qu'un électrolyte ?",
+    answer: "Une substance qui produit des ions en solution et permet la conduction électrique."
   },
+
   {
-    question: "Quel est le pH d'une solution neutre à température ambiante ?",
-    answer: "Environ 7."
+    question: "Qu'est-ce qu'une pile électrochimique ?",
+    answer: "Un dispositif qui transforme spontanément l'énergie chimique en énergie électrique."
   },
+
   {
-    question: "Une solution ayant un pH inférieur à 7 est-elle acide ou basique ?",
-    answer: "Acide."
+    question: "Dans une pile, où se produit l'oxydation ?",
+    answer: "À l'anode."
   },
+
   {
-    question: "Une solution ayant un pH supérieur à 7 est-elle acide ou basique ?",
-    answer: "Basique."
+    question: "Dans une pile, où se produit la réduction ?",
+    answer: "À la cathode."
   },
+
   {
-    question: "Qu'est-ce qu'une neutralisation acido-basique ?",
-    answer: "Une réaction entre un acide et une base donnant généralement un sel et de l'eau."
+    question: "Qu'est-ce que la loi de Boyle-Mariotte ?",
+    answer: "À température constante, le produit pression × volume d'un gaz reste constant."
   },
+
   {
-    question: "Quel instrument peut mesurer précisément le pH ?",
-    answer: "Le pH-mètre."
+    question: "Quelle est l'équation des gaz parfaits ?",
+    answer: "PV = nRT."
   },
+
+  {
+    question: "Qu'est-ce que le nombre d'Avogadro ?",
+    answer: "Environ 6,022 × 10²³ entités par mole."
+  },
+
+  {
+    question: "Quel est le réactif limitant ?",
+    answer: "Le réactif qui est consommé en premier et limite la quantité de produit formée."
+  },
+
+  {
+    question: "Qu'est-ce qu'un réactif en excès ?",
+    answer: "Un réactif dont une partie reste après la réaction."
+  },
+
+  {
+    question: "Qu'est-ce que la stœchiométrie ?",
+    answer: "L'étude des relations quantitatives entre les réactifs et les produits d'une réaction chimique."
+  },
+
+  {
+    question: "Quel est le principe de conservation de la matière ?",
+    answer: "Lors d'une réaction chimique, les atomes sont conservés : ils sont réarrangés mais ne sont ni créés ni détruits."
+  },
+
+  {
+    question: "Pourquoi équilibre-t-on une équation chimique ?",
+    answer: "Pour avoir le même nombre d'atomes de chaque élément des deux côtés de l'équation."
+  },
+
+  {
+    question: "Qu'est-ce que l'énergie d'activation ?",
+    answer: "L'énergie minimale nécessaire pour qu'une réaction chimique puisse se produire."
+  },
+
+  {
+    question: "Quels facteurs peuvent accélérer une réaction chimique ?",
+    answer: "La température, la concentration, la surface de contact et un catalyseur peuvent notamment influencer la vitesse."
+  },
+
+  {
+    question: "Pourquoi augmenter la température accélère-t-il généralement une réaction ?",
+    answer: "Les particules ont davantage d'énergie et les collisions efficaces deviennent plus fréquentes."
+  },
+
+  {
+    question: "Qu'est-ce qu'une liaison ionique ?",
+    answer: "Une attraction électrostatique entre ions de charges opposées."
+  },
+
+  {
+    question: "Qu'est-ce qu'une liaison covalente ?",
+    answer: "Une liaison résultant du partage d'électrons entre atomes."
+  },
+
+  {
+    question: "Pourquoi l'eau est-elle une molécule polaire ?",
+    answer: "Sa géométrie et les différences d'électronégativité provoquent une répartition inégale des charges."
+  },
+
+  {
+    question: "Qu'est-ce qu'une formule brute ?",
+    answer: "Une formule indiquant le nombre de chaque type d'atome présent dans un composé."
+  },
+
+  {
+    question: "Qu'est-ce qu'un isomère ?",
+    answer: "Un composé ayant la même formule brute qu'un autre mais une structure différente."
+  },
+
+  {
+    question: "Qu'est-ce qu'une distillation ?",
+    answer: "Une technique de séparation fondée principalement sur les différences de températures d'ébullition."
+  },
+
+  {
+    question: "Qu'est-ce qu'une filtration ?",
+    answer: "Une technique permettant de séparer un solide insoluble d'un liquide."
+  },
+
+  {
+    question: "Qu'est-ce qu'une chromatographie ?",
+    answer: "Une technique permettant de séparer les constituants d'un mélange selon leurs différentes affinités."
+  },
+
+  {
+    question: "Qu'est-ce que le rendement d'une réaction ?",
+    answer: "Le rapport entre la quantité réellement obtenue et la quantité théorique attendue, généralement exprimé en pourcentage."
+  },
+
+  {
+    question: "Si une réaction devait produire 20 g mais produit réellement 15 g, quel est son rendement ?",
+    answer: "75 %."
+  },
+
+  {
+    question: "Combien de moles contient 36 g d'eau ?",
+    answer: "2 mol, car M(H₂O) = 18 g·mol⁻¹."
+  },
+
+  {
+    question: "Combien de molécules contient 0,5 mol d'une substance ?",
+    answer: "Environ 3,011 × 10²³ molécules."
+  },
+
+  {
+    question: "Que produit la combustion complète d'un hydrocarbure ?",
+    answer: "Du dioxyde de carbone et de l'eau, lorsque le dioxygène est suffisant."
+  },
+
+  {
+    question: "Qu'est-ce qu'une combustion incomplète ?",
+    answer: "Une combustion qui se produit lorsque le dioxygène est insuffisant et peut notamment former du monoxyde de carbone ou du carbone."
+  },
+
+  {
+    question: "Qu'est-ce qu'un sel en chimie ?",
+    answer: "Un composé ionique constitué généralement de cations et d'anions."
+  },
+
+  {
+    question: "Quelle est la formule chimique du chlorure de sodium ?",
+    answer: "NaCl."
+  },
+
+  {
+    question: "Quelle est la formule chimique de l'acide chlorhydrique ?",
+    answer: "HCl en solution aqueuse."
+  },
+
+  {
+    question: "Quelle est la formule chimique de l'acide sulfurique ?",
+    answer: "H₂SO₄."
+  },
+
+  {
+    question: "Quelle est la formule chimique de l'hydroxyde de sodium ?",
+    answer: "NaOH."
+  },
+
+  {
+    question: "Quelle est la formule chimique de l'ammoniac ?",
+    answer: "NH₃."
+  },
+
+  {
+    question: "Quelle est la formule chimique du méthane ?",
+    answer: "CH₄."
+  },
+
+  {
+    question: "Quelle est la formule chimique de l'éthanol ?",
+    answer: "C₂H₅OH."
+  },
+
+  {
+    question: "Que signifie pH ?",
+    answer: "Le pH caractérise l'acidité ou la basicité d'une solution aqueuse."
+  },
+
+  {
+    question: "Si [H₃O⁺] = 10⁻³ mol·L⁻¹, quel est le pH ?",
+    answer: "3."
+  },
+
+  {
+    question: "Une solution de pH 11 est-elle acide ou basique ?",
+    answer: "Elle est basique."
+  },
+
+  {
+    question: "Quelle est l'équation ionique simplifiée d'une neutralisation entre H₃O⁺ et OH⁻ ?",
+    answer: "H₃O⁺ + OH⁻ → 2H₂O."
+  },
+
   {
     question: "Qu'est-ce qu'un indicateur coloré ?",
-    answer: "Une substance dont la couleur change selon le pH du milieu."
-  },
-  {
-    question: "Donnez un exemple d'acide courant.",
-    answer: "L'acide chlorhydrique (HCl)."
-
+    answer: "Une substance dont la couleur varie selon le pH du milieu."
   },
 
   {
-    question: "Qu'est-ce qu'une oxydation ?",
-    answer: "Une transformation correspondant notamment à une perte d'électrons."
-  },
-  {
-    question: "Qu'est-ce qu'une réduction ?",
-    answer: "Une transformation correspondant notamment à un gain d'électrons."
-  },
-  {
-    question: "Qu'est-ce qu'une réaction d'oxydoréduction ?",
-    answer: "Une réaction dans laquelle une oxydation et une réduction se produisent simultanément."
-  },
-  {
-    question: "Qu'est-ce qu'un oxydant ?",
-    answer: "Une espèce chimique capable de capter des électrons."
-  },
-  {
-    question: "Qu'est-ce qu'un réducteur ?",
-    answer: "Une espèce chimique capable de céder des électrons."
-  },
-  {
-    question: "Que se passe-t-il pour le nombre d'oxydation lors d'une oxydation ?",
-    answer: "Il augmente."
-  },
-  {
-    question: "Que se passe-t-il pour le nombre d'oxydation lors d'une réduction ?",
-    answer: "Il diminue."
-  },
-  {
-    question: "Quel métal est souvent utilisé dans l'étude des réactions d'oxydoréduction ?",
-    answer: "Le zinc."
-  },
-  {
-    question: "Qu'est-ce que la corrosion du fer ?",
-    answer: "Une oxydation progressive du fer en présence notamment d'eau et de dioxygène."
-  },
-  {
-    question: "Quel produit apparaît généralement lors de la corrosion du fer ?",
-    answer: "La rouille."
-
+    question: "Qu'est-ce qu'un équilibre chimique ?",
+    answer: "Un état dynamique dans lequel les réactions directe et inverse se produisent à des vitesses égales."
   },
 
   {
-    question: "Qu'est-ce que la chimie organique ?",
-    answer: "La branche de la chimie qui étudie principalement les composés du carbone."
+    question: "Que dit le principe de Le Chatelier ?",
+    answer: "Un système à l'équilibre évolue de manière à s'opposer à une perturbation imposée."
   },
+
   {
-    question: "Quel élément est caractéristique des composés organiques ?",
-    answer: "Le carbone."
+    question: "Quelle différence existe entre une réaction exothermique et endothermique ?",
+    answer: "La réaction exothermique libère de l'énergie thermique, tandis que la réaction endothermique en absorbe."
   },
+
   {
-    question: "Quels sont les éléments présents principalement dans les hydrocarbures ?",
-    answer: "Le carbone et l'hydrogène."
+    question: "Pourquoi les métaux conduisent-ils généralement l'électricité ?",
+    answer: "Parce qu'ils possèdent des électrons délocalisés capables de se déplacer."
   },
+
   {
-    question: "Qu'est-ce qu'un hydrocarbure ?",
-    answer: "Un composé
+    question: "Qu'est-ce qu'une réaction de neutralisation ?",
+    answer: "Une réaction entre un acide et une base qui conduit notamment à la formation d'eau et d'un sel selon les espèces utilisées."
+  },
+
+  {
+    question: "Quelle est la différence entre un mélange homogène et un mélange hétérogène ?",
+    answer: "Un mélange homogène présente une seule phase visible, tandis qu'un mélange hétérogène présente plusieurs phases."
+  },
+
+  {
+    question: "Qu'est-ce qu'une substance pure ?",
+    answer: "Une matière constituée d'une seule espèce chimique."
+  },
+
+  {
+    question: "Qu'est-ce qu'un élément chimique ?",
+    answer: "Un ensemble d'atomes possédant le même nombre de protons."
+  },
+
+  {
+    question: "Que représente le numéro atomique Z ?",
+    answer: "Le nombre de protons du noyau d'un atome."
+  },
+
+  {
+    question: "Que représente le nombre de masse A ?",
+    answer: "Le nombre total de protons et de neutrons du noyau."
+  },
+
+  {
+    question: "Qu'est-ce qu'un isotope ?",
+    answer: "Un atome d'un même élément possédant le même nombre de protons mais un nombre différent de neutrons."
+  },
+
+  {
+    question: "Quelle particule possède une charge électrique négative ?",
+    answer: "L'électron."
+  },
+
+  {
+    question: "Quelle particule possède une charge électrique positive ?",
+    answer: "Le proton."
+  },
+
+  {
+    question: "Quelle particule est électriquement neutre ?",
+    answer: "Le neutron."
+  },
+
+  {
+    question: "Où se trouve presque toute la masse d'un atome ?",
+    answer: "Dans son noyau, constitué de protons et de neutrons."
+  },
+
+  {
+    question: "Qu'est-ce qu'un ion ?",
+    answer: "Un atome ou groupe d'atomes qui porte une charge électrique."
+  },
+
+  {
+    question: "Qu'est-ce qu'un cation ?",
+    answer: "Un ion chargé positivement."
+  },
+
+  {
+    question: "Qu'est-ce qu'un anion ?",
+    answer: "Un ion chargé négativement."
+  },
+
+  {
+    question: "Pourquoi un atome devient-il un cation ?",
+    answer: "Lorsqu'il perd un ou plusieurs électrons."
+  },
+
+  {
+    question: "Pourquoi un atome devient-il un anion ?",
+    answer: "Lorsqu'il gagne un ou plusieurs électrons."
+  }
+];
