@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#24113f">
+
 <title>Sciences NS4 — ExamQuiz Haiti</title>
 
 <style>
@@ -18,8 +19,7 @@ body{
 
 header{
   background:#24113f;
-  color:white;
-  padding:22px 7%;
+  padding:18px 7%;
   display:flex;
   align-items:center;
   justify-content:space-between;
@@ -40,145 +40,124 @@ header a{
   background:linear-gradient(135deg,#54319a,#1764c0);
   color:white;
   text-align:center;
-  padding:70px 20px;
+  padding:65px 20px;
 }
 
 .hero h1{
   margin:0 0 15px;
-  font-size:42px;
+  font-size:40px;
 }
 
 .hero p{
-  max-width:700px;
   margin:auto;
-  line-height:1.7;
+  max-width:700px;
   font-size:18px;
+  line-height:1.7;
 }
 
 .container{
-  max-width:1000px;
+  max-width:1050px;
   margin:45px auto;
   padding:0 20px;
 }
 
-.choix{
+.categories{
   display:grid;
   grid-template-columns:repeat(2,1fr);
   gap:20px;
-  margin-bottom:35px;
 }
 
-.matiere{
+.category-btn{
   border:0;
+  background:white;
   border-radius:18px;
   padding:30px 20px;
-  background:white;
-  box-shadow:0 8px 25px rgba(0,0,0,.08);
   cursor:pointer;
-  text-align:center;
+  box-shadow:0 8px 25px rgba(0,0,0,.08);
   transition:.2s;
+  text-align:center;
 }
 
-.matiere:hover{
+.category-btn:hover{
   transform:translateY(-4px);
 }
 
-.matiere .emoji{
+.emoji{
   font-size:50px;
-  margin-bottom:12px;
 }
 
-.matiere h2{
-  margin:8px 0;
+.category-btn h2{
+  margin:12px 0 8px;
 }
 
-.matiere p{
+.category-btn p{
   color:#666;
 }
 
-.quiz{
+#questions-page{
   display:none;
+}
+
+.topbar{
   background:white;
-  border-radius:20px;
-  padding:30px;
-  box-shadow:0 10px 35px rgba(0,0,0,.1);
-}
-
-.quiz.active{
-  display:block;
-}
-
-.progress{
-  color:#666;
-  font-weight:bold;
-  margin-bottom:15px;
-}
-
-.question{
-  font-size:23px;
-  line-height:1.5;
+  border-radius:16px;
+  padding:20px;
   margin-bottom:25px;
+  box-shadow:0 5px 20px rgba(0,0,0,.07);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
 }
 
-.answer{
-  width:100%;
-  border:1px solid #dce2eb;
-  background:white;
-  padding:16px;
-  margin:8px 0;
-  border-radius:12px;
-  cursor:pointer;
-  text-align:left;
-  font-size:16px;
+.topbar h2{
+  margin:0;
 }
 
-.answer:hover{
-  background:#f1f7ff;
-  border-color:#3180e8;
-}
-
-.answer.correct{
-  background:#dff6e8;
-  border-color:#20a75a;
-}
-
-.answer.wrong{
-  background:#ffe2e2;
-  border-color:#d33;
-}
-
-.info{
-  text-align:center;
-  color:#666;
-  margin:20px 0;
-}
-
-.retour{
-  width:100%;
+.back-btn{
   border:0;
-  border-radius:12px;
-  padding:15px;
-  margin-top:20px;
+  border-radius:10px;
+  padding:12px 18px;
   background:#24113f;
   color:white;
   cursor:pointer;
+}
+
+.question-card{
+  background:white;
+  border-radius:16px;
+  padding:25px;
+  margin-bottom:18px;
+  box-shadow:0 5px 20px rgba(0,0,0,.07);
+  border-left:5px solid #1764c0;
+}
+
+.question-number{
+  color:#1764c0;
   font-weight:bold;
+  margin-bottom:10px;
 }
 
-.fin{
-  text-align:center;
+.question-text{
+  font-size:18px;
+  font-weight:bold;
+  line-height:1.5;
+  margin-bottom:15px;
 }
 
-.fin h2{
-  font-size:30px;
+.answer{
+  background:#f1f6ff;
+  border-radius:10px;
+  padding:15px;
+  line-height:1.6;
 }
 
 footer{
-  margin-top:70px;
   background:#000;
   color:#aaa;
   text-align:center;
   padding:35px 20px;
+  margin-top:70px;
 }
 
 footer strong{
@@ -186,20 +165,22 @@ footer strong{
 }
 
 @media(max-width:650px){
-  .choix{
+
+  .categories{
     grid-template-columns:1fr;
   }
 
   .hero h1{
-    font-size:32px;
+    font-size:30px;
   }
 
-  .quiz{
-    padding:20px;
+  .topbar{
+    flex-direction:column;
+    align-items:stretch;
   }
 
-  .question{
-    font-size:20px;
+  .back-btn{
+    width:100%;
   }
 }
 </style>
@@ -208,303 +189,231 @@ footer strong{
 <body>
 
 <header>
+
   <a href="index.html">
     <img src="logo.png" alt="ExamQuiz Haiti">
   </a>
 
   <a href="index.html">← Accueil</a>
+
 </header>
 
 <section class="hero">
+
   <h1>🔬 Sciences NS4</h1>
+
   <p>
-    Révise la biologie et la géologie avec des questions adaptées
-    au niveau NS4 en Haïti.
+    Révise tes cours avec les questions et réponses
+    de niveau NS4.
   </p>
+
 </section>
 
 <main class="container">
 
-  <div id="choix" class="choix">
+  <!-- CHOIX DES MATIÈRES -->
 
-    <button class="matiere" id="btn-biologie">
+  <div id="categories" class="categories">
+
+    <button class="category-btn" id="biologyBtn">
+
       <div class="emoji">🧬</div>
+
       <h2>Biologie</h2>
-      <p>Questions de biologie niveau NS4</p>
+
+      <p>
+        Questions et réponses de biologie
+        niveau NS4.
+      </p>
+
     </button>
 
-    <button class="matiere" id="btn-geologie">
+
+    <button class="category-btn" id="geologyBtn">
+
       <div class="emoji">🌍</div>
+
       <h2>Géologie</h2>
-      <p>Questions de géologie niveau NS4</p>
+
+      <p>
+        Questions et réponses de géologie
+        niveau NS4.
+      </p>
+
     </button>
 
   </div>
 
-  <div id="quiz" class="quiz">
 
-    <div class="progress" id="progress"></div>
+  <!-- PAGE QUESTIONS -->
 
-    <div class="question" id="question"></div>
+  <div id="questions-page">
 
-    <div id="answers"></div>
+    <div class="topbar">
 
-    <div class="info" id="info"></div>
+      <h2 id="title"></h2>
 
-    <button class="retour" id="retour">
-      ← RETOUR AUX MATIÈRES
-    </button>
+      <button class="back-btn" id="backBtn">
+        ← Retour
+      </button>
+
+    </div>
+
+    <div id="questions"></div>
 
   </div>
 
 </main>
 
+
 <footer>
-  <strong>ExamQuiz Haiti</strong><br>
-  Sciences — Niveau NS4<br><br>
+
+  <strong>ExamQuiz Haiti</strong>
+
+  <br><br>
+
+  Sciences — Niveau NS4
+
+  <br><br>
+
   © 2026 ExamQuiz • Développé par Ing. Fawenbert Régis
+
 </footer>
 
 
 <script type="module">
 
-/*
-  IMPORTANT :
-  Cette page n'utilise PAS quizLogic.js.
+import { biologieQuestions } 
+from "./src/biologieQuestions.js";
 
-  Elle utilise uniquement :
-  - biologieQuestions.js
-  - geologieQuestions.js
-*/
-
-import { biologieQuestions } from './src/biologieQuestions.js';
-import { geologieQuestions } from './src/geologieQuestions.js';
+import { geologieQuestions } 
+from "./src/geologieQuestions.js";
 
 
-const choix = document.getElementById('choix');
-const quiz = document.getElementById('quiz');
+const categories =
+document.getElementById("categories");
 
-const btnBiologie = document.getElementById('btn-biologie');
-const btnGeologie = document.getElementById('btn-geologie');
+const questionsPage =
+document.getElementById("questions-page");
 
-const progress = document.getElementById('progress');
-const questionElement = document.getElementById('question');
-const answersElement = document.getElementById('answers');
-const info = document.getElementById('info');
-const retour = document.getElementById('retour');
+const questionsContainer =
+document.getElementById("questions");
 
+const title =
+document.getElementById("title");
 
-let questions = [];
-let numero = 0;
-let score = 0;
-let matiere = "";
+const biologyBtn =
+document.getElementById("biologyBtn");
 
+const geologyBtn =
+document.getElementById("geologyBtn");
 
-/*
-  Cette fonction accepte plusieurs formats
-  de questions pour éviter les problèmes
-  avec ton fichier existant.
-*/
-
-function normaliserQuestion(q){
-
-  if(Array.isArray(q)){
-
-    return {
-      question:q[0],
-      options:q[1] || [],
-      correctAnswer:q[2]
-    };
-
-  }
-
-  if(q && typeof q === "object"){
-
-    return {
-      question:q.question || q.Question || "",
-      options:q.options || q.choices || q.reponses || [],
-      correctAnswer:
-        q.correctAnswer ??
-        q.correct ??
-        q.answer ??
-        q.bonneReponse
-    };
-
-  }
-
-  return {
-    question:"",
-    options:[],
-    correctAnswer:0
-  };
-}
+const backBtn =
+document.getElementById("backBtn");
 
 
-function commencer(nouvellesQuestions, nom){
+function afficherQuestions(liste, nom){
 
-  questions = nouvellesQuestions.map(normaliserQuestion);
+  categories.style.display = "none";
 
-  /*
-    Mélange les questions pour que l'ordre
-    ne soit pas toujours le même.
-  */
+  questionsPage.style.display = "block";
 
-  questions = [...questions].sort(() => Math.random() - 0.5);
+  title.textContent = nom;
 
-  numero = 0;
-  score = 0;
-  matiere = nom;
-
-  choix.style.display = "none";
-  quiz.classList.add("active");
-
-  afficherQuestion();
-}
+  questionsContainer.innerHTML = "";
 
 
-function afficherQuestion(){
+  if(!Array.isArray(liste) || liste.length === 0){
 
-  if(numero >= questions.length){
-    afficherFin();
+    questionsContainer.innerHTML = `
+      <div class="question-card">
+        <div class="question-text">
+          Aucune question trouvée.
+        </div>
+
+        <div class="answer">
+          Vérifie le contenu du fichier JavaScript.
+        </div>
+      </div>
+    `;
+
     return;
   }
 
-  const q = questions[numero];
 
-  progress.textContent =
-    `${matiere} — Question ${numero + 1} / ${questions.length}`;
+  liste.forEach((item,index)=>{
 
-  questionElement.textContent = q.question;
+    const question =
+      item.question ??
+      item.Question ??
+      "";
 
-  answersElement.innerHTML = "";
-  info.textContent = "";
+    const answer =
+      item.answer ??
+      item.reponse ??
+      item.response ??
+      item.answerText ??
+      "";
 
-  q.options.forEach((option,index)=>{
 
-    const bouton = document.createElement("button");
+    const card =
+    document.createElement("div");
 
-    bouton.className = "answer";
-    bouton.textContent = option;
+    card.className = "question-card";
 
-    bouton.addEventListener("click",()=>{
 
-      verifierReponse(index,q.correctAnswer,bouton);
+    card.innerHTML = `
 
-    });
+      <div class="question-number">
+        Question ${index + 1}
+      </div>
 
-    answersElement.appendChild(bouton);
+      <div class="question-text">
+        ${question}
+      </div>
+
+      <div class="answer">
+        <strong>Réponse :</strong><br>
+        ${answer}
+      </div>
+
+    `;
+
+
+    questionsContainer.appendChild(card);
 
   });
+
 }
 
 
-function verifierReponse(index,bonne,bouton){
+biologyBtn.addEventListener("click",()=>{
 
-  const boutons =
-    answersElement.querySelectorAll(".answer");
-
-  boutons.forEach(b=>{
-    b.disabled = true;
-  });
-
-  /*
-    La bonne réponse peut être :
-    - un numéro : 0,1,2,3
-    - une lettre : A,B,C,D
-  */
-
-  let bonneIndex = bonne;
-
-  if(typeof bonne === "string"){
-
-    const lettre = bonne.trim().toUpperCase();
-
-    if(["A","B","C","D"].includes(lettre)){
-      bonneIndex = ["A","B","C","D"].indexOf(lettre);
-    }
-  }
-
-  if(Number(index) === Number(bonneIndex)){
-
-    bouton.classList.add("correct");
-    score++;
-
-    info.textContent = "✅ Bonne réponse !";
-
-  }else{
-
-    bouton.classList.add("wrong");
-
-    if(boutons[bonneIndex]){
-      boutons[bonneIndex].classList.add("correct");
-    }
-
-    info.textContent = "❌ Mauvaise réponse.";
-
-  }
-
-  setTimeout(()=>{
-
-    numero++;
-    afficherQuestion();
-
-  },900);
-}
-
-
-function afficherFin(){
-
-  questionElement.innerHTML = `
-    <div class="fin">
-      <h2>🎉 Quiz terminé !</h2>
-      <p>
-        Tu as obtenu
-        <strong>${score} / ${questions.length}</strong>.
-      </p>
-    </div>
-  `;
-
-  progress.textContent = matiere;
-
-  answersElement.innerHTML = "";
-
-  info.textContent =
-    `Score : ${score}/${questions.length}`;
-
-  retour.style.display = "block";
-}
-
-
-btnBiologie.addEventListener("click",()=>{
-
-  commencer(
+  afficherQuestions(
     biologieQuestions,
-    "🧬 Biologie NS4"
+    "🧬 Biologie — NS4"
   );
 
 });
 
 
-btnGeologie.addEventListener("click",()=>{
+geologyBtn.addEventListener("click",()=>{
 
-  commencer(
+  afficherQuestions(
     geologieQuestions,
-    "🌍 Géologie NS4"
+    "🌍 Géologie — NS4"
   );
 
 });
 
 
-retour.addEventListener("click",()=>{
+backBtn.addEventListener("click",()=>{
 
-  quiz.classList.remove("active");
+  questionsPage.style.display = "none";
 
-  choix.style.display = "grid";
+  categories.style.display = "grid";
 
-  progress.textContent = "";
-  questionElement.textContent = "";
-  answersElement.innerHTML = "";
-  info.textContent = "";
+  questionsContainer.innerHTML = "";
 
 });
 
