@@ -1,12 +1,327 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#24113f">
+
+<title>Biologie NS4 — Questions et Réponses | ExamQuiz Haiti</title>
+
+<meta name="description" content="Questions et réponses de biologie niveau NS4 pour réviser le Baccalauréat en Haïti.">
+
+<link rel="icon" href="icons/icon-192.png">
+
+<style>
+:root{
+  --purple:#24113f;
+  --purple2:#4b2481;
+  --blue:#1764c0;
+  --light:#f7f8fc;
+  --text:#171717;
+  --muted:#666;
+  --card:#fff;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--light);
+  color:var(--text);
+}
+
+/* HEADER */
+header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  min-height:76px;
+  background:var(--purple);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:12px 6%;
+  box-shadow:0 2px 12px rgba(0,0,0,.15);
+}
+
+.logo img{
+  width:170px;
+  max-width:55vw;
+  display:block;
+}
+
+nav{
+  display:flex;
+  gap:25px;
+}
+
+nav a{
+  color:white;
+  text-decoration:none;
+  font-size:15px;
+}
+
+nav a:hover{
+  color:#83b7ff;
+}
+
+/* HERO */
+.hero{
+  background:linear-gradient(155deg,#54319a,#324caa,#155db7);
+  color:white;
+  text-align:center;
+  padding:70px 20px;
+}
+
+.hero h1{
+  margin:0 0 15px;
+  font-size:42px;
+}
+
+.hero p{
+  max-width:750px;
+  margin:auto;
+  line-height:1.7;
+  font-size:17px;
+}
+
+.badge{
+  display:inline-block;
+  margin-top:25px;
+  padding:10px 18px;
+  border-radius:30px;
+  background:rgba(255,255,255,.15);
+  border:1px solid rgba(255,255,255,.3);
+}
+
+/* CONTENU */
+.container{
+  max-width:1000px;
+  margin:0 auto;
+  padding:60px 20px;
+}
+
+.intro{
+  text-align:center;
+  margin-bottom:40px;
+}
+
+.intro h2{
+  font-size:32px;
+  margin-bottom:12px;
+}
+
+.intro p{
+  color:var(--muted);
+  line-height:1.7;
+}
+
+/* QUESTIONS */
+.question{
+  background:white;
+  border-radius:16px;
+  margin-bottom:18px;
+  padding:25px;
+  box-shadow:0 6px 20px rgba(0,0,0,.07);
+  border:1px solid #e8e8e8;
+}
+
+.question h3{
+  margin:0 0 15px;
+  color:var(--purple);
+  font-size:19px;
+  line-height:1.5;
+}
+
+.answer{
+  background:#f1f7ff;
+  border-left:5px solid var(--blue);
+  padding:15px 18px;
+  border-radius:8px;
+  line-height:1.6;
+}
+
+.answer strong{
+  color:var(--blue);
+}
+
+/* BOUTON */
+.top-btn{
+  display:block;
+  width:max-content;
+  margin:40px auto 0;
+  padding:14px 25px;
+  border-radius:30px;
+  background:var(--blue);
+  color:white;
+  text-decoration:none;
+  font-weight:bold;
+}
+
+.top-btn:hover{
+  background:#0f55a8;
+}
+
+/* FOOTER */
+footer{
+  background:#000;
+  color:white;
+  text-align:center;
+  padding:40px 20px;
+}
+
+footer p{
+  color:#aaa;
+  line-height:1.6;
+}
+
+/* MOBILE */
+@media(max-width:700px){
+
+  header{
+    padding:12px 5%;
+  }
+
+  nav{
+    display:none;
+  }
+
+  .hero{
+    padding:55px 20px;
+  }
+
+  .hero h1{
+    font-size:30px;
+  }
+
+  .hero p{
+    font-size:16px;
+  }
+
+  .container{
+    padding:45px 15px;
+  }
+
+  .intro h2{
+    font-size:27px;
+  }
+
+  .question{
+    padding:20px;
+  }
+
+  .question h3{
+    font-size:17px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <a class="logo" href="index.html" aria-label="ExamQuiz Haiti">
+    <img src="logo.png" alt="ExamQuiz Haiti">
+  </a>
+
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="index.html#categories">Catégories</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>Biologie — Niveau NS4</h1>
+
+  <p>
+    Questions et réponses pour réviser la biologie,
+    préparer le Baccalauréat et renforcer tes connaissances.
+  </p>
+
+  <div class="badge">
+    106 questions de biologie
+  </div>
+</section>
+
+<main class="container">
+
+  <div class="intro">
+    <h2>Questions de Biologie</h2>
+
+    <p>
+      Retrouve ici les questions et leurs réponses,
+      organisées à partir du programme de biologie de niveau NS4.
+    </p>
+  </div>
+
+  <div id="questions">
+    <p style="text-align:center">
+      Chargement des questions...
+    </p>
+  </div>
+
+  <a href="#" class="top-btn">↑ Retour en haut</a>
+
+</main>
+
+<footer>
+  <p>
+    © 2026 ExamQuiz • Tous droits réservés
+  </p>
+
+  <p>
+    Développé par <strong>Ing. Fawenbert Régis</strong>
+  </p>
+</footer>
+
 <script type="module">
+
 import { biologieQuestions } from './src/biologieQuestions.js';
 
 const container = document.getElementById('questions');
 
-container.innerHTML = biologieQuestions.map((q, i) => `
-  <div class="question">
-    <h3>${i + 1}. ${q.question}</h3>
-    <p><strong>Réponse :</strong> ${q.answer}</p>
-  </div>
-`).join('');
+if (!Array.isArray(biologieQuestions)) {
+
+  container.innerHTML = `
+    <div class="question">
+      <h3>Erreur de chargement</h3>
+      <div class="answer">
+        Impossible de charger les questions de biologie.
+      </div>
+    </div>
+  `;
+
+} else {
+
+  container.innerHTML = biologieQuestions.map((q, index) => {
+
+    return `
+      <article class="question">
+
+        <h3>
+          ${index + 1}. ${q.question}
+        </h3>
+
+        <div class="answer">
+          <strong>Réponse :</strong>
+          ${q.answer}
+        </div>
+
+      </article>
+    `;
+
+  }).join('');
+
+}
+
 </script>
+
+</body>
+</html>
