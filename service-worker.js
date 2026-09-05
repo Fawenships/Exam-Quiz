@@ -1,4 +1,4 @@
-const CACHE_NAME = 'exam-quiz-cache-v2';
+const CACHE_NAME = 'exam-quiz-cache-v3';
 
 const FILES_TO_CACHE = [
   '/',
@@ -10,9 +10,7 @@ const FILES_TO_CACHE = [
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(FILES_TO_CACHE);
-    })
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(FILES_TO_CACHE))
   );
 
   self.skipWaiting();
@@ -20,18 +18,37 @@ self.addEventListener('install', (event) => {
 
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then((cacheNames) => {
-      return Promise.all(
+    caches.keys().then((cacheNames) =>
+      Promise.all(
         cacheNames
           .filter((cacheName) => cacheName !== CACHE_NAME)
           .map((cacheName) => caches.delete(cacheName))
-      );
-    }).then(() => self.clients.claim())
+      )
+    ).then(() => self.clients.claim())
   );
 });
 
 self.addEventListener('fetch', (event) => {
-  // Pour le HTML : toujours récupérer la nouvelle version du serveur
+  // Toujours récupérer la nouvelle version de la banque de questions.
+  if (new URL(event.request.url).pathname.endsWith('/src/baccQuestions.js')) {
+    event.respondWith(
+      fetch(event.request)
+        .then((response) => {
+          const responseClone = response.clone();
+
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(event.request, responseClone);
+          });
+
+          return response;
+        })
+        .catch(() => caches.match(event.request))
+    );
+
+    return;
+  }
+
+  // Pour le HTML : récupérer la nouvelle version du site.
   if (event.request.mode === 'navigate') {
     event.respondWith(
       fetch(event.request)
@@ -44,15 +61,13 @@ self.addEventListener('fetch', (event) => {
 
           return response;
         })
-        .catch(() => {
-          return caches.match('/index.html');
-        })
+        .catch(() => caches.match('/index.html'))
     );
 
     return;
   }
 
-  // Pour les autres fichiers : cache puis réseau
+  // Les autres fichiers utilisent le cache puis le réseau.
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
       return cachedResponse || fetch(event.request);
