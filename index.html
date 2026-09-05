@@ -6,12 +6,25 @@
   <meta name="theme-color" content="#24113f">
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="icons/icon-192.png">
+
   <title>Exam Quiz Haiti</title>
-  <meta name="description" content="Exam Quiz Haiti : entraînez-vous gratuitement avec des quiz pour le Baccalauréat NS4, histoire, sciences, culture générale et autres matières.">
+
+  <meta
+    name="description"
+    content="Exam Quiz Haiti : entraînez-vous gratuitement avec des quiz pour le Baccalauréat NS4, histoire, sciences, culture générale et autres matières."
+  >
+
   <link rel="canonical" href="https://examquizhaiti.com/">
+
   <meta property="og:title" content="Exam Quiz Haiti">
-  <meta property="og:description" content="Entraînez-vous gratuitement avec des quiz pour le Baccalauréat NS4, histoire, sciences, culture générale et autres matières.">
-  <meta property="og:image" content="https://examquizhaiti.com/icons/icon-192.png">
+  <meta
+    property="og:description"
+    content="Entraînez-vous gratuitement avec des quiz pour le Baccalauréat NS4, histoire, sciences, culture générale et autres matières."
+  >
+  <meta
+    property="og:image"
+    content="https://examquizhaiti.com/icons/icon-192.png"
+  >
   <meta property="og:url" content="https://examquizhaiti.com/">
   <meta property="og:type" content="website">
 
@@ -26,6 +39,7 @@
   </script>
 
   <style>
+
     :root{
       --purple:#24113f;
       --purple2:#4b2481;
@@ -37,9 +51,13 @@
       --card:#fff;
     }
 
-    *{box-sizing:border-box}
+    *{
+      box-sizing:border-box;
+    }
 
-    html{scroll-behavior:smooth}
+    html{
+      scroll-behavior:smooth;
+    }
 
     body{
       margin:0;
@@ -48,11 +66,20 @@
       background:var(--light);
     }
 
-    button,a{font:inherit}
+    button,
+    a{
+      font:inherit;
+    }
 
-    a{text-decoration:none;color:inherit}
+    a{
+      text-decoration:none;
+      color:inherit;
+    }
 
-    /* HEADER */
+    /* =========================
+       HEADER
+    ========================= */
+
     .site-header{
       position:sticky;
       top:0;
@@ -82,7 +109,7 @@
     .desktop-nav{
       display:flex;
       align-items:center;
-      gap:28px;
+      gap:24px;
       color:#fff;
       font-size:15px;
     }
@@ -95,6 +122,23 @@
     .desktop-nav a:hover{
       opacity:1;
       color:#7eb5ff;
+    }
+
+    .desktop-nav .konkou-nav{
+      background:linear-gradient(135deg,#f0a51a,#ffbf3f);
+      color:#24113f;
+      padding:10px 16px;
+      border-radius:25px;
+      font-weight:bold;
+      opacity:1;
+      box-shadow:0 5px 15px rgba(0,0,0,.15);
+      transition:.2s;
+    }
+
+    .desktop-nav .konkou-nav:hover{
+      color:#24113f;
+      transform:translateY(-2px);
+      box-shadow:0 8px 20px rgba(0,0,0,.22);
     }
 
     .menu-btn{
@@ -119,7 +163,9 @@
       box-shadow:0 8px 18px rgba(0,0,0,.18);
     }
 
-    .mobile-nav.open{display:block}
+    .mobile-nav.open{
+      display:block;
+    }
 
     .mobile-nav a{
       display:block;
@@ -128,7 +174,15 @@
       border-bottom:1px solid rgba(255,255,255,.1);
     }
 
-    /* HERO */
+    .mobile-nav .konkou-mobile{
+      color:#ffbf3f;
+      font-weight:bold;
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
     .hero{
       min-height:610px;
       display:flex;
@@ -137,7 +191,12 @@
       text-align:center;
       color:#fff;
       padding:80px 20px 100px;
-      background:linear-gradient(155deg,#54319a 0%,#324caa 48%,#155db7 100%);
+      background:linear-gradient(
+        155deg,
+        #54319a 0%,
+        #324caa 48%,
+        #155db7 100%
+      );
       position:relative;
       overflow:hidden;
     }
@@ -224,13 +283,18 @@
       background:#3c8bf5;
     }
 
-    /* CONTENT */
+    /* =========================
+       CONTENT
+    ========================= */
+
     .section{
       padding:85px 7%;
       background:#fff;
     }
 
-    .section.alt{background:#f7f8fc}
+    .section.alt{
+      background:#f7f8fc;
+    }
 
     .section-title{
       text-align:center;
@@ -249,7 +313,10 @@
       line-height:1.8;
     }
 
-    /* QUIZ */
+    /* =========================
+       QUIZ
+    ========================= */
+
     .quiz-shell{
       max-width:900px;
       margin:0 auto;
@@ -333,10 +400,21 @@
       margin-top:10px;
     }
 
-    .restart-btn{background:#1764c0}
-    .hint-btn{background:#7040bd}
-    .start-btn{background:#1764c0}
-    .install-btn{background:#e99619}
+    .restart-btn{
+      background:#1764c0;
+    }
+
+    .hint-btn{
+      background:#7040bd;
+    }
+
+    .start-btn{
+      background:#1764c0;
+    }
+
+    .install-btn{
+      background:#e99619;
+    }
 
     .install-btn:disabled{
       opacity:.45;
@@ -366,7 +444,9 @@
       color:#315aa0;
     }
 
-    .landing-card{text-align:center}
+    .landing-card{
+      text-align:center;
+    }
 
     .landing-card .quiz-icon{
       width:120px;
@@ -393,7 +473,10 @@
       text-align:left;
     }
 
-    /* CATEGORIES */
+    /* =========================
+       CATEGORIES
+    ========================= */
+
     .categories{
       display:grid;
       grid-template-columns:repeat(4,1fr);
@@ -434,7 +517,34 @@
       line-height:1.5;
     }
 
-    /* SOCIAL */
+    /* KONKOU */
+
+    .category-konkou{
+      background:linear-gradient(
+        135deg,
+        #24113f,
+        #4b2481
+      );
+      color:#fff;
+      border:none;
+    }
+
+    .category-konkou h3{
+      color:#fff;
+    }
+
+    .category-konkou p{
+      color:#e6ddf5;
+    }
+
+    .category-konkou:hover{
+      box-shadow:0 16px 35px rgba(36,17,63,.25);
+    }
+
+    /* =========================
+       SOCIAL
+    ========================= */
+
     .social-section{
       background:#000;
       color:#fff;
@@ -467,7 +577,10 @@
       transform:scale(1.08);
     }
 
-    /* FOOTER */
+    /* =========================
+       FOOTER
+    ========================= */
+
     footer{
       background:#000;
       color:#fff;
@@ -501,6 +614,11 @@
       margin:16px 0;
     }
 
+    .footer-links .footer-konkou{
+      color:#ffbf3f;
+      font-weight:bold;
+    }
+
     .footer-bottom{
       max-width:1100px;
       margin:50px auto 0;
@@ -523,7 +641,10 @@
       font-size:22px;
     }
 
-    /* DÉVELOPPEUR */
+    /* =========================
+       DÉVELOPPEUR
+    ========================= */
+
     .developer-hero{
       display:inline-flex;
       flex-direction:column;
@@ -584,7 +705,9 @@
       padding:20px;
     }
 
-    .bio-overlay.open{display:flex}
+    .bio-overlay.open{
+      display:flex;
+    }
 
     .bio-modal{
       max-width:520px;
@@ -612,7 +735,9 @@
       color:#888;
     }
 
-    .bio-close:hover{color:#222}
+    .bio-close:hover{
+      color:#222;
+    }
 
     .bio-avatar{
       width:80px;
@@ -682,6 +807,10 @@
       margin:10px 0 4px !important;
     }
 
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
     @media(max-width:800px){
 
       .site-header{
@@ -689,24 +818,38 @@
         height:70px;
       }
 
-      .desktop-nav{display:none}
+      .desktop-nav{
+        display:none;
+      }
 
-      .menu-btn{display:block}
+      .menu-btn{
+        display:block;
+      }
 
-      .mobile-nav{top:70px}
+      .mobile-nav{
+        top:70px;
+      }
 
       .hero{
         min-height:610px;
         padding:65px 20px 85px;
       }
 
-      .hero-brand{font-size:48px}
+      .hero-brand{
+        font-size:48px;
+      }
 
-      .developer-hero strong{font-size:21px}
+      .developer-hero strong{
+        font-size:21px;
+      }
 
-      .developer-hero{padding:14px 20px}
+      .developer-hero{
+        padding:14px 20px;
+      }
 
-      .hero-brand span{height:58px}
+      .hero-brand span{
+        height:58px;
+      }
 
       .hero h1{
         font-size:16px;
@@ -714,11 +857,17 @@
         line-height:2;
       }
 
-      .hero p{font-size:16px}
+      .hero p{
+        font-size:16px;
+      }
 
-      .section{padding:65px 6%}
+      .section{
+        padding:65px 6%;
+      }
 
-      .section-title{font-size:34px}
+      .section-title{
+        font-size:34px;
+      }
 
       .categories{
         grid-template-columns:repeat(2,1fr);
@@ -733,29 +882,46 @@
       .footer-bottom{
         flex-direction:column;
       }
+
     }
 
     @media(max-width:480px){
 
-      .logo img{width:145px}
+      .logo img{
+        width:145px;
+      }
 
-      .hero-brand{font-size:40px}
+      .hero-brand{
+        font-size:40px;
+      }
 
-      .hero-brand span{height:48px}
+      .hero-brand span{
+        height:48px;
+      }
 
       .hero h1{
         font-size:14px;
         letter-spacing:3px;
       }
 
-      .primary-btn{padding:16px 34px}
+      .primary-btn{
+        padding:16px 34px;
+      }
 
-      .quiz-shell{padding:20px}
+      .quiz-shell{
+        padding:20px;
+      }
 
-      .categories{grid-template-columns:1fr}
+      .categories{
+        grid-template-columns:1fr;
+      }
 
-      .section-title{font-size:29px}
+      .section-title{
+        font-size:29px;
+      }
+
     }
+
   </style>
 </head>
 
@@ -763,38 +929,116 @@
 
 <header class="site-header">
 
-  <a class="logo" href="#accueil" aria-label="ExamQuiz accueil">
-    <img src="logo.png" alt="ExamQuiz Haiti">
+  <a
+    class="logo"
+    href="#accueil"
+    aria-label="ExamQuiz accueil"
+  >
+    <img
+      src="logo.png"
+      alt="ExamQuiz Haiti"
+    >
   </a>
 
+  <!-- MENU ORDINATEUR -->
+
   <nav class="desktop-nav">
-    <a href="#accueil">Accueil</a>
-    <a href="#quiz">Quiz</a>
-    <a href="#categories">Catégories</a>
-    <a href="#apropos">À propos</a>
-    <a href="#contact">Contact</a>
+
+    <a href="#accueil">
+      Accueil
+    </a>
+
+    <a href="#quiz">
+      Quiz
+    </a>
+
+    <a href="#categories">
+      Catégories
+    </a>
+
+    <a href="#apropos">
+      À propos
+    </a>
+
+    <a href="#contact">
+      Contact
+    </a>
+
+    <a
+      href="https://konkouquizhaiti.com/"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="konkou-nav"
+    >
+      🏆 Konkou
+    </a>
+
   </nav>
 
-  <button class="menu-btn" id="menu-btn" aria-label="Ouvrir le menu">☰</button>
+  <button
+    class="menu-btn"
+    id="menu-btn"
+    aria-label="Ouvrir le menu"
+  >
+    ☰
+  </button>
 
-  <nav class="mobile-nav" id="mobile-nav">
-    <a href="#accueil">Accueil</a>
-    <a href="#quiz">Quiz</a>
-    <a href="#categories">Catégories</a>
-    <a href="#apropos">À propos</a>
-    <a href="#contact">Contact</a>
+  <!-- MENU MOBILE -->
+
+  <nav
+    class="mobile-nav"
+    id="mobile-nav"
+  >
+
+    <a href="#accueil">
+      Accueil
+    </a>
+
+    <a href="#quiz">
+      Quiz
+    </a>
+
+    <a href="#categories">
+      Catégories
+    </a>
+
+    <a href="#apropos">
+      À propos
+    </a>
+
+    <a href="#contact">
+      Contact
+    </a>
+
+    <a
+      href="https://konkouquizhaiti.com/"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="konkou-mobile"
+    >
+      🏆 Konkou — Joue pour gagner
+    </a>
+
   </nav>
 
 </header>
 
 <main>
 
-  <section class="hero" id="accueil">
+  <!-- =========================
+       ACCUEIL
+  ========================= -->
+
+  <section
+    class="hero"
+    id="accueil"
+  >
 
     <div class="hero-content">
 
       <div class="hero-brand">
-        <span></span>ExamQuiz
+        <span></span>
+        ExamQuiz
       </div>
 
       <h1>
@@ -807,21 +1051,45 @@
       </p>
 
       <div class="developer-hero">
-        <span>UNE CRÉATION DE</span>
-        <strong>Ing. Fawenbert Régis</strong>
-        <small>Développeur &amp; créateur d'ExamQuiz</small>
-        <button class="bio-btn" id="bio-open-btn" type="button">
+
+        <span>
+          UNE CRÉATION DE
+        </span>
+
+        <strong>
+          Ing. Fawenbert Régis
+        </strong>
+
+        <small>
+          Développeur &amp; créateur d'ExamQuiz
+        </small>
+
+        <button
+          class="bio-btn"
+          id="bio-open-btn"
+          type="button"
+        >
           VOIR LA BIOGRAPHIE
         </button>
+
       </div>
 
     </div>
 
   </section>
 
-  <section class="section" id="apropos">
+  <!-- =========================
+       À PROPOS / QUIZ
+  ========================= -->
 
-    <h2 class="section-title">Bienvenue à ExamQuiz</h2>
+  <section
+    class="section"
+    id="apropos"
+  >
+
+    <h2 class="section-title">
+      Bienvenue à ExamQuiz
+    </h2>
 
     <p class="section-intro">
       ExamQuiz rassemble des questions d'entraînement dans plusieurs domaines
@@ -831,9 +1099,13 @@
 
     <div class="quiz-shell landing-card">
 
-      <div class="quiz-icon">🎓</div>
+      <div class="quiz-icon">
+        🎓
+      </div>
 
-      <h2>Apprends en jouant</h2>
+      <h2>
+        Apprends en jouant
+      </h2>
 
       <p>
         Choisis ton niveau, réponds aux questions et débloque progressivement
@@ -841,9 +1113,16 @@
       </p>
 
       <div class="reassure">
-        <strong>Pour les élèves :</strong><br>
+
+        <strong>
+          Pour les élèves :
+        </strong>
+
+        <br>
+
         Prends ton temps, lis attentivement les questions et utilise chaque
         erreur comme une occasion d'apprendre.
+
       </div>
 
       <div id="quiz-container"></div>
@@ -852,9 +1131,18 @@
 
   </section>
 
-  <section class="section alt" id="categories">
+  <!-- =========================
+       CATÉGORIES
+  ========================= -->
 
-    <h2 class="section-title">Nos catégories</h2>
+  <section
+    class="section alt"
+    id="categories"
+  >
+
+    <h2 class="section-title">
+      Nos catégories
+    </h2>
 
     <p class="section-intro">
       Découvre les différentes matières et domaines disponibles sur ExamQuiz.
@@ -862,13 +1150,20 @@
 
     <div class="categories">
 
+      <!-- SCIENCES -->
 
-      <!-- SCIENCES RELIÉ À BIOLOGIE.HTML -->
-      <a href="biologie.html" class="category">
+      <a
+        href="biologie.html"
+        class="category"
+      >
 
-        <div class="emoji">🔬</div>
+        <div class="emoji">
+          🔬
+        </div>
 
-        <h3>Sciences</h3>
+        <h3>
+          Sciences
+        </h3>
 
         <p>
           Biologie, physique, chimie et sciences générales.
@@ -876,80 +1171,164 @@
 
       </a>
 
+      <!-- BACCALAURÉAT -->
+
       <div class="category">
-        <div class="emoji">🎓</div>
-        <h3>Baccalauréat</h3>
-        <p>Entraîne-toi avec des questions de niveau examen.</p>
+
+        <div class="emoji">
+          🎓
+        </div>
+
+        <h3>
+          Baccalauréat
+        </h3>
+
+        <p>
+          Entraîne-toi avec des questions de niveau examen.
+        </p>
+
       </div>
+
+      <!-- KONKOU -->
+
+      <a
+        href="https://konkouquizhaiti.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="category category-konkou"
+      >
+
+        <div class="emoji">
+          🏆
+        </div>
+
+        <h3>
+          Konkou
+        </h3>
+
+        <p>
+          Joue, relève des défis et participe aux concours.
+        </p>
+
+      </a>
 
     </div>
 
   </section>
 
- <section class="social-section" id="contact">
+  <!-- =========================
+       CONTACT
+  ========================= -->
 
-  <h2>Contact</h2>
+  <section
+    class="social-section"
+    id="contact"
+  >
 
-  <p>
-    Pour toute question, suggestion ou problème concernant ExamQuiz Haiti,
-    vous pouvez nous contacter directement.
-  </p>
-
-  <div class="contact-info">
+    <h2>
+      Contact
+    </h2>
 
     <p>
-      📧 <strong>Email :</strong>
-      <a href="mailto:regisfawen4@gmail.com">
-        regisfawen4@gmail.com
-      </a>
+      Pour toute question, suggestion ou problème concernant ExamQuiz Haiti,
+      vous pouvez nous contacter directement.
     </p>
 
-    <p>
-      📱 <strong>Téléphone :</strong>
-      <a href="tel:+15084055521">
-        +1 508 405 5521
-      </a>
-    </p>
+    <div class="contact-info">
 
-    <p>
-      🎵 <strong>TikTok :</strong>
+      <p>
+
+        📧
+        <strong>
+          Email :
+        </strong>
+
+        <a href="mailto:regisfawen4@gmail.com">
+          regisfawen4@gmail.com
+        </a>
+
+      </p>
+
+      <p>
+
+        📱
+        <strong>
+          Téléphone :
+        </strong>
+
+        <a href="tel:+15084055521">
+          +1 508 405 5521
+        </a>
+
+      </p>
+
+      <p>
+
+        🎵
+        <strong>
+          TikTok :
+        </strong>
+
+        <a
+          href="https://www.tiktok.com/@examquizhaiti"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          @examquizhaiti
+        </a>
+
+      </p>
+
+    </div>
+
+    <div class="socials">
+
+      <a
+        href="#"
+        aria-label="Facebook"
+      >
+        f
+      </a>
+
+      <a
+        href="#"
+        aria-label="X"
+      >
+        𝕏
+      </a>
+
+      <a
+        href="#"
+        aria-label="Instagram"
+      >
+        ◎
+      </a>
+
+      <a
+        href="#"
+        aria-label="YouTube"
+      >
+        ▶
+      </a>
+
       <a
         href="https://www.tiktok.com/@examquizhaiti"
         target="_blank"
         rel="noopener noreferrer"
+        aria-label="TikTok"
       >
-        @examquizhaiti
+        ♪
       </a>
-    </p>
 
-  </div>
-
-  <div class="socials">
-
-    <a href="#" aria-label="Facebook">f</a>
-
-    <a href="#" aria-label="X">𝕏</a>
-
-    <a href="#" aria-label="Instagram">◎</a>
-
-    <a href="#" aria-label="YouTube">▶</a>
-
-    <a
-      href="https://www.tiktok.com/@examquizhaiti"
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="TikTok"
-    >
-      ♪
-    </a>
-
-  </div>
-
-</section>
+    </div>
 
   </section>
 
 </main>
+
+<!-- =========================
+     FOOTER
+========================= -->
 
 <footer>
 
@@ -957,7 +1336,9 @@
 
     <div>
 
-      <h3>À PROPOS DE NOUS</h3>
+      <h3>
+        À PROPOS DE NOUS
+      </h3>
 
       <p>
         ExamQuiz est une plateforme éducative destinée à aider les élèves
@@ -968,12 +1349,34 @@
 
     <div class="footer-links">
 
-      <h3>MENU</h3>
+      <h3>
+        MENU
+      </h3>
 
-      <a href="#quiz">Quiz</a>
-      <a href="#categories">Catégories</a>
-      <a href="#apropos">À propos</a>
-      <a href="#contact">Contact</a>
+      <a href="#quiz">
+        Quiz
+      </a>
+
+      <a href="#categories">
+        Catégories
+      </a>
+
+      <a href="#apropos">
+        À propos
+      </a>
+
+      <a href="#contact">
+        Contact
+      </a>
+
+      <a
+        href="https://konkouquizhaiti.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="footer-konkou"
+      >
+        🏆 Konkou — Joue pour gagner
+      </a>
 
     </div>
 
@@ -986,26 +1389,71 @@
     </div>
 
     <div class="footer-socials">
-      <a href="#" aria-label="Facebook">f</a>
-      <a href="#" aria-label="Instagram">◎</a>
-      <a href="#" aria-label="YouTube">▶</a>
-      <a href="#" aria-label="TikTok">♪</a>
+
+      <a
+        href="#"
+        aria-label="Facebook"
+      >
+        f
+      </a>
+
+      <a
+        href="#"
+        aria-label="Instagram"
+      >
+        ◎
+      </a>
+
+      <a
+        href="#"
+        aria-label="YouTube"
+      >
+        ▶
+      </a>
+
+      <a
+        href="#"
+        aria-label="TikTok"
+      >
+        ♪
+      </a>
+
     </div>
 
   </div>
 
 </footer>
 
-<div class="bio-overlay" id="bio-overlay">
+<!-- =========================
+     BIOGRAPHIE
+========================= -->
+
+<div
+  class="bio-overlay"
+  id="bio-overlay"
+>
 
   <div class="bio-modal">
 
-    <button class="bio-close" id="bio-close-btn" aria-label="Fermer">×</button>
+    <button
+      class="bio-close"
+      id="bio-close-btn"
+      aria-label="Fermer"
+    >
+      ×
+    </button>
 
-    <div class="bio-avatar">👨‍💻</div>
+    <div class="bio-avatar">
+      👨‍💻
+    </div>
 
-    <h3>Fawenbert Regis</h3>
-    <div class="bio-role">Étudiant en sciences informatiques | Développeur &amp; créateur de projets numériques</div>
+    <h3>
+      Fawenbert Regis
+    </h3>
+
+    <div class="bio-role">
+      Étudiant en sciences informatiques | Développeur &amp; créateur de projets numériques
+    </div>
 
     <p>
       Je suis Fawenbert Regis, âgé de 19 ans, et étudiant en première année
@@ -1077,29 +1525,43 @@
     QUESTIONS_PER_LEVEL
   } from './src/quizLogic.js';
 
-  import { baccQuestions } from './src/baccQuestions.js';
+  import {
+    baccQuestions
+  } from './src/baccQuestions.js';
 
   const questions = baccQuestions;
 
   const totalLevels =
-    Math.ceil(questions.length / QUESTIONS_PER_LEVEL);
+    Math.ceil(
+      questions.length /
+      QUESTIONS_PER_LEVEL
+    );
 
   const unlockThreshold =
-    Math.max(1, QUESTIONS_PER_LEVEL - 1);
+    Math.max(
+      1,
+      QUESTIONS_PER_LEVEL - 1
+    );
 
   const savedUnlockedLevels =
     JSON.parse(
-      localStorage.getItem('exam_quiz_unlocked_levels') || '[1]'
+      localStorage.getItem(
+        'exam_quiz_unlocked_levels'
+      ) || '[1]'
     );
 
   const unlockedLevels =
-    new Set(savedUnlockedLevels);
+    new Set(
+      savedUnlockedLevels
+    );
 
   function saveUnlockedLevels(){
 
     localStorage.setItem(
       'exam_quiz_unlocked_levels',
-      JSON.stringify(Array.from(unlockedLevels))
+      JSON.stringify(
+        Array.from(unlockedLevels)
+      )
     );
 
   }
@@ -1110,7 +1572,9 @@
 
   let coins =
     Number(
-      localStorage.getItem('exam_quiz_coins') || 0
+      localStorage.getItem(
+        'exam_quiz_coins'
+      ) || 0
     );
 
   const levelReward = 5;
@@ -1118,37 +1582,55 @@
   function renderLanding(){
 
     const container =
-      document.getElementById('quiz-container');
+      document.getElementById(
+        'quiz-container'
+      );
 
     container.innerHTML = `
 
-      <div style="margin:18px 0;font-weight:bold">
+      <div
+        style="margin:18px 0;font-weight:bold"
+      >
         🪙 ${coins} pièces
       </div>
 
-      <button class="start-btn" id="start-btn">
+      <button
+        class="start-btn"
+        id="start-btn"
+      >
         DÉMARRER
       </button>
 
-      <button class="install-btn" id="install-btn" disabled>
+      <button
+        class="install-btn"
+        id="install-btn"
+        disabled
+      >
         INSTALLER L'APPLICATION
       </button>
 
-      <p id="install-note" style="color:#777;font-size:14px">
-        Le bouton d'installation sera activé si le navigateur autorise l'installation.
+      <p
+        id="install-note"
+        style="color:#777;font-size:14px"
+      >
+        Le bouton d'installation sera activé si
+        le navigateur autorise l'installation.
       </p>
 
     `;
 
     document
       .getElementById('start-btn')
-      .addEventListener('click', () => {
+      .addEventListener(
+        'click',
+        () => {
 
-        showLanding = false;
+          showLanding = false;
 
-        render();
+          render();
 
-      });
+        }
+      );
 
   }
 
@@ -1160,18 +1642,24 @@
         level
       );
 
-    return createQuiz(levelQuestions);
+    return createQuiz(
+      levelQuestions
+    );
 
   }
 
   function renderLevelSelection(){
 
     const container =
-      document.getElementById('quiz-container');
+      document.getElementById(
+        'quiz-container'
+      );
 
     const levels =
       Array.from(
-        { length: totalLevels },
+        {
+          length: totalLevels
+        },
         (_, i) => i + 1
       );
 
@@ -1181,7 +1669,9 @@
         Choisissez un niveau :
       </div>
 
-      <div style="margin-bottom:15px">
+      <div
+        style="margin-bottom:15px"
+      >
         Vos pièces : 🪙 ${coins}
       </div>
 
@@ -1197,7 +1687,8 @@
             <button
               class="level-btn${unlocked ? '' : ' locked'}"
               data-level="${level}"
-              ${unlocked ? '' : 'disabled'}>
+              ${unlocked ? '' : 'disabled'}
+            >
 
               ${
                 unlocked
@@ -1230,10 +1721,14 @@
           () => {
 
             selectedLevel =
-              Number(button.dataset.level);
+              Number(
+                button.dataset.level
+              );
 
             quiz =
-              startQuiz(selectedLevel);
+              startQuiz(
+                selectedLevel
+              );
 
             render();
 
@@ -1247,7 +1742,9 @@
   function render(){
 
     const container =
-      document.getElementById('quiz-container');
+      document.getElementById(
+        'quiz-container'
+      );
 
     if(showLanding){
 
@@ -1298,11 +1795,17 @@
           Recommencez le niveau pour progresser.
         </div>
 
-        <button class="restart-btn" id="retry-btn">
+        <button
+          class="restart-btn"
+          id="retry-btn"
+        >
           RECOMMENCER
         </button>
 
-        <button class="restart-btn" id="back-btn">
+        <button
+          class="restart-btn"
+          id="back-btn"
+        >
           RETOUR AUX NIVEAUX
         </button>
 
@@ -1310,25 +1813,33 @@
 
       document
         .getElementById('retry-btn')
-        .addEventListener('click', () => {
+        .addEventListener(
+          'click',
+          () => {
 
-          quiz =
-            startQuiz(selectedLevel);
+            quiz =
+              startQuiz(
+                selectedLevel
+              );
 
-          render();
+            render();
 
-        });
+          }
+        );
 
       document
         .getElementById('back-btn')
-        .addEventListener('click', () => {
+        .addEventListener(
+          'click',
+          () => {
 
-          selectedLevel = null;
-          quiz = null;
+            selectedLevel = null;
+            quiz = null;
 
-          render();
+            render();
 
-        });
+          }
+        );
 
       return;
 
@@ -1350,7 +1861,9 @@
         !unlockedLevels.has(nextLevel)
       ){
 
-        unlockedLevels.add(nextLevel);
+        unlockedLevels.add(
+          nextLevel
+        );
 
         saveUnlockedLevels();
 
@@ -1399,7 +1912,8 @@
 
             <div
               class="badge"
-              style="background:#e99619">
+              style="background:#e99619"
+            >
 
               Score nécessaire :
               ${unlockThreshold}/${quiz.questions.length}
@@ -1414,7 +1928,9 @@
 
           ? `
 
-            <div style="margin-top:12px">
+            <div
+              style="margin-top:12px"
+            >
               +${earned} pièces 🪙
             </div>
 
@@ -1423,30 +1939,34 @@
           : ''
         }
 
-        <div style="margin-top:10px">
+        <div
+          style="margin-top:10px"
+        >
           Total : 🪙 ${coins}
         </div>
 
         <button
           class="restart-btn"
-          id="restart-btn">
-
+          id="restart-btn"
+        >
           RETOUR AUX NIVEAUX
-
         </button>
 
       `;
 
       document
         .getElementById('restart-btn')
-        .addEventListener('click', () => {
+        .addEventListener(
+          'click',
+          () => {
 
-          selectedLevel = null;
-          quiz = null;
+            selectedLevel = null;
+            quiz = null;
 
-          render();
+            render();
 
-        });
+          }
+        );
 
       return;
 
@@ -1473,10 +1993,9 @@
 
             <button
               class="answer-btn"
-              data-index="${index}">
-
+              data-index="${index}"
+            >
               ${option}
-
             </button>
 
           `
@@ -1486,7 +2005,9 @@
 
       <div class="ai-panel">
 
-        <h3>🤖 Assistant IA</h3>
+        <h3>
+          🤖 Assistant IA
+        </h3>
 
         <p id="ai-feedback">
           ${getAiHint(question)}
@@ -1494,10 +2015,9 @@
 
         <button
           class="hint-btn"
-          id="hint-btn">
-
+          id="hint-btn"
+        >
           DEMANDER UN CONSEIL
-
         </button>
 
       </div>
@@ -1513,7 +2033,9 @@
           () => {
 
             const selectedIndex =
-              Number(button.dataset.index);
+              Number(
+                button.dataset.index
+              );
 
             const feedback =
               document.getElementById(
@@ -1535,7 +2057,8 @@
               quiz = {
                 ...quiz,
                 failed: true,
-                failedAnswer: selectedIndex
+                failedAnswer:
+                  selectedIndex
               };
 
               setTimeout(
@@ -1578,6 +2101,10 @@
       );
 
   }
+
+  /* =========================
+     INSTALLATION PWA
+  ========================= */
 
   let deferredPrompt = null;
 
@@ -1624,13 +2151,19 @@
               "Installation terminée ou annulée.";
 
           },
-          { once:true }
+          {
+            once:true
+          }
         );
 
       }
 
     }
   );
+
+  /* =========================
+     MENU MOBILE
+  ========================= */
 
   document
     .getElementById('menu-btn')
@@ -1662,74 +2195,120 @@
 
     });
 
+  /* =========================
+     LANCEMENT DU QUIZ
+  ========================= */
+
   render();
 
+  /* =========================
+     BIOGRAPHIE
+  ========================= */
+
   const bioOverlay =
-    document.getElementById('bio-overlay');
+    document.getElementById(
+      'bio-overlay'
+    );
 
   const bioOpenBtn =
-    document.getElementById('bio-open-btn');
+    document.getElementById(
+      'bio-open-btn'
+    );
 
   const bioCloseBtn =
-    document.getElementById('bio-close-btn');
+    document.getElementById(
+      'bio-close-btn'
+    );
 
   function openBio(){
 
-    bioOverlay.classList.add('open');
-    document.body.style.overflow = 'hidden';
+    bioOverlay.classList.add(
+      'open'
+    );
+
+    document.body.style.overflow =
+      'hidden';
 
   }
 
   function closeBio(){
 
-    bioOverlay.classList.remove('open');
-    document.body.style.overflow = '';
+    bioOverlay.classList.remove(
+      'open'
+    );
+
+    document.body.style.overflow =
+      '';
 
   }
 
-  bioOpenBtn.addEventListener('click', openBio);
+  bioOpenBtn.addEventListener(
+    'click',
+    openBio
+  );
 
-  bioCloseBtn.addEventListener('click', closeBio);
+  bioCloseBtn.addEventListener(
+    'click',
+    closeBio
+  );
 
-  bioOverlay.addEventListener('click', event => {
+  bioOverlay.addEventListener(
+    'click',
+    event => {
 
-    if(event.target === bioOverlay){
+      if(
+        event.target === bioOverlay
+      ){
 
-      closeBio();
+        closeBio();
+
+      }
 
     }
+  );
 
-  });
+  document.addEventListener(
+    'keydown',
+    event => {
 
-  document.addEventListener('keydown', event => {
+      if(
+        event.key === 'Escape' &&
+        bioOverlay.classList.contains('open')
+      ){
 
-    if(
-      event.key === 'Escape' &&
-      bioOverlay.classList.contains('open')
-    ){
+        closeBio();
 
-      closeBio();
+      }
 
     }
+  );
 
-  });
+  /* =========================
+     SERVICE WORKER
+  ========================= */
 
-  if('serviceWorker' in navigator){
+  if(
+    'serviceWorker' in navigator
+  ){
 
     window.addEventListener(
       'load',
       () => {
 
         navigator.serviceWorker
-          .register('/service-worker.js')
-          .catch(error => {
+          .register(
+            '/service-worker.js'
+          )
+          .catch(
+            error => {
 
-            console.warn(
-              'Service worker registration failed:',
-              error
-            );
+              console.warn(
+                'Service worker registration failed:',
+                error
+              );
 
-          });
+            }
+          );
 
       }
     );
