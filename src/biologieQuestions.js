@@ -487,6 +487,210 @@ export const biologieQuestions = [
   {
     question: "Pourquoi une alimentation équilibrée est-elle importante ?",
     answer: "Elle apporte les nutriments nécessaires au bon fonctionnement de l'organisme et contribue à prévenir certaines maladies."
+  },
+
+  // =========================
+  // NIVEAU BACC 2 — BIOLOGIE MOLÉCULAIRE ET GÉNÉTIQUE APPROFONDIE
+  // =========================
+
+  {
+    question: "Qu'est-ce que la réplication de l'ADN ?",
+    answer: "Le processus par lequel une molécule d'ADN se duplique pour produire deux molécules identiques avant la division cellulaire."
+  },
+  {
+    question: "Qu'est-ce que la transcription génétique ?",
+    answer: "La synthèse d'une molécule d'ARN messager à partir d'un brin d'ADN matrice."
+  },
+  {
+    question: "Qu'est-ce que la traduction génétique ?",
+    answer: "La synthèse d'une protéine à partir de l'information portée par l'ARN messager, réalisée par les ribosomes."
+  },
+  {
+    question: "Qu'est-ce qu'un codon ?",
+    answer: "Une séquence de trois nucléotides de l'ARN messager qui code pour un acide aminé précis."
+  },
+  {
+    question: "Qu'est-ce que l'ARN de transfert (ARNt) ?",
+    answer: "Une molécule qui transporte les acides aminés jusqu'au ribosome durant la traduction, selon la correspondance avec l'anticodon."
+  },
+  {
+    question: "Quelle est la différence entre l'ADN et l'ARN ?",
+    answer: "L'ADN est double brin et contient de la thymine et du désoxyribose, tandis que l'ARN est simple brin et contient de l'uracile et du ribose."
+  },
+  {
+    question: "Qu'est-ce que le code génétique ?",
+    answer: "L'ensemble des règles qui associent chaque codon d'ARN à un acide aminé spécifique ou à un signal d'arrêt."
+  },
+  {
+    question: "Qu'est-ce qu'une mutation ponctuelle ?",
+    answer: "Un changement d'un seul nucléotide dans la séquence d'ADN, pouvant modifier ou non la protéine produite."
+  },
+  {
+    question: "Quelle est la différence entre une mutation germinale et une mutation somatique ?",
+    answer: "Une mutation germinale affecte les cellules reproductrices et peut être transmise à la descendance, tandis qu'une mutation somatique n'affecte que l'individu porteur."
+  },
+  {
+    question: "Qu'est-ce que le crossing-over ?",
+    answer: "L'échange de segments de chromatides entre chromosomes homologues pendant la méiose, source de brassage génétique."
+  },
+  {
+    question: "Qu'est-ce que la loi de la ségrégation de Mendel ?",
+    answer: "Chaque individu possède deux allèles pour un caractère, qui se séparent lors de la formation des gamètes, chacun n'en recevant qu'un."
+  },
+  {
+    question: "Qu'est-ce que la dominance incomplète ?",
+    answer: "Un phénomène où l'allèle dominant ne masque pas complètement l'allèle récessif, produisant un phénotype intermédiaire."
+  },
+  {
+    question: "Qu'est-ce qu'une maladie liée au chromosome X ?",
+    answer: "Une maladie génétique dont le gène responsable se trouve sur le chromosome X, comme l'hémophilie ou le daltonisme."
+  },
+  {
+    question: "Qu'est-ce que la trisomie 21 ?",
+    answer: "Une anomalie chromosomique caractérisée par la présence d'un chromosome 21 supplémentaire."
+  },
+  {
+    question: "Qu'est-ce que le génie génétique ?",
+    answer: "L'ensemble des techniques permettant de modifier directement le matériel génétique d'un organisme."
+  },
+  {
+    question: "Qu'est-ce qu'un organisme génétiquement modifié (OGM) ?",
+    answer: "Un organisme dont le patrimoine génétique a été modifié par l'introduction ou la suppression de gènes."
+  },
+  {
+    question: "Qu'est-ce que la biotechnologie ?",
+    answer: "L'utilisation d'organismes vivants ou de leurs composants pour développer des produits ou procédés utiles à l'homme."
+  },
+  {
+    question: "Qu'est-ce que le clonage ?",
+    answer: "La production d'un individu génétiquement identique à un individu d'origine."
+  },
+
+  // =========================
+  // NIVEAU BACC 2 — HOMÉOSTASIE ET PHYSIOLOGIE APPROFONDIE
+  // =========================
+
+  {
+    question: "Qu'est-ce que l'homéostasie ?",
+    answer: "Le maintien d'un état d'équilibre stable des paramètres internes de l'organisme malgré les variations du milieu extérieur."
+  },
+  {
+    question: "Comment le corps régule-t-il la glycémie ?",
+    answer: "Par l'action antagoniste de deux hormones pancréatiques : l'insuline, qui abaisse la glycémie, et le glucagon, qui l'élève."
+  },
+  {
+    question: "Qu'est-ce qu'un système de rétroaction négative (feedback négatif) ?",
+    answer: "Un mécanisme de régulation où une variation d'un paramètre déclenche une réponse qui la ramène vers sa valeur normale."
+  },
+  {
+    question: "Quel est le rôle de l'hypothalamus dans la régulation de l'organisme ?",
+    answer: "Il coordonne les fonctions du système nerveux et du système endocrinien pour maintenir l'homéostasie, notamment la température et la faim."
+  },
+  {
+    question: "Comment se transmet un influx nerveux le long d'un neurone ?",
+    answer: "Par une dépolarisation électrique appelée potentiel d'action, qui se propage le long de l'axone."
+  },
+  {
+    question: "Qu'est-ce qu'une synapse ?",
+    answer: "La zone de communication entre deux neurones, où l'information est transmise par des molécules appelées neurotransmetteurs."
+  },
+  {
+    question: "Qu'est-ce qu'un neurotransmetteur ?",
+    answer: "Une substance chimique libérée par un neurone qui transmet le signal nerveux à la cellule suivante."
+  },
+  {
+    question: "Qu'est-ce que le système nerveux autonome ?",
+    answer: "La partie du système nerveux qui régule les fonctions involontaires du corps, comme la digestion et le rythme cardiaque."
+  },
+  {
+    question: "Quelle est la différence entre le système sympathique et le système parasympathique ?",
+    answer: "Le système sympathique prépare le corps à l'action (stress, danger), tandis que le système parasympathique favorise le repos et la récupération."
+  },
+  {
+    question: "Comment le rein régule-t-il la composition du sang ?",
+    answer: "Par la filtration du sang au niveau des néphrons, suivie de la réabsorption sélective de l'eau et des substances utiles et de l'excrétion des déchets."
+  },
+  {
+    question: "Qu'est-ce que la pression osmotique et pourquoi est-elle importante pour la cellule ?",
+    answer: "C'est la pression exercée par les solutés qui régule les mouvements d'eau à travers la membrane cellulaire, essentielle à l'équilibre hydrique de la cellule."
+  },
+
+  // =========================
+  // NIVEAU BACC 2 — IMMUNOLOGIE APPROFONDIE
+  // =========================
+
+  {
+    question: "Quelle est la différence entre l'immunité innée et l'immunité adaptative ?",
+    answer: "L'immunité innée est une défense immédiate et non spécifique présente dès la naissance, tandis que l'immunité adaptative est spécifique à un agent pathogène et se développe après exposition."
+  },
+  {
+    question: "Qu'est-ce qu'un antigène ?",
+    answer: "Une substance étrangère capable de déclencher une réponse immunitaire spécifique."
+  },
+  {
+    question: "Quel est le rôle des lymphocytes T ?",
+    answer: "Ils détruisent directement les cellules infectées ou anormales et coordonnent la réponse immunitaire."
+  },
+  {
+    question: "Quel est le rôle des lymphocytes B ?",
+    answer: "Ils se différencient en plasmocytes qui produisent des anticorps spécifiques contre un antigène."
+  },
+  {
+    question: "Qu'est-ce que la mémoire immunitaire ?",
+    answer: "La capacité du système immunitaire à répondre plus rapidement et plus efficacement lors d'un second contact avec un antigène déjà rencontré."
+  },
+  {
+    question: "Comment fonctionne un vaccin sur le plan immunologique ?",
+    answer: "Il introduit un antigène atténué ou inactivé qui stimule la production d'anticorps et la formation de cellules mémoires sans provoquer la maladie."
+  },
+  {
+    question: "Qu'est-ce qu'une maladie auto-immune ?",
+    answer: "Une maladie où le système immunitaire attaque par erreur les cellules et tissus normaux de l'organisme."
+  },
+  {
+    question: "Comment le VIH affaiblit-il le système immunitaire ?",
+    answer: "Il infecte et détruit progressivement les lymphocytes T, affaiblissant la capacité de l'organisme à se défendre contre les infections."
+  },
+
+  // =========================
+  // NIVEAU BACC 2 — ÉCOLOGIE ET ÉVOLUTION APPROFONDIES
+  // =========================
+
+  {
+    question: "Qu'est-ce que la capacité limite (capacité de charge) d'un écosystème ?",
+    answer: "Le nombre maximal d'individus d'une espèce qu'un écosystème peut soutenir durablement compte tenu de ses ressources."
+  },
+  {
+    question: "Qu'est-ce que la spéciation ?",
+    answer: "Le processus par lequel une nouvelle espèce se forme, généralement à partir de l'isolement reproductif d'une population."
+  },
+  {
+    question: "Qu'est-ce que la dérive génétique ?",
+    answer: "La variation aléatoire des fréquences alléliques dans une population, plus marquée dans les petites populations."
+  },
+  {
+    question: "Qu'est-ce que le flux génétique ?",
+    answer: "Le transfert d'allèles d'une population à une autre par la migration et la reproduction d'individus."
+  },
+  {
+    question: "Qu'est-ce que la coévolution ?",
+    answer: "Le processus par lequel deux espèces influencent réciproquement leur évolution, comme dans les relations prédateur-proie."
+  },
+  {
+    question: "Qu'est-ce qu'une espèce endémique ?",
+    answer: "Une espèce que l'on ne trouve naturellement que dans une région géographique précise."
+  },
+  {
+    question: "Qu'est-ce que la succession écologique ?",
+    answer: "Le changement progressif de la composition d'une communauté vivante dans un milieu donné au fil du temps."
+  },
+  {
+    question: "Qu'est-ce que le flux d'énergie dans un écosystème ?",
+    answer: "Le transfert d'énergie des producteurs vers les différents niveaux de consommateurs, avec une perte importante à chaque niveau trophique."
+  },
+  {
+    question: "Qu'est-ce que la biomagnification ?",
+    answer: "L'accumulation croissante de substances toxiques dans les organismes à mesure que l'on monte dans la chaîne alimentaire."
   }
 
 ];
