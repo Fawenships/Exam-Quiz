@@ -1,4 +1,4 @@
-const CACHE_NAME = 'exam-quiz-cache-v3';
+const CACHE_NAME = 'exam-quiz-cache-v4';
 
 const FILES_TO_CACHE = [
   '/',
@@ -10,7 +10,9 @@ const FILES_TO_CACHE = [
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(FILES_TO_CACHE))
+    caches.open(CACHE_NAME).then((cache) => {
+      return cache.addAll(FILES_TO_CACHE);
+    })
   );
 
   self.skipWaiting();
@@ -18,59 +20,124 @@ self.addEventListener('install', (event) => {
 
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then((cacheNames) =>
-      Promise.all(
+    caches.keys().then((cacheNames) => {
+      return Promise.all(
         cacheNames
           .filter((cacheName) => cacheName !== CACHE_NAME)
           .map((cacheName) => caches.delete(cacheName))
-      )
-    ).then(() => self.clients.claim())
+      );
+    }).then(() => {
+      return self.clients.claim();
+    })
   );
 });
 
 self.addEventListener('fetch', (event) => {
-  // Toujours récupérer la nouvelle version de la banque de questions.
-  if (new URL(event.request.url).pathname.endsWith('/src/baccQuestions.js')) {
+
+  const url = new URL(event.request.url);
+
+  /*
+   * BANQUE DE QUESTIONS
+   * Toujours essayer de récupérer
+   * la dernière version depuis le réseau.
+   */
+  if (
+    url.pathname.endsWith('/src/baccQuestions.js')
+  ) {
+
     event.respondWith(
+
       fetch(event.request)
         .then((response) => {
-          const responseClone = response.clone();
 
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, responseClone);
-          });
+          const responseClone =
+            response.clone();
+
+          caches.open(CACHE_NAME)
+            .then((cache) => {
+
+              cache.put(
+                event.request,
+                responseClone
+              );
+
+            });
 
           return response;
+
         })
-        .catch(() => caches.match(event.request))
+        .catch(() => {
+
+          return caches.match(
+            event.request
+          );
+
+        })
+
     );
 
     return;
   }
 
-  // Pour le HTML : récupérer la nouvelle version du site.
-  if (event.request.mode === 'navigate') {
+  /*
+   * HTML
+   * Toujours récupérer la dernière
+   * version du site depuis le réseau.
+   */
+  if (
+    event.request.mode === 'navigate'
+  ) {
+
     event.respondWith(
+
       fetch(event.request)
         .then((response) => {
-          const responseClone = response.clone();
 
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put('/index.html', responseClone);
-          });
+          const responseClone =
+            response.clone();
+
+          caches.open(CACHE_NAME)
+            .then((cache) => {
+
+              cache.put(
+                '/index.html',
+                responseClone
+              );
+
+            });
 
           return response;
+
         })
-        .catch(() => caches.match('/index.html'))
+        .catch(() => {
+
+          return caches.match(
+            '/index.html'
+          );
+
+        })
+
     );
 
     return;
   }
 
-  // Les autres fichiers utilisent le cache puis le réseau.
+  /*
+   * AUTRES FICHIERS
+   * Cache en priorité.
+   */
   event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
-      return cachedResponse || fetch(event.request);
-    })
+
+    caches.match(event.request)
+      .then((cachedResponse) => {
+
+        return (
+          cachedResponse ||
+          fetch(event.request)
+        );
+
+      })
+
   );
+
 });
