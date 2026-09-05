@@ -555,6 +555,97 @@
       font-size:13px;
     }
 
+    .bio-btn{
+      margin-top:10px;
+      border:1px solid rgba(255,255,255,.4);
+      background:rgba(255,255,255,.08);
+      color:#fff;
+      padding:9px 22px;
+      border-radius:30px;
+      font-size:13px;
+      letter-spacing:1px;
+      cursor:pointer;
+      transition:.2s;
+    }
+
+    .bio-btn:hover{
+      background:rgba(255,255,255,.2);
+      transform:translateY(-1px);
+    }
+
+    .bio-overlay{
+      display:none;
+      position:fixed;
+      inset:0;
+      z-index:2000;
+      background:rgba(10,5,20,.65);
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+    }
+
+    .bio-overlay.open{display:flex}
+
+    .bio-modal{
+      max-width:520px;
+      width:100%;
+      max-height:85vh;
+      overflow-y:auto;
+      background:#fff;
+      color:var(--text);
+      border-radius:20px;
+      padding:32px;
+      position:relative;
+      box-shadow:0 25px 60px rgba(0,0,0,.35);
+      text-align:left;
+    }
+
+    .bio-close{
+      position:absolute;
+      top:14px;
+      right:16px;
+      border:0;
+      background:transparent;
+      font-size:26px;
+      line-height:1;
+      cursor:pointer;
+      color:#888;
+    }
+
+    .bio-close:hover{color:#222}
+
+    .bio-avatar{
+      width:80px;
+      height:80px;
+      border-radius:50%;
+      margin:0 auto 14px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:34px;
+      color:#fff;
+      background:linear-gradient(135deg,#5b3aa1,#2378dc);
+    }
+
+    .bio-modal h3{
+      text-align:center;
+      margin:0 4px 2px;
+      font-size:21px;
+    }
+
+    .bio-modal .bio-role{
+      text-align:center;
+      color:var(--muted);
+      font-size:14px;
+      margin-bottom:18px;
+    }
+
+    .bio-modal p{
+      line-height:1.7;
+      color:#333;
+      margin:0 0 14px;
+    }
+
     .developer-card{
       max-width:520px;
       margin:20px auto 25px;
@@ -719,6 +810,9 @@
         <span>UNE CRÉATION DE</span>
         <strong>Ing. Fawenbert Régis</strong>
         <small>Développeur &amp; créateur d'ExamQuiz</small>
+        <button class="bio-btn" id="bio-open-btn" type="button">
+          VOIR LA BIOGRAPHIE
+        </button>
       </div>
 
     </div>
@@ -901,6 +995,72 @@
   </div>
 
 </footer>
+
+<div class="bio-overlay" id="bio-overlay">
+
+  <div class="bio-modal">
+
+    <button class="bio-close" id="bio-close-btn" aria-label="Fermer">×</button>
+
+    <div class="bio-avatar">👨‍💻</div>
+
+    <h3>Fawenbert Regis</h3>
+    <div class="bio-role">Étudiant en sciences informatiques | Développeur &amp; créateur de projets numériques</div>
+
+    <p>
+      Je suis Fawenbert Regis, âgé de 19 ans, et étudiant en première année
+      de sciences informatiques à l'Université Américaine d'Haïti (AUC).
+      Passionné par l'informatique, la programmation et les nouvelles
+      technologies, je m'intéresse particulièrement au développement web
+      et à la création de solutions numériques innovantes.
+    </p>
+
+    <p>
+      Mon parcours est animé par une volonté constante d'apprendre,
+      d'expérimenter et de mettre mes connaissances en pratique. Je
+      considère la programmation comme un moyen de transformer des idées
+      en solutions concrètes et utiles.
+    </p>
+
+    <p>
+      Parmi mes principaux projets figure ExamQuizHaiti, une plateforme
+      éducative que j'ai conçue afin de permettre aux élèves de réviser
+      leurs connaissances à travers des quiz interactifs, notamment dans
+      le cadre de la préparation au baccalauréat haïtien. Mon objectif est
+      de contribuer à rendre l'apprentissage plus accessible, moderne et
+      interactif.
+    </p>
+
+    <p>
+      Je travaille également sur Konkou — Joue pour Gagner, une plateforme
+      interactive reposant sur un système de quiz et de concours. Ce projet
+      me permet d'approfondir mes compétences en développement web, en
+      programmation, en gestion des données et en conception de plateformes
+      numériques.
+    </p>
+
+    <p>
+      À travers mes études à l'Université Américaine d'Haïti et mes
+      différents projets, je cherche continuellement à développer mes
+      compétences et à élargir mes connaissances dans le domaine
+      informatique.
+    </p>
+
+    <p>
+      Mon ambition est de devenir un professionnel compétent dans le
+      domaine des technologies et de contribuer, grâce à mes connaissances
+      et à mes futurs projets, au développement de solutions numériques
+      utiles en Haïti et à l'international.
+    </p>
+
+    <p>
+      Pour moi, l'informatique est bien plus qu'un domaine d'études : c'est
+      un moyen de créer, d'innover et de transformer des idées en solutions.
+    </p>
+
+  </div>
+
+</div>
 
 <script type="module">
 
@@ -1503,6 +1663,56 @@
     });
 
   render();
+
+  const bioOverlay =
+    document.getElementById('bio-overlay');
+
+  const bioOpenBtn =
+    document.getElementById('bio-open-btn');
+
+  const bioCloseBtn =
+    document.getElementById('bio-close-btn');
+
+  function openBio(){
+
+    bioOverlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+
+  }
+
+  function closeBio(){
+
+    bioOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+
+  }
+
+  bioOpenBtn.addEventListener('click', openBio);
+
+  bioCloseBtn.addEventListener('click', closeBio);
+
+  bioOverlay.addEventListener('click', event => {
+
+    if(event.target === bioOverlay){
+
+      closeBio();
+
+    }
+
+  });
+
+  document.addEventListener('keydown', event => {
+
+    if(
+      event.key === 'Escape' &&
+      bioOverlay.classList.contains('open')
+    ){
+
+      closeBio();
+
+    }
+
+  });
 
   if('serviceWorker' in navigator){
 
