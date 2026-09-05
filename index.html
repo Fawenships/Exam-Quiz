@@ -525,34 +525,47 @@
 
     /* DÉVELOPPEUR */
     .developer-hero{
-      display:inline-flex;
-      flex-direction:column;
-      align-items:center;
-      gap:5px;
-      margin:5px auto 28px;
-      padding:16px 28px;
+      max-width:700px;
+      margin:25px auto;
+      padding:25px;
       border:1px solid rgba(255,255,255,.28);
       border-radius:18px;
       background:rgba(0,0,0,.12);
       box-shadow:0 8px 25px rgba(0,0,0,.12);
+      text-align:left;
     }
 
-    .developer-hero span{
-      font-size:11px;
-      letter-spacing:4px;
-      color:#b9d5ff;
-      font-weight:bold;
+    .developer-hero h2{
+      font-size:28px;
+      margin:0 0 10px;
+      color:#fff;
+      text-transform:uppercase;
+      letter-spacing:2px;
+    }
+
+    .developer-hero h3{
+      font-size:16px;
+      margin:0 0 20px;
+      color:#83b7ff;
+      font-weight:normal;
+      letter-spacing:1px;
+    }
+
+    .developer-hero p{
+      color:#eef5ff;
+      line-height:1.8;
+      margin:12px 0;
+      font-size:15px;
     }
 
     .developer-hero strong{
-      font-size:25px;
-      color:#fff;
-      letter-spacing:.5px;
+      color:#83b7ff;
+      font-weight:bold;
     }
 
-    .developer-hero small{
-      color:#dbeaff;
-      font-size:13px;
+    .developer-hero em{
+      color:#b9d5ff;
+      font-style:italic;
     }
 
     .developer-card{
@@ -611,9 +624,13 @@
 
       .hero-brand{font-size:48px}
 
-      .developer-hero strong{font-size:21px}
+      .developer-hero{padding:18px}
 
-      .developer-hero{padding:14px 20px}
+      .developer-hero h2{font-size:22px}
+
+      .developer-hero h3{font-size:14px}
+
+      .developer-hero p{font-size:14px}
 
       .hero-brand span{height:58px}
 
@@ -664,6 +681,17 @@
       .categories{grid-template-columns:1fr}
 
       .section-title{font-size:29px}
+
+      .developer-hero{
+        padding:15px;
+        margin:15px auto;
+      }
+
+      .developer-hero h2{font-size:18px}
+
+      .developer-hero h3{font-size:12px}
+
+      .developer-hero p{font-size:13px}
     }
   </style>
 </head>
@@ -716,9 +744,32 @@
       </p>
 
       <div class="developer-hero">
-        <span>UNE CRÉATION DE</span>
-        <strong>Ing. Fawenbert Régis</strong>
-        <small>Développeur &amp; créateur d'ExamQuiz</small>
+        <h2>Fawenbert Régis</h2>
+        <h3>Étudiant en Sciences Informatiques | Développeur &amp; Créateur</h3>
+        
+        <p>
+          Je suis <strong>Fawenbert Régis</strong>, âgé de <strong>19 ans</strong>, étudiant en première année de <strong>sciences informatiques à l'Université Américaine d'Haïti (AUC)</strong>. Passionné par l'informatique, la programmation et les nouvelles technologies, je m'intéresse particulièrement au développement web et à la création de solutions numériques innovantes.
+        </p>
+
+        <p>
+          Mon parcours est animé par une volonté constante d'apprendre, d'expérimenter et de mettre mes connaissances en pratique. Je considère la programmation comme <em>un moyen de transformer des idées en solutions concrètes et utiles</em>.
+        </p>
+
+        <p>
+          Parmi mes principaux projets figure <strong>ExamQuizHaiti</strong>, une plateforme éducative que j'ai conçue afin de permettre aux élèves de réviser leurs connaissances à travers des quiz interactifs, notamment dans le cadre de la préparation au baccalauréat haïtien. Mon objectif est de contribuer à rendre l'apprentissage plus accessible, moderne et interactif.
+        </p>
+
+        <p>
+          Je travaille également sur <strong>Konkou — Joue pour Gagner</strong>, une plateforme interactive reposant sur un système de quiz et de concours. Ce projet me permet d'approfondir mes compétences en développement web, en programmation, en gestion des données et en conception de plateformes numériques.
+        </p>
+
+        <p>
+          Mon ambition est de devenir un professionnel compétent dans le domaine des technologies et de contribuer, grâce à mes connaissances et à mes futurs projets, au développement de solutions numériques utiles en Haïti et à l'international.
+        </p>
+
+        <p>
+          <strong><em>Pour moi, l'informatique est bien plus qu'un domaine d'études : c'est un moyen de créer, d'innover et de transformer des idées en solutions.</em></strong>
+        </p>
       </div>
 
     </div>
@@ -1000,87 +1051,15 @@
         level
       );
 
-    return createQuiz(levelQuestions);
+    quiz = createQuiz(
+      levelQuestions
+    );
 
-  }
+    selectedLevel = level;
 
-  function renderLevelSelection(){
+    showLanding = false;
 
-    const container =
-      document.getElementById('quiz-container');
-
-    const levels =
-      Array.from(
-        { length: totalLevels },
-        (_, i) => i + 1
-      );
-
-    container.innerHTML = `
-
-      <div class="quiz-progress">
-        Choisissez un niveau :
-      </div>
-
-      <div style="margin-bottom:15px">
-        Vos pièces : 🪙 ${coins}
-      </div>
-
-      <div class="levels-grid">
-
-        ${levels.map(level => {
-
-          const unlocked =
-            unlockedLevels.has(level);
-
-          return `
-
-            <button
-              class="level-btn${unlocked ? '' : ' locked'}"
-              data-level="${level}"
-              ${unlocked ? '' : 'disabled'}>
-
-              ${
-                unlocked
-                  ? `Niveau ${level}`
-                  : `Niveau ${level} 🔒`
-              }
-
-            </button>
-
-          `;
-
-        }).join('')}
-
-      </div>
-
-      <div class="result">
-        Terminez un niveau pour débloquer le suivant.
-      </div>
-
-    `;
-
-    container
-      .querySelectorAll('.level-btn')
-      .forEach(button => {
-
-        if(button.disabled) return;
-
-        button.addEventListener(
-          'click',
-          () => {
-
-            selectedLevel =
-              Number(button.dataset.level);
-
-            quiz =
-              startQuiz(selectedLevel);
-
-            render();
-
-          }
-        );
-
-      });
+    render();
 
   }
 
@@ -1097,436 +1076,140 @@
 
     }
 
-    if(!quiz){
+    if(!selectedLevel){
 
-      renderLevelSelection();
+      const levelBtns = [];
 
-      return;
+      for(let i = 1; i <= totalLevels; i++){
 
-    }
+        const isUnlocked = unlockedLevels.has(i);
 
-    if(quiz.failed){
-
-      const failedQuestion =
-        getCurrentQuestion(quiz);
-
-      const failedAnswerText =
-        failedQuestion?.options[
-          quiz.failedAnswer
-        ] ?? 'Réponse inconnue';
-
-      const correctAnswerText =
-        failedQuestion?.options[
-          failedQuestion?.correctAnswer
-        ] ?? 'Réponse inconnue';
-
-      container.innerHTML = `
-
-        <div class="result">
-          ❌ Échec du niveau ${selectedLevel}
-        </div>
-
-        <div class="result">
-          Votre réponse : ${failedAnswerText}
-        </div>
-
-        <div class="result">
-          Bonne réponse : ${correctAnswerText}
-        </div>
-
-        <div class="result">
-          Recommencez le niveau pour progresser.
-        </div>
-
-        <button class="restart-btn" id="retry-btn">
-          RECOMMENCER
-        </button>
-
-        <button class="restart-btn" id="back-btn">
-          RETOUR AUX NIVEAUX
-        </button>
-
-      `;
-
-      document
-        .getElementById('retry-btn')
-        .addEventListener('click', () => {
-
-          quiz =
-            startQuiz(selectedLevel);
-
-          render();
-
-        });
-
-      document
-        .getElementById('back-btn')
-        .addEventListener('click', () => {
-
-          selectedLevel = null;
-          quiz = null;
-
-          render();
-
-        });
-
-      return;
-
-    }
-
-    if(isFinished(quiz)){
-
-      const nextLevel =
-        selectedLevel + 1;
-
-      const canUnlock =
-        quiz.score >= unlockThreshold;
-
-      let earned = 0;
-
-      if(
-        canUnlock &&
-        nextLevel <= totalLevels &&
-        !unlockedLevels.has(nextLevel)
-      ){
-
-        unlockedLevels.add(nextLevel);
-
-        saveUnlockedLevels();
-
-        earned = levelReward;
-
-        coins += earned;
-
-        localStorage.setItem(
-          'exam_quiz_coins',
-          String(coins)
+        levelBtns.push(
+          `<button class="level-btn ${isUnlocked ? '' : 'locked'}" ${isUnlocked ? `onclick="window.startQuiz(${i})"` : 'disabled'}>${i}</button>`
         );
 
       }
 
       container.innerHTML = `
-
-        <div class="result">
-          🎉 Quiz terminé !
+        <h3>Choisir un niveau</h3>
+        <div class="levels-grid">
+          ${levelBtns.join('')}
         </div>
-
-        <div class="result">
-          Score :
-          ${quiz.score}/${quiz.questions.length}
-        </div>
-
-        <div class="result">
-          ${getLevel(
-            quiz.score,
-            quiz.questions.length
-          )}
-        </div>
-
-        ${
-          canUnlock &&
-          nextLevel <= totalLevels
-
-          ? `
-
-            <div class="badge">
-              Niveau ${nextLevel} débloqué !
-            </div>
-
-          `
-
-          : `
-
-            <div
-              class="badge"
-              style="background:#e99619">
-
-              Score nécessaire :
-              ${unlockThreshold}/${quiz.questions.length}
-
-            </div>
-
-          `
-        }
-
-        ${
-          earned > 0
-
-          ? `
-
-            <div style="margin-top:12px">
-              +${earned} pièces 🪙
-            </div>
-
-          `
-
-          : ''
-        }
-
-        <div style="margin-top:10px">
-          Total : 🪙 ${coins}
-        </div>
-
-        <button
-          class="restart-btn"
-          id="restart-btn">
-
-          RETOUR AUX NIVEAUX
-
-        </button>
-
       `;
-
-      document
-        .getElementById('restart-btn')
-        .addEventListener('click', () => {
-
-          selectedLevel = null;
-          quiz = null;
-
-          render();
-
-        });
 
       return;
 
     }
 
-    const question =
-      getCurrentQuestion(quiz);
+    const question = getCurrentQuestion(quiz);
 
-    container.innerHTML = `
+    const progress = getProgress(quiz);
+
+    const answers = question.answers;
+
+    const answersHtml = answers.map((answer, idx) => {
+
+      return `<button class="answer-btn" onclick="window.answerQuizQuestion(${idx})">${answer}</button>`;
+
+    }).join('');
+
+    let content = `
 
       <div class="quiz-progress">
-        Niveau ${selectedLevel} —
-        ${getProgress(quiz)}
+        Question ${progress.current} sur ${progress.total}
       </div>
 
-      <h2>
-        ${question.question}
-      </h2>
+      <h2>${question.question}</h2>
 
       <div class="answers">
-
-        ${question.options.map(
-          (option,index) => `
-
-            <button
-              class="answer-btn"
-              data-index="${index}">
-
-              ${option}
-
-            </button>
-
-          `
-        ).join('')}
-
-      </div>
-
-      <div class="ai-panel">
-
-        <h3>🤖 Assistant IA</h3>
-
-        <p id="ai-feedback">
-          ${getAiHint(question)}
-        </p>
-
-        <button
-          class="hint-btn"
-          id="hint-btn">
-
-          DEMANDER UN CONSEIL
-
-        </button>
-
+        ${answersHtml}
       </div>
 
     `;
 
-    container
-      .querySelectorAll('.answer-btn')
-      .forEach(button => {
+    if(quiz.answered){
 
-        button.addEventListener(
-          'click',
-          () => {
+      const correct = quiz.answered === question.correctAnswer;
 
-            const selectedIndex =
-              Number(button.dataset.index);
+      const resultClass = correct ? 'green' : 'red';
 
-            const feedback =
-              document.getElementById(
-                'ai-feedback'
-              );
+      const resultText = correct ? '✓ Bonne réponse!' : '✗ Mauvaise réponse.';
 
-            feedback.textContent =
-              getAiFeedback(
-                question,
-                selectedIndex
-              );
+      content += `
 
-            const isCorrect =
-              selectedIndex ===
-              question.correctAnswer;
+        <div class="result" style="color:${correct ? '#20a75a' : '#d32f2f'}">
+          ${resultText}
+        </div>
 
-            if(!isCorrect){
+      `;
 
-              quiz = {
-                ...quiz,
-                failed: true,
-                failedAnswer: selectedIndex
-              };
+      if(!correct){
 
-              setTimeout(
-                render,
-                500
-              );
+        content += `
 
-              return;
+          <div class="ai-panel">
+            <h3>💡 Explication</h3>
+            <p>${getAiFeedback(question)}</p>
+          </div>
 
-            }
-
-            quiz =
-              answerQuestion(
-                quiz,
-                selectedIndex
-              );
-
-            setTimeout(
-              render,
-              400
-            );
-
-          }
-        );
-
-      });
-
-    document
-      .getElementById('hint-btn')
-      .addEventListener(
-        'click',
-        () => {
-
-          document.getElementById(
-            'ai-feedback'
-          ).textContent =
-            getAiHint(question);
-
-        }
-      );
-
-  }
-
-  let deferredPrompt = null;
-
-  window.addEventListener(
-    'beforeinstallprompt',
-    event => {
-
-      event.preventDefault();
-
-      deferredPrompt = event;
-
-      const installBtn =
-        document.getElementById(
-          'install-btn'
-        );
-
-      const installNote =
-        document.getElementById(
-          'install-note'
-        );
-
-      if(installBtn){
-
-        installBtn.disabled = false;
-
-        installNote.textContent =
-          "Cliquez pour installer l'application.";
-
-        installBtn.addEventListener(
-          'click',
-          async () => {
-
-            if(!deferredPrompt) return;
-
-            deferredPrompt.prompt();
-
-            await deferredPrompt.userChoice;
-
-            deferredPrompt = null;
-
-            installBtn.disabled = true;
-
-            installNote.textContent =
-              "Installation terminée ou annulée.";
-
-          },
-          { once:true }
-        );
+        `;
 
       }
+
+      content += `<button class="restart-btn" onclick="window.nextQuestion()">Suivant</button>`;
 
     }
-  );
 
-  document
-    .getElementById('menu-btn')
-    .addEventListener(
-      'click',
-      () => {
-
-        document
-          .getElementById('mobile-nav')
-          .classList.toggle('open');
-
-      }
-    );
-
-  document
-    .querySelectorAll('.mobile-nav a')
-    .forEach(link => {
-
-      link.addEventListener(
-        'click',
-        () => {
-
-          document
-            .getElementById('mobile-nav')
-            .classList.remove('open');
-
-        }
-      );
-
-    });
-
-  render();
-
-  if('serviceWorker' in navigator){
-
-    window.addEventListener(
-      'load',
-      () => {
-
-        navigator.serviceWorker
-          .register('/service-worker.js')
-          .catch(error => {
-
-            console.warn(
-              'Service worker registration failed:',
-              error
-            );
-
-          });
-
-      }
-    );
+    container.innerHTML = content;
 
   }
+
+  window.startQuiz = startQuiz;
+
+  window.answerQuizQuestion = (idx) => {
+
+    answerQuestion(quiz, idx);
+
+    render();
+
+  };
+
+  window.nextQuestion = () => {
+
+    quiz.currentQuestion++;
+
+    if(isFinished(quiz)){
+
+      coins += levelReward;
+
+      localStorage.setItem('exam_quiz_coins', coins.toString());
+
+      if(selectedLevel < totalLevels){
+
+        unlockedLevels.add(selectedLevel + 1);
+
+        saveUnlockedLevels();
+
+      }
+
+      selectedLevel = null;
+
+      showLanding = true;
+
+      render();
+
+    } else {
+
+      render();
+
+    }
+
+  };
+
+  renderLanding();
 
 </script>
 
 </body>
+
 </html>
