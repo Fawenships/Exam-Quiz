@@ -1,96 +1,96 @@
 export const baccQuestions = [
   {
-    "id": 1,
-    "question": "Au cours de la méiose, une cellule diploïde 2n = 46 donne normalement :",
-    "options": [
-      "Deux cellules diploïdes identiques",
-      "Quatre cellules haploïdes à 23 chromosomes",
-      "Quatre cellules diploïdes à 46 chromosomes",
-      "Deux gamètes à 46 chromosomes"
-    ],
-    "correctAnswer": 1
+    id: 1,
+    question: 'Une espèce clé de voûte est une espèce dont la disparition :',
+    options: ['n’a aucun effet sur le milieu', 'modifie fortement l’écosystème', 'empêche toutes les mutations', 'aucune de ces propositions'],
+    correctAnswer: 1,
   },
   {
-    "id": 2,
-    "question": "Le crossing-over a lieu principalement pendant :",
-    "options": [
-      "La prophase I de la méiose",
-      "La métaphase de la mitose",
-      "La télophase II",
-      "La cytocinèse"
-    ],
-    "correctAnswer": 0
+    id: 2,
+    question: 'Un véhicule parcourt 300 km en 5 h. Sa vitesse moyenne est :',
+    options: ['1500 km·h⁻¹', '295 km·h⁻¹', '0,02 km·h⁻¹', '60 km·h⁻¹'],
+    correctAnswer: 3,
   },
   {
-    "id": 3,
-    "question": "La réplication semi-conservative de l’ADN signifie que chaque molécule fille contient :",
-    "options": [
-      "Deux brins entièrement nouveaux",
-      "Un brin parental et un brin néosynthétisé",
-      "Uniquement des nucléotides parentaux",
-      "Deux brins parentaux"
-    ],
-    "correctAnswer": 1
+    id: 3,
+    question: 'La combustion complète d’un hydrocarbure produit essentiellement :',
+    options: ['CO2 et H2O', 'aucune de ces propositions', 'N2 et O2', 'CO et H2 uniquement'],
+    correctAnswer: 0,
   },
   {
-    "id": 4,
-    "question": "Une mutation par substitution correspond à :",
-    "options": [
-      "La perte d’un chromosome",
-      "L’échange d’un nucléotide par un autre",
-      "La duplication de toute la cellule",
-      "La fusion de deux gènes"
-    ],
-    "correctAnswer": 1
+    id: 4,
+    question: 'Une résistance de 6 Ω est branchée sous 24 V. L’intensité qui la traverse vaut :',
+    options: ['4 A', '144 A', '18 A', '0,25 A'],
+    correctAnswer: 0,
   },
   {
-    "id": 5,
-    "question": "Le génotype d’un individu hétérozygote pour un gène à deux allèles A et a est :",
-    "options": [
-      "AA",
-      "aa",
-      "Aa",
-      "A ou a"
-    ],
-    "correctAnswer": 2
+    id: 5,
+    question: 'La fusion nucléaire libère de l’énergie en :',
+    options: ['aucune de ces propositions', 'cassant une liaison chimique seulement', 'refroidissant un gaz', 'assemblant des noyaux légers'],
+    correctAnswer: 3,
   },
   {
-    "id": 6,
-    "question": "Dans un croisement Aa × Aa, la probabilité d’obtenir le génotype aa est :",
-    "options": [
-      "0 %",
-      "25 %",
-      "50 %",
-      "75 %"
-    ],
-    "correctAnswer": 1
+    id: 6,
+    question: 'Quelle est la masse correspondant à 1,2 mol d’une substance de masse molaire 25 g·mol⁻¹ ?',
+    options: ['20,83 g', '26,2 g', '30 g', '1,2 g'],
+    correctAnswer: 2,
   },
   {
-    "id": 7,
-    "question": "L’ARN messager est synthétisé à partir de l’ADN lors de :",
-    "options": [
-      "La traduction",
-      "La transcription",
-      "La réplication",
-      "La mitose"
-    ],
-    "correctAnswer": 1
+    id: 7,
+    question: 'L’équilibrage d’une équation chimique respecte la conservation :',
+    options: ['de la couleur des solutions', 'des atomes de chaque élément', 'aucune de ces propositions', 'du volume seulement'],
+    correctAnswer: 1,
   },
   {
-    "id": 8,
-    "question": "La traduction de l’ARNm en protéine se déroule sur :",
-    "options": [
-      "Les lysosomes",
-      "Les ribosomes",
-      "Le centrosome",
-      "Les vacuoles"
-    ],
-    "correctAnswer": 1
+    id: 8,
+    question: 'Quelle est la masse correspondant à 0,05 mol d’une substance de masse molaire 200 g·mol⁻¹ ?',
+    options: ['10 g', '0,05 g', '4000 g', '200,05 g'],
+    correctAnswer: 0,
   },
   {
-    "id": 9,
-    "question": "Dans une enzyme, le site actif reconnaît spécifiquement :",
-    "options": [
-      "Le produit final uniquement",
-      "Le substrat",
-      "L’ATP uniquement",
+    id: 9,
+    question: 'Un véhicule parcourt 75 km en 1,5 h. Sa vitesse moyenne est :',
+    options: ['50 km·h⁻¹', '0,02 km·h⁻¹', '112,5 km·h⁻¹', '73,5 km·h⁻¹'],
+    correctAnswer: 0,
+  },
+  {
+    id: 10,
+    question: 'Le principe d’action-réaction indique que deux forces associées :',
+    options: ['s’annulent sur un même objet', 'ont même direction, même intensité et sens opposés', 'ont toujours des intensités différentes', 'aucune de ces propositions'],
+    correctAnswer: 1,
+  },
+  {
+    id: 11,
+    question: 'Une résistance de 6 Ω est branchée sous 54 V. L’intensité qui la traverse vaut :',
+    options: ['48 A', '0,11 A', '9 A', '324 A'],
+    correctAnswer: 2,
+  },
+  {
+    id: 12,
+    question: 'Un véhicule parcourt 270 km en 4,5 h. Sa vitesse moyenne est :',
+    options: ['265,5 km·h⁻¹', '1215 km·h⁻¹', '0,02 km·h⁻¹', '60 km·h⁻¹'],
+    correctAnswer: 3,
+  },
+  {
+    id: 13,
+    question: 'Le marbre provient du métamorphisme :',
+    options: ['du basalte uniquement', 'du calcaire', 'aucune de ces propositions', 'du granite'],
+    correctAnswer: 1,
+  },
+  {
+    id: 14,
+    question: 'L’intensité sismique décrit surtout :',
+    options: ['la profondeur du manteau', 'la masse du foyer', 'les effets et dommages observés en un lieu', 'aucune de ces propositions'],
+    correctAnswer: 2,
+  },
+  {
+    id: 15,
+    question: 'La filtration du sang dans le rein commence au niveau :',
+    options: ['de l’uretère', 'de la vessie', 'du glomérule', 'aucune de ces propositions'],
+    correctAnswer: 2,
+  },
+  {
+    id: 16,
+    question: 'Une résistance de 7 Ω est branchée sous 56 V. L’intensité qui la traverse vaut :',
+    options: ['0,13 A', '49 A', '8 A', '392 A'],
+    correctAnswer: 2,
