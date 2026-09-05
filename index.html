@@ -124,23 +124,6 @@
       color:#7eb5ff;
     }
 
-    .desktop-nav .konkou-nav{
-      background:linear-gradient(135deg,#f0a51a,#ffbf3f);
-      color:#24113f;
-      padding:10px 16px;
-      border-radius:25px;
-      font-weight:bold;
-      opacity:1;
-      box-shadow:0 5px 15px rgba(0,0,0,.15);
-      transition:.2s;
-    }
-
-    .desktop-nav .konkou-nav:hover{
-      color:#24113f;
-      transform:translateY(-2px);
-      box-shadow:0 8px 20px rgba(0,0,0,.22);
-    }
-
     .menu-btn{
       display:none;
       border:0;
@@ -172,11 +155,6 @@
       color:#fff;
       padding:14px 0;
       border-bottom:1px solid rgba(255,255,255,.1);
-    }
-
-    .mobile-nav .konkou-mobile{
-      color:#ffbf3f;
-      font-weight:bold;
     }
 
     /* =========================
@@ -479,9 +457,9 @@
 
     .categories{
       display:grid;
-      grid-template-columns:repeat(4,1fr);
+      grid-template-columns:repeat(2,1fr);
       gap:20px;
-      max-width:1100px;
+      max-width:700px;
       margin:auto;
     }
 
@@ -517,28 +495,68 @@
       line-height:1.5;
     }
 
-    /* KONKOU */
+    /* =========================
+       KONKOU
+    ========================= */
 
-    .category-konkou{
+    .konkou-section{
+      padding:45px 6%;
       background:linear-gradient(
         135deg,
         #24113f,
-        #4b2481
+        #1764c0
       );
       color:#fff;
-      border:none;
+      text-align:center;
     }
 
-    .category-konkou h3{
-      color:#fff;
+    .konkou-card{
+      max-width:700px;
+      margin:0 auto;
     }
 
-    .category-konkou p{
-      color:#e6ddf5;
+    .konkou-icon{
+      width:65px;
+      height:65px;
+      margin:0 auto 15px;
+      border-radius:18px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:rgba(255,255,255,.12);
+      font-size:30px;
+      box-shadow:0 6px 15px rgba(0,0,0,.12);
     }
 
-    .category-konkou:hover{
-      box-shadow:0 16px 35px rgba(36,17,63,.25);
+    .konkou-section h2{
+      margin:0 0 10px;
+      font-size:28px;
+    }
+
+    .konkou-section p{
+      max-width:600px;
+      margin:0 auto 12px;
+      color:#eef5ff;
+      font-size:15px;
+      line-height:1.5;
+    }
+
+    .konkou-btn-section{
+      display:inline-block;
+      margin-top:8px;
+      padding:11px 22px;
+      border-radius:25px;
+      background:#fff;
+      color:#24113f;
+      font-weight:bold;
+      font-size:14px;
+      text-decoration:none;
+      transition:.2s;
+    }
+
+    .konkou-btn-section:hover{
+      transform:translateY(-2px);
+      box-shadow:0 6px 15px rgba(0,0,0,.2);
     }
 
     /* =========================
@@ -612,11 +630,6 @@
       display:block;
       color:#3782df;
       margin:16px 0;
-    }
-
-    .footer-links .footer-konkou{
-      color:#ffbf3f;
-      font-weight:bold;
     }
 
     .footer-bottom{
@@ -920,6 +933,31 @@
         font-size:29px;
       }
 
+      .konkou-section{
+        padding:35px 5%;
+      }
+
+      .konkou-icon{
+        width:55px;
+        height:55px;
+        margin-bottom:12px;
+        font-size:25px;
+      }
+
+      .konkou-section h2{
+        font-size:24px;
+      }
+
+      .konkou-section p{
+        font-size:14px;
+        line-height:1.45;
+      }
+
+      .konkou-btn-section{
+        padding:10px 18px;
+        font-size:13px;
+      }
+
     }
 
   </style>
@@ -964,15 +1002,6 @@
       Contact
     </a>
 
-    <a
-      href="https://konkouquizhaiti.com/"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="konkou-nav"
-    >
-      🏆 Konkou
-    </a>
-
   </nav>
 
   <button
@@ -1008,15 +1037,6 @@
 
     <a href="#contact">
       Contact
-    </a>
-
-    <a
-      href="https://konkouquizhaiti.com/"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="konkou-mobile"
-    >
-      🏆 Konkou — Joue pour gagner
     </a>
 
   </nav>
@@ -1097,7 +1117,10 @@
       et progressive.
     </p>
 
-    <div class="quiz-shell landing-card">
+    <div
+      class="quiz-shell landing-card"
+      id="quiz"
+    >
 
       <div class="quiz-icon">
         🎓
@@ -1189,27 +1212,44 @@
 
       </div>
 
-      <!-- KONKOU -->
+    </div>
+
+  </section>
+
+  <!-- =========================
+       KONKOU
+  ========================= -->
+
+  <section class="konkou-section">
+
+    <div class="konkou-card">
+
+      <div class="konkou-icon">
+        🏆
+      </div>
+
+      <h2>
+        Découvrez Konkou
+      </h2>
+
+      <p>
+        Envie de tester tes connaissances autrement ?
+        <strong>Konkou</strong> est une plateforme interactive
+        basée sur des quiz et des concours.
+      </p>
+
+      <p>
+        Réponds aux questions, relève les défis et participe
+        aux différents concours.
+      </p>
 
       <a
         href="https://konkouquizhaiti.com/"
         target="_blank"
         rel="noopener noreferrer"
-        class="category category-konkou"
+        class="konkou-btn-section"
       >
-
-        <div class="emoji">
-          🏆
-        </div>
-
-        <h3>
-          Konkou
-        </h3>
-
-        <p>
-          Joue, relève des défis et participe aux concours.
-        </p>
-
+        🏆 Découvrir Konkou
       </a>
 
     </div>
@@ -1367,15 +1407,6 @@
 
       <a href="#contact">
         Contact
-      </a>
-
-      <a
-        href="https://konkouquizhaiti.com/"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="footer-konkou"
-      >
-        🏆 Konkou — Joue pour gagner
       </a>
 
     </div>
