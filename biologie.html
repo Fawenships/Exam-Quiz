@@ -125,6 +125,8 @@ header{
   margin:25px auto 50px;
 }
 
+/* QUESTIONS HEADER */
+
 .questions-header{
   display:flex;
   align-items:center;
@@ -139,6 +141,8 @@ header{
   font-size:28px;
 }
 
+/* BOUTON RETOUR */
+
 #backBtn{
   border:none;
   background:#24113f;
@@ -147,10 +151,13 @@ header{
   border-radius:10px;
   cursor:pointer;
   font-weight:bold;
+  font-size:15px;
+  transition:.2s;
 }
 
 #backBtn:hover{
   opacity:.9;
+  transform:translateY(-2px);
 }
 
 /* QUESTION CARD */
@@ -259,10 +266,12 @@ footer{
 
   #backBtn{
     width:100%;
+    order:2;
   }
 
   .questions-header h2{
     text-align:center;
+    order:1;
   }
 
 }
@@ -451,14 +460,18 @@ const mathematiquesBtn =
 /* ============================= */
 
 let biologieQuestions = [];
+
 let geologieQuestions = [];
+
 let chimieQuestions = [];
+
 let anglaisQuestions = [];
+
 let mathematiquesQuestions = [];
 
 
 /* ============================= */
-/* CHARGEMENT DES FICHIERS */
+/* CHARGEMENT BIOLOGIE */
 /* ============================= */
 
 try{
@@ -479,6 +492,10 @@ try{
 }
 
 
+/* ============================= */
+/* CHARGEMENT GÉOLOGIE */
+/* ============================= */
+
 try{
 
   const module =
@@ -496,6 +513,10 @@ try{
 
 }
 
+
+/* ============================= */
+/* CHARGEMENT CHIMIE */
+/* ============================= */
 
 try{
 
@@ -515,6 +536,10 @@ try{
 }
 
 
+/* ============================= */
+/* CHARGEMENT ANGLAIS */
+/* ============================= */
+
 try{
 
   const module =
@@ -532,6 +557,10 @@ try{
 
 }
 
+
+/* ============================= */
+/* CHARGEMENT MATHÉMATIQUES */
+/* ============================= */
 
 try{
 
@@ -693,84 +722,129 @@ function afficherQuestions(liste, nom){
 
   });
 
+
+  /* RETOUR EN HAUT */
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
 }
 
 
 /* ============================= */
-/* BOUTONS */
+/* BOUTON BIOLOGIE */
 /* ============================= */
 
 biologyBtn.addEventListener(
   "click",
   ()=>{
+
     afficherQuestions(
       biologieQuestions,
       "🧬 Biologie"
     );
-  }
-);
 
-
-geologyBtn.addEventListener(
-  "click",
-  ()=>{
-    afficherQuestions(
-      geologieQuestions,
-      "🌍 Géologie"
-    );
-  }
-);
-
-
-chemistryBtn.addEventListener(
-  "click",
-  ()=>{
-    afficherQuestions(
-      chimieQuestions,
-      "⚗️ Chimie"
-    );
-  }
-);
-
-
-anglaisBtn.addEventListener(
-  "click",
-  ()=>{
-    afficherQuestions(
-      anglaisQuestions,
-      "🇬🇧 Anglais"
-    );
-  }
-);
-
-
-mathematiquesBtn.addEventListener(
-  "click",
-  ()=>{
-    afficherQuestions(
-      mathematiquesQuestions,
-      "➗ Mathématiques"
-    );
   }
 );
 
 
 /* ============================= */
-/* RETOUR */
+/* BOUTON GÉOLOGIE */
+/* ============================= */
+
+geologyBtn.addEventListener(
+  "click",
+  ()=>{
+
+    afficherQuestions(
+      geologieQuestions,
+      "🌍 Géologie"
+    );
+
+  }
+);
+
+
+/* ============================= */
+/* BOUTON CHIMIE */
+/* ============================= */
+
+chemistryBtn.addEventListener(
+  "click",
+  ()=>{
+
+    afficherQuestions(
+      chimieQuestions,
+      "⚗️ Chimie"
+    );
+
+  }
+);
+
+
+/* ============================= */
+/* BOUTON ANGLAIS */
+/* ============================= */
+
+anglaisBtn.addEventListener(
+  "click",
+  ()=>{
+
+    afficherQuestions(
+      anglaisQuestions,
+      "🇬🇧 Anglais"
+    );
+
+  }
+);
+
+
+/* ============================= */
+/* BOUTON MATHÉMATIQUES */
+/* ============================= */
+
+mathematiquesBtn.addEventListener(
+  "click",
+  ()=>{
+
+    afficherQuestions(
+      mathematiquesQuestions,
+      "➗ Mathématiques"
+    );
+
+  }
+);
+
+
+/* ============================= */
+/* BOUTON RETOUR */
 /* ============================= */
 
 backBtn.addEventListener(
   "click",
   ()=>{
 
+    /* CACHER LA PAGE DES QUESTIONS */
+
     questionsPage.style.display =
       "none";
+
+
+    /* RÉAFFICHER LES CATÉGORIES */
 
     categories.style.display =
       "grid";
 
+
+    /* EFFACER LES QUESTIONS */
+
     questionsContainer.innerHTML =
       "";
+
+
+    /* REMONTER EN HAUT DE LA PAGE */
 
     window.scrollTo({
       top:0,
