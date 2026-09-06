@@ -1,14 +1,25 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#24113f">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<meta
+  name="theme-color"
+  content="#24113f"
+>
 
 <title>Sciences NS4 — ExamQuiz Haiti</title>
 
-<meta name="description"
-content="Questions et réponses de biologie, géologie et chimie niveau NS4.">
+<meta
+  name="description"
+  content="Questions et réponses de biologie, géologie, chimie, anglais et mathématiques niveau NS4 sur ExamQuiz Haiti."
+>
 
 <style>
 
@@ -19,460 +30,390 @@ content="Questions et réponses de biologie, géologie et chimie niveau NS4.">
 body{
   margin:0;
   font-family:Arial,Helvetica,sans-serif;
-  background:#f7f8fc;
-  color:#171717;
+  background:#f5f3f8;
+  color:#222;
 }
 
 /* HEADER */
 
 header{
   background:#24113f;
-  padding:18px 7%;
+  color:white;
+  padding:14px 20px;
   display:flex;
   align-items:center;
   justify-content:space-between;
+  box-shadow:0 3px 10px rgba(0,0,0,.15);
 }
 
-header img{
-  width:150px;
-  max-width:50vw;
-  display:block;
-}
-
-header a{
-  color:white;
+.logo-link{
+  display:flex;
+  align-items:center;
+  gap:10px;
   text-decoration:none;
+  color:white;
   font-weight:bold;
+  font-size:20px;
+}
+
+.logo-link img{
+  width:42px;
+  height:42px;
+  object-fit:contain;
+  border-radius:10px;
 }
 
 /* HERO */
 
 .hero{
-  background:linear-gradient(135deg,#54319a,#1764c0);
-  color:white;
   text-align:center;
-  padding:65px 20px;
+  padding:45px 20px 30px;
 }
 
 .hero h1{
-  margin:0 0 15px;
-  font-size:40px;
+  margin:0;
+  color:#24113f;
+  font-size:34px;
 }
 
 .hero p{
-  margin:auto;
-  max-width:700px;
-  font-size:18px;
-  line-height:1.7;
-}
-
-/* CONTAINER */
-
-.container{
-  max-width:1050px;
-  margin:45px auto;
-  padding:0 20px;
+  margin-top:12px;
+  color:#666;
+  font-size:17px;
 }
 
 /* CATEGORIES */
 
 .categories{
+  width:min(1100px,92%);
+  margin:20px auto 50px;
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:20px;
 }
 
 .category-btn{
-  border:0;
-  background:#fff;
+  border:none;
   border-radius:18px;
-  padding:30px 20px;
+  padding:28px 20px;
+  min-height:150px;
   cursor:pointer;
-  box-shadow:0 8px 25px rgba(0,0,0,.08);
+  background:white;
+  box-shadow:0 5px 18px rgba(0,0,0,.08);
   transition:.2s;
-  text-align:center;
+  font-size:18px;
+  font-weight:bold;
+  color:#24113f;
 }
 
 .category-btn:hover{
-  transform:translateY(-5px);
-  box-shadow:0 14px 30px rgba(0,0,0,.12);
+  transform:translateY(-4px);
+  box-shadow:0 9px 25px rgba(0,0,0,.14);
 }
 
-.emoji{
-  font-size:50px;
+.category-icon{
+  display:block;
+  font-size:45px;
   margin-bottom:12px;
 }
 
-.category-btn h2{
-  margin:10px 0;
-}
-
-.category-btn p{
-  color:#666;
-  line-height:1.5;
-}
-
-/* PAGE QUESTIONS */
+/* QUESTIONS PAGE */
 
 #questions-page{
   display:none;
+  width:min(950px,92%);
+  margin:25px auto 50px;
 }
 
-.topbar{
-  background:#fff;
-  border-radius:16px;
-  padding:20px;
-  margin-bottom:25px;
-  box-shadow:0 5px 20px rgba(0,0,0,.07);
-
+.questions-header{
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  justify-content:space-between;
   gap:15px;
+  margin-bottom:25px;
 }
 
-.topbar h2{
+.questions-header h2{
   margin:0;
+  color:#24113f;
+  font-size:28px;
 }
 
-.back-btn{
-  border:0;
-  border-radius:10px;
-  padding:12px 18px;
+#backBtn{
+  border:none;
   background:#24113f;
   color:white;
+  padding:12px 18px;
+  border-radius:10px;
   cursor:pointer;
   font-weight:bold;
 }
 
-/* QUESTIONS */
+#backBtn:hover{
+  opacity:.9;
+}
+
+/* QUESTION CARD */
 
 .question-card{
-  background:#fff;
+  background:white;
   border-radius:16px;
-  padding:25px;
-  margin-bottom:18px;
-  box-shadow:0 5px 20px rgba(0,0,0,.07);
-  border-left:5px solid #1764c0;
+  padding:22px;
+  margin-bottom:20px;
+  box-shadow:0 5px 18px rgba(0,0,0,.08);
 }
 
 .question-number{
-  color:#1764c0;
+  display:inline-block;
+  background:#24113f;
+  color:white;
+  padding:7px 12px;
+  border-radius:8px;
+  font-size:14px;
   font-weight:bold;
-  margin-bottom:10px;
+  margin-bottom:15px;
 }
 
 .question-text{
   font-size:18px;
   font-weight:bold;
-  line-height:1.5;
-  margin-bottom:15px;
+  line-height:1.6;
 }
+
+/* RÉSOLUTION */
+
+.solution{
+  background:#fff8e6;
+  border-radius:12px;
+  padding:18px;
+  margin-top:18px;
+  line-height:1.8;
+  border-left:4px solid #f0a500;
+}
+
+.solution strong{
+  display:block;
+  margin-bottom:10px;
+  font-size:17px;
+}
+
+.solution-steps{
+  white-space:normal;
+  color:#333;
+}
+
+/* RÉPONSE */
 
 .answer{
   background:#f1f6ff;
   border-radius:10px;
-  padding:15px;
-  line-height:1.6;
+  padding:18px;
+  margin-top:15px;
+  line-height:1.7;
+  border-left:4px solid #1764c0;
 }
+
+.answer strong{
+  color:#1764c0;
+}
+
+/* EMPTY */
 
 .empty{
-  background:#fff;
-  padding:25px;
+  background:white;
+  padding:35px;
   border-radius:15px;
   text-align:center;
-  color:#666;
+  box-shadow:0 5px 18px rgba(0,0,0,.08);
 }
 
-/* CHARGEMENT */
-
-.loading{
-  background:#fff;
-  padding:30px;
-  border-radius:15px;
-  text-align:center;
-  color:#666;
+.empty h3{
+  color:#24113f;
 }
 
 /* FOOTER */
 
 footer{
-  background:#000;
-  color:#aaa;
   text-align:center;
-  padding:35px 20px;
-  margin-top:70px;
-}
-
-footer strong{
-  color:#fff;
+  padding:25px 15px;
+  color:#777;
+  font-size:14px;
 }
 
 /* MOBILE */
 
-@media(max-width:800px){
+@media(max-width:750px){
 
   .categories{
     grid-template-columns:1fr;
   }
 
   .hero h1{
-    font-size:32px;
+    font-size:28px;
   }
 
-  .topbar{
+  .questions-header{
     flex-direction:column;
     align-items:stretch;
   }
 
-  .back-btn{
+  #backBtn{
     width:100%;
   }
 
-}
-
-@media(min-width:801px) and (max-width:950px){
-
-  .categories{
-    grid-template-columns:repeat(2,1fr);
+  .questions-header h2{
+    text-align:center;
   }
 
 }
 
 </style>
+
 </head>
 
 <body>
 
-<!-- =========================
-     HEADER
-========================= -->
+<!-- HEADER -->
 
 <header>
 
-  <a href="index.html" aria-label="Retour à l'accueil">
+  <a
+    href="index.html"
+    class="logo-link"
+  >
 
-    <img src="logo.png" alt="ExamQuiz Haiti">
+    <img
+      src="logo.png"
+      alt="ExamQuiz Haiti"
+    >
 
-  </a>
+    <span>ExamQuiz Haiti</span>
 
-  <a href="index.html">
-    ← Accueil
   </a>
 
 </header>
 
 
-<!-- =========================
-     HERO
-========================= -->
+<!-- HERO -->
 
 <section class="hero">
 
   <h1>🔬 Sciences NS4</h1>
 
   <p>
-    Révise les sciences avec des questions et réponses
-    adaptées au niveau NS4.
+    Révise tes matières avec des questions,
+    réponses et résolutions détaillées.
   </p>
 
 </section>
 
 
-<main class="container">
+<!-- CATÉGORIES -->
+
+<section
+  class="categories"
+  id="categories"
+>
+
+  <button
+    class="category-btn"
+    id="biologyBtn"
+  >
+
+    <span class="category-icon">🧬</span>
+
+    Biologie
+
+  </button>
 
 
-  <!-- =========================
-       CATÉGORIES
-  ========================= -->
+  <button
+    class="category-btn"
+    id="geologyBtn"
+  >
 
-  <div id="categories" class="categories">
+    <span class="category-icon">🌍</span>
+
+    Géologie
+
+  </button>
 
 
-    <!-- BIOLOGIE -->
+  <button
+    class="category-btn"
+    id="chemistryBtn"
+  >
 
-    <button
-      class="category-btn"
-      id="biologyBtn"
-      type="button">
+    <span class="category-icon">⚗️</span>
 
-      <div class="emoji">
-        🧬
-      </div>
+    Chimie
 
-      <h2>
-        Biologie
-      </h2>
+  </button>
 
-      <p>
-        Questions et réponses de biologie
-        niveau NS4.
-      </p>
 
+  <button
+    class="category-btn"
+    id="anglaisBtn"
+  >
+
+    <span class="category-icon">🇬🇧</span>
+
+    Anglais
+
+  </button>
+
+
+  <button
+    class="category-btn"
+    id="mathematiquesBtn"
+  >
+
+    <span class="category-icon">➗</span>
+
+    Mathématiques
+
+  </button>
+
+</section>
+
+
+<!-- PAGE QUESTIONS -->
+
+<section id="questions-page">
+
+  <div class="questions-header">
+
+    <button id="backBtn">
+      ← Retour aux catégories
     </button>
 
-
-    <!-- GÉOLOGIE -->
-
-    <button
-      class="category-btn"
-      id="geologyBtn"
-      type="button">
-
-      <div class="emoji">
-        🌍
-      </div>
-
-      <h2>
-        Géologie
-      </h2>
-
-      <p>
-        Questions et réponses de géologie
-        niveau NS4.
-      </p>
-
-    </button>
-
-
-    <!-- CHIMIE -->
-
-    <button
-      class="category-btn"
-      id="chemistryBtn"
-      type="button">
-
-      <div class="emoji">
-        ⚗️
-      </div>
-
-      <h2>
-        Chimie
-      </h2>
-
-      <p>
-        Questions et réponses de chimie
-        niveau NS4.
-      </p>
-
-    </button>
-
-
-    <!-- ANGLAIS -->
-
-    <button
-      class="category-btn"
-      id="anglaisBtn"
-      type="button">
-
-      <div class="emoji">
-        🇬🇧
-      </div>
-
-      <h2>
-        Anglais
-      </h2>
-
-      <p>
-        Questions et réponses d'anglais
-        niveau NS4.
-      </p>
-
-    </button>
-
-
-    <!-- MATHÉMATIQUES -->
-
-    <button
-      class="category-btn"
-      id="mathematiquesBtn"
-      type="button">
-
-      <div class="emoji">
-        ➗
-      </div>
-
-      <h2>
-        Mathématiques
-      </h2>
-
-      <p>
-        Questions et réponses de mathématiques
-        niveau NS4.
-      </p>
-
-    </button>
+    <h2 id="title">
+      Questions
+    </h2>
 
   </div>
 
 
-  <!-- =========================
-       PAGE QUESTIONS
-  ========================= -->
+  <div id="questions"></div>
 
-  <div id="questions-page">
-
-    <div class="topbar">
-
-      <h2 id="title"></h2>
-
-      <button
-        class="back-btn"
-        id="backBtn"
-        type="button">
-
-        ← Retour aux matières
-
-      </button>
-
-    </div>
+</section>
 
 
-    <div id="questions">
-
-      <div class="loading">
-        Chargement...
-      </div>
-
-    </div>
-
-  </div>
-
-</main>
-
-
-<!-- =========================
-     FOOTER
-========================= -->
+<!-- FOOTER -->
 
 <footer>
 
-  <strong>
-    ExamQuiz Haiti
-  </strong>
-
-  <br><br>
-
-  Sciences — Niveau NS4
-
-  <br><br>
-
-  © 2026 ExamQuiz • Développé par Ing. Fawenbert Régis
+  © 2026 ExamQuiz •
+  Développé par Ing. Fawenbert Régis
 
 </footer>
 
 
-<!-- =========================
-     JAVASCRIPT
-========================= -->
-
 <script type="module">
 
-/*
-====================================================
-ÉLÉMENTS
-====================================================
-*/
+/* ============================= */
+/* VARIABLES */
+/* ============================= */
 
 const categories =
   document.getElementById("categories");
@@ -485,6 +426,9 @@ const questionsContainer =
 
 const title =
   document.getElementById("title");
+
+const backBtn =
+  document.getElementById("backBtn");
 
 const biologyBtn =
   document.getElementById("biologyBtn");
@@ -501,15 +445,10 @@ const anglaisBtn =
 const mathematiquesBtn =
   document.getElementById("mathematiquesBtn");
 
-const backBtn =
-  document.getElementById("backBtn");
 
-
-/*
-====================================================
-VARIABLES
-====================================================
-*/
+/* ============================= */
+/* VARIABLES QUESTIONS */
+/* ============================= */
 
 let biologieQuestions = [];
 let geologieQuestions = [];
@@ -518,180 +457,120 @@ let anglaisQuestions = [];
 let mathematiquesQuestions = [];
 
 
-/*
-====================================================
-CHARGEMENT BIOLOGIE
-====================================================
+/* ============================= */
+/* CHARGEMENT DES FICHIERS */
+/* ============================= */
 
-IMPORTANT :
-La biologie est chargée séparément.
-Elle ne dépend PAS de quizLogic.js.
-*/
+try{
 
-try {
-
-  const moduleBiologie =
+  const module =
     await import("./src/biologieQuestions.js");
 
   biologieQuestions =
-    moduleBiologie.biologieQuestions || [];
+    module.biologieQuestions || [];
 
-  console.log(
-    "Biologie chargée :",
-    biologieQuestions.length,
-    "questions"
-  );
-
-} catch(error) {
+}catch(error){
 
   console.error(
-    "Erreur biologieQuestions.js :",
+    "Erreur chargement Biologie :",
     error
   );
 
 }
 
 
-/*
-====================================================
-CHARGEMENT GÉOLOGIE
-====================================================
-*/
+try{
 
-try {
-
-  const moduleGeologie =
+  const module =
     await import("./src/geologieQuestions.js");
 
   geologieQuestions =
-    moduleGeologie.geologieQuestions || [];
+    module.geologieQuestions || [];
 
-  console.log(
-    "Géologie chargée :",
-    geologieQuestions.length,
-    "questions"
-  );
+}catch(error){
 
-} catch(error) {
-
-  console.warn(
-    "Géologie non chargée :",
+  console.error(
+    "Erreur chargement Géologie :",
     error
   );
 
 }
 
 
-/*
-====================================================
-CHARGEMENT CHIMIE
-====================================================
-*/
+try{
 
-try {
-
-  const moduleChimie =
+  const module =
     await import("./src/chimieQuestions.js");
 
   chimieQuestions =
-    moduleChimie.chimieQuestions || [];
+    module.chimieQuestions || [];
 
-  console.log(
-    "Chimie chargée :",
-    chimieQuestions.length,
-    "questions"
-  );
+}catch(error){
 
-} catch(error) {
-
-  console.warn(
-    "Chimie non chargée :",
+  console.error(
+    "Erreur chargement Chimie :",
     error
   );
 
 }
 
 
-/*
-====================================================
-CHARGEMENT ANGLAIS
-====================================================
-*/
+try{
 
-try {
-
-  const moduleAnglais =
+  const module =
     await import("./src/anglaisQuestions.js");
 
   anglaisQuestions =
-    moduleAnglais.anglaisQuestions || [];
+    module.anglaisQuestions || [];
 
-  console.log(
-    "Anglais chargé :",
-    anglaisQuestions.length,
-    "questions"
-  );
+}catch(error){
 
-} catch(error) {
-
-  console.warn(
-    "Anglais non chargé :",
+  console.error(
+    "Erreur chargement Anglais :",
     error
   );
 
 }
 
 
-/*
-====================================================
-CHARGEMENT MATHÉMATIQUES
-====================================================
-*/
+try{
 
-try {
-
-  const moduleMathematiques =
+  const module =
     await import("./src/mathematiquesQuestions.js");
 
   mathematiquesQuestions =
-    moduleMathematiques.mathematiquesQuestions || [];
+    module.mathematiquesQuestions || [];
 
-  console.log(
-    "Mathématiques chargées :",
-    mathematiquesQuestions.length,
-    "questions"
-  );
+}catch(error){
 
-} catch(error) {
-
-  console.warn(
-    "Mathématiques non chargées :",
+  console.error(
+    "Erreur chargement Mathématiques :",
     error
   );
 
 }
 
 
-/*
-====================================================
-AFFICHER LES QUESTIONS
-====================================================
-*/
+/* ============================= */
+/* AFFICHER LES QUESTIONS */
+/* ============================= */
 
 function afficherQuestions(liste, nom){
 
-  categories.style.display = "none";
+  categories.style.display =
+    "none";
 
-  questionsPage.style.display = "block";
+  questionsPage.style.display =
+    "block";
 
-  title.textContent = nom;
+  title.textContent =
+    nom;
 
-  questionsContainer.innerHTML = "";
+  questionsContainer.innerHTML =
+    "";
 
 
-  /*
-  Vérification
-  */
+  /* SI AUCUNE QUESTION */
 
   if(
     !Array.isArray(liste) ||
@@ -720,9 +599,7 @@ function afficherQuestions(liste, nom){
   }
 
 
-  /*
-  Affichage
-  */
+  /* AFFICHAGE */
 
   liste.forEach((item,index)=>{
 
@@ -742,9 +619,15 @@ function afficherQuestions(liste, nom){
       "";
 
 
+    const solution =
+      item.solution ??
+      item.resolution ??
+      item.correction ??
+      "";
+
+
     const card =
       document.createElement("div");
-
 
     card.className =
       "question-card";
@@ -766,13 +649,36 @@ function afficherQuestions(liste, nom){
       </div>
 
 
+      ${
+        solution
+        ?
+        `
+        <div class="solution">
+
+          <strong>
+            📝 Résolution :
+          </strong>
+
+          <div class="solution-steps">
+
+            ${solution.replace(/\n/g,"<br>")}
+
+          </div>
+
+        </div>
+        `
+        :
+        ""
+      }
+
+
       <div class="answer">
 
         <strong>
-          Réponse :
+          ✅ Réponse :
         </strong>
 
-        <br>
+        <br><br>
 
         ${answer}
 
@@ -781,125 +687,95 @@ function afficherQuestions(liste, nom){
     `;
 
 
-    questionsContainer.appendChild(card);
+    questionsContainer.appendChild(
+      card
+    );
 
   });
 
 }
 
 
-/*
-====================================================
-BOUTON BIOLOGIE
-====================================================
-*/
+/* ============================= */
+/* BOUTONS */
+/* ============================= */
 
 biologyBtn.addEventListener(
   "click",
-  function(){
-
+  ()=>{
     afficherQuestions(
       biologieQuestions,
-      "🧬 Biologie — NS4"
+      "🧬 Biologie"
     );
-
   }
 );
 
-
-/*
-====================================================
-BOUTON GÉOLOGIE
-====================================================
-*/
 
 geologyBtn.addEventListener(
   "click",
-  function(){
-
+  ()=>{
     afficherQuestions(
       geologieQuestions,
-      "🌍 Géologie — NS4"
+      "🌍 Géologie"
     );
-
   }
 );
 
-
-/*
-====================================================
-BOUTON CHIMIE
-====================================================
-*/
 
 chemistryBtn.addEventListener(
   "click",
-  function(){
-
+  ()=>{
     afficherQuestions(
       chimieQuestions,
-      "⚗️ Chimie — NS4"
+      "⚗️ Chimie"
     );
-
   }
 );
 
-
-/*
-====================================================
-BOUTON ANGLAIS
-====================================================
-*/
 
 anglaisBtn.addEventListener(
   "click",
-  function(){
-
+  ()=>{
     afficherQuestions(
       anglaisQuestions,
-      "🇬🇧 Anglais — NS4"
+      "🇬🇧 Anglais"
     );
-
   }
 );
 
-
-/*
-====================================================
-BOUTON MATHÉMATIQUES
-====================================================
-*/
 
 mathematiquesBtn.addEventListener(
   "click",
-  function(){
-
+  ()=>{
     afficherQuestions(
       mathematiquesQuestions,
-      "➗ Mathématiques — NS4"
+      "➗ Mathématiques"
     );
-
   }
 );
 
 
-/*
-====================================================
-RETOUR AUX CATÉGORIES
-====================================================
-*/
+/* ============================= */
+/* RETOUR */
+/* ============================= */
 
 backBtn.addEventListener(
   "click",
-  function(){
+  ()=>{
 
-    questionsPage.style.display = "none";
+    questionsPage.style.display =
+      "none";
 
-    categories.style.display = "grid";
+    categories.style.display =
+      "grid";
 
-    questionsContainer.innerHTML = "";
+    questionsContainer.innerHTML =
+      "";
 
-    title.textContent = "";
+    window.scrollTo({
+      top:0,
+      behavior:"smooth"
+    });
 
   }
 );
