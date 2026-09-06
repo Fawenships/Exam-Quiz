@@ -1,4 +1,4 @@
-const CACHE_NAME = 'exam-quiz-cache-v4';
+const CACHE_NAME = 'exam-quiz-cache-v5';
 
 const FILES_TO_CACHE = [
   '/',
@@ -6,8 +6,14 @@ const FILES_TO_CACHE = [
   '/manifest.webmanifest',
   '/logo.png',
   '/src/quizLogic.js',
-  '/src/baccQuestions.js'
+  '/src/baccQuestions.js',
+  '/src/biologieQuestions.js',
+  '/src/geologieQuestions.js',
+  '/src/chimieQuestions.js',
+  '/src/anglaisQuestions.js',
+  '/src/mathematiquesQuestions.js'
 ];
+
 
 /* =========================
    INSTALLATION
@@ -16,9 +22,20 @@ const FILES_TO_CACHE = [
 self.addEventListener('install', event => {
 
   event.waitUntil(
+
     caches.open(CACHE_NAME)
-      .then(cache => cache.addAll(FILES_TO_CACHE))
+      .then(cache => {
+
+        return cache.addAll(FILES_TO_CACHE);
+
+      })
+
   );
+
+  /*
+    Active immédiatement le nouveau
+    service worker.
+  */
 
   self.skipWaiting();
 
@@ -40,20 +57,59 @@ self.addEventListener('activate', event => {
 
           cacheNames
             .filter(cacheName => {
+
               return cacheName !== CACHE_NAME;
+
             })
             .map(cacheName => {
+
               return caches.delete(cacheName);
+
             })
 
         );
 
       })
-      .then(() => self.clients.claim())
+      .then(() => {
+
+        /*
+          Prend immédiatement le contrôle
+          des pages ouvertes.
+        */
+
+        return self.clients.claim();
+
+      })
 
   );
 
 });
+
+
+/* =========================
+   FICHIERS QUI DOIVENT
+   TOUJOURS ÊTRE ACTUALISÉS
+========================= */
+
+const UPDATE_FILES = [
+
+  '/index.html',
+
+  '/src/quizLogic.js',
+
+  '/src/baccQuestions.js',
+
+  '/src/biologieQuestions.js',
+
+  '/src/geologieQuestions.js',
+
+  '/src/chimieQuestions.js',
+
+  '/src/anglaisQuestions.js',
+
+  '/src/mathematiquesQuestions.js'
+
+];
 
 
 /* =========================
@@ -63,43 +119,75 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
 
   const request = event.request;
+
   const url = new URL(request.url);
 
 
+  /*
+    On ne traite que les requêtes HTTP/HTTPS.
+  */
+
+  if(
+    request.method !== 'GET' ||
+    (url.protocol !== 'http:' &&
+     url.protocol !== 'https:')
+  ){
+
+    return;
+
+  }
+
+
   /* =========================
-     BACC QUESTIONS
+     FICHIERS IMPORTANTS
+     NETWORK FIRST
   ========================= */
 
   if(
-    url.pathname.endsWith(
-      '/src/baccQuestions.js'
-    )
+    UPDATE_FILES.includes(url.pathname)
   ){
 
     event.respondWith(
 
-      fetch(request)
+      fetch(request, {
+        cache: 'no-cache'
+      })
 
         .then(response => {
 
-          const responseClone =
-            response.clone();
+          /*
+            Si le serveur répond correctement,
+            on sauvegarde la nouvelle version.
+          */
 
-          caches.open(CACHE_NAME)
-            .then(cache => {
+          if(response && response.ok){
 
-              cache.put(
-                request,
-                responseClone
-              );
+            const responseClone =
+              response.clone();
 
-            });
+            caches.open(CACHE_NAME)
+              .then(cache => {
+
+                cache.put(
+                  request,
+                  responseClone
+                );
+
+              });
+
+          }
 
           return response;
 
         })
 
         .catch(() => {
+
+          /*
+            Pas d'Internet :
+            utiliser la dernière version
+            enregistrée dans le cache.
+          */
 
           return caches.match(request);
 
@@ -122,22 +210,28 @@ self.addEventListener('fetch', event => {
 
     event.respondWith(
 
-      fetch(request)
+      fetch(request, {
+        cache: 'no-cache'
+      })
 
         .then(response => {
 
-          const responseClone =
-            response.clone();
+          if(response && response.ok){
 
-          caches.open(CACHE_NAME)
-            .then(cache => {
+            const responseClone =
+              response.clone();
 
-              cache.put(
-                '/index.html',
-                responseClone
-              );
+            caches.open(CACHE_NAME)
+              .then(cache => {
 
-            });
+                cache.put(
+                  request,
+                  responseClone
+                );
+
+              });
+
+          }
 
           return response;
 
@@ -146,8 +240,20 @@ self.addEventListener('fetch', event => {
         .catch(() => {
 
           return caches.match(
-            '/index.html'
-          );
+            request
+          ).then(cachedPage => {
+
+            if(cachedPage){
+
+              return cachedPage;
+
+            }
+
+            return caches.match(
+              '/index.html'
+            );
+
+          });
 
         })
 
@@ -160,6 +266,7 @@ self.addEventListener('fetch', event => {
 
   /* =========================
      AUTRES FICHIERS
+     CACHE FIRST
   ========================= */
 
   event.respondWith(
@@ -174,7 +281,33 @@ self.addEventListener('fetch', event => {
 
         }
 
-        return fetch(request);
+        return fetch(request)
+
+          .then(response => {
+
+            if(
+              response &&
+              response.ok
+            ){
+
+              const responseClone =
+                response.clone();
+
+              caches.open(CACHE_NAME)
+                .then(cache => {
+
+                  cache.put(
+                    request,
+                    responseClone
+                  );
+
+                });
+
+            }
+
+            return response;
+
+          });
 
       })
 
