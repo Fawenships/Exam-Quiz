@@ -63,6 +63,26 @@ header{
   border-radius:10px;
 }
 
+/* BOUTON RETOUR À L'ACCUEIL */
+
+.home-btn{
+  display:block;
+  width:max-content;
+  margin:20px auto 0;
+  padding:12px 20px;
+  background:#24113f;
+  color:white;
+  text-decoration:none;
+  border-radius:10px;
+  font-weight:bold;
+  transition:.2s;
+}
+
+.home-btn:hover{
+  opacity:.9;
+  transform:translateY(-2px);
+}
+
 /* HERO */
 
 .hero{
@@ -141,7 +161,7 @@ header{
   font-size:28px;
 }
 
-/* BOUTON RETOUR */
+/* BOUTON RETOUR AUX CATÉGORIES */
 
 #backBtn{
   border:none;
@@ -259,6 +279,11 @@ footer{
     font-size:28px;
   }
 
+  .home-btn{
+    width:92%;
+    text-align:center;
+  }
+
   .questions-header{
     flex-direction:column;
     align-items:stretch;
@@ -301,6 +326,16 @@ footer{
   </a>
 
 </header>
+
+
+<!-- RETOUR À L'ACCUEIL -->
+
+<a
+  href="index.html"
+  class="home-btn"
+>
+  ← Retour à l'accueil
+</a>
 
 
 <!-- HERO -->
@@ -819,7 +854,7 @@ mathematiquesBtn.addEventListener(
 
 
 /* ============================= */
-/* BOUTON RETOUR */
+/* BOUTON RETOUR AUX CATÉGORIES */
 /* ============================= */
 
 backBtn.addEventListener(
