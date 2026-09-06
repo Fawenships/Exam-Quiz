@@ -357,6 +357,52 @@ footer strong{
 
     </button>
 
+
+    <!-- ANGLAIS -->
+
+    <button
+      class="category-btn"
+      id="anglaisBtn"
+      type="button">
+
+      <div class="emoji">
+        🇬🇧
+      </div>
+
+      <h2>
+        Anglais
+      </h2>
+
+      <p>
+        Questions et réponses d'anglais
+        niveau NS4.
+      </p>
+
+    </button>
+
+
+    <!-- MATHÉMATIQUES -->
+
+    <button
+      class="category-btn"
+      id="mathematiquesBtn"
+      type="button">
+
+      <div class="emoji">
+        ➗
+      </div>
+
+      <h2>
+        Mathématiques
+      </h2>
+
+      <p>
+        Questions et réponses de mathématiques
+        niveau NS4.
+      </p>
+
+    </button>
+
   </div>
 
 
@@ -449,6 +495,12 @@ const geologyBtn =
 const chemistryBtn =
   document.getElementById("chemistryBtn");
 
+const anglaisBtn =
+  document.getElementById("anglaisBtn");
+
+const mathematiquesBtn =
+  document.getElementById("mathematiquesBtn");
+
 const backBtn =
   document.getElementById("backBtn");
 
@@ -462,6 +514,8 @@ VARIABLES
 let biologieQuestions = [];
 let geologieQuestions = [];
 let chimieQuestions = [];
+let anglaisQuestions = [];
+let mathematiquesQuestions = [];
 
 
 /*
@@ -552,6 +606,66 @@ try {
 
   console.warn(
     "Chimie non chargée :",
+    error
+  );
+
+}
+
+
+/*
+====================================================
+CHARGEMENT ANGLAIS
+====================================================
+*/
+
+try {
+
+  const moduleAnglais =
+    await import("./src/anglaisQuestions.js");
+
+  anglaisQuestions =
+    moduleAnglais.anglaisQuestions || [];
+
+  console.log(
+    "Anglais chargé :",
+    anglaisQuestions.length,
+    "questions"
+  );
+
+} catch(error) {
+
+  console.warn(
+    "Anglais non chargé :",
+    error
+  );
+
+}
+
+
+/*
+====================================================
+CHARGEMENT MATHÉMATIQUES
+====================================================
+*/
+
+try {
+
+  const moduleMathematiques =
+    await import("./src/mathematiquesQuestions.js");
+
+  mathematiquesQuestions =
+    moduleMathematiques.mathematiquesQuestions || [];
+
+  console.log(
+    "Mathématiques chargées :",
+    mathematiquesQuestions.length,
+    "questions"
+  );
+
+} catch(error) {
+
+  console.warn(
+    "Mathématiques non chargées :",
     error
   );
 
@@ -725,6 +839,44 @@ chemistryBtn.addEventListener(
     afficherQuestions(
       chimieQuestions,
       "⚗️ Chimie — NS4"
+    );
+
+  }
+);
+
+
+/*
+====================================================
+BOUTON ANGLAIS
+====================================================
+*/
+
+anglaisBtn.addEventListener(
+  "click",
+  function(){
+
+    afficherQuestions(
+      anglaisQuestions,
+      "🇬🇧 Anglais — NS4"
+    );
+
+  }
+);
+
+
+/*
+====================================================
+BOUTON MATHÉMATIQUES
+====================================================
+*/
+
+mathematiquesBtn.addEventListener(
+  "click",
+  function(){
+
+    afficherQuestions(
+      mathematiquesQuestions,
+      "➗ Mathématiques — NS4"
     );
 
   }
