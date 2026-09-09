@@ -418,6 +418,17 @@ footer{
 
   </button>
 
+  <button
+    class="category-btn"
+    id="physiqueBtn"
+  >
+
+    <span class="category-icon">⚡</span>
+
+    Physique
+
+  </button>
+
 </section>
 
 
@@ -489,6 +500,9 @@ const anglaisBtn =
 const mathematiquesBtn =
   document.getElementById("mathematiquesBtn");
 
+const physiqueBtn =
+  document.getElementById("physiqueBtn");
+
 
 /* ============================= */
 /* VARIABLES QUESTIONS */
@@ -503,6 +517,8 @@ let chimieQuestions = [];
 let anglaisQuestions = [];
 
 let mathematiquesQuestions = [];
+
+let physiqueQuestions = [];
 
 
 /* ============================= */
@@ -609,6 +625,28 @@ try{
 
   console.error(
     "Erreur chargement Mathématiques :",
+    error
+  );
+
+}
+
+
+/* ============================= */
+/* CHARGEMENT PHYSIQUE */
+/* ============================= */
+
+try{
+
+  const module =
+    await import("./src/physiqueQuestions.js");
+
+  physiqueQuestions =
+    module.physiqueQuestions || [];
+
+}catch(error){
+
+  console.error(
+    "Erreur chargement Physique :",
     error
   );
 
@@ -847,6 +885,23 @@ mathematiquesBtn.addEventListener(
     afficherQuestions(
       mathematiquesQuestions,
       "➗ Mathématiques"
+    );
+
+  }
+);
+
+
+/* ============================= */
+/* BOUTON PHYSIQUE */
+/* ============================= */
+
+physiqueBtn.addEventListener(
+  "click",
+  ()=>{
+
+    afficherQuestions(
+      physiqueQuestions,
+      "⚡ Physique"
     );
 
   }
