@@ -1,512 +1,547 @@
 export const physiqueQuestions = [
 
-  // =========================================================
-  // ⚙️ MÉCANIQUE — NIVEAU BACC II — 40 EXERCICES
-  // =========================================================
+  // =====================================================
+  // 1. MOUVEMENT CIRCULAIRE — 10 EXERCICES
+  // =====================================================
 
   {
-    question: "Une voiture part du repos et atteint une vitesse de 25 m/s en 10 s avec une accélération constante. Calculer son accélération.",
-    answer: "Démarche : On utilise a = (vf - vi)/t. Données : vi = 0 m/s, vf = 25 m/s et t = 10 s. Calcul : a = (25 - 0)/10 = 2,5 m/s². Réponse : l'accélération est de 2,5 m/s²."
+    question: "Une voiture de masse 1200 kg décrit une trajectoire circulaire de rayon 50 m à la vitesse constante de 15 m/s. Déterminer son accélération centripète puis la force centripète exercée sur la voiture.",
+    answer: "Démarche : On utilise ac = v²/r. Avec v = 15 m/s et r = 50 m, ac = 15²/50 = 225/50 = 4,5 m/s². Ensuite Fc = mac = 1200 × 4,5 = 5400 N. Réponse : l’accélération centripète est de 4,5 m/s² et la force centripète est de 5400 N."
   },
 
   {
-    question: "Une voiture initialement à 10 m/s accélère à 2 m/s² pendant 8 s. Calculer sa vitesse finale.",
-    answer: "Démarche : On utilise vf = vi + at. Données : vi = 10 m/s, a = 2 m/s² et t = 8 s. Calcul : vf = 10 + 2 × 8 = 26 m/s. Réponse : la vitesse finale est de 26 m/s."
+    question: "Une roue de rayon 0,40 m tourne à 300 tours par minute. Calculer sa fréquence, sa période et la vitesse linéaire d’un point situé sur sa circonférence.",
+    answer: "Démarche : 300 tours/min = 300/60 = 5 tours/s. Donc f = 5 Hz. La période est T = 1/f = 1/5 = 0,20 s. La vitesse linéaire est v = 2πrf = 2π × 0,40 × 5 ≈ 12,57 m/s. Réponse : f = 5 Hz, T = 0,20 s et v ≈ 12,57 m/s."
   },
 
   {
-    question: "Une voiture part du repos avec une accélération constante de 3 m/s² pendant 6 s. Calculer la distance parcourue.",
-    answer: "Démarche : Pour un mouvement uniformément accéléré, d = vi t + 1/2 at². Comme vi = 0, d = 1/2 × 3 × 6² = 1,5 × 36 = 54 m. Réponse : la distance parcourue est de 54 m."
+    question: "Un disque de rayon 0,25 m effectue 120 tours par minute. Calculer sa vitesse angulaire en rad/s puis la vitesse d’un point situé sur son bord.",
+    answer: "Démarche : f = 120/60 = 2 Hz. La vitesse angulaire est ω = 2πf = 4π ≈ 12,57 rad/s. Puis v = ωr = 12,57 × 0,25 ≈ 3,14 m/s. Réponse : ω ≈ 12,57 rad/s et v ≈ 3,14 m/s."
   },
 
   {
-    question: "Un véhicule roule à 20 m/s et freine avec une accélération constante de -4 m/s². Calculer le temps nécessaire pour s'arrêter.",
-    answer: "Démarche : On utilise vf = vi + at. À l'arrêt, vf = 0. Donc 0 = 20 - 4t. Ainsi 4t = 20 et t = 5 s. Réponse : le véhicule s'arrête après 5 s."
+    question: "Un cycliste parcourt un virage circulaire de rayon 20 m à 36 km/h. Calculer sa vitesse en m/s, son accélération centripète et la force centripète si la masse totale du cycliste et du vélo est de 80 kg.",
+    answer: "Démarche : 36 km/h = 36/3,6 = 10 m/s. L’accélération centripète est ac = v²/r = 10²/20 = 5 m/s². La force est Fc = mac = 80 × 5 = 400 N. Réponse : v = 10 m/s, ac = 5 m/s² et Fc = 400 N."
   },
 
   {
-    question: "Une voiture roule à 25 m/s et s'arrête après 5 s. Calculer la distance de freinage en supposant une décélération constante.",
-    answer: "Démarche : On utilise d = (vi + vf)t/2. Données : vi = 25 m/s, vf = 0 et t = 5 s. Calcul : d = (25 + 0) × 5/2 = 62,5 m. Réponse : la distance de freinage est de 62,5 m."
+    question: "Une machine possède une roue de rayon 0,50 m tournant à 600 tours/minute. Déterminer sa fréquence, sa vitesse angulaire et la vitesse linéaire d’un point de la périphérie.",
+    answer: "Démarche : f = 600/60 = 10 Hz. Donc ω = 2πf = 20π ≈ 62,83 rad/s. La vitesse linéaire est v = ωr = 62,83 × 0,50 ≈ 31,42 m/s. Réponse : f = 10 Hz, ω ≈ 62,83 rad/s et v ≈ 31,42 m/s."
   },
 
   {
-    question: "Un objet est lancé verticalement vers le haut avec une vitesse initiale de 20 m/s. En prenant g = 10 m/s², calculer la hauteur maximale atteinte.",
-    answer: "Démarche : Au sommet, vf = 0. On utilise vf² = vi² - 2gh. Donc h = vi²/(2g). Calcul : h = 20²/(2 × 10) = 400/20 = 20 m. Réponse : la hauteur maximale est de 20 m."
+    question: "Une masse de 2 kg est attachée à une corde de longueur 1,5 m et tourne horizontalement à une vitesse de 6 m/s. Calculer l’accélération centripète et la tension de la corde.",
+    answer: "Démarche : L’accélération centripète vaut ac = v²/r = 6²/1,5 = 36/1,5 = 24 m/s². La force centripète est fournie par la tension : F = mac = 2 × 24 = 48 N. Réponse : ac = 24 m/s² et la tension est de 48 N."
   },
 
   {
-    question: "Un objet est lancé verticalement vers le haut à 30 m/s. Avec g = 10 m/s², calculer le temps nécessaire pour atteindre le sommet.",
-    answer: "Démarche : Au sommet vf = 0. On utilise vf = vi - gt. Donc 0 = 30 - 10t. Ainsi t = 3 s. Réponse : l'objet atteint son sommet après 3 s."
+    question: "Une roue effectue 900 tours en 3 minutes. Son rayon est de 0,30 m. Calculer sa fréquence, sa période et la distance parcourue par un point de sa circonférence pendant 10 secondes.",
+    answer: "Démarche : En 3 min = 180 s, la fréquence est f = 900/180 = 5 Hz. La période est T = 1/5 = 0,20 s. En 10 s, le nombre de tours est N = 5 × 10 = 50. La circonférence vaut 2πr = 2π × 0,30 ≈ 1,885 m. Distance = 50 × 1,885 ≈ 94,25 m. Réponse : f = 5 Hz, T = 0,20 s et la distance est ≈ 94,25 m."
   },
 
   {
-    question: "Un corps tombe librement pendant 4 s à partir du repos. Avec g = 10 m/s², calculer sa vitesse finale.",
-    answer: "Démarche : En chute libre, vf = gt lorsque vi = 0. Calcul : vf = 10 × 4 = 40 m/s. Réponse : la vitesse finale est de 40 m/s."
+    question: "Une voiture de masse 1000 kg roule à 20 m/s sur une route circulaire de rayon 100 m. Une seconde voiture roule sur le même virage à 10 m/s. Comparer les forces centripètes exercées sur les deux voitures.",
+    answer: "Démarche : Fc = mv²/r. Pour la première voiture : Fc1 = 1000 × 20²/100 = 4000 N. Pour la deuxième : Fc2 = 1000 × 10²/100 = 1000 N. Le rapport est 4000/1000 = 4. Réponse : la première voiture subit une force centripète quatre fois plus grande."
   },
 
   {
-    question: "Un corps tombe librement pendant 3 s à partir du repos. Avec g = 10 m/s², calculer la distance parcourue.",
-    answer: "Démarche : d = 1/2 gt². Calcul : d = 1/2 × 10 × 3² = 5 × 9 = 45 m. Réponse : le corps parcourt 45 m."
+    question: "Une roue tourne avec une vitesse angulaire de 10 rad/s et possède un rayon de 0,80 m. Calculer sa vitesse linéaire et son accélération centripète.",
+    answer: "Démarche : La vitesse linéaire est v = ωr = 10 × 0,80 = 8 m/s. L’accélération centripète est ac = ω²r = 10² × 0,80 = 80 m/s². Réponse : v = 8 m/s et ac = 80 m/s²."
   },
 
   {
-    question: "Une force horizontale de 50 N agit sur un bloc de 10 kg. Les frottements valent 10 N. Calculer l'accélération du bloc.",
-    answer: "Démarche : La force résultante est Fr = 50 - 10 = 40 N. Puis F = ma, donc a = Fr/m = 40/10 = 4 m/s². Réponse : l'accélération est de 4 m/s²."
+    question: "Un objet de masse 0,5 kg effectue un mouvement circulaire uniforme de rayon 2 m avec une période de 4 s. Calculer sa vitesse, son accélération centripète et la force centripète.",
+    answer: "Démarche : v = 2πr/T = 2π × 2/4 = π ≈ 3,14 m/s. Puis ac = v²/r = 3,14²/2 ≈ 4,93 m/s². Enfin Fc = mac = 0,5 × 4,93 ≈ 2,47 N. Réponse : v ≈ 3,14 m/s, ac ≈ 4,93 m/s² et Fc ≈ 2,47 N."
   },
 
-  {
-    question: "Un bloc de 5 kg est tiré par une force de 30 N sur une surface horizontale. Les frottements valent 5 N. Calculer son accélération.",
-    answer: "Démarche : Fr = 30 - 5 = 25 N. Avec F = ma, a = 25/5 = 5 m/s². Réponse : l'accélération est de 5 m/s²."
-  },
+  // =====================================================
+  // 2. TRAVAIL ET ÉNERGIE — 10 EXERCICES
+  // =====================================================
 
   {
-    question: "Un objet de 8 kg est soumis à deux forces horizontales opposées de 50 N et 18 N. Calculer son accélération.",
-    answer: "Démarche : La force résultante est Fr = 50 - 18 = 32 N. Donc a = Fr/m = 32/8 = 4 m/s². Réponse : l'accélération est de 4 m/s² dans le sens de la force de 50 N."
+    question: "Un élève pousse une caisse de masse 20 kg sur une distance de 8 m avec une force horizontale constante de 50 N. Calculer le travail effectué par cette force.",
+    answer: "Démarche : Le travail est W = Fd cosθ. La force et le déplacement sont dans la même direction, donc θ = 0° et cos0° = 1. W = 50 × 8 = 400 J. Réponse : le travail effectué est de 400 J."
   },
 
   {
-    question: "Un corps de 10 kg est tiré par une force de 60 N faisant un angle de 30° avec l'horizontale. Calculer la composante horizontale de la force.",
-    answer: "Démarche : La composante horizontale est Fx = F cos(30°). Avec cos(30°) ≈ 0,866. Calcul : Fx = 60 × 0,866 ≈ 51,96 N. Réponse : Fx ≈ 52 N."
+    question: "Une force de 100 N tire une caisse sur 5 m en faisant un angle de 60° avec l’horizontale. Calculer le travail de cette force.",
+    answer: "Démarche : W = Fd cosθ. Donc W = 100 × 5 × cos60°. Comme cos60° = 0,5, W = 250 J. Réponse : le travail est de 250 J."
   },
 
   {
-    question: "Une force de 100 N agit sur un objet en le déplaçant de 8 m dans la même direction. Calculer le travail effectué.",
-    answer: "Démarche : W = Fd cos(θ). Ici θ = 0°, donc cos(0°) = 1. Calcul : W = 100 × 8 = 800 J. Réponse : le travail est de 800 J."
+    question: "Un objet de masse 4 kg se déplace à 10 m/s. Calculer son énergie cinétique. Que devient cette énergie si sa vitesse double ?",
+    answer: "Démarche : Ec = 1/2 mv². À 10 m/s : Ec = 1/2 × 4 × 10² = 200 J. À 20 m/s : Ec = 1/2 × 4 × 20² = 800 J. Réponse : l’énergie passe de 200 J à 800 J, donc elle est multipliée par 4."
   },
 
   {
-    question: "Une force de 50 N agit sur un objet qui se déplace de 10 m avec un angle de 60° entre la force et le déplacement. Calculer le travail.",
-    answer: "Démarche : W = Fd cos(θ). cos(60°) = 0,5. Calcul : W = 50 × 10 × 0,5 = 250 J. Réponse : le travail est de 250 J."
+    question: "Une pierre de masse 3 kg est placée à une hauteur de 12 m. En prenant g = 10 m/s², calculer son énergie potentielle de pesanteur.",
+    answer: "Démarche : Ep = mgh. Donc Ep = 3 × 10 × 12 = 360 J. Réponse : l’énergie potentielle est de 360 J."
   },
 
   {
-    question: "Un moteur effectue un travail de 12000 J en 30 s. Calculer sa puissance moyenne.",
-    answer: "Démarche : P = W/t. Calcul : P = 12000/30 = 400 W. Réponse : la puissance moyenne est de 400 W."
+    question: "Une balle de masse 0,5 kg est lancée verticalement avec une vitesse initiale de 20 m/s. En négligeant les frottements et en prenant g = 10 m/s², déterminer la hauteur maximale atteinte.",
+    answer: "Démarche : Au départ, Ec = 1/2 mv² = 1/2 × 0,5 × 20² = 100 J. Au sommet, toute cette énergie devient potentielle : mgh = 100. Donc 0,5 × 10 × h = 100, d’où h = 20 m. Réponse : la hauteur maximale est de 20 m."
   },
 
   {
-    question: "Un moteur de 2 kW soulève une charge pendant 20 s. Calculer le travail fourni.",
-    answer: "Démarche : On convertit 2 kW = 2000 W. Puis W = Pt. Calcul : W = 2000 × 20 = 40000 J. Réponse : le travail est de 40000 J."
+    question: "Un moteur fournit un travail de 18 000 J en 30 secondes. Calculer sa puissance mécanique moyenne.",
+    answer: "Démarche : P = W/t. Donc P = 18 000/30 = 600 W. Réponse : la puissance moyenne est de 600 W."
   },
 
   {
-    question: "Un objet de masse 5 kg se déplace à 12 m/s. Calculer son énergie cinétique.",
-    answer: "Démarche : Ec = 1/2 mv². Calcul : Ec = 1/2 × 5 × 12² = 2,5 × 144 = 360 J. Réponse : l'énergie cinétique est de 360 J."
+    question: "Une machine reçoit une énergie de 5000 J et fournit une énergie utile de 3500 J. Calculer son rendement.",
+    answer: "Démarche : η = (Énergie utile/Énergie reçue) × 100. η = (3500/5000) × 100 = 70 %. Réponse : le rendement de la machine est de 70 %."
   },
 
   {
-    question: "Un objet de masse 10 kg possède une énergie cinétique de 500 J. Calculer sa vitesse.",
-    answer: "Démarche : Ec = 1/2 mv². Donc v = √(2Ec/m). Calcul : v = √(1000/10) = √100 = 10 m/s. Réponse : la vitesse est de 10 m/s."
+    question: "Un objet de masse 10 kg passe d’une vitesse de 4 m/s à une vitesse de 12 m/s. Calculer la variation de son énergie cinétique.",
+    answer: "Démarche : Ec initiale = 1/2 × 10 × 4² = 80 J. Ec finale = 1/2 × 10 × 12² = 720 J. ΔEc = 720 - 80 = 640 J. Réponse : la variation d’énergie cinétique est de 640 J."
   },
 
   {
-    question: "Une masse de 4 kg est élevée à une hauteur de 15 m. Avec g = 10 m/s², calculer son énergie potentielle.",
-    answer: "Démarche : Ep = mgh. Calcul : Ep = 4 × 10 × 15 = 600 J. Réponse : l'énergie potentielle est de 600 J."
+    question: "Une caisse de masse 15 kg est tirée sur une distance de 10 m par une force de 80 N parallèle au déplacement. Les frottements exercent une force opposée de 20 N. Calculer le travail de chaque force et le travail total.",
+    answer: "Démarche : Travail de la force motrice : W1 = 80 × 10 = 800 J. Travail des frottements : Wf = -20 × 10 = -200 J. Travail total : Wtotal = 800 - 200 = 600 J. Réponse : W1 = 800 J, Wf = -200 J et Wtotal = 600 J."
   },
 
   {
-    question: "Un objet de 2 kg tombe d'une hauteur de 20 m sans frottement. Avec g = 10 m/s², calculer sa vitesse juste avant le sol.",
-    answer: "Démarche : Par conservation de l'énergie, mgh = 1/2 mv². La masse se simplifie : v = √(2gh). Calcul : v = √(2 × 10 × 20) = √400 = 20 m/s. Réponse : la vitesse est de 20 m/s."
+    question: "Un objet de masse 2 kg est lâché sans vitesse initiale d’une hauteur de 15 m. En négligeant les frottements et avec g = 10 m/s², calculer sa vitesse juste avant d’atteindre le sol.",
+    answer: "Démarche : Conservation de l’énergie mécanique : mgh = 1/2 mv². La masse se simplifie : gh = v²/2. Donc v² = 2gh = 2 × 10 × 15 = 300. v = √300 ≈ 17,32 m/s. Réponse : v ≈ 17,32 m/s."
   },
+
+  // =====================================================
+  // 3. LOI D’OHM — 8 EXERCICES
+  // =====================================================
 
   {
-    question: "Un objet possède une énergie mécanique de 500 J et une énergie potentielle de 180 J. Calculer son énergie cinétique.",
-    answer: "Démarche : Em = Ec + Ep. Donc Ec = Em - Ep. Calcul : Ec = 500 - 180 = 320 J. Réponse : l'énergie cinétique est de 320 J."
+    question: "Une résistance de 20 Ω est branchée aux bornes d’une source de tension de 12 V. Calculer l’intensité du courant qui la traverse.",
+    answer: "Démarche : D’après la loi d’Ohm, I = U/R. I = 12/20 = 0,6 A. Réponse : l’intensité est de 0,6 A."
   },
 
   {
-    question: "Un corps de masse 4 kg se déplace à 5 m/s. Calculer sa quantité de mouvement.",
-    answer: "Démarche : p = mv. Calcul : p = 4 × 5 = 20 kg·m/s. Réponse : la quantité de mouvement est de 20 kg·m/s."
+    question: "Un conducteur est traversé par un courant de 2 A lorsqu’il est soumis à une tension de 24 V. Déterminer sa résistance.",
+    answer: "Démarche : R = U/I. R = 24/2 = 12 Ω. Réponse : la résistance vaut 12 Ω."
   },
 
   {
-    question: "Une voiture de 1000 kg roule à 20 m/s. Calculer sa quantité de mouvement.",
-    answer: "Démarche : p = mv. Calcul : p = 1000 × 20 = 20000 kg·m/s. Réponse : la quantité de mouvement est de 20000 kg·m/s."
+    question: "Une résistance de 15 Ω est traversée par un courant de 0,8 A. Calculer la tension à ses bornes et la puissance électrique consommée.",
+    answer: "Démarche : U = RI = 15 × 0,8 = 12 V. Puis P = UI = 12 × 0,8 = 9,6 W. Réponse : U = 12 V et P = 9,6 W."
   },
 
   {
-    question: "Une force constante de 200 N agit pendant 5 s sur un objet initialement au repos de masse 20 kg. Calculer sa vitesse finale en négligeant les frottements.",
-    answer: "Démarche : F = ma, donc a = F/m = 200/20 = 10 m/s². Ensuite vf = vi + at = 0 + 10 × 5 = 50 m/s. Réponse : la vitesse finale est de 50 m/s."
+    question: "Un appareil électrique fonctionne sous une tension de 120 V et consomme un courant de 2,5 A. Calculer sa résistance et sa puissance.",
+    answer: "Démarche : R = U/I = 120/2,5 = 48 Ω. P = UI = 120 × 2,5 = 300 W. Réponse : R = 48 Ω et P = 300 W."
   },
 
   {
-    question: "Une force de 80 N déplace un objet de 10 m en 4 s. Calculer le travail puis la puissance moyenne.",
-    answer: "Démarche : W = Fd = 80 × 10 = 800 J. Puis P = W/t = 800/4 = 200 W. Réponse : le travail est de 800 J et la puissance moyenne est de 200 W."
+    question: "Une résistance de 40 Ω dissipe une puissance de 90 W. Calculer l’intensité du courant qui la traverse.",
+    answer: "Démarche : P = RI². Donc I² = P/R = 90/40 = 2,25. I = √2,25 = 1,5 A. Réponse : I = 1,5 A."
   },
 
   {
-    question: "Une force de 40 N agit sur un objet de 5 kg pendant 6 s, sans frottement, à partir du repos. Calculer sa vitesse finale.",
-    answer: "Démarche : a = F/m = 40/5 = 8 m/s². Puis vf = at = 8 × 6 = 48 m/s. Réponse : la vitesse finale est de 48 m/s."
+    question: "Une résistance de 10 Ω est traversée par un courant de 3 A. Calculer la tension à ses bornes et la puissance dissipée.",
+    answer: "Démarche : U = RI = 10 × 3 = 30 V. P = RI² = 10 × 3² = 90 W. Réponse : U = 30 V et P = 90 W."
   },
 
   {
-    question: "Un objet de 2 kg est lancé à 15 m/s. Calculer son énergie cinétique puis son énergie potentielle maximale lorsqu'il monte sans frottement, avec g = 10 m/s².",
-    answer: "Démarche : Ec initiale = 1/2 mv² = 1/2 × 2 × 15² = 225 J. Au sommet, l'énergie cinétique devient nulle et toute l'énergie devient potentielle. Donc Ep maximale = 225 J. Réponse : l'énergie potentielle maximale est de 225 J."
+    question: "Un générateur de 24 V alimente une résistance. Le courant mesuré est de 1,2 A. Calculer la résistance puis l’énergie consommée en 5 minutes.",
+    answer: "Démarche : R = U/I = 24/1,2 = 20 Ω. La puissance est P = UI = 24 × 1,2 = 28,8 W. 5 min = 300 s. Énergie E = Pt = 28,8 × 300 = 8640 J. Réponse : R = 20 Ω et E = 8640 J."
   },
 
   {
-    question: "Un bloc de 10 kg glisse sur une surface avec une force de frottement de 20 N. Une force motrice de 50 N agit pendant 5 s à partir du repos. Calculer sa vitesse finale.",
-    answer: "Démarche : Fr = 50 - 20 = 30 N. Donc a = Fr/m = 30/10 = 3 m/s². Puis vf = at = 3 × 5 = 15 m/s. Réponse : la vitesse finale est de 15 m/s."
+    question: "Une lampe possède une résistance de 60 Ω et est alimentée sous 120 V. Calculer le courant qui la traverse et sa puissance électrique.",
+    answer: "Démarche : I = U/R = 120/60 = 2 A. P = UI = 120 × 2 = 240 W. Réponse : I = 2 A et P = 240 W."
   },
 
+  // =====================================================
+  // 4. RÉSISTANCES — 10 EXERCICES
+  // =====================================================
+
   {
-    question: "Un objet de 1000 kg se déplace sur une trajectoire circulaire de rayon 50 m à une vitesse de 10 m/s. Calculer la force centripète.",
-    answer: "Démarche : Fc = mv²/r. Calcul : Fc = 1000 × 10²/50 = 100000/50 = 2000 N. Réponse : la force centripète est de 2000 N."
+    question: "Deux résistances de 10 Ω et 20 Ω sont montées en série. Calculer leur résistance équivalente.",
+    answer: "Démarche : En série, Req = R1 + R2. Req = 10 + 20 = 30 Ω. Réponse : Req = 30 Ω."
   },
 
   {
-    question: "Une voiture de 1200 kg prend un virage de rayon 100 m à 20 m/s. Calculer son accélération centripète.",
-    answer: "Démarche : ac = v²/r. Calcul : ac = 20²/100 = 400/100 = 4 m/s². Réponse : l'accélération centripète est de 4 m/s²."
+    question: "Trois résistances de 5 Ω, 10 Ω et 15 Ω sont branchées en série sur une source de 60 V. Calculer la résistance équivalente et le courant du circuit.",
+    answer: "Démarche : Req = 5 + 10 + 15 = 30 Ω. D’après Ohm, I = U/Req = 60/30 = 2 A. Réponse : Req = 30 Ω et I = 2 A."
   },
 
   {
-    question: "Une force de 100 N agit à 0,4 m d'un axe de rotation avec un angle de 90°. Calculer le moment de cette force.",
-    answer: "Démarche : M = Fd sin(θ). Comme θ = 90°, sin(90°) = 1. Calcul : M = 100 × 0,4 = 40 N·m. Réponse : le moment est de 40 N·m."
+    question: "Deux résistances de 6 Ω et 3 Ω sont montées en parallèle. Calculer leur résistance équivalente.",
+    answer: "Démarche : 1/Req = 1/6 + 1/3 = 1/6 + 2/6 = 3/6 = 1/2. Donc Req = 2 Ω. Réponse : Req = 2 Ω."
   },
 
   {
-    question: "Une force de 60 N agit à 0,5 m d'un axe avec un angle de 30°. Calculer son moment.",
-    answer: "Démarche : M = Fd sin(θ). sin(30°) = 0,5. Calcul : M = 60 × 0,5 × 0,5 = 15 N·m. Réponse : le moment est de 15 N·m."
+    question: "Deux résistances de 12 Ω et 4 Ω sont branchées en parallèle sous 24 V. Calculer le courant dans chaque résistance et le courant total.",
+    answer: "Démarche : La tension est la même dans chaque branche. I1 = 24/12 = 2 A. I2 = 24/4 = 6 A. Courant total : I = I1 + I2 = 8 A. Réponse : I1 = 2 A, I2 = 6 A et I = 8 A."
   },
 
   {
-    question: "Une force de 500 N agit sur une surface de 0,25 m². Calculer la pression exercée.",
-    answer: "Démarche : P = F/S. Calcul : P = 500/0,25 = 2000 Pa. Réponse : la pression est de 2000 Pa."
+    question: "Une résistance de 5 Ω est montée en série avec deux résistances de 10 Ω et 10 Ω en parallèle. Calculer la résistance équivalente du montage.",
+    answer: "Démarche : Les deux résistances parallèles donnent Rp = (10 × 10)/(10 + 10) = 100/20 = 5 Ω. Elles sont ensuite en série avec 5 Ω. Req = 5 + 5 = 10 Ω. Réponse : Req = 10 Ω."
   },
 
   {
-    question: "Un liquide de masse volumique 1000 kg/m³ exerce une pression hydrostatique à 5 m de profondeur. Avec g = 10 m/s², calculer cette pression.",
-    answer: "Démarche : La pression hydrostatique est P = ρgh. Calcul : P = 1000 × 10 × 5 = 50000 Pa. Réponse : la pression hydrostatique est de 50000 Pa."
+    question: "Une source de 30 V alimente une résistance de 5 Ω en série avec un groupement parallèle de deux résistances de 10 Ω. Calculer le courant total.",
+    answer: "Démarche : Le parallèle donne Rp = 5 Ω. Donc Req = 5 + 5 = 10 Ω. Le courant total est I = 30/10 = 3 A. Réponse : I = 3 A."
   },
 
   {
-    question: "Un objet de volume 0,05 m³ est totalement immergé dans l'eau. Avec ρ = 1000 kg/m³ et g = 10 m/s², calculer la poussée d'Archimède.",
-    answer: "Démarche : FA = ρVg. Calcul : FA = 1000 × 0,05 × 10 = 500 N. Réponse : la poussée d'Archimède est de 500 N."
+    question: "Deux résistances de 20 Ω et 30 Ω sont montées en série sur une source de 100 V. Calculer la tension aux bornes de chaque résistance.",
+    answer: "Démarche : Req = 20 + 30 = 50 Ω. Courant I = 100/50 = 2 A. Donc U1 = R1I = 20 × 2 = 40 V et U2 = 30 × 2 = 60 V. Réponse : U1 = 40 V et U2 = 60 V."
   },
 
   {
-    question: "Un objet de masse 30 kg et de volume 0,02 m³ est immergé dans l'eau. Déterminer s'il monte ou descend. On prend g = 10 m/s².",
-    answer: "Démarche : Poids P = mg = 30 × 10 = 300 N. Poussée d'Archimède FA = ρVg = 1000 × 0,02 × 10 = 200 N. Comme P > FA, la résultante est dirigée vers le bas. Réponse : l'objet descend."
+    question: "Deux résistances de 8 Ω et 24 Ω sont branchées en parallèle sur une tension de 12 V. Calculer la résistance équivalente puis le courant total.",
+    answer: "Démarche : Req = (8 × 24)/(8 + 24) = 192/32 = 6 Ω. I = U/Req = 12/6 = 2 A. Réponse : Req = 6 Ω et I = 2 A."
   },
 
   {
-    question: "Un satellite se déplace autour de la Terre. Pourquoi ne tombe-t-il pas directement sur la Terre malgré l'attraction gravitationnelle ?",
-    answer: "Démarche : La gravitation fournit la force centripète tandis que la vitesse tangentielle du satellite tend à le faire avancer. La combinaison des deux produit une orbite. Réponse : le satellite est continuellement en chute libre autour de la Terre."
+    question: "Un montage comporte une résistance de 4 Ω en série avec deux résistances de 6 Ω et 3 Ω en parallèle. Il est alimenté sous 18 V. Calculer la résistance totale et le courant fourni par la source.",
+    answer: "Démarche : Le parallèle vaut Rp = (6 × 3)/(6 + 3) = 18/9 = 2 Ω. Donc Req = 4 + 2 = 6 Ω. Courant total I = 18/6 = 3 A. Réponse : Req = 6 Ω et I = 3 A."
   },
 
   {
-    question: "Deux masses de 10 kg et 20 kg sont séparées de 2 m. Calculer leur force gravitationnelle avec G = 6,67 × 10^-11 N·m²/kg².",
-    answer: "Démarche : F = Gm1m2/r². Calcul : F = 6,67 × 10^-11 × 10 × 20 / 2² = 6,67 × 10^-9 / 4 = 1,6675 × 10^-9 N. Réponse : F ≈ 1,67 × 10^-9 N."
+    question: "Trois résistances identiques de 9 Ω sont utilisées. Deux sont montées en parallèle puis l’ensemble est monté en série avec la troisième. Calculer la résistance équivalente.",
+    answer: "Démarche : Deux résistances de 9 Ω en parallèle donnent Rp = 9/2 = 4,5 Ω. En série avec la troisième : Req = 4,5 + 9 = 13,5 Ω. Réponse : Req = 13,5 Ω."
   },
 
+  // =====================================================
+  // 5. EFFET DE JOULE — 8 EXERCICES
+  // =====================================================
 
-  // =========================================================
-  // ⚡ ÉLECTRICITÉ — NIVEAU BACC II — 35 EXERCICES
-  // =========================================================
+  {
+    question: "Une résistance de 10 Ω est parcourue par un courant de 2 A pendant 5 minutes. Calculer l’énergie thermique produite par effet Joule.",
+    answer: "Démarche : E = RI²t. Avec t = 5 × 60 = 300 s. E = 10 × 2² × 300 = 10 × 4 × 300 = 12 000 J. Réponse : l’énergie produite est de 12 000 J."
+  },
 
   {
-    question: "Une résistance de 12 Ω est branchée sur une tension de 24 V. Calculer l'intensité du courant et la puissance consommée.",
-    answer: "Démarche : Loi d'Ohm : I = U/R = 24/12 = 2 A. Puis P = UI = 24 × 2 = 48 W. Réponse : I = 2 A et P = 48 W."
+    question: "Un radiateur électrique de résistance 20 Ω est alimenté sous 220 V. Calculer sa puissance puis l’énergie consommée pendant 10 minutes.",
+    answer: "Démarche : P = U²/R = 220²/20 = 2420 W. Pour 10 min = 600 s, E = Pt = 2420 × 600 = 1 452 000 J. Réponse : P = 2420 W et E = 1 452 000 J."
   },
 
   {
-    question: "Un appareil de 1200 W fonctionne sous 240 V. Calculer le courant absorbé.",
-    answer: "Démarche : P = UI, donc I = P/U. Calcul : I = 1200/240 = 5 A. Réponse : le courant est de 5 A."
+    question: "Un conducteur de résistance 5 Ω est parcouru par un courant de 4 A pendant 2 minutes. Calculer la puissance dissipée et l’énergie produite.",
+    answer: "Démarche : P = RI² = 5 × 4² = 80 W. t = 120 s. E = Pt = 80 × 120 = 9600 J. Réponse : P = 80 W et E = 9600 J."
   },
 
   {
-    question: "Une résistance de 20 Ω est traversée par un courant de 3 A pendant 10 s. Calculer l'énergie dissipée par effet Joule.",
-    answer: "Démarche : P = RI² = 20 × 3² = 180 W. Puis E = Pt = 180 × 10 = 1800 J. Réponse : l'énergie dissipée est de 1800 J."
+    question: "Une résistance dissipe une puissance de 100 W lorsqu’elle est traversée par un courant de 2 A. Déterminer sa résistance.",
+    answer: "Démarche : P = RI². Donc R = P/I² = 100/4 = 25 Ω. Réponse : R = 25 Ω."
   },
 
   {
-    question: "Trois résistances de 4 Ω, 6 Ω et 10 Ω sont montées en série sur une source de 40 V. Calculer le courant total.",
-    answer: "Démarche : Req = 4 + 6 + 10 = 20 Ω. Puis I = U/Req = 40/20 = 2 A. Réponse : le courant total est de 2 A."
+    question: "Une résistance de 44 Ω est branchée sous 220 V. Calculer le courant puis la puissance dissipée par effet Joule.",
+    answer: "Démarche : I = U/R = 220/44 = 5 A. Puis P = UI = 220 × 5 = 1100 W. Réponse : I = 5 A et P = 1100 W."
   },
 
   {
-    question: "Deux résistances de 6 Ω et 12 Ω sont montées en parallèle sur une source de 24 V. Calculer la résistance équivalente.",
-    answer: "Démarche : Req = R1R2/(R1 + R2). Calcul : Req = (6 × 12)/(6 + 12) = 72/18 = 4 Ω. Réponse : la résistance équivalente est de 4 Ω."
+    question: "Un appareil de puissance 800 W fonctionne pendant 15 minutes. Calculer l’énergie électrique consommée en joules.",
+    answer: "Démarche : t = 15 × 60 = 900 s. E = Pt = 800 × 900 = 720 000 J. Réponse : E = 720 000 J."
   },
 
   {
-    question: "Deux résistances de 6 Ω et 12 Ω sont en parallèle sous 24 V. Calculer le courant dans chaque branche.",
-    answer: "Démarche : La tension est la même dans chaque branche. Pour 6 Ω : I1 = 24/6 = 4 A. Pour 12 Ω : I2 = 24/12 = 2 A. Réponse : I1 = 4 A et I2 = 2 A."
+    question: "Une résistance de 50 Ω est traversée par un courant de 1,5 A pendant 4 minutes. Calculer l’énergie thermique dégagée.",
+    answer: "Démarche : t = 4 × 60 = 240 s. E = RI²t = 50 × 1,5² × 240 = 50 × 2,25 × 240 = 27 000 J. Réponse : E = 27 000 J."
   },
 
   {
-    question: "Deux résistances de 6 Ω et 12 Ω sont en parallèle sous 24 V. Calculer le courant total.",
-    answer: "Démarche : D'après la loi des nœuds, It = I1 + I2. On a I1 = 4 A et I2 = 2 A. Donc It = 6 A. Réponse : le courant total est de 6 A."
+    question: "Un chauffe-eau électrique de 2000 W fonctionne pendant 30 minutes. Calculer l’énergie transformée en chaleur.",
+    answer: "Démarche : 30 min = 1800 s. E = Pt = 2000 × 1800 = 3 600 000 J. Réponse : l’énergie thermique produite est de 3,6 × 10⁶ J."
   },
 
+  // =====================================================
+  // 6. CIRCUITS COMPLEXES — 10 EXERCICES
+  // =====================================================
+
   {
-    question: "Un circuit possède deux résistances de 5 Ω et 15 Ω en série sous 40 V. Calculer la tension aux bornes de chaque résistance.",
-    answer: "Démarche : Req = 5 + 15 = 20 Ω. Courant I = 40/20 = 2 A. Alors U1 = R1I = 5 × 2 = 10 V et U2 = 15 × 2 = 30 V. Réponse : U1 = 10 V et U2 = 30 V."
+    question: "Dans un circuit, un courant de 5 A arrive à un nœud. Il se divise en deux branches. La première branche reçoit 2 A. Déterminer le courant dans la deuxième branche.",
+    answer: "Démarche : D’après la loi des nœuds, le courant entrant est égal à la somme des courants sortants. 5 = 2 + I2. Donc I2 = 3 A. Réponse : le courant dans la deuxième branche est de 3 A."
   },
 
   {
-    question: "Un circuit en série possède trois résistances de 2 Ω, 4 Ω et 6 Ω et une source de 24 V. Calculer la puissance totale.",
-    answer: "Démarche : Req = 2 + 4 + 6 = 12 Ω. I = 24/12 = 2 A. Puis P = UI = 24 × 2 = 48 W. Réponse : la puissance totale est de 48 W."
+    question: "Un générateur de 24 V alimente deux résistances de 4 Ω et 8 Ω montées en série. Vérifier que la somme des tensions aux bornes des résistances est égale à la tension du générateur.",
+    answer: "Démarche : Req = 4 + 8 = 12 Ω. I = 24/12 = 2 A. U1 = 4 × 2 = 8 V. U2 = 8 × 2 = 16 V. U1 + U2 = 24 V. Réponse : la loi des mailles est vérifiée."
   },
 
   {
-    question: "Une résistance de 10 Ω dissipe une puissance de 90 W. Calculer le courant qui la traverse.",
-    answer: "Démarche : P = RI². Donc I = √(P/R). Calcul : I = √(90/10) = √9 = 3 A. Réponse : le courant est de 3 A."
+    question: "Un générateur de 30 V alimente une résistance de 5 Ω en série avec deux résistances de 10 Ω et 10 Ω en parallèle. Déterminer le courant total et les courants dans les deux branches parallèles.",
+    answer: "Démarche : Le parallèle vaut 5 Ω. Req = 5 + 5 = 10 Ω. Courant total I = 30/10 = 3 A. La tension sur la partie parallèle est U = 3 × 5 = 15 V. Chaque branche de 10 Ω reçoit I = 15/10 = 1,5 A. Vérification : 1,5 + 1,5 = 3 A. Réponse : courant total = 3 A et chaque branche = 1,5 A."
   },
 
   {
-    question: "Une résistance de 8 Ω est parcourue par un courant de 2 A. Calculer la puissance puis l'énergie dissipée en 30 s.",
-    answer: "Démarche : P = RI² = 8 × 2² = 32 W. Puis E = Pt = 32 × 30 = 960 J. Réponse : P = 32 W et E = 960 J."
+    question: "Dans une maille contenant un générateur de 12 V et deux résistances de 2 Ω et 4 Ω en série, calculer le courant en appliquant la loi des mailles.",
+    answer: "Démarche : Loi des mailles : 12 - 2I - 4I = 0. Donc 12 - 6I = 0, d’où I = 2 A. Réponse : le courant est de 2 A."
   },
 
   {
-    question: "Un appareil de 2,2 kW fonctionne pendant 3 h 30 min. Calculer l'énergie consommée en kWh.",
-    answer: "Démarche : 3 h 30 min = 3,5 h. E = Pt = 2,2 × 3,5 = 7,7 kWh. Réponse : l'énergie consommée est de 7,7 kWh."
+    question: "Un circuit comporte deux branches parallèles. La première est constituée d’une résistance de 6 Ω et la deuxième d’une résistance de 3 Ω. La tension du générateur est de 12 V. Déterminer les courants de branche et le courant total.",
+    answer: "Démarche : Dans chaque branche, U = 12 V. I1 = 12/6 = 2 A. I2 = 12/3 = 4 A. Au nœud, I = I1 + I2 = 6 A. Réponse : I1 = 2 A, I2 = 4 A et Itotal = 6 A."
   },
 
   {
-    question: "Une maison utilise un appareil de 1000 W pendant 4 h par jour durant 30 jours. Calculer l'énergie consommée en kWh.",
-    answer: "Démarche : 1000 W = 1 kW. Durée totale = 4 × 30 = 120 h. E = 1 × 120 = 120 kWh. Réponse : la consommation est de 120 kWh."
+    question: "Un circuit comporte une résistance de 2 Ω en série avec un parallèle constitué de 6 Ω et 3 Ω. Le générateur fournit 16 V. Calculer le courant total et la tension sur le parallèle.",
+    answer: "Démarche : Rp = (6 × 3)/(6 + 3) = 2 Ω. Req = 2 + 2 = 4 Ω. I = 16/4 = 4 A. La tension sur la résistance série est U1 = 2 × 4 = 8 V. Donc la tension sur le parallèle est Up = 16 - 8 = 8 V. Réponse : I = 4 A et Up = 8 V."
   },
 
   {
-    question: "Une résistance de 4 Ω est parcourue par un courant de 5 A. Calculer la tension et la puissance.",
-    answer: "Démarche : U = RI = 4 × 5 = 20 V. Puis P = UI = 20 × 5 = 100 W. Réponse : U = 20 V et P = 100 W."
+    question: "Un générateur de 20 V alimente deux résistances de 5 Ω et 15 Ω en série. Calculer le courant puis les tensions aux bornes des deux résistances.",
+    answer: "Démarche : Req = 20 Ω. I = 20/20 = 1 A. U1 = 5 × 1 = 5 V. U2 = 15 × 1 = 15 V. Vérification : 5 + 15 = 20 V. Réponse : I = 1 A, U1 = 5 V et U2 = 15 V."
   },
 
   {
-    question: "Une source de 30 V alimente deux résistances en série de 10 Ω et 20 Ω. Calculer la puissance dissipée par la résistance de 20 Ω.",
-    answer: "Démarche : Req = 10 + 20 = 30 Ω. Courant I = 30/30 = 1 A. Puissance dans R2 : P2 = R2I² = 20 × 1² = 20 W. Réponse : la puissance est de 20 W."
+    question: "Un nœud reçoit deux courants de 4 A et 3 A. Trois courants sortent du nœud : 2 A, 1 A et I. Déterminer I.",
+    answer: "Démarche : Loi des nœuds : 4 + 3 = 2 + 1 + I. Donc 7 = 3 + I, d’où I = 4 A. Réponse : I = 4 A."
   },
 
   {
-    question: "Une source de 12 V alimente deux résistances parallèles de 4 Ω et 8 Ω. Calculer la puissance totale.",
-    answer: "Démarche : Req = (4 × 8)/(4 + 8) = 32/12 = 8/3 Ω. Le courant total vaut It = 12/(8/3) = 4,5 A. Donc Pt = UIt = 12 × 4,5 = 54 W. Réponse : la puissance totale est de 54 W."
+    question: "Deux résistances de 4 Ω et 12 Ω sont montées en parallèle puis connectées en série avec une résistance de 5 Ω. Le générateur fournit 20 V. Calculer la résistance totale et le courant total.",
+    answer: "Démarche : Rp = (4 × 12)/(4 + 12) = 48/16 = 3 Ω. Req = 3 + 5 = 8 Ω. I = 20/8 = 2,5 A. Réponse : Req = 8 Ω et I = 2,5 A."
   },
 
   {
-    question: "Dans un circuit, un courant de 5 A arrive à un nœud. Deux branches sortantes transportent respectivement 2 A et I. Calculer I.",
-    answer: "Démarche : Loi des nœuds : somme des courants entrants = somme des courants sortants. Donc 5 = 2 + I. Ainsi I = 3 A. Réponse : I = 3 A."
+    question: "Dans une maille, un générateur de 18 V alimente trois résistances de 2 Ω, 4 Ω et 3 Ω en série. Calculer le courant et vérifier la loi des mailles.",
+    answer: "Démarche : Req = 2 + 4 + 3 = 9 Ω. I = 18/9 = 2 A. Les chutes de tension sont 4 V, 8 V et 6 V. Leur somme vaut 18 V. Donc 18 - 4 - 8 - 6 = 0. Réponse : I = 2 A et la loi des mailles est vérifiée."
   },
 
+  // =====================================================
+  // 7. CONDENSATEUR — 8 EXERCICES
+  // =====================================================
+
   {
-    question: "Dans une maille, une source de 24 V alimente deux résistances en série de 4 Ω et 8 Ω. Vérifier la loi des mailles et calculer les tensions aux bornes des résistances.",
-    answer: "Démarche : Req = 4 + 8 = 12 Ω. I = 24/12 = 2 A. U1 = 4 × 2 = 8 V et U2 = 8 × 2 = 16 V. Vérification : 8 + 16 = 24 V. Réponse : la loi des mailles est vérifiée."
+    question: "Un condensateur de capacité 100 μF est branché sous une tension de 12 V. Calculer la charge électrique accumulée.",
+    answer: "Démarche : Q = CU. C = 100 μF = 100 × 10⁻⁶ F. Q = 100 × 10⁻⁶ × 12 = 1,2 × 10⁻³ C. Réponse : Q = 1,2 mC."
   },
 
   {
-    question: "Une résistance de 15 Ω est branchée sous 45 V. Calculer l'énergie consommée en 2 minutes.",
-    answer: "Démarche : I = U/R = 45/15 = 3 A. Puissance P = UI = 45 × 3 = 135 W. Temps = 2 min = 120 s. E = Pt = 135 × 120 = 16200 J. Réponse : l'énergie consommée est de 16200 J."
+    question: "Un condensateur de 50 μF est chargé sous 20 V. Calculer l’énergie électrique qu’il emmagasine.",
+    answer: "Démarche : E = 1/2 CU². E = 1/2 × 50 × 10⁻⁶ × 20² = 0,01 J. Réponse : l’énergie stockée est de 0,01 J."
   },
 
   {
-    question: "Un appareil électrique de 1500 W fonctionne sous 250 V. Calculer sa résistance équivalente.",
-    answer: "Démarche : P = U²/R. Donc R = U²/P. Calcul : R = 250²/1500 = 62500/1500 ≈ 41,67 Ω. Réponse : la résistance équivalente est d'environ 41,67 Ω."
+    question: "Un condensateur porte une charge de 4 mC lorsqu’il est soumis à une tension de 20 V. Déterminer sa capacité.",
+    answer: "Démarche : C = Q/U. C = 4 × 10⁻³/20 = 2 × 10⁻⁴ F = 200 μF. Réponse : C = 200 μF."
   },
 
   {
-    question: "Un générateur de 12 V possède une résistance interne de 1 Ω et alimente une résistance externe de 5 Ω. Calculer le courant dans le circuit.",
-    answer: "Démarche : La résistance totale est Rtot = 1 + 5 = 6 Ω. Donc I = E/Rtot = 12/6 = 2 A. Réponse : le courant est de 2 A."
+    question: "Deux condensateurs de 10 μF et 20 μF sont branchés en parallèle. Calculer leur capacité équivalente.",
+    answer: "Démarche : En parallèle, Ceq = C1 + C2. Ceq = 10 + 20 = 30 μF. Réponse : Ceq = 30 μF."
   },
 
   {
-    question: "Un générateur de f.e.m. 24 V possède une résistance interne de 2 Ω et alimente une résistance de 10 Ω. Calculer la tension aux bornes de la résistance externe.",
-    answer: "Démarche : Rtot = 2 + 10 = 12 Ω. I = 24/12 = 2 A. Tension externe : U = RI = 10 × 2 = 20 V. Réponse : la tension aux bornes de la résistance externe est de 20 V."
+    question: "Deux condensateurs de 6 μF et 3 μF sont branchés en série. Calculer leur capacité équivalente.",
+    answer: "Démarche : 1/Ceq = 1/6 + 1/3 = 1/6 + 2/6 = 3/6. Donc Ceq = 2 μF. Réponse : Ceq = 2 μF."
   },
 
   {
-    question: "Un condensateur de capacité 100 μF est chargé sous une tension de 20 V. Calculer sa charge électrique.",
-    answer: "Démarche : Q = CU. Convertir 100 μF = 100 × 10^-6 F. Calcul : Q = 100 × 10^-6 × 20 = 2 × 10^-3 C. Réponse : Q = 0,002 C."
+    question: "Un condensateur de capacité 200 μF est chargé à 50 V. Calculer la charge accumulée puis l’énergie stockée.",
+    answer: "Démarche : Q = CU = 200 × 10⁻⁶ × 50 = 0,01 C. Énergie : E = 1/2 CU² = 1/2 × 200 × 10⁻⁶ × 2500 = 0,25 J. Réponse : Q = 0,01 C et E = 0,25 J."
   },
 
   {
-    question: "Un condensateur de 50 μF est soumis à une tension de 100 V. Calculer l'énergie stockée.",
-    answer: "Démarche : Ec = 1/2 CU². Convertir 50 μF = 50 × 10^-6 F. Calcul : Ec = 1/2 × 50 × 10^-6 × 100² = 0,25 J. Réponse : l'énergie stockée est de 0,25 J."
+    question: "Trois condensateurs de 4 μF sont montés en parallèle. Ils sont ensuite branchés sous 12 V. Calculer la capacité équivalente et la charge totale.",
+    answer: "Démarche : Ceq = 4 + 4 + 4 = 12 μF. Q = CeqU = 12 × 10⁻⁶ × 12 = 144 × 10⁻⁶ C = 144 μC. Réponse : Ceq = 12 μF et Q = 144 μC."
   },
 
   {
-    question: "Deux condensateurs de 10 μF et 20 μF sont montés en parallèle. Calculer la capacité équivalente.",
-    answer: "Démarche : En parallèle, Ceq = C1 + C2. Calcul : Ceq = 10 + 20 = 30 μF. Réponse : la capacité équivalente est de 30 μF."
+    question: "Un condensateur de 80 μF emmagasine une charge de 2,4 mC. Calculer la tension à ses bornes puis l’énergie stockée.",
+    answer: "Démarche : U = Q/C = 2,4 × 10⁻³/(80 × 10⁻⁶) = 30 V. Puis E = 1/2 QU = 1/2 × 2,4 × 10⁻³ × 30 = 0,036 J. Réponse : U = 30 V et E = 0,036 J."
   },
+
+  // =====================================================
+  // 8. COURANT CONTINU — 8 EXERCICES
+  // =====================================================
 
   {
-    question: "Deux condensateurs de 10 μF et 20 μF sont montés en série. Calculer leur capacité équivalente.",
-    answer: "Démarche : En série, 1/Ceq = 1/C1 + 1/C2. Donc Ceq = C1C2/(C1 + C2) = (10 × 20)/30 = 6,67 μF. Réponse : Ceq ≈ 6,67 μF."
+    question: "Une pile possède une force électromotrice de 12 V et une résistance interne de 1 Ω. Elle alimente une résistance extérieure de 5 Ω. Calculer le courant fourni par la pile.",
+    answer: "Démarche : Le courant est I = E/(R + r). Donc I = 12/(5 + 1) = 2 A. Réponse : le courant fourni est de 2 A."
   },
 
   {
-    question: "Une résistance de 100 Ω est traversée par un courant de 0,2 A. Calculer la puissance et l'énergie dissipée pendant 1 minute.",
-    answer: "Démarche : P = RI² = 100 × 0,2² = 4 W. Temps = 60 s. E = Pt = 4 × 60 = 240 J. Réponse : P = 4 W et E = 240 J."
+    question: "Une source possède une f.é.m. de 24 V et une résistance interne de 2 Ω. Elle débite un courant de 3 A. Calculer la résistance extérieure.",
+    answer: "Démarche : E = I(R + r). Donc R + r = E/I = 24/3 = 8 Ω. Ainsi R = 8 - 2 = 6 Ω. Réponse : la résistance extérieure est de 6 Ω."
   },
 
   {
-    question: "Un appareil de 800 W fonctionne sous 200 V pendant 15 minutes. Calculer le courant puis l'énergie consommée en joules.",
-    answer: "Démarche : I = P/U = 800/200 = 4 A. Temps = 15 × 60 = 900 s. E = Pt = 800 × 900 = 720000 J. Réponse : I = 4 A et E = 720000 J."
+    question: "Une batterie de f.é.m. 12 V possède une résistance interne de 0,5 Ω et alimente une résistance de 5,5 Ω. Calculer le courant et la tension disponible aux bornes de la résistance extérieure.",
+    answer: "Démarche : I = E/(R+r) = 12/(5,5+0,5) = 2 A. La tension utile est U = RI = 5,5 × 2 = 11 V. Réponse : I = 2 A et U = 11 V."
   },
 
   {
-    question: "Une source de 18 V alimente trois résistances en série de 3 Ω, 6 Ω et 9 Ω. Calculer le courant et la tension sur chacune.",
-    answer: "Démarche : Req = 3 + 6 + 9 = 18 Ω. I = 18/18 = 1 A. Donc U1 = 3 V, U2 = 6 V et U3 = 9 V. Vérification : 3 + 6 + 9 = 18 V. Réponse : I = 1 A et les tensions sont 3 V, 6 V et 9 V."
+    question: "Un générateur de f.é.m. 18 V et de résistance interne 1 Ω débite un courant de 2 A. Calculer la puissance fournie par le générateur et la puissance dissipée dans sa résistance interne.",
+    answer: "Démarche : Puissance totale fournie par la f.é.m. : P = EI = 18 × 2 = 36 W. Pertes internes : Pinterne = rI² = 1 × 2² = 4 W. Réponse : puissance fournie = 36 W et pertes internes = 4 W."
   },
 
   {
-    question: "Un circuit possède une résistance de 10 Ω en série avec deux résistances parallèles de 20 Ω et 20 Ω. Il est alimenté sous 30 V. Calculer le courant total.",
-    answer: "Démarche : Les deux résistances parallèles donnent Rp = 20/2 = 10 Ω. Donc Req = 10 + 10 = 20 Ω. Courant total : I = 30/20 = 1,5 A. Réponse : le courant total est de 1,5 A."
+    question: "Une batterie de 9 V possède une résistance interne de 0,5 Ω et alimente une résistance de 8,5 Ω. Calculer le courant puis la tension aux bornes de la batterie en fonctionnement.",
+    answer: "Démarche : I = 9/(8,5 + 0,5) = 1 A. La tension aux bornes est U = E - rI = 9 - 0,5 × 1 = 8,5 V. Réponse : I = 1 A et U = 8,5 V."
   },
 
   {
-    question: "Dans le circuit précédent, calculer la tension aux bornes du groupe parallèle.",
-    answer: "Démarche : Le courant total est 1,5 A et la résistance série vaut 10 Ω. La chute de tension sur cette résistance est U1 = RI = 10 × 1,5 = 15 V. La source fournit 30 V, donc Up = 30 - 15 = 15 V. Réponse : la tension du groupe parallèle est de 15 V."
+    question: "Un générateur fournit un courant continu de 4 A sous une tension de 15 V pendant 10 minutes. Calculer l’énergie électrique fournie.",
+    answer: "Démarche : P = UI = 15 × 4 = 60 W. t = 10 × 60 = 600 s. E = Pt = 60 × 600 = 36 000 J. Réponse : E = 36 000 J."
   },
 
   {
-    question: "Un appareil de puissance utile 900 W reçoit une puissance électrique de 1200 W. Calculer son rendement.",
-    answer: "Démarche : η = Pu/Pr × 100. Calcul : η = 900/1200 × 100 = 75 %. Réponse : le rendement est de 75 %."
+    question: "Une source de 20 V possède une résistance interne de 2 Ω et alimente une résistance extérieure de 8 Ω. Calculer le courant, la tension aux bornes de la charge et la puissance reçue par la charge.",
+    answer: "Démarche : I = 20/(8+2) = 2 A. U = RI = 8 × 2 = 16 V. Pcharge = UI = 16 × 2 = 32 W. Réponse : I = 2 A, U = 16 V et P = 32 W."
   },
 
   {
-    question: "Un moteur électrique fonctionne sous 220 V avec un courant de 5 A et possède un rendement de 80 %. Calculer sa puissance mécanique utile.",
-    answer: "Démarche : Puissance électrique reçue : Pe = UI = 220 × 5 = 1100 W. Puissance utile : Pu = ηPe = 0,80 × 1100 = 880 W. Réponse : la puissance mécanique utile est de 880 W."
+    question: "Une batterie possède une f.é.m. de 12 V et une résistance interne de 1 Ω. Pour quel courant la puissance dissipée dans la résistance interne est-elle de 9 W ?",
+    answer: "Démarche : Pinterne = rI². Donc 9 = 1 × I². Ainsi I² = 9 et I = 3 A. Réponse : le courant est de 3 A."
   },
 
+  // =====================================================
+  // 9. CHAMP D’UN SOLÉNOÏDE — 8 EXERCICES
+  // =====================================================
 
-  // =========================================================
-  // 🧲 MAGNÉTISME / ÉLECTROMAGNÉTISME — 25 EXERCICES
-  // =========================================================
+  {
+    question: "Un solénoïde de longueur 0,50 m possède 1000 spires et est parcouru par un courant de 2 A. Calculer le champ magnétique intérieur. On prendra μ0 = 4π × 10⁻⁷ T·m/A.",
+    answer: "Démarche : B = μ0(N/L)I. N/L = 1000/0,50 = 2000 spires/m. Donc B = 4π × 10⁻⁷ × 2000 × 2 ≈ 5,03 × 10⁻³ T. Réponse : B ≈ 5,03 mT."
+  },
 
   {
-    question: "Une charge de 2 × 10^-6 C se déplace à 3 × 10^4 m/s perpendiculairement à un champ magnétique de 0,5 T. Calculer la force magnétique.",
-    answer: "Démarche : F = qvB sin(θ). Comme θ = 90°, sin(90°) = 1. Calcul : F = 2 × 10^-6 × 3 × 10^4 × 0,5 = 3 × 10^-2 N. Réponse : F = 0,03 N."
+    question: "Un solénoïde de 0,20 m comporte 500 spires et est parcouru par un courant de 1,5 A. Calculer son champ magnétique.",
+    answer: "Démarche : N/L = 500/0,20 = 2500 spires/m. B = μ0nI = 4π × 10⁻⁷ × 2500 × 1,5 ≈ 4,71 × 10⁻³ T. Réponse : B ≈ 4,71 mT."
   },
 
   {
-    question: "Une charge de 4 × 10^-6 C se déplace à 2 × 10^5 m/s perpendiculairement à un champ de 0,2 T. Calculer la force magnétique.",
-    answer: "Démarche : F = qvB. Calcul : F = 4 × 10^-6 × 2 × 10^5 × 0,2 = 0,16 N. Réponse : la force magnétique est de 0,16 N."
+    question: "Un solénoïde de 0,40 m doit produire un champ de 2 × 10⁻³ T avec un courant de 1 A. Déterminer le nombre de spires nécessaires.",
+    answer: "Démarche : B = μ0(N/L)I. Donc N = BL/(μ0I). N = (2 × 10⁻³ × 0,40)/(4π × 10⁻⁷ × 1) ≈ 637 spires. Réponse : il faut environ 637 spires."
   },
 
   {
-    question: "Un conducteur de longueur 0,4 m est parcouru par un courant de 5 A dans un champ magnétique de 0,8 T, perpendiculairement au champ. Calculer la force.",
-    answer: "Démarche : F = BIL sin(θ). À 90°, sin(90°) = 1. Calcul : F = 0,8 × 5 × 0,4 = 1,6 N. Réponse : la force magnétique est de 1,6 N."
+    question: "Un solénoïde possède 2000 spires réparties sur une longueur de 1 m. Quel courant faut-il pour obtenir un champ de 5 mT ?",
+    answer: "Démarche : I = B/(μ0N/L). Ici N/L = 2000 m⁻¹. I = 5 × 10⁻³/(4π × 10⁻⁷ × 2000) ≈ 1,99 A. Réponse : I ≈ 1,99 A."
   },
 
   {
-    question: "Un conducteur de 0,5 m placé perpendiculairement à un champ de 0,6 T subit une force de 3 N. Si le courant vaut 10 A, vérifier la valeur de la force.",
-    answer: "Démarche : F = BIL. Calcul : F = 0,6 × 10 × 0,5 = 3 N. Réponse : la valeur calculée confirme une force de 3 N."
+    question: "Deux solénoïdes ont le même nombre de spires et sont parcourus par le même courant. Le premier mesure 20 cm et le second 40 cm. Comparer leurs champs magnétiques intérieurs.",
+    answer: "Démarche : B = μ0(N/L)I. À N et I constants, B est inversement proportionnel à L. Le deuxième solénoïde est deux fois plus long, donc son champ est deux fois plus faible. Réponse : B2 = B1/2."
   },
 
   {
-    question: "Un conducteur de 2 m parcouru par un courant de 4 A subit une force de 8 N dans un champ perpendiculaire. Calculer le champ magnétique.",
-    answer: "Démarche : F = BIL, donc B = F/(IL). Calcul : B = 8/(4 × 2) = 1 T. Réponse : le champ magnétique vaut 1 T."
+    question: "Un solénoïde de 0,30 m possède 1500 spires. Il est parcouru par un courant de 0,8 A. Calculer le nombre de spires par mètre puis le champ magnétique.",
+    answer: "Démarche : n = N/L = 1500/0,30 = 5000 spires/m. B = μ0nI = 4π × 10⁻⁷ × 5000 × 0,8 ≈ 5,03 × 10⁻³ T. Réponse : n = 5000 spires/m et B ≈ 5,03 mT."
   },
 
   {
-    question: "Une bobine de 200 spires subit une variation de flux de 0,4 Wb à 0,1 Wb en 0,5 s. Calculer la valeur absolue de la f.e.m. moyenne induite.",
-    answer: "Démarche : |e| = N|ΔΦ|/Δt. Variation : |ΔΦ| = |0,1 - 0,4| = 0,3 Wb. Calcul : e = 200 × 0,3/0,5 = 120 V. Réponse : la f.e.m. moyenne est de 120 V."
+    question: "Le champ magnétique au centre d’un solénoïde est de 3 mT lorsqu’il est parcouru par un courant de 2 A. Si le courant est doublé sans modifier le solénoïde, quel sera le nouveau champ ?",
+    answer: "Démarche : Pour un solénoïde fixe, B est proportionnel à I. Si I est multiplié par 2, B est aussi multiplié par 2. B2 = 2 × 3 = 6 mT. Réponse : B = 6 mT."
   },
 
   {
-    question: "Une bobine de 500 spires voit son flux magnétique varier de 0,02 Wb à 0,08 Wb en 0,2 s. Calculer la f.e.m. induite moyenne.",
-    answer: "Démarche : e = NΔΦ/Δt. ΔΦ = 0,08 - 0,02 = 0,06 Wb. Calcul : e = 500 × 0,06/0,2 = 150 V. Réponse : la f.e.m. moyenne est de 150 V."
+    question: "Un solénoïde possède 800 spires sur une longueur de 0,40 m. Il produit un champ de 2,01 mT. Déterminer approximativement le courant qui le traverse.",
+    answer: "Démarche : B = μ0(N/L)I. Donc I = B/[μ0(N/L)]. N/L = 800/0,40 = 2000 m⁻¹. I = 2,01 × 10⁻³/(4π × 10⁻⁷ × 2000) ≈ 0,80 A. Réponse : I ≈ 0,80 A."
   },
 
+  // =====================================================
+  // 10. INDUCTION ÉLECTROMAGNÉTIQUE — 10 EXERCICES
+  // =====================================================
+
   {
-    question: "Une bobine de 100 spires est traversée par un flux de 0,05 Wb. Le flux devient nul en 0,1 s. Calculer la f.e.m. moyenne induite.",
-    answer: "Démarche : |e| = N|ΔΦ|/Δt. ΔΦ = 0 - 0,05 = -0,05 Wb. Valeur absolue : 0,05 Wb. Calcul : e = 100 × 0,05/0,1 = 50 V. Réponse : la f.e.m. moyenne est de 50 V."
+    question: "Une bobine de 200 spires voit son flux magnétique moyen passer de 0,01 Wb à 0,04 Wb en 0,5 s. Calculer la valeur absolue de la f.é.m. moyenne induite.",
+    answer: "Démarche : |e| = N|ΔΦ|/Δt. ΔΦ = 0,04 - 0,01 = 0,03 Wb. Donc |e| = 200 × 0,03/0,5 = 12 V. Réponse : la f.é.m. moyenne induite est de 12 V."
   },
 
   {
-    question: "Une surface de 0,5 m² est placée perpendiculairement à un champ magnétique de 2 T. Calculer le flux magnétique.",
-    answer: "Démarche : Φ = BS cos(θ). Pour une surface perpendiculaire au champ, θ = 0° entre B et la normale à la surface. Donc cos(0°) = 1. Calcul : Φ = 2 × 0,5 = 1 Wb. Réponse : le flux est de 1 Wb."
+    question: "Une bobine de 100 spires est soumise à un champ magnétique uniforme. Le flux par spire varie de 0,02 Wb à 0 en 0,1 s. Calculer la f.é.m. moyenne induite.",
+    answer: "Démarche : |ΔΦ| = 0,02 Wb. |e| = N|ΔΦ|/Δt = 100 × 0,02/0,1 = 20 V. Réponse : |e| = 20 V."
   },
 
   {
-    question: "Un champ magnétique de 0,8 T traverse une surface de 2 m². La normale à la surface fait un angle de 60° avec le champ. Calculer le flux.",
-    answer: "Démarche : Φ = BS cos(θ). cos(60°) = 0,5. Calcul : Φ = 0,8 × 2 × 0,5 = 0,8 Wb. Réponse : le flux est de 0,8 Wb."
+    question: "Une barre conductrice de longueur 0,50 m se déplace à 8 m/s perpendiculairement à un champ magnétique de 0,4 T. Calculer la f.é.m. induite.",
+    answer: "Démarche : Pour un déplacement perpendiculaire, e = BLv. Donc e = 0,4 × 0,50 × 8 = 1,6 V. Réponse : la f.é.m. induite est de 1,6 V."
   },
 
   {
-    question: "Un solénoïde de 1000 spires possède une longueur de 0,5 m et est parcouru par un courant de 2 A. Calculer son champ magnétique dans le vide avec μ0 = 4π × 10^-7 T·m/A.",
-    answer: "Démarche : B = μ0NI/L. Calcul : B = 4π × 10^-7 × 1000 × 2/0,5 = 16π × 10^-4 T ≈ 5,03 × 10^-3 T. Réponse : B ≈ 5,03 mT."
+    question: "Une barre de longueur 0,80 m se déplace à 5 m/s dans un champ magnétique de 0,6 T, perpendiculairement au champ. Calculer la tension induite.",
+    answer: "Démarche : e = BLv. Donc e = 0,6 × 0,80 × 5 = 2,4 V. Réponse : e = 2,4 V."
   },
 
   {
-    question: "Un solénoïde possède 500 spires sur une longueur de 0,25 m et est parcouru par un courant de 1,5 A. Calculer son champ magnétique dans le vide.",
-    answer: "Démarche : B = μ0NI/L. Calcul : B = 4π × 10^-7 × 500 × 1,5/0,25 ≈ 3,77 × 10^-3 T. Réponse : B ≈ 3,77 mT."
+    question: "Une bobine de 500 spires est placée dans un champ magnétique. Le flux par spire augmente de 0,005 Wb à 0,025 Wb en 0,2 s. Déterminer la f.é.m. induite moyenne.",
+    answer: "Démarche : ΔΦ = 0,025 - 0,005 = 0,020 Wb. |e| = NΔΦ/Δt = 500 × 0,020/0,2 = 50 V. Réponse : |e| = 50 V."
   },
 
   {
-    question: "Un transformateur possède 200 spires au primaire et 1000 au secondaire. La tension primaire est de 24 V. Calculer la tension secondaire.",
-    answer: "Démarche : Us/Up = Ns/Np. Donc Us = Up × Ns/Np. Calcul : Us = 24 × 1000/200 = 120 V. Réponse : la tension secondaire est de 120 V."
+    question: "Une bobine de 250 spires possède un flux magnétique de 4 × 10⁻³ Wb par spire. Le flux devient nul en 0,05 s. Calculer la f.é.m. moyenne induite.",
+    answer: "Démarche : |e| = N|ΔΦ|/Δt = 250 × 4 × 10⁻³/0,05 = 20 V. Réponse : |e| = 20 V."
   },
 
   {
-    question: "Un transformateur abaisseur reçoit 240 V au primaire et possède 1200 spires. Le secondaire possède 200 spires. Calculer la tension secondaire.",
-    answer: "Démarche : Us = Up × Ns/Np. Calcul : Us = 240 × 200/1200 = 40 V. Réponse : la tension secondaire est de 40 V."
+    question: "Une barre de longueur 0,25 m se déplace à 12 m/s dans un champ magnétique de 0,8 T. Le mouvement est perpendiculaire au champ. Calculer la f.é.m. induite.",
+    answer: "Démarche : e = BLv = 0,8 × 0,25 × 12 = 2,4 V. Réponse : e = 2,4 V."
   },
 
   {
-    question: "Un transformateur idéal fournit 12 V au secondaire avec un courant de 5 A. Si le primaire reçoit 120 V, calculer le courant primaire.",
-    answer: "Démarche : Pour un transformateur idéal, la puissance est conservée : UpIp = UsIs. Donc Ip = UsIs/Up. Calcul : Ip = 12 × 5/120 = 0,5 A. Réponse : le courant primaire est de 0,5 A."
+    question: "Une bobine comporte 1000 spires. Son flux magnétique passe de 6 × 10⁻³ Wb à 2 × 10⁻³ Wb en 0,4 s. Calculer la valeur absolue de la f.é.m. induite moyenne.",
+    answer: "Démarche : |ΔΦ| = |2 × 10⁻³ - 6 × 10⁻³| = 4 × 10⁻³ Wb. |e| = 1000 × 4 × 10⁻³/0,4 = 10 V. Réponse : |e| = 10 V."
   },
 
   {
-    question: "Un transformateur possède 500 spires au primaire et 2500 au secondaire. Si le primaire reçoit 100 V, calculer le rapport de transformation et la tension secondaire.",
-    answer: "Démarche : Rapport Ns/Np = 2500/500 = 5. Puis Us = Up × 5 = 100 × 5 = 500 V. Réponse : le rapport est 5 et la tension secondaire est de 500 V."
+    question: "Une barre conductrice de longueur 0,40 m doit produire une f.é.m. de 3,2 V lorsqu’elle se déplace à 10 m/s perpendiculairement au champ. Déterminer l’intensité du champ magnétique nécessaire.",
+    answer: "Démarche : e = BLv. Donc B = e/(Lv) = 3,2/(0,40 × 10) = 0,8 T. Réponse : B = 0,8 T."
   },
 
   {
-    question: "Un moteur électrique reçoit une puissance électrique de 1500 W et fournit une puissance mécanique de 1200 W. Calculer son rendement.",
-    answer: "Démarche : η = Pu/Pr × 100. Calcul : η = 1200/1500 × 100 = 80 %. Réponse : le rendement du moteur est de 80 %."
+    question: "Une bobine est placée dans un champ magnétique variable. Son flux par spire passe de 0,03 Wb à 0,01 Wb en 0,1 s. La bobine possède 300 spires. Déterminer la f.é.m. moyenne induite et préciser que son sens s’oppose à la variation du flux.",
+    answer: "Démarche : |ΔΦ| = 0,02 Wb. |e| = N|ΔΦ|/Δt = 300 × 0,02/0,1 = 60 V. D’après la loi de Lenz, le courant induit crée un champ qui s’oppose à la diminution du flux. Réponse : |e| = 60 V et le sens du courant s’oppose à la diminution du flux."
   },
+
+  // =====================================================
+  // 11. FORCE SUR UN CONDUCTEUR — 10 EXERCICES
+  // =====================================================
 
   {
-    question: "Un générateur reçoit une puissance mécanique de 2000 W et fournit 1600 W de puissance électrique. Calculer les pertes et le rendement.",
-    answer: "Démarche : Pertes = 2000 - 1600 = 400 W. Rendement : η = 1600/2000 × 100 = 80 %. Réponse : les pertes sont de 400 W et le rendement est de 80 %."
+    question: "Un conducteur de longueur 0,50 m est parcouru par un courant de 4 A et placé perpendiculairement dans un champ magnétique de 0,8 T. Calculer la force magnétique exercée sur le conducteur.",
+    answer: "Démarche : F = BIL sinθ. Le conducteur est perpendiculaire au champ, donc θ = 90° et sin90° = 1. F = 0,8 × 4 × 0,50 = 1,6 N. Réponse : F = 1,6 N."
   },
 
   {
-    question: "Une charge de 3 × 10^-6 C se déplace parallèlement à un champ magnétique. Quelle est la force magnétique exercée sur elle ?",
-    answer: "Démarche : F = qvB sin(θ). Pour un déplacement parallèle au champ, θ = 0° et sin(0°) = 0. Donc F = 0. Réponse : la force magnétique est nulle."
+    question: "Un conducteur de longueur 0,20 m est parcouru par un courant de 3 A dans un champ magnétique de 0,5 T. Le conducteur est perpendiculaire au champ. Déterminer la force exercée.",
+    answer: "Démarche : F = BIL. F = 0,5 × 3 × 0,20 = 0,30 N. Réponse : F = 0,30 N."
   },
 
   {
-    question: "Une particule chargée entre perpendiculairement dans un champ magnétique uniforme. Pourquoi sa trajectoire peut-elle devenir circulaire ?",
-    answer: "Démarche : La force magnétique est perpendiculaire à la vitesse et joue le rôle de force centripète. On écrit qvB = mv²/r. En simplifiant, r = mv/(qB). Réponse : la force magnétique courbe continuellement la trajectoire et peut produire un mouvement circulaire."
+    question: "Un conducteur de 0,80 m placé perpendiculairement à un champ magnétique de 0,25 T subit une force de 2 N. Déterminer le courant qui le traverse.",
+    answer: "Démarche : F = BIL. Donc I = F/(BL) = 2/(0,25 × 0,80) = 10 A. Réponse : I = 10 A."
   },
 
   {
-    question: "Un proton possède une masse de 1,67 × 10^-27 kg, une charge de 1,6 × 10^-19 C et se déplace à 2 × 10^6 m/s dans un champ de 0,5 T perpendiculaire à sa vitesse. Calculer le rayon de sa trajectoire.",
-    answer: "Démarche : Pour un mouvement circulaire, r = mv/(qB). Calcul : r = (1,67 × 10^-27 × 2 × 10^6)/(1,6 × 10^-19 × 0,5) ≈ 0,0418 m. Réponse : le rayon est d'environ 4,18 cm."
+    question: "Un fil parcouru par un courant de 5 A est soumis à une force magnétique de 1,5 N lorsqu’il est perpendiculaire à un champ de 0,3 T. Déterminer sa longueur située dans le champ.",
+    answer: "Démarche : F = BIL. Donc L = F/(BI) = 1,5/(0,3 × 5) = 1 m. Réponse : L = 1 m."
   },
 
   {
-    question: "Selon la loi de Lenz, dans quel sens circule le courant induit lorsqu'un flux magnétique à travers une bobine augmente ?",
-    answer: "Démarche : La loi de Lenz indique que le courant induit crée un champ magnétique qui s'oppose à la variation du flux qui l'a produit. Réponse : le courant induit circule dans le sens qui s'oppose à l'augmentation du flux."
+    question: "Un conducteur de longueur 0,40 m est parcouru par un courant de 6 A dans un champ magnétique de 0,5 T. Le conducteur fait un angle de 30° avec le champ. Calculer la force magnétique.",
+    answer: "Démarche : F = BIL sinθ. F = 0,5 × 6 × 0,40 × sin30°. Comme sin30° = 0,5, F = 0,6 N. Réponse : F = 0,6 N."
   },
 
   {
-    question: "Une bobine de 400 spires possède une surface de 0,02 m². Le champ magnétique passe de 0,1 T à 0,5 T en 0,4 s, perpendiculairement à la bobine. Calculer la f.e.m. moyenne induite.",
-    answer: "Démarche : e = NΔΦ/Δt et Φ = BS. Donc ΔΦ = SΔB = 0,02 × (0,5 - 0,1) = 0,008 Wb. Puis e = 400 × 0,008/0,4 = 8 V. Réponse : la f.e.m. moyenne est de 8 V."
+    question: "Un conducteur de longueur 0,60 m est parcouru par un courant de 2 A. Il est placé dans un champ magnétique de 0,4 T sous un angle de 90°. Calculer la force puis déterminer cette force si l’angle devient 0°.",
+    answer: "Démarche : À 90°, F = BIL = 0,4 × 2 × 0,60 = 0,48 N. À 0°, sin0° = 0, donc F = 0. Réponse : F = 0,48 N à 90° et F = 0 N à 0°."
   },
 
   {
-    question: "Une barre conductrice de longueur 0,8 m se déplace à 5 m/s perpendiculairement à un champ magnétique de 0,4 T. Calculer la f.e.m. motrice induite.",
-    answer: "Démarche : Pour une barre en mouvement perpendiculaire au champ, e = BLv. Calcul : e = 0,4 × 0,8 × 5 = 1,6 V. Réponse : la f.e.m. induite est de 1,6 V."
+    question: "Un conducteur de longueur 0,25 m est parcouru par un courant de 8 A dans un champ magnétique de 0,75 T. Il est perpendiculaire au champ. Calculer la force exercée.",
+    answer: "Démarche : F = BIL = 0,75 × 8 × 0,25 = 1,5 N. Réponse : F = 1,5 N."
   },
 
   {
-    question: "Une barre de longueur 0,5 m se déplace à 10 m/s dans un champ magnétique de 0,6 T. Calculer la f.e.m. induite lorsqu'elle se déplace perpendiculairement au champ.",
-    answer: "Démarche : e = BLv. Calcul : e = 0,6 × 0,5 × 10 = 3 V. Réponse : la f.e.m. induite est de 3 V."
+    question: "Un conducteur placé dans un champ magnétique de 0,6 T subit une force de 1,8 N lorsqu’il est parcouru par un courant de 3 A et placé perpendiculairement au champ. Déterminer sa longueur.",
+    answer: "Démarche : L = F/(BI) = 1,8/(0,6 × 3) = 1 m. Réponse : la longueur du conducteur dans le champ est de 1 m."
   },
 
   {
-    question: "Une bobine de 250 spires possède une surface de 0,04 m². Le champ magnétique de 0,2 T disparaît complètement en 0,1 s. Calculer la f.e.m. moyenne induite.",
-    answer: "Démarche : Flux initial Φ = BS = 0,2 × 0,04 = 0,008 Wb. Le flux final est 0. Donc |ΔΦ| = 0,008 Wb. Loi de Faraday : e = N|ΔΦ|/Δt = 250 × 0,008/0,1 = 20 V. Réponse : la f.e.m. moyenne est de 20 V."
+    question: "Un conducteur de longueur 0,50 m et parcouru par un courant de 4 A subit une force de 0,5 N dans un champ de 0,5 T. Déterminer l’angle entre le conducteur et le champ magnétique.",
+    answer: "Démarche : F = BIL sinθ. Donc sinθ = F/(BIL) = 0,5/(0,5 × 4 × 0,5) = 0,5. L’angle correspondant est θ = 30°. Réponse : θ = 30°."
   },
 
   {
-    question: "Un transformateur idéal possède 150 spires au primaire et 600 au secondaire. Il est alimenté sous 30 V et le secondaire délivre 2 A. Calculer la tension secondaire et le courant primaire.",
-    answer: "Démarche : Us = Up × Ns/Np = 30 × 600/150 = 120 V. Pour un transformateur idéal, UpIp = UsIs. Donc Ip = 120 × 2/30 = 8 A. Réponse : Us = 120 V et Ip = 8 A."
+    question: "Un conducteur de longueur 0,40 m est parcouru par un courant de 5 A dans un champ magnétique uniforme de 0,2 T. Comparer la force magnétique lorsqu’il est perpendiculaire au champ puis lorsqu’il fait un angle de 60° avec le champ.",
+    answer: "Démarche : À 90° : F1 = BIL = 0,2 × 5 × 0,40 = 0,40 N. À 60° : F2 = BIL sin60° = 0,40 × 0,866 ≈ 0,346 N. Réponse : F1 = 0,40 N et F2 ≈ 0,346 N."
   }
 
 ];
