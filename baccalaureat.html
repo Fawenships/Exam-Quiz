@@ -3,30 +3,46 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <meta name="theme-color" content="#24113f">
+
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="icons/icon-192.png">
 
-  <title>Baccalauréat — Exam Quiz Haiti</title>
+  <title>Catégories — ExamQuiz Haiti</title>
 
   <meta
     name="description"
-    content="Retrouvez les sujets officiels du Baccalauréat haïtien, classés par matière, sur Exam Quiz Haiti."
+    content="Découvrez les catégories de révision d'ExamQuiz Haiti, le programme détaillé des cours de NS4, les sujets du Baccalauréat et les concours d'admission universitaire."
   >
 
-  <link rel="canonical" href="https://examquizhaiti.com/baccalaureat.html">
+  <link
+    rel="canonical"
+    href="https://examquizhaiti.com/categories.html"
+  >
 
-  <meta property="og:title" content="Baccalauréat — Exam Quiz Haiti">
+  <meta
+    property="og:title"
+    content="Catégories — ExamQuiz Haiti"
+  >
+
   <meta
     property="og:description"
-    content="Les sujets officiels du Baccalauréat haïtien, classés par matière."
+    content="Révise les programmes scolaires, les sujets du Baccalauréat et les concours d'admission universitaire sur ExamQuiz Haiti."
   >
+
   <meta
     property="og:image"
     content="https://examquizhaiti.com/icons/icon-192.png"
   >
-  <meta property="og:url" content="https://examquizhaiti.com/baccalaureat.html">
+
+  <meta
+    property="og:url"
+    content="https://examquizhaiti.com/categories.html"
+  >
+
   <meta property="og:type" content="website">
+
 
   <style>
 
@@ -35,19 +51,23 @@
       --purple2:#4b2481;
       --blue:#1764c0;
       --blue2:#2f80ed;
+
       --light:#f7f8fc;
       --text:#171717;
       --muted:#666;
       --card:#fff;
     }
 
+
     *{
       box-sizing:border-box;
     }
 
+
     html{
       scroll-behavior:smooth;
     }
+
 
     body{
       margin:0;
@@ -56,38 +76,48 @@
       background:var(--light);
     }
 
+
     button,
     a{
       font:inherit;
     }
+
 
     a{
       text-decoration:none;
       color:inherit;
     }
 
-    /* =========================
-       HEADER (identique au site)
-    ========================= */
+
+    /* =========================================
+       HEADER
+    ========================================= */
 
     .site-header{
       position:sticky;
       top:0;
       z-index:1000;
+
       height:76px;
+
       background:var(--purple);
+
       display:flex;
       align-items:center;
       justify-content:space-between;
+
       padding:0 6%;
+
       box-shadow:0 2px 12px rgba(0,0,0,.12);
     }
+
 
     .logo{
       display:flex;
       align-items:center;
       min-width:0;
     }
+
 
     .logo img{
       width:170px;
@@ -96,18 +126,22 @@
       display:block;
     }
 
+
     .desktop-nav{
       display:flex;
       align-items:center;
       gap:24px;
+
       color:#fff;
       font-size:15px;
     }
+
 
     .desktop-nav a{
       opacity:.9;
       transition:.2s;
     }
+
 
     .desktop-nav a:hover,
     .desktop-nav a.active{
@@ -115,391 +149,661 @@
       color:#7eb5ff;
     }
 
+
+    /* =========================================
+       MENU MOBILE
+    ========================================= */
+
     .menu-btn{
       display:none;
+
       border:0;
       background:transparent;
+
       color:#fff;
+
       font-size:34px;
       line-height:1;
+
       cursor:pointer;
+
       padding:4px;
     }
 
+
     .mobile-nav{
       display:none;
+
       position:absolute;
+
       top:76px;
       left:0;
       right:0;
+
       background:var(--purple);
+
       padding:14px 7%;
+
       box-shadow:0 8px 18px rgba(0,0,0,.18);
     }
+
 
     .mobile-nav.open{
       display:block;
     }
 
+
     .mobile-nav a{
       display:block;
+
       color:#fff;
+
       padding:14px 0;
+
       border-bottom:1px solid rgba(255,255,255,.1);
     }
 
-    /* =========================
-       BANNIÈRE DE PAGE
-    ========================= */
+
+    /* =========================================
+       HERO
+    ========================================= */
 
     .page-hero{
       padding:64px 20px 74px;
+
       text-align:center;
+
       color:#fff;
+
       background:linear-gradient(
         155deg,
         #54319a 0%,
         #324caa 48%,
         #155db7 100%
       );
+
       position:relative;
+
       overflow:hidden;
     }
 
-    .page-hero:before{
+
+    .page-hero::before{
       content:"";
+
       position:absolute;
+
       border-radius:50%;
+
       width:340px;
       height:340px;
+
       top:-180px;
       right:-100px;
+
       background:rgba(255,255,255,.06);
     }
 
+
     .page-hero-content{
-      max-width:700px;
+      max-width:760px;
+
       margin:0 auto;
+
       position:relative;
+
       z-index:1;
     }
 
-    .page-hero .emoji{
-      font-size:46px;
-      margin-bottom:10px;
-    }
 
     .page-hero h1{
       margin:0 0 14px;
+
       font-size:34px;
+
       font-weight:400;
+
       text-transform:uppercase;
+
       letter-spacing:2px;
     }
 
+
     .page-hero p{
       margin:0;
+
       font-size:16px;
+
       line-height:1.7;
+
       color:#eef5ff;
     }
 
-    /* =========================
-       SECTION MATIÈRES
-    ========================= */
+
+    /* =========================================
+       SECTION
+    ========================================= */
 
     .section{
-      padding:70px 7% 85px;
+      padding:70px 7% 90px;
+
       background:#fff;
     }
+
 
     .section-title{
       text-align:center;
+
       font-size:34px;
+
       font-weight:400;
+
       margin:0 0 18px;
+
       text-transform:uppercase;
     }
 
+
     .section-intro{
-      max-width:700px;
-      margin:0 auto 40px;
+      max-width:720px;
+
+      margin:0 auto 45px;
+
       color:#555;
+
       text-align:center;
+
       font-size:16px;
+
       line-height:1.8;
     }
 
+
+    /* =========================================
+       CATÉGORIES PRINCIPALES
+    ========================================= */
+
     .categories{
+      max-width:1100px;
+
+      margin:0 auto;
+
       display:grid;
+
       grid-template-columns:repeat(3,1fr);
-      gap:20px;
-      max-width:980px;
-      margin:0 auto 50px;
+
+      gap:22px;
     }
 
+
     .category{
+      position:relative;
+
       background:#fff;
+
+      border:1px solid #e8e8e8;
+
       border-radius:18px;
-      padding:26px 20px;
+
+      padding:30px 24px;
+
+      min-height:215px;
+
+      display:flex;
+
+      flex-direction:column;
+
+      align-items:center;
+
+      justify-content:center;
+
       text-align:center;
+
       box-shadow:0 8px 25px rgba(0,0,0,.07);
-      border:2px solid #eee;
-      transition:.2s;
-      display:block;
+
+      transition:.25s;
+
       cursor:pointer;
     }
 
+
     .category:hover{
-      transform:translateY(-5px);
-      box-shadow:0 14px 30px rgba(0,0,0,.1);
-    }
+      transform:translateY(-6px);
 
-    .category.active{
       border-color:var(--blue2);
-      background:#f1f7ff;
+
+      box-shadow:0 14px 32px rgba(0,0,0,.11);
     }
 
-    .category .emoji{
-      font-size:40px;
-      margin-bottom:12px;
+
+    /* Carte programme NS4 */
+
+    .category-featured{
+      border:2px solid var(--purple2);
+
+      background:linear-gradient(
+        180deg,
+        #fff 0%,
+        #faf8ff 100%
+      );
     }
+
+
+    .category-featured:hover{
+      border-color:var(--blue2);
+    }
+
+
+    .category-icon{
+      width:64px;
+      height:64px;
+
+      border-radius:16px;
+
+      display:flex;
+
+      align-items:center;
+      justify-content:center;
+
+      background:#f1f7ff;
+
+      color:var(--purple2);
+
+      font-size:24px;
+
+      font-weight:bold;
+
+      margin-bottom:17px;
+    }
+
+
+    .category-featured .category-icon{
+      background:#eee8fa;
+
+      color:var(--purple2);
+    }
+
 
     .category h3{
-      margin:8px 0;
-      font-size:18px;
+      margin:0 0 9px;
+
+      font-size:19px;
+
+      font-weight:600;
+
+      line-height:1.35;
     }
+
 
     .category p{
       margin:0;
-      color:#777;
-      line-height:1.5;
+
+      color:#707070;
+
       font-size:14px;
+
+      line-height:1.6;
     }
 
-    /* =========================
-       PANNEAU DES SUJETS
-    ========================= */
 
-    .quiz-shell{
-      max-width:900px;
-      margin:0 auto;
-      background:#fff;
-      border-radius:22px;
-      padding:30px;
-      box-shadow:0 12px 40px rgba(25,35,60,.1);
-      border:1px solid #eee;
-    }
+    .category-arrow{
+      margin-top:17px;
 
-    .panel-head{
-      display:flex;
-      justify-content:space-between;
-      align-items:baseline;
-      border-bottom:1px solid #eee;
-      padding-bottom:14px;
-      margin-bottom:22px;
-    }
+      color:var(--blue2);
 
-    .panel-head h2{
-      margin:0;
-      font-size:22px;
+      font-size:14px;
+
       font-weight:bold;
     }
 
-    .panel-head .count{
-      font-size:14px;
-      color:var(--muted);
-    }
 
-    .sheets{
-      display:grid;
-      grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
-      gap:18px;
-    }
+    /* =========================================
+       PROGRAMME NS4
+    ========================================= */
 
-    .sheet{
-      display:block;
-      cursor:zoom-in;
-    }
+    .ns4-section{
+      max-width:1100px;
 
-    .sheet .thumb{
-      aspect-ratio:3/4;
+      margin:55px auto 0;
+
+      padding:38px;
+
       background:var(--light);
-      border:1px solid #eee;
-      border-radius:12px;
-      overflow:hidden;
+
+      border:1px solid #e8e8e8;
+
+      border-radius:22px;
     }
 
-    .sheet .thumb img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
+
+    .ns4-header{
+      text-align:center;
+
+      margin-bottom:32px;
+    }
+
+
+    .ns4-header h2{
+      margin:0 0 12px;
+
+      font-size:26px;
+
+      font-weight:500;
+
+      color:var(--purple);
+    }
+
+
+    .ns4-header p{
+      max-width:700px;
+
+      margin:0 auto;
+
+      color:var(--muted);
+
+      line-height:1.7;
+
+      font-size:15px;
+    }
+
+
+    /* =========================================
+       MATIÈRES
+    ========================================= */
+
+    .subjects{
+      display:grid;
+
+      grid-template-columns:repeat(3,1fr);
+
+      gap:16px;
+    }
+
+
+    .subject{
       display:block;
+
+      background:#fff;
+
+      border:1px solid #e7e7e7;
+
+      border-radius:15px;
+
+      padding:21px 16px;
+
+      text-align:left;
+
+      transition:.2s;
     }
 
-    .sheet .label{
-      margin-top:8px;
-      font-size:13px;
-      color:var(--muted);
-      text-align:center;
+
+    .subject:hover{
+      border-color:var(--blue2);
+
+      transform:translateY(-3px);
+
+      box-shadow:0 8px 20px rgba(0,0,0,.07);
     }
 
-    .empty{
-      color:var(--muted);
-      text-align:center;
-      padding:20px 0;
+
+    .subject-top{
+      display:flex;
+
+      align-items:center;
+
+      gap:12px;
     }
 
-    /* =========================
-       LIGHTBOX
-    ========================= */
 
-    .lightbox{
-      position:fixed;
-      inset:0;
-      background:rgba(10,5,20,.8);
-      display:none;
+    .subject-number{
+      width:38px;
+      height:38px;
+
+      flex-shrink:0;
+
+      display:flex;
+
       align-items:center;
       justify-content:center;
-      padding:30px;
-      z-index:2000;
+
+      border-radius:10px;
+
+      background:#f1f7ff;
+
+      color:var(--blue);
+
+      font-size:13px;
+
+      font-weight:bold;
     }
 
-    .lightbox.open{
-      display:flex;
-    }
 
-    .lightbox img{
-      max-width:100%;
-      max-height:100%;
-      border-radius:8px;
-      box-shadow:0 25px 60px rgba(0,0,0,.4);
-    }
+    .subject strong{
+      display:block;
 
-    .lightbox .close{
-      position:absolute;
-      top:22px;
-      right:26px;
-      border:0;
-      background:rgba(255,255,255,.12);
-      color:#fff;
       font-size:15px;
-      border-radius:30px;
-      padding:9px 18px;
-      cursor:pointer;
+
+      line-height:1.35;
+
+      color:#222;
     }
 
-    /* =========================
-       FOOTER (identique au site)
-    ========================= */
+
+    .subject span{
+      display:block;
+
+      margin-top:4px;
+
+      font-size:12px;
+
+      color:#777;
+    }
+
+
+    /* =========================================
+       BLOC INFORMATION
+    ========================================= */
+
+    .program-info{
+      margin-top:28px;
+
+      padding:22px;
+
+      background:#fff;
+
+      border:1px solid #e8e8e8;
+
+      border-radius:15px;
+
+      text-align:center;
+    }
+
+
+    .program-info strong{
+      display:block;
+
+      margin-bottom:8px;
+
+      color:var(--purple);
+
+      font-size:16px;
+    }
+
+
+    .program-info p{
+      margin:0;
+
+      color:#666;
+
+      font-size:14px;
+
+      line-height:1.7;
+    }
+
+
+    /* =========================================
+       FOOTER
+    ========================================= */
 
     footer{
       background:#000;
+
       color:#fff;
+
       padding:60px 7% 25px;
+
       border-top:1px solid #2b2b2b;
     }
 
+
     .footer-grid{
       max-width:1100px;
+
       margin:auto;
+
       display:grid;
+
       grid-template-columns:1.4fr 1fr 1fr;
+
       gap:50px;
     }
 
+
     footer h3{
       letter-spacing:5px;
+
       font-size:18px;
+
       font-weight:400;
+
       margin-top:0;
     }
 
+
     footer p{
       color:#bbb;
+
       line-height:1.8;
     }
 
+
     .footer-links a{
       display:block;
+
       color:#3782df;
+
       margin:16px 0;
     }
 
+
     .footer-bottom{
       max-width:1100px;
+
       margin:50px auto 0;
+
       padding-top:25px;
+
       border-top:1px solid #2a2a2a;
+
       display:flex;
+
       justify-content:space-between;
+
       gap:20px;
+
       color:#aaa;
+
       font-size:14px;
     }
 
+
     .footer-socials{
       display:flex;
+
       gap:20px;
     }
 
+
     .footer-socials a{
       color:#aaa;
+
       font-size:22px;
     }
 
-    /* =========================
+
+    /* =========================================
        RESPONSIVE
-    ========================= */
+    ========================================= */
+
+    @media(max-width:900px){
+
+      .categories{
+        grid-template-columns:repeat(2,1fr);
+      }
+
+
+      .subjects{
+        grid-template-columns:repeat(2,1fr);
+      }
+
+    }
+
 
     @media(max-width:800px){
 
       .site-header{
         padding:0 5%;
+
         height:70px;
       }
+
 
       .desktop-nav{
         display:none;
       }
 
+
       .menu-btn{
         display:block;
       }
+
 
       .mobile-nav{
         top:70px;
       }
 
+
       .page-hero{
         padding:50px 20px 60px;
       }
 
+
       .page-hero h1{
-        font-size:26px;
+        font-size:27px;
       }
 
-      .categories{
-        grid-template-columns:repeat(2,1fr);
-        gap:14px;
-      }
 
       .section{
         padding:55px 6% 70px;
       }
 
+
       .section-title{
         font-size:28px;
       }
 
-      .quiz-shell{
-        padding:20px;
+
+      .ns4-section{
+        padding:28px 20px;
       }
+
 
       .footer-grid{
         grid-template-columns:1fr;
+
         gap:25px;
       }
+
 
       .footer-bottom{
         flex-direction:column;
@@ -507,26 +811,46 @@
 
     }
 
-    @media(max-width:480px){
+
+    @media(max-width:520px){
 
       .logo img{
         width:145px;
       }
 
+
       .categories{
         grid-template-columns:1fr;
       }
 
+
+      .subjects{
+        grid-template-columns:1fr;
+      }
+
+
       .page-hero h1{
+        font-size:23px;
+      }
+
+
+      .ns4-header h2{
         font-size:22px;
       }
 
     }
 
   </style>
+
 </head>
 
+
 <body>
+
+
+<!-- =========================================
+     HEADER
+========================================= -->
 
 <header class="site-header">
 
@@ -535,13 +859,16 @@
     href="index.html"
     aria-label="ExamQuiz accueil"
   >
+
     <img
       src="logo.png"
       alt="ExamQuiz Haiti"
     >
+
   </a>
 
-  <!-- MENU ORDINATEUR -->
+
+  <!-- MENU DESKTOP -->
 
   <nav class="desktop-nav">
 
@@ -553,12 +880,15 @@
       Quiz
     </a>
 
-    <a href="index.html#categories">
+    <a
+      href="categories.html"
+      class="active"
+    >
       Catégories
     </a>
 
-    <a href="baccalaureat.html" class="active">
-      Baccalauréat
+    <a href="baccalaureat.html">
+      Sujets du Baccalauréat
     </a>
 
     <a href="index.html#contact">
@@ -567,13 +897,18 @@
 
   </nav>
 
+
+  <!-- BOUTON MOBILE -->
+
   <button
     class="menu-btn"
     id="menu-btn"
     aria-label="Ouvrir le menu"
+    aria-expanded="false"
   >
     ☰
   </button>
+
 
   <!-- MENU MOBILE -->
 
@@ -590,12 +925,12 @@
       Quiz
     </a>
 
-    <a href="index.html#categories">
+    <a href="categories.html">
       Catégories
     </a>
 
     <a href="baccalaureat.html">
-      Baccalauréat
+      Sujets du Baccalauréat
     </a>
 
     <a href="index.html#contact">
@@ -606,53 +941,602 @@
 
 </header>
 
+
+
+<!-- =========================================
+     CONTENU PRINCIPAL
+========================================= -->
+
 <main>
+
+
+  <!-- HERO -->
 
   <section class="page-hero">
 
     <div class="page-hero-content">
 
-      <div class="emoji">
-        🎓
-      </div>
-
       <h1>
-        Baccalauréat
+        Catégories
       </h1>
 
       <p>
-        Les sujets officiels des examens d'État, classés matière par matière.
+        Explore les différentes catégories d'ExamQuiz Haiti
+        et choisis le contenu que tu souhaites réviser.
       </p>
 
     </div>
 
   </section>
 
+
+
+  <!-- CATÉGORIES -->
+
   <section class="section">
 
     <h2 class="section-title">
-      Choisis une matière
+      Nos catégories
     </h2>
 
+
     <p class="section-intro">
-      Clique sur une matière pour voir les sujets déjà disponibles.
+      Retrouve des contenus de révision pour les élèves,
+      les candidats au Baccalauréat et les futurs étudiants.
     </p>
 
-    <div class="categories" id="subject-grid"></div>
 
-    <div class="quiz-shell" id="panel"></div>
+    <div class="categories">
+
+
+      <!-- =================================
+           PROGRAMME NS4
+      ================================== -->
+
+      <a
+        href="#programme-ns4"
+        class="category category-featured"
+      >
+
+        <div class="category-icon">
+          NS4
+        </div>
+
+
+        <h3>
+          Programme détaillé des cours
+        </h3>
+
+
+        <p>
+          NS4 — Consulte les matières et les principaux
+          contenus à étudier.
+        </p>
+
+
+        <div class="category-arrow">
+          Voir le programme →
+        </div>
+
+      </a>
+
+
+
+      <!-- =================================
+           HISTOIRE D'HAÏTI
+      ================================== -->
+
+      <a
+        href="quiz.html?category=histoire"
+        class="category"
+      >
+
+        <div class="category-icon">
+          H
+        </div>
+
+
+        <h3>
+          Histoire d’Haïti
+        </h3>
+
+
+        <p>
+          Révise les grands événements et les principales
+          périodes de l'histoire d'Haïti.
+        </p>
+
+
+        <div class="category-arrow">
+          Commencer →
+        </div>
+
+      </a>
+
+
+
+      <!-- =================================
+           SCIENCES
+      ================================== -->
+
+      <a
+        href="quiz.html?category=sciences"
+        class="category"
+      >
+
+        <div class="category-icon">
+          S
+        </div>
+
+
+        <h3>
+          Sciences
+        </h3>
+
+
+        <p>
+          Découvre des quiz de sciences et teste
+          tes connaissances.
+        </p>
+
+
+        <div class="category-arrow">
+          Commencer →
+        </div>
+
+      </a>
+
+
+
+      <!-- =================================
+           CULTURE GÉNÉRALE
+      ================================== -->
+
+      <a
+        href="quiz.html?category=culture-generale"
+        class="category"
+      >
+
+        <div class="category-icon">
+          CG
+        </div>
+
+
+        <h3>
+          Culture générale
+        </h3>
+
+
+        <p>
+          Teste tes connaissances dans différents
+          domaines.
+        </p>
+
+
+        <div class="category-arrow">
+          Commencer →
+        </div>
+
+      </a>
+
+
+
+      <!-- =================================
+           BACCALAURÉAT
+      ================================== -->
+
+      <a
+        href="baccalaureat.html"
+        class="category"
+      >
+
+        <div class="category-icon">
+          BAC
+        </div>
+
+
+        <h3>
+          Sujets du Baccalauréat
+        </h3>
+
+
+        <p>
+          Consulte les sujets du Baccalauréat
+          classés par matière.
+        </p>
+
+
+        <div class="category-arrow">
+          Voir les sujets →
+        </div>
+
+      </a>
+
+
+
+      <!-- =================================
+           CONCOURS
+      ================================== -->
+
+      <a
+        href="concours.html"
+        class="category"
+      >
+
+        <div class="category-icon">
+          CA
+        </div>
+
+
+        <h3>
+          Concours d’admission universitaire
+        </h3>
+
+
+        <p>
+          Prépare les concours et examens d'admission
+          des universités en Haïti.
+        </p>
+
+
+        <div class="category-arrow">
+          Préparer →
+        </div>
+
+      </a>
+
+
+    </div>
+
+
+
+    <!-- =========================================
+         PROGRAMME DÉTAILLÉ NS4
+    ========================================= -->
+
+    <section
+      class="ns4-section"
+      id="programme-ns4"
+    >
+
+
+      <div class="ns4-header">
+
+        <h2>
+          Programme détaillé des cours — NS4
+        </h2>
+
+
+        <p>
+          Retrouve les matières et les principaux contenus
+          du programme de NS4 afin d'organiser tes révisions
+          et de mieux préparer tes examens.
+        </p>
+
+      </div>
+
+
+
+      <div class="subjects">
+
+
+        <!-- MATHÉMATIQUES -->
+
+        <a
+          href="quiz.html?category=ns4-mathematiques"
+          class="subject"
+        >
+
+          <div class="subject-top">
+
+            <div class="subject-number">
+              01
+            </div>
+
+            <div>
+
+              <strong>
+                Mathématiques
+              </strong>
+
+              <span>
+                Programme NS4
+              </span>
+
+            </div>
+
+          </div>
+
+        </a>
+
+
+
+        <!-- PHYSIQUE -->
+
+        <a
+          href="quiz.html?category=ns4-physique"
+          class="subject"
+        >
+
+          <div class="subject-top">
+
+            <div class="subject-number">
+              02
+            </div>
+
+            <div>
+
+              <strong>
+                Physique
+              </strong>
+
+              <span>
+                Programme NS4
+              </span>
+
+            </div>
+
+          </div>
+
+        </a>
+
+
+
+        <!-- CHIMIE -->
+
+        <a
+          href="quiz.html?category=ns4-chimie"
+          class="subject"
+        >
+
+          <div class="subject-top">
+
+            <div class="subject-number">
+              03
+            </div>
+
+            <div>
+
+              <strong>
+                Chimie
+              </strong>
+
+              <span>
+                Programme NS4
+              </span>
+
+            </div>
+
+          </div>
+
+        </a>
+
+
+
+        <!-- BIOLOGIE -->
+
+        <a
+          href="quiz.html?category=ns4-biologie"
+          class="subject"
+        >
+
+          <div class="subject-top">
+
+            <div class="subject-number">
+              04
+            </div>
+
+            <div>
+
+              <strong>
+                Biologie / SVT
+              </strong>
+
+              <span>
+                Programme NS4
+              </span>
+
+            </div>
+
+          </div>
+
+        </a>
+
+
+
+        <!-- FRANÇAIS -->
+
+        <a
+          href="quiz.html?category=ns4-francais"
+          class="subject"
+        >
+
+          <div class="subject-top">
+
+            <div class="subject-number">
+              05
+            </div>
+
+            <div>
+
+              <strong>
+                Français
+              </strong>
+
+              <span>
+                Programme NS4
+              </span>
+
+            </div>
+
+          </div>
+
+        </a>
+
+
+
+        <!-- PHILOSOPHIE -->
+
+        <a
+          href="quiz.html?category=ns4-philosophie"
+          class="subject"
+        >
+
+          <div class="subject-top">
+
+            <div class="subject-number">
+              06
+            </div>
+
+            <div>
+
+              <strong>
+                Philosophie
+              </strong>
+
+              <span>
+                Programme NS4
+              </span>
+
+            </div>
+
+          </div>
+
+        </a>
+
+
+
+        <!-- HISTOIRE GÉOGRAPHIE -->
+
+        <a
+          href="quiz.html?category=ns4-histoire-geographie"
+          class="subject"
+        >
+
+          <div class="subject-top">
+
+            <div class="subject-number">
+              07
+            </div>
+
+            <div>
+
+              <strong>
+                Histoire-Géographie
+              </strong>
+
+              <span>
+                Programme NS4
+              </span>
+
+            </div>
+
+          </div>
+
+        </a>
+
+
+
+        <!-- ANGLAIS -->
+
+        <a
+          href="quiz.html?category=ns4-anglais"
+          class="subject"
+        >
+
+          <div class="subject-top">
+
+            <div class="subject-number">
+              08
+            </div>
+
+            <div>
+
+              <strong>
+                Anglais
+              </strong>
+
+              <span>
+                Programme NS4
+              </span>
+
+            </div>
+
+          </div>
+
+        </a>
+
+
+
+        <!-- CRÉOLE -->
+
+        <a
+          href="quiz.html?category=ns4-kreyol"
+          class="subject"
+        >
+
+          <div class="subject-top">
+
+            <div class="subject-number">
+              09
+            </div>
+
+            <div>
+
+              <strong>
+                Créole
+              </strong>
+
+              <span>
+                Programme NS4
+              </span>
+
+            </div>
+
+          </div>
+
+        </a>
+
+
+      </div>
+
+
+
+      <!-- INFORMATION -->
+
+      <div class="program-info">
+
+        <strong>
+          Programme de révision NS4
+        </strong>
+
+        <p>
+          Chaque matière pourra contenir les chapitres,
+          notions essentielles, exercices et quiz correspondant
+          au programme de NS4.
+        </p>
+
+      </div>
+
+
+    </section>
+
 
   </section>
 
 </main>
 
-<!-- =========================
+
+
+<!-- =========================================
      FOOTER
-========================= -->
+========================================= -->
 
 <footer>
 
+
   <div class="footer-grid">
+
 
     <div>
 
@@ -660,12 +1544,16 @@
         À PROPOS DE NOUS
       </h3>
 
+
       <p>
-        ExamQuiz est une plateforme éducative destinée à aider les élèves
-        à apprendre, réviser et tester leurs connaissances à travers des quiz.
+        ExamQuiz est une plateforme éducative destinée
+        à aider les élèves à apprendre, réviser et tester
+        leurs connaissances à travers des quiz.
       </p>
 
     </div>
+
+
 
     <div class="footer-links">
 
@@ -673,17 +1561,21 @@
         MENU
       </h3>
 
+
       <a href="index.html#quiz">
         Quiz
       </a>
 
-      <a href="index.html#categories">
+
+      <a href="categories.html">
         Catégories
       </a>
 
+
       <a href="baccalaureat.html">
-        Baccalauréat
+        Sujets du Baccalauréat
       </a>
+
 
       <a href="index.html#contact">
         Contact
@@ -691,20 +1583,51 @@
 
     </div>
 
+
   </div>
 
+
+
   <div class="footer-bottom">
+
 
     <div>
       © 2026 ExamQuiz • Tous droits réservés
     </div>
 
+
     <div class="footer-socials">
 
-      <a href="#" aria-label="Facebook">f</a>
-      <a href="#" aria-label="Instagram">◎</a>
-      <a href="#" aria-label="YouTube">▶</a>
-      <a href="#" aria-label="TikTok">♪</a>
+      <a
+        href="#"
+        aria-label="Facebook"
+      >
+        f
+      </a>
+
+
+      <a
+        href="#"
+        aria-label="Instagram"
+      >
+        ◎
+      </a>
+
+
+      <a
+        href="#"
+        aria-label="YouTube"
+      >
+        ▶
+      </a>
+
+
+      <a
+        href="#"
+        aria-label="TikTok"
+      >
+        ♪
+      </a>
 
     </div>
 
@@ -712,137 +1635,53 @@
 
 </footer>
 
-<div class="lightbox" id="lightbox">
-  <button class="close" id="lightboxClose">Fermer ✕</button>
-  <img id="lightboxImg" src="" alt="">
-</div>
+
+
+<!-- =========================================
+     JAVASCRIPT
+========================================= -->
 
 <script>
 
-  /* =========================
-     MENU MOBILE
-  ========================= */
+  const menuBtn =
+    document.getElementById("menu-btn");
+
+  const mobileNav =
+    document.getElementById("mobile-nav");
+
+
+  menuBtn.addEventListener("click", () => {
+
+    const isOpen =
+      mobileNav.classList.toggle("open");
+
+    menuBtn.setAttribute(
+      "aria-expanded",
+      isOpen ? "true" : "false"
+    );
+
+  });
+
 
   document
-    .getElementById('menu-btn')
-    .addEventListener('click', () => {
-      document.getElementById('mobile-nav').classList.toggle('open');
-    });
-
-  document
-    .querySelectorAll('.mobile-nav a')
+    .querySelectorAll(".mobile-nav a")
     .forEach(link => {
-      link.addEventListener('click', () => {
-        document.getElementById('mobile-nav').classList.remove('open');
+
+      link.addEventListener("click", () => {
+
+        mobileNav.classList.remove("open");
+
+        menuBtn.setAttribute(
+          "aria-expanded",
+          "false"
+        );
+
       });
+
     });
-
-  /* =========================
-     SUJETS DU BACCALAURÉAT
-  ========================= */
-
-  // Dossier racine où se trouvent les sous-dossiers de matières.
-  // Ajuste cette valeur si le nom exact du dossier sur GitHub diffère
-  // (avec ou sans accent) : c'est la SEULE ligne à changer si l'image
-  // ne s'affiche pas.
-  const BASE_DIR = "baccalauréat";
-
-  // Chaque matière : son dossier (sans accent, plus sûr pour les chemins)
-  // et la liste des fichiers d'images déjà déposés dedans.
-  // Pour ajouter un sujet : dépose l'image dans le dossier GitHub,
-  // puis ajoute son nom de fichier dans le tableau "images" ci-dessous.
-  const SUBJECTS = [
-    { key: "mathematiques", icon: "📐", label: "Mathématiques", images: ["sujet1.jpg"] },
-    { key: "physique",      icon: "⚡", label: "Physique",      images: [] },
-    { key: "chimie",        icon: "🧪", label: "Chimie",        images: [] },
-    { key: "svt",           icon: "🧬", label: "SVT",           images: [] },
-    { key: "francais",      icon: "📖", label: "Français",      images: [] },
-    { key: "philosophie",   icon: "🧠", label: "Philosophie",   images: [] },
-    { key: "histoire",      icon: "🌍", label: "Histoire",      images: [] },
-  ];
-
-  const gridEl = document.getElementById("subject-grid");
-  const panelEl = document.getElementById("panel");
-  let activeKey = SUBJECTS[0].key;
-
-  function imgPath(subject, filename){
-    return `${BASE_DIR}/${subject.key}/${filename}`;
-  }
-
-  function renderGrid(){
-    gridEl.innerHTML = SUBJECTS.map(s => `
-      <div class="category${s.key === activeKey ? ' active' : ''}" data-key="${s.key}">
-        <div class="emoji">${s.icon}</div>
-        <h3>${s.label}</h3>
-        <p>${s.images.length} sujet${s.images.length !== 1 ? "s" : ""} disponible${s.images.length !== 1 ? "s" : ""}</p>
-      </div>
-    `).join("");
-
-    gridEl.querySelectorAll(".category").forEach(card => {
-      card.addEventListener("click", () => {
-        activeKey = card.dataset.key;
-        renderGrid();
-        renderPanel();
-      });
-    });
-  }
-
-  function renderPanel(){
-    const subject = SUBJECTS.find(s => s.key === activeKey);
-
-    if (subject.images.length === 0){
-      panelEl.innerHTML = `
-        <div class="panel-head">
-          <h2>${subject.icon} ${subject.label}</h2>
-          <span class="count">0 sujet</span>
-        </div>
-        <p class="empty">Aucun sujet déposé pour l'instant dans ce dossier.</p>
-      `;
-      return;
-    }
-
-    panelEl.innerHTML = `
-      <div class="panel-head">
-        <h2>${subject.icon} ${subject.label}</h2>
-        <span class="count">${subject.images.length} sujet${subject.images.length > 1 ? "s" : ""}</span>
-      </div>
-      <div class="sheets">
-        ${subject.images.map((file, i) => `
-          <a class="sheet" data-src="${imgPath(subject, file)}">
-            <div class="thumb"><img src="${imgPath(subject, file)}" alt="${subject.label} — sujet ${i + 1}" loading="lazy"></div>
-            <div class="label">Sujet ${i + 1}</div>
-          </a>
-        `).join("")}
-      </div>
-    `;
-
-    panelEl.querySelectorAll(".sheet").forEach(a => {
-      a.addEventListener("click", (e) => {
-        e.preventDefault();
-        openLightbox(a.dataset.src);
-      });
-    });
-  }
-
-  const lightbox = document.getElementById("lightbox");
-  const lightboxImg = document.getElementById("lightboxImg");
-
-  function openLightbox(src){
-    lightboxImg.src = src;
-    lightbox.classList.add("open");
-  }
-  function closeLightbox(){
-    lightbox.classList.remove("open");
-    lightboxImg.src = "";
-  }
-  document.getElementById("lightboxClose").addEventListener("click", closeLightbox);
-  lightbox.addEventListener("click", (e) => { if (e.target === lightbox) closeLightbox(); });
-  document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeLightbox(); });
-
-  renderGrid();
-  renderPanel();
 
 </script>
+
 
 </body>
 </html>
