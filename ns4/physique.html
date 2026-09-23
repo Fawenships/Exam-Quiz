@@ -1,0 +1,1590 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Physique NS4 — Programme détaillé | ExamQuiz Haïti</title>
+
+    <meta
+        name="description"
+        content="Programme détaillé de Physique NS4 : cours, chapitres, formules et notes de révision."
+    >
+
+    <style>
+        :root {
+            --purple: #24113f;
+            --purple-light: #4b2481;
+            --blue: #1764c0;
+            --text: #171717;
+            --muted: #666;
+            --background: #f7f8fc;
+            --white: #ffffff;
+            --border: #e7e7ec;
+            --success: #18794e;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* HEADER */
+
+        header {
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            max-width: 1180px;
+            margin: auto;
+            padding: 16px 22px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand img {
+            width: 42px;
+            height: 42px;
+            object-fit: contain;
+        }
+
+        .brand-name {
+            font-size: 19px;
+            font-weight: 700;
+            color: var(--purple);
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        nav a {
+            color: #333;
+            font-size: 15px;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--purple-light);
+        }
+
+        /* HERO */
+
+        .hero {
+            background: var(--purple);
+            color: white;
+            padding: 65px 20px;
+        }
+
+        .hero-container {
+            max-width: 1180px;
+            margin: auto;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 25px;
+            color: #ddd;
+            font-size: 14px;
+        }
+
+        .back-link:hover {
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: clamp(32px, 5vw, 52px);
+            line-height: 1.15;
+            margin-bottom: 18px;
+        }
+
+        .hero p {
+            max-width: 720px;
+            color: #e6e0ed;
+            font-size: 17px;
+        }
+
+        /* MAIN */
+
+        main {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 45px 20px 80px;
+        }
+
+        .intro {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .intro h2 {
+            color: var(--purple);
+            margin-bottom: 8px;
+        }
+
+        .intro p {
+            color: var(--muted);
+        }
+
+        /* SELECTOR */
+
+        .chapter-selector {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .chapter-selector label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--purple);
+        }
+
+        .chapter-selector select {
+            width: 100%;
+            padding: 15px 16px;
+            border: 1px solid #d7d7de;
+            border-radius: 9px;
+            background: white;
+            color: var(--text);
+            font-size: 15px;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .chapter-selector select:focus {
+            border-color: var(--purple-light);
+            box-shadow: 0 0 0 3px rgba(75, 36, 129, 0.08);
+        }
+
+        /* PROGRESS */
+
+        .progress-box {
+            margin-top: 18px;
+        }
+
+        .progress-top {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            color: var(--muted);
+            font-size: 14px;
+            margin-bottom: 7px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 7px;
+            background: #ececf1;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            width: 6.66%;
+            height: 100%;
+            background: var(--purple-light);
+            transition: width 0.3s ease;
+        }
+
+        /* COURSE */
+
+        .course-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            overflow: hidden;
+        }
+
+        .course-header {
+            padding: 32px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .module-label {
+            display: inline-block;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--purple-light);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
+
+        .course-header h2 {
+            font-size: 30px;
+            line-height: 1.3;
+            color: var(--purple);
+            margin-bottom: 10px;
+        }
+
+        .course-header p {
+            color: var(--muted);
+        }
+
+        .course-content {
+            padding: 32px;
+        }
+
+        .section {
+            margin-bottom: 32px;
+        }
+
+        .section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section h3 {
+            font-size: 21px;
+            color: var(--purple);
+            margin-bottom: 13px;
+        }
+
+        .section p {
+            color: #333;
+        }
+
+        .section ul {
+            padding-left: 22px;
+            color: #333;
+        }
+
+        .section li {
+            margin-bottom: 7px;
+        }
+
+        /* FORMULE */
+
+        .formula-box {
+            margin-top: 15px;
+            padding: 18px;
+            background: #faf9fc;
+            border: 1px solid #e4dff0;
+            border-left: 4px solid var(--purple-light);
+            border-radius: 8px;
+            font-family: "Times New Roman", serif;
+            font-size: 18px;
+        }
+
+        .formula-box strong {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 14px;
+            color: var(--purple);
+            display: block;
+            margin-bottom: 7px;
+        }
+
+        /* NOTE */
+
+        .important-box {
+            padding: 18px 20px;
+            background: #f8faf9;
+            border: 1px solid #dcebe3;
+            border-left: 4px solid var(--success);
+            border-radius: 8px;
+        }
+
+        .important-box strong {
+            display: block;
+            color: var(--success);
+            margin-bottom: 5px;
+        }
+
+        /* NAVIGATION CHAPTER */
+
+        .chapter-navigation {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .chapter-navigation button {
+            border: 1px solid var(--border);
+            background: white;
+            color: var(--purple);
+            padding: 13px 20px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .chapter-navigation button:hover:not(:disabled) {
+            background: var(--purple);
+            color: white;
+            border-color: var(--purple);
+        }
+
+        .chapter-navigation button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: var(--purple);
+            color: white;
+            padding: 35px 20px;
+        }
+
+        .footer-container {
+            max-width: 1180px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .footer-container p {
+            color: #dcd5e4;
+            font-size: 14px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 700px) {
+
+            nav {
+                display: none;
+            }
+
+            .hero {
+                padding: 48px 20px;
+            }
+
+            .hero h1 {
+                font-size: 34px;
+            }
+
+            main {
+                padding-top: 30px;
+            }
+
+            .course-header,
+            .course-content,
+            .chapter-selector,
+            .intro {
+                padding: 22px;
+            }
+
+            .course-header h2 {
+                font-size: 25px;
+            }
+
+            .chapter-navigation {
+                flex-direction: column;
+            }
+
+            .chapter-navigation button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="header-container">
+
+        <a href="../index.html" class="brand">
+            <img src="../logo.png" alt="ExamQuiz Haïti">
+            <span class="brand-name">ExamQuiz Haïti</span>
+        </a>
+
+        <nav>
+            <a href="../index.html">Accueil</a>
+            <a href="../categories.html">Catégories</a>
+            <a href="../baccalauréat.html">Baccalauréat</a>
+            <a href="../concours.html">Concours</a>
+        </nav>
+
+    </div>
+</header>
+
+<section class="hero">
+
+    <div class="hero-container">
+
+        <a href="../categories.html#programme-ns4" class="back-link">
+            ← Retour au programme NS4
+        </a>
+
+        <h1>Physique — NS4</h1>
+
+        <p>
+            Programme détaillé du cours de Physique pour la NS4.
+            Sélectionnez un chapitre pour consulter les notes,
+            les notions essentielles et les formules à maîtriser.
+        </p>
+
+    </div>
+
+</section>
+
+<main>
+
+    <section class="intro">
+
+        <h2>Programme de Physique NS4</h2>
+
+        <p>
+            Cette section permet de suivre le programme chapitre par chapitre.
+            Choisissez le chapitre que vous souhaitez étudier pour afficher
+            directement ses notes.
+        </p>
+
+    </section>
+
+
+    <!-- SELECTEUR DE CHAPITRE -->
+
+    <section class="chapter-selector">
+
+        <label for="chapterSelect">
+            Choisir un chapitre
+        </label>
+
+        <select id="chapterSelect">
+
+            <optgroup label="Module 1 — Électrostatique et Condensateurs">
+                <option value="1">
+                    Chapitre 1 — Le condensateur et la capacité électrique
+                </option>
+
+                <option value="2">
+                    Chapitre 2 — Charge et décharge d'un condensateur
+                </option>
+
+                <option value="3">
+                    Chapitre 3 — Énergie emmagasinée dans un condensateur
+                </option>
+            </optgroup>
+
+            <optgroup label="Module 2 — Magnétisme et Électromagnétisme">
+
+                <option value="4">
+                    Chapitre 4 — Le champ magnétique
+                </option>
+
+                <option value="5">
+                    Chapitre 5 — La force électromagnétique ou Force de Laplace
+                </option>
+
+                <option value="6">
+                    Chapitre 6 — L'induction électromagnétique
+                </option>
+
+                <option value="7">
+                    Chapitre 7 — Le phénomène d'auto-induction
+                </option>
+
+            </optgroup>
+
+            <optgroup label="Module 3 — Courant Alternatif Sinusoïdal">
+
+                <option value="8">
+                    Chapitre 8 — Production et caractéristiques du courant alternatif sinusoïdal
+                </option>
+
+                <option value="9">
+                    Chapitre 9 — Comportement des dipôles purs en courant alternatif
+                </option>
+
+                <option value="10">
+                    Chapitre 10 — Le circuit RLC Série et construction de Fresnel
+                </option>
+
+                <option value="11">
+                    Chapitre 11 — Phénomène de résonance d'intensité
+                </option>
+
+                <option value="12">
+                    Chapitre 12 — Puissance en courant alternatif et facteur de puissance
+                </option>
+
+            </optgroup>
+
+            <optgroup label="Module 4 — Compléments de Mécanique">
+
+                <option value="13">
+                    Chapitre 13 — Cinématique et dynamique du point matériel
+                </option>
+
+                <option value="14">
+                    Chapitre 14 — Les mouvements oscillatoires mécaniques
+                </option>
+
+                <option value="15">
+                    Chapitre 15 — Énergie du pendule élastique
+                </option>
+
+            </optgroup>
+
+        </select>
+
+        <div class="progress-box">
+
+            <div class="progress-top">
+                <span id="progressText">Chapitre 1 sur 15</span>
+                <span id="progressPercent">7 %</span>
+            </div>
+
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CONTENU DU CHAPITRE -->
+
+    <article class="course-card">
+
+        <div class="course-header">
+
+            <span class="module-label" id="moduleName">
+                Module 1 — Électrostatique et Condensateurs
+            </span>
+
+            <h2 id="chapterTitle">
+                Chapitre 1 — Le condensateur et la capacité électrique
+            </h2>
+
+            <p id="chapterDescription">
+                Étude du condensateur, de sa constitution et de sa capacité électrique.
+            </p>
+
+        </div>
+
+
+        <div class="course-content">
+
+            <section class="section">
+
+                <h3>Objectifs du chapitre</h3>
+
+                <ul id="objectives"></ul>
+
+            </section>
+
+
+            <section class="section">
+
+                <h3>Notes de cours</h3>
+
+                <div id="notes"></div>
+
+            </section>
+
+
+            <section class="section">
+
+                <h3>Formules importantes</h3>
+
+                <div id="formulas"></div>
+
+            </section>
+
+
+            <section class="section">
+
+                <div class="important-box">
+
+                    <strong>À retenir</strong>
+
+                    <p id="important"></p>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </article>
+
+
+    <div class="chapter-navigation">
+
+        <button id="previousButton" onclick="previousChapter()">
+            ← Chapitre précédent
+        </button>
+
+        <button id="nextButton" onclick="nextChapter()">
+            Chapitre suivant →
+        </button>
+
+    </div>
+
+</main>
+
+
+<footer>
+
+    <div class="footer-container">
+
+        <p>
+            ExamQuiz Haïti — Programme de révision NS4
+        </p>
+
+        <p>
+            Physique
+        </p>
+
+    </div>
+
+</footer>
+
+
+<script>
+
+    /*
+     * PROGRAMME PHYSIQUE NS4
+     *
+     * Ce système est indépendant du système de quiz.
+     * Aucun fichier de source/ n'est utilisé ici.
+     */
+
+    const chapters = {
+
+        1: {
+            module: "Module 1 — Électrostatique et Condensateurs",
+
+            title: "Chapitre 1 — Le condensateur et la capacité électrique",
+
+            description:
+                "Étude du condensateur, de sa constitution et de sa capacité électrique.",
+
+            objectives: [
+                "Comprendre le rôle d'un condensateur.",
+                "Identifier les différentes parties d'un condensateur.",
+                "Comprendre la notion de capacité électrique.",
+                "Connaître les principales relations entre charge, capacité et tension."
+            ],
+
+            notes: `
+                <p>
+                    Un <strong>condensateur</strong> est un dipôle électrique
+                    constitué de deux conducteurs appelés armatures,
+                    séparés par un isolant appelé diélectrique.
+                </p>
+
+                <br>
+
+                <p>
+                    Lorsqu'un condensateur est relié à un générateur,
+                    des charges électriques s'accumulent sur ses deux armatures.
+                    Les charges des deux armatures sont de signes opposés.
+                </p>
+
+                <br>
+
+                <p>
+                    La <strong>capacité électrique</strong> mesure l'aptitude
+                    d'un condensateur à emmagasiner des charges électriques
+                    pour une tension donnée.
+                </p>
+            `,
+
+            formulas: `
+                <div class="formula-box">
+                    <strong>Relation fondamentale</strong>
+                    C = Q / U
+                </div>
+
+                <div class="formula-box">
+                    <strong>Avec</strong>
+                    C : capacité en farads (F)<br>
+                    Q : charge électrique en coulombs (C)<br>
+                    U : tension en volts (V)
+                </div>
+            `,
+
+            important:
+                "La capacité d'un condensateur s'exprime en farads (F). Pour un même condensateur, plus la tension augmente, plus la charge emmagasinée augmente."
+        },
+
+
+        2: {
+            module: "Module 1 — Électrostatique et Condensateurs",
+
+            title: "Chapitre 2 — Charge et décharge d'un condensateur",
+
+            description:
+                "Étude de la charge et de la décharge d'un condensateur dans un circuit RC.",
+
+            objectives: [
+                "Comprendre le fonctionnement d'un dipôle RC.",
+                "Décrire la charge d'un condensateur.",
+                "Décrire la décharge d'un condensateur.",
+                "Comprendre le rôle de la constante de temps."
+            ],
+
+            notes: `
+                <p>
+                    Lors de la <strong>charge</strong>, le condensateur
+                    accumule progressivement des charges électriques.
+                    La tension à ses bornes augmente progressivement.
+                </p>
+
+                <br>
+
+                <p>
+                    Lors de la <strong>décharge</strong>, le condensateur
+                    restitue progressivement l'énergie électrique qu'il avait
+                    emmagasinée.
+                </p>
+
+                <br>
+
+                <p>
+                    Dans un circuit comportant une résistance R et un
+                    condensateur C, la constante de temps du circuit est
+                    appelée <strong>constante de temps RC</strong>.
+                </p>
+            `,
+
+            formulas: `
+                <div class="formula-box">
+                    <strong>Constante de temps</strong>
+                    τ = R × C
+                </div>
+
+                <div class="formula-box">
+                    <strong>Unité</strong>
+                    τ s'exprime en secondes (s).
+                </div>
+            `,
+
+            important:
+                "La constante de temps τ = RC permet de caractériser la rapidité de charge ou de décharge d'un condensateur."
+        },
+
+
+        3: {
+            module: "Module 1 — Électrostatique et Condensateurs",
+
+            title: "Chapitre 3 — Énergie emmagasinée dans un condensateur",
+
+            description:
+                "Étude de l'énergie électrique stockée dans un condensateur chargé.",
+
+            objectives: [
+                "Comprendre qu'un condensateur peut stocker de l'énergie.",
+                "Calculer l'énergie emmagasinée.",
+                "Relier énergie, capacité, charge et tension."
+            ],
+
+            notes: `
+                <p>
+                    Un condensateur chargé possède de l'<strong>énergie électrique</strong>.
+                    Cette énergie peut ensuite être restituée au circuit
+                    pendant la décharge.
+                </p>
+
+                <br>
+
+                <p>
+                    L'énergie stockée dépend de la capacité du condensateur
+                    et de la tension appliquée à ses bornes.
+                </p>
+            `,
+
+            formulas: `
+                <div class="formula-box">
+                    <strong>Énergie emmagasinée</strong>
+                    E = 1/2 × C × U²
+                </div>
+
+                <div class="formula-box">
+                    <strong>Autres formes</strong>
+                    E = 1/2 × Q × U
+                </div>
+            `,
+
+            important:
+                "L'énergie électrique d'un condensateur s'exprime en joules (J)."
+        },
+
+
+        4: {
+            module: "Module 2 — Magnétisme et Électromagnétisme",
+
+            title: "Chapitre 4 — Le champ magnétique",
+
+            description:
+                "Étude du champ magnétique créé par les aimants et les courants électriques.",
+
+            objectives: [
+                "Définir un champ magnétique.",
+                "Identifier les sources d'un champ magnétique.",
+                "Étudier le champ créé par un fil parcouru par un courant.",
+                "Étudier le champ d'une spire et d'un solénoïde."
+            ],
+
+            notes: `
+                <p>
+                    Un <strong>champ magnétique</strong> est une région de
+                    l'espace dans laquelle des phénomènes magnétiques peuvent
+                    être observés.
+                </p>
+
+                <br>
+
+                <p>
+                    Un champ magnétique peut être créé par un aimant ou par
+                    un courant électrique.
+                </p>
+
+                <br>
+
+                <p>
+                    Le champ magnétique est représenté par le vecteur
+                    <strong>B</strong> et son unité dans le Système international
+                    est le tesla (T).
+                </p>
+            `,
+
+            formulas: `
+                <div class="formula-box">
+                    <strong>Grandeur étudiée</strong>
+                    B : induction magnétique, exprimée en teslas (T)
+                </div>
+            `,
+
+            important:
+                "Un courant électrique peut créer un champ magnétique autour du conducteur."
+        },
+
+
+        5: {
+            module: "Module 2 — Magnétisme et Électromagnétisme",
+
+            title: "Chapitre 5 — La force électromagnétique ou Force de Laplace",
+
+            description:
+                "Étude de la force exercée par un champ magnétique sur un conducteur parcouru par un courant.",
+
+            objectives: [
+                "Comprendre l'action d'un champ magnétique sur un courant.",
+                "Identifier la force de Laplace.",
+                "Déterminer les facteurs dont dépend cette force.",
+                "Utiliser la règle de direction de la force."
+            ],
+
+            notes: `
+                <p>
+                    Lorsqu'un conducteur parcouru par un courant est placé
+                    dans un champ magnétique, il peut subir une force appelée
+                    <strong>force de Laplace</strong>.
+                </p>
+
+                <br>
+
+                <p>
+                    Cette force dépend notamment de l'intensité du courant,
+                    de la longueur du conducteur et de l'intensité du champ
+                    magnétique.
+                </p>
+            `,
+
+            formulas: `
+                <div class="formula-box">
+                    <strong>Force de Laplace</strong>
+                    F = B × I × L × sin(θ)
+                </div>
+            `,
+
+            important:
+                "La force de Laplace est une force mécanique résultant de l'interaction entre un courant électrique et un champ magnétique."
+        },
+
+
+        6: {
+            module: "Module 2 — Magnétisme et Électromagnétisme",
+
+            title: "Chapitre 6 — Le phénomène d'induction électromagnétique",
+
+            description:
+                "Étude de l'induction électromagnétique et des lois de Faraday et de Lenz.",
+
+            objectives: [
+                "Comprendre le phénomène d'induction électromagnétique.",
+                "Comprendre le rôle du flux magnétique.",
+                "Utiliser la loi de Faraday.",
+                "Comprendre la loi de Lenz."
+            ],
+
+            notes: `
+                <p>
+                    L'<strong>induction électromagnétique</strong> correspond
+                    à l'apparition d'une tension induite lorsqu'il y a une
+                    variation du flux magnétique traversant un circuit.
+                </p>
+
+                <br>
+
+                <p>
+                    La loi de Faraday relie la force électromotrice induite
+                    à la variation du flux magnétique.
+                </p>
+
+                <br>
+
+                <p>
+                    La loi de Lenz permet de déterminer le sens du phénomène
+                    induit : les effets du courant induit s'opposent à la
+                    variation qui lui a donné naissance.
+                </p>
+            `,
+
+            formulas: `
+                <div class="formula-box">
+                    <strong>Loi de Faraday</strong>
+                    e = − dΦ / dt
+                </div>
+            `,
+
+            important:
+                "Le signe négatif de la loi de Faraday traduit la loi de Lenz et l'opposition du phénomène induit à la variation du flux."
+        },
+
+
+        7: {
+            module: "Module 2 — Magnétisme et Électromagnétisme",
+
+            title: "Chapitre 7 — Le phénomène d'auto-induction",
+
+            description:
+                "Étude de la bobine et du dipôle RL.",
+
+            objectives: [
+                "Comprendre le phénomène d'auto-induction.",
+                "Étudier le comportement d'une bobine.",
+                "Comprendre le rôle de l'inductance.",
+                "Étudier le dipôle RL."
+            ],
+
+            notes: `
+                <p>
+                    Une bobine parcourue par un courant crée un champ magnétique.
+                    Lorsque le courant varie, la bobine produit une tension
+                    induite qui s'oppose à la variation du courant.
+                </p>
+
+                <br>
+
+                <p>
+                    Ce phénomène est appelé <strong>auto-induction</strong>.
+                </p>
+            `,
+
+            formulas: `
+                <div class="formula-box">
+                    <strong>Tension d'auto-induction</strong>
+                    u = −L × di/dt
+                </div>
+
+                <div class="formula-box">
+                    <strong>Constante de temps d'un circuit RL</strong>
+                    τ = L / R
+                </div>
+            `,
+
+            important:
+                "L'inductance L d'une bobine s'exprime en henrys (H)."
+        },
+
+
+        8: {
+            module: "Module 3 — Courant Alternatif Sinusoïdal",
+
+            title: "Chapitre 8 — Production et caractéristiques du courant alternatif sinusoïdal",
+
+            description:
+                "Étude de la production et des caractéristiques du courant alternatif sinusoïdal.",
+
+            objectives: [
+                "Définir un courant alternatif sinusoïdal.",
+                "Comprendre sa production.",
+                "Identifier période, fréquence, amplitude et valeur efficace.",
+                "Lire et interpréter une représentation sinusoïdale."
+            ],
+
+            notes: `
+                <p>
+                    Un courant alternatif change périodiquement de sens et
+                    de valeur au cours du temps.
+                </p>
+
+                <br>
+
+                <p>
+                    Un signal sinusoïdal peut être décrit par son amplitude,
+                    sa période, sa fréquence et sa phase.
+                </p>
+            `,
+
+            formulas: `
+                <div class="formula-box">
+                    <strong>Relation période-fréquence</strong>
+                    f = 1 / T
+                </div>
+
+                <div class="formula-box">
+                    <strong>Pulsation</strong>
+                    ω = 2πf
+                </div>
+            `,
+
+            important:
+                "La fréquence s'exprime en hertz (Hz) et la période en secondes (s)."
+        },
+
+
+        9: {
+            module: "Module 3 — Courant Alternatif Sinusoïdal",
+
+            title: "Chapitre 9 — Comportement des dipôles purs en courant alternatif",
+
+            description:
+                "Étude de la résistance, de la bobine et du condensateur en courant alternatif.",
+
+            objectives: [
+                "Étudier une résistance en régime sinusoïdal.",
+                "Étudier une bobine en régime sinusoïdal.",
+                "Étudier un condensateur en régime sinusoïdal.",
+                "Comprendre les déphasages entre tension et courant."
+            ],
+
+            notes: `
+                <p>
+                    En courant alternatif, la résistance, la bobine et le
+                    condensateur ne se comportent pas de la même manière.
+                </p>
+
+                <br>
+
+                <p>
+                    La résistance ne crée pas de déphasage entre tension et
+                    courant, tandis que la bobine et le condensateur créent
+                    des déphasages caractéristiques.
+                </p>
+            `,
+
+            formulas: `
+                <div class="formula-box">
+                    <strong>Réactance inductive</strong>
+                    X<sub>L</sub> = ωL
+                </div>
+
+                <div class="formula-box">
+                    <strong>Réactance capacitive</strong>
+                    X<sub>C</sub> = 1 / (ωC)
+                </div>
+            `,
+
+            important:
+                "La fréquence du courant alternatif influence le comportement de la bobine et du condensateur."
+        },
+
+
+        10: {
+            module: "Module 3 — Courant Alternatif Sinusoïdal",
+
+            title: "Chapitre 10 — Le circuit RLC Série et construction de Fresnel",
+
+            description:
+                "Étude du circuit RLC série et représentation vectorielle de Fresnel.",
+
+            objectives: [
+                "Identifier les éléments d'un circuit RLC série.",
+                "Étudier son impédance.",
+                "Comprendre le déphasage entre tension et courant.",
+                "Construire et interpréter un diagramme de Fresnel."
+            ],
+
+            notes: `
+                <p>
+                    Un circuit <strong>RLC série</strong> comporte une résistance,
+                    une bobine et un condensateur montés en série.
+                </p>
+
+                <br>
+
+                <p>
+                    En régime sinusoïdal, l'opposition totale au passage du
+                    courant est décrite par l'impédance du circuit.
+                </p>
+            `,
+
+            formulas: `
+                <div class="formula-box">
+                    <strong>Impédance du circuit RLC série</strong>
+                    Z = √[R² + (X<sub>L</sub> − X<sub>C</sub>)²]
+                </div>
+            `,
+
+            important:
+                "Dans un circuit RLC série, le comportement dépend de la relation entre Xₗ et Xc."
+        },
+
+
+        11: {
+            module: "Module 3 — Courant Alternatif Sinusoïdal",
+
+            title: "Chapitre 11 — Phénomène de résonance d'intensité",
+
+            description:
+                "Étude de la résonance dans un circuit RLC série.",
+
+            objectives: [
+                "Définir la résonance.",
+                "Identifier la condition de résonance.",
+                "Déterminer la fréquence de résonance.",
+                "Comprendre l'évolution de l'intensité."
+            ],
+
+            notes: `
+                <p>
+                    Dans un circuit RLC série, la <strong>résonance d'intensité</strong>
+                    apparaît lorsque les effets inductif et capacitif se compensent.
+                </p>
+
+                <br>
+
+                <p>
+                    À la résonance, l'impédance du circuit est minimale et
+                    l'intensité efficace atteint sa valeur maximale pour
+                    une tension efficace donnée.
+                </p>
+            `,
+
+            formulas: `
+                <div class="formula-box">
+                    <strong>Condition de résonance</strong>
+                    X<sub>L</sub> = X<sub>C</sub>
+                </div>
+
+                <div class="formula-box">
+                    <strong>Fréquence propre</strong>
+                    f₀ = 1 / (2π√(LC))
+                </div>
+            `,
+
+            important:
+                "À la résonance d'un circuit RLC série, les réactances inductive et capacitive se compensent."
+        },
+
+
+        12: {
+            module: "Module 3 — Courant Alternatif Sinusoïdal",
+
+            title: "Chapitre 12 — Puissance en courant alternatif et facteur de puissance",
+
+            description:
+                "Étude de la puissance électrique en courant alternatif et du facteur de puissance.",
+
+            objectives: [
+                "Comprendre la puissance active.",
+                "Comprendre le facteur de puissance.",
+                "Relier puissance, tension, courant et déphasage.",
+                "Interpréter cos φ."
+            ],
+
+            notes: `
+                <p>
+                    En courant alternatif, la puissance active dépend de la
+                    tension efficace, de l'intensité efficace et du déphasage
+                    entre la tension et le courant.
+                </p>
+
+                <br>
+
+                <p>
+                    Le facteur de puissance est lié au cosinus de l'angle
+                    de déphasage.
+                </p>
+            `,
+
+            formulas: `
+                <div class="formula-box">
+                    <strong>Puissance active</strong>
+                    P = U × I × cos(φ)
+                </div>
+
+                <div class="formula-box">
+                    <strong>Facteur de puissance</strong>
+                    cos(φ) = P / (U × I)
+                </div>
+            `,
+
+            important:
+                "Le facteur de puissance indique la part de la puissance apparente effectivement transformée en puissance active."
+        },
+
+
+        13: {
+            module: "Module 4 — Compléments de Mécanique",
+
+            title: "Chapitre 13 — Cinématique et dynamique du point matériel",
+
+            description:
+                "Rappels de cinématique et étude de la dynamique du point matériel.",
+
+            objectives: [
+                "Décrire le mouvement d'un point matériel.",
+                "Déterminer vitesse et accélération.",
+                "Identifier les forces appliquées.",
+                "Appliquer les lois de Newton."
+            ],
+
+            notes: `
+                <p>
+                    La <strong>cinématique</strong> étudie le mouvement des
+                    objets sans s'intéresser directement aux causes de ce mouvement.
+                </p>
+
+                <br>
+
+                <p>
+                    La <strong>dynamique</strong> étudie les relations entre
+                    les forces appliquées à un système et son mouvement.
+                </p>
+
+                <br>
+
+                <p>
+                    Les lois de Newton permettent notamment de relier la
+                    résultante des forces à l'accélération d'un corps.
+                </p>
+            `,
+
+            formulas: `
+                <div class="formula-box">
+                    <strong>Deuxième loi de Newton</strong>
+                    ΣF = m × a
+                </div>
+
+                <div class="formula-box">
+                    <strong>Vitesse moyenne</strong>
+                    v = Δx / Δt
+                </div>
+            `,
+
+            important:
+                "La deuxième loi de Newton permet d'étudier le mouvement d'un système soumis à des forces."
+        },
+
+
+        14: {
+            module: "Module 4 — Compléments de Mécanique",
+
+            title: "Chapitre 14 — Les mouvements oscillatoires mécaniques",
+
+            description:
+                "Étude des oscillations mécaniques et du système masse-ressort.",
+
+            objectives: [
+                "Définir un mouvement oscillatoire.",
+                "Comprendre le fonctionnement d'un système masse-ressort.",
+                "Identifier période et fréquence des oscillations.",
+                "Étudier les caractéristiques d'un mouvement harmonique."
+            ],
+
+            notes: `
+                <p>
+                    Un mouvement oscillatoire est un mouvement qui se répète
+                    autour d'une position d'équilibre.
+                </p>
+
+                <br>
+
+                <p>
+                    Le <strong>pendule élastique</strong> ou système masse-ressort
+                    constitue un exemple important de mouvement oscillatoire.
+                </p>
+
+                <br>
+
+                <p>
+                    La période correspond au temps nécessaire pour effectuer
+                    une oscillation complète.
+                </p>
+            `,
+
+            formulas: `
+                <div class="formula-box">
+                    <strong>Période du système masse-ressort</strong>
+                    T = 2π√(m / k)
+                </div>
+
+                <div class="formula-box">
+                    <strong>Fréquence</strong>
+                    f = 1 / T
+                </div>
+            `,
+
+            important:
+                "La période d'un système masse-ressort dépend de la masse m et de la constante de raideur k du ressort."
+        },
+
+
+        15: {
+            module: "Module 4 — Compléments de Mécanique",
+
+            title: "Chapitre 15 — Énergie du pendule élastique",
+
+            description:
+                "Étude des énergies cinétique, potentielle et mécanique d'un système masse-ressort.",
+
+            objectives: [
+                "Identifier l'énergie cinétique.",
+                "Identifier l'énergie potentielle élastique.",
+                "Comprendre la conservation de l'énergie mécanique.",
+                "Étudier les transformations d'énergie pendant les oscillations."
+            ],
+
+            notes: `
+                <p>
+                    Pendant les oscillations d'un système masse-ressort,
+                    l'énergie se transforme entre énergie cinétique et
+                    énergie potentielle élastique.
+                </p>
+
+                <br>
+
+                <p>
+                    En l'absence de pertes, la somme de ces énergies reste
+                    constante : c'est l'énergie mécanique du système.
+                </p>
+            `,
+
+            formulas: `
+                <div class="formula-box">
+                    <strong>Énergie cinétique</strong>
+                    E<sub>c</sub> = 1/2 × m × v²
+                </div>
+
+                <div class="formula-box">
+                    <strong>Énergie potentielle élastique</strong>
+                    E<sub>p</sub> = 1/2 × k × x²
+                </div>
+
+                <div class="formula-box">
+                    <strong>Énergie mécanique</strong>
+                    E<sub>m</sub> = E<sub>c</sub> + E<sub>p</sub>
+                </div>
+            `,
+
+            important:
+                "Sans pertes d'énergie, l'énergie mécanique totale du système reste constante pendant les oscillations."
+        }
+
+    };
+
+
+    /* AFFICHAGE */
+
+    const chapterSelect = document.getElementById("chapterSelect");
+
+    const moduleName = document.getElementById("moduleName");
+    const chapterTitle = document.getElementById("chapterTitle");
+    const chapterDescription = document.getElementById("chapterDescription");
+
+    const objectives = document.getElementById("objectives");
+    const notes = document.getElementById("notes");
+    const formulas = document.getElementById("formulas");
+    const important = document.getElementById("important");
+
+    const progressText = document.getElementById("progressText");
+    const progressPercent = document.getElementById("progressPercent");
+    const progressFill = document.getElementById("progressFill");
+
+    const previousButton = document.getElementById("previousButton");
+    const nextButton = document.getElementById("nextButton");
+
+
+    function loadChapter(number) {
+
+        const chapter = chapters[number];
+
+        if (!chapter) {
+            return;
+        }
+
+        moduleName.textContent = chapter.module;
+
+        chapterTitle.textContent = chapter.title;
+
+        chapterDescription.textContent = chapter.description;
+
+        objectives.innerHTML = "";
+
+        chapter.objectives.forEach(function(item) {
+
+            const li = document.createElement("li");
+
+            li.textContent = item;
+
+            objectives.appendChild(li);
+
+        });
+
+        notes.innerHTML = chapter.notes;
+
+        formulas.innerHTML = chapter.formulas;
+
+        important.textContent = chapter.important;
+
+
+        const percent = Math.round((number / 15) * 100);
+
+        progressText.textContent =
+            "Chapitre " + number + " sur 15";
+
+        progressPercent.textContent =
+            percent + " %";
+
+        progressFill.style.width =
+            percent + "%";
+
+
+        previousButton.disabled = number === 1;
+
+        nextButton.disabled = number === 15;
+
+
+        /*
+         * Enregistre le dernier chapitre consulté
+         * uniquement pour cette page NS4.
+         */
+
+        localStorage.setItem(
+            "examquiz_ns4_physique_chapter",
+            number
+        );
+
+
+        /*
+         * Remonte au début du contenu après changement
+         * de chapitre.
+         */
+
+        document.querySelector(".course-card").scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
+    }
+
+
+    chapterSelect.addEventListener("change", function() {
+
+        const number = Number(this.value);
+
+        loadChapter(number);
+
+    });
+
+
+    function previousChapter() {
+
+        const current = Number(chapterSelect.value);
+
+        if (current > 1) {
+
+            chapterSelect.value = current - 1;
+
+            loadChapter(current - 1);
+
+        }
+
+    }
+
+
+    function nextChapter() {
+
+        const current = Number(chapterSelect.value);
+
+        if (current < 15) {
+
+            chapterSelect.value = current + 1;
+
+            loadChapter(current + 1);
+
+        }
+
+    }
+
+
+    /*
+     * Récupère le dernier chapitre consulté.
+     * Si aucun chapitre n'a encore été consulté,
+     * le chapitre 1 est affiché.
+     */
+
+    const savedChapter =
+        Number(
+            localStorage.getItem(
+                "examquiz_ns4_physique_chapter"
+            )
+        );
+
+
+    if (
+        savedChapter >= 1 &&
+        savedChapter <= 15
+    ) {
+
+        chapterSelect.value = savedChapter;
+
+        loadChapter(savedChapter);
+
+    } else {
+
+        loadChapter(1);
+
+    }
+
+</script>
+
+</body>
+</html>
