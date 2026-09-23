@@ -43,7 +43,6 @@
 
   <meta property="og:type" content="website">
 
-
   <style>
 
     :root{
@@ -58,16 +57,13 @@
       --card:#fff;
     }
 
-
     *{
       box-sizing:border-box;
     }
 
-
     html{
       scroll-behavior:smooth;
     }
-
 
     body{
       margin:0;
@@ -76,18 +72,15 @@
       background:var(--light);
     }
 
-
     button,
     a{
       font:inherit;
     }
 
-
     a{
       text-decoration:none;
       color:inherit;
     }
-
 
     /* =========================================
        HEADER
@@ -111,13 +104,11 @@
       box-shadow:0 2px 12px rgba(0,0,0,.12);
     }
 
-
     .logo{
       display:flex;
       align-items:center;
       min-width:0;
     }
-
 
     .logo img{
       width:170px;
@@ -125,7 +116,6 @@
       height:auto;
       display:block;
     }
-
 
     .desktop-nav{
       display:flex;
@@ -136,19 +126,16 @@
       font-size:15px;
     }
 
-
     .desktop-nav a{
       opacity:.9;
       transition:.2s;
     }
-
 
     .desktop-nav a:hover,
     .desktop-nav a.active{
       opacity:1;
       color:#7eb5ff;
     }
-
 
     /* =========================================
        MENU MOBILE
@@ -170,7 +157,6 @@
       padding:4px;
     }
 
-
     .mobile-nav{
       display:none;
 
@@ -187,11 +173,9 @@
       box-shadow:0 8px 18px rgba(0,0,0,.18);
     }
 
-
     .mobile-nav.open{
       display:block;
     }
-
 
     .mobile-nav a{
       display:block;
@@ -202,7 +186,6 @@
 
       border-bottom:1px solid rgba(255,255,255,.1);
     }
-
 
     /* =========================================
        HERO
@@ -227,7 +210,6 @@
       overflow:hidden;
     }
 
-
     .page-hero::before{
       content:"";
 
@@ -244,7 +226,6 @@
       background:rgba(255,255,255,.06);
     }
 
-
     .page-hero-content{
       max-width:760px;
 
@@ -254,7 +235,6 @@
 
       z-index:1;
     }
-
 
     .page-hero h1{
       margin:0 0 14px;
@@ -268,7 +248,6 @@
       letter-spacing:2px;
     }
 
-
     .page-hero p{
       margin:0;
 
@@ -279,7 +258,6 @@
       color:#eef5ff;
     }
 
-
     /* =========================================
        SECTION
     ========================================= */
@@ -289,7 +267,6 @@
 
       background:#fff;
     }
-
 
     .section-title{
       text-align:center;
@@ -302,7 +279,6 @@
 
       text-transform:uppercase;
     }
-
 
     .section-intro{
       max-width:720px;
@@ -317,7 +293,6 @@
 
       line-height:1.8;
     }
-
 
     /* =========================================
        CATÉGORIES PRINCIPALES
@@ -334,7 +309,6 @@
 
       gap:22px;
     }
-
 
     .category{
       position:relative;
@@ -366,7 +340,6 @@
       cursor:pointer;
     }
 
-
     .category:hover{
       transform:translateY(-6px);
 
@@ -375,8 +348,9 @@
       box-shadow:0 14px 32px rgba(0,0,0,.11);
     }
 
-
-    /* Carte programme NS4 */
+    /* =========================================
+       CARTE PROGRAMME NS4
+    ========================================= */
 
     .category-featured{
       border:2px solid var(--purple2);
@@ -388,11 +362,9 @@
       );
     }
 
-
     .category-featured:hover{
       border-color:var(--blue2);
     }
-
 
     .category-icon{
       width:64px;
@@ -416,13 +388,11 @@
       margin-bottom:17px;
     }
 
-
     .category-featured .category-icon{
       background:#eee8fa;
 
       color:var(--purple2);
     }
-
 
     .category h3{
       margin:0 0 9px;
@@ -434,7 +404,6 @@
       line-height:1.35;
     }
 
-
     .category p{
       margin:0;
 
@@ -445,7 +414,6 @@
       line-height:1.6;
     }
 
-
     .category-arrow{
       margin-top:17px;
 
@@ -455,7 +423,6 @@
 
       font-weight:bold;
     }
-
 
     /* =========================================
        PROGRAMME NS4
@@ -475,13 +442,11 @@
       border-radius:22px;
     }
 
-
     .ns4-header{
       text-align:center;
 
       margin-bottom:32px;
     }
-
 
     .ns4-header h2{
       margin:0 0 12px;
@@ -492,7 +457,6 @@
 
       color:var(--purple);
     }
-
 
     .ns4-header p{
       max-width:700px;
@@ -506,7 +470,6 @@
       font-size:15px;
     }
 
-
     /* =========================================
        MATIÈRES
     ========================================= */
@@ -518,7 +481,6 @@
 
       gap:16px;
     }
-
 
     .subject{
       display:block;
@@ -536,7 +498,6 @@
       transition:.2s;
     }
 
-
     .subject:hover{
       border-color:var(--blue2);
 
@@ -545,7 +506,6 @@
       box-shadow:0 8px 20px rgba(0,0,0,.07);
     }
 
-
     .subject-top{
       display:flex;
 
@@ -553,7 +513,6 @@
 
       gap:12px;
     }
-
 
     .subject-number{
       width:38px;
@@ -577,7 +536,6 @@
       font-weight:bold;
     }
 
-
     .subject strong{
       display:block;
 
@@ -587,7 +545,6 @@
 
       color:#222;
     }
-
 
     .subject span{
       display:block;
@@ -599,6 +556,137 @@
       color:#777;
     }
 
+    /* =========================================
+       QUIZ NS4
+    ========================================= */
+
+    .quiz-ns4-section{
+      max-width:1100px;
+
+      margin:45px auto 0;
+
+      padding:38px;
+
+      background:#fff;
+
+      border:2px solid var(--blue);
+
+      border-radius:22px;
+
+      box-shadow:0 8px 25px rgba(0,0,0,.06);
+    }
+
+    .quiz-ns4-header{
+      text-align:center;
+
+      margin-bottom:30px;
+    }
+
+    .quiz-ns4-header h2{
+      margin:0 0 12px;
+
+      font-size:26px;
+
+      font-weight:500;
+
+      color:var(--purple);
+    }
+
+    .quiz-ns4-header p{
+      max-width:700px;
+
+      margin:0 auto;
+
+      color:var(--muted);
+
+      line-height:1.7;
+
+      font-size:15px;
+    }
+
+    .quiz-ns4-card{
+      max-width:600px;
+
+      margin:0 auto;
+
+      padding:30px;
+
+      background:var(--light);
+
+      border:1px solid #e5e5e5;
+
+      border-radius:17px;
+
+      text-align:center;
+    }
+
+    .quiz-ns4-icon{
+      width:58px;
+      height:58px;
+
+      margin:0 auto 16px;
+
+      border-radius:14px;
+
+      display:flex;
+      align-items:center;
+      justify-content:center;
+
+      background:#eee8fa;
+
+      color:var(--purple2);
+
+      font-size:22px;
+
+      font-weight:bold;
+    }
+
+    .quiz-ns4-card h3{
+      margin:0 0 10px;
+
+      font-size:20px;
+
+      font-weight:600;
+    }
+
+    .quiz-ns4-card p{
+      margin:0 0 22px;
+
+      color:#666;
+
+      font-size:14px;
+
+      line-height:1.7;
+    }
+
+    .quiz-button{
+      display:inline-flex;
+
+      align-items:center;
+      justify-content:center;
+
+      min-height:46px;
+
+      padding:0 25px;
+
+      border-radius:10px;
+
+      background:var(--purple);
+
+      color:#fff;
+
+      font-size:14px;
+
+      font-weight:600;
+
+      transition:.2s;
+    }
+
+    .quiz-button:hover{
+      background:var(--purple2);
+
+      transform:translateY(-2px);
+    }
 
     /* =========================================
        BLOC INFORMATION
@@ -618,7 +706,6 @@
       text-align:center;
     }
 
-
     .program-info strong{
       display:block;
 
@@ -629,7 +716,6 @@
       font-size:16px;
     }
 
-
     .program-info p{
       margin:0;
 
@@ -639,7 +725,6 @@
 
       line-height:1.7;
     }
-
 
     /* =========================================
        FOOTER
@@ -655,7 +740,6 @@
       border-top:1px solid #2b2b2b;
     }
 
-
     .footer-grid{
       max-width:1100px;
 
@@ -668,7 +752,6 @@
       gap:50px;
     }
 
-
     footer h3{
       letter-spacing:5px;
 
@@ -679,13 +762,11 @@
       margin-top:0;
     }
 
-
     footer p{
       color:#bbb;
 
       line-height:1.8;
     }
-
 
     .footer-links a{
       display:block;
@@ -694,7 +775,6 @@
 
       margin:16px 0;
     }
-
 
     .footer-bottom{
       max-width:1100px;
@@ -716,20 +796,17 @@
       font-size:14px;
     }
 
-
     .footer-socials{
       display:flex;
 
       gap:20px;
     }
 
-
     .footer-socials a{
       color:#aaa;
 
       font-size:22px;
     }
-
 
     /* =========================================
        RESPONSIVE
@@ -741,13 +818,11 @@
         grid-template-columns:repeat(2,1fr);
       }
 
-
       .subjects{
         grid-template-columns:repeat(2,1fr);
       }
 
     }
-
 
     @media(max-width:800px){
 
@@ -757,46 +832,38 @@
         height:70px;
       }
 
-
       .desktop-nav{
         display:none;
       }
-
 
       .menu-btn{
         display:block;
       }
 
-
       .mobile-nav{
         top:70px;
       }
-
 
       .page-hero{
         padding:50px 20px 60px;
       }
 
-
       .page-hero h1{
         font-size:27px;
       }
-
 
       .section{
         padding:55px 6% 70px;
       }
 
-
       .section-title{
         font-size:28px;
       }
 
-
-      .ns4-section{
+      .ns4-section,
+      .quiz-ns4-section{
         padding:28px 20px;
       }
-
 
       .footer-grid{
         grid-template-columns:1fr;
@@ -804,13 +871,11 @@
         gap:25px;
       }
 
-
       .footer-bottom{
         flex-direction:column;
       }
 
     }
-
 
     @media(max-width:520px){
 
@@ -818,24 +883,25 @@
         width:145px;
       }
 
-
       .categories{
         grid-template-columns:1fr;
       }
-
 
       .subjects{
         grid-template-columns:1fr;
       }
 
-
       .page-hero h1{
         font-size:23px;
       }
 
-
-      .ns4-header h2{
+      .ns4-header h2,
+      .quiz-ns4-header h2{
         font-size:22px;
+      }
+
+      .quiz-ns4-card{
+        padding:25px 18px;
       }
 
     }
@@ -844,9 +910,7 @@
 
 </head>
 
-
 <body>
-
 
 <!-- =========================================
      HEADER
@@ -866,9 +930,6 @@
     >
 
   </a>
-
-
-  <!-- MENU DESKTOP -->
 
   <nav class="desktop-nav">
 
@@ -897,9 +958,6 @@
 
   </nav>
 
-
-  <!-- BOUTON MOBILE -->
-
   <button
     class="menu-btn"
     id="menu-btn"
@@ -908,9 +966,6 @@
   >
     ☰
   </button>
-
-
-  <!-- MENU MOBILE -->
 
   <nav
     class="mobile-nav"
@@ -929,7 +984,7 @@
       Catégories
     </a>
 
-    <a href="baccalaureat.html">
+    <a href="baccalaureate.html">
       Sujets du Baccalauréat
     </a>
 
@@ -942,13 +997,11 @@
 </header>
 
 
-
 <!-- =========================================
      CONTENU PRINCIPAL
 ========================================= -->
 
 <main>
-
 
   <!-- HERO -->
 
@@ -970,7 +1023,6 @@
   </section>
 
 
-
   <!-- CATÉGORIES -->
 
   <section class="section">
@@ -978,7 +1030,6 @@
     <h2 class="section-title">
       Nos catégories
     </h2>
-
 
     <p class="section-intro">
       Retrouve des contenus de révision pour les élèves,
@@ -988,10 +1039,7 @@
 
     <div class="categories">
 
-
-      <!-- =================================
-           PROGRAMME NS4
-      ================================== -->
+      <!-- PROGRAMME NS4 -->
 
       <a
         href="#programme-ns4"
@@ -1002,17 +1050,14 @@
           NS4
         </div>
 
-
         <h3>
           Programme détaillé des cours
         </h3>
 
-
         <p>
-          NS4 — Consulte les matières et les principaux
-          contenus à étudier.
+          NS4 — Consulte les matières, les chapitres
+          et les contenus à étudier.
         </p>
-
 
         <div class="category-arrow">
           Voir le programme →
@@ -1021,10 +1066,34 @@
       </a>
 
 
+      <!-- QUIZ NS4 -->
 
-      <!-- =================================
-           HISTOIRE D'HAÏTI
-      ================================== -->
+      <a
+        href="#quiz-ns4"
+        class="category"
+      >
+
+        <div class="category-icon">
+          Q
+        </div>
+
+        <h3>
+          Quiz NS4
+        </h3>
+
+        <p>
+          Teste tes connaissances sur les matières
+          de NS4 avec des questions de révision.
+        </p>
+
+        <div class="category-arrow">
+          Commencer le quiz →
+        </div>
+
+      </a>
+
+
+      <!-- HISTOIRE D'HAÏTI -->
 
       <a
         href="quiz.html?category=histoire"
@@ -1035,17 +1104,14 @@
           H
         </div>
 
-
         <h3>
           Histoire d’Haïti
         </h3>
-
 
         <p>
           Révise les grands événements et les principales
           périodes de l'histoire d'Haïti.
         </p>
-
 
         <div class="category-arrow">
           Commencer →
@@ -1054,10 +1120,7 @@
       </a>
 
 
-
-      <!-- =================================
-           SCIENCES
-      ================================== -->
+      <!-- SCIENCES -->
 
       <a
         href="quiz.html?category=sciences"
@@ -1068,17 +1131,14 @@
           S
         </div>
 
-
         <h3>
           Sciences
         </h3>
-
 
         <p>
           Découvre des quiz de sciences et teste
           tes connaissances.
         </p>
-
 
         <div class="category-arrow">
           Commencer →
@@ -1087,10 +1147,7 @@
       </a>
 
 
-
-      <!-- =================================
-           CULTURE GÉNÉRALE
-      ================================== -->
+      <!-- CULTURE GÉNÉRALE -->
 
       <a
         href="quiz.html?category=culture-generale"
@@ -1101,17 +1158,14 @@
           CG
         </div>
 
-
         <h3>
           Culture générale
         </h3>
-
 
         <p>
           Teste tes connaissances dans différents
           domaines.
         </p>
-
 
         <div class="category-arrow">
           Commencer →
@@ -1120,10 +1174,7 @@
       </a>
 
 
-
-      <!-- =================================
-           BACCALAURÉAT
-      ================================== -->
+      <!-- BACCALAURÉAT -->
 
       <a
         href="baccalaureat.html"
@@ -1134,17 +1185,14 @@
           BAC
         </div>
 
-
         <h3>
           Sujets du Baccalauréat
         </h3>
-
 
         <p>
           Consulte les sujets du Baccalauréat
           classés par matière.
         </p>
-
 
         <div class="category-arrow">
           Voir les sujets →
@@ -1153,10 +1201,7 @@
       </a>
 
 
-
-      <!-- =================================
-           CONCOURS
-      ================================== -->
+      <!-- CONCOURS -->
 
       <a
         href="concours.html"
@@ -1167,17 +1212,14 @@
           CA
         </div>
 
-
         <h3>
           Concours d’admission universitaire
         </h3>
-
 
         <p>
           Prépare les concours et examens d'admission
           des universités en Haïti.
         </p>
-
 
         <div class="category-arrow">
           Préparer →
@@ -1185,9 +1227,7 @@
 
       </a>
 
-
     </div>
-
 
 
     <!-- =========================================
@@ -1199,31 +1239,27 @@
       id="programme-ns4"
     >
 
-
       <div class="ns4-header">
 
         <h2>
           Programme détaillé des cours — NS4
         </h2>
 
-
         <p>
-          Retrouve les matières et les principaux contenus
-          du programme de NS4 afin d'organiser tes révisions
-          et de mieux préparer tes examens.
+          Consulte les différentes matières de NS4 et
+          accède à leur programme détaillé, organisé
+          par chapitres et notions à étudier.
         </p>
 
       </div>
 
 
-
       <div class="subjects">
-
 
         <!-- MATHÉMATIQUES -->
 
         <a
-          href="quiz.html?category=ns4-mathematiques"
+          href="mathematiques-ns4.html"
           class="subject"
         >
 
@@ -1240,7 +1276,7 @@
               </strong>
 
               <span>
-                Programme NS4
+                Programme détaillé NS4
               </span>
 
             </div>
@@ -1250,11 +1286,10 @@
         </a>
 
 
-
         <!-- PHYSIQUE -->
 
         <a
-          href="quiz.html?category=ns4-physique"
+          href="physique-ns4.html"
           class="subject"
         >
 
@@ -1271,7 +1306,7 @@
               </strong>
 
               <span>
-                Programme NS4
+                Programme détaillé NS4
               </span>
 
             </div>
@@ -1281,11 +1316,10 @@
         </a>
 
 
-
         <!-- CHIMIE -->
 
         <a
-          href="quiz.html?category=ns4-chimie"
+          href="chimie-ns4.html"
           class="subject"
         >
 
@@ -1302,7 +1336,7 @@
               </strong>
 
               <span>
-                Programme NS4
+                Programme détaillé NS4
               </span>
 
             </div>
@@ -1312,11 +1346,10 @@
         </a>
 
 
-
         <!-- BIOLOGIE -->
 
         <a
-          href="quiz.html?category=ns4-biologie"
+          href="biologie-ns4.html"
           class="subject"
         >
 
@@ -1333,7 +1366,7 @@
               </strong>
 
               <span>
-                Programme NS4
+                Programme détaillé NS4
               </span>
 
             </div>
@@ -1343,11 +1376,10 @@
         </a>
 
 
-
         <!-- FRANÇAIS -->
 
         <a
-          href="quiz.html?category=ns4-francais"
+          href="francais-ns4.html"
           class="subject"
         >
 
@@ -1364,7 +1396,7 @@
               </strong>
 
               <span>
-                Programme NS4
+                Programme détaillé NS4
               </span>
 
             </div>
@@ -1374,11 +1406,10 @@
         </a>
 
 
-
         <!-- PHILOSOPHIE -->
 
         <a
-          href="quiz.html?category=ns4-philosophie"
+          href="philosophie-ns4.html"
           class="subject"
         >
 
@@ -1395,7 +1426,7 @@
               </strong>
 
               <span>
-                Programme NS4
+                Programme détaillé NS4
               </span>
 
             </div>
@@ -1405,11 +1436,10 @@
         </a>
 
 
-
-        <!-- HISTOIRE GÉOGRAPHIE -->
+        <!-- HISTOIRE-GÉOGRAPHIE -->
 
         <a
-          href="quiz.html?category=ns4-histoire-geographie"
+          href="histoire-geographie-ns4.html"
           class="subject"
         >
 
@@ -1426,7 +1456,7 @@
               </strong>
 
               <span>
-                Programme NS4
+                Programme détaillé NS4
               </span>
 
             </div>
@@ -1436,11 +1466,10 @@
         </a>
 
 
-
         <!-- ANGLAIS -->
 
         <a
-          href="quiz.html?category=ns4-anglais"
+          href="anglais-ns4.html"
           class="subject"
         >
 
@@ -1457,7 +1486,7 @@
               </strong>
 
               <span>
-                Programme NS4
+                Programme détaillé NS4
               </span>
 
             </div>
@@ -1467,11 +1496,10 @@
         </a>
 
 
-
         <!-- CRÉOLE -->
 
         <a
-          href="quiz.html?category=ns4-kreyol"
+          href="kreyol-ns4.html"
           class="subject"
         >
 
@@ -1488,7 +1516,7 @@
               </strong>
 
               <span>
-                Programme NS4
+                Programme détaillé NS4
               </span>
 
             </div>
@@ -1497,12 +1525,8 @@
 
         </a>
 
-
       </div>
 
-
-
-      <!-- INFORMATION -->
 
       <div class="program-info">
 
@@ -1511,21 +1535,68 @@
         </strong>
 
         <p>
-          Chaque matière pourra contenir les chapitres,
-          notions essentielles, exercices et quiz correspondant
-          au programme de NS4.
+          Chaque matière dispose de sa propre page afin
+          de présenter les chapitres, notions essentielles
+          et contenus à étudier.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================================
+         QUIZ NS4
+    ========================================= -->
+
+    <section
+      class="quiz-ns4-section"
+      id="quiz-ns4"
+    >
+
+      <div class="quiz-ns4-header">
+
+        <h2>
+          Quiz NS4
+        </h2>
+
+        <p>
+          Après avoir étudié le programme, teste tes
+          connaissances avec les quiz de révision NS4.
         </p>
 
       </div>
 
 
-    </section>
+      <div class="quiz-ns4-card">
 
+        <div class="quiz-ns4-icon">
+          Q
+        </div>
+
+        <h3>
+          Révision interactive NS4
+        </h3>
+
+        <p>
+          Réponds aux questions, vérifie tes connaissances
+          et identifie les notions que tu dois encore travailler.
+        </p>
+
+        <a
+          href="quiz.html?category=ns4"
+          class="quiz-button"
+        >
+          Commencer le Quiz NS4
+        </a>
+
+      </div>
+
+    </section>
 
   </section>
 
 </main>
-
 
 
 <!-- =========================================
@@ -1534,16 +1605,13 @@
 
 <footer>
 
-
   <div class="footer-grid">
-
 
     <div>
 
       <h3>
         À PROPOS DE NOUS
       </h3>
-
 
       <p>
         ExamQuiz est une plateforme éducative destinée
@@ -1554,28 +1622,23 @@
     </div>
 
 
-
     <div class="footer-links">
 
       <h3>
         MENU
       </h3>
 
-
       <a href="index.html#quiz">
         Quiz
       </a>
-
 
       <a href="categories.html">
         Catégories
       </a>
 
-
       <a href="baccalaureat.html">
         Sujets du Baccalauréat
       </a>
-
 
       <a href="index.html#contact">
         Contact
@@ -1583,18 +1646,14 @@
 
     </div>
 
-
   </div>
-
 
 
   <div class="footer-bottom">
 
-
     <div>
       © 2026 ExamQuiz • Tous droits réservés
     </div>
-
 
     <div class="footer-socials">
 
@@ -1605,7 +1664,6 @@
         f
       </a>
 
-
       <a
         href="#"
         aria-label="Instagram"
@@ -1613,14 +1671,12 @@
         ◎
       </a>
 
-
       <a
         href="#"
         aria-label="YouTube"
       >
         ▶
       </a>
-
 
       <a
         href="#"
@@ -1634,7 +1690,6 @@
   </div>
 
 </footer>
-
 
 
 <!-- =========================================
@@ -1681,7 +1736,6 @@
     });
 
 </script>
-
 
 </body>
 </html>
