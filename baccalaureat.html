@@ -1,24 +1,945 @@
-<section class="quiz-ns4-section" id="edubillard">
-  <div class="quiz-ns4-header">
-    <h2>EduBillard</h2>
-    <p>
-      Apprends, teste tes connaissances et progresse avec un jeu de billard
-      éducatif basé sur la biologie.
-    </p>
-  </div>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <div class="quiz-ns4-card">
-    <div class="quiz-ns4-icon">🎱</div>
+  <meta name="theme-color" content="#24113f">
 
-    <h3>Jouer à EduBillard</h3>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon-192.png">
 
-    <p>
-      Réponds aux questions de biologie en utilisant la boule blanche.
-      Touche la bonne réponse pour gagner des points et continuer la partie.
-    </p>
+  <title>Jeux éducatifs — ExamQuiz Haiti</title>
 
-    <a href="edubillard.html" class="quiz-button">
-      Jouer maintenant
+  <meta
+    name="description"
+    content="Découvre les jeux éducatifs d'ExamQuiz Haiti et apprends tout en t'amusant."
+  >
+
+  <link
+    rel="canonical"
+    href="https://examquizhaiti.com/categories.html"
+  >
+
+  <meta
+    property="og:title"
+    content="Jeux éducatifs — ExamQuiz Haiti"
+  >
+
+  <meta
+    property="og:description"
+    content="Apprends et teste tes connaissances avec les jeux éducatifs d'ExamQuiz Haiti."
+  >
+
+  <meta
+    property="og:image"
+    content="https://examquizhaiti.com/icons/icon-192.png"
+  >
+
+  <meta
+    property="og:url"
+    content="https://examquizhaiti.com/categories.html"
+  >
+
+  <meta property="og:type" content="website">
+
+  <style>
+
+    :root{
+      --purple:#24113f;
+      --purple2:#4b2481;
+      --blue:#1764c0;
+      --blue2:#2f80ed;
+
+      --light:#f7f8fc;
+      --text:#171717;
+      --muted:#666;
+      --card:#fff;
+    }
+
+    *{
+      box-sizing:border-box;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      margin:0;
+      font-family:Arial,Helvetica,sans-serif;
+      color:var(--text);
+      background:var(--light);
+    }
+
+    button,
+    a{
+      font:inherit;
+    }
+
+    a{
+      text-decoration:none;
+      color:inherit;
+    }
+
+    /* =========================================
+       HEADER
+    ========================================= */
+
+    .site-header{
+      position:sticky;
+      top:0;
+      z-index:1000;
+
+      height:76px;
+
+      background:var(--purple);
+
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+
+      padding:0 6%;
+
+      box-shadow:0 2px 12px rgba(0,0,0,.12);
+    }
+
+    .logo{
+      display:flex;
+      align-items:center;
+      min-width:0;
+    }
+
+    .logo img{
+      width:170px;
+      max-width:55vw;
+      height:auto;
+      display:block;
+    }
+
+    .desktop-nav{
+      display:flex;
+      align-items:center;
+      gap:24px;
+
+      color:#fff;
+      font-size:15px;
+    }
+
+    .desktop-nav a{
+      opacity:.9;
+      transition:.2s;
+    }
+
+    .desktop-nav a:hover,
+    .desktop-nav a.active{
+      opacity:1;
+      color:#7eb5ff;
+    }
+
+    /* =========================================
+       MENU MOBILE
+    ========================================= */
+
+    .menu-btn{
+      display:none;
+
+      border:0;
+      background:transparent;
+
+      color:#fff;
+
+      font-size:34px;
+      line-height:1;
+
+      cursor:pointer;
+
+      padding:4px;
+    }
+
+    .mobile-nav{
+      display:none;
+
+      position:absolute;
+
+      top:76px;
+      left:0;
+      right:0;
+
+      background:var(--purple);
+
+      padding:14px 7%;
+
+      box-shadow:0 8px 18px rgba(0,0,0,.18);
+    }
+
+    .mobile-nav.open{
+      display:block;
+    }
+
+    .mobile-nav a{
+      display:block;
+
+      color:#fff;
+
+      padding:14px 0;
+
+      border-bottom:1px solid rgba(255,255,255,.1);
+    }
+
+    /* =========================================
+       HERO
+    ========================================= */
+
+    .page-hero{
+      padding:64px 20px 74px;
+
+      text-align:center;
+
+      color:#fff;
+
+      background:linear-gradient(
+        155deg,
+        #54319a 0%,
+        #324caa 48%,
+        #155db7 100%
+      );
+
+      position:relative;
+
+      overflow:hidden;
+    }
+
+    .page-hero::before{
+      content:"";
+
+      position:absolute;
+
+      border-radius:50%;
+
+      width:340px;
+      height:340px;
+
+      top:-180px;
+      right:-100px;
+
+      background:rgba(255,255,255,.06);
+    }
+
+    .page-hero-content{
+      max-width:760px;
+
+      margin:0 auto;
+
+      position:relative;
+
+      z-index:1;
+    }
+
+    .page-hero h1{
+      margin:0 0 14px;
+
+      font-size:34px;
+
+      font-weight:400;
+
+      text-transform:uppercase;
+
+      letter-spacing:2px;
+    }
+
+    .page-hero p{
+      margin:0;
+
+      font-size:16px;
+
+      line-height:1.7;
+
+      color:#eef5ff;
+    }
+
+    /* =========================================
+       SECTION
+    ========================================= */
+
+    .section{
+      padding:70px 7% 90px;
+
+      background:#fff;
+
+      min-height:500px;
+    }
+
+    .section-title{
+      text-align:center;
+
+      font-size:34px;
+
+      font-weight:400;
+
+      margin:0 0 18px;
+
+      text-transform:uppercase;
+    }
+
+    .section-intro{
+      max-width:720px;
+
+      margin:0 auto 45px;
+
+      color:#555;
+
+      text-align:center;
+
+      font-size:16px;
+
+      line-height:1.8;
+    }
+
+    /* =========================================
+       JEUX
+    ========================================= */
+
+    .games{
+      max-width:1100px;
+
+      margin:0 auto;
+
+      display:grid;
+
+      grid-template-columns:repeat(3,1fr);
+
+      gap:22px;
+    }
+
+    .game{
+      position:relative;
+
+      background:#fff;
+
+      border:1px solid #e8e8e8;
+
+      border-radius:18px;
+
+      padding:32px 24px;
+
+      min-height:270px;
+
+      display:flex;
+
+      flex-direction:column;
+
+      align-items:center;
+
+      justify-content:center;
+
+      text-align:center;
+
+      box-shadow:0 8px 25px rgba(0,0,0,.07);
+
+      transition:.25s;
+
+      cursor:pointer;
+    }
+
+    .game:hover{
+      transform:translateY(-6px);
+
+      border-color:var(--blue2);
+
+      box-shadow:0 14px 32px rgba(0,0,0,.11);
+    }
+
+    .game-featured{
+      border:2px solid var(--purple2);
+
+      background:linear-gradient(
+        180deg,
+        #fff 0%,
+        #faf8ff 100%
+      );
+    }
+
+    .game-featured:hover{
+      border-color:var(--blue2);
+    }
+
+    .game-icon{
+      width:76px;
+      height:76px;
+
+      border-radius:20px;
+
+      display:flex;
+
+      align-items:center;
+      justify-content:center;
+
+      background:#eee8fa;
+
+      color:var(--purple2);
+
+      font-size:34px;
+
+      margin-bottom:20px;
+    }
+
+    .game h3{
+      margin:0 0 10px;
+
+      font-size:21px;
+
+      font-weight:600;
+
+      line-height:1.35;
+    }
+
+    .game p{
+      margin:0;
+
+      color:#707070;
+
+      font-size:14px;
+
+      line-height:1.7;
+
+      max-width:330px;
+    }
+
+    .game-arrow{
+      margin-top:20px;
+
+      color:var(--blue2);
+
+      font-size:14px;
+
+      font-weight:bold;
+    }
+
+    /* =========================================
+       JEUX À VENIR
+    ========================================= */
+
+    .coming-soon{
+      max-width:1100px;
+
+      margin:30px auto 0;
+
+      padding:28px;
+
+      border:1px dashed #d8d8d8;
+
+      border-radius:18px;
+
+      background:var(--light);
+
+      text-align:center;
+    }
+
+    .coming-soon strong{
+      display:block;
+
+      margin-bottom:8px;
+
+      color:var(--purple);
+
+      font-size:16px;
+    }
+
+    .coming-soon p{
+      margin:0;
+
+      color:#777;
+
+      font-size:14px;
+
+      line-height:1.7;
+    }
+
+    /* =========================================
+       FOOTER
+    ========================================= */
+
+    footer{
+      background:#000;
+
+      color:#fff;
+
+      padding:60px 7% 25px;
+
+      border-top:1px solid #2b2b2b;
+    }
+
+    .footer-grid{
+      max-width:1100px;
+
+      margin:auto;
+
+      display:grid;
+
+      grid-template-columns:1.4fr 1fr 1fr;
+
+      gap:50px;
+    }
+
+    footer h3{
+      letter-spacing:5px;
+
+      font-size:18px;
+
+      font-weight:400;
+
+      margin-top:0;
+    }
+
+    footer p{
+      color:#bbb;
+
+      line-height:1.8;
+    }
+
+    .footer-links a{
+      display:block;
+
+      color:#3782df;
+
+      margin:16px 0;
+    }
+
+    .footer-bottom{
+      max-width:1100px;
+
+      margin:50px auto 0;
+
+      padding-top:25px;
+
+      border-top:1px solid #2a2a2a;
+
+      display:flex;
+
+      justify-content:space-between;
+
+      gap:20px;
+
+      color:#aaa;
+
+      font-size:14px;
+    }
+
+    .footer-socials{
+      display:flex;
+
+      gap:20px;
+    }
+
+    .footer-socials a{
+      color:#aaa;
+
+      font-size:22px;
+    }
+
+    /* =========================================
+       RESPONSIVE
+    ========================================= */
+
+    @media(max-width:900px){
+
+      .games{
+        grid-template-columns:repeat(2,1fr);
+      }
+
+    }
+
+    @media(max-width:800px){
+
+      .site-header{
+        padding:0 5%;
+
+        height:70px;
+      }
+
+      .desktop-nav{
+        display:none;
+      }
+
+      .menu-btn{
+        display:block;
+      }
+
+      .mobile-nav{
+        top:70px;
+      }
+
+      .page-hero{
+        padding:50px 20px 60px;
+      }
+
+      .page-hero h1{
+        font-size:27px;
+      }
+
+      .section{
+        padding:55px 6% 70px;
+      }
+
+      .section-title{
+        font-size:28px;
+      }
+
+      .footer-grid{
+        grid-template-columns:1fr;
+
+        gap:25px;
+      }
+
+      .footer-bottom{
+        flex-direction:column;
+      }
+
+    }
+
+    @media(max-width:520px){
+
+      .logo img{
+        width:145px;
+      }
+
+      .games{
+        grid-template-columns:1fr;
+      }
+
+      .page-hero h1{
+        font-size:23px;
+      }
+
+      .game{
+        min-height:250px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+<!-- =========================================
+     HEADER
+========================================= -->
+
+<header class="site-header">
+
+  <a
+    class="logo"
+    href="index.html"
+    aria-label="ExamQuiz accueil"
+  >
+
+    <img
+      src="logo.png"
+      alt="ExamQuiz Haiti"
+    >
+
+  </a>
+
+  <nav class="desktop-nav">
+
+    <a href="index.html#accueil">
+      Accueil
     </a>
+
+    <a href="index.html#quiz">
+      Quiz
+    </a>
+
+    <a
+      href="categories.html"
+      class="active"
+    >
+      Jeux
+    </a>
+
+    <a href="baccalaureat.html">
+      Sujets du Baccalauréat
+    </a>
+
+    <a href="index.html#contact">
+      Contact
+    </a>
+
+  </nav>
+
+  <button
+    class="menu-btn"
+    id="menu-btn"
+    aria-label="Ouvrir le menu"
+    aria-expanded="false"
+  >
+    ☰
+  </button>
+
+  <nav
+    class="mobile-nav"
+    id="mobile-nav"
+  >
+
+    <a href="index.html#accueil">
+      Accueil
+    </a>
+
+    <a href="index.html#quiz">
+      Quiz
+    </a>
+
+    <a href="categories.html">
+      Jeux
+    </a>
+
+    <a href="baccalaureat.html">
+      Sujets du Baccalauréat
+    </a>
+
+    <a href="index.html#contact">
+      Contact
+    </a>
+
+  </nav>
+
+</header>
+
+
+<!-- =========================================
+     CONTENU PRINCIPAL
+========================================= -->
+
+<main>
+
+  <!-- HERO -->
+
+  <section class="page-hero">
+
+    <div class="page-hero-content">
+
+      <h1>
+        Jeux éducatifs
+      </h1>
+
+      <p>
+        Apprends, teste tes connaissances et progresse
+        grâce aux jeux éducatifs d'ExamQuiz Haiti.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- JEUX -->
+
+  <section class="section">
+
+    <h2 class="section-title">
+      Nos jeux
+    </h2>
+
+    <p class="section-intro">
+      Découvre des jeux conçus pour rendre la révision
+      plus interactive et plus amusante.
+    </p>
+
+
+    <div class="games">
+
+      <!-- EDUBILLARD -->
+
+      <a
+        href="edubillard.html"
+        class="game game-featured"
+      >
+
+        <div class="game-icon">
+          🎱
+        </div>
+
+        <h3>
+          EduBillard
+        </h3>
+
+        <p>
+          Teste tes connaissances en biologie avec
+          un véritable jeu de billard éducatif.
+          Touche la bonne réponse et gagne des points.
+        </p>
+
+        <div class="game-arrow">
+          Jouer maintenant →
+        </div>
+
+      </a>
+
+    </div>
+
+
+    <!-- JEUX À VENIR -->
+
+    <div class="coming-soon">
+
+      <strong>
+        D'autres jeux arrivent bientôt
+      </strong>
+
+      <p>
+        De nouveaux jeux éducatifs seront ajoutés
+        prochainement pour rendre tes révisions
+        encore plus interactives.
+      </p>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<!-- =========================================
+     FOOTER
+========================================= -->
+
+<footer>
+
+  <div class="footer-grid">
+
+    <div>
+
+      <h3>
+        À PROPOS DE NOUS
+      </h3>
+
+      <p>
+        ExamQuiz est une plateforme éducative destinée
+        à aider les élèves à apprendre, réviser et tester
+        leurs connaissances à travers des quiz et des jeux
+        éducatifs.
+      </p>
+
+    </div>
+
+
+    <div class="footer-links">
+
+      <h3>
+        MENU
+      </h3>
+
+      <a href="index.html#quiz">
+        Quiz
+      </a>
+
+      <a href="categories.html">
+        Jeux
+      </a>
+
+      <a href="baccalaureat.html">
+        Sujets du Baccalauréat
+      </a>
+
+      <a href="index.html#contact">
+        Contact
+      </a>
+
+    </div>
+
   </div>
-</section>
+
+
+  <div class="footer-bottom">
+
+    <div>
+      © 2026 ExamQuiz • Tous droits réservés
+    </div>
+
+    <div class="footer-socials">
+
+      <a
+        href="#"
+        aria-label="Facebook"
+      >
+        f
+      </a>
+
+      <a
+        href="#"
+        aria-label="Instagram"
+      >
+        ◎
+      </a>
+
+      <a
+        href="#"
+        aria-label="YouTube"
+      >
+        ▶
+      </a>
+
+      <a
+        href="#"
+        aria-label="TikTok"
+      >
+        ♪
+      </a>
+
+    </div>
+
+  </div>
+
+</footer>
+
+
+<!-- =========================================
+     JAVASCRIPT
+========================================= -->
+
+<script>
+
+  const menuBtn =
+    document.getElementById("menu-btn");
+
+  const mobileNav =
+    document.getElementById("mobile-nav");
+
+
+  menuBtn.addEventListener("click", () => {
+
+    const isOpen =
+      mobileNav.classList.toggle("open");
+
+    menuBtn.setAttribute(
+      "aria-expanded",
+      isOpen ? "true" : "false"
+    );
+
+  });
+
+
+  document
+    .querySelectorAll(".mobile-nav a")
+    .forEach(link => {
+
+      link.addEventListener("click", () => {
+
+        mobileNav.classList.remove("open");
+
+        menuBtn.setAttribute(
+          "aria-expanded",
+          "false"
+        );
+
+      });
+
+    });
+
+</script>
+
+</body>
+</html>
