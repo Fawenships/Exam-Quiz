@@ -267,6 +267,106 @@ footer{
   font-size:14px;
 }
 
+/* ================================= */
+/* EDU BILLARD - BIOLOGIE UNIQUEMENT */
+/* ================================= */
+
+#edubillard-launch{
+  display:none;
+  width:100%;
+  margin:0 0 25px;
+  padding:14px 20px;
+  border:none;
+  border-radius:12px;
+  background:#24113f;
+  color:white;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+  box-shadow:0 5px 18px rgba(0,0,0,.10);
+  transition:.2s;
+}
+
+#edubillard-launch:hover{
+  opacity:.9;
+  transform:translateY(-2px);
+}
+
+#edubillard{
+  display:none;
+  background:white;
+  border-radius:18px;
+  padding:20px;
+  margin-bottom:25px;
+  box-shadow:0 5px 18px rgba(0,0,0,.10);
+}
+
+.edubillard-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  margin-bottom:15px;
+}
+
+.edubillard-top h3{
+  margin:0;
+  color:#24113f;
+}
+
+#edubillard-score{
+  font-weight:bold;
+  color:#1764c0;
+}
+
+#edubillard-question{
+  background:#f1f6ff;
+  border-left:4px solid #1764c0;
+  padding:15px;
+  border-radius:10px;
+  line-height:1.6;
+  margin-bottom:15px;
+}
+
+#edubillard-table{
+  width:100%;
+  max-width:900px;
+  display:block;
+  margin:auto;
+  background:#1764c0;
+  border:12px solid #24113f;
+  border-radius:20px;
+  touch-action:none;
+}
+
+#edubillard-message{
+  text-align:center;
+  font-weight:bold;
+  min-height:25px;
+  margin:15px 0 5px;
+}
+
+#edubillard-next{
+  display:none;
+  width:100%;
+  border:none;
+  background:#24113f;
+  color:white;
+  padding:12px 18px;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+#edubillard-close{
+  border:none;
+  background:#eee;
+  color:#24113f;
+  padding:9px 14px;
+  border-radius:9px;
+  cursor:pointer;
+}
+
 /* MOBILE */
 
 @media(max-width:750px){
@@ -297,6 +397,15 @@ footer{
   .questions-header h2{
     text-align:center;
     order:1;
+  }
+
+  .edubillard-top{
+    flex-direction:column;
+    text-align:center;
+  }
+
+  #edubillard-table{
+    border-width:7px;
   }
 
 }
@@ -806,6 +915,1402 @@ function afficherQuestions(liste, nom){
 }
 
 
+/* ================================= */
+/* EDU BILLARD - VARIABLES */
+/* ================================= */
+
+let eduBillardCreated =
+  false;
+
+let eduCanvas =
+  null;
+
+let eduCtx =
+  null;
+
+let eduScore =
+  0;
+
+let eduQuestionIndex =
+  0;
+
+let eduBalls =
+  [];
+
+let eduWhiteBall =
+  null;
+
+let eduShooting =
+  false;
+
+let eduGameRunning =
+  false;
+
+let eduQuestionResolved =
+  false;
+
+
+/* ================================= */
+/* BOUTON EDU BILLARD */
+/* ================================= */
+
+function afficherBoutonEduBillard(){
+
+  if(eduBillardCreated){
+
+    const oldButton =
+      document.getElementById(
+        "edubillard-launch"
+      );
+
+    if(oldButton){
+
+      oldButton.style.display =
+        "block";
+
+    }
+
+    return;
+
+  }
+
+
+  eduBillardCreated =
+    true;
+
+
+  const button =
+    document.createElement(
+      "button"
+    );
+
+
+  button.id =
+    "edubillard-launch";
+
+
+  button.textContent =
+    "🎱 Jouer à EduBillard";
+
+
+  questionsContainer.insertBefore(
+    button,
+    questionsContainer.firstChild
+  );
+
+
+  button.style.display =
+    "block";
+
+
+  button.addEventListener(
+    "click",
+    lancerEduBillard
+  );
+
+}
+
+
+/* ================================= */
+/* CRÉER LE JEU */
+/* ================================= */
+
+function creerEduBillard(){
+
+  const game =
+    document.createElement(
+      "div"
+    );
+
+
+  game.id =
+    "edubillard";
+
+
+  game.innerHTML = `
+
+    <div class="edubillard-top">
+
+      <h3>
+        🎱 EduBillard — Biologie
+      </h3>
+
+      <span id="edubillard-score">
+        Points : 0
+      </span>
+
+    </div>
+
+
+    <div id="edubillard-question"></div>
+
+
+    <canvas
+      id="edubillard-table"
+      width="900"
+      height="500"
+    >
+      Votre navigateur ne supporte pas Canvas.
+    </canvas>
+
+
+    <div id="edubillard-message"></div>
+
+
+    <button id="edubillard-next">
+      Question suivante →
+    </button>
+
+  `;
+
+
+  questionsContainer.insertBefore(
+    game,
+    questionsContainer.children[1] || null
+  );
+
+
+  eduCanvas =
+    document.getElementById(
+      "edubillard-table"
+    );
+
+
+  eduCtx =
+    eduCanvas.getContext(
+      "2d"
+    );
+
+
+  document
+    .getElementById(
+      "edubillard-next"
+    )
+    .addEventListener(
+      "click",
+      questionEduSuivante
+    );
+
+
+  eduCanvas.addEventListener(
+    "pointerdown",
+    eduPointerDown
+  );
+
+
+  eduCanvas.addEventListener(
+    "pointerup",
+    eduPointerUp
+  );
+
+
+  eduCanvas.addEventListener(
+    "pointercancel",
+    eduPointerCancel
+  );
+
+
+  eduGameRunning =
+    true;
+
+}
+
+
+/* ================================= */
+/* LANCER EDU BILLARD */
+/* ================================= */
+
+function lancerEduBillard(){
+
+  if(
+    !Array.isArray(
+      biologieQuestions
+    ) ||
+    biologieQuestions.length < 4
+  ){
+
+    alert(
+      "Il faut au moins 4 questions de biologie pour jouer."
+    );
+
+    return;
+
+  }
+
+
+  const button =
+    document.getElementById(
+      "edubillard-launch"
+    );
+
+
+  let game =
+    document.getElementById(
+      "edubillard"
+    );
+
+
+  if(!game){
+
+    creerEduBillard();
+
+    game =
+      document.getElementById(
+        "edubillard"
+      );
+
+  }
+
+
+  button.style.display =
+    "none";
+
+
+  game.style.display =
+    "block";
+
+
+  eduScore =
+    0;
+
+
+  eduQuestionIndex =
+    0;
+
+
+  afficherScore();
+
+
+  nouvelleQuestionEdu();
+
+
+  game.scrollIntoView({
+    behavior:"smooth",
+    block:"start"
+  });
+
+}
+
+
+/* ================================= */
+/* NOUVELLE QUESTION */
+/* ================================= */
+
+function nouvelleQuestionEdu(){
+
+  if(
+    !biologieQuestions.length
+  ){
+    return;
+  }
+
+
+  eduQuestionResolved =
+    false;
+
+
+  eduShooting =
+    false;
+
+
+  const currentIndex =
+    eduQuestionIndex %
+    biologieQuestions.length;
+
+
+  const questionData =
+    biologieQuestions[
+      currentIndex
+    ];
+
+
+  const bonneReponse =
+    obtenirReponse(
+      questionData
+    );
+
+
+  const mauvaises =
+    [];
+
+
+  const indices =
+    [];
+
+
+  for(
+    let i=0;
+    i<biologieQuestions.length;
+    i++
+  ){
+
+    if(i !== currentIndex){
+
+      indices.push(i);
+
+    }
+
+  }
+
+
+  melanger(indices);
+
+
+  for(
+    const index of indices
+  ){
+
+    const reponse =
+      obtenirReponse(
+        biologieQuestions[index]
+      );
+
+
+    if(
+      reponse &&
+      reponse !== bonneReponse &&
+      !mauvaises.includes(reponse)
+    ){
+
+      mauvaises.push(
+        reponse
+      );
+
+    }
+
+
+    if(
+      mauvaises.length === 3
+    ){
+
+      break;
+
+    }
+
+  }
+
+
+  /* SI LE FICHIER CONTIENT MOINS
+     DE 4 RÉPONSES DIFFÉRENTES */
+
+  if(
+    mauvaises.length < 3
+  ){
+
+    document
+      .getElementById(
+        "edubillard-message"
+      )
+      .textContent =
+      "Pas assez de réponses différentes pour cette question.";
+
+
+    return;
+
+  }
+
+
+  eduBalls =
+    [];
+
+
+  const positions = [
+
+    {
+      x:650,
+      y:130
+    },
+
+    {
+      x:760,
+      y:250
+    },
+
+    {
+      x:650,
+      y:370
+    },
+
+    {
+      x:760,
+      y:390
+    }
+
+  ];
+
+
+  /* BONNE RÉPONSE */
+
+  eduBalls.push({
+
+    x:
+      positions[0].x,
+
+    y:
+      positions[0].y,
+
+    radius:
+      32,
+
+    answer:
+      bonneReponse,
+
+    correct:
+      true,
+
+    number:
+      1
+
+  });
+
+
+  /* MAUVAISES RÉPONSES */
+
+  mauvaises.forEach(
+    (
+      answer,
+      index
+    )=>{
+
+      eduBalls.push({
+
+        x:
+          positions[index+1].x,
+
+        y:
+          positions[index+1].y,
+
+        radius:
+          32,
+
+        answer:
+          answer,
+
+        correct:
+          false,
+
+        number:
+          index+2
+
+      });
+
+    }
+  );
+
+
+  /* BOULE BLANCHE */
+
+  eduWhiteBall = {
+
+    x:
+      140,
+
+    y:
+      250,
+
+    radius:
+      18,
+
+    vx:
+      0,
+
+    vy:
+      0
+
+  };
+
+
+  const questionElement =
+    document.getElementById(
+      "edubillard-question"
+    );
+
+
+  questionElement.innerHTML = `
+
+    <strong>
+      Question ${eduQuestionIndex + 1}
+    </strong>
+
+    <br><br>
+
+    ${obtenirQuestion(questionData)}
+
+    <br><br>
+
+    <strong>
+      Tire la boule blanche vers la bonne réponse.
+    </strong>
+
+  `;
+
+
+  const message =
+    document.getElementById(
+      "edubillard-message"
+    );
+
+
+  message.textContent =
+    "";
+
+
+  message.style.color =
+    "";
+
+
+  const next =
+    document.getElementById(
+      "edubillard-next"
+    );
+
+
+  next.style.display =
+    "none";
+
+
+  dessinerEduBillard();
+
+}
+
+
+/* ================================= */
+/* EXTRAIRE QUESTION */
+/* ================================= */
+
+function obtenirQuestion(item){
+
+  return (
+    item.question ??
+    item.Question ??
+    item.q ??
+    ""
+  );
+
+}
+
+
+/* ================================= */
+/* EXTRAIRE RÉPONSE */
+/* ================================= */
+
+function obtenirReponse(item){
+
+  return (
+    item.answer ??
+    item.reponse ??
+    item.response ??
+    item.r ??
+    item.answerText ??
+    ""
+  );
+
+}
+
+
+/* ================================= */
+/* MÉLANGER */
+/* ================================= */
+
+function melanger(array){
+
+  for(
+    let i=array.length-1;
+    i>0;
+    i--
+  ){
+
+    const j =
+      Math.floor(
+        Math.random() *
+        (i+1)
+      );
+
+
+    [
+      array[i],
+      array[j]
+    ] =
+    [
+      array[j],
+      array[i]
+    ];
+
+  }
+
+}
+
+
+/* ================================= */
+/* SOURIS / TACTILE */
+/* ================================= */
+
+function eduPointerDown(event){
+
+  if(
+    !eduGameRunning ||
+    eduQuestionResolved ||
+    eduShooting ||
+    !eduWhiteBall
+  ){
+
+    return;
+
+  }
+
+
+  const rect =
+    eduCanvas.getBoundingClientRect();
+
+
+  const scaleX =
+    eduCanvas.width /
+    rect.width;
+
+
+  const scaleY =
+    eduCanvas.height /
+    rect.height;
+
+
+  const x =
+    (
+      event.clientX -
+      rect.left
+    ) *
+    scaleX;
+
+
+  const y =
+    (
+      event.clientY -
+      rect.top
+    ) *
+    scaleY;
+
+
+  const dx =
+    x -
+    eduWhiteBall.x;
+
+
+  const dy =
+    y -
+    eduWhiteBall.y;
+
+
+  const distance =
+    Math.sqrt(
+      dx*dx +
+      dy*dy
+    );
+
+
+  if(
+    distance >
+    eduWhiteBall.radius + 25
+  ){
+
+    return;
+
+  }
+
+
+  eduCanvas.setPointerCapture(
+    event.pointerId
+  );
+
+
+  eduShooting =
+    true;
+
+
+  eduWhiteBall.shootX =
+    x;
+
+
+  eduWhiteBall.shootY =
+    y;
+
+}
+
+
+function eduPointerUp(event){
+
+  if(
+    !eduShooting ||
+    !eduWhiteBall
+  ){
+
+    return;
+
+  }
+
+
+  const rect =
+    eduCanvas.getBoundingClientRect();
+
+
+  const scaleX =
+    eduCanvas.width /
+    rect.width;
+
+
+  const scaleY =
+    eduCanvas.height /
+    rect.height;
+
+
+  const x =
+    (
+      event.clientX -
+      rect.left
+    ) *
+    scaleX;
+
+
+  const y =
+    (
+      event.clientY -
+      rect.top
+    ) *
+    scaleY;
+
+
+  /*
+   * LA FORCE EST DÉTERMINÉE
+   * PAR LA DISTANCE ENTRE
+   * LA BOULE BLANCHE ET LE POINT
+   * OÙ LE JOUEUR RELÂCHE.
+   */
+
+  const dx =
+    eduWhiteBall.x -
+    x;
+
+
+  const dy =
+    eduWhiteBall.y -
+    y;
+
+
+  eduWhiteBall.vx =
+    dx * 0.075;
+
+
+  eduWhiteBall.vy =
+    dy * 0.075;
+
+
+  eduShooting =
+    false;
+
+}
+
+
+function eduPointerCancel(){
+
+  eduShooting =
+    false;
+
+}
+
+
+/* ================================= */
+/* BOUCLE DU JEU */
+/* ================================= */
+
+function boucleEduBillard(){
+
+  if(
+    !eduGameRunning ||
+    !eduCanvas
+  ){
+
+    return;
+
+  }
+
+
+  mettreAJourEduBillard();
+
+
+  dessinerEduBillard();
+
+
+  requestAnimationFrame(
+    boucleEduBillard
+  );
+
+}
+
+
+/* ================================= */
+/* PHYSIQUE */
+/* ================================= */
+
+function mettreAJourEduBillard(){
+
+  if(
+    !eduWhiteBall ||
+    eduQuestionResolved
+  ){
+
+    return;
+
+  }
+
+
+  eduWhiteBall.x +=
+    eduWhiteBall.vx;
+
+
+  eduWhiteBall.y +=
+    eduWhiteBall.vy;
+
+
+  /* FROTTEMENT */
+
+  eduWhiteBall.vx *=
+    0.985;
+
+
+  eduWhiteBall.vy *=
+    0.985;
+
+
+  const r =
+    eduWhiteBall.radius;
+
+
+  /* ============================= */
+  /* REBOND GAUCHE */
+  /* ============================= */
+
+  if(
+    eduWhiteBall.x-r < 0
+  ){
+
+    eduWhiteBall.x =
+      r;
+
+
+    eduWhiteBall.vx =
+      Math.abs(
+        eduWhiteBall.vx
+      );
+
+  }
+
+
+  /* ============================= */
+  /* REBOND DROITE */
+  /* ============================= */
+
+  if(
+    eduWhiteBall.x+r >
+    eduCanvas.width
+  ){
+
+    eduWhiteBall.x =
+      eduCanvas.width-r;
+
+
+    eduWhiteBall.vx =
+      -Math.abs(
+        eduWhiteBall.vx
+      );
+
+  }
+
+
+  /* ============================= */
+  /* REBOND HAUT */
+  /* ============================= */
+
+  if(
+    eduWhiteBall.y-r < 0
+  ){
+
+    eduWhiteBall.y =
+      r;
+
+
+    eduWhiteBall.vy =
+      Math.abs(
+        eduWhiteBall.vy
+      );
+
+  }
+
+
+  /* ============================= */
+  /* REBOND BAS */
+  /* ============================= */
+
+  if(
+    eduWhiteBall.y+r >
+    eduCanvas.height
+  ){
+
+    eduWhiteBall.y =
+      eduCanvas.height-r;
+
+
+    eduWhiteBall.vy =
+      -Math.abs(
+        eduWhiteBall.vy
+      );
+
+  }
+
+
+  /* ============================= */
+  /* COLLISION AVEC LES BOULES */
+/* ============================= */
+
+  for(
+    const ball of eduBalls
+  ){
+
+    const dx =
+      eduWhiteBall.x -
+      ball.x;
+
+
+    const dy =
+      eduWhiteBall.y -
+      ball.y;
+
+
+    const distance =
+      Math.sqrt(
+        dx*dx +
+        dy*dy
+      );
+
+
+    const minDistance =
+      eduWhiteBall.radius +
+      ball.radius;
+
+
+    /*
+     * IMPORTANT :
+     * LA RÉUSSITE EST DÉCLENCHÉE
+     * DÈS QUE LA BOULE BLANCHE
+     * TOUCHE LA BONNE BOULE.
+     */
+
+    if(
+      distance <=
+      minDistance
+    ){
+
+      collisionEduBoule(
+        ball
+      );
+
+
+      return;
+
+    }
+
+  }
+
+
+  /* ARRÊT SI PRESQUE IMMOBILE */
+
+  if(
+    Math.abs(
+      eduWhiteBall.vx
+    ) < 0.05
+  ){
+
+    eduWhiteBall.vx =
+      0;
+
+  }
+
+
+  if(
+    Math.abs(
+      eduWhiteBall.vy
+    ) < 0.05
+  ){
+
+    eduWhiteBall.vy =
+      0;
+
+  }
+
+}
+
+
+/* ================================= */
+/* COLLISION AVEC UNE RÉPONSE */
+/* ================================= */
+
+function collisionEduBoule(ball){
+
+  if(
+    eduQuestionResolved
+  ){
+
+    return;
+
+  }
+
+
+  eduQuestionResolved =
+    true;
+
+
+  if(
+    ball.correct
+  ){
+
+    /* ============================= */
+    /* BONNE RÉPONSE */
+    /* ============================= */
+
+    eduScore +=
+      10;
+
+
+    afficherScore();
+
+
+    const message =
+      document.getElementById(
+        "edubillard-message"
+      );
+
+
+    message.textContent =
+      "✅ Bonne réponse ! +10 points";
+
+
+    message.style.color =
+      "#1764c0";
+
+  }else{
+
+    /* ============================= */
+    /* MAUVAISE RÉPONSE */
+    /* ============================= */
+
+    const bonneReponse =
+      obtenirReponse(
+        biologieQuestions[
+          eduQuestionIndex %
+          biologieQuestions.length
+        ]
+      );
+
+
+    const message =
+      document.getElementById(
+        "edubillard-message"
+      );
+
+
+    message.textContent =
+      "❌ Mauvaise réponse. La bonne réponse était : " +
+      bonneReponse;
+
+
+    message.style.color =
+      "#b00020";
+
+  }
+
+
+  document
+    .getElementById(
+      "edubillard-next"
+    )
+    .style.display =
+    "block";
+
+}
+
+
+/* ================================= */
+/* QUESTION SUIVANTE */
+/* ================================= */
+
+function questionEduSuivante(){
+
+  eduQuestionIndex++;
+
+
+  nouvelleQuestionEdu();
+
+}
+
+
+/* ================================= */
+/* SCORE */
+/* ================================= */
+
+function afficherScore(){
+
+  const score =
+    document.getElementById(
+      "edubillard-score"
+    );
+
+
+  if(score){
+
+    score.textContent =
+      "Points : " +
+      eduScore;
+
+  }
+
+}
+
+
+/* ================================= */
+/* DESSIN DU BILLARD */
+/* ================================= */
+
+function dessinerEduBillard(){
+
+  if(
+    !eduCtx ||
+    !eduCanvas
+  ){
+
+    return;
+
+  }
+
+
+  eduCtx.clearRect(
+    0,
+    0,
+    eduCanvas.width,
+    eduCanvas.height
+  );
+
+
+  /* ============================= */
+  /* TABLE */
+  /* ============================= */
+
+  eduCtx.fillStyle =
+    "#1764c0";
+
+
+  eduCtx.fillRect(
+    0,
+    0,
+    eduCanvas.width,
+    eduCanvas.height
+  );
+
+
+  /* ============================= */
+  /* BANDES */
+  /* ============================= */
+
+  eduCtx.strokeStyle =
+    "#ffffff";
+
+
+  eduCtx.lineWidth =
+    3;
+
+
+  eduCtx.strokeRect(
+    8,
+    8,
+    eduCanvas.width-16,
+    eduCanvas.height-16
+  );
+
+
+  /* ============================= */
+  /* TROUS */
+  /* ============================= */
+
+  const pockets = [
+
+    [
+      18,
+      18
+    ],
+
+    [
+      eduCanvas.width/2,
+      12
+    ],
+
+    [
+      eduCanvas.width-18,
+      18
+    ],
+
+    [
+      18,
+      eduCanvas.height-18
+    ],
+
+    [
+      eduCanvas.width/2,
+      eduCanvas.height-12
+    ],
+
+    [
+      eduCanvas.width-18,
+      eduCanvas.height-18
+    ]
+
+  ];
+
+
+  eduCtx.fillStyle =
+    "#24113f";
+
+
+  pockets.forEach(
+    ([x,y])=>{
+
+      eduCtx.beginPath();
+
+
+      eduCtx.arc(
+        x,
+        y,
+        16,
+        0,
+        Math.PI*2
+      );
+
+
+      eduCtx.fill();
+
+    }
+  );
+
+
+  /* ============================= */
+  /* BOULES-RÉPONSES */
+  /* ============================= */
+
+  eduBalls.forEach(
+    ball=>{
+
+      eduCtx.beginPath();
+
+
+      eduCtx.arc(
+        ball.x,
+        ball.y,
+        ball.radius,
+        0,
+        Math.PI*2
+      );
+
+
+      /*
+       * LA BONNE BOULE EST JAUNE
+       * DANS CETTE VERSION.
+       *
+       * LES MAUVAISES SONT BLANCHES.
+       */
+
+      eduCtx.fillStyle =
+        ball.correct
+        ? "#f0a500"
+        : "#ffffff";
+
+
+      eduCtx.fill();
+
+
+      eduCtx.strokeStyle =
+        "#24113f";
+
+
+      eduCtx.lineWidth =
+        3;
+
+
+      eduCtx.stroke();
+
+
+      /* NUMÉRO */
+
+      eduCtx.fillStyle =
+        "#24113f";
+
+
+      eduCtx.font =
+        "bold 18px Arial";
+
+
+      eduCtx.textAlign =
+        "center";
+
+
+      eduCtx.textBaseline =
+        "middle";
+
+
+      eduCtx.fillText(
+        ball.number,
+        ball.x,
+        ball.y
+      );
+
+    }
+  );
+
+
+  /* ============================= */
+  /* BOULE BLANCHE */
+  /* ============================= */
+
+  if(eduWhiteBall){
+
+    eduCtx.beginPath();
+
+
+    eduCtx.arc(
+      eduWhiteBall.x,
+      eduWhiteBall.y,
+      eduWhiteBall.radius,
+      0,
+      Math.PI*2
+    );
+
+
+    eduCtx.fillStyle =
+      "#ffffff";
+
+
+    eduCtx.fill();
+
+
+    eduCtx.strokeStyle =
+      "#24113f";
+
+
+    eduCtx.lineWidth =
+      2;
+
+
+    eduCtx.stroke();
+
+  }
+
+}
+
+
 /* ============================= */
 /* BOUTON BIOLOGIE */
 /* ============================= */
@@ -818,6 +2323,9 @@ biologyBtn.addEventListener(
       biologieQuestions,
       "🧬 Biologie"
     );
+
+
+    afficherBoutonEduBillard();
 
   }
 );
@@ -916,6 +2424,18 @@ backBtn.addEventListener(
   "click",
   ()=>{
 
+    /* ARRÊTER EDU BILLARD */
+
+    eduGameRunning =
+      false;
+
+    eduQuestionResolved =
+      true;
+
+    eduShooting =
+      false;
+
+
     /* CACHER LA PAGE DES QUESTIONS */
 
     questionsPage.style.display =
@@ -932,6 +2452,28 @@ backBtn.addEventListener(
 
     questionsContainer.innerHTML =
       "";
+
+
+    /* RÉINITIALISER LE BOUTON EDU BILLARD */
+
+    eduBillardCreated =
+      false;
+
+
+    eduCanvas =
+      null;
+
+
+    eduCtx =
+      null;
+
+
+    eduBalls =
+      [];
+
+
+    eduWhiteBall =
+      null;
 
 
     /* REMONTER EN HAUT DE LA PAGE */
