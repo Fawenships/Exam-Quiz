@@ -2,617 +2,375 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#24113f">
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
->
+<title>Défense du château — ExamQuiz Haiti</title>
 
-<title>Quiz Rush — ExamQuiz Haiti</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
 
 <style>
-
 :root{
-    --purple:#24113f;
-    --purple2:#4b2481;
-    --blue:#1764c0;
-    --blue2:#2f80ed;
-    --white:#ffffff;
-    --bg:#f5f5f7;
-    --text:#171717;
-    --muted:#707070;
-    --border:#e4e4e7;
-    --green:#16834b;
-    --red:#c62828;
+  --purple:#24113f;
+  --purple2:#4b2481;
+  --blue:#2f80ed;
+  --red:#c62828;
+  --green:#16834b;
+  --gold:#d89b20;
+  --bg:#11131a;
+  --panel:#1b1f29;
+  --border:#343b4a;
+  --text:#fff;
+  --muted:#aeb5c2;
 }
 
 *{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
+  box-sizing:border-box;
+}
+
+html,body{
+  margin:0;
+  min-height:100%;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
 }
 
 body{
-    font-family:Arial, Helvetica, sans-serif;
-    background:var(--bg);
-    color:var(--text);
-    min-height:100vh;
+  overflow-x:hidden;
 }
 
 button{
-    font:inherit;
-    border:none;
-    cursor:pointer;
+  font:inherit;
 }
 
 .page{
-    width:100%;
-    max-width:900px;
-    margin:auto;
-    padding:12px;
+  width:100%;
+  min-height:100vh;
+  padding:18px;
 }
 
-
-/* RETOUR */
-
-.back-button{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    width:100%;
-    min-height:46px;
-
-    margin-bottom:12px;
-    padding:10px 14px;
-
-    border:1px solid var(--border);
-    border-radius:13px;
-
-    background:var(--white);
-    color:var(--purple);
-
-    text-decoration:none;
-
-    font-size:14px;
-    font-weight:800;
-
-    transition:.15s;
+.game-wrap{
+  width:min(1180px,100%);
+  margin:auto;
 }
 
-.back-button:hover{
-    border-color:var(--purple2);
-}
-
-.back-button:active{
-    transform:scale(.98);
-}
-
-
-/* HEADER */
+/* ==============================
+   TOP
+============================== */
 
 .topbar{
-    background:var(--white);
-
-    border:1px solid var(--border);
-    border-radius:16px;
-
-    padding:14px 16px;
-
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-
-    gap:12px;
-
-    margin-bottom:14px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:14px;
 }
 
-.logo{
-    font-size:18px;
-    font-weight:800;
-    color:var(--purple);
+.back{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:42px;
+  padding:0 16px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  background:#1a1e27;
+  color:#fff;
+  text-decoration:none;
 }
 
-.round-label{
-    font-size:14px;
-    color:var(--muted);
-    font-weight:700;
+.back:hover{
+  border-color:#5a6680;
 }
 
-
-/* STATS */
-
-.stats{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap:10px;
-
-    margin-bottom:14px;
+.title{
+  text-align:center;
+  flex:1;
 }
 
-.stat{
-
-    background:var(--white);
-
-    border:1px solid var(--border);
-
-    border-radius:15px;
-
-    padding:12px;
-
-    text-align:center;
+.title h1{
+  margin:0;
+  font-size:clamp(22px,4vw,34px);
 }
 
-.stat-label{
-
-    color:var(--muted);
-
-    font-size:12px;
-
-    font-weight:700;
+.title p{
+  margin:5px 0 0;
+  color:var(--muted);
+  font-size:13px;
 }
 
-.stat-value{
+/* ==============================
+   HUD
+============================== */
 
-    color:var(--purple);
-
-    font-size:25px;
-
-    font-weight:900;
-
-    margin-top:3px;
+.hud{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  margin-bottom:12px;
 }
 
-.timer-value{
-
-    color:var(--blue);
+.hud-box{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:12px;
+  text-align:center;
 }
 
-
-/* TIMER */
-
-.timer-bar{
-
-    width:100%;
-
-    height:8px;
-
-    background:#e8e8eb;
-
-    border-radius:999px;
-
-    overflow:hidden;
-
-    margin-bottom:14px;
+.hud-label{
+  color:var(--muted);
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:1px;
 }
 
-.timer-progress{
-
-    height:100%;
-
-    width:100%;
-
-    background:var(--blue2);
-
-    border-radius:999px;
-
-    transition:
-        width .1s linear;
+.hud-value{
+  margin-top:4px;
+  font-size:22px;
+  font-weight:700;
 }
 
-
-/* GAME */
-
-.game-card{
-
-    background:var(--white);
-
-    border:1px solid var(--border);
-
-    border-radius:18px;
-
-    padding:20px;
+.lives{
+  letter-spacing:2px;
+  color:#ff5252;
+  white-space:nowrap;
 }
 
-.question-number{
+/* ==============================
+   GAME
+============================== */
 
-    text-align:center;
+.canvas-wrap{
+  position:relative;
+  width:100%;
+  background:#090b10;
+  border:1px solid var(--border);
+  border-radius:16px;
+  overflow:hidden;
+}
 
-    color:var(--muted);
+canvas{
+  display:block;
+  width:100%;
+  height:auto;
+  aspect-ratio:16/9;
+  background:#101722;
+}
 
-    font-size:13px;
+/* ==============================
+   QUESTION
+============================== */
 
-    margin-bottom:10px;
+.question-panel{
+  margin-top:14px;
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:18px;
 }
 
 .question{
-
-    font-size:23px;
-
-    line-height:1.35;
-
-    font-weight:800;
-
-    text-align:center;
-
-    max-width:720px;
-
-    margin:0 auto 24px;
+  margin:0 auto 16px;
+  max-width:900px;
+  text-align:center;
+  font-size:clamp(17px,2.4vw,23px);
+  line-height:1.45;
 }
 
-
-/* OPTIONS */
-
 .options{
-
-    display:grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
-    gap:12px;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
 }
 
 .option{
-
-    min-height:64px;
-
-    border:2px solid var(--border);
-
-    border-radius:14px;
-
-    background:white;
-
-    padding:12px;
-
-    font-weight:700;
-
-    text-align:left;
-
-    transition:.15s;
+  border:1px solid #3a4353;
+  background:#232936;
+  color:#fff;
+  border-radius:11px;
+  min-height:56px;
+  padding:12px 14px;
+  text-align:left;
+  cursor:pointer;
+  transition:.18s;
 }
 
 .option:hover{
-
-    border-color:var(--blue2);
-}
-
-.option:active{
-
-    transform:scale(.98);
-}
-
-.option.correct{
-
-    border-color:var(--green);
-
-    background:#eef9f2;
-
-    color:var(--green);
-}
-
-.option.wrong{
-
-    border-color:var(--red);
-
-    background:#fff0f0;
-
-    color:var(--red);
+  border-color:#6385b8;
+  background:#293141;
 }
 
 .option:disabled{
-
-    cursor:default;
+  cursor:not-allowed;
+  opacity:.65;
 }
 
-
-/* FEEDBACK */
-
-.feedback{
-
-    margin-top:16px;
-
-    padding:14px;
-
-    border-radius:12px;
-
-    text-align:center;
-
-    font-weight:700;
-
-    display:none;
+.option.correct{
+  background:#135f3a;
+  border-color:#2bc477;
 }
 
-.feedback.show{
-
-    display:block;
+.option.wrong{
+  background:#702525;
+  border-color:#ff5757;
 }
 
-.feedback.correct{
-
-    background:#eef9f2;
-
-    color:var(--green);
+.option-key{
+  display:inline-flex;
+  width:30px;
+  height:30px;
+  align-items:center;
+  justify-content:center;
+  border-radius:7px;
+  background:#141820;
+  margin-right:9px;
+  font-weight:bold;
 }
 
-.feedback.wrong{
+/* ==============================
+   MESSAGE
+============================== */
 
-    background:#fff0f0;
-
-    color:var(--red);
+.message{
+  min-height:24px;
+  margin-top:12px;
+  text-align:center;
+  font-weight:bold;
 }
 
-
-/* NEXT */
-
-.next-btn{
-
-    width:100%;
-
-    min-height:52px;
-
-    margin-top:12px;
-
-    border-radius:13px;
-
-    background:var(--purple2);
-
-    color:white;
-
-    font-weight:800;
-
-    display:none;
+.message.good{
+  color:#43d98b;
 }
 
-.next-btn.show{
-
-    display:block;
+.message.bad{
+  color:#ff6d6d;
 }
 
-.next-btn:active{
-
-    transform:scale(.98);
+.message.info{
+  color:#8bbcff;
 }
 
-
-/* CATEGORY */
-
-.category{
-
-    margin-top:14px;
-
-    text-align:center;
-
-    color:var(--muted);
-
-    font-size:13px;
-}
-
-
-/* OVERLAY */
+/* ==============================
+   OVERLAY
+============================== */
 
 .overlay{
-
-    position:fixed;
-
-    inset:0;
-
-    background:rgba(20,12,30,.72);
-
-    display:none;
-
-    align-items:center;
-
-    justify-content:center;
-
-    padding:20px;
-
-    z-index:50;
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:rgba(5,7,12,.78);
+  backdrop-filter:blur(5px);
+  z-index:20;
 }
 
-.overlay.show{
-
-    display:flex;
+.overlay.hidden{
+  display:none;
 }
 
-.result-box{
+.result{
+  width:min(450px,100%);
+  padding:28px;
+  border-radius:18px;
+  background:#1b1f29;
+  border:1px solid #414a5d;
+  text-align:center;
+}
 
+.result h2{
+  margin:0 0 10px;
+  font-size:30px;
+}
+
+.result p{
+  color:var(--muted);
+  line-height:1.6;
+}
+
+.result-score{
+  font-size:42px;
+  font-weight:bold;
+  margin:20px 0;
+}
+
+.restart{
+  width:100%;
+  min-height:50px;
+  border:0;
+  border-radius:11px;
+  background:var(--purple2);
+  color:#fff;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.restart:hover{
+  background:#5b2d99;
+}
+
+/* ==============================
+   RESPONSIVE
+============================== */
+
+@media(max-width:700px){
+
+  .page{
+    padding:10px;
+  }
+
+  .topbar{
+    flex-wrap:wrap;
+  }
+
+  .title{
+    order:-1;
     width:100%;
+    flex-basis:100%;
+  }
 
-    max-width:450px;
-
-    background:white;
-
-    border-radius:20px;
-
-    padding:26px 20px;
-
-    text-align:center;
-}
-
-.result-title{
-
-    font-size:28px;
-
-    font-weight:900;
-
-    color:var(--purple);
-
-    margin-bottom:10px;
-}
-
-.result-text{
-
-    color:var(--muted);
-
-    font-size:15px;
-
-    line-height:1.5;
-
-    margin-bottom:16px;
-}
-
-.final-score{
-
-    font-size:42px;
-
-    font-weight:900;
-
-    color:var(--purple);
-
-    margin:12px 0 20px;
-}
-
-.action-btn{
-
+  .back{
     width:100%;
+  }
 
+  .hud{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .options{
+    grid-template-columns:1fr;
+  }
+
+  .question-panel{
+    padding:13px;
+  }
+
+  .option{
     min-height:52px;
+  }
 
-    border-radius:13px;
-
-    background:var(--purple2);
-
-    color:white;
-
-    font-weight:800;
-
-    margin-top:8px;
 }
 
-.action-btn:active{
+@media(max-width:430px){
 
-    transform:scale(.98);
+  .hud-value{
+    font-size:19px;
+  }
+
+  .hud-box{
+    padding:9px 5px;
+  }
+
+  .lives{
+    font-size:15px;
+    letter-spacing:1px;
+  }
+
 }
-
-.secondary-btn{
-
-    background:#eeeef1;
-
-    color:var(--text);
-}
-
-
-/* MOBILE */
-
-@media(max-width:600px){
-
-    .page{
-        padding:9px;
-    }
-
-    .back-button{
-
-        min-height:44px;
-
-        font-size:13px;
-
-        margin-bottom:9px;
-    }
-
-    .topbar{
-
-        border-radius:13px;
-
-        padding:12px;
-    }
-
-    .logo{
-        font-size:16px;
-    }
-
-    .round-label{
-        font-size:12px;
-    }
-
-    .stats{
-
-        gap:6px;
-    }
-
-    .stat{
-
-        padding:9px 5px;
-
-        border-radius:13px;
-    }
-
-    .stat-label{
-        font-size:11px;
-    }
-
-    .stat-value{
-        font-size:22px;
-    }
-
-    .game-card{
-
-        padding:14px 10px;
-
-        border-radius:15px;
-    }
-
-    .question{
-
-        font-size:19px;
-
-        line-height:1.35;
-
-        margin-bottom:18px;
-    }
-
-    .options{
-
-        grid-template-columns:1fr;
-
-        gap:9px;
-    }
-
-    .option{
-
-        min-height:58px;
-
-        padding:11px;
-
-        font-size:14px;
-    }
-
-    .result-box{
-
-        padding:22px 15px;
-    }
-
-    .result-title{
-
-        font-size:24px;
-    }
-
-    .final-score{
-
-        font-size:36px;
-    }
-}
-
-@media(max-width:360px){
-
-    .question{
-        font-size:17px;
-    }
-
-    .stat-value{
-        font-size:20px;
-    }
-
-    .option{
-        font-size:13px;
-    }
-}
-
 </style>
 </head>
 
@@ -620,950 +378,2030 @@ button{
 
 <div class="page">
 
-    <!-- RETOUR -->
+<div class="game-wrap">
+
+  <!-- ==============================
+       HEADER
+  ============================== -->
+
+  <div class="topbar">
 
     <a
-        href="baccalaureat.html"
-        class="back-button"
+      href="baccalaureat.html"
+      class="back"
     >
-        ← Retour aux jeux
+      ← Retour aux jeux
     </a>
 
+    <div class="title">
+      <h1>Défense du château</h1>
+      <p>Réponds correctement pour repousser les ennemis.</p>
+    </div>
 
-    <!-- HEADER -->
+  </div>
 
-    <header class="topbar">
 
-        <div class="logo">
-            ExamQuiz
-        </div>
+  <!-- ==============================
+       HUD
+  ============================== -->
 
-        <div
-            class="round-label"
-            id="roundLabel"
+  <div class="hud">
+
+    <div class="hud-box">
+      <div class="hud-label">Vies</div>
+      <div
+        class="hud-value lives"
+        id="lives"
+      >
+        ❤️❤️❤️❤️❤️
+      </div>
+    </div>
+
+    <div class="hud-box">
+      <div class="hud-label">Score</div>
+      <div
+        class="hud-value"
+        id="score"
+      >
+        0
+      </div>
+    </div>
+
+    <div class="hud-box">
+      <div class="hud-label">Vague</div>
+      <div
+        class="hud-value"
+        id="wave"
+      >
+        1
+      </div>
+    </div>
+
+    <div class="hud-box">
+      <div class="hud-label">Ennemis</div>
+      <div
+        class="hud-value"
+        id="enemy-count"
+      >
+        0
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- ==============================
+       CANVAS
+  ============================== -->
+
+  <div class="canvas-wrap">
+
+    <canvas
+      id="gameCanvas"
+      width="1200"
+      height="675"
+    ></canvas>
+
+
+    <div
+      class="overlay"
+      id="startOverlay"
+    >
+
+      <div class="result">
+
+        <h2>Défends ton château</h2>
+
+        <p>
+          Les ennemis avancent vers ton château.
+          Réponds correctement aux questions pour
+          lancer une attaque et les éliminer.
+        </p>
+
+        <button
+          class="restart"
+          id="startBtn"
+          type="button"
         >
-            Partie 1 / 20
-        </div>
+          Commencer
+        </button>
 
-    </header>
-
-
-    <!-- STATS -->
-
-    <section class="stats">
-
-        <div class="stat">
-
-            <div class="stat-label">
-                Score
-            </div>
-
-            <div
-                class="stat-value"
-                id="score"
-            >
-                0
-            </div>
-
-        </div>
-
-
-        <div class="stat">
-
-            <div class="stat-label">
-                Question
-            </div>
-
-            <div
-                class="stat-value"
-                id="questionCount"
-            >
-                1 / 10
-            </div>
-
-        </div>
-
-
-        <div class="stat">
-
-            <div class="stat-label">
-                Temps
-            </div>
-
-            <div
-                class="stat-value timer-value"
-                id="timer"
-            >
-                15
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- TIMER BAR -->
-
-    <div class="timer-bar">
-
-        <div
-            class="timer-progress"
-            id="timerProgress"
-        ></div>
+      </div>
 
     </div>
 
 
-    <!-- QUESTION -->
+    <div
+      class="overlay hidden"
+      id="gameOverOverlay"
+    >
 
-    <main class="game-card">
+      <div class="result">
+
+        <h2>Château détruit</h2>
+
+        <p>
+          Les ennemis ont réussi à atteindre
+          ton château.
+        </p>
 
         <div
-            class="question-number"
-            id="questionNumber"
+          class="result-score"
+          id="finalScore"
         >
-            Question 1 / 10
+          0 points
         </div>
-
-
-        <div
-            class="question"
-            id="question"
-        >
-            Chargement...
-        </div>
-
-
-        <div
-            class="options"
-            id="options"
-        ></div>
-
-
-        <div
-            class="feedback"
-            id="feedback"
-        ></div>
-
 
         <button
-            type="button"
-            class="next-btn"
-            id="nextBtn"
+          class="restart"
+          id="restartBtn"
+          type="button"
         >
-            Question suivante
+          Recommencer
         </button>
 
+      </div>
+
+    </div>
+
+
+    <div
+      class="overlay hidden"
+      id="victoryOverlay"
+    >
+
+      <div class="result">
+
+        <h2>Victoire</h2>
+
+        <p>
+          Tu as repoussé la vague d'ennemis.
+        </p>
 
         <div
-            class="category"
-            id="category"
-        ></div>
+          class="result-score"
+          id="victoryScore"
+        >
+          0 points
+        </div>
 
-    </main>
+        <button
+          class="restart"
+          id="continueBtn"
+          type="button"
+        >
+          Vague suivante
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ==============================
+       QUESTION
+  ============================== -->
+
+  <section class="question-panel">
+
+    <p
+      class="question"
+      id="question"
+    >
+      Clique sur « Commencer » pour défendre ton château.
+    </p>
+
+    <div
+      class="options"
+      id="options"
+    ></div>
+
+    <div
+      class="message info"
+      id="message"
+    >
+      Chaque bonne réponse lance une attaque.
+    </div>
+
+  </section>
 
 </div>
-
-
-<!-- RESULTAT -->
-
-<div
-    class="overlay"
-    id="resultOverlay"
->
-
-    <div class="result-box">
-
-        <div
-            class="result-title"
-            id="resultTitle"
-        >
-            Partie terminée
-        </div>
-
-
-        <div
-            class="result-text"
-            id="resultText"
-        >
-            Résultat de la partie
-        </div>
-
-
-        <div
-            class="final-score"
-            id="finalScore"
-        >
-            0 points
-        </div>
-
-
-        <button
-            type="button"
-            class="action-btn"
-            id="nextRoundBtn"
-        >
-            Partie suivante
-        </button>
-
-
-        <button
-            type="button"
-            class="action-btn secondary-btn"
-            id="restartBtn"
-        >
-            Recommencer
-        </button>
-
-    </div>
 
 </div>
 
 
 <script type="module">
 
-import {
-    jeuxQuestions
-} from "./src/jeuxQuestions.js";
+/* =========================================================
+   CONFIGURATION
+========================================================= */
 
+const QUESTIONS_URL = "./src/jeuxQuestions.js";
 
-/* CONFIGURATION */
+const MAX_LIVES = 5;
+const POINTS_CORRECT = 10;
 
-const QUESTIONS_PER_ROUND = 10;
+const canvas =
+  document.getElementById("gameCanvas");
 
-const MAX_ROUNDS = 20;
+const ctx =
+  canvas.getContext("2d");
 
-const TIME_PER_QUESTION = 15;
+const questionEl =
+  document.getElementById("question");
 
+const optionsEl =
+  document.getElementById("options");
 
-/* ETAT */
+const messageEl =
+  document.getElementById("message");
 
-let allQuestions = [];
+const livesEl =
+  document.getElementById("lives");
 
-let currentQuestions = [];
+const scoreEl =
+  document.getElementById("score");
 
-let currentQuestionIndex = 0;
+const waveEl =
+  document.getElementById("wave");
 
-let score = 0;
+const enemyCountEl =
+  document.getElementById("enemy-count");
 
-let roundScore = 0;
+const startOverlay =
+  document.getElementById("startOverlay");
 
-let roundNumber = 1;
+const gameOverOverlay =
+  document.getElementById("gameOverOverlay");
 
-let timeLeft = TIME_PER_QUESTION;
+const victoryOverlay =
+  document.getElementById("victoryOverlay");
 
-let timerInterval = null;
-
-let answered = false;
-
-let gameFinished = false;
-
-
-/* ELEMENTS */
-
-const scoreElement =
-    document.getElementById("score");
-
-const questionCountElement =
-    document.getElementById("questionCount");
-
-const timerElement =
-    document.getElementById("timer");
-
-const timerProgress =
-    document.getElementById("timerProgress");
-
-const questionNumberElement =
-    document.getElementById("questionNumber");
-
-const questionElement =
-    document.getElementById("question");
-
-const optionsElement =
-    document.getElementById("options");
-
-const feedbackElement =
-    document.getElementById("feedback");
-
-const nextBtn =
-    document.getElementById("nextBtn");
-
-const categoryElement =
-    document.getElementById("category");
-
-const roundLabel =
-    document.getElementById("roundLabel");
-
-const resultOverlay =
-    document.getElementById("resultOverlay");
-
-const resultTitle =
-    document.getElementById("resultTitle");
-
-const resultText =
-    document.getElementById("resultText");
-
-const finalScore =
-    document.getElementById("finalScore");
-
-const nextRoundBtn =
-    document.getElementById("nextRoundBtn");
+const startBtn =
+  document.getElementById("startBtn");
 
 const restartBtn =
-    document.getElementById("restartBtn");
+  document.getElementById("restartBtn");
+
+const continueBtn =
+  document.getElementById("continueBtn");
+
+const finalScoreEl =
+  document.getElementById("finalScore");
+
+const victoryScoreEl =
+  document.getElementById("victoryScore");
 
 
-/* MELANGE */
+/* =========================================================
+   ÉTAT
+========================================================= */
 
-function shuffle(array){
+let QUESTIONS = [];
 
-    const copy = [...array];
+let questionPool = [];
+let usedQuestions = new Set();
 
-    for(
-        let i = copy.length - 1;
-        i > 0;
-        i--
-    ){
+let score = 0;
+let lives = MAX_LIVES;
+let wave = 1;
 
-        const j =
-            Math.floor(
-                Math.random() * (i + 1)
-            );
+let enemies = [];
+let projectiles = [];
 
-        [
-            copy[i],
-            copy[j]
-        ] = [
-            copy[j],
-            copy[i]
-        ];
+let currentEnemy = null;
+let currentQuestion = null;
+
+let gameRunning = false;
+let waveRunning = false;
+
+let lastTime = 0;
+
+
+/* =========================================================
+   OUTILS QUESTIONS
+========================================================= */
+
+function normalizeQuestions(data){
+
+  if(Array.isArray(data)){
+    return data;
+  }
+
+  if(Array.isArray(data.questions)){
+    return data.questions;
+  }
+
+  if(Array.isArray(data.default)){
+    return data.default;
+  }
+
+  return [];
+}
+
+
+async function loadQuestions(){
+
+  try{
+
+    const module =
+      await import(QUESTIONS_URL);
+
+    let data =
+      module.default ?? module;
+
+    const questions =
+      normalizeQuestions(data);
+
+    if(!questions.length){
+      throw new Error("Aucune question trouvée.");
     }
 
-    return copy;
-}
-
-
-/* ARRETER LE TIMER */
-
-function stopTimer(){
-
-    if(timerInterval){
-
-        clearInterval(timerInterval);
-
-        timerInterval = null;
-    }
-}
-
-
-/* DEMARRER LE TIMER */
-
-function startTimer(){
-
-    stopTimer();
-
-
-    timeLeft =
-        TIME_PER_QUESTION;
-
-
-    updateTimer();
-
-
-    timerInterval =
-        setInterval(() => {
-
-            if(answered){
-
-                stopTimer();
-
-                return;
-            }
-
-
-            timeLeft -= 0.1;
-
-
-            if(timeLeft <= 0){
-
-                timeLeft = 0;
-
-                updateTimer();
-
-                stopTimer();
-
-                timeExpired();
-
-                return;
-            }
-
-
-            updateTimer();
-
-        },100);
-
-}
-
-
-/* AFFICHER TIMER */
-
-function updateTimer(){
-
-    timerElement.textContent =
-        Math.ceil(timeLeft);
-
-
-    const percentage =
-        (
-            timeLeft /
-            TIME_PER_QUESTION
-        ) * 100;
-
-
-    timerProgress.style.width =
-        `${Math.max(0,percentage)}%`;
-
-}
-
-
-/* PREPARER UNE PARTIE */
-
-function prepareRound(){
-
-    if(
-        !Array.isArray(jeuxQuestions) ||
-        jeuxQuestions.length === 0
-    ){
-
-        questionElement.textContent =
-            "Aucune question disponible.";
-
-        optionsElement.innerHTML =
-            "";
-
-        return false;
-    }
-
-
-    allQuestions =
-        [...jeuxQuestions];
-
-
-    currentQuestions =
-        shuffle(allQuestions)
-        .slice(
-            0,
-            Math.min(
-                QUESTIONS_PER_ROUND,
-                allQuestions.length
-            )
-        );
-
-
-    return currentQuestions.length > 0;
-}
-
-
-/* SCORE */
-
-function updateScore(){
-
-    scoreElement.textContent =
-        score;
-
-}
-
-
-/* AFFICHER QUESTION */
-
-function displayQuestion(){
-
-    if(
-        currentQuestionIndex >=
-        currentQuestions.length
-    ){
-
-        endRound();
-
-        return;
-    }
-
-
-    answered = false;
-
-
-    const currentQuestion =
-        currentQuestions[
-            currentQuestionIndex
-        ];
-
-
-    questionNumberElement.textContent =
-        `Question ${
-            currentQuestionIndex + 1
-        } / ${
-            currentQuestions.length
-        }`;
-
-
-    questionCountElement.textContent =
-        `${
-            currentQuestionIndex + 1
-        } / ${
-            currentQuestions.length
-        }`;
-
-
-    questionElement.textContent =
-        currentQuestion.question;
-
-
-    categoryElement.textContent =
-        currentQuestion.category
-        ? `Catégorie : ${currentQuestion.category}`
-        : "";
-
-
-    feedbackElement.className =
-        "feedback";
-
-    feedbackElement.textContent =
-        "";
-
-
-    nextBtn.className =
-        "next-btn";
-
-
-    optionsElement.innerHTML =
-        "";
-
-
-    const options =
-        shuffle(
-            currentQuestion.options || []
-        );
-
-
-    options.forEach(option => {
-
-        const button =
-            document.createElement("button");
-
-
-        button.type =
-            "button";
-
-
-        button.className =
-            "option";
-
-
-        button.textContent =
-            option;
-
-
-        button.addEventListener(
-            "click",
-            () => {
-
-                answerQuestion(
-                    button,
-                    option,
-                    currentQuestion
-                );
-
-            }
-        );
-
-
-        optionsElement.appendChild(
-            button
-        );
+    return questions.filter(q => {
+
+      if(!q) return false;
+
+      const difficulty =
+        String(
+          q.difficulty ||
+          q.difficulte ||
+          "easy"
+        ).toLowerCase();
+
+      return (
+        difficulty === "easy" ||
+        difficulty === "medium" ||
+        difficulty === "facile" ||
+        difficulty === "moyen"
+      );
 
     });
 
+  }catch(error){
 
-    startTimer();
+    console.error(error);
 
-    updateScore();
+    return [
+
+      {
+        id:"fallback1",
+        question:"Quel organe produit principalement l'insuline ?",
+        options:[
+          "Le foie",
+          "Le pancréas",
+          "Le cœur",
+          "Le rein"
+        ],
+        answer:"Le pancréas",
+        correctAnswer:"Le pancréas"
+      },
+
+      {
+        id:"fallback2",
+        question:"Quelle est la formule chimique de l'eau ?",
+        options:[
+          "CO₂",
+          "O₂",
+          "H₂O",
+          "NaCl"
+        ],
+        answer:"H₂O",
+        correctAnswer:"H₂O"
+      },
+
+      {
+        id:"fallback3",
+        question:"Combien font 7 × 8 ?",
+        options:[
+          "48",
+          "54",
+          "56",
+          "64"
+        ],
+        answer:"56",
+        correctAnswer:"56"
+      }
+
+    ];
+
+  }
 
 }
 
 
-/* REPONDRE */
+/* =========================================================
+   EXTRACTION DES RÉPONSES
+========================================================= */
+
+function getQuestionText(q){
+
+  return (
+    q.question ||
+    q.text ||
+    q.questionText ||
+    "Question"
+  );
+
+}
+
+
+function getOptions(q){
+
+  const raw =
+    q.options ||
+    q.answers ||
+    q.choices ||
+    [];
+
+  if(Array.isArray(raw)){
+    return raw.map(item => {
+
+      if(typeof item === "string"){
+        return item;
+      }
+
+      return (
+        item.text ||
+        item.label ||
+        item.answer ||
+        ""
+      );
+
+    }).filter(Boolean);
+  }
+
+  return [];
+
+}
+
+
+function getCorrectAnswer(q, options){
+
+  const possible =
+    q.correctAnswer ??
+    q.correct ??
+    q.answer ??
+    q.correctOption ??
+    q.correctIndex;
+
+  if(typeof possible === "number"){
+    return options[possible];
+  }
+
+  if(
+    possible &&
+    typeof possible === "object"
+  ){
+    return (
+      possible.text ||
+      possible.label ||
+      possible.answer ||
+      ""
+    );
+  }
+
+  return possible;
+}
+
+
+/* =========================================================
+   QUESTION SUIVANTE
+========================================================= */
+
+function getNextQuestion(){
+
+  if(!questionPool.length){
+
+    questionPool =
+      QUESTIONS.filter(q => {
+
+        const id =
+          q.id ??
+          q.question ??
+          JSON.stringify(q);
+
+        return !usedQuestions.has(String(id));
+
+      });
+
+    if(!questionPool.length){
+
+      usedQuestions.clear();
+
+      questionPool =
+        [...QUESTIONS];
+    }
+
+  }
+
+  const index =
+    Math.floor(
+      Math.random() *
+      questionPool.length
+    );
+
+  const q =
+    questionPool.splice(index,1)[0];
+
+  const id =
+    String(
+      q.id ??
+      q.question ??
+      JSON.stringify(q)
+    );
+
+  usedQuestions.add(id);
+
+  return q;
+}
+
+
+/* =========================================================
+   CRÉATION DES ENNEMIS
+========================================================= */
+
+function createEnemy(type){
+
+  const types = {
+
+    soldier:{
+      speed:28,
+      hp:1,
+      size:27,
+      color:"#9b4d45"
+    },
+
+    cavalier:{
+      speed:42,
+      hp:1,
+      size:31,
+      color:"#7567a8"
+    },
+
+    giant:{
+      speed:18,
+      hp:2,
+      size:44,
+      color:"#555d6d"
+    },
+
+    boss:{
+      speed:14,
+      hp:3,
+      size:57,
+      color:"#7e2431"
+    }
+
+  };
+
+  const config =
+    types[type] || types.soldier;
+
+  return {
+
+    type,
+
+    x:1080,
+
+    y:430,
+
+    speed:config.speed +
+      Math.min(wave * 1.5,25),
+
+    hp:config.hp,
+
+    maxHp:config.hp,
+
+    size:config.size,
+
+    color:config.color,
+
+    targetQuestion:null,
+
+    attacking:false,
+
+    dead:false,
+
+    bob:Math.random() * Math.PI * 2
+
+  };
+
+}
+
+
+/* =========================================================
+   VAGUE
+========================================================= */
+
+function getWaveEnemies(){
+
+  const result = [];
+
+  const amount =
+    Math.min(
+      2 + wave,
+      8
+    );
+
+  if(wave % 5 === 0){
+
+    result.push(
+      createEnemy("boss")
+    );
+
+    for(let i=0;i<amount-1;i++){
+
+      result.push(
+        createEnemy(
+          i % 2 === 0
+            ? "soldier"
+            : "cavalier"
+        )
+      );
+
+    }
+
+    return result;
+  }
+
+  for(let i=0;i<amount;i++){
+
+    let type = "soldier";
+
+    if(wave >= 3 && i % 3 === 2){
+      type = "cavalier";
+    }
+
+    if(wave >= 7 && i % 5 === 4){
+      type = "giant";
+    }
+
+    result.push(
+      createEnemy(type)
+    );
+
+  }
+
+  return result;
+
+}
+
+
+/* =========================================================
+   DÉMARRAGE VAGUE
+========================================================= */
+
+function startWave(){
+
+  enemies =
+    getWaveEnemies();
+
+  projectiles = [];
+
+  currentEnemy = null;
+  currentQuestion = null;
+
+  waveRunning = true;
+
+  setMessage(
+    `Vague ${wave} — défends ton château !`,
+    "info"
+  );
+
+  nextEnemyQuestion();
+
+  updateHUD();
+
+}
+
+
+/* =========================================================
+   ENNEMI ACTUEL
+========================================================= */
+
+function nextEnemyQuestion(){
+
+  const alive =
+    enemies.filter(
+      enemy => !enemy.dead
+    );
+
+  if(!alive.length){
+
+    finishWave();
+
+    return;
+  }
+
+  const target =
+    alive.find(
+      enemy => !enemy.targetQuestion
+    ) || alive[0];
+
+  currentEnemy = target;
+
+  currentQuestion =
+    getNextQuestion();
+
+  target.targetQuestion =
+    currentQuestion;
+
+  showQuestion(
+    currentQuestion
+  );
+
+}
+
+
+/* =========================================================
+   AFFICHER QUESTION
+========================================================= */
+
+function showQuestion(q){
+
+  const text =
+    getQuestionText(q);
+
+  let options =
+    getOptions(q);
+
+  const correct =
+    getCorrectAnswer(q,options);
+
+  if(!options.length){
+
+    options = [
+      "Vrai",
+      "Faux"
+    ];
+
+  }
+
+  options =
+    [...options]
+      .sort(
+        () => Math.random() - .5
+      );
+
+  currentQuestion = {
+    ...q,
+    displayOptions:options,
+    displayCorrect:correct
+  };
+
+  questionEl.textContent =
+    text;
+
+  optionsEl.innerHTML = "";
+
+  const labels =
+    ["A","B","C","D"];
+
+  options.forEach(
+    (option,index) => {
+
+      const button =
+        document.createElement("button");
+
+      button.type =
+        "button";
+
+      button.className =
+        "option";
+
+      button.dataset.answer =
+        option;
+
+      button.innerHTML = `
+        <span class="option-key">
+          ${labels[index] || index + 1}
+        </span>
+        ${escapeHTML(option)}
+      `;
+
+      button.addEventListener(
+        "click",
+        () => answerQuestion(option,button)
+      );
+
+      optionsEl.appendChild(button);
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   RÉPONSE
+========================================================= */
 
 function answerQuestion(
-    clickedButton,
-    selectedAnswer,
-    currentQuestion
+  selected,
+  clickedButton
 ){
 
-    if(answered) return;
+  if(!gameRunning){
+    return;
+  }
 
+  if(!currentQuestion){
+    return;
+  }
 
-    answered = true;
+  const buttons =
+    [...optionsEl.querySelectorAll("button")];
 
-    stopTimer();
+  buttons.forEach(
+    button => {
+      button.disabled = true;
+    }
+  );
 
+  const correct =
+    String(
+      currentQuestion.displayCorrect
+    ).trim();
 
-    const buttons =
-        optionsElement.querySelectorAll(
-            ".option"
-        );
+  const chosen =
+    String(selected).trim();
 
+  const isCorrect =
+    chosen === correct;
+
+  if(isCorrect){
+
+    clickedButton.classList.add(
+      "correct"
+    );
+
+    score +=
+      POINTS_CORRECT;
+
+    setMessage(
+      "Bonne réponse ! Le château attaque.",
+      "good"
+    );
+
+    launchProjectile(
+      currentEnemy
+    );
+
+  }else{
+
+    clickedButton.classList.add(
+      "wrong"
+    );
 
     buttons.forEach(button => {
 
-        button.disabled = true;
+      if(
+        String(button.dataset.answer).trim()
+        === correct
+      ){
 
+        button.classList.add(
+          "correct"
+        );
 
-        if(
-            button.textContent ===
-            currentQuestion.answer
-        ){
-
-            button.classList.add(
-                "correct"
-            );
-
-        }
+      }
 
     });
 
+    setMessage(
+      "Mauvaise réponse. L'ennemi continue d'avancer.",
+      "bad"
+    );
 
-    const isCorrect =
-        selectedAnswer ===
-        currentQuestion.answer;
+  }
 
+  updateHUD();
 
-    if(isCorrect){
+  setTimeout(
+    () => {
 
-        clickedButton.classList.add(
-            "correct"
-        );
+      if(
+        currentEnemy &&
+        !currentEnemy.dead
+      ){
 
+        currentEnemy.targetQuestion =
+          null;
 
-        /*
-         * Plus de points si
-         * la réponse est rapide.
-         */
+      }
 
-        const speedBonus =
-            Math.ceil(timeLeft);
+      currentQuestion =
+        null;
 
+      nextEnemyQuestion();
 
-        const points =
-            10 + speedBonus;
+    },
+    750
+  );
 
-
-        score += points;
-
-        roundScore += points;
-
-
-        feedbackElement.textContent =
-            `Bonne réponse ! +${
-                points
-            } points.`;
-
-
-        feedbackElement.className =
-            "feedback show correct";
-
-    }
-    else{
-
-        clickedButton.classList.add(
-            "wrong"
-        );
-
-
-        feedbackElement.textContent =
-            `Mauvaise réponse. La bonne réponse était : ${
-                currentQuestion.answer
-            }`;
-
-
-        feedbackElement.className =
-            "feedback show wrong";
-
-    }
-
-
-    updateScore();
-
-
-    nextBtn.className =
-        "next-btn show";
 }
 
 
-/* TEMPS ECOULE */
+/* =========================================================
+   PROJECTILE
+========================================================= */
 
-function timeExpired(){
+function launchProjectile(enemy){
 
-    if(answered) return;
+  if(!enemy){
+    return;
+  }
+
+  projectiles.push({
+
+    x:300,
+
+    y:420,
+
+    target:enemy,
+
+    speed:650,
+
+    alive:true
+
+  });
+
+}
 
 
-    answered = true;
+/* =========================================================
+   IMPACT
+========================================================= */
+
+function hitEnemy(enemy){
+
+  if(!enemy || enemy.dead){
+    return;
+  }
+
+  enemy.hp--;
+
+  if(enemy.hp <= 0){
+
+    enemy.dead = true;
+
+    score += 5;
+
+  }
+
+}
 
 
-    const currentQuestion =
-        currentQuestions[
-            currentQuestionIndex
-        ];
+/* =========================================================
+   VIE PERDUE
+========================================================= */
 
+function loseLife(enemy){
+
+  if(enemy.dead){
+    return;
+  }
+
+  enemy.dead = true;
+
+  lives--;
+
+  setMessage(
+    "Un ennemi a atteint le château !",
+    "bad"
+  );
+
+  updateHUD();
+
+  if(lives <= 0){
+
+    gameOver();
+
+  }
+
+}
+
+
+/* =========================================================
+   FIN VAGUE
+========================================================= */
+
+function finishWave(){
+
+  if(!waveRunning){
+    return;
+  }
+
+  waveRunning = false;
+
+  victoryScoreEl.textContent =
+    `${score} points`;
+
+  victoryOverlay.classList.remove(
+    "hidden"
+  );
+
+}
+
+
+/* =========================================================
+   VAGUE SUIVANTE
+========================================================= */
+
+function continueWave(){
+
+  victoryOverlay.classList.add(
+    "hidden"
+  );
+
+  wave++;
+
+  startWave();
+
+}
+
+
+/* =========================================================
+   GAME OVER
+========================================================= */
+
+function gameOver(){
+
+  gameRunning = false;
+  waveRunning = false;
+
+  finalScoreEl.textContent =
+    `${score} points`;
+
+  gameOverOverlay.classList.remove(
+    "hidden"
+  );
+
+  questionEl.textContent =
+    "La partie est terminée.";
+
+  optionsEl.innerHTML = "";
+
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+function resetGame(){
+
+  score = 0;
+
+  lives =
+    MAX_LIVES;
+
+  wave = 1;
+
+  enemies = [];
+
+  projectiles = [];
+
+  currentEnemy = null;
+
+  currentQuestion = null;
+
+  usedQuestions.clear();
+
+  questionPool =
+    [...QUESTIONS];
+
+  gameRunning = true;
+
+  gameOverOverlay.classList.add(
+    "hidden"
+  );
+
+  victoryOverlay.classList.add(
+    "hidden"
+  );
+
+  startOverlay.classList.add(
+    "hidden"
+  );
+
+  startWave();
+
+  updateHUD();
+
+}
+
+
+/* =========================================================
+   HUD
+========================================================= */
+
+function updateHUD(){
+
+  scoreEl.textContent =
+    score;
+
+  waveEl.textContent =
+    wave;
+
+  enemyCountEl.textContent =
+    enemies.filter(
+      enemy => !enemy.dead
+    ).length;
+
+  livesEl.textContent =
+    "❤️".repeat(
+      Math.max(0,lives)
+    ) ||
+    "0";
+
+}
+
+
+/* =========================================================
+   MESSAGE
+========================================================= */
+
+function setMessage(
+  text,
+  type
+){
+
+  messageEl.textContent =
+    text;
+
+  messageEl.className =
+    `message ${type || ""}`;
+
+}
+
+
+/* =========================================================
+   CANVAS
+========================================================= */
+
+function draw(){
+
+  const w =
+    canvas.width;
+
+  const h =
+    canvas.height;
+
+  ctx.clearRect(
+    0,
+    0,
+    w,
+    h
+  );
+
+
+  /* CIEL */
+
+  const sky =
+    ctx.createLinearGradient(
+      0,
+      0,
+      0,
+      h
+    );
+
+  sky.addColorStop(
+    0,
+    "#111a32"
+  );
+
+  sky.addColorStop(
+    1,
+    "#59667b"
+  );
+
+  ctx.fillStyle =
+    sky;
+
+  ctx.fillRect(
+    0,
+    0,
+    w,
+    h
+  );
+
+
+  drawMoon();
+
+  drawClouds();
+
+  drawMountains();
+
+  drawGround();
+
+  drawCastle();
+
+  drawProjectiles();
+
+  enemies.forEach(
+    drawEnemy
+  );
+
+}
+
+
+/* =========================================================
+   LUNE
+========================================================= */
+
+function drawMoon(){
+
+  ctx.beginPath();
+
+  ctx.arc(
+    920,
+    95,
+    42,
+    0,
+    Math.PI * 2
+  );
+
+  ctx.fillStyle =
+    "#f4e6b4";
+
+  ctx.fill();
+
+}
+
+
+/* =========================================================
+   NUAGES
+========================================================= */
+
+function drawClouds(){
+
+  ctx.fillStyle =
+    "rgba(255,255,255,.13)";
+
+  const clouds = [
+    [160,100,70],
+    [430,75,55],
+    [690,130,80]
+  ];
+
+  clouds.forEach(
+    ([x,y,r]) => {
+
+      ctx.beginPath();
+
+      ctx.arc(
+        x,
+        y,
+        r,
+        0,
+        Math.PI * 2
+      );
+
+      ctx.arc(
+        x+r*.7,
+        y+5,
+        r*.7,
+        0,
+        Math.PI * 2
+      );
+
+      ctx.arc(
+        x-r*.7,
+        y+10,
+        r*.65,
+        0,
+        Math.PI * 2
+      );
+
+      ctx.fill();
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   MONTAGNES
+========================================================= */
+
+function drawMountains(){
+
+  ctx.fillStyle =
+    "#273246";
+
+  ctx.beginPath();
+
+  ctx.moveTo(
+    0,
+    390
+  );
+
+  ctx.lineTo(
+    180,
+    220
+  );
+
+  ctx.lineTo(
+    330,
+    380
+  );
+
+  ctx.lineTo(
+    510,
+    190
+  );
+
+  ctx.lineTo(
+    720,
+    390
+  );
+
+  ctx.lineTo(
+    850,
+    250
+  );
+
+  ctx.lineTo(
+    1100,
+    390
+  );
+
+  ctx.lineTo(
+    1200,
+    390
+  );
+
+  ctx.lineTo(
+    1200,
+    500
+  );
+
+  ctx.lineTo(
+    0,
+    500
+  );
+
+  ctx.closePath();
+
+  ctx.fill();
+
+}
+
+
+/* =========================================================
+   SOL
+========================================================= */
+
+function drawGround(){
+
+  ctx.fillStyle =
+    "#182119";
+
+  ctx.fillRect(
+    0,
+    465,
+    1200,
+    210
+  );
+
+  ctx.fillStyle =
+    "#293b29";
+
+  ctx.fillRect(
+    0,
+    465,
+    1200,
+    12
+  );
+
+}
+
+
+/* =========================================================
+   CHÂTEAU
+========================================================= */
+
+function drawCastle(){
+
+  const x = 85;
+  const y = 270;
+
+  /* corps */
+
+  ctx.fillStyle =
+    "#81756b";
+
+  ctx.fillRect(
+    x,
+    y+80,
+    215,
+    190
+  );
+
+
+  /* tours */
+
+  drawTower(
+    x-10,
+    y+30,
+    72,
+    240
+  );
+
+  drawTower(
+    x+150,
+    y+30,
+    72,
+    240
+  );
+
+
+  /* porte */
+
+  ctx.fillStyle =
+    "#3a241a";
+
+  ctx.beginPath();
+
+  ctx.arc(
+    x+105,
+    y+270,
+    35,
+    Math.PI,
+    0
+  );
+
+  ctx.rect(
+    x+70,
+    y+270,
+    70,
+    55
+  );
+
+  ctx.fill();
+
+
+  /* drapeau */
+
+  ctx.fillStyle =
+    "#d7d7d7";
+
+  ctx.fillRect(
+    x+105,
+    y-30,
+    4,
+    60
+  );
+
+  ctx.fillStyle =
+    "#c83d4a";
+
+  ctx.beginPath();
+
+  ctx.moveTo(
+    x+109,
+    y-30
+  );
+
+  ctx.lineTo(
+    x+165,
+    y-15
+  );
+
+  ctx.lineTo(
+    x+109,
+    y
+  );
+
+  ctx.closePath();
+
+  ctx.fill();
+
+}
+
+
+function drawTower(
+  x,
+  y,
+  width,
+  height
+){
+
+  ctx.fillStyle =
+    "#92867b";
+
+  ctx.fillRect(
+    x,
+    y,
+    width,
+    height
+  );
+
+  ctx.fillStyle =
+    "#6c625b";
+
+  for(let i=0;i<4;i++){
+
+    ctx.fillRect(
+      x + i*20,
+      y-20,
+      14,
+      22
+    );
+
+  }
+
+  ctx.fillStyle =
+    "#302d2a";
+
+  ctx.fillRect(
+    x+23,
+    y+55,
+    26,
+    40
+  );
+
+}
+
+
+/* =========================================================
+   ENNEMIS
+========================================================= */
+
+function drawEnemy(enemy){
+
+  if(enemy.dead){
+    return;
+  }
+
+  const bob =
+    Math.sin(
+      enemy.bob + performance.now()/300
+    ) * 2;
+
+  const x =
+    enemy.x;
+
+  const y =
+    enemy.y + bob;
+
+  const s =
+    enemy.size;
+
+
+  /* ombre */
+
+  ctx.fillStyle =
+    "rgba(0,0,0,.3)";
+
+  ctx.beginPath();
+
+  ctx.ellipse(
+    x,
+    y+15,
+    s*.75,
+    8,
+    0,
+    0,
+    Math.PI*2
+  );
+
+  ctx.fill();
+
+
+  /* corps */
+
+  ctx.fillStyle =
+    enemy.color;
+
+  ctx.fillRect(
+    x-s*.55,
+    y-s*.15,
+    s*1.1,
+    s*1.15
+  );
+
+
+  /* tête */
+
+  ctx.beginPath();
+
+  ctx.arc(
+    x,
+    y-s*.5,
+    s*.42,
+    0,
+    Math.PI*2
+  );
+
+  ctx.fillStyle =
+    "#c79573";
+
+  ctx.fill();
+
+
+  /* casque */
+
+  ctx.fillStyle =
+    "#353942";
+
+  ctx.beginPath();
+
+  ctx.arc(
+    x,
+    y-s*.57,
+    s*.45,
+    Math.PI,
+    Math.PI*2
+  );
+
+  ctx.fill();
+
+
+  /* yeux */
+
+  ctx.fillStyle =
+    "#151515";
+
+  ctx.fillRect(
+    x-s*.18,
+    y-s*.53,
+    5,
+    5
+  );
+
+  ctx.fillRect(
+    x+s*.08,
+    y-s*.53,
+    5,
+    5
+  );
+
+
+  /* arme */
+
+  ctx.strokeStyle =
+    "#c9c9c9";
+
+  ctx.lineWidth =
+    5;
+
+  ctx.beginPath();
+
+  ctx.moveTo(
+    x+s*.55,
+    y-s*.1
+  );
+
+  ctx.lineTo(
+    x+s*1.05,
+    y-s*.75
+  );
+
+  ctx.stroke();
+
+
+  /* barre de vie */
+
+  if(enemy.maxHp > 1){
+
+    const barWidth =
+      s*1.5;
+
+    const hpWidth =
+      barWidth *
+      (enemy.hp / enemy.maxHp);
+
+    ctx.fillStyle =
+      "#2a1616";
+
+    ctx.fillRect(
+      x-barWidth/2,
+      y-s-15,
+      barWidth,
+      7
+    );
+
+    ctx.fillStyle =
+      "#e44949";
+
+    ctx.fillRect(
+      x-barWidth/2,
+      y-s-15,
+      hpWidth,
+      7
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   PROJECTILES
+========================================================= */
+
+function drawProjectiles(){
+
+  projectiles.forEach(
+    projectile => {
+
+      if(!projectile.alive){
+        return;
+      }
+
+      ctx.fillStyle =
+        "#ffd35a";
+
+      ctx.beginPath();
+
+      ctx.arc(
+        projectile.x,
+        projectile.y,
+        8,
+        0,
+        Math.PI*2
+      );
+
+      ctx.fill();
+
+      ctx.strokeStyle =
+        "rgba(255,211,90,.4)";
+
+      ctx.lineWidth =
+        4;
+
+      ctx.beginPath();
+
+      ctx.moveTo(
+        projectile.x-25,
+        projectile.y
+      );
+
+      ctx.lineTo(
+        projectile.x,
+        projectile.y
+      );
+
+      ctx.stroke();
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   ANIMATION
+========================================================= */
+
+function update(dt){
+
+  if(!gameRunning){
+    return;
+  }
+
+  /* ENNEMIS */
+
+  enemies.forEach(
+    enemy => {
+
+      if(enemy.dead){
+        return;
+      }
+
+      enemy.x -=
+        enemy.speed * dt;
+
+      if(enemy.x <= 285){
+
+        loseLife(enemy);
+
+      }
+
+    }
+  );
+
+
+  /* PROJECTILES */
+
+  projectiles.forEach(
+    projectile => {
+
+      if(!projectile.alive){
+        return;
+      }
+
+      const target =
+        projectile.target;
+
+      if(
+        !target ||
+        target.dead
+      ){
+
+        projectile.alive =
+          false;
+
+        return;
+
+      }
+
+      const dx =
+        target.x -
+        projectile.x;
+
+      const dy =
+        target.y -
+        projectile.y;
+
+      const distance =
+        Math.sqrt(
+          dx*dx +
+          dy*dy
+        );
+
+      if(distance < 18){
+
+        projectile.alive =
+          false;
+
+        hitEnemy(target);
+
+        updateHUD();
+
+        return;
+
+      }
+
+      const vx =
+        dx / distance;
+
+      const vy =
+        dy / distance;
+
+      projectile.x +=
+        vx *
+        projectile.speed *
+        dt;
+
+      projectile.y +=
+        vy *
+        projectile.speed *
+        dt;
+
+    }
+  );
+
+
+  projectiles =
+    projectiles.filter(
+      projectile =>
+        projectile.alive
+    );
+
+  updateHUD();
+
+}
+
+
+/* =========================================================
+   BOUCLE
+========================================================= */
+
+function loop(timestamp){
+
+  if(!lastTime){
+    lastTime = timestamp;
+  }
+
+  const dt =
+    Math.min(
+      (timestamp-lastTime)/1000,
+      .04
+    );
+
+  lastTime =
+    timestamp;
+
+  update(dt);
+
+  draw();
+
+  requestAnimationFrame(
+    loop
+  );
+
+}
+
+
+/* =========================================================
+   CLAVIER
+========================================================= */
+
+document.addEventListener(
+  "keydown",
+  event => {
+
+    if(!gameRunning){
+      return;
+    }
+
+    const key =
+      event.key.toLowerCase();
+
+    const index =
+      {
+        a:0,
+        b:1,
+        c:2,
+        d:3,
+        "1":0,
+        "2":1,
+        "3":2,
+        "4":3
+      }[key];
+
+    if(index === undefined){
+      return;
+    }
 
     const buttons =
-        optionsElement.querySelectorAll(
-            ".option"
-        );
+      optionsEl.querySelectorAll(
+        "button"
+      );
 
-
-    buttons.forEach(button => {
-
-        button.disabled = true;
-
-
-        if(
-            button.textContent ===
-            currentQuestion.answer
-        ){
-
-            button.classList.add(
-                "correct"
-            );
-
-        }
-
-    });
-
-
-    feedbackElement.textContent =
-        `Temps écoulé. La bonne réponse était : ${
-            currentQuestion.answer
-        }`;
-
-
-    feedbackElement.className =
-        "feedback show wrong";
-
-
-    nextBtn.className =
-        "next-btn show";
-}
-
-
-/* QUESTION SUIVANTE */
-
-function nextQuestion(){
-
-    if(!answered) return;
-
-
-    currentQuestionIndex++;
-
-
-    displayQuestion();
-}
-
-
-/* FIN DE PARTIE */
-
-function endRound(){
-
-    stopTimer();
-
-
-    finalScore.textContent =
-        `${roundScore} points`;
-
-
-    resultTitle.textContent =
-        `Partie ${roundNumber} terminée`;
-
-
-    resultText.textContent =
-        `Score total : ${score} points. ` +
-        `Tu peux continuer avec une nouvelle série de questions.`;
-
-
-    if(
-        roundNumber >= MAX_ROUNDS
-    ){
-
-        endGame();
-
-        return;
+    if(buttons[index]){
+      buttons[index].click();
     }
 
-
-    nextRoundBtn.textContent =
-        "Partie suivante";
-
-
-    resultOverlay.classList.add(
-        "show"
-    );
-}
-
-
-/* FIN DES 20 PARTIES */
-
-function endGame(){
-
-    gameFinished = true;
-
-
-    resultTitle.textContent =
-        "Quiz Rush terminé";
-
-
-    resultText.textContent =
-        `Tu as terminé les ${
-            MAX_ROUNDS
-        } parties.`;
-
-
-    finalScore.textContent =
-        `${score} points`;
-
-
-    nextRoundBtn.textContent =
-        "Nouvelle partie";
-
-
-    resultOverlay.classList.add(
-        "show"
-    );
-}
-
-
-/* PARTIE SUIVANTE */
-
-function startNextRound(){
-
-    if(gameFinished){
-
-        restartGame();
-
-        return;
-    }
-
-
-    if(
-        roundNumber >= MAX_ROUNDS
-    ){
-
-        endGame();
-
-        return;
-    }
-
-
-    roundNumber++;
-
-
-    currentQuestionIndex = 0;
-
-
-    roundScore = 0;
-
-
-    roundLabel.textContent =
-        `Partie ${
-            roundNumber
-        } / ${
-            MAX_ROUNDS
-        }`;
-
-
-    resultOverlay.classList.remove(
-        "show"
-    );
-
-
-    if(prepareRound()){
-
-        displayQuestion();
-
-    }
-
-}
-
-
-/* RECOMMENCER */
-
-function restartGame(){
-
-    stopTimer();
-
-
-    score = 0;
-
-    roundScore = 0;
-
-    roundNumber = 1;
-
-    currentQuestionIndex = 0;
-
-    timeLeft =
-        TIME_PER_QUESTION;
-
-    answered = false;
-
-    gameFinished = false;
-
-
-    roundLabel.textContent =
-        `Partie 1 / ${MAX_ROUNDS}`;
-
-
-    resultOverlay.classList.remove(
-        "show"
-    );
-
-
-    updateScore();
-
-
-    if(prepareRound()){
-
-        displayQuestion();
-
-    }
-
-}
-
-
-/* EVENEMENTS */
-
-nextBtn.addEventListener(
-    "click",
-    nextQuestion
+  }
 );
 
 
-nextRoundBtn.addEventListener(
-    "click",
-    startNextRound
-);
+/* =========================================================
+   BOUTONS
+========================================================= */
 
+startBtn.addEventListener(
+  "click",
+  resetGame
+);
 
 restartBtn.addEventListener(
-    "click",
-    restartGame
+  "click",
+  resetGame
+);
+
+continueBtn.addEventListener(
+  "click",
+  continueWave
 );
 
 
-/* DEMARRAGE */
+/* =========================================================
+   HTML SÉCURISÉ
+========================================================= */
 
-if(prepareRound()){
+function escapeHTML(value){
 
-    displayQuestion();
+  return String(value)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
 
 }
+
+
+/* =========================================================
+   INITIALISATION
+========================================================= */
+
+async function init(){
+
+  QUESTIONS =
+    await loadQuestions();
+
+  questionPool =
+    [...QUESTIONS];
+
+  updateHUD();
+
+  draw();
+
+}
+
+init();
+
+requestAnimationFrame(
+  loop
+);
 
 </script>
 
