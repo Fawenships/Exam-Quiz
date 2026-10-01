@@ -2,8 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 <title>Mots Cachés — ExamQuiz</title>
 
@@ -18,7 +17,6 @@
     --purple: #4b2481;
     --purple-dark: #24113f;
     --blue: #1764c0;
-    --blue-light: #2f80ed;
     --green: #16a34a;
     --red: #dc2626;
     --bg: #f5f7fb;
@@ -36,39 +34,32 @@ body {
     overflow-x: hidden;
 }
 
-/* =========================
-   HEADER
-========================= */
+/* HEADER */
 
 .topbar {
-    width: 100%;
-    background: white;
+    background: #fff;
     border-bottom: 1px solid var(--border);
 }
 
 .topbar-inner {
     max-width: 1100px;
     margin: auto;
-    padding: 14px 18px;
+    padding: 12px 16px;
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    gap: 12px;
+    align-items: center;
+    gap: 10px;
 }
 
 .back-button {
     text-decoration: none;
     color: var(--purple);
     border: 1px solid var(--border);
-    padding: 10px 15px;
+    padding: 9px 13px;
     border-radius: 10px;
     font-weight: 700;
     font-size: 14px;
     background: white;
-}
-
-.back-button:active {
-    transform: scale(.97);
 }
 
 .logo {
@@ -77,14 +68,12 @@ body {
     color: var(--purple-dark);
 }
 
-/* =========================
-   MAIN
-========================= */
+/* MAIN */
 
 .container {
     width: min(1100px, 100%);
     margin: auto;
-    padding: 20px 16px 40px;
+    padding: 20px 15px 40px;
 }
 
 .title-section {
@@ -93,9 +82,9 @@ body {
 }
 
 .title-section h1 {
-    font-size: clamp(24px, 5vw, 36px);
     color: var(--purple-dark);
-    margin-bottom: 7px;
+    font-size: clamp(25px, 5vw, 36px);
+    margin-bottom: 6px;
 }
 
 .title-section p {
@@ -103,13 +92,11 @@ body {
     font-size: 14px;
 }
 
-/* =========================
-   HUD
-========================= */
+/* HUD */
 
 .hud {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 10px;
     margin-bottom: 18px;
 }
@@ -123,21 +110,19 @@ body {
 }
 
 .stat-label {
-    font-size: 11px;
     color: var(--muted);
+    font-size: 10px;
     text-transform: uppercase;
     margin-bottom: 4px;
 }
 
 .stat-value {
+    color: var(--purple-dark);
     font-size: 20px;
     font-weight: 800;
-    color: var(--purple-dark);
 }
 
-/* =========================
-   GAME LAYOUT
-========================= */
+/* LAYOUT */
 
 .game-layout {
     display: grid;
@@ -153,20 +138,18 @@ body {
     border-radius: 18px;
 }
 
-/* =========================
-   GRID
-========================= */
-
 .game-card {
     padding: 14px;
 }
 
 .grid-title {
     text-align: center;
-    font-size: 14px;
     color: var(--muted);
+    font-size: 13px;
     margin-bottom: 12px;
 }
+
+/* GRID */
 
 .word-grid {
     width: min(100%, 650px);
@@ -175,11 +158,10 @@ body {
     display: grid;
     grid-template-columns: repeat(13, 1fr);
 
+    background: var(--purple-dark);
     border: 3px solid var(--purple-dark);
     border-radius: 12px;
     overflow: hidden;
-
-    background: var(--purple-dark);
 
     touch-action: none;
     user-select: none;
@@ -194,14 +176,11 @@ body {
     justify-content: center;
 
     background: white;
-    border: 1px solid #d9dfeb;
-
-    font-size: clamp(13px, 2.7vw, 23px);
-    font-weight: 800;
+    border: 1px solid #dce2ec;
 
     color: #20293a;
-
-    cursor: pointer;
+    font-weight: 800;
+    font-size: clamp(12px, 2.8vw, 22px);
 
     position: relative;
 
@@ -211,8 +190,7 @@ body {
 
     transition:
         background .12s ease,
-        color .12s ease,
-        transform .12s ease;
+        color .12s ease;
 }
 
 .cell.selecting {
@@ -228,7 +206,7 @@ body {
 .cell.found::after {
     content: "";
     position: absolute;
-    inset: 5%;
+    inset: 7%;
     border: 2px solid #22c55e;
     border-radius: 50%;
     pointer-events: none;
@@ -239,25 +217,23 @@ body {
     color: var(--red);
 }
 
-/* =========================
-   WORD LIST
-========================= */
+/* WORDS */
 
 .words-card {
-    padding: 17px;
+    padding: 16px;
 }
 
 .words-card h2 {
+    color: var(--purple-dark);
     font-size: 18px;
     margin-bottom: 5px;
-    color: var(--purple-dark);
 }
 
-.words-card .help {
-    font-size: 12px;
+.help {
     color: var(--muted);
+    font-size: 12px;
     line-height: 1.45;
-    margin-bottom: 15px;
+    margin-bottom: 14px;
 }
 
 .clues {
@@ -267,18 +243,17 @@ body {
 }
 
 .clue {
-    border: 1px solid var(--border);
-    border-radius: 11px;
-    padding: 10px 11px;
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+
     background: #fafbfe;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 9px;
+
     font-size: 13px;
     line-height: 1.4;
-
-    display: flex;
-    gap: 9px;
-    align-items: flex-start;
-
-    transition: .15s ease;
 }
 
 .clue-number {
@@ -286,13 +261,14 @@ body {
     height: 25px;
     min-width: 25px;
 
-    border-radius: 7px;
-    background: #eee9f8;
-    color: var(--purple);
-
     display: flex;
     align-items: center;
     justify-content: center;
+
+    border-radius: 7px;
+
+    background: #eee9f8;
+    color: var(--purple);
 
     font-size: 12px;
     font-weight: 800;
@@ -318,60 +294,14 @@ body {
     color: #15803d;
 }
 
-/* =========================
-   INSTRUCTION
-========================= */
-
-.instruction {
-    margin-top: 14px;
-    padding: 12px;
-    border-radius: 11px;
-    background: #f4f0fa;
-    color: var(--purple-dark);
-    text-align: center;
-    font-size: 13px;
-    line-height: 1.4;
-}
-
-/* =========================
-   BUTTONS
-========================= */
-
-.actions {
-    margin-top: 15px;
-    display: flex;
-    gap: 10px;
-}
-
-button {
-    border: 0;
-    border-radius: 10px;
-    padding: 12px 15px;
-    font-weight: 700;
-    cursor: pointer;
-    font-size: 14px;
-}
-
-.restart-btn {
-    width: 100%;
-    background: var(--purple);
-    color: white;
-}
-
-.restart-btn:active {
-    transform: scale(.98);
-}
-
-/* =========================
-   MESSAGE
-========================= */
+/* MESSAGE */
 
 .message {
-    min-height: 24px;
+    min-height: 23px;
     text-align: center;
+    margin-top: 10px;
     font-size: 14px;
     font-weight: 700;
-    margin-top: 10px;
 }
 
 .message.success {
@@ -382,21 +312,54 @@ button {
     color: var(--red);
 }
 
-/* =========================
-   OVERLAY
-========================= */
+/* HELP */
+
+.instruction {
+    margin-top: 13px;
+    padding: 11px;
+
+    border-radius: 10px;
+
+    background: #f4f0fa;
+    color: var(--purple-dark);
+
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.45;
+}
+
+/* BUTTON */
+
+.actions {
+    margin-top: 14px;
+}
+
+.restart-btn,
+.next-btn {
+    width: 100%;
+    border: 0;
+    border-radius: 10px;
+    padding: 12px;
+    background: var(--purple);
+    color: white;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* OVERLAY */
 
 .overlay {
     position: fixed;
     inset: 0;
-
-    background: rgba(20, 15, 35, .72);
 
     display: flex;
     align-items: center;
     justify-content: center;
 
     padding: 20px;
+
+    background: rgba(20, 15, 35, .72);
 
     z-index: 100;
 }
@@ -415,7 +378,7 @@ button {
 
 .result-box h2 {
     color: var(--purple-dark);
-    font-size: 28px;
+    font-size: 27px;
     margin-bottom: 10px;
 }
 
@@ -425,15 +388,7 @@ button {
     margin-bottom: 20px;
 }
 
-.next-btn {
-    width: 100%;
-    background: var(--purple);
-    color: white;
-}
-
-/* =========================
-   MOBILE
-========================= */
+/* MOBILE */
 
 @media (max-width: 800px) {
 
@@ -441,20 +396,12 @@ button {
         grid-template-columns: 1fr;
     }
 
-    .words-card {
-        order: 2;
-    }
-
     .game-card {
         order: 1;
     }
 
-    .words-card h2 {
-        text-align: center;
-    }
-
-    .hud {
-        grid-template-columns: repeat(2, 1fr);
+    .words-card {
+        order: 2;
     }
 
     .word-grid {
@@ -465,7 +412,7 @@ button {
 @media (max-width: 480px) {
 
     .container {
-        padding: 14px 10px 30px;
+        padding: 14px 9px 30px;
     }
 
     .topbar-inner {
@@ -477,8 +424,8 @@ button {
     }
 
     .back-button {
-        padding: 8px 10px;
         font-size: 12px;
+        padding: 8px 10px;
     }
 
     .title-section {
@@ -499,12 +446,11 @@ button {
     }
 
     .stat {
-        padding: 9px 5px;
-        border-radius: 10px;
+        padding: 9px 4px;
     }
 
     .stat-label {
-        font-size: 9px;
+        font-size: 8px;
     }
 
     .stat-value {
@@ -522,16 +468,14 @@ button {
     }
 
     .cell {
-        font-size: clamp(12px, 5vw, 20px);
+        font-size: clamp(11px, 5vw, 19px);
     }
 
     .words-card {
-        padding: 13px;
-        border-radius: 14px;
+        padding: 12px;
     }
 
     .clue {
-        padding: 9px;
         font-size: 12px;
     }
 }
@@ -567,17 +511,16 @@ button {
 
         <div class="stat">
             <div class="stat-label">Mots trouvés</div>
-            <div class="stat-value" id="foundCount">0/8</div>
+            <div class="stat-value" id="foundCount">
+                0/8
+            </div>
         </div>
 
         <div class="stat">
             <div class="stat-label">Score</div>
-            <div class="stat-value" id="score">0</div>
-        </div>
-
-        <div class="stat">
-            <div class="stat-label">Temps</div>
-            <div class="stat-value" id="timer">0s</div>
+            <div class="stat-value" id="score">
+                0
+            </div>
         </div>
 
         <div class="stat">
@@ -603,9 +546,9 @@ button {
             <div id="message" class="message"></div>
 
             <div class="instruction">
-                Commence sur la première lettre puis fais glisser
-                ton doigt jusqu'à la dernière. Les mots peuvent être
-                horizontaux, verticaux ou diagonaux.
+                Lis les questions, trouve leurs réponses
+                dans la grille puis trace chaque mot avec ton doigt.
+                Les mots peuvent être horizontaux, verticaux ou diagonaux.
             </div>
 
         </div>
@@ -613,19 +556,23 @@ button {
 
         <aside class="words-card">
 
-            <h2>À trouver</h2>
+            <h2>Questions</h2>
 
             <p class="help">
-                Réponds mentalement aux questions puis cherche
-                la réponse dans la grille.
+                Trouve dans la grille la réponse correspondant
+                à chaque question.
             </p>
 
             <div id="clues" class="clues"></div>
 
             <div class="actions">
-                <button id="restartBtn" class="restart-btn">
+
+                <button
+                    id="restartBtn"
+                    class="restart-btn">
                     Nouvelle partie
                 </button>
+
             </div>
 
         </aside>
@@ -662,19 +609,25 @@ import { jeuxQuestions } from "./src/jeuxQuestions.js";
 ========================================================= */
 
 const GRID_SIZE = 13;
+
 const WORDS_PER_ROUND = 8;
+
 const MAX_ROUNDS = 20;
 
 const DIRECTIONS = [
-    { dr: 0, dc: 1 },    // droite
-    { dr: 0, dc: -1 },   // gauche
-    { dr: 1, dc: 0 },    // bas
-    { dr: -1, dc: 0 },   // haut
 
-    { dr: 1, dc: 1 },    // bas-droite
-    { dr: -1, dc: -1 },  // haut-gauche
-    { dr: 1, dc: -1 },   // bas-gauche
-    { dr: -1, dc: 1 }    // haut-droite
+    { dr: 0, dc: 1 },
+    { dr: 0, dc: -1 },
+
+    { dr: 1, dc: 0 },
+    { dr: -1, dc: 0 },
+
+    { dr: 1, dc: 1 },
+    { dr: -1, dc: -1 },
+
+    { dr: 1, dc: -1 },
+    { dr: -1, dc: 1 }
+
 ];
 
 
@@ -682,17 +635,17 @@ const DIRECTIONS = [
    DOM
 ========================================================= */
 
-const gridElement = document.getElementById("wordGrid");
-const cluesElement = document.getElementById("clues");
+const gridElement =
+    document.getElementById("wordGrid");
+
+const cluesElement =
+    document.getElementById("clues");
 
 const foundCountElement =
     document.getElementById("foundCount");
 
 const scoreElement =
     document.getElementById("score");
-
-const timerElement =
-    document.getElementById("timer");
 
 const roundElement =
     document.getElementById("round");
@@ -721,8 +674,6 @@ let board = [];
 
 let placements = [];
 
-let currentWords = [];
-
 let foundWords = new Set();
 
 let usedQuestionIds = new Set();
@@ -737,13 +688,9 @@ let score = 0;
 
 let round = 1;
 
-let seconds = 0;
-
-let timerInterval = null;
-
 
 /* =========================================================
-   UTILITAIRES
+   NETTOYAGE DES RÉPONSES
 ========================================================= */
 
 function cleanAnswer(value) {
@@ -756,13 +703,18 @@ function cleanAnswer(value) {
 }
 
 
+/* =========================================================
+   MÉLANGE
+========================================================= */
+
 function shuffle(array) {
 
     const copy = [...array];
 
     for (let i = copy.length - 1; i > 0; i--) {
 
-        const j = Math.floor(Math.random() * (i + 1));
+        const j =
+            Math.floor(Math.random() * (i + 1));
 
         [copy[i], copy[j]] =
             [copy[j], copy[i]];
@@ -772,16 +724,26 @@ function shuffle(array) {
 }
 
 
+/* =========================================================
+   LETTRE ALÉATOIRE
+========================================================= */
+
 function randomLetter() {
 
     const letters =
         "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
     return letters[
-        Math.floor(Math.random() * letters.length)
+        Math.floor(
+            Math.random() * letters.length
+        )
     ];
 }
 
+
+/* =========================================================
+   GRILLE VIDE
+========================================================= */
 
 function createEmptyBoard() {
 
@@ -792,58 +754,93 @@ function createEmptyBoard() {
 }
 
 
-function key(row, col) {
-
-    return `${row}-${col}`;
-}
-
-
 /* =========================================================
-   QUESTIONS
+   QUESTIONS FACILES + MOYENNES UNIQUEMENT
 ========================================================= */
 
 function getQuestions() {
 
-    const valid = jeuxQuestions.filter(q => {
+    const validQuestions =
+        jeuxQuestions.filter(question => {
 
-        const answer = cleanAnswer(q.answer);
+            const difficulty =
+                String(
+                    question.difficulty || ""
+                ).toLowerCase();
 
-        return (
-            answer.length >= 3 &&
-            answer.length <= GRID_SIZE
-        );
-    });
+            const answer =
+                cleanAnswer(
+                    question.answer
+                );
+
+            return (
+                (
+                    difficulty === "facile" ||
+                    difficulty === "moyen"
+                ) &&
+                answer.length >= 3 &&
+                answer.length <= GRID_SIZE
+            );
+        });
+
 
     let available =
-        valid.filter(q => !usedQuestionIds.has(q.id));
+        validQuestions.filter(
+            question =>
+                !usedQuestionIds.has(
+                    question.id
+                )
+        );
 
-    if (available.length < WORDS_PER_ROUND) {
+
+    if (
+        available.length <
+        WORDS_PER_ROUND
+    ) {
 
         usedQuestionIds.clear();
 
-        available = [...valid];
+        available =
+            [...validQuestions];
     }
 
-    return shuffle(available)
-        .slice(0, WORDS_PER_ROUND);
+
+    return shuffle(
+        available
+    ).slice(
+        0,
+        WORDS_PER_ROUND
+    );
 }
 
 
 /* =========================================================
-   VÉRIFICATION D'UNE POSITION
+   TESTER UNE POSITION
 ========================================================= */
 
-function canPlaceWord(word, row, col, direction) {
+function canPlaceWord(
+    word,
+    row,
+    col,
+    direction
+) {
 
     const cells = [];
 
-    for (let i = 0; i < word.length; i++) {
+    for (
+        let i = 0;
+        i < word.length;
+        i++
+    ) {
 
         const r =
-            row + direction.dr * i;
+            row +
+            direction.dr * i;
 
         const c =
-            col + direction.dc * i;
+            col +
+            direction.dc * i;
+
 
         if (
             r < 0 ||
@@ -851,18 +848,23 @@ function canPlaceWord(word, row, col, direction) {
             c < 0 ||
             c >= GRID_SIZE
         ) {
+
             return null;
         }
 
+
         const existing =
             board[r][c];
+
 
         if (
             existing !== "" &&
             existing !== word[i]
         ) {
+
             return null;
         }
+
 
         cells.push({
             row: r,
@@ -870,29 +872,35 @@ function canPlaceWord(word, row, col, direction) {
         });
     }
 
+
     return cells;
 }
 
 
 /* =========================================================
    SCORE D'UNE POSITION
-   FAVORISE LES CROISEMENTS
+   ON FAVORISE LES CROISEMENTS
 ========================================================= */
 
 function placementScore(cells) {
 
-    let score = 0;
+    let value = 0;
 
     for (const cell of cells) {
 
         if (
-            board[cell.row][cell.col] !== ""
+            board[
+                cell.row
+            ][
+                cell.col
+            ] !== ""
         ) {
-            score += 10;
+
+            value += 10;
         }
     }
 
-    return score;
+    return value;
 }
 
 
@@ -900,31 +908,42 @@ function placementScore(cells) {
    PLACER UN MOT
 ========================================================= */
 
-function placeWord(word, question) {
+function placeWord(
+    word,
+    question
+) {
 
     let best = null;
 
-    const directions =
-        shuffle(DIRECTIONS);
 
-    for (let attempt = 0; attempt < 700; attempt++) {
+    for (
+        let attempt = 0;
+        attempt < 800;
+        attempt++
+    ) {
 
         const direction =
-            directions[
+            DIRECTIONS[
                 Math.floor(
-                    Math.random() * directions.length
+                    Math.random() *
+                    DIRECTIONS.length
                 )
             ];
 
+
         const row =
             Math.floor(
-                Math.random() * GRID_SIZE
+                Math.random() *
+                GRID_SIZE
             );
+
 
         const col =
             Math.floor(
-                Math.random() * GRID_SIZE
+                Math.random() *
+                GRID_SIZE
             );
+
 
         const cells =
             canPlaceWord(
@@ -934,88 +953,135 @@ function placeWord(word, question) {
                 direction
             );
 
+
         if (!cells) continue;
 
-        const score =
+
+        const placementValue =
             placementScore(cells);
+
 
         if (
             !best ||
-            score > best.score
+            placementValue >
+            best.score
         ) {
 
             best = {
+
                 row,
                 col,
                 direction,
+
                 cells,
-                score
+
+                score:
+                    placementValue
             };
 
-            if (score >= Math.min(30, word.length * 4)) {
+
+            if (
+                placementValue >=
+                Math.min(
+                    30,
+                    word.length * 4
+                )
+            ) {
+
                 break;
             }
         }
     }
 
+
     if (!best) {
+
         return false;
     }
 
-    for (let i = 0; i < word.length; i++) {
+
+    for (
+        let i = 0;
+        i < word.length;
+        i++
+    ) {
 
         const cell =
             best.cells[i];
 
-        board[cell.row][cell.col] =
+        board[
+            cell.row
+        ][
+            cell.col
+        ] =
             word[i];
     }
 
+
     placements.push({
+
         id: question.id,
-        question: question.question,
-        answer: word,
-        cells: best.cells
+
+        question:
+            question.question,
+
+        answer:
+            word,
+
+        cells:
+            best.cells
+
     });
+
 
     return true;
 }
 
 
 /* =========================================================
-   CRÉER LE PUZZLE
+   CONSTRUIRE LA PARTIE
 ========================================================= */
 
 function buildPuzzle() {
 
-    board = createEmptyBoard();
+    board =
+        createEmptyBoard();
 
     placements = [];
 
-    currentWords = getQuestions();
+
+    const questions =
+        getQuestions();
+
 
     /*
-       On place d'abord les mots les plus longs.
-       Cela facilite les croisements.
+       Les plus longs mots sont placés en premier.
+       Cela augmente les possibilités de croisement.
     */
 
-    const sorted =
-        [...currentWords]
-            .sort(
-                (a, b) =>
-                    cleanAnswer(b.answer).length -
-                    cleanAnswer(a.answer).length
-            );
+    questions.sort(
+        (a, b) =>
+            cleanAnswer(b.answer).length -
+            cleanAnswer(a.answer).length
+    );
 
-    for (const question of sorted) {
+
+    for (
+        const question of questions
+    ) {
 
         const answer =
-            cleanAnswer(question.answer);
+            cleanAnswer(
+                question.answer
+            );
 
-        const placed =
-            placeWord(answer, question);
 
-        if (placed) {
+        if (
+            placeWord(
+                answer,
+                question
+            )
+        ) {
 
             usedQuestionIds.add(
                 question.id
@@ -1025,39 +1091,72 @@ function buildPuzzle() {
 
 
     /*
-       Si certains mots n'ont pas pu entrer,
-       on complète avec d'autres questions.
+       Compléter si nécessaire.
     */
 
-    if (placements.length < WORDS_PER_ROUND) {
+    if (
+        placements.length <
+        WORDS_PER_ROUND
+    ) {
 
-        const extra =
-            jeuxQuestions
-                .filter(q => {
+        const extraQuestions =
+            shuffle(
+                jeuxQuestions.filter(
+                    question => {
 
-                    const answer =
-                        cleanAnswer(q.answer);
+                        const answer =
+                            cleanAnswer(
+                                question.answer
+                            );
 
-                    return (
-                        answer.length >= 3 &&
-                        answer.length <= GRID_SIZE &&
-                        !placements.some(
-                            p => p.id === q.id
-                        )
-                    );
-                });
+                        const difficulty =
+                            String(
+                                question.difficulty ||
+                                ""
+                            ).toLowerCase();
 
-        for (const question of shuffle(extra)) {
+                        return (
+                            (
+                                difficulty === "facile" ||
+                                difficulty === "moyen"
+                            ) &&
+                            answer.length >= 3 &&
+                            answer.length <= GRID_SIZE &&
+                            !placements.some(
+                                placement =>
+                                    placement.id ===
+                                    question.id
+                            )
+                        );
+                    }
+                )
+            );
+
+
+        for (
+            const question of extraQuestions
+        ) {
 
             if (
                 placements.length >=
                 WORDS_PER_ROUND
-            ) break;
+            ) {
+                break;
+            }
+
 
             const answer =
-                cleanAnswer(question.answer);
+                cleanAnswer(
+                    question.answer
+                );
 
-            if (placeWord(answer, question)) {
+
+            if (
+                placeWord(
+                    answer,
+                    question
+                )
+            ) {
 
                 usedQuestionIds.add(
                     question.id
@@ -1068,17 +1167,26 @@ function buildPuzzle() {
 
 
     /*
-       Remplir toutes les cases vides
-       avec des lettres aléatoires.
+       Remplissage des cases restantes.
     */
 
-    for (let r = 0; r < GRID_SIZE; r++) {
+    for (
+        let row = 0;
+        row < GRID_SIZE;
+        row++
+    ) {
 
-        for (let c = 0; c < GRID_SIZE; c++) {
+        for (
+            let col = 0;
+            col < GRID_SIZE;
+            col++
+        ) {
 
-            if (board[r][c] === "") {
+            if (
+                board[row][col] === ""
+            ) {
 
-                board[r][c] =
+                board[row][col] =
                     randomLetter();
             }
         }
@@ -1087,99 +1195,155 @@ function buildPuzzle() {
 
 
 /* =========================================================
-   AFFICHAGE DE LA GRILLE
+   AFFICHER LA GRILLE
 ========================================================= */
 
 function renderGrid() {
 
     gridElement.innerHTML = "";
 
-    for (let r = 0; r < GRID_SIZE; r++) {
 
-        for (let c = 0; c < GRID_SIZE; c++) {
+    for (
+        let row = 0;
+        row < GRID_SIZE;
+        row++
+    ) {
+
+        for (
+            let col = 0;
+            col < GRID_SIZE;
+            col++
+        ) {
 
             const cell =
                 document.createElement("div");
 
-            cell.className = "cell";
 
-            cell.dataset.row = r;
-            cell.dataset.col = c;
+            cell.className =
+                "cell";
+
+
+            cell.dataset.row =
+                row;
+
+            cell.dataset.col =
+                col;
+
 
             cell.textContent =
-                board[r][c];
+                board[row][col];
 
-            gridElement.appendChild(cell);
+
+            gridElement.appendChild(
+                cell
+            );
         }
     }
 }
 
 
 /* =========================================================
-   AFFICHAGE DES INDICES
+   AFFICHER LES QUESTIONS
 ========================================================= */
 
 function renderClues() {
 
     cluesElement.innerHTML = "";
 
-    placements.forEach((placement, index) => {
 
-        const clue =
-            document.createElement("div");
+    placements.forEach(
+        (placement, index) => {
 
-        clue.className = "clue";
+            const clue =
+                document.createElement("div");
 
-        clue.dataset.id =
-            placement.id;
 
-        clue.innerHTML = `
-            <div class="clue-number">
-                ${index + 1}
-            </div>
+            clue.className =
+                "clue";
 
-            <div class="clue-text">
-                ${escapeHTML(placement.question)}
-            </div>
-        `;
 
-        cluesElement.appendChild(clue);
-    });
+            clue.dataset.id =
+                placement.id;
+
+
+            clue.innerHTML = `
+
+                <div class="clue-number">
+                    ${index + 1}
+                </div>
+
+                <div class="clue-text">
+                    ${escapeHTML(
+                        placement.question
+                    )}
+                </div>
+
+            `;
+
+
+            cluesElement.appendChild(
+                clue
+            );
+        }
+    );
+
 
     updateClues();
 }
 
 
+/* =========================================================
+   SÉCURISER LE TEXTE
+========================================================= */
+
 function escapeHTML(text) {
 
     return String(text)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
 }
 
 
 /* =========================================================
-   METTRE À JOUR LES INDICES
+   ACTUALISER LA LISTE
 ========================================================= */
 
 function updateClues() {
 
-    const items =
-        cluesElement.querySelectorAll(".clue");
+    cluesElement
+        .querySelectorAll(".clue")
+        .forEach(clue => {
 
-    items.forEach(item => {
+            const id =
+                Number(
+                    clue.dataset.id
+                );
 
-        const id =
-            Number(item.dataset.id);
 
-        item.classList.toggle(
-            "found",
-            foundWords.has(id)
-        );
-    });
+            clue.classList.toggle(
+                "found",
+                foundWords.has(id)
+            );
+        });
+
 
     foundCountElement.textContent =
         `${foundWords.size}/${placements.length}`;
@@ -1187,67 +1351,91 @@ function updateClues() {
 
 
 /* =========================================================
-   TROUVER UNE CELLULE DEPUIS UN POINT
+   TROUVER UNE CASE SOUS LE DOIGT
 ========================================================= */
 
-function getCellFromPoint(x, y) {
+function getCellFromPoint(
+    x,
+    y
+) {
 
     const element =
-        document.elementFromPoint(x, y);
+        document.elementFromPoint(
+            x,
+            y
+        );
+
 
     if (!element) {
         return null;
     }
 
+
     const cell =
-        element.closest(".cell");
+        element.closest(
+            ".cell"
+        );
+
 
     if (!cell) {
         return null;
     }
 
+
     return {
-        row: Number(cell.dataset.row),
-        col: Number(cell.dataset.col)
+
+        row:
+            Number(
+                cell.dataset.row
+            ),
+
+        col:
+            Number(
+                cell.dataset.col
+            )
+
     };
 }
 
 
 /* =========================================================
-   OBTENIR LES CELLULES ENTRE DEUX POINTS
+   CRÉER UNE LIGNE ENTRE DEUX CASES
 ========================================================= */
 
-function getLineCells(start, end) {
+function getLineCells(
+    start,
+    end
+) {
 
     const dr =
-        end.row - start.row;
+        end.row -
+        start.row;
 
     const dc =
-        end.col - start.col;
+        end.col -
+        start.col;
 
-    /*
-       On accepte uniquement :
-       - horizontal
-       - vertical
-       - diagonal à 45°
-    */
 
-    const sameRow =
+    const horizontal =
         dr === 0;
 
-    const sameCol =
+    const vertical =
         dc === 0;
 
     const diagonal =
-        Math.abs(dr) === Math.abs(dc);
+        Math.abs(dr) ===
+        Math.abs(dc);
+
 
     if (
-        !sameRow &&
-        !sameCol &&
+        !horizontal &&
+        !vertical &&
         !diagonal
     ) {
+
         return [];
     }
+
 
     const stepRow =
         Math.sign(dr);
@@ -1255,17 +1443,25 @@ function getLineCells(start, end) {
     const stepCol =
         Math.sign(dc);
 
+
     const length =
         Math.max(
             Math.abs(dr),
             Math.abs(dc)
         ) + 1;
 
+
     const cells = [];
 
-    for (let i = 0; i < length; i++) {
+
+    for (
+        let i = 0;
+        i < length;
+        i++
+    ) {
 
         cells.push({
+
             row:
                 start.row +
                 stepRow * i,
@@ -1273,58 +1469,78 @@ function getLineCells(start, end) {
             col:
                 start.col +
                 stepCol * i
+
         });
     }
+
 
     return cells;
 }
 
 
 /* =========================================================
-   COMPARER DEUX CHEMINS
+   COMPARER LES CHEMINS
 ========================================================= */
 
-function samePath(pathA, pathB) {
+function samePath(
+    first,
+    second
+) {
 
     if (
-        pathA.length !==
-        pathB.length
+        first.length !==
+        second.length
     ) {
+
         return false;
     }
 
-    for (let i = 0; i < pathA.length; i++) {
+
+    for (
+        let i = 0;
+        i < first.length;
+        i++
+    ) {
 
         if (
-            pathA[i].row !== pathB[i].row ||
-            pathA[i].col !== pathB[i].col
+            first[i].row !==
+            second[i].row ||
+
+            first[i].col !==
+            second[i].col
         ) {
+
             return false;
         }
     }
+
 
     return true;
 }
 
 
 /* =========================================================
-   PATH INVERSÉ
+   INVERSER
 ========================================================= */
 
 function reversePath(path) {
 
-    return [...path].reverse();
+    return [
+        ...path
+    ].reverse();
 }
 
 
 /* =========================================================
-   EFFACER LA SÉLECTION
+   EFFACER SÉLECTION
 ========================================================= */
 
 function clearSelection() {
 
     gridElement
-        .querySelectorAll(".cell.selecting")
+        .querySelectorAll(
+            ".cell.selecting"
+        )
         .forEach(cell => {
 
             cell.classList.remove(
@@ -1332,37 +1548,47 @@ function clearSelection() {
             );
         });
 
+
     selectedCells = [];
 }
 
 
 /* =========================================================
-   AFFICHER LA SÉLECTION
+   AFFICHER SÉLECTION
 ========================================================= */
 
-function showSelection(cells) {
+function showSelection(
+    cells
+) {
 
     clearSelection();
 
-    selectedCells = cells;
 
-    for (const position of cells) {
+    selectedCells =
+        cells;
 
-        const selector =
-            `.cell[data-row="${position.row}"][data-col="${position.col}"]`;
 
-        const cell =
-            gridElement.querySelector(
-                selector
-            );
+    cells.forEach(
+        position => {
 
-        if (cell) {
+            const selector =
+                `.cell[data-row="${position.row}"][data-col="${position.col}"]`;
 
-            cell.classList.add(
-                "selecting"
-            );
+
+            const cell =
+                gridElement.querySelector(
+                    selector
+                );
+
+
+            if (cell) {
+
+                cell.classList.add(
+                    "selecting"
+                );
+            }
         }
-    }
+    );
 }
 
 
@@ -1370,35 +1596,44 @@ function showSelection(cells) {
    DÉBUT DU TRACÉ
 ========================================================= */
 
-function startSelection(position) {
+function startSelection(
+    position
+) {
 
-    if (!position) return;
+    if (!position) {
+        return;
+    }
+
 
     selecting = true;
 
-    selectionStart = position;
+    selectionStart =
+        position;
 
-    selectedCells = [position];
 
-    showSelection(
-        selectedCells
-    );
+    showSelection([
+        position
+    ]);
 }
 
 
 /* =========================================================
-   MOUVEMENT
+   DÉPLACEMENT
 ========================================================= */
 
-function moveSelection(position) {
+function moveSelection(
+    position
+) {
 
     if (
         !selecting ||
         !selectionStart ||
         !position
     ) {
+
         return;
     }
+
 
     const cells =
         getLineCells(
@@ -1406,31 +1641,20 @@ function moveSelection(position) {
             position
         );
 
+
     if (!cells.length) {
 
-        clearSelection();
-
-        selectedCells =
-            [selectionStart];
-
-        const selector =
-            `.cell[data-row="${selectionStart.row}"][data-col="${selectionStart.col}"]`;
-
-        const firstCell =
-            gridElement.querySelector(
-                selector
-            );
-
-        if (firstCell) {
-            firstCell.classList.add(
-                "selecting"
-            );
-        }
+        showSelection([
+            selectionStart
+        ]);
 
         return;
     }
 
-    showSelection(cells);
+
+    showSelection(
+        cells
+    );
 }
 
 
@@ -1444,10 +1668,11 @@ function endSelection() {
         return;
     }
 
+
     selecting = false;
 
+
     if (
-        !selectedCells ||
         selectedCells.length < 3
     ) {
 
@@ -1458,14 +1683,16 @@ function endSelection() {
         return;
     }
 
+
     checkSelection();
+
 
     selectionStart = null;
 }
 
 
 /* =========================================================
-   VÉRIFIER LE MOT
+   VÉRIFIER
 ========================================================= */
 
 function checkSelection() {
@@ -1473,23 +1700,31 @@ function checkSelection() {
     const selected =
         selectedCells;
 
-    let foundPlacement = null;
 
-    for (const placement of placements) {
+    let matched =
+        null;
+
+
+    for (
+        const placement of placements
+    ) {
 
         if (
             foundWords.has(
                 placement.id
             )
         ) {
+
             continue;
         }
+
 
         if (
             samePath(
                 selected,
                 placement.cells
             ) ||
+
             samePath(
                 selected,
                 reversePath(
@@ -1498,7 +1733,7 @@ function checkSelection() {
             )
         ) {
 
-            foundPlacement =
+            matched =
                 placement;
 
             break;
@@ -1506,28 +1741,35 @@ function checkSelection() {
     }
 
 
-    if (foundPlacement) {
+    if (matched) {
 
         foundWords.add(
-            foundPlacement.id
+            matched.id
         );
+
 
         score += 10;
 
+
         scoreElement.textContent =
             score;
+
 
         markFoundCells(
             selected
         );
 
+
         updateClues();
 
+
         messageElement.textContent =
-            "Mot trouvé !";
+            "+10 points — Mot trouvé !";
+
 
         messageElement.className =
             "message success";
+
 
         if (
             foundWords.size >=
@@ -1536,116 +1778,146 @@ function checkSelection() {
 
             setTimeout(
                 finishRound,
-                500
+                450
             );
         }
 
     } else {
 
-        /*
-           Mauvaise sélection.
-        */
+        selected.forEach(
+            position => {
 
-        selected.forEach(position => {
+                const selector =
+                    `.cell[data-row="${position.row}"][data-col="${position.col}"]`;
 
-            const selector =
-                `.cell[data-row="${position.row}"][data-col="${position.col}"]`;
 
-            const cell =
-                gridElement.querySelector(
-                    selector
-                );
+                const cell =
+                    gridElement.querySelector(
+                        selector
+                    );
 
-            if (cell) {
 
-                cell.classList.add(
-                    "wrong"
-                );
+                if (cell) {
 
-                setTimeout(() => {
-
-                    cell.classList.remove(
+                    cell.classList.add(
                         "wrong"
                     );
 
-                }, 350);
+
+                    setTimeout(
+                        () => {
+
+                            cell.classList.remove(
+                                "wrong"
+                            );
+
+                        },
+                        300
+                    );
+                }
             }
-        });
+        );
+
 
         messageElement.textContent =
-            "Ce n'est pas un mot recherché.";
+            "Ce n'est pas une réponse recherchée.";
+
 
         messageElement.className =
             "message error";
     }
+
 
     clearSelection();
 }
 
 
 /* =========================================================
-   MARQUER UN MOT TROUVÉ
+   MOT TROUVÉ
 ========================================================= */
 
-function markFoundCells(cells) {
+function markFoundCells(
+    cells
+) {
 
-    cells.forEach(position => {
+    cells.forEach(
+        position => {
 
-        const selector =
-            `.cell[data-row="${position.row}"][data-col="${position.col}"]`;
+            const selector =
+                `.cell[data-row="${position.row}"][data-col="${position.col}"]`;
 
-        const cell =
-            gridElement.querySelector(
-                selector
-            );
 
-        if (cell) {
+            const cell =
+                gridElement.querySelector(
+                    selector
+                );
 
-            cell.classList.add(
-                "found"
-            );
+
+            if (cell) {
+
+                cell.classList.add(
+                    "found"
+                );
+            }
         }
-    });
+    );
 }
 
 
 /* =========================================================
-   POINTER EVENTS
-   Compatible souris + tactile
+   POINTER DOWN
 ========================================================= */
 
 gridElement.addEventListener(
     "pointerdown",
     event => {
 
+        event.preventDefault();
+
+
         const position =
             getCellFromPoint(
                 event.clientX,
                 event.clientY
             );
 
-        if (!position) return;
 
-        event.preventDefault();
+        if (!position) {
+            return;
+        }
+
 
         try {
+
             gridElement.setPointerCapture(
                 event.pointerId
             );
+
         } catch {}
 
-        startSelection(position);
+
+        startSelection(
+            position
+        );
     }
 );
 
+
+/* =========================================================
+   POINTER MOVE
+========================================================= */
 
 gridElement.addEventListener(
     "pointermove",
     event => {
 
-        if (!selecting) return;
+        if (!selecting) {
+            return;
+        }
+
 
         event.preventDefault();
+
 
         const position =
             getCellFromPoint(
@@ -1653,13 +1925,20 @@ gridElement.addEventListener(
                 event.clientY
             );
 
+
         if (position) {
 
-            moveSelection(position);
+            moveSelection(
+                position
+            );
         }
     }
 );
 
+
+/* =========================================================
+   POINTER UP
+========================================================= */
 
 gridElement.addEventListener(
     "pointerup",
@@ -1667,16 +1946,24 @@ gridElement.addEventListener(
 
         event.preventDefault();
 
+
         endSelection();
 
+
         try {
+
             gridElement.releasePointerCapture(
                 event.pointerId
             );
+
         } catch {}
     }
 );
 
+
+/* =========================================================
+   POINTER CANCEL
+========================================================= */
 
 gridElement.addEventListener(
     "pointercancel",
@@ -1692,42 +1979,18 @@ gridElement.addEventListener(
 
 
 /* =========================================================
-   TIMER
-========================================================= */
-
-function startTimer() {
-
-    clearInterval(timerInterval);
-
-    seconds = 0;
-
-    timerElement.textContent =
-        "0s";
-
-    timerInterval =
-        setInterval(() => {
-
-            seconds++;
-
-            timerElement.textContent =
-                `${seconds}s`;
-
-        }, 1000);
-}
-
-
-/* =========================================================
    FIN DE PARTIE
 ========================================================= */
 
 function finishRound() {
 
-    clearInterval(timerInterval);
-
     resultText.textContent =
-        `Tu as trouvé les ${placements.length} mots en ${seconds} seconde${seconds > 1 ? "s" : ""}. Score total : ${score} points.`;
+        `Tu as trouvé les ${placements.length} mots. Score : ${score} points.`;
 
-    if (round >= MAX_ROUNDS) {
+
+    if (
+        round >= MAX_ROUNDS
+    ) {
 
         nextBtn.textContent =
             "Recommencer";
@@ -1737,6 +2000,7 @@ function finishRound() {
         nextBtn.textContent =
             "Partie suivante";
     }
+
 
     overlay.classList.remove(
         "hidden"
@@ -1754,8 +2018,10 @@ function newRound() {
         "hidden"
     );
 
+
     foundWords =
         new Set();
+
 
     selectedCells = [];
 
@@ -1763,11 +2029,13 @@ function newRound() {
 
     selecting = false;
 
+
     messageElement.textContent =
         "";
 
     messageElement.className =
         "message";
+
 
     buildPuzzle();
 
@@ -1775,23 +2043,21 @@ function newRound() {
 
     renderClues();
 
+
     roundElement.textContent =
         round;
 
+
     foundCountElement.textContent =
         `0/${placements.length}`;
-
-    startTimer();
 }
 
 
 /* =========================================================
-   RECOMMENCER TOUT LE JEU
+   RECOMMENCER
 ========================================================= */
 
 function restartGame() {
-
-    clearInterval(timerInterval);
 
     score = 0;
 
@@ -1799,8 +2065,10 @@ function restartGame() {
 
     usedQuestionIds.clear();
 
+
     scoreElement.textContent =
         "0";
+
 
     newRound();
 }
@@ -1820,7 +2088,9 @@ nextBtn.addEventListener(
     "click",
     () => {
 
-        if (round >= MAX_ROUNDS) {
+        if (
+            round >= MAX_ROUNDS
+        ) {
 
             restartGame();
 
