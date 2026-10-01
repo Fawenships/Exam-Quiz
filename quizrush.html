@@ -1,0 +1,1571 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+>
+
+<title>Quiz Rush — ExamQuiz Haiti</title>
+
+<style>
+
+:root{
+    --purple:#24113f;
+    --purple2:#4b2481;
+    --blue:#1764c0;
+    --blue2:#2f80ed;
+    --white:#ffffff;
+    --bg:#f5f5f7;
+    --text:#171717;
+    --muted:#707070;
+    --border:#e4e4e7;
+    --green:#16834b;
+    --red:#c62828;
+}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh;
+}
+
+button{
+    font:inherit;
+    border:none;
+    cursor:pointer;
+}
+
+.page{
+    width:100%;
+    max-width:900px;
+    margin:auto;
+    padding:12px;
+}
+
+
+/* RETOUR */
+
+.back-button{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    width:100%;
+    min-height:46px;
+
+    margin-bottom:12px;
+    padding:10px 14px;
+
+    border:1px solid var(--border);
+    border-radius:13px;
+
+    background:var(--white);
+    color:var(--purple);
+
+    text-decoration:none;
+
+    font-size:14px;
+    font-weight:800;
+
+    transition:.15s;
+}
+
+.back-button:hover{
+    border-color:var(--purple2);
+}
+
+.back-button:active{
+    transform:scale(.98);
+}
+
+
+/* HEADER */
+
+.topbar{
+    background:var(--white);
+
+    border:1px solid var(--border);
+    border-radius:16px;
+
+    padding:14px 16px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    gap:12px;
+
+    margin-bottom:14px;
+}
+
+.logo{
+    font-size:18px;
+    font-weight:800;
+    color:var(--purple);
+}
+
+.round-label{
+    font-size:14px;
+    color:var(--muted);
+    font-weight:700;
+}
+
+
+/* STATS */
+
+.stats{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap:10px;
+
+    margin-bottom:14px;
+}
+
+.stat{
+
+    background:var(--white);
+
+    border:1px solid var(--border);
+
+    border-radius:15px;
+
+    padding:12px;
+
+    text-align:center;
+}
+
+.stat-label{
+
+    color:var(--muted);
+
+    font-size:12px;
+
+    font-weight:700;
+}
+
+.stat-value{
+
+    color:var(--purple);
+
+    font-size:25px;
+
+    font-weight:900;
+
+    margin-top:3px;
+}
+
+.timer-value{
+
+    color:var(--blue);
+}
+
+
+/* TIMER */
+
+.timer-bar{
+
+    width:100%;
+
+    height:8px;
+
+    background:#e8e8eb;
+
+    border-radius:999px;
+
+    overflow:hidden;
+
+    margin-bottom:14px;
+}
+
+.timer-progress{
+
+    height:100%;
+
+    width:100%;
+
+    background:var(--blue2);
+
+    border-radius:999px;
+
+    transition:
+        width .1s linear;
+}
+
+
+/* GAME */
+
+.game-card{
+
+    background:var(--white);
+
+    border:1px solid var(--border);
+
+    border-radius:18px;
+
+    padding:20px;
+}
+
+.question-number{
+
+    text-align:center;
+
+    color:var(--muted);
+
+    font-size:13px;
+
+    margin-bottom:10px;
+}
+
+.question{
+
+    font-size:23px;
+
+    line-height:1.35;
+
+    font-weight:800;
+
+    text-align:center;
+
+    max-width:720px;
+
+    margin:0 auto 24px;
+}
+
+
+/* OPTIONS */
+
+.options{
+
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:12px;
+}
+
+.option{
+
+    min-height:64px;
+
+    border:2px solid var(--border);
+
+    border-radius:14px;
+
+    background:white;
+
+    padding:12px;
+
+    font-weight:700;
+
+    text-align:left;
+
+    transition:.15s;
+}
+
+.option:hover{
+
+    border-color:var(--blue2);
+}
+
+.option:active{
+
+    transform:scale(.98);
+}
+
+.option.correct{
+
+    border-color:var(--green);
+
+    background:#eef9f2;
+
+    color:var(--green);
+}
+
+.option.wrong{
+
+    border-color:var(--red);
+
+    background:#fff0f0;
+
+    color:var(--red);
+}
+
+.option:disabled{
+
+    cursor:default;
+}
+
+
+/* FEEDBACK */
+
+.feedback{
+
+    margin-top:16px;
+
+    padding:14px;
+
+    border-radius:12px;
+
+    text-align:center;
+
+    font-weight:700;
+
+    display:none;
+}
+
+.feedback.show{
+
+    display:block;
+}
+
+.feedback.correct{
+
+    background:#eef9f2;
+
+    color:var(--green);
+}
+
+.feedback.wrong{
+
+    background:#fff0f0;
+
+    color:var(--red);
+}
+
+
+/* NEXT */
+
+.next-btn{
+
+    width:100%;
+
+    min-height:52px;
+
+    margin-top:12px;
+
+    border-radius:13px;
+
+    background:var(--purple2);
+
+    color:white;
+
+    font-weight:800;
+
+    display:none;
+}
+
+.next-btn.show{
+
+    display:block;
+}
+
+.next-btn:active{
+
+    transform:scale(.98);
+}
+
+
+/* CATEGORY */
+
+.category{
+
+    margin-top:14px;
+
+    text-align:center;
+
+    color:var(--muted);
+
+    font-size:13px;
+}
+
+
+/* OVERLAY */
+
+.overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(20,12,30,.72);
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:20px;
+
+    z-index:50;
+}
+
+.overlay.show{
+
+    display:flex;
+}
+
+.result-box{
+
+    width:100%;
+
+    max-width:450px;
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:26px 20px;
+
+    text-align:center;
+}
+
+.result-title{
+
+    font-size:28px;
+
+    font-weight:900;
+
+    color:var(--purple);
+
+    margin-bottom:10px;
+}
+
+.result-text{
+
+    color:var(--muted);
+
+    font-size:15px;
+
+    line-height:1.5;
+
+    margin-bottom:16px;
+}
+
+.final-score{
+
+    font-size:42px;
+
+    font-weight:900;
+
+    color:var(--purple);
+
+    margin:12px 0 20px;
+}
+
+.action-btn{
+
+    width:100%;
+
+    min-height:52px;
+
+    border-radius:13px;
+
+    background:var(--purple2);
+
+    color:white;
+
+    font-weight:800;
+
+    margin-top:8px;
+}
+
+.action-btn:active{
+
+    transform:scale(.98);
+}
+
+.secondary-btn{
+
+    background:#eeeef1;
+
+    color:var(--text);
+}
+
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    .page{
+        padding:9px;
+    }
+
+    .back-button{
+
+        min-height:44px;
+
+        font-size:13px;
+
+        margin-bottom:9px;
+    }
+
+    .topbar{
+
+        border-radius:13px;
+
+        padding:12px;
+    }
+
+    .logo{
+        font-size:16px;
+    }
+
+    .round-label{
+        font-size:12px;
+    }
+
+    .stats{
+
+        gap:6px;
+    }
+
+    .stat{
+
+        padding:9px 5px;
+
+        border-radius:13px;
+    }
+
+    .stat-label{
+        font-size:11px;
+    }
+
+    .stat-value{
+        font-size:22px;
+    }
+
+    .game-card{
+
+        padding:14px 10px;
+
+        border-radius:15px;
+    }
+
+    .question{
+
+        font-size:19px;
+
+        line-height:1.35;
+
+        margin-bottom:18px;
+    }
+
+    .options{
+
+        grid-template-columns:1fr;
+
+        gap:9px;
+    }
+
+    .option{
+
+        min-height:58px;
+
+        padding:11px;
+
+        font-size:14px;
+    }
+
+    .result-box{
+
+        padding:22px 15px;
+    }
+
+    .result-title{
+
+        font-size:24px;
+    }
+
+    .final-score{
+
+        font-size:36px;
+    }
+}
+
+@media(max-width:360px){
+
+    .question{
+        font-size:17px;
+    }
+
+    .stat-value{
+        font-size:20px;
+    }
+
+    .option{
+        font-size:13px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+    <!-- RETOUR -->
+
+    <a
+        href="baccalaureat.html"
+        class="back-button"
+    >
+        ← Retour aux jeux
+    </a>
+
+
+    <!-- HEADER -->
+
+    <header class="topbar">
+
+        <div class="logo">
+            ExamQuiz
+        </div>
+
+        <div
+            class="round-label"
+            id="roundLabel"
+        >
+            Partie 1 / 20
+        </div>
+
+    </header>
+
+
+    <!-- STATS -->
+
+    <section class="stats">
+
+        <div class="stat">
+
+            <div class="stat-label">
+                Score
+            </div>
+
+            <div
+                class="stat-value"
+                id="score"
+            >
+                0
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-label">
+                Question
+            </div>
+
+            <div
+                class="stat-value"
+                id="questionCount"
+            >
+                1 / 10
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-label">
+                Temps
+            </div>
+
+            <div
+                class="stat-value timer-value"
+                id="timer"
+            >
+                15
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- TIMER BAR -->
+
+    <div class="timer-bar">
+
+        <div
+            class="timer-progress"
+            id="timerProgress"
+        ></div>
+
+    </div>
+
+
+    <!-- QUESTION -->
+
+    <main class="game-card">
+
+        <div
+            class="question-number"
+            id="questionNumber"
+        >
+            Question 1 / 10
+        </div>
+
+
+        <div
+            class="question"
+            id="question"
+        >
+            Chargement...
+        </div>
+
+
+        <div
+            class="options"
+            id="options"
+        ></div>
+
+
+        <div
+            class="feedback"
+            id="feedback"
+        ></div>
+
+
+        <button
+            type="button"
+            class="next-btn"
+            id="nextBtn"
+        >
+            Question suivante
+        </button>
+
+
+        <div
+            class="category"
+            id="category"
+        ></div>
+
+    </main>
+
+</div>
+
+
+<!-- RESULTAT -->
+
+<div
+    class="overlay"
+    id="resultOverlay"
+>
+
+    <div class="result-box">
+
+        <div
+            class="result-title"
+            id="resultTitle"
+        >
+            Partie terminée
+        </div>
+
+
+        <div
+            class="result-text"
+            id="resultText"
+        >
+            Résultat de la partie
+        </div>
+
+
+        <div
+            class="final-score"
+            id="finalScore"
+        >
+            0 points
+        </div>
+
+
+        <button
+            type="button"
+            class="action-btn"
+            id="nextRoundBtn"
+        >
+            Partie suivante
+        </button>
+
+
+        <button
+            type="button"
+            class="action-btn secondary-btn"
+            id="restartBtn"
+        >
+            Recommencer
+        </button>
+
+    </div>
+
+</div>
+
+
+<script type="module">
+
+import {
+    jeuxQuestions
+} from "./src/jeuxQuestions.js";
+
+
+/* CONFIGURATION */
+
+const QUESTIONS_PER_ROUND = 10;
+
+const MAX_ROUNDS = 20;
+
+const TIME_PER_QUESTION = 15;
+
+
+/* ETAT */
+
+let allQuestions = [];
+
+let currentQuestions = [];
+
+let currentQuestionIndex = 0;
+
+let score = 0;
+
+let roundScore = 0;
+
+let roundNumber = 1;
+
+let timeLeft = TIME_PER_QUESTION;
+
+let timerInterval = null;
+
+let answered = false;
+
+let gameFinished = false;
+
+
+/* ELEMENTS */
+
+const scoreElement =
+    document.getElementById("score");
+
+const questionCountElement =
+    document.getElementById("questionCount");
+
+const timerElement =
+    document.getElementById("timer");
+
+const timerProgress =
+    document.getElementById("timerProgress");
+
+const questionNumberElement =
+    document.getElementById("questionNumber");
+
+const questionElement =
+    document.getElementById("question");
+
+const optionsElement =
+    document.getElementById("options");
+
+const feedbackElement =
+    document.getElementById("feedback");
+
+const nextBtn =
+    document.getElementById("nextBtn");
+
+const categoryElement =
+    document.getElementById("category");
+
+const roundLabel =
+    document.getElementById("roundLabel");
+
+const resultOverlay =
+    document.getElementById("resultOverlay");
+
+const resultTitle =
+    document.getElementById("resultTitle");
+
+const resultText =
+    document.getElementById("resultText");
+
+const finalScore =
+    document.getElementById("finalScore");
+
+const nextRoundBtn =
+    document.getElementById("nextRoundBtn");
+
+const restartBtn =
+    document.getElementById("restartBtn");
+
+
+/* MELANGE */
+
+function shuffle(array){
+
+    const copy = [...array];
+
+    for(
+        let i = copy.length - 1;
+        i > 0;
+        i--
+    ){
+
+        const j =
+            Math.floor(
+                Math.random() * (i + 1)
+            );
+
+        [
+            copy[i],
+            copy[j]
+        ] = [
+            copy[j],
+            copy[i]
+        ];
+    }
+
+    return copy;
+}
+
+
+/* ARRETER LE TIMER */
+
+function stopTimer(){
+
+    if(timerInterval){
+
+        clearInterval(timerInterval);
+
+        timerInterval = null;
+    }
+}
+
+
+/* DEMARRER LE TIMER */
+
+function startTimer(){
+
+    stopTimer();
+
+
+    timeLeft =
+        TIME_PER_QUESTION;
+
+
+    updateTimer();
+
+
+    timerInterval =
+        setInterval(() => {
+
+            if(answered){
+
+                stopTimer();
+
+                return;
+            }
+
+
+            timeLeft -= 0.1;
+
+
+            if(timeLeft <= 0){
+
+                timeLeft = 0;
+
+                updateTimer();
+
+                stopTimer();
+
+                timeExpired();
+
+                return;
+            }
+
+
+            updateTimer();
+
+        },100);
+
+}
+
+
+/* AFFICHER TIMER */
+
+function updateTimer(){
+
+    timerElement.textContent =
+        Math.ceil(timeLeft);
+
+
+    const percentage =
+        (
+            timeLeft /
+            TIME_PER_QUESTION
+        ) * 100;
+
+
+    timerProgress.style.width =
+        `${Math.max(0,percentage)}%`;
+
+}
+
+
+/* PREPARER UNE PARTIE */
+
+function prepareRound(){
+
+    if(
+        !Array.isArray(jeuxQuestions) ||
+        jeuxQuestions.length === 0
+    ){
+
+        questionElement.textContent =
+            "Aucune question disponible.";
+
+        optionsElement.innerHTML =
+            "";
+
+        return false;
+    }
+
+
+    allQuestions =
+        [...jeuxQuestions];
+
+
+    currentQuestions =
+        shuffle(allQuestions)
+        .slice(
+            0,
+            Math.min(
+                QUESTIONS_PER_ROUND,
+                allQuestions.length
+            )
+        );
+
+
+    return currentQuestions.length > 0;
+}
+
+
+/* SCORE */
+
+function updateScore(){
+
+    scoreElement.textContent =
+        score;
+
+}
+
+
+/* AFFICHER QUESTION */
+
+function displayQuestion(){
+
+    if(
+        currentQuestionIndex >=
+        currentQuestions.length
+    ){
+
+        endRound();
+
+        return;
+    }
+
+
+    answered = false;
+
+
+    const currentQuestion =
+        currentQuestions[
+            currentQuestionIndex
+        ];
+
+
+    questionNumberElement.textContent =
+        `Question ${
+            currentQuestionIndex + 1
+        } / ${
+            currentQuestions.length
+        }`;
+
+
+    questionCountElement.textContent =
+        `${
+            currentQuestionIndex + 1
+        } / ${
+            currentQuestions.length
+        }`;
+
+
+    questionElement.textContent =
+        currentQuestion.question;
+
+
+    categoryElement.textContent =
+        currentQuestion.category
+        ? `Catégorie : ${currentQuestion.category}`
+        : "";
+
+
+    feedbackElement.className =
+        "feedback";
+
+    feedbackElement.textContent =
+        "";
+
+
+    nextBtn.className =
+        "next-btn";
+
+
+    optionsElement.innerHTML =
+        "";
+
+
+    const options =
+        shuffle(
+            currentQuestion.options || []
+        );
+
+
+    options.forEach(option => {
+
+        const button =
+            document.createElement("button");
+
+
+        button.type =
+            "button";
+
+
+        button.className =
+            "option";
+
+
+        button.textContent =
+            option;
+
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                answerQuestion(
+                    button,
+                    option,
+                    currentQuestion
+                );
+
+            }
+        );
+
+
+        optionsElement.appendChild(
+            button
+        );
+
+    });
+
+
+    startTimer();
+
+    updateScore();
+
+}
+
+
+/* REPONDRE */
+
+function answerQuestion(
+    clickedButton,
+    selectedAnswer,
+    currentQuestion
+){
+
+    if(answered) return;
+
+
+    answered = true;
+
+    stopTimer();
+
+
+    const buttons =
+        optionsElement.querySelectorAll(
+            ".option"
+        );
+
+
+    buttons.forEach(button => {
+
+        button.disabled = true;
+
+
+        if(
+            button.textContent ===
+            currentQuestion.answer
+        ){
+
+            button.classList.add(
+                "correct"
+            );
+
+        }
+
+    });
+
+
+    const isCorrect =
+        selectedAnswer ===
+        currentQuestion.answer;
+
+
+    if(isCorrect){
+
+        clickedButton.classList.add(
+            "correct"
+        );
+
+
+        /*
+         * Plus de points si
+         * la réponse est rapide.
+         */
+
+        const speedBonus =
+            Math.ceil(timeLeft);
+
+
+        const points =
+            10 + speedBonus;
+
+
+        score += points;
+
+        roundScore += points;
+
+
+        feedbackElement.textContent =
+            `Bonne réponse ! +${
+                points
+            } points.`;
+
+
+        feedbackElement.className =
+            "feedback show correct";
+
+    }
+    else{
+
+        clickedButton.classList.add(
+            "wrong"
+        );
+
+
+        feedbackElement.textContent =
+            `Mauvaise réponse. La bonne réponse était : ${
+                currentQuestion.answer
+            }`;
+
+
+        feedbackElement.className =
+            "feedback show wrong";
+
+    }
+
+
+    updateScore();
+
+
+    nextBtn.className =
+        "next-btn show";
+}
+
+
+/* TEMPS ECOULE */
+
+function timeExpired(){
+
+    if(answered) return;
+
+
+    answered = true;
+
+
+    const currentQuestion =
+        currentQuestions[
+            currentQuestionIndex
+        ];
+
+
+    const buttons =
+        optionsElement.querySelectorAll(
+            ".option"
+        );
+
+
+    buttons.forEach(button => {
+
+        button.disabled = true;
+
+
+        if(
+            button.textContent ===
+            currentQuestion.answer
+        ){
+
+            button.classList.add(
+                "correct"
+            );
+
+        }
+
+    });
+
+
+    feedbackElement.textContent =
+        `Temps écoulé. La bonne réponse était : ${
+            currentQuestion.answer
+        }`;
+
+
+    feedbackElement.className =
+        "feedback show wrong";
+
+
+    nextBtn.className =
+        "next-btn show";
+}
+
+
+/* QUESTION SUIVANTE */
+
+function nextQuestion(){
+
+    if(!answered) return;
+
+
+    currentQuestionIndex++;
+
+
+    displayQuestion();
+}
+
+
+/* FIN DE PARTIE */
+
+function endRound(){
+
+    stopTimer();
+
+
+    finalScore.textContent =
+        `${roundScore} points`;
+
+
+    resultTitle.textContent =
+        `Partie ${roundNumber} terminée`;
+
+
+    resultText.textContent =
+        `Score total : ${score} points. ` +
+        `Tu peux continuer avec une nouvelle série de questions.`;
+
+
+    if(
+        roundNumber >= MAX_ROUNDS
+    ){
+
+        endGame();
+
+        return;
+    }
+
+
+    nextRoundBtn.textContent =
+        "Partie suivante";
+
+
+    resultOverlay.classList.add(
+        "show"
+    );
+}
+
+
+/* FIN DES 20 PARTIES */
+
+function endGame(){
+
+    gameFinished = true;
+
+
+    resultTitle.textContent =
+        "Quiz Rush terminé";
+
+
+    resultText.textContent =
+        `Tu as terminé les ${
+            MAX_ROUNDS
+        } parties.`;
+
+
+    finalScore.textContent =
+        `${score} points`;
+
+
+    nextRoundBtn.textContent =
+        "Nouvelle partie";
+
+
+    resultOverlay.classList.add(
+        "show"
+    );
+}
+
+
+/* PARTIE SUIVANTE */
+
+function startNextRound(){
+
+    if(gameFinished){
+
+        restartGame();
+
+        return;
+    }
+
+
+    if(
+        roundNumber >= MAX_ROUNDS
+    ){
+
+        endGame();
+
+        return;
+    }
+
+
+    roundNumber++;
+
+
+    currentQuestionIndex = 0;
+
+
+    roundScore = 0;
+
+
+    roundLabel.textContent =
+        `Partie ${
+            roundNumber
+        } / ${
+            MAX_ROUNDS
+        }`;
+
+
+    resultOverlay.classList.remove(
+        "show"
+    );
+
+
+    if(prepareRound()){
+
+        displayQuestion();
+
+    }
+
+}
+
+
+/* RECOMMENCER */
+
+function restartGame(){
+
+    stopTimer();
+
+
+    score = 0;
+
+    roundScore = 0;
+
+    roundNumber = 1;
+
+    currentQuestionIndex = 0;
+
+    timeLeft =
+        TIME_PER_QUESTION;
+
+    answered = false;
+
+    gameFinished = false;
+
+
+    roundLabel.textContent =
+        `Partie 1 / ${MAX_ROUNDS}`;
+
+
+    resultOverlay.classList.remove(
+        "show"
+    );
+
+
+    updateScore();
+
+
+    if(prepareRound()){
+
+        displayQuestion();
+
+    }
+
+}
+
+
+/* EVENEMENTS */
+
+nextBtn.addEventListener(
+    "click",
+    nextQuestion
+);
+
+
+nextRoundBtn.addEventListener(
+    "click",
+    startNextRound
+);
+
+
+restartBtn.addEventListener(
+    "click",
+    restartGame
+);
+
+
+/* DEMARRAGE */
+
+if(prepareRound()){
+
+    displayQuestion();
+
+}
+
+</script>
+
+</body>
+</html>
