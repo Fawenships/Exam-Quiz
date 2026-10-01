@@ -29,7 +29,8 @@
   box-sizing:border-box;
 }
 
-html,body{
+html,
+body{
   margin:0;
   padding:0;
   min-height:100%;
@@ -331,7 +332,7 @@ canvas{
     </h1>
 
     <p>
-      Défends ton château contre des vagues d’ennemis en répondant correctement.
+      Défends ton château contre des vagues d'ennemis en répondant correctement.
     </p>
 
   </div>
@@ -394,8 +395,6 @@ canvas{
     </canvas>
 
 
-    <!-- START -->
-
     <div
       class="overlay"
       id="startOverlay">
@@ -407,9 +406,9 @@ canvas{
         </h2>
 
         <p>
-          Réponds correctement aux questions
-          pour attaquer les ennemis.
-          Chaque vague devient plus difficile.
+          Réponds aux questions pour défendre
+          ton château. Une bonne réponse lance
+          un projectile contre l'ennemi.
         </p>
 
         <button
@@ -425,8 +424,6 @@ canvas{
     </div>
 
 
-    <!-- GAME OVER -->
-
     <div
       class="overlay hidden"
       id="gameOverOverlay">
@@ -434,7 +431,7 @@ canvas{
       <div class="overlay-box">
 
         <h2>
-          Château vaincu
+          Partie terminée
         </h2>
 
         <p>
@@ -476,8 +473,6 @@ canvas{
     </div>
 
 
-    <!-- VAGUE TERMINÉE -->
-
     <div
       class="overlay hidden"
       id="victoryOverlay">
@@ -485,12 +480,12 @@ canvas{
       <div class="overlay-box">
 
         <h2>
-          Vague terminée
+          Vague réussie
         </h2>
 
         <p>
-          Tous les ennemis de cette vague
-          ont été vaincus.
+          Tous les ennemis ont été traités.
+          Ton château est toujours debout.
         </p>
 
         <p>
@@ -514,8 +509,6 @@ canvas{
 
   </div>
 
-
-  <!-- QUESTION -->
 
   <section class="question-panel">
 
@@ -556,27 +549,22 @@ canvas{
 
 <script type="module">
 
-/* =========================================================
-   CONFIGURATION
-========================================================= */
-
 const QUESTIONS_URL =
   "./src/jeuxQuestions.js";
 
-const MAX_LIVES = 5;
+const MAX_LIVES =
+  5;
 
-const POINTS_CORRECT = 10;
+const POINTS_CORRECT =
+  10;
 
-
-/* =========================================================
-   DOM
-========================================================= */
 
 const canvas =
   document.getElementById("gameCanvas");
 
 const ctx =
   canvas.getContext("2d");
+
 
 const livesEl =
   document.getElementById("lives");
@@ -633,10 +621,6 @@ const waveScoreEl =
   document.getElementById("waveScore");
 
 
-/* =========================================================
-   ÉTAT
-========================================================= */
-
 let questions = [];
 
 let questionPool = [];
@@ -685,13 +669,27 @@ let lastTime =
    UTILITAIRES
 ========================================================= */
 
+function cleanText(value){
+
+  if(
+    value === null ||
+    value === undefined
+  ){
+
+    return "";
+  }
+
+  return String(value).trim();
+}
+
+
 function shuffle(array){
 
-  const copy =
+  const result =
     [...array];
 
   for(
-    let i = copy.length - 1;
+    let i = result.length - 1;
     i > 0;
     i--
   ){
@@ -702,46 +700,36 @@ function shuffle(array){
       );
 
     [
-      copy[i],
-      copy[j]
-    ] = [
-      copy[j],
-      copy[i]
+      result[i],
+      result[j]
+    ] =
+    [
+      result[j],
+      result[i]
     ];
   }
 
-  return copy;
-}
-
-
-function cleanText(value){
-
-  if(
-    value === null ||
-    value === undefined
-  ){
-    return "";
-  }
-
-  return String(value).trim();
+  return result;
 }
 
 
 /* =========================================================
-   NORMALISATION DES QUESTIONS
+   QUESTIONS
 ========================================================= */
 
-function normalizeQuestion(raw,index){
+function normalizeQuestion(
+  raw,
+  index
+){
 
   if(
     !raw ||
     typeof raw !== "object"
   ){
+
     return null;
   }
 
-
-  /* QUESTION */
 
   const questionText =
     raw.question ??
@@ -757,13 +745,12 @@ function normalizeQuestion(raw,index){
   if(
     !cleanText(questionText)
   ){
+
     return null;
   }
 
 
-  /* OPTIONS */
-
-  let rawOptions =
+  const rawOptions =
     raw.options ??
     raw.answers ??
     raw.choices ??
@@ -775,13 +762,10 @@ function normalizeQuestion(raw,index){
   if(
     !Array.isArray(rawOptions)
   ){
+
     return null;
   }
 
-
-  /*
-   * Conversion des options
-   */
 
   const options = [];
 
@@ -804,74 +788,45 @@ function normalizeQuestion(raw,index){
           option.name ??
           "";
 
-        options.push(
-          cleanText(text)
-        );
+        if(cleanText(text)){
 
-        optionObjects.push(
-          option
-        );
+          options.push(
+            cleanText(text)
+          );
+
+          optionObjects.push(
+            option
+          );
+        }
 
       }else{
 
-        options.push(
-          cleanText(option)
-        );
+        if(cleanText(option)){
 
-        optionObjects.push(
-          null
-        );
+          options.push(
+            cleanText(option)
+          );
+
+          optionObjects.push(
+            null
+          );
+        }
       }
-
     }
   );
 
 
-  /*
-   * Retirer les options vides.
-   */
-
-  const validOptions = [];
-
-  const validObjects = [];
-
-  for(
-    let i = 0;
-    i < options.length;
-    i++
-  ){
-
-    if(options[i]){
-
-      validOptions.push(
-        options[i]
-      );
-
-      validObjects.push(
-        optionObjects[i]
-      );
-    }
-  }
-
-
   if(
-    validOptions.length < 2
+    options.length < 2
   ){
+
     return null;
   }
 
 
-  /* =======================================================
-     TROUVER LA BONNE RÉPONSE
-  ======================================================= */
+  let correctIndex =
+    -1;
 
-  let correctIndex = -1;
-
-
-  /*
-   * Cas :
-   * correctIndex
-   */
 
   if(
     Number.isInteger(
@@ -881,14 +836,8 @@ function normalizeQuestion(raw,index){
 
     correctIndex =
       raw.correctIndex;
-
   }
 
-
-  /*
-   * Cas :
-   * answerIndex
-   */
 
   if(
     correctIndex === -1 &&
@@ -899,14 +848,8 @@ function normalizeQuestion(raw,index){
 
     correctIndex =
       raw.answerIndex;
-
   }
 
-
-  /*
-   * Cas :
-   * correctAnswerIndex
-   */
 
   if(
     correctIndex === -1 &&
@@ -917,62 +860,8 @@ function normalizeQuestion(raw,index){
 
     correctIndex =
       raw.correctAnswerIndex;
-
   }
 
-
-  /*
-   * Cas :
-   * correct = 0/1/2/3
-   */
-
-  if(
-    correctIndex === -1 &&
-    Number.isInteger(raw.correct)
-  ){
-
-    correctIndex =
-      raw.correct;
-
-  }
-
-
-  /*
-   * Cas :
-   * answer = 0/1/2/3
-   */
-
-  if(
-    correctIndex === -1 &&
-    Number.isInteger(raw.answer)
-  ){
-
-    correctIndex =
-      raw.answer;
-
-  }
-
-
-  /*
-   * Cas :
-   * correctOption = 0/1/2/3
-   */
-
-  if(
-    correctIndex === -1 &&
-    Number.isInteger(raw.correctOption)
-  ){
-
-    correctIndex =
-      raw.correctOption;
-
-  }
-
-
-  /*
-   * Cas :
-   * correctAnswer = nombre
-   */
 
   if(
     correctIndex === -1 &&
@@ -981,16 +870,40 @@ function normalizeQuestion(raw,index){
 
     correctIndex =
       raw.correctAnswer;
-
   }
 
 
-  /*
-   * Cas :
-   * bonne réponse sous forme de texte
-   */
+  if(
+    correctIndex === -1 &&
+    typeof raw.correct === "number"
+  ){
 
-  let correctValue =
+    correctIndex =
+      raw.correct;
+  }
+
+
+  if(
+    correctIndex === -1 &&
+    typeof raw.answer === "number"
+  ){
+
+    correctIndex =
+      raw.answer;
+  }
+
+
+  if(
+    correctIndex === -1 &&
+    typeof raw.correctOption === "number"
+  ){
+
+    correctIndex =
+      raw.correctOption;
+  }
+
+
+  const correctValue =
     raw.correctAnswer ??
     raw.answer ??
     raw.correct ??
@@ -1011,10 +924,6 @@ function normalizeQuestion(raw,index){
         .toLowerCase();
 
 
-    /*
-     * A/B/C/D
-     */
-
     if(
       wanted.length === 1 &&
       "abcd".includes(wanted)
@@ -1026,44 +935,26 @@ function normalizeQuestion(raw,index){
     }
 
 
-    /*
-     * Texte exact d'une option
-     */
-
     if(
       correctIndex === -1
     ){
 
       correctIndex =
-        validOptions.findIndex(
+        options.findIndex(
           option =>
             option
-              .trim()
               .toLowerCase() === wanted
         );
-
     }
-
   }
 
-
-  /*
-   * Certains fichiers mettent la bonne
-   * réponse dans les objets option.
-   *
-   * Exemple :
-   * options: [
-   *   {text:"Paris", correct:false},
-   *   {text:"Port-au-Prince", correct:true}
-   * ]
-   */
 
   if(
     correctIndex === -1
   ){
 
     const objectIndex =
-      validObjects.findIndex(
+      optionObjects.findIndex(
         option =>
           option &&
           (
@@ -1072,6 +963,7 @@ function normalizeQuestion(raw,index){
             option.isAnswer === true
           )
       );
+
 
     if(
       objectIndex >= 0
@@ -1084,26 +976,22 @@ function normalizeQuestion(raw,index){
 
 
   /*
-   * Correction des index 1-4.
+   * Support des index 1,2,3,4
    */
 
   if(
-    correctIndex >= validOptions.length &&
+    correctIndex >= options.length &&
     correctIndex > 0 &&
-    correctIndex <= validOptions.length
+    correctIndex <= options.length
   ){
 
     correctIndex--;
   }
 
 
-  /*
-   * Dernière vérification.
-   */
-
   if(
     correctIndex < 0 ||
-    correctIndex >= validOptions.length
+    correctIndex >= options.length
   ){
 
     console.warn(
@@ -1125,8 +1013,7 @@ function normalizeQuestion(raw,index){
     question:
       cleanText(questionText),
 
-    options:
-      validOptions,
+    options,
 
     correctIndex,
 
@@ -1140,10 +1027,6 @@ function normalizeQuestion(raw,index){
 }
 
 
-/* =========================================================
-   CHARGEMENT DES QUESTIONS
-========================================================= */
-
 async function loadQuestions(){
 
   try{
@@ -1155,17 +1038,14 @@ async function loadQuestions(){
 
 
     console.log(
-      "jeuxQuestions.js chargé :",
+      "Module jeuxQuestions chargé :",
       module
     );
 
 
-    let rawQuestions = [];
+    let rawQuestions =
+      [];
 
-
-    /*
-     * EXPORT DEFAULT
-     */
 
     if(
       Array.isArray(module.default)
@@ -1175,11 +1055,6 @@ async function loadQuestions(){
         module.default;
     }
 
-
-    /*
-     * EXPORT :
-     * jeuxQuestions
-     */
 
     if(
       !rawQuestions.length &&
@@ -1191,11 +1066,6 @@ async function loadQuestions(){
     }
 
 
-    /*
-     * EXPORT :
-     * questions
-     */
-
     if(
       !rawQuestions.length &&
       Array.isArray(module.questions)
@@ -1205,11 +1075,6 @@ async function loadQuestions(){
         module.questions;
     }
 
-
-    /*
-     * EXPORT :
-     * QUESTIONS
-     */
 
     if(
       !rawQuestions.length &&
@@ -1221,27 +1086,6 @@ async function loadQuestions(){
     }
 
 
-    /*
-     * EXPORT :
-     * data
-     */
-
-    if(
-      !rawQuestions.length &&
-      module.data &&
-      Array.isArray(module.data)
-    ){
-
-      rawQuestions =
-        module.data;
-    }
-
-
-    /*
-     * EXPORT :
-     * data.questions
-     */
-
     if(
       !rawQuestions.length &&
       module.data &&
@@ -1252,11 +1096,6 @@ async function loadQuestions(){
         module.data.questions;
     }
 
-
-    /*
-     * Cherche automatiquement
-     * un tableau exporté.
-     */
 
     if(
       !rawQuestions.length
@@ -1274,7 +1113,7 @@ async function loadQuestions(){
             module[key];
 
           console.log(
-            "Banque détectée dans l'export :",
+            "Questions trouvées dans l'export :",
             key
           );
 
@@ -1284,53 +1123,36 @@ async function loadQuestions(){
     }
 
 
-    console.log(
-      "Nombre brut de questions :",
-      rawQuestions.length
-    );
-
-
-    /*
-     * Normalisation
-     */
-
     const normalized =
       rawQuestions
-        .map(
-          normalizeQuestion
-        )
+        .map(normalizeQuestion)
         .filter(Boolean);
 
 
     console.log(
-      "Nombre de questions utilisables :",
+      "Questions utilisables :",
       normalized.length
     );
 
 
     if(
-      normalized.length
+      normalized.length > 0
     ){
 
       return normalized;
     }
 
-
-    console.error(
-      "Aucune question utilisable trouvée."
-    );
-
   }catch(error){
 
     console.error(
-      "Erreur pendant le chargement des questions :",
+      "Erreur de chargement des questions :",
       error
     );
   }
 
 
   /*
-   * QUESTIONS DE SECOURS
+   * Secours
    */
 
   return [
@@ -1351,7 +1173,6 @@ async function loadQuestions(){
       correctIndex:1
     },
 
-
     {
       id:"fallback-2",
 
@@ -1367,7 +1188,6 @@ async function loadQuestions(){
 
       correctIndex:2
     },
-
 
     {
       id:"fallback-3",
@@ -1385,7 +1205,6 @@ async function loadQuestions(){
       correctIndex:1
     },
 
-
     {
       id:"fallback-4",
 
@@ -1401,7 +1220,6 @@ async function loadQuestions(){
 
       correctIndex:2
     },
-
 
     {
       id:"fallback-5",
@@ -1424,18 +1242,14 @@ async function loadQuestions(){
 
 
 /* =========================================================
-   BANQUE SANS RÉPÉTITION
+   BANQUE
 ========================================================= */
 
 function rebuildQuestionPool(){
 
-  /*
-   * Quand toutes les questions ont été utilisées,
-   * on recommence un nouveau cycle.
-   */
-
   if(
-    usedQuestionIds.size >= questions.length
+    usedQuestionIds.size >=
+    questions.length
   ){
 
     usedQuestionIds.clear();
@@ -1489,7 +1303,7 @@ function getNextQuestion(){
 
 
 /* =========================================================
-   TYPES D'ENNEMIS
+   ENNEMIS
 ========================================================= */
 
 const ENEMY_TYPES = {
@@ -1569,27 +1383,20 @@ function createEnemy(type){
     alive:true,
 
     targetQuestion:null
+
   };
 }
 
 
 /* =========================================================
-   NOMBRE D'ENNEMIS
+   VAGUES
 ========================================================= */
 
 function getWaveEnemies(){
 
-  const result = [];
+  const result =
+    [];
 
-
-  /*
-   * 1 = 4
-   * 2 = 6
-   * 3 = 8
-   * 4 = 10
-   * 5 = 12 + boss
-   * etc.
-   */
 
   const amount =
     Math.min(
@@ -1644,10 +1451,6 @@ function getWaveEnemies(){
   }
 
 
-  /*
-   * Boss toutes les 5 vagues.
-   */
-
   if(
     wave % 5 === 0
   ){
@@ -1661,10 +1464,6 @@ function getWaveEnemies(){
   return result;
 }
 
-
-/* =========================================================
-   DÉMARRER UNE VAGUE
-========================================================= */
 
 function startWave(){
 
@@ -1693,7 +1492,7 @@ function startWave(){
 
 
 /* =========================================================
-   QUESTION SUIVANTE
+   QUESTIONS DANS LE JEU
 ========================================================= */
 
 function showNextQuestion(){
@@ -1715,7 +1514,7 @@ function showNextQuestion(){
 
 
   if(
-    !alive.length
+    alive.length === 0
   ){
 
     finishWave();
@@ -1724,44 +1523,23 @@ function showNextQuestion(){
   }
 
 
-  /*
-   * On garde l'ennemi actuel s'il
-   * est encore vivant et nécessite
-   * une question.
-   */
-
   let enemy =
-    null;
+    alive.find(
+      e =>
+        !e.targetQuestion
+    );
 
 
   if(
+    !enemy &&
     currentEnemy &&
-    currentEnemy.alive &&
-    !currentEnemy.targetQuestion
+    currentEnemy.alive
   ){
 
     enemy =
       currentEnemy;
   }
 
-
-  /*
-   * Sinon chercher un ennemi sans question.
-   */
-
-  if(!enemy){
-
-    enemy =
-      alive.find(
-        e =>
-          !e.targetQuestion
-      );
-  }
-
-
-  /*
-   * Sinon prendre le premier vivant.
-   */
 
   if(!enemy){
 
@@ -1782,10 +1560,6 @@ function showNextQuestion(){
     !currentQuestion
   ){
 
-    console.error(
-      "Impossible de récupérer une question."
-    );
-
     return;
   }
 
@@ -1800,10 +1574,6 @@ function showNextQuestion(){
   );
 }
 
-
-/* =========================================================
-   AFFICHER QUESTION
-========================================================= */
 
 function displayQuestion(
   question,
@@ -1848,13 +1618,11 @@ function displayQuestion(
         );
 
 
-      button.className =
-        "option";
-
-
       button.type =
         "button";
 
+      button.className =
+        "option";
 
       button.textContent =
         `${String.fromCharCode(65 + index)}. ${option}`;
@@ -1877,7 +1645,7 @@ function displayQuestion(
 
 
 /* =========================================================
-   RÉPONDRE
+   RÉPONSE
 ========================================================= */
 
 function answerQuestion(
@@ -1931,7 +1699,7 @@ function answerQuestion(
 
 
     feedbackEl.textContent =
-      "Bonne réponse ! Attaque réussie.";
+      "Bonne réponse ! Le château attaque.";
 
     feedbackEl.className =
       "good";
@@ -1995,7 +1763,7 @@ function answerQuestion(
 
 
 /* =========================================================
-   TIR
+   PROJECTILE
 ========================================================= */
 
 function launchProjectile(
@@ -2037,16 +1805,13 @@ function hitEnemy(
 
   enemy.hp--;
 
-
   enemy.targetQuestion =
     null;
 
 
   /*
-   * Géant ou boss encore vivant.
-   *
-   * Il reçoit immédiatement
-   * une nouvelle question.
+   * Géant / Boss :
+   * il faut plusieurs bonnes réponses.
    */
 
   if(
@@ -2088,10 +1853,6 @@ function hitEnemy(
   }
 
 
-  /*
-   * Ennemi détruit.
-   */
-
   enemy.alive =
     false;
 
@@ -2114,7 +1875,6 @@ function hitEnemy(
 
   updateHUD();
 
-
   checkWaveFinished();
 
 
@@ -2136,10 +1896,11 @@ function hitEnemy(
 
 
 /* =========================================================
-   ENNEMI AU CHÂTEAU
+   ENNEMI TOUCHE LE CHÂTEAU
+   = RÉUSSITE
 ========================================================= */
 
-function loseLife(
+function enemyReachedCastle(
   enemy
 ){
 
@@ -2151,6 +1912,11 @@ function loseLife(
   }
 
 
+  /*
+   * IMPORTANT :
+   * aucun cœur n'est retiré.
+   */
+
   enemy.alive =
     false;
 
@@ -2159,8 +1925,17 @@ function loseLife(
     null;
 
 
-  lives--;
+  /*
+   * Bonus de réussite.
+   */
 
+  score +=
+    5;
+
+
+  /*
+   * Message de réussite.
+   */
 
   if(
     currentEnemy === enemy
@@ -2174,17 +1949,14 @@ function loseLife(
   }
 
 
+  feedbackEl.textContent =
+    "Réussi ! L'ennemi a atteint le château.";
+
+  feedbackEl.className =
+    "good";
+
+
   updateHUD();
-
-
-  if(
-    lives <= 0
-  ){
-
-    endGame();
-
-    return;
-  }
 
 
   checkWaveFinished();
@@ -2201,7 +1973,7 @@ function loseLife(
         showNextQuestion();
 
       },
-      300
+      400
     );
   }
 }
@@ -2245,7 +2017,6 @@ function finishWave(){
   currentEnemy =
     null;
 
-
   currentQuestion =
     null;
 
@@ -2255,15 +2026,15 @@ function finishWave(){
 
 
   questionEl.textContent =
-    "Tous les ennemis ont été vaincus.";
+    "Vague réussie !";
 
 
   enemyTypeEl.textContent =
-    "Vague terminée";
+    "Réussi";
 
 
   enemyHpEl.textContent =
-    "—";
+    "Tous les ennemis ont été traités";
 
 
   waveScoreEl.textContent =
@@ -2308,21 +2079,6 @@ function endGame(){
 
   gameStarted =
     false;
-
-
-  currentEnemy =
-    null;
-
-  currentQuestion =
-    null;
-
-
-  optionsEl.innerHTML =
-    "";
-
-
-  questionEl.textContent =
-    "Le château n'a plus de vies.";
 
 
   finalScoreEl.textContent =
@@ -2413,7 +2169,10 @@ function updateHUD(){
 
   livesEl.textContent =
     "❤️".repeat(
-      Math.max(0,lives)
+      Math.max(
+        0,
+        lives
+      )
     );
 
 
@@ -2434,7 +2193,7 @@ function updateHUD(){
 
 
 /* =========================================================
-   DESSIN DU CIEL
+   DESSIN
 ========================================================= */
 
 function drawSky(){
@@ -2498,7 +2257,7 @@ function drawMoon(){
 function drawCloud(
   x,
   y,
-  scale = 1
+  scale=1
 ){
 
   ctx.fillStyle =
@@ -2553,69 +2312,57 @@ function drawMountains(){
     430
   );
 
-
   ctx.lineTo(
     180,
     245
   );
-
 
   ctx.lineTo(
     330,
     430
   );
 
-
   ctx.lineTo(
     470,
     220
   );
-
 
   ctx.lineTo(
     650,
     430
   );
 
-
   ctx.lineTo(
     800,
     260
   );
-
 
   ctx.lineTo(
     1010,
     430
   );
 
-
   ctx.lineTo(
     1130,
     285
   );
-
 
   ctx.lineTo(
     1200,
     350
   );
 
-
   ctx.lineTo(
     1200,
     500
   );
-
 
   ctx.lineTo(
     0,
     500
   );
 
-
   ctx.closePath();
-
 
   ctx.fill();
 }
@@ -2654,13 +2401,17 @@ function drawGround(){
 
 function drawCastle(){
 
-  const x = 110;
+  const x =
+    110;
 
-  const y = 315;
+  const y =
+    315;
 
-  const w = 190;
+  const w =
+    190;
 
-  const h = 190;
+  const h =
+    190;
 
 
   ctx.fillStyle =
@@ -2842,10 +2593,6 @@ function drawEnemy(
   }
 
 
-  /*
-   * Ombre
-   */
-
   ctx.fillStyle =
     "rgba(0,0,0,.35)";
 
@@ -2867,10 +2614,6 @@ function drawEnemy(
   ctx.fill();
 
 
-  /*
-   * Corps
-   */
-
   ctx.fillStyle =
     bodyColor;
 
@@ -2890,10 +2633,6 @@ function drawEnemy(
   ctx.fill();
 
 
-  /*
-   * Tête
-   */
-
   ctx.fillStyle =
     "#d2a07c";
 
@@ -2912,10 +2651,6 @@ function drawEnemy(
 
   ctx.fill();
 
-
-  /*
-   * Yeux
-   */
 
   ctx.fillStyle =
     "#111";
@@ -2945,15 +2680,8 @@ function drawEnemy(
   ctx.fill();
 
 
-  /*
-   * Barre de vie
-   */
-
   const barWidth =
     r * 2;
-
-  const barHeight =
-    7;
 
   const ratio =
     Math.max(
@@ -2971,7 +2699,7 @@ function drawEnemy(
     enemy.x - barWidth / 2,
     enemy.y - r - 22,
     barWidth,
-    barHeight
+    7
   );
 
 
@@ -2985,13 +2713,9 @@ function drawEnemy(
     enemy.x - barWidth / 2,
     enemy.y - r - 22,
     barWidth * ratio,
-    barHeight
+    7
   );
 
-
-  /*
-   * Nom
-   */
 
   ctx.fillStyle =
     "#fff";
@@ -3084,10 +2808,6 @@ function update(dt){
   }
 
 
-  /*
-   * ENNEMIS
-   */
-
   enemies.forEach(
     enemy => {
 
@@ -3104,14 +2824,15 @@ function update(dt){
 
 
       /*
-       * Le château est atteint.
+       * IMPORTANT :
+       * toucher le château = réussite.
        */
 
       if(
         enemy.x <= 315
       ){
 
-        loseLife(
+        enemyReachedCastle(
           enemy
         );
       }
@@ -3119,10 +2840,6 @@ function update(dt){
     }
   );
 
-
-  /*
-   * PROJECTILES
-   */
 
   projectiles.forEach(
     projectile => {
@@ -3203,7 +2920,6 @@ function update(dt){
 
 
   updateHUD();
-
 
   checkWaveFinished();
 }
@@ -3327,6 +3043,7 @@ document.addEventListener(
       "2":1,
       "3":2,
       "4":3
+
     };
 
 
