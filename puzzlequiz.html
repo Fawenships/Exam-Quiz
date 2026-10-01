@@ -1,0 +1,1487 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+>
+
+<title>Puzzle Quiz — ExamQuiz Haiti</title>
+
+<style>
+
+:root{
+    --purple:#24113f;
+    --purple2:#4b2481;
+    --blue:#1764c0;
+    --blue2:#2f80ed;
+    --white:#ffffff;
+    --bg:#f5f5f7;
+    --text:#171717;
+    --muted:#707070;
+    --border:#e4e4e7;
+    --green:#16834b;
+    --red:#c62828;
+}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh;
+}
+
+button{
+    font:inherit;
+    border:none;
+    cursor:pointer;
+}
+
+.page{
+    width:100%;
+    max-width:900px;
+    margin:auto;
+    padding:12px;
+}
+
+
+/* RETOUR */
+
+.back-button{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    width:100%;
+    min-height:46px;
+
+    margin-bottom:12px;
+    padding:10px 14px;
+
+    border:1px solid var(--border);
+    border-radius:13px;
+
+    background:var(--white);
+    color:var(--purple);
+
+    text-decoration:none;
+
+    font-size:14px;
+    font-weight:800;
+}
+
+.back-button:active{
+    transform:scale(.98);
+}
+
+
+/* HEADER */
+
+.topbar{
+    background:var(--white);
+
+    border:1px solid var(--border);
+    border-radius:16px;
+
+    padding:14px 16px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    gap:10px;
+
+    margin-bottom:14px;
+}
+
+.logo{
+    font-size:18px;
+    font-weight:800;
+    color:var(--purple);
+}
+
+.level-label{
+    color:var(--muted);
+    font-size:14px;
+    font-weight:700;
+}
+
+
+/* PROGRESSION */
+
+.progress-box{
+    background:var(--white);
+
+    border:1px solid var(--border);
+    border-radius:16px;
+
+    padding:14px;
+
+    margin-bottom:14px;
+}
+
+.progress-info{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    margin-bottom:9px;
+
+    font-size:13px;
+    font-weight:700;
+}
+
+.progress-text{
+    color:var(--purple);
+}
+
+.progress-points{
+    color:var(--muted);
+}
+
+.progress-bar{
+    height:9px;
+
+    background:#e8e8eb;
+
+    border-radius:999px;
+
+    overflow:hidden;
+}
+
+.progress-fill{
+    height:100%;
+
+    width:0%;
+
+    background:var(--purple2);
+
+    border-radius:999px;
+
+    transition:width .35s ease;
+}
+
+
+/* PUZZLE */
+
+.puzzle-card{
+    background:var(--white);
+
+    border:1px solid var(--border);
+    border-radius:18px;
+
+    padding:18px;
+
+    margin-bottom:14px;
+}
+
+.puzzle-title{
+    text-align:center;
+
+    font-size:14px;
+
+    color:var(--muted);
+
+    font-weight:800;
+
+    margin-bottom:14px;
+}
+
+.puzzle{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap:6px;
+
+    width:min(100%,500px);
+
+    aspect-ratio:1 / 1;
+
+    margin:auto;
+
+    padding:6px;
+
+    background:#dedee3;
+
+    border-radius:15px;
+}
+
+.piece{
+    min-width:0;
+
+    border-radius:9px;
+
+    background:#ededf0;
+
+    border:1px solid #d7d7dc;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    color:#b3b3b8;
+
+    font-size:24px;
+
+    font-weight:900;
+
+    transition:
+        background .25s ease,
+        transform .25s ease;
+}
+
+.piece.unlocked{
+    background:var(--purple2);
+
+    color:white;
+
+    border-color:var(--purple2);
+
+    transform:scale(1);
+}
+
+.piece.current{
+    box-shadow:
+        inset 0 0 0 3px
+        rgba(47,128,237,.35);
+}
+
+
+/* GAME */
+
+.game-card{
+    background:var(--white);
+
+    border:1px solid var(--border);
+
+    border-radius:18px;
+
+    padding:20px;
+}
+
+.question-number{
+    text-align:center;
+
+    color:var(--muted);
+
+    font-size:13px;
+
+    margin-bottom:10px;
+}
+
+.question{
+    font-size:22px;
+
+    line-height:1.35;
+
+    font-weight:800;
+
+    text-align:center;
+
+    max-width:720px;
+
+    margin:0 auto 22px;
+}
+
+
+/* OPTIONS */
+
+.options{
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:12px;
+}
+
+.option{
+    min-height:64px;
+
+    border:2px solid var(--border);
+
+    border-radius:14px;
+
+    background:white;
+
+    padding:12px;
+
+    font-weight:700;
+
+    text-align:left;
+
+    transition:.15s;
+}
+
+.option:hover{
+    border-color:var(--blue2);
+}
+
+.option:active{
+    transform:scale(.98);
+}
+
+.option.correct{
+    border-color:var(--green);
+
+    background:#eef9f2;
+
+    color:var(--green);
+}
+
+.option.wrong{
+    border-color:var(--red);
+
+    background:#fff0f0;
+
+    color:var(--red);
+}
+
+.option:disabled{
+    cursor:default;
+}
+
+
+/* FEEDBACK */
+
+.feedback{
+    margin-top:16px;
+
+    padding:14px;
+
+    border-radius:12px;
+
+    text-align:center;
+
+    font-weight:700;
+
+    display:none;
+}
+
+.feedback.show{
+    display:block;
+}
+
+.feedback.correct{
+    background:#eef9f2;
+
+    color:var(--green);
+}
+
+.feedback.wrong{
+    background:#fff0f0;
+
+    color:var(--red);
+}
+
+
+/* NEXT */
+
+.next-btn{
+    width:100%;
+
+    min-height:52px;
+
+    margin-top:12px;
+
+    border-radius:13px;
+
+    background:var(--purple2);
+
+    color:white;
+
+    font-weight:800;
+
+    display:none;
+}
+
+.next-btn.show{
+    display:block;
+}
+
+
+/* CATEGORY */
+
+.category{
+    margin-top:14px;
+
+    text-align:center;
+
+    color:var(--muted);
+
+    font-size:13px;
+}
+
+
+/* OVERLAY */
+
+.overlay{
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(20,12,30,.72);
+
+    display:none;
+
+    align-items:center;
+    justify-content:center;
+
+    padding:20px;
+
+    z-index:50;
+}
+
+.overlay.show{
+    display:flex;
+}
+
+.result-box{
+    width:100%;
+
+    max-width:450px;
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:26px 20px;
+
+    text-align:center;
+}
+
+.result-title{
+    font-size:27px;
+
+    font-weight:900;
+
+    color:var(--purple);
+
+    margin-bottom:10px;
+}
+
+.result-text{
+    color:var(--muted);
+
+    line-height:1.5;
+
+    margin-bottom:15px;
+}
+
+.final-score{
+    font-size:40px;
+
+    font-weight:900;
+
+    color:var(--purple);
+
+    margin:12px 0 20px;
+}
+
+.action-btn{
+    width:100%;
+
+    min-height:52px;
+
+    border-radius:13px;
+
+    background:var(--purple2);
+
+    color:white;
+
+    font-weight:800;
+
+    margin-top:8px;
+}
+
+.secondary-btn{
+    background:#eeeef1;
+
+    color:var(--text);
+}
+
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    .page{
+        padding:9px;
+    }
+
+    .back-button{
+        min-height:44px;
+
+        font-size:13px;
+
+        margin-bottom:9px;
+    }
+
+    .topbar{
+        padding:12px;
+
+        border-radius:13px;
+    }
+
+    .logo{
+        font-size:16px;
+    }
+
+    .level-label{
+        font-size:12px;
+    }
+
+    .progress-box{
+        padding:11px;
+
+        border-radius:13px;
+    }
+
+    .puzzle-card{
+        padding:12px;
+
+        border-radius:15px;
+    }
+
+    .puzzle{
+        gap:4px;
+
+        padding:4px;
+
+        border-radius:12px;
+    }
+
+    .piece{
+        border-radius:6px;
+
+        font-size:18px;
+    }
+
+    .game-card{
+        padding:14px 10px;
+
+        border-radius:15px;
+    }
+
+    .question{
+        font-size:19px;
+
+        line-height:1.35;
+
+        margin-bottom:18px;
+    }
+
+    .options{
+        grid-template-columns:1fr;
+
+        gap:9px;
+    }
+
+    .option{
+        min-height:58px;
+
+        padding:11px;
+
+        font-size:14px;
+    }
+
+    .result-box{
+        padding:22px 15px;
+    }
+
+    .result-title{
+        font-size:24px;
+    }
+
+    .final-score{
+        font-size:35px;
+    }
+}
+
+@media(max-width:360px){
+
+    .question{
+        font-size:17px;
+    }
+
+    .piece{
+        font-size:15px;
+    }
+
+    .option{
+        font-size:13px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+    <!-- RETOUR -->
+
+    <a
+        href="baccalaureat.html"
+        class="back-button"
+    >
+        ← Retour aux jeux
+    </a>
+
+
+    <!-- HEADER -->
+
+    <header class="topbar">
+
+        <div class="logo">
+            ExamQuiz
+        </div>
+
+        <div
+            class="level-label"
+            id="levelLabel"
+        >
+            Puzzle 1 / 20
+        </div>
+
+    </header>
+
+
+    <!-- PROGRESSION -->
+
+    <section class="progress-box">
+
+        <div class="progress-info">
+
+            <span
+                class="progress-text"
+                id="progressText"
+            >
+                0 / 9 pièces
+            </span>
+
+            <span
+                class="progress-points"
+                id="score"
+            >
+                0 points
+            </span>
+
+        </div>
+
+
+        <div class="progress-bar">
+
+            <div
+                class="progress-fill"
+                id="progressFill"
+            ></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PUZZLE -->
+
+    <section class="puzzle-card">
+
+        <div class="puzzle-title">
+            Complète le puzzle en répondant correctement
+        </div>
+
+
+        <div
+            class="puzzle"
+            id="puzzle"
+        ></div>
+
+    </section>
+
+
+    <!-- QUESTION -->
+
+    <main class="game-card">
+
+        <div
+            class="question-number"
+            id="questionNumber"
+        >
+            Question 1 / 9
+        </div>
+
+
+        <div
+            class="question"
+            id="question"
+        >
+            Chargement...
+        </div>
+
+
+        <div
+            class="options"
+            id="options"
+        ></div>
+
+
+        <div
+            class="feedback"
+            id="feedback"
+        ></div>
+
+
+        <button
+            type="button"
+            class="next-btn"
+            id="nextBtn"
+        >
+            Question suivante
+        </button>
+
+
+        <div
+            class="category"
+            id="category"
+        ></div>
+
+    </main>
+
+</div>
+
+
+<!-- RESULTAT -->
+
+<div
+    class="overlay"
+    id="resultOverlay"
+>
+
+    <div class="result-box">
+
+        <div
+            class="result-title"
+            id="resultTitle"
+        >
+            Puzzle terminé
+        </div>
+
+
+        <div
+            class="result-text"
+            id="resultText"
+        ></div>
+
+
+        <div
+            class="final-score"
+            id="finalScore"
+        >
+            0 points
+        </div>
+
+
+        <button
+            type="button"
+            class="action-btn"
+            id="nextPuzzleBtn"
+        >
+            Puzzle suivant
+        </button>
+
+
+        <button
+            type="button"
+            class="action-btn secondary-btn"
+            id="restartBtn"
+        >
+            Recommencer
+        </button>
+
+    </div>
+
+</div>
+
+
+<script type="module">
+
+import {
+    jeuxQuestions
+} from "./src/jeuxQuestions.js";
+
+
+/* CONFIGURATION */
+
+const PIECES_PER_PUZZLE = 9;
+
+const MAX_PUZZLES = 20;
+
+
+/* ETAT */
+
+let allQuestions = [];
+
+let currentQuestions = [];
+
+let currentQuestionIndex = 0;
+
+let unlockedPieces = 0;
+
+let score = 0;
+
+let puzzleScore = 0;
+
+let puzzleNumber = 1;
+
+let answered = false;
+
+let gameFinished = false;
+
+
+/* ELEMENTS */
+
+const puzzleElement =
+    document.getElementById("puzzle");
+
+const questionElement =
+    document.getElementById("question");
+
+const optionsElement =
+    document.getElementById("options");
+
+const feedbackElement =
+    document.getElementById("feedback");
+
+const nextBtn =
+    document.getElementById("nextBtn");
+
+const questionNumberElement =
+    document.getElementById("questionNumber");
+
+const categoryElement =
+    document.getElementById("category");
+
+const levelLabel =
+    document.getElementById("levelLabel");
+
+const progressText =
+    document.getElementById("progressText");
+
+const progressFill =
+    document.getElementById("progressFill");
+
+const scoreElement =
+    document.getElementById("score");
+
+const resultOverlay =
+    document.getElementById("resultOverlay");
+
+const resultTitle =
+    document.getElementById("resultTitle");
+
+const resultText =
+    document.getElementById("resultText");
+
+const finalScore =
+    document.getElementById("finalScore");
+
+const nextPuzzleBtn =
+    document.getElementById("nextPuzzleBtn");
+
+const restartBtn =
+    document.getElementById("restartBtn");
+
+
+/* MELANGE */
+
+function shuffle(array){
+
+    const copy = [...array];
+
+    for(
+        let i = copy.length - 1;
+        i > 0;
+        i--
+    ){
+
+        const j =
+            Math.floor(
+                Math.random() * (i + 1)
+            );
+
+        [
+            copy[i],
+            copy[j]
+        ] = [
+            copy[j],
+            copy[i]
+        ];
+    }
+
+    return copy;
+}
+
+
+/* CREER LE PUZZLE */
+
+function createPuzzle(){
+
+    puzzleElement.innerHTML = "";
+
+
+    for(
+        let i = 0;
+        i < PIECES_PER_PUZZLE;
+        i++
+    ){
+
+        const piece =
+            document.createElement("div");
+
+
+        piece.className =
+            "piece";
+
+
+        piece.dataset.index =
+            i;
+
+
+        piece.textContent =
+            i + 1;
+
+
+        puzzleElement.appendChild(
+            piece
+        );
+
+    }
+
+
+    updatePuzzle();
+}
+
+
+/* METTRE A JOUR LE PUZZLE */
+
+function updatePuzzle(){
+
+    const pieces =
+        puzzleElement.querySelectorAll(
+            ".piece"
+        );
+
+
+    pieces.forEach((piece,index) => {
+
+        piece.classList.toggle(
+            "unlocked",
+            index < unlockedPieces
+        );
+
+
+        piece.classList.toggle(
+            "current",
+            index === unlockedPieces &&
+            unlockedPieces < PIECES_PER_PUZZLE
+        );
+
+    });
+
+
+    progressText.textContent =
+        `${unlockedPieces} / ${PIECES_PER_PUZZLE} pièces`;
+
+
+    const percentage =
+        (
+            unlockedPieces /
+            PIECES_PER_PUZZLE
+        ) * 100;
+
+
+    progressFill.style.width =
+        `${percentage}%`;
+
+
+    scoreElement.textContent =
+        `${score} points`;
+}
+
+
+/* PREPARER UN PUZZLE */
+
+function preparePuzzle(){
+
+    if(
+        !Array.isArray(jeuxQuestions) ||
+        jeuxQuestions.length === 0
+    ){
+
+        questionElement.textContent =
+            "Aucune question disponible.";
+
+        optionsElement.innerHTML =
+            "";
+
+        return false;
+    }
+
+
+    allQuestions =
+        [...jeuxQuestions];
+
+
+    currentQuestions =
+        shuffle(allQuestions)
+        .slice(
+            0,
+            Math.min(
+                PIECES_PER_PUZZLE,
+                allQuestions.length
+            )
+        );
+
+
+    unlockedPieces = 0;
+
+    puzzleScore = 0;
+
+
+    createPuzzle();
+
+
+    return currentQuestions.length > 0;
+}
+
+
+/* AFFICHER QUESTION */
+
+function displayQuestion(){
+
+    if(
+        currentQuestionIndex >=
+        currentQuestions.length
+    ){
+
+        endPuzzle();
+
+        return;
+    }
+
+
+    answered = false;
+
+
+    const currentQuestion =
+        currentQuestions[
+            currentQuestionIndex
+        ];
+
+
+    questionNumberElement.textContent =
+        `Question ${
+            currentQuestionIndex + 1
+        } / ${
+            currentQuestions.length
+        }`;
+
+
+    questionElement.textContent =
+        currentQuestion.question;
+
+
+    categoryElement.textContent =
+        currentQuestion.category
+        ? `Catégorie : ${currentQuestion.category}`
+        : "";
+
+
+    feedbackElement.className =
+        "feedback";
+
+    feedbackElement.textContent =
+        "";
+
+
+    nextBtn.className =
+        "next-btn";
+
+
+    optionsElement.innerHTML =
+        "";
+
+
+    const options =
+        shuffle(
+            currentQuestion.options || []
+        );
+
+
+    options.forEach(option => {
+
+        const button =
+            document.createElement("button");
+
+
+        button.type =
+            "button";
+
+
+        button.className =
+            "option";
+
+
+        button.textContent =
+            option;
+
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                answerQuestion(
+                    button,
+                    option,
+                    currentQuestion
+                );
+
+            }
+        );
+
+
+        optionsElement.appendChild(
+            button
+        );
+
+    });
+
+
+    updatePuzzle();
+}
+
+
+/* REPONDRE */
+
+function answerQuestion(
+    clickedButton,
+    selectedAnswer,
+    currentQuestion
+){
+
+    if(answered) return;
+
+
+    answered = true;
+
+
+    const buttons =
+        optionsElement.querySelectorAll(
+            ".option"
+        );
+
+
+    buttons.forEach(button => {
+
+        button.disabled = true;
+
+
+        if(
+            button.textContent ===
+            currentQuestion.answer
+        ){
+
+            button.classList.add(
+                "correct"
+            );
+
+        }
+
+    });
+
+
+    const isCorrect =
+        selectedAnswer ===
+        currentQuestion.answer;
+
+
+    if(isCorrect){
+
+        clickedButton.classList.add(
+            "correct"
+        );
+
+
+        unlockedPieces++;
+
+
+        const points = 10;
+
+
+        score += points;
+
+        puzzleScore += points;
+
+
+        feedbackElement.textContent =
+            `Bonne réponse ! Une pièce du puzzle est débloquée. +${points} points.`;
+
+
+        feedbackElement.className =
+            "feedback show correct";
+
+
+        updatePuzzle();
+
+    }
+    else{
+
+        clickedButton.classList.add(
+            "wrong"
+        );
+
+
+        feedbackElement.textContent =
+            `Mauvaise réponse. La bonne réponse était : ${
+                currentQuestion.answer
+            }`;
+
+
+        feedbackElement.className =
+            "feedback show wrong";
+
+    }
+
+
+    nextBtn.className =
+        "next-btn show";
+}
+
+
+/* QUESTION SUIVANTE */
+
+function nextQuestion(){
+
+    if(!answered) return;
+
+
+    currentQuestionIndex++;
+
+
+    displayQuestion();
+}
+
+
+/* FIN DU PUZZLE */
+
+function endPuzzle(){
+
+    if(
+        unlockedPieces ===
+        PIECES_PER_PUZZLE
+    ){
+
+        resultTitle.textContent =
+            "Puzzle terminé !";
+
+        resultText.textContent =
+            "Toutes les pièces ont été débloquées.";
+
+    }
+    else{
+
+        resultTitle.textContent =
+            "Puzzle terminé";
+
+        resultText.textContent =
+            `Tu as débloqué ${
+                unlockedPieces
+            } pièces sur ${
+                PIECES_PER_PUZZLE
+            }.`;
+    }
+
+
+    finalScore.textContent =
+        `${puzzleScore} points`;
+
+
+    if(
+        puzzleNumber >= MAX_PUZZLES
+    ){
+
+        endGame();
+
+        return;
+    }
+
+
+    nextPuzzleBtn.textContent =
+        "Puzzle suivant";
+
+
+    resultOverlay.classList.add(
+        "show"
+    );
+}
+
+
+/* FIN DES 20 PUZZLES */
+
+function endGame(){
+
+    gameFinished = true;
+
+
+    resultTitle.textContent =
+        "Puzzle Quiz terminé";
+
+
+    resultText.textContent =
+        `Tu as terminé les ${
+            MAX_PUZZLES
+        } puzzles.`;
+
+
+    finalScore.textContent =
+        `${score} points`;
+
+
+    nextPuzzleBtn.textContent =
+        "Nouvelle partie";
+
+
+    resultOverlay.classList.add(
+        "show"
+    );
+}
+
+
+/* PUZZLE SUIVANT */
+
+function startNextPuzzle(){
+
+    if(gameFinished){
+
+        restartGame();
+
+        return;
+    }
+
+
+    if(
+        puzzleNumber >= MAX_PUZZLES
+    ){
+
+        endGame();
+
+        return;
+    }
+
+
+    puzzleNumber++;
+
+    currentQuestionIndex = 0;
+
+
+    levelLabel.textContent =
+        `Puzzle ${
+            puzzleNumber
+        } / ${
+            MAX_PUZZLES
+        }`;
+
+
+    resultOverlay.classList.remove(
+        "show"
+    );
+
+
+    if(preparePuzzle()){
+
+        displayQuestion();
+
+    }
+}
+
+
+/* RECOMMENCER */
+
+function restartGame(){
+
+    puzzleNumber = 1;
+
+    currentQuestionIndex = 0;
+
+    score = 0;
+
+    puzzleScore = 0;
+
+    unlockedPieces = 0;
+
+    answered = false;
+
+    gameFinished = false;
+
+
+    levelLabel.textContent =
+        `Puzzle 1 / ${MAX_PUZZLES}`;
+
+
+    resultOverlay.classList.remove(
+        "show"
+    );
+
+
+    if(preparePuzzle()){
+
+        displayQuestion();
+
+    }
+}
+
+
+/* EVENEMENTS */
+
+nextBtn.addEventListener(
+    "click",
+    nextQuestion
+);
+
+
+nextPuzzleBtn.addEventListener(
+    "click",
+    startNextPuzzle
+);
+
+
+restartBtn.addEventListener(
+    "click",
+    restartGame
+);
+
+
+/* DEMARRAGE */
+
+if(preparePuzzle()){
+
+    displayQuestion();
+
+}
+
+</script>
+
+</body>
+</html>
