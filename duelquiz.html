@@ -47,7 +47,9 @@ button{
     padding:14px;
 }
 
-/* HEADER */
+/* =========================
+   HEADER
+========================= */
 
 .topbar{
     background:var(--white);
@@ -70,9 +72,12 @@ button{
 .round{
     font-size:14px;
     color:var(--muted);
+    font-weight:700;
 }
 
-/* SCORE */
+/* =========================
+   SCOREBOARD
+========================= */
 
 .scoreboard{
     display:grid;
@@ -115,7 +120,9 @@ button{
     font-size:14px;
 }
 
-/* QUESTION */
+/* =========================
+   GAME
+========================= */
 
 .game-card{
     background:var(--white);
@@ -148,7 +155,9 @@ button{
     margin:0 auto 22px;
 }
 
-/* OPTIONS */
+/* =========================
+   OPTIONS
+========================= */
 
 .options{
     display:grid;
@@ -191,7 +200,9 @@ button{
     cursor:default;
 }
 
-/* MESSAGE */
+/* =========================
+   FEEDBACK
+========================= */
 
 .feedback{
     margin-top:16px;
@@ -216,6 +227,10 @@ button{
     color:var(--red);
 }
 
+/* =========================
+   NEXT BUTTON
+========================= */
+
 .next-btn{
     width:100%;
     margin-top:12px;
@@ -231,7 +246,9 @@ button{
     display:block;
 }
 
-/* CATEGORY */
+/* =========================
+   CATEGORY
+========================= */
 
 .category{
     margin-top:16px;
@@ -240,7 +257,9 @@ button{
     font-size:13px;
 }
 
-/* OVERLAY */
+/* =========================
+   OVERLAY
+========================= */
 
 .overlay{
     position:fixed;
@@ -319,7 +338,9 @@ button{
     color:var(--text);
 }
 
-/* MOBILE */
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:600px){
 
@@ -390,6 +411,18 @@ button{
     .category{
         margin-top:12px;
     }
+
+    .result-box{
+        padding:22px 15px;
+    }
+
+    .result-title{
+        font-size:24px;
+    }
+
+    .result-winner{
+        font-size:18px;
+    }
 }
 
 @media(max-width:360px){
@@ -414,25 +447,56 @@ button{
 <div class="page">
 
     <header class="topbar">
-        <div class="logo">ExamQuiz</div>
-        <div class="round" id="roundLabel">Manche 1</div>
+
+        <div class="logo">
+            ExamQuiz
+        </div>
+
+        <div class="round" id="roundLabel">
+            Manche 1 / 20
+        </div>
+
     </header>
+
+
+    <!-- SCORE -->
 
     <section class="scoreboard">
 
         <div class="player active" id="player1Card">
-            <div class="player-name">Joueur 1</div>
-            <div class="player-score" id="score1">0</div>
+
+            <div class="player-name">
+                Joueur 1
+            </div>
+
+            <div class="player-score" id="score1">
+                0
+            </div>
+
         </div>
 
-        <div class="vs">VS</div>
+
+        <div class="vs">
+            VS
+        </div>
+
 
         <div class="player" id="player2Card">
-            <div class="player-name">Joueur 2</div>
-            <div class="player-score" id="score2">0</div>
+
+            <div class="player-name">
+                Joueur 2
+            </div>
+
+            <div class="player-score" id="score2">
+                0
+            </div>
+
         </div>
 
     </section>
+
+
+    <!-- JEU -->
 
     <main class="game-card">
 
@@ -440,21 +504,31 @@ button{
             Tour de Joueur 1
         </div>
 
+
         <div class="question-number" id="questionNumber">
-            Question 1
+            Question 1 / 10
         </div>
+
 
         <div class="question" id="question">
             Chargement...
         </div>
 
+
         <div class="options" id="options"></div>
+
 
         <div class="feedback" id="feedback"></div>
 
-        <button class="next-btn" id="nextBtn">
+
+        <button
+            type="button"
+            class="next-btn"
+            id="nextBtn"
+        >
             Question suivante
         </button>
+
 
         <div class="category" id="category"></div>
 
@@ -463,37 +537,66 @@ button{
 </div>
 
 
-<!-- RESULTAT -->
+<!-- =========================
+     RESULTAT
+========================= -->
 
 <div class="overlay" id="resultOverlay">
 
     <div class="result-box">
 
-        <div class="result-title">
+        <div class="result-title" id="resultTitle">
             Manche terminée
         </div>
 
+
         <div class="result-winner" id="winnerText"></div>
+
 
         <div class="final-score">
 
             <div class="final-player">
-                <strong>Joueur 1</strong>
-                <span id="finalScore1">0</span>
+
+                <strong>
+                    Joueur 1
+                </strong>
+
+                <span id="finalScore1">
+                    0
+                </span>
+
             </div>
 
+
             <div class="final-player">
-                <strong>Joueur 2</strong>
-                <span id="finalScore2">0</span>
+
+                <strong>
+                    Joueur 2
+                </strong>
+
+                <span id="finalScore2">
+                    0
+                </span>
+
             </div>
 
         </div>
 
-        <button class="action-btn" id="nextRoundBtn">
+
+        <button
+            type="button"
+            class="action-btn"
+            id="nextRoundBtn"
+        >
             Manche suivante
         </button>
 
-        <button class="action-btn secondary-btn" id="restartBtn">
+
+        <button
+            type="button"
+            class="action-btn secondary-btn"
+            id="restartBtn"
+        >
             Recommencer
         </button>
 
@@ -512,6 +615,7 @@ import { jeuxQuestions } from "./src/jeuxQuestions.js";
 ========================= */
 
 const QUESTIONS_PER_ROUND = 10;
+const MAX_ROUNDS = 20;
 
 
 /* =========================
@@ -531,6 +635,8 @@ let score2 = 0;
 let roundNumber = 1;
 
 let answered = false;
+
+let gameFinished = false;
 
 
 /* =========================
@@ -576,6 +682,9 @@ const roundLabel =
 const resultOverlay =
     document.getElementById("resultOverlay");
 
+const resultTitle =
+    document.getElementById("resultTitle");
+
 const winnerText =
     document.getElementById("winnerText");
 
@@ -593,19 +702,31 @@ const restartBtn =
 
 
 /* =========================
-   OUTILS
+   MELANGE
 ========================= */
 
 function shuffle(array){
 
     const copy = [...array];
 
-    for(let i = copy.length - 1; i > 0; i--){
+    for(
+        let i = copy.length - 1;
+        i > 0;
+        i--
+    ){
 
-        const j = Math.floor(Math.random() * (i + 1));
+        const j =
+            Math.floor(
+                Math.random() * (i + 1)
+            );
 
-        [copy[i], copy[j]] =
-        [copy[j], copy[i]];
+        [
+            copy[i],
+            copy[j]
+        ] = [
+            copy[j],
+            copy[i]
+        ];
     }
 
     return copy;
@@ -613,13 +734,15 @@ function shuffle(array){
 
 
 /* =========================
-   PREPARATION
+   PREPARATION QUESTIONS
 ========================= */
 
 function prepareQuestions(){
 
-    if(!Array.isArray(jeuxQuestions) ||
-       jeuxQuestions.length === 0){
+    if(
+        !Array.isArray(jeuxQuestions) ||
+        jeuxQuestions.length === 0
+    ){
 
         questionElement.textContent =
             "Aucune question disponible.";
@@ -627,7 +750,9 @@ function prepareQuestions(){
         return false;
     }
 
+
     allQuestions = [...jeuxQuestions];
+
 
     currentQuestions =
         shuffle(allQuestions)
@@ -639,18 +764,23 @@ function prepareQuestions(){
             )
         );
 
+
     return currentQuestions.length > 0;
 }
 
 
 /* =========================
-   AFFICHAGE SCORE
+   SCORE
 ========================= */
 
 function updateScore(){
 
-    score1Element.textContent = score1;
-    score2Element.textContent = score2;
+    score1Element.textContent =
+        score1;
+
+    score2Element.textContent =
+        score2;
+
 
     player1Card.classList.toggle(
         "active",
@@ -665,70 +795,108 @@ function updateScore(){
 
 
 /* =========================
-   AFFICHAGE QUESTION
+   AFFICHER QUESTION
 ========================= */
 
 function displayQuestion(){
 
-    if(currentQuestionIndex >= currentQuestions.length){
+    if(
+        currentQuestionIndex >=
+        currentQuestions.length
+    ){
 
         endRound();
 
         return;
     }
 
+
     answered = false;
 
+
     const q =
-        currentQuestions[currentQuestionIndex];
+        currentQuestions[
+            currentQuestionIndex
+        ];
+
 
     questionNumber.textContent =
-        `Question ${currentQuestionIndex + 1} / ${currentQuestions.length}`;
+        `Question ${
+            currentQuestionIndex + 1
+        } / ${
+            currentQuestions.length
+        }`;
+
 
     questionElement.textContent =
         q.question;
 
+
     turnLabel.textContent =
         `Tour de Joueur ${currentPlayer}`;
+
 
     categoryElement.textContent =
         q.category
         ? `Catégorie : ${q.category}`
         : "";
 
+
     feedbackElement.className =
         "feedback";
 
-    feedbackElement.textContent = "";
+    feedbackElement.textContent =
+        "";
+
 
     nextBtn.className =
         "next-btn";
 
-    optionsElement.innerHTML = "";
+
+    optionsElement.innerHTML =
+        "";
+
 
     const options =
         shuffle(q.options || []);
+
 
     options.forEach(option => {
 
         const button =
             document.createElement("button");
 
-        button.className = "option";
 
-        button.textContent = option;
+        button.type = "button";
+
+        button.className =
+            "option";
+
+
+        button.textContent =
+            option;
+
 
         button.addEventListener(
             "click",
-            () => answerQuestion(
-                button,
-                option,
-                q
-            )
+            () => {
+
+                answerQuestion(
+                    button,
+                    option,
+                    q
+                );
+
+            }
         );
 
-        optionsElement.appendChild(button);
+
+        optionsElement.appendChild(
+            button
+        );
+
     });
+
 
     updateScore();
 }
@@ -746,29 +914,46 @@ function answerQuestion(
 
     if(answered) return;
 
+
     answered = true;
 
+
     const buttons =
-        optionsElement.querySelectorAll(".option");
+        optionsElement.querySelectorAll(
+            ".option"
+        );
+
 
     buttons.forEach(button => {
 
         button.disabled = true;
 
-        if(button.textContent === question.answer){
 
-            button.classList.add("correct");
+        if(
+            button.textContent ===
+            question.answer
+        ){
+
+            button.classList.add(
+                "correct"
+            );
+
         }
+
     });
 
 
     const isCorrect =
-        selectedAnswer === question.answer;
+        selectedAnswer ===
+        question.answer;
 
 
     if(isCorrect){
 
-        clickedButton.classList.add("correct");
+        clickedButton.classList.add(
+            "correct"
+        );
+
 
         if(currentPlayer === 1){
 
@@ -777,27 +962,41 @@ function answerQuestion(
         }else{
 
             score2 += 10;
+
         }
 
+
         feedbackElement.textContent =
-            `Bonne réponse ! Joueur ${currentPlayer} gagne 10 points.`;
+            `Bonne réponse ! Joueur ${
+                currentPlayer
+            } gagne 10 points.`;
+
 
         feedbackElement.className =
             "feedback show correct";
 
+
     }else{
 
-        clickedButton.classList.add("wrong");
+        clickedButton.classList.add(
+            "wrong"
+        );
+
 
         feedbackElement.textContent =
-            `Mauvaise réponse. La bonne réponse était : ${question.answer}`;
+            `Mauvaise réponse. La bonne réponse était : ${
+                question.answer
+            }`;
+
 
         feedbackElement.className =
             "feedback show wrong";
+
     }
 
 
     updateScore();
+
 
     nextBtn.className =
         "next-btn show";
@@ -810,10 +1009,17 @@ function answerQuestion(
 
 function nextQuestion(){
 
+    if(!answered) return;
+
+
     currentQuestionIndex++;
 
+
     currentPlayer =
-        currentPlayer === 1 ? 2 : 1;
+        currentPlayer === 1
+        ? 2
+        : 1;
+
 
     displayQuestion();
 }
@@ -825,47 +1031,150 @@ function nextQuestion(){
 
 function endRound(){
 
-    finalScore1.textContent = score1;
-    finalScore2.textContent = score2;
+    finalScore1.textContent =
+        score1;
+
+    finalScore2.textContent =
+        score2;
+
+
+    resultTitle.textContent =
+        `Manche ${roundNumber} terminée`;
+
 
     if(score1 > score2){
 
         winnerText.textContent =
             "Joueur 1 remporte la manche !";
 
-    }else if(score2 > score1){
+    }
+    else if(score2 > score1){
 
         winnerText.textContent =
             "Joueur 2 remporte la manche !";
 
-    }else{
+    }
+    else{
 
         winnerText.textContent =
-            "Égalité !";
+            "La manche se termine par une égalité !";
+
     }
 
-    resultOverlay.classList.add("show");
+
+    if(roundNumber >= MAX_ROUNDS){
+
+        endGame();
+
+        return;
+    }
+
+
+    nextRoundBtn.textContent =
+        "Manche suivante";
+
+
+    resultOverlay.classList.add(
+        "show"
+    );
 }
 
 
 /* =========================
-   NOUVELLE MANCHE
+   FIN DES 20 MANCHES
+========================= */
+
+function endGame(){
+
+    gameFinished = true;
+
+
+    resultTitle.textContent =
+        "Duel terminé";
+
+
+    if(score1 > score2){
+
+        winnerText.textContent =
+            "Joueur 1 remporte le duel !";
+
+    }
+    else if(score2 > score1){
+
+        winnerText.textContent =
+            "Joueur 2 remporte le duel !";
+
+    }
+    else{
+
+        winnerText.textContent =
+            "Le duel se termine par une égalité !";
+
+    }
+
+
+    finalScore1.textContent =
+        score1;
+
+    finalScore2.textContent =
+        score2;
+
+
+    nextRoundBtn.textContent =
+        "Nouvelle partie";
+
+
+    resultOverlay.classList.add(
+        "show"
+    );
+}
+
+
+/* =========================
+   MANCHE SUIVANTE
 ========================= */
 
 function startNextRound(){
 
+    if(gameFinished){
+
+        restartGame();
+
+        return;
+    }
+
+
+    if(roundNumber >= MAX_ROUNDS){
+
+        endGame();
+
+        return;
+    }
+
+
     roundNumber++;
+
 
     currentQuestionIndex = 0;
 
     currentPlayer = 1;
 
-    roundLabel.textContent =
-        `Manche ${roundNumber}`;
 
-    resultOverlay.classList.remove("show");
+    roundLabel.textContent =
+        `Manche ${
+            roundNumber
+        } / ${
+            MAX_ROUNDS
+        }`;
+
+
+    resultOverlay.classList.remove(
+        "show"
+    );
+
 
     prepareQuestions();
+
 
     displayQuestion();
 }
@@ -887,14 +1196,30 @@ function restartGame(){
 
     score2 = 0;
 
+    answered = false;
+
+    gameFinished = false;
+
+
     roundLabel.textContent =
-        "Manche 1";
+        `Manche 1 / ${MAX_ROUNDS}`;
 
-    resultOverlay.classList.remove("show");
 
-    prepareQuestions();
+    resultOverlay.classList.remove(
+        "show"
+    );
 
-    displayQuestion();
+
+    nextRoundBtn.textContent =
+        "Manche suivante";
+
+
+    if(prepareQuestions()){
+
+        displayQuestion();
+
+    }
+
 }
 
 
@@ -907,10 +1232,12 @@ nextBtn.addEventListener(
     nextQuestion
 );
 
+
 nextRoundBtn.addEventListener(
     "click",
     startNextRound
 );
+
 
 restartBtn.addEventListener(
     "click",
@@ -925,6 +1252,7 @@ restartBtn.addEventListener(
 if(prepareQuestions()){
 
     displayQuestion();
+
 }
 
 </script>
