@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<title>Duel de connaissances — ExamQuiz Haiti</title>
+
+<style>
+:root{
+    --purple:#24113f;
+    --purple2:#4b2481;
+    --blue:#1764c0;
+    --blue2:#2f80ed;
+    --white:#ffffff;
+    --bg:#f5f5f7;
+    --text:#171717;
+    --muted:#707070;
+    --border:#e4e4e7;
+    --green:#16834b;
+    --red:#c62828;
+}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh;
+}
+
+button{
+    font:inherit;
+    border:none;
+    cursor:pointer;
+}
+
+.page{
+    width:100%;
+    max-width:900px;
+    margin:auto;
+    padding:14px;
+}
+
+/* HEADER */
+
+.topbar{
+    background:var(--white);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:14px 16px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+    margin-bottom:14px;
+}
+
+.logo{
+    font-size:18px;
+    font-weight:800;
+    color:var(--purple);
+}
+
+.round{
+    font-size:14px;
+    color:var(--muted);
+}
+
+/* SCORE */
+
+.scoreboard{
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    gap:10px;
+    align-items:center;
+    margin-bottom:14px;
+}
+
+.player{
+    background:var(--white);
+    border:2px solid var(--border);
+    border-radius:16px;
+    padding:14px;
+    text-align:center;
+    transition:.2s;
+}
+
+.player.active{
+    border-color:var(--blue2);
+    box-shadow:0 0 0 3px rgba(47,128,237,.10);
+}
+
+.player-name{
+    font-size:14px;
+    font-weight:700;
+    color:var(--muted);
+}
+
+.player-score{
+    font-size:34px;
+    font-weight:800;
+    color:var(--purple);
+    margin-top:4px;
+}
+
+.vs{
+    font-weight:900;
+    color:var(--muted);
+    font-size:14px;
+}
+
+/* QUESTION */
+
+.game-card{
+    background:var(--white);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:20px;
+}
+
+.turn{
+    text-align:center;
+    font-size:14px;
+    color:var(--blue);
+    font-weight:800;
+    margin-bottom:14px;
+}
+
+.question-number{
+    text-align:center;
+    color:var(--muted);
+    font-size:13px;
+    margin-bottom:10px;
+}
+
+.question{
+    font-size:22px;
+    line-height:1.35;
+    font-weight:800;
+    text-align:center;
+    max-width:720px;
+    margin:0 auto 22px;
+}
+
+/* OPTIONS */
+
+.options{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.option{
+    min-height:64px;
+    border:2px solid var(--border);
+    border-radius:14px;
+    background:#fff;
+    padding:12px;
+    font-weight:700;
+    text-align:left;
+    transition:.15s;
+}
+
+.option:hover{
+    border-color:var(--blue2);
+}
+
+.option:active{
+    transform:scale(.98);
+}
+
+.option.correct{
+    border-color:var(--green);
+    background:#eef9f2;
+    color:var(--green);
+}
+
+.option.wrong{
+    border-color:var(--red);
+    background:#fff0f0;
+    color:var(--red);
+}
+
+.option:disabled{
+    cursor:default;
+}
+
+/* MESSAGE */
+
+.feedback{
+    margin-top:16px;
+    padding:14px;
+    border-radius:12px;
+    text-align:center;
+    font-weight:700;
+    display:none;
+}
+
+.feedback.show{
+    display:block;
+}
+
+.feedback.correct{
+    background:#eef9f2;
+    color:var(--green);
+}
+
+.feedback.wrong{
+    background:#fff0f0;
+    color:var(--red);
+}
+
+.next-btn{
+    width:100%;
+    margin-top:12px;
+    min-height:52px;
+    border-radius:13px;
+    background:var(--purple2);
+    color:white;
+    font-weight:800;
+    display:none;
+}
+
+.next-btn.show{
+    display:block;
+}
+
+/* CATEGORY */
+
+.category{
+    margin-top:16px;
+    text-align:center;
+    color:var(--muted);
+    font-size:13px;
+}
+
+/* OVERLAY */
+
+.overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(20,12,30,.72);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    z-index:50;
+}
+
+.overlay.show{
+    display:flex;
+}
+
+.result-box{
+    width:100%;
+    max-width:450px;
+    background:white;
+    border-radius:20px;
+    padding:26px 20px;
+    text-align:center;
+}
+
+.result-title{
+    font-size:28px;
+    font-weight:900;
+    color:var(--purple);
+    margin-bottom:10px;
+}
+
+.result-winner{
+    font-size:20px;
+    font-weight:800;
+    margin:16px 0;
+}
+
+.final-score{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin:18px 0;
+}
+
+.final-player{
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:14px;
+}
+
+.final-player strong{
+    display:block;
+    color:var(--muted);
+    margin-bottom:6px;
+}
+
+.final-player span{
+    font-size:30px;
+    font-weight:900;
+    color:var(--purple);
+}
+
+.action-btn{
+    width:100%;
+    min-height:52px;
+    border-radius:13px;
+    background:var(--purple2);
+    color:white;
+    font-weight:800;
+    margin-top:8px;
+}
+
+.secondary-btn{
+    background:#eeeef1;
+    color:var(--text);
+}
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    .page{
+        padding:9px;
+    }
+
+    .topbar{
+        border-radius:13px;
+        padding:12px;
+    }
+
+    .logo{
+        font-size:16px;
+    }
+
+    .round{
+        font-size:12px;
+    }
+
+    .scoreboard{
+        gap:6px;
+    }
+
+    .player{
+        padding:10px 6px;
+        border-radius:13px;
+    }
+
+    .player-name{
+        font-size:12px;
+    }
+
+    .player-score{
+        font-size:28px;
+    }
+
+    .vs{
+        font-size:12px;
+    }
+
+    .game-card{
+        padding:14px 10px;
+        border-radius:15px;
+    }
+
+    .turn{
+        font-size:13px;
+    }
+
+    .question{
+        font-size:19px;
+        line-height:1.35;
+        margin-bottom:18px;
+    }
+
+    .options{
+        grid-template-columns:1fr;
+        gap:9px;
+    }
+
+    .option{
+        min-height:58px;
+        padding:11px;
+        font-size:14px;
+    }
+
+    .category{
+        margin-top:12px;
+    }
+}
+
+@media(max-width:360px){
+
+    .question{
+        font-size:17px;
+    }
+
+    .player-score{
+        font-size:25px;
+    }
+
+    .option{
+        font-size:13px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+    <header class="topbar">
+        <div class="logo">ExamQuiz</div>
+        <div class="round" id="roundLabel">Manche 1</div>
+    </header>
+
+    <section class="scoreboard">
+
+        <div class="player active" id="player1Card">
+            <div class="player-name">Joueur 1</div>
+            <div class="player-score" id="score1">0</div>
+        </div>
+
+        <div class="vs">VS</div>
+
+        <div class="player" id="player2Card">
+            <div class="player-name">Joueur 2</div>
+            <div class="player-score" id="score2">0</div>
+        </div>
+
+    </section>
+
+    <main class="game-card">
+
+        <div class="turn" id="turnLabel">
+            Tour de Joueur 1
+        </div>
+
+        <div class="question-number" id="questionNumber">
+            Question 1
+        </div>
+
+        <div class="question" id="question">
+            Chargement...
+        </div>
+
+        <div class="options" id="options"></div>
+
+        <div class="feedback" id="feedback"></div>
+
+        <button class="next-btn" id="nextBtn">
+            Question suivante
+        </button>
+
+        <div class="category" id="category"></div>
+
+    </main>
+
+</div>
+
+
+<!-- RESULTAT -->
+
+<div class="overlay" id="resultOverlay">
+
+    <div class="result-box">
+
+        <div class="result-title">
+            Manche terminée
+        </div>
+
+        <div class="result-winner" id="winnerText"></div>
+
+        <div class="final-score">
+
+            <div class="final-player">
+                <strong>Joueur 1</strong>
+                <span id="finalScore1">0</span>
+            </div>
+
+            <div class="final-player">
+                <strong>Joueur 2</strong>
+                <span id="finalScore2">0</span>
+            </div>
+
+        </div>
+
+        <button class="action-btn" id="nextRoundBtn">
+            Manche suivante
+        </button>
+
+        <button class="action-btn secondary-btn" id="restartBtn">
+            Recommencer
+        </button>
+
+    </div>
+
+</div>
+
+
+<script type="module">
+
+import { jeuxQuestions } from "./src/jeuxQuestions.js";
+
+
+/* =========================
+   CONFIGURATION
+========================= */
+
+const QUESTIONS_PER_ROUND = 10;
+
+
+/* =========================
+   ETAT DU JEU
+========================= */
+
+let allQuestions = [];
+let currentQuestions = [];
+
+let currentQuestionIndex = 0;
+
+let currentPlayer = 1;
+
+let score1 = 0;
+let score2 = 0;
+
+let roundNumber = 1;
+
+let answered = false;
+
+
+/* =========================
+   ELEMENTS
+========================= */
+
+const questionElement =
+    document.getElementById("question");
+
+const optionsElement =
+    document.getElementById("options");
+
+const feedbackElement =
+    document.getElementById("feedback");
+
+const nextBtn =
+    document.getElementById("nextBtn");
+
+const turnLabel =
+    document.getElementById("turnLabel");
+
+const questionNumber =
+    document.getElementById("questionNumber");
+
+const categoryElement =
+    document.getElementById("category");
+
+const score1Element =
+    document.getElementById("score1");
+
+const score2Element =
+    document.getElementById("score2");
+
+const player1Card =
+    document.getElementById("player1Card");
+
+const player2Card =
+    document.getElementById("player2Card");
+
+const roundLabel =
+    document.getElementById("roundLabel");
+
+const resultOverlay =
+    document.getElementById("resultOverlay");
+
+const winnerText =
+    document.getElementById("winnerText");
+
+const finalScore1 =
+    document.getElementById("finalScore1");
+
+const finalScore2 =
+    document.getElementById("finalScore2");
+
+const nextRoundBtn =
+    document.getElementById("nextRoundBtn");
+
+const restartBtn =
+    document.getElementById("restartBtn");
+
+
+/* =========================
+   OUTILS
+========================= */
+
+function shuffle(array){
+
+    const copy = [...array];
+
+    for(let i = copy.length - 1; i > 0; i--){
+
+        const j = Math.floor(Math.random() * (i + 1));
+
+        [copy[i], copy[j]] =
+        [copy[j], copy[i]];
+    }
+
+    return copy;
+}
+
+
+/* =========================
+   PREPARATION
+========================= */
+
+function prepareQuestions(){
+
+    if(!Array.isArray(jeuxQuestions) ||
+       jeuxQuestions.length === 0){
+
+        questionElement.textContent =
+            "Aucune question disponible.";
+
+        return false;
+    }
+
+    allQuestions = [...jeuxQuestions];
+
+    currentQuestions =
+        shuffle(allQuestions)
+        .slice(
+            0,
+            Math.min(
+                QUESTIONS_PER_ROUND,
+                allQuestions.length
+            )
+        );
+
+    return currentQuestions.length > 0;
+}
+
+
+/* =========================
+   AFFICHAGE SCORE
+========================= */
+
+function updateScore(){
+
+    score1Element.textContent = score1;
+    score2Element.textContent = score2;
+
+    player1Card.classList.toggle(
+        "active",
+        currentPlayer === 1
+    );
+
+    player2Card.classList.toggle(
+        "active",
+        currentPlayer === 2
+    );
+}
+
+
+/* =========================
+   AFFICHAGE QUESTION
+========================= */
+
+function displayQuestion(){
+
+    if(currentQuestionIndex >= currentQuestions.length){
+
+        endRound();
+
+        return;
+    }
+
+    answered = false;
+
+    const q =
+        currentQuestions[currentQuestionIndex];
+
+    questionNumber.textContent =
+        `Question ${currentQuestionIndex + 1} / ${currentQuestions.length}`;
+
+    questionElement.textContent =
+        q.question;
+
+    turnLabel.textContent =
+        `Tour de Joueur ${currentPlayer}`;
+
+    categoryElement.textContent =
+        q.category
+        ? `Catégorie : ${q.category}`
+        : "";
+
+    feedbackElement.className =
+        "feedback";
+
+    feedbackElement.textContent = "";
+
+    nextBtn.className =
+        "next-btn";
+
+    optionsElement.innerHTML = "";
+
+    const options =
+        shuffle(q.options || []);
+
+    options.forEach(option => {
+
+        const button =
+            document.createElement("button");
+
+        button.className = "option";
+
+        button.textContent = option;
+
+        button.addEventListener(
+            "click",
+            () => answerQuestion(
+                button,
+                option,
+                q
+            )
+        );
+
+        optionsElement.appendChild(button);
+    });
+
+    updateScore();
+}
+
+
+/* =========================
+   REPONSE
+========================= */
+
+function answerQuestion(
+    clickedButton,
+    selectedAnswer,
+    question
+){
+
+    if(answered) return;
+
+    answered = true;
+
+    const buttons =
+        optionsElement.querySelectorAll(".option");
+
+    buttons.forEach(button => {
+
+        button.disabled = true;
+
+        if(button.textContent === question.answer){
+
+            button.classList.add("correct");
+        }
+    });
+
+
+    const isCorrect =
+        selectedAnswer === question.answer;
+
+
+    if(isCorrect){
+
+        clickedButton.classList.add("correct");
+
+        if(currentPlayer === 1){
+
+            score1 += 10;
+
+        }else{
+
+            score2 += 10;
+        }
+
+        feedbackElement.textContent =
+            `Bonne réponse ! Joueur ${currentPlayer} gagne 10 points.`;
+
+        feedbackElement.className =
+            "feedback show correct";
+
+    }else{
+
+        clickedButton.classList.add("wrong");
+
+        feedbackElement.textContent =
+            `Mauvaise réponse. La bonne réponse était : ${question.answer}`;
+
+        feedbackElement.className =
+            "feedback show wrong";
+    }
+
+
+    updateScore();
+
+    nextBtn.className =
+        "next-btn show";
+}
+
+
+/* =========================
+   QUESTION SUIVANTE
+========================= */
+
+function nextQuestion(){
+
+    currentQuestionIndex++;
+
+    currentPlayer =
+        currentPlayer === 1 ? 2 : 1;
+
+    displayQuestion();
+}
+
+
+/* =========================
+   FIN DE MANCHE
+========================= */
+
+function endRound(){
+
+    finalScore1.textContent = score1;
+    finalScore2.textContent = score2;
+
+    if(score1 > score2){
+
+        winnerText.textContent =
+            "Joueur 1 remporte la manche !";
+
+    }else if(score2 > score1){
+
+        winnerText.textContent =
+            "Joueur 2 remporte la manche !";
+
+    }else{
+
+        winnerText.textContent =
+            "Égalité !";
+    }
+
+    resultOverlay.classList.add("show");
+}
+
+
+/* =========================
+   NOUVELLE MANCHE
+========================= */
+
+function startNextRound(){
+
+    roundNumber++;
+
+    currentQuestionIndex = 0;
+
+    currentPlayer = 1;
+
+    roundLabel.textContent =
+        `Manche ${roundNumber}`;
+
+    resultOverlay.classList.remove("show");
+
+    prepareQuestions();
+
+    displayQuestion();
+}
+
+
+/* =========================
+   RECOMMENCER
+========================= */
+
+function restartGame(){
+
+    roundNumber = 1;
+
+    currentQuestionIndex = 0;
+
+    currentPlayer = 1;
+
+    score1 = 0;
+
+    score2 = 0;
+
+    roundLabel.textContent =
+        "Manche 1";
+
+    resultOverlay.classList.remove("show");
+
+    prepareQuestions();
+
+    displayQuestion();
+}
+
+
+/* =========================
+   EVENEMENTS
+========================= */
+
+nextBtn.addEventListener(
+    "click",
+    nextQuestion
+);
+
+nextRoundBtn.addEventListener(
+    "click",
+    startNextRound
+);
+
+restartBtn.addEventListener(
+    "click",
+    restartGame
+);
+
+
+/* =========================
+   DEMARRAGE
+========================= */
+
+if(prepareQuestions()){
+
+    displayQuestion();
+}
+
+</script>
+
+</body>
+</html>
