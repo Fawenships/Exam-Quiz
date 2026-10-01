@@ -55,6 +55,7 @@
       --text:#171717;
       --muted:#666;
       --card:#fff;
+      --border:#e8e8e8;
     }
 
     *{
@@ -321,7 +322,7 @@
 
       background:#fff;
 
-      border:1px solid #e8e8e8;
+      border:1px solid var(--border);
 
       border-radius:18px;
 
@@ -341,7 +342,10 @@
 
       box-shadow:0 8px 25px rgba(0,0,0,.07);
 
-      transition:.25s;
+      transition:
+        transform .25s ease,
+        border-color .25s ease,
+        box-shadow .25s ease;
 
       cursor:pointer;
     }
@@ -510,6 +514,10 @@
       margin:16px 0;
     }
 
+    .footer-links a:hover{
+      color:#7eb5ff;
+    }
+
     .footer-bottom{
       max-width:1100px;
 
@@ -540,6 +548,10 @@
       color:#aaa;
 
       font-size:22px;
+    }
+
+    .footer-socials a:hover{
+      color:#fff;
     }
 
     /* =========================================
@@ -677,6 +689,7 @@
     id="menu-btn"
     aria-label="Ouvrir le menu"
     aria-expanded="false"
+    type="button"
   >
     ☰
   </button>
@@ -753,7 +766,9 @@
 
     <div class="games">
 
-      <!-- EDUBILLARD -->
+      <!-- =====================================
+           EDUBILLARD
+      ====================================== -->
 
       <a
         href="edubillard.html"
@@ -771,8 +786,188 @@
 
         <p>
           Teste tes connaissances en biologie avec
-          un véritable jeu de billard éducatif.
-          Touche la bonne réponse et gagne des points.
+          un jeu de billard éducatif. Touche la bonne
+          réponse et gagne des points.
+        </p>
+
+        <div class="game-arrow">
+          Jouer maintenant →
+        </div>
+
+      </a>
+
+
+      <!-- =====================================
+           MEMORY QUIZ
+      ====================================== -->
+
+      <a
+        href="memoryquiz.html"
+        class="game"
+        aria-label="Jouer à Memory Quiz"
+      >
+
+        <div class="game-icon">
+          🧠
+        </div>
+
+        <h3>
+          Memory Quiz
+        </h3>
+
+        <p>
+          Retourne les cartes et retrouve les paires
+          correspondant aux questions et aux bonnes réponses.
+        </p>
+
+        <div class="game-arrow">
+          Jouer maintenant →
+        </div>
+
+      </a>
+
+
+      <!-- =====================================
+           DUEL DE CONNAISSANCES
+      ====================================== -->
+
+      <a
+        href="duelquiz.html"
+        class="game"
+        aria-label="Jouer au Duel de connaissances"
+      >
+
+        <div class="game-icon">
+          ⚔
+        </div>
+
+        <h3>
+          Duel de connaissances
+        </h3>
+
+        <p>
+          Réponds rapidement aux questions et affronte
+          un adversaire dans un duel de connaissances.
+        </p>
+
+        <div class="game-arrow">
+          Jouer maintenant →
+        </div>
+
+      </a>
+
+
+      <!-- =====================================
+           COURSE QUIZ
+      ====================================== -->
+
+      <a
+        href="coursequiz.html"
+        class="game"
+        aria-label="Jouer à Course Quiz"
+      >
+
+        <div class="game-icon">
+          🏃
+        </div>
+
+        <h3>
+          Course Quiz
+        </h3>
+
+        <p>
+          Réponds correctement pour avancer.
+          Chaque bonne réponse te rapproche de l'arrivée.
+        </p>
+
+        <div class="game-arrow">
+          Jouer maintenant →
+        </div>
+
+      </a>
+
+
+      <!-- =====================================
+           FLÈCHES À RÉPONSES
+      ====================================== -->
+
+      <a
+        href="flechesquiz.html"
+        class="game"
+        aria-label="Jouer à Flèches à réponses"
+      >
+
+        <div class="game-icon">
+          ➜
+        </div>
+
+        <h3>
+          Flèches à réponses
+        </h3>
+
+        <p>
+          Choisis la bonne direction pour atteindre
+          la réponse correcte avant de continuer.
+        </p>
+
+        <div class="game-arrow">
+          Jouer maintenant →
+        </div>
+
+      </a>
+
+
+      <!-- =====================================
+           PUZZLE QUIZ
+      ====================================== -->
+
+      <a
+        href="puzzlequiz.html"
+        class="game"
+        aria-label="Jouer à Puzzle Quiz"
+      >
+
+        <div class="game-icon">
+          🧩
+        </div>
+
+        <h3>
+          Puzzle Quiz
+        </h3>
+
+        <p>
+          Résous les défis et reconstruis progressivement
+          ton puzzle grâce à tes connaissances.
+        </p>
+
+        <div class="game-arrow">
+          Jouer maintenant →
+        </div>
+
+      </a>
+
+
+      <!-- =====================================
+           QUIZ RUSH
+      ====================================== -->
+
+      <a
+        href="quizrush.html"
+        class="game"
+        aria-label="Jouer à Quiz Rush"
+      >
+
+        <div class="game-icon">
+          ⚡
+        </div>
+
+        <h3>
+          Quiz Rush
+        </h3>
+
+        <p>
+          Réponds au maximum de questions dans
+          un temps limité et améliore ton score.
         </p>
 
         <div class="game-arrow">
@@ -784,7 +979,9 @@
     </div>
 
 
-    <!-- JEUX À VENIR -->
+    <!-- =====================================
+         JEUX À VENIR
+    ====================================== -->
 
     <div class="coming-soon">
 
