@@ -4,2488 +4,2924 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>EduBillard — Biologie | ExamQuiz Haiti</title>
+<title>EduBillard — ExamQuiz Haiti</title>
+
+<meta
+  name="description"
+  content="EduBillard — Apprends la biologie en jouant au billard sur ExamQuiz Haiti."
+>
 
 <style>
-* {
+  * {
     box-sizing: border-box;
+  }
+
+  body {
     margin: 0;
-    padding: 0;
-}
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f6f4f8;
+    color: #24113f;
+  }
 
-body {
-    font-family: Arial, sans-serif;
-    background: #f4f4f4;
-    color: #222;
-    min-height: 100vh;
-}
-
-header {
+  header {
     background: #24113f;
     color: white;
     padding: 16px 24px;
+  }
+
+  .header-inner {
+    max-width: 1200px;
+    margin: auto;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
     gap: 20px;
-}
+  }
 
-.logo {
-    font-size: 22px;
+  .brand {
+    font-size: 21px;
     font-weight: 700;
-}
+  }
 
-.back-link {
+  .back-link {
     color: white;
     text-decoration: none;
     font-size: 14px;
-}
+    border: 1px solid rgba(255,255,255,.35);
+    padding: 9px 14px;
+    border-radius: 8px;
+  }
 
-.container {
-    width: min(1180px, 96%);
-    margin: 20px auto 40px;
-}
+  .back-link:hover {
+    background: rgba(255,255,255,.1);
+  }
 
-.title-area {
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 28px 20px 50px;
+  }
+
+  .page-title {
     text-align: center;
-    margin-bottom: 18px;
-}
+    margin-bottom: 24px;
+  }
 
-.title-area h1 {
-    color: #24113f;
-    font-size: clamp(24px, 4vw, 36px);
-    margin-bottom: 6px;
-}
+  .page-title h1 {
+    margin: 0 0 8px;
+    font-size: 34px;
+  }
 
-.title-area p {
+  .page-title p {
+    margin: 0;
     color: #666;
-    font-size: 14px;
-}
+  }
 
-.hud {
+  /* HUD */
+
+  .hud {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-    margin-bottom: 15px;
-}
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-bottom: 18px;
+  }
 
-.hud-box {
+  .hud-box {
     background: white;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 12px;
+    border: 1px solid #e4e0e9;
+    border-radius: 12px;
+    padding: 13px;
     text-align: center;
-}
+  }
 
-.hud-label {
-    font-size: 12px;
+  .hud-label {
     color: #777;
-    margin-bottom: 4px;
-}
+    font-size: 12px;
+    margin-bottom: 5px;
+  }
 
-.hud-value {
+  .hud-value {
     font-size: 20px;
     font-weight: 700;
+  }
+
+  .stars {
+    font-size: 19px;
+    letter-spacing: 2px;
+    white-space: nowrap;
+    line-height: 1.2;
+  }
+
+  .star-active {
     color: #24113f;
-}
+  }
 
-.question-box {
+  .star-lost {
+    color: #d6d3da;
+  }
+
+  /* QUESTION */
+
+  .question-box {
     background: white;
-    border: 1px solid #ddd;
-    border-radius: 12px;
-    padding: 18px;
-    margin-bottom: 14px;
-}
+    border: 1px solid #e4e0e9;
+    border-radius: 14px;
+    padding: 18px 20px;
+    margin-bottom: 18px;
+  }
 
-.question-top {
+  .question-top {
     display: flex;
     justify-content: space-between;
-    gap: 10px;
     align-items: center;
+    gap: 15px;
     margin-bottom: 10px;
-}
+  }
 
-.level-label {
-    background: #eee7f8;
-    color: #24113f;
-    border-radius: 20px;
-    padding: 5px 10px;
-    font-size: 12px;
-    font-weight: 700;
-}
-
-.question-number {
-    color: #777;
+  .level-label {
     font-size: 13px;
-}
-
-.question {
-    font-size: clamp(17px, 2.4vw, 22px);
     font-weight: 700;
+    color: #4b2481;
+  }
+
+  .question-number {
+    font-size: 13px;
+    color: #777;
+  }
+
+  .question-text {
+    font-size: 20px;
     line-height: 1.45;
-}
+    font-weight: 600;
+    margin-bottom: 14px;
+  }
 
-.progress {
-    height: 6px;
-    background: #e5e5e5;
-    border-radius: 20px;
+  .progress-container {
+    width: 100%;
+    height: 7px;
+    background: #ebe8ef;
+    border-radius: 10px;
     overflow: hidden;
-    margin-top: 14px;
-}
+  }
 
-.progress-bar {
+  .progress-bar {
     width: 0%;
     height: 100%;
     background: #4b2481;
-    transition: width .3s ease;
-}
+    transition: width .25s ease;
+  }
 
-.table-wrapper {
+  /* TABLE */
+
+  .table-wrapper {
+    position: relative;
     width: 100%;
     overflow: hidden;
-    border-radius: 16px;
-    background: #153e28;
-    box-shadow: 0 8px 30px rgba(0,0,0,.15);
-    touch-action: none;
-}
+    border-radius: 25px;
+    background: #123d27;
+    box-shadow: 0 12px 35px rgba(0,0,0,.16);
+  }
 
-#gameCanvas {
+  #gameCanvas {
+    display: block;
     width: 100%;
     height: auto;
-    display: block;
-    cursor: crosshair;
+    background: #17613b;
     touch-action: none;
-}
+    cursor: default;
+  }
 
-.answers-grid {
+  /* RESULTAT */
+
+  .answer-result {
+    position: absolute;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(20, 12, 30, .68);
+    z-index: 10;
+  }
+
+  .answer-result.show {
+    display: flex;
+  }
+
+  .answer-result-content {
+    width: min(560px, 94%);
+    background: white;
+    border-radius: 18px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 18px 45px rgba(0,0,0,.28);
+  }
+
+  .answer-result-title {
+    font-size: 26px;
+    font-weight: 800;
+    color: #24113f;
+    margin-bottom: 14px;
+  }
+
+  .answer-result-question {
+    color: #444;
+    line-height: 1.5;
+    margin-bottom: 18px;
+  }
+
+  .answer-result-answer {
+    background: #f5f2f8;
+    border-radius: 10px;
+    padding: 13px;
+    margin-bottom: 18px;
+  }
+
+  .answer-result-answer span {
+    color: #666;
+  }
+
+  .answer-result-answer strong {
+    display: block;
+    margin-top: 5px;
+    color: #24113f;
+  }
+
+  .continue-btn {
+    border: 0;
+    background: #24113f;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 9px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .continue-btn:hover {
+    background: #4b2481;
+  }
+
+  /* REPONSES */
+
+  .answers-title {
+    margin: 22px 0 10px;
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  .answers-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-    margin-top: 15px;
-}
+    gap: 12px;
+  }
 
-.answer-card {
+  .answer-card {
     background: white;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 12px;
-    min-height: 70px;
-    display: flex;
-    gap: 10px;
-    align-items: flex-start;
-}
-
-.answer-letter {
-    width: 30px;
-    height: 30px;
-    min-width: 30px;
-    border-radius: 50%;
-    background: #24113f;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: 700;
-}
-
-.answer-text {
-    font-size: 14px;
-    line-height: 1.4;
-    overflow-wrap: anywhere;
-}
-
-.answer-card.selected {
-    border-color: #4b2481;
-    box-shadow: 0 0 0 2px rgba(75,36,129,.12);
-}
-
-.message {
-    min-height: 48px;
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    margin-top: 14px;
+    border: 2px solid #e1dde7;
+    border-radius: 12px;
     padding: 13px;
-    text-align: center;
+    min-height: 75px;
+    cursor: pointer;
+    transition: .15s ease;
+  }
+
+  .answer-card:hover {
+    border-color: #4b2481;
+  }
+
+  .answer-card.selected {
+    border-color: #4b2481;
+    background: #f4f0f8;
+  }
+
+  .answer-letter {
+    font-weight: 800;
+    color: #4b2481;
+    margin-bottom: 5px;
+  }
+
+  .answer-text {
     font-size: 14px;
-    line-height: 1.5;
-}
+    line-height: 1.35;
+    color: #333;
+  }
 
-.instructions {
-    margin-top: 14px;
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 14px;
-    color: #555;
-    font-size: 13px;
-    line-height: 1.6;
-}
+  /* MESSAGE */
 
-.controls {
+  .message {
+    min-height: 25px;
     text-align: center;
-    margin-top: 15px;
-}
+    margin: 16px 0;
+    font-weight: 600;
+    color: #4b2481;
+  }
 
-.restart-small {
-    border: none;
+  /* INSTRUCTIONS */
+
+  .instructions {
+    background: white;
+    border: 1px solid #e4e0e9;
+    border-radius: 14px;
+    padding: 18px;
+    margin-top: 18px;
+  }
+
+  .instructions h2 {
+    font-size: 17px;
+    margin: 0 0 10px;
+  }
+
+  .instructions p {
+    margin: 6px 0;
+    color: #555;
+    line-height: 1.5;
+  }
+
+  /* BUTTON */
+
+  .restart-small {
+    display: block;
+    margin: 20px auto 0;
+    border: 1px solid #24113f;
+    background: white;
+    color: #24113f;
+    padding: 11px 20px;
+    border-radius: 9px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .restart-small:hover {
     background: #24113f;
     color: white;
-    padding: 10px 18px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 700;
-}
+  }
 
-.end-overlay {
+  /* FIN */
+
+  .end-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,.65);
+    background: rgba(20, 12, 30, .75);
     display: none;
     align-items: center;
     justify-content: center;
     padding: 20px;
     z-index: 100;
-}
+  }
 
-.end-overlay.show {
+  .end-overlay.show {
     display: flex;
-}
+  }
 
-.end-card {
-    width: min(500px, 100%);
+  .end-box {
+    width: min(500px, 95%);
     background: white;
-    border-radius: 16px;
-    padding: 28px;
+    border-radius: 18px;
+    padding: 30px;
     text-align: center;
-}
+  }
 
-.end-card h2 {
+  .end-box h2 {
+    margin-top: 0;
+    font-size: 28px;
     color: #24113f;
-    margin-bottom: 18px;
-}
+  }
 
-.final-score {
-    font-size: 42px;
-    color: #4b2481;
+  .final-score {
+    font-size: 40px;
     font-weight: 800;
-    margin-bottom: 20px;
-}
+    color: #4b2481;
+    margin: 15px 0;
+  }
 
-.final-stats {
+  .final-stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
-    margin-bottom: 20px;
-}
+    margin: 20px 0;
+  }
 
-.final-stat {
-    border: 1px solid #ddd;
+  .final-stat {
+    background: #f5f2f8;
     border-radius: 10px;
     padding: 12px;
-}
+  }
 
-.final-stat strong {
+  .final-stat strong {
     display: block;
     font-size: 20px;
     color: #24113f;
-    margin-bottom: 4px;
-}
+  }
 
-.restart-btn {
-    border: none;
+  .final-stat span {
+    display: block;
+    margin-top: 4px;
+    font-size: 12px;
+    color: #777;
+  }
+
+  .restart-btn {
+    width: 100%;
+    border: 0;
     background: #24113f;
     color: white;
-    padding: 13px 24px;
+    padding: 13px;
     border-radius: 9px;
-    cursor: pointer;
     font-weight: 700;
     font-size: 15px;
-}
+    cursor: pointer;
+  }
 
-@media (max-width: 800px) {
+  .restart-btn:hover {
+    background: #4b2481;
+  }
+
+  @media (max-width: 900px) {
     .hud {
-        grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(3, 1fr);
     }
 
     .answers-grid {
-        grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(2, 1fr);
     }
-}
+  }
 
-@media (max-width: 520px) {
+  @media (max-width: 600px) {
     header {
-        padding: 13px 15px;
+      padding: 14px 15px;
     }
 
-    .container {
-        width: 96%;
-        margin-top: 14px;
+    main {
+      padding: 22px 12px 35px;
+    }
+
+    .page-title h1 {
+      font-size: 27px;
+    }
+
+    .hud {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hud-box:last-child {
+      grid-column: span 2;
+    }
+
+    .question-text {
+      font-size: 17px;
+    }
+
+    .question-top {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 5px;
     }
 
     .answers-grid {
-        grid-template-columns: 1fr;
+      grid-template-columns: 1fr;
     }
 
-    .question-box {
-        padding: 14px;
+    .answer-card {
+      min-height: auto;
     }
 
-    .hud-value {
-        font-size: 18px;
+    .answer-result-content {
+      padding: 20px;
     }
 
     .final-stats {
-        grid-template-columns: 1fr;
+      grid-template-columns: 1fr;
     }
-}
+  }
 </style>
 </head>
 
 <body>
 
 <header>
-    <div class="logo">ExamQuiz Haiti</div>
-    <a href="./baccalaureat.html" class="back-link">Retour</a>
+  <div class="header-inner">
+    <div class="brand">ExamQuiz Haiti</div>
+    <a class="back-link" href="baccalaureat.html">Retour</a>
+  </div>
 </header>
 
-<div class="container">
+<main>
 
-    <div class="title-area">
-        <h1>EduBillard</h1>
-        <p>Réponds aux questions de biologie avec ta bille.</p>
+  <section class="page-title">
+    <h1>EduBillard</h1>
+    <p>Réponds aux questions de biologie en jouant au billard.</p>
+  </section>
+
+  <!-- HUD -->
+
+  <section class="hud">
+
+    <div class="hud-box">
+      <div class="hud-label">Score</div>
+      <div class="hud-value" id="score">0</div>
     </div>
 
-    <div class="hud">
-        <div class="hud-box">
-            <div class="hud-label">Score</div>
-            <div class="hud-value" id="score">0</div>
-        </div>
-
-        <div class="hud-box">
-            <div class="hud-label">Question</div>
-            <div class="hud-value" id="questionCounter">1 / 10</div>
-        </div>
-
-        <div class="hud-box">
-            <div class="hud-label">Bonnes réponses</div>
-            <div class="hud-value" id="correctCount">0</div>
-        </div>
-
-        <div class="hud-box">
-            <div class="hud-label">Meilleur score</div>
-            <div class="hud-value" id="bestScore">0</div>
-        </div>
+    <div class="hud-box">
+      <div class="hud-label">Question</div>
+      <div class="hud-value" id="questionCounter">1 / 10</div>
     </div>
 
-    <div class="question-box">
-        <div class="question-top">
-            <span class="level-label" id="levelLabel">Niveau 1</span>
-            <span class="question-number" id="questionNumber">Question 1</span>
-        </div>
-
-        <div class="question" id="question">
-            Chargement de la question...
-        </div>
-
-        <div class="progress">
-            <div class="progress-bar" id="progressBar"></div>
-        </div>
+    <div class="hud-box">
+      <div class="hud-label">Bonnes réponses</div>
+      <div class="hud-value" id="correctCount">0</div>
     </div>
 
-    <div class="table-wrapper">
-        <canvas id="gameCanvas" width="1100" height="600"></canvas>
+    <div class="hud-box">
+      <div class="hud-label">Meilleur score</div>
+      <div class="hud-value" id="bestScore">0</div>
     </div>
 
-    <div class="answers-grid" id="answersGrid"></div>
-
-    <div class="message" id="message">
-        Tire la bille blanche vers une réponse.
+    <div class="hud-box">
+      <div class="hud-label">Étoiles</div>
+      <div class="hud-value stars" id="stars"></div>
     </div>
 
-    <div class="instructions">
-        <strong>Comment jouer :</strong>
-        place ton doigt ou ta souris sur la bille blanche,
-        tire-la vers l'arrière pour choisir la direction et la puissance,
-        puis relâche.
-        La première bille A, B, C ou D touchée est ta réponse.
-        Une mauvaise bille ne disparaît pas et ne revient pas à sa position initiale.
-        Tu dois continuer à jouer jusqu'à toucher la bonne bille.
+  </section>
+
+  <!-- QUESTION -->
+
+  <section class="question-box">
+
+    <div class="question-top">
+      <div class="level-label" id="levelLabel">Biologie</div>
+      <div class="question-number" id="questionNumber">Question 1</div>
     </div>
 
-    <div class="controls">
-        <button class="restart-small" id="restartSmall">
-            Recommencer
-        </button>
+    <div class="question-text" id="question">
+      Chargement de la question...
     </div>
 
-</div>
+    <div class="progress-container">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
 
-<div class="end-overlay" id="endOverlay">
-    <div class="end-card">
+  </section>
 
-        <h2>Partie terminée</h2>
+  <!-- BILLARD -->
 
-        <div class="final-score" id="finalScore">
-            0 points
+  <section class="table-wrapper">
+
+    <canvas
+      id="gameCanvas"
+      width="1100"
+      height="600"
+    ></canvas>
+
+    <!-- RESULTAT BONNE REPONSE -->
+
+    <div class="answer-result" id="answerResult">
+
+      <div class="answer-result-content">
+
+        <div class="answer-result-title">
+          Bonne réponse
         </div>
 
-        <div class="final-stats">
+        <div
+          class="answer-result-question"
+          id="resultQuestion"
+        ></div>
 
-            <div class="final-stat">
-                <strong id="finalCorrect">0</strong>
-                Bonnes réponses
-            </div>
+        <div class="answer-result-answer">
 
-            <div class="final-stat">
-                <strong id="finalWrong">0</strong>
-                Mauvais contacts
-            </div>
+          <span>Réponse :</span>
 
-            <div class="final-stat">
-                <strong id="finalBest">0</strong>
-                Meilleur score
-            </div>
+          <strong id="resultAnswer"></strong>
 
         </div>
 
-        <button class="restart-btn" id="restartBtn">
-            Rejouer
+        <button
+          type="button"
+          id="continueBtn"
+          class="continue-btn"
+        >
+          Continuer
         </button>
 
+      </div>
+
     </div>
+
+  </section>
+
+  <!-- REPONSES -->
+
+  <div class="answers-title">
+    Réponses disponibles
+  </div>
+
+  <section
+    class="answers-grid"
+    id="answersGrid"
+  ></section>
+
+  <div
+    class="message"
+    id="message"
+    aria-live="polite"
+  >
+    Tire la bille blanche vers l'arrière puis relâche-la.
+  </div>
+
+  <!-- INSTRUCTIONS -->
+
+  <section class="instructions">
+
+    <h2>Comment jouer ?</h2>
+
+    <p>
+      1. Place ton doigt ou ta souris sur la bille blanche.
+    </p>
+
+    <p>
+      2. Tire vers l'arrière pour choisir la direction et la puissance.
+    </p>
+
+    <p>
+      3. Relâche pour lancer la bille.
+    </p>
+
+    <p>
+      4. Touche une boule-réponse pour répondre.
+    </p>
+
+    <p>
+      5. Une mauvaise réponse te fait perdre une étoile.
+    </p>
+
+    <p>
+      6. Tu dois toucher la bonne réponse pour passer à la question suivante.
+    </p>
+
+  </section>
+
+  <button
+    type="button"
+    id="restartSmall"
+    class="restart-small"
+  >
+    Recommencer la partie
+  </button>
+
+</main>
+
+<!-- FIN DE PARTIE -->
+
+<div
+  class="end-overlay"
+  id="endOverlay"
+>
+
+  <div class="end-box">
+
+    <h2 id="endTitle">
+      Partie terminée
+    </h2>
+
+    <div class="final-score">
+      <span id="finalScore">0</span> points
+    </div>
+
+    <div class="final-stats">
+
+      <div class="final-stat">
+        <strong id="finalCorrect">0</strong>
+        <span>Bonnes réponses</span>
+      </div>
+
+      <div class="final-stat">
+        <strong id="finalWrong">0</strong>
+        <span>Mauvaises réponses</span>
+      </div>
+
+      <div class="final-stat">
+        <strong id="finalBest">0</strong>
+        <span>Meilleur score</span>
+      </div>
+
+    </div>
+
+    <button
+      type="button"
+      id="restartBtn"
+      class="restart-btn"
+    >
+      Rejouer
+    </button>
+
+  </div>
+
 </div>
 
 <script type="module">
 
+/* =========================================================
+   CONFIGURATION
+========================================================= */
+
 const QUESTIONS_URL = './src/biologieQuestions.js';
 
 const TOTAL_QUESTIONS = 10;
+
 const POINTS_CORRECT = 10;
+
+const MAX_STARS = 5;
+
 const BEST_SCORE_KEY = 'edubillard_best_score';
 
-/* =========================
+
+/* =========================================================
    DOM
-========================= */
+========================================================= */
 
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
 const scoreEl = document.getElementById('score');
-const questionCounterEl = document.getElementById('questionCounter');
-const correctCountEl = document.getElementById('correctCount');
-const bestScoreEl = document.getElementById('bestScore');
+const questionCounterEl =
+  document.getElementById('questionCounter');
 
-const questionEl = document.getElementById('question');
-const questionNumberEl = document.getElementById('questionNumber');
-const levelLabelEl = document.getElementById('levelLabel');
-const progressBarEl = document.getElementById('progressBar');
+const correctCountEl =
+  document.getElementById('correctCount');
 
-const messageEl = document.getElementById('message');
-const answersGrid = document.getElementById('answersGrid');
+const bestScoreEl =
+  document.getElementById('bestScore');
 
-const endOverlay = document.getElementById('endOverlay');
-const finalScoreEl = document.getElementById('finalScore');
-const finalCorrectEl = document.getElementById('finalCorrect');
-const finalWrongEl = document.getElementById('finalWrong');
-const finalBestEl = document.getElementById('finalBest');
+const starsEl =
+  document.getElementById('stars');
 
-const restartBtn = document.getElementById('restartBtn');
-const restartSmall = document.getElementById('restartSmall');
+const questionEl =
+  document.getElementById('question');
+
+const questionNumberEl =
+  document.getElementById('questionNumber');
+
+const levelLabelEl =
+  document.getElementById('levelLabel');
+
+const progressBarEl =
+  document.getElementById('progressBar');
+
+const messageEl =
+  document.getElementById('message');
+
+const answersGrid =
+  document.getElementById('answersGrid');
+
+const answerResult =
+  document.getElementById('answerResult');
+
+const resultQuestion =
+  document.getElementById('resultQuestion');
+
+const resultAnswer =
+  document.getElementById('resultAnswer');
+
+const continueBtn =
+  document.getElementById('continueBtn');
+
+const endOverlay =
+  document.getElementById('endOverlay');
+
+const endTitle =
+  document.getElementById('endTitle');
+
+const finalScoreEl =
+  document.getElementById('finalScore');
+
+const finalCorrectEl =
+  document.getElementById('finalCorrect');
+
+const finalWrongEl =
+  document.getElementById('finalWrong');
+
+const finalBestEl =
+  document.getElementById('finalBest');
+
+const restartBtn =
+  document.getElementById('restartBtn');
+
+const restartSmall =
+  document.getElementById('restartSmall');
 
 
-/* =========================
-   ÉTAT DU JEU
-========================= */
+/* =========================================================
+   ETAT DU JEU
+========================================================= */
 
 let biologyQuestions = [];
+
 let gameQuestions = [];
 
 let currentQuestionIndex = 0;
+
 let currentQuestion = null;
 
 let score = 0;
+
 let correctAnswers = 0;
+
 let wrongAnswers = 0;
 
+let stars = MAX_STARS;
+
 let balls = [];
+
 let whiteBall = null;
 
 let dragging = false;
+
 let shotInProgress = false;
+
 let answerLocked = false;
 
-/*
-    Une seule réponse peut être enregistrée
-    pendant un même tir.
-*/
 let answerHitThisShot = false;
 
 let animationFrame = null;
-let nextQuestionTimer = null;
 
 let dragStartX = 0;
+
 let dragStartY = 0;
 
 let currentPointerX = 0;
+
 let currentPointerY = 0;
 
 let tableWidth = canvas.width;
+
 let tableHeight = canvas.height;
 
 let gameRunning = false;
 
 
-/* =========================
+/* =========================================================
    PHYSIQUE
-========================= */
+========================================================= */
 
-/*
-    Ces valeurs donnent un comportement
-    proche d'un vrai billard :
-
-    - friction lente
-    - collisions presque élastiques
-    - restitution des bandes
-*/
 const BALL_FRICTION = 0.987;
+
 const BALL_RESTITUTION = 0.96;
+
 const WALL_RESTITUTION = 0.90;
 
 const MIN_MOVING_SPEED = 0.025;
+
 const MOVING_THRESHOLD = 0.05;
 
 
-/* =========================
-   UTILITAIRES
-========================= */
+/* =========================================================
+   OUTILS
+========================================================= */
 
 function shuffle(array) {
-    const copy = [...array];
 
-    for (let i = copy.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
+  const copy = [...array];
 
-        [copy[i], copy[j]] = [copy[j], copy[i]];
-    }
+  for (
+    let i = copy.length - 1;
+    i > 0;
+    i--
+  ) {
 
-    return copy;
+    const j =
+      Math.floor(Math.random() * (i + 1));
+
+    [
+      copy[i],
+      copy[j]
+    ] =
+    [
+      copy[j],
+      copy[i]
+    ];
+  }
+
+  return copy;
 }
 
 
 function cleanText(value) {
-    if (value === null || value === undefined) {
-        return '';
-    }
 
-    return String(value).trim();
-}
+  if (
+    value === null ||
+    value === undefined
+  ) {
+    return '';
+  }
 
-
-function normalizeQuestion(raw) {
-
-    if (!raw || typeof raw !== 'object') {
-        return null;
-    }
-
-    const question =
-        cleanText(
-            raw.question ??
-            raw.q ??
-            raw.text ??
-            raw.enonce
-        );
-
-    let answer =
-        cleanText(
-            raw.answer ??
-            raw.reponse ??
-            raw.correct ??
-            raw.correctAnswer
-        );
-
-    let options = [];
-
-    if (Array.isArray(raw.options)) {
-        options = raw.options.map(cleanText);
-    }
-    else if (Array.isArray(raw.choices)) {
-        options = raw.choices.map(cleanText);
-    }
-    else {
-
-        const possible = [
-            raw.a,
-            raw.b,
-            raw.c,
-            raw.d
-        ];
-
-        options = possible
-            .map(cleanText)
-            .filter(Boolean);
-    }
-
-    let correctIndex =
-        Number.isInteger(raw.correctIndex)
-            ? raw.correctIndex
-            : Number.isInteger(raw.answerIndex)
-                ? raw.answerIndex
-                : -1;
-
-    if (!answer && correctIndex >= 0 && options[correctIndex]) {
-        answer = options[correctIndex];
-    }
-
-    if (!answer && options.length) {
-        const possibleCorrect = options.find(
-            option =>
-                option.toLowerCase() ===
-                cleanText(raw.correct ?? raw.reponse ?? '').toLowerCase()
-        );
-
-        if (possibleCorrect) {
-            answer = possibleCorrect;
-        }
-    }
-
-    if (!question || !answer) {
-        return null;
-    }
-
-    return {
-        question,
-        answer,
-        options: [...new Set(options.filter(Boolean))],
-        level:
-            raw.level ??
-            raw.niveau ??
-            raw.difficulty ??
-            1
-    };
+  return String(value).trim();
 }
 
 
 function distance(a, b) {
-    return Math.hypot(
-        b.x - a.x,
-        b.y - a.y
-    );
+
+  return Math.hypot(
+    a.x - b.x,
+    a.y - b.y
+  );
 }
 
 
-function getBestScore() {
-    return Number(
-        localStorage.getItem(BEST_SCORE_KEY) || 0
-    );
+/* =========================================================
+   NORMALISATION DES QUESTIONS
+========================================================= */
+
+function normalizeQuestion(raw) {
+
+  if (!raw || typeof raw !== 'object') {
+    return null;
+  }
+
+  const question = cleanText(
+    raw.question ??
+    raw.q ??
+    raw.text ??
+    raw.enonce
+  );
+
+  let answer = cleanText(
+    raw.answer ??
+    raw.reponse ??
+    raw.correct ??
+    raw.correctAnswer
+  );
+
+  let options = [];
+
+  if (Array.isArray(raw.options)) {
+
+    options = raw.options
+      .map(cleanText)
+      .filter(Boolean);
+
+  } else if (Array.isArray(raw.choices)) {
+
+    options = raw.choices
+      .map(cleanText)
+      .filter(Boolean);
+
+  } else {
+
+    options = [
+      raw.a,
+      raw.b,
+      raw.c,
+      raw.d
+    ]
+      .map(cleanText)
+      .filter(Boolean);
+
+  }
+
+  const correctIndex =
+    Number.isInteger(raw.correctIndex)
+      ? raw.correctIndex
+      : Number.isInteger(raw.answerIndex)
+        ? raw.answerIndex
+        : -1;
+
+  if (
+    !answer &&
+    correctIndex >= 0 &&
+    options[correctIndex]
+  ) {
+    answer = options[correctIndex];
+  }
+
+  if (
+    !question ||
+    !answer
+  ) {
+    return null;
+  }
+
+  if (
+    !options.some(
+      option =>
+        option.toLowerCase() ===
+        answer.toLowerCase()
+    )
+  ) {
+    options.unshift(answer);
+  }
+
+  const level =
+    raw.level ??
+    raw.niveau ??
+    raw.difficulty ??
+    '';
+
+  return {
+    question,
+    answer,
+    options: [...new Set(options)],
+    level
+  };
 }
 
 
-function updateBestScore() {
-
-    const best = getBestScore();
-
-    if (score > best) {
-        localStorage.setItem(
-            BEST_SCORE_KEY,
-            String(score)
-        );
-    }
-
-    bestScoreEl.textContent = getBestScore();
-}
-
-
-/* =========================
-   QUESTIONS
-========================= */
+/* =========================================================
+   CHARGEMENT BIOLOGIE
+========================================================= */
 
 async function loadQuestions() {
 
-    try {
+  try {
 
-        const module = await import(
-            QUESTIONS_URL
-        );
+    messageEl.textContent =
+      'Chargement des questions de biologie...';
 
-        let rawQuestions =
-            module.biologieQuestions ??
-            module.biologyQuestions ??
-            module.questions ??
-            module.default ??
-            [];
+    const module =
+      await import(
+        `${QUESTIONS_URL}?v=${Date.now()}`
+      );
 
-        if (!Array.isArray(rawQuestions)) {
-            rawQuestions = [];
-        }
+    const source =
+      module.biologieQuestions ??
+      module.biologyQuestions ??
+      module.questions ??
+      module.default;
 
-        biologyQuestions = rawQuestions
-            .map(normalizeQuestion)
-            .filter(Boolean);
+    if (!Array.isArray(source)) {
 
-        /*
-            Suppression des doublons.
-        */
-        const seen = new Set();
-
-        biologyQuestions =
-            biologyQuestions.filter(item => {
-
-                const key =
-                    item.question
-                        .toLowerCase()
-                        .replace(/\s+/g, ' ')
-                        .trim();
-
-                if (seen.has(key)) {
-                    return false;
-                }
-
-                seen.add(key);
-                return true;
-            });
-
-        if (biologyQuestions.length < 4) {
-            throw new Error(
-                'Il faut au moins 4 questions de biologie.'
-            );
-        }
-
-        startGame();
+      throw new Error(
+        'Le fichier biologieQuestions.js ne contient pas de tableau de questions.'
+      );
 
     }
-    catch (error) {
 
-        console.error(error);
+    biologyQuestions =
+      source
+        .map(normalizeQuestion)
+        .filter(Boolean);
 
-        questionEl.textContent =
-            'Impossible de charger les questions de biologie.';
+    const unique = [];
 
-        messageEl.textContent =
-            'Vérifie le fichier src/biologieQuestions.js.';
+    const seen = new Set();
+
+    for (const question of biologyQuestions) {
+
+      const key =
+        question.question
+          .toLowerCase()
+          .trim();
+
+      if (!seen.has(key)) {
+
+        seen.add(key);
+
+        unique.push(question);
+
+      }
+
     }
+
+    biologyQuestions = unique;
+
+    if (biologyQuestions.length < 4) {
+
+      throw new Error(
+        'Il faut au moins 4 questions de biologie.'
+      );
+
+    }
+
+    startGame();
+
+  } catch (error) {
+
+    console.error(error);
+
+    messageEl.textContent =
+      'Impossible de charger les questions de biologie.';
+
+  }
+
 }
 
 
-/* =========================
-   PRÉPARATION DES QUESTIONS
-========================= */
+/* =========================================================
+   PREPARER LES QUESTIONS
+========================================================= */
 
 function prepareGameQuestions() {
 
-    /*
-        Mélange une seule fois.
-
-        Les questions utilisées pendant
-        la partie ne seront donc pas répétées.
-    */
-    gameQuestions = shuffle(
-        biologyQuestions
-    ).slice(
+  gameQuestions =
+    shuffle(biologyQuestions)
+      .slice(
         0,
         Math.min(
-            TOTAL_QUESTIONS,
-            biologyQuestions.length
+          TOTAL_QUESTIONS,
+          biologyQuestions.length
         )
-    );
+      );
+
 }
 
 
-/* =========================
-   CONSTRUCTION DES RÉPONSES
-========================= */
+/* =========================================================
+   CONSTRUIRE LES REPONSES
+========================================================= */
 
 function buildAnswers(question) {
 
-    const correct = cleanText(question.answer);
+  const correct =
+    cleanText(question.answer);
 
-    /*
-        On prend les options de la question,
-        puis les réponses/options des autres
-        questions pour avoir suffisamment
-        de mauvaises réponses.
-    */
+  const wrongCandidates = [];
 
-    const candidates = [];
+  /*
+    On récupère d'abord les options
+    de la question actuelle.
+  */
 
-    function addCandidate(value) {
+  for (const option of question.options) {
 
-        const text = cleanText(value);
+    const text = cleanText(option);
 
-        if (!text) return;
+    if (
+      text &&
+      text.toLowerCase() !==
+      correct.toLowerCase()
+    ) {
 
-        const exists = candidates.some(
-            item =>
-                item.toLowerCase() ===
-                text.toLowerCase()
-        );
+      wrongCandidates.push(text);
 
-        if (!exists) {
-            candidates.push(text);
-        }
     }
 
-    /*
-        Priorité aux options de la question.
-    */
-    question.options.forEach(addCandidate);
+  }
 
-    /*
-        Puis les réponses des autres questions.
-    */
-    shuffle(
-        biologyQuestions
-            .map(q => q.answer)
-    ).forEach(addCandidate);
+  /*
+    Puis les bonnes réponses des autres questions.
+  */
 
-    /*
-        Puis toutes les options disponibles.
-    */
-    shuffle(
-        biologyQuestions
-            .flatMap(q => q.options || [])
-    ).forEach(addCandidate);
+  for (const item of biologyQuestions) {
 
-    const wrongAnswers = candidates
-        .filter(
-            answer =>
-                answer.toLowerCase() !==
-                correct.toLowerCase()
-        )
-        .slice(0, 3);
+    const text =
+      cleanText(item.answer);
 
-    const answers = [
-        {
-            text: correct,
-            correct: true
-        },
-        ...wrongAnswers.map(text => ({
-            text,
-            correct: false
-        }))
-    ];
+    if (
+      text &&
+      text.toLowerCase() !==
+      correct.toLowerCase()
+    ) {
 
-    return shuffle(answers);
+      wrongCandidates.push(text);
+
+    }
+
+  }
+
+  /*
+    Puis toutes les options disponibles.
+  */
+
+  for (const item of biologyQuestions) {
+
+    for (const option of item.options) {
+
+      const text =
+        cleanText(option);
+
+      if (
+        text &&
+        text.toLowerCase() !==
+        correct.toLowerCase()
+      ) {
+
+        wrongCandidates.push(text);
+
+      }
+
+    }
+
+  }
+
+  const uniqueWrong = [];
+
+  const seen = new Set();
+
+  for (const candidate of shuffle(wrongCandidates)) {
+
+    const key =
+      candidate.toLowerCase();
+
+    if (
+      key !== correct.toLowerCase() &&
+      !seen.has(key)
+    ) {
+
+      seen.add(key);
+
+      uniqueWrong.push(candidate);
+
+    }
+
+    if (uniqueWrong.length >= 3) {
+      break;
+    }
+
+  }
+
+  const answers =
+    shuffle([
+      correct,
+      ...uniqueWrong
+    ]);
+
+  return answers.slice(0, 4);
 }
 
 
-/* =========================
-   AFFICHAGE DES RÉPONSES
-========================= */
+/* =========================================================
+   AFFICHER LES REPONSES
+========================================================= */
 
 function renderAnswerCards(answers) {
 
-    answersGrid.innerHTML = '';
+  answersGrid.innerHTML = '';
 
-    answers.forEach(
-        (answer, index) => {
+  answers.forEach(
+    (answer, index) => {
 
-            const card =
-                document.createElement('div');
+      const card =
+        document.createElement('div');
 
-            card.className = 'answer-card';
+      card.className = 'answer-card';
 
-            card.dataset.index = index;
+      card.dataset.index = index;
 
-            const letter =
-                document.createElement('div');
+      const letter =
+        document.createElement('div');
 
-            letter.className =
-                'answer-letter';
+      letter.className =
+        'answer-letter';
 
-            letter.textContent =
-                String.fromCharCode(
-                    65 + index
-                );
+      letter.textContent =
+        String.fromCharCode(
+          65 + index
+        );
 
-            const text =
-                document.createElement('div');
+      const text =
+        document.createElement('div');
 
-            text.className =
-                'answer-text';
+      text.className =
+        'answer-text';
 
-            text.textContent =
-                answer.text;
+      text.textContent =
+        answer;
 
-            card.appendChild(letter);
-            card.appendChild(text);
+      card.appendChild(letter);
 
-            answersGrid.appendChild(card);
-        }
-    );
+      card.appendChild(text);
+
+      card.addEventListener(
+        'click',
+        () => selectAnswerCard(index)
+      );
+
+      answersGrid.appendChild(card);
+
+    }
+  );
+
 }
 
 
 function selectAnswerCard(index) {
 
-    document
-        .querySelectorAll('.answer-card')
-        .forEach(card => {
+  const cards =
+    answersGrid.querySelectorAll(
+      '.answer-card'
+    );
 
-            card.classList.toggle(
-                'selected',
-                Number(card.dataset.index) === index
-            );
-        });
+  cards.forEach(
+    card => {
+
+      card.classList.toggle(
+        'selected',
+        Number(card.dataset.index) === index
+      );
+
+    }
+  );
+
 }
 
 
-/* =========================
+/* =========================================================
    NIVEAU
-========================= */
+========================================================= */
 
 function getQuestionLevel(question) {
 
-    const level =
-        String(question.level)
-            .toLowerCase();
+  const level =
+    String(question.level)
+      .toLowerCase();
 
-    if (
-        level.includes('3') ||
-        level.includes('trois') ||
-        level.includes('advanced')
-    ) {
-        return 'Niveau 3';
-    }
+  if (
+    level.includes('3') ||
+    level.includes('trois')
+  ) {
+    return 'Niveau 3';
+  }
 
-    if (
-        level.includes('2') ||
-        level.includes('deux') ||
-        level.includes('intermediate')
-    ) {
-        return 'Niveau 2';
-    }
+  if (
+    level.includes('2') ||
+    level.includes('deux')
+  ) {
+    return 'Niveau 2';
+  }
 
+  if (
+    level.includes('1') ||
+    level.includes('un')
+  ) {
     return 'Niveau 1';
+  }
+
+  return 'Biologie';
 }
 
 
-/* =========================
-   HUD
-========================= */
+/* =========================================================
+   ETOILES
+========================================================= */
+
+function updateStars() {
+
+  starsEl.innerHTML = '';
+
+  for (
+    let i = 0;
+    i < MAX_STARS;
+    i++
+  ) {
+
+    const star =
+      document.createElement('span');
+
+    if (i < stars) {
+
+      star.textContent = '★';
+
+      star.className =
+        'star-active';
+
+    } else {
+
+      star.textContent = '☆';
+
+      star.className =
+        'star-lost';
+
+    }
+
+    starsEl.appendChild(star);
+
+  }
+
+}
+
+
+/* =========================================================
+   STATISTIQUES
+========================================================= */
 
 function updateStats() {
 
-    scoreEl.textContent = score;
+  scoreEl.textContent =
+    score;
 
-    questionCounterEl.textContent =
-        `${Math.min(
-            currentQuestionIndex + 1,
-            gameQuestions.length
-        )} / ${gameQuestions.length}`;
+  questionCounterEl.textContent =
+    `${Math.min(
+      currentQuestionIndex + 1,
+      gameQuestions.length
+    )} / ${gameQuestions.length}`;
 
-    correctCountEl.textContent =
-        correctAnswers;
+  correctCountEl.textContent =
+    correctAnswers;
 
-    updateBestScore();
+  const best =
+    Number(
+      localStorage.getItem(
+        BEST_SCORE_KEY
+      ) || 0
+    );
+
+  bestScoreEl.textContent =
+    best;
+
+  updateStars();
+
 }
 
 
-/* =========================
-   CHARGER QUESTION
-========================= */
+/* =========================================================
+   QUESTION ACTUELLE
+========================================================= */
 
 function loadCurrentQuestion() {
 
-    if (
-        currentQuestionIndex >=
-        gameQuestions.length
-    ) {
-        finishGame();
-        return;
-    }
+  currentQuestion =
+    gameQuestions[
+      currentQuestionIndex
+    ];
 
-    currentQuestion =
-        gameQuestions[
-            currentQuestionIndex
-        ];
+  if (!currentQuestion) {
 
-    const answers =
-        buildAnswers(currentQuestion);
+    finishGame();
 
-    questionEl.textContent =
-        currentQuestion.question;
+    return;
 
-    questionNumberEl.textContent =
-        `Question ${currentQuestionIndex + 1}`;
+  }
 
-    levelLabelEl.textContent =
-        getQuestionLevel(currentQuestion);
+  questionEl.textContent =
+    currentQuestion.question;
 
-    progressBarEl.style.width =
-        `${
-            (
-                currentQuestionIndex /
-                gameQuestions.length
-            ) * 100
-        }%`;
+  questionNumberEl.textContent =
+    `Question ${currentQuestionIndex + 1}`;
 
-    renderAnswerCards(answers);
+  levelLabelEl.textContent =
+    getQuestionLevel(
+      currentQuestion
+    );
 
-    messageEl.textContent =
-        'Tire la bille blanche vers l’arrière puis relâche.';
+  progressBarEl.style.width =
+    `${(
+      currentQuestionIndex /
+      gameQuestions.length
+    ) * 100}%`;
 
-    resetTable(answers);
+  const answers =
+    buildAnswers(
+      currentQuestion
+    );
 
-    updateStats();
+  renderAnswerCards(
+    answers
+  );
+
+  resetTable(
+    answers
+  );
+
+  messageEl.textContent =
+    'Tire la bille blanche vers l’arrière puis relâche-la.';
+
+  updateStats();
+
 }
 
 
-/* =========================
-   TABLE
-========================= */
+/* =========================================================
+   CREER LA TABLE
+========================================================= */
 
 function resetTable(answers) {
 
-    balls = [];
+  tableWidth =
+    canvas.width;
 
-    tableWidth = canvas.width;
-    tableHeight = canvas.height;
+  tableHeight =
+    canvas.height;
 
-    answerLocked = false;
-    answerHitThisShot = false;
-    shotInProgress = false;
-    dragging = false;
+  const radius =
+    Math.max(
+      18,
+      Math.min(
+        tableWidth,
+        tableHeight
+      ) * 0.029
+    );
 
-    /*
-        Bille blanche.
-    */
+  whiteBall = {
 
-    const whiteRadius =
-        Math.max(
-            18,
-            Math.min(
-                tableWidth,
-                tableHeight
-            ) * 0.029
-        );
+    x: tableWidth * 0.22,
 
-    whiteBall = {
-        type: 'white',
+    y: tableHeight * 0.50,
 
-        x: tableWidth * 0.22,
-        y: tableHeight * 0.50,
+    vx: 0,
 
-        radius: whiteRadius,
+    vy: 0,
+
+    radius,
+
+    type: 'white',
+
+    active: true
+
+  };
+
+  const positions = [
+
+    [
+      tableWidth * 0.64,
+      tableHeight * 0.25
+    ],
+
+    [
+      tableWidth * 0.82,
+      tableHeight * 0.25
+    ],
+
+    [
+      tableWidth * 0.64,
+      tableHeight * 0.75
+    ],
+
+    [
+      tableWidth * 0.82,
+      tableHeight * 0.75
+    ]
+
+  ];
+
+  balls =
+    answers.map(
+      (answer, index) => ({
+
+        x: positions[index][0],
+
+        y: positions[index][1],
 
         vx: 0,
+
         vy: 0,
 
+        radius,
+
+        type: 'answer',
+
+        index,
+
+        text: answer,
+
         active: true
-    };
 
-
-    /*
-        Boules A B C D.
-    */
-
-    const positions = [
-        [0.64, 0.25],
-        [0.82, 0.25],
-        [0.64, 0.75],
-        [0.82, 0.75]
-    ];
-
-    answers.forEach(
-        (answer, index) => {
-
-            const position =
-                positions[index];
-
-            if (!position) return;
-
-            balls.push({
-
-                type: 'answer',
-
-                label:
-                    String.fromCharCode(
-                        65 + index
-                    ),
-
-                text: answer.text,
-
-                correct: answer.correct,
-
-                x:
-                    tableWidth *
-                    position[0],
-
-                y:
-                    tableHeight *
-                    position[1],
-
-                radius: whiteRadius,
-
-                vx: 0,
-                vy: 0,
-
-                active: true
-            });
-        }
+      })
     );
+
+  dragging = false;
+
+  shotInProgress = false;
+
+  answerLocked = false;
+
+  answerHitThisShot = false;
+
 }
 
 
-/* =========================
-   DESSIN TABLE
-========================= */
+/* =========================================================
+   DESSIN DE LA TABLE
+========================================================= */
 
 function drawTable() {
 
-    ctx.clearRect(
-        0,
-        0,
-        tableWidth,
-        tableHeight
+  ctx.clearRect(
+    0,
+    0,
+    tableWidth,
+    tableHeight
+  );
+
+  /*
+    Tapis
+  */
+
+  ctx.fillStyle =
+    '#17613b';
+
+  ctx.fillRect(
+    0,
+    0,
+    tableWidth,
+    tableHeight
+  );
+
+  /*
+    Bordure intérieure
+  */
+
+  ctx.strokeStyle =
+    '#0b2819';
+
+  ctx.lineWidth = 24;
+
+  ctx.strokeRect(
+    12,
+    12,
+    tableWidth - 24,
+    tableHeight - 24
+  );
+
+  /*
+    Ligne centrale discrète
+  */
+
+  ctx.strokeStyle =
+    'rgba(255,255,255,.10)';
+
+  ctx.lineWidth = 1;
+
+  ctx.beginPath();
+
+  ctx.moveTo(
+    tableWidth * 0.50,
+    30
+  );
+
+  ctx.lineTo(
+    tableWidth * 0.50,
+    tableHeight - 30
+  );
+
+  ctx.stroke();
+
+  /*
+    Six poches
+  */
+
+  const pocketRadius = 28;
+
+  const pockets = [
+
+    [18, 18],
+
+    [tableWidth / 2, 13],
+
+    [tableWidth - 18, 18],
+
+    [18, tableHeight - 18],
+
+    [tableWidth / 2, tableHeight - 13],
+
+    [tableWidth - 18, tableHeight - 18]
+
+  ];
+
+  ctx.fillStyle =
+    '#07150d';
+
+  for (const pocket of pockets) {
+
+    ctx.beginPath();
+
+    ctx.arc(
+      pocket[0],
+      pocket[1],
+      pocketRadius,
+      0,
+      Math.PI * 2
     );
 
-    /*
-        Tapis.
-    */
+    ctx.fill();
 
-    ctx.fillStyle = '#17613b';
+  }
 
-    ctx.fillRect(
-        0,
-        0,
-        tableWidth,
-        tableHeight
-    );
+  /*
+    Ligne de visée
+  */
 
+  if (
+    dragging &&
+    whiteBall &&
+    !shotInProgress &&
+    !answerLocked
+  ) {
 
-    /*
-        Bandes.
-    */
+    ctx.save();
 
-    ctx.strokeStyle = '#123c27';
-    ctx.lineWidth = 24;
-
-    ctx.strokeRect(
-        12,
-        12,
-        tableWidth - 24,
-        tableHeight - 24
-    );
-
-
-    /*
-        Ligne centrale décorative.
-    */
+    ctx.setLineDash([
+      10,
+      10
+    ]);
 
     ctx.strokeStyle =
-        'rgba(255,255,255,.12)';
+      'rgba(255,255,255,.65)';
 
     ctx.lineWidth = 2;
 
     ctx.beginPath();
 
     ctx.moveTo(
-        tableWidth / 2,
-        24
+      whiteBall.x,
+      whiteBall.y
     );
 
     ctx.lineTo(
-        tableWidth / 2,
-        tableHeight - 24
+      currentPointerX,
+      currentPointerY
     );
 
     ctx.stroke();
 
+    ctx.restore();
 
-    /*
-        Poches.
-    */
+  }
 
-    const pockets = [
-        [18, 18],
-        [tableWidth / 2, 18],
-        [tableWidth - 18, 18],
+  /*
+    Boule blanche
+  */
 
-        [18, tableHeight - 18],
-        [tableWidth / 2, tableHeight - 18],
-        [tableWidth - 18, tableHeight - 18]
-    ];
+  if (whiteBall) {
 
-    pockets.forEach(
-        ([x, y]) => {
-
-            ctx.beginPath();
-
-            ctx.arc(
-                x,
-                y,
-                23,
-                0,
-                Math.PI * 2
-            );
-
-            ctx.fillStyle = '#07150e';
-
-            ctx.fill();
-        }
+    drawBall(
+      whiteBall,
+      '#ffffff',
+      ''
     );
 
+  }
 
-    /*
-        Ligne de visée.
-    */
+  /*
+    Boules réponses
+  */
 
-    if (
-        dragging &&
-        whiteBall &&
-        !shotInProgress
-    ) {
+  for (const ball of balls) {
 
-        ctx.save();
-
-        ctx.setLineDash([
-            8,
-            8
-        ]);
-
-        ctx.strokeStyle =
-            'rgba(255,255,255,.65)';
-
-        ctx.lineWidth = 2;
-
-        ctx.beginPath();
-
-        ctx.moveTo(
-            whiteBall.x,
-            whiteBall.y
-        );
-
-        ctx.lineTo(
-            currentPointerX,
-            currentPointerY
-        );
-
-        ctx.stroke();
-
-        ctx.restore();
+    if (!ball.active) {
+      continue;
     }
 
+    drawBall(
+      ball,
+      '#d8d8d8',
+      String.fromCharCode(
+        65 + ball.index
+      )
+    );
 
-    /*
-        Boules.
-    */
+  }
 
-    if (whiteBall && whiteBall.active) {
-        drawBall(whiteBall);
-    }
-
-    balls.forEach(ball => {
-
-        if (ball.active) {
-            drawBall(ball);
-        }
-
-    });
 }
 
 
-/* =========================
-   DESSIN BOULE
-========================= */
+/* =========================================================
+   DESSIN D'UNE BOULE
+========================================================= */
 
-function drawBall(ball) {
+function drawBall(
+  ball,
+  baseColor,
+  label
+) {
 
-    const gradient =
-        ctx.createRadialGradient(
-            ball.x - ball.radius * .35,
-            ball.y - ball.radius * .35,
-            ball.radius * .1,
-            ball.x,
-            ball.y,
-            ball.radius
-        );
-
-    if (ball.type === 'white') {
-
-        gradient.addColorStop(
-            0,
-            '#ffffff'
-        );
-
-        gradient.addColorStop(
-            .75,
-            '#eeeeee'
-        );
-
-        gradient.addColorStop(
-            1,
-            '#bbbbbb'
-        );
-
-    }
-    else {
-
-        gradient.addColorStop(
-            0,
-            '#8d62d1'
-        );
-
-        gradient.addColorStop(
-            .7,
-            '#4b2481'
-        );
-
-        gradient.addColorStop(
-            1,
-            '#24113f'
-        );
-    }
-
-    ctx.beginPath();
-
-    ctx.arc(
-        ball.x,
-        ball.y,
-        ball.radius,
-        0,
-        Math.PI * 2
+  const gradient =
+    ctx.createRadialGradient(
+      ball.x - ball.radius * .35,
+      ball.y - ball.radius * .35,
+      ball.radius * .12,
+      ball.x,
+      ball.y,
+      ball.radius
     );
+
+  if (baseColor === '#ffffff') {
+
+    gradient.addColorStop(
+      0,
+      '#ffffff'
+    );
+
+    gradient.addColorStop(
+      0.55,
+      '#f3f3f3'
+    );
+
+    gradient.addColorStop(
+      1,
+      '#bcbcbc'
+    );
+
+  } else {
+
+    gradient.addColorStop(
+      0,
+      '#ffffff'
+    );
+
+    gradient.addColorStop(
+      0.15,
+      '#eeeeee'
+    );
+
+    gradient.addColorStop(
+      0.55,
+      '#d1d1d1'
+    );
+
+    gradient.addColorStop(
+      1,
+      '#8e8e8e'
+    );
+
+  }
+
+  ctx.beginPath();
+
+  ctx.arc(
+    ball.x,
+    ball.y,
+    ball.radius,
+    0,
+    Math.PI * 2
+  );
+
+  ctx.fillStyle =
+    gradient;
+
+  ctx.fill();
+
+  ctx.strokeStyle =
+    'rgba(0,0,0,.30)';
+
+  ctx.lineWidth = 1.5;
+
+  ctx.stroke();
+
+  if (label) {
 
     ctx.fillStyle =
-        gradient;
+      '#24113f';
 
-    ctx.fill();
+    ctx.font =
+      `bold ${Math.max(
+        15,
+        ball.radius * .72
+      )}px Arial`;
 
-    ctx.strokeStyle =
-        'rgba(0,0,0,.35)';
+    ctx.textAlign =
+      'center';
 
-    ctx.lineWidth = 1.5;
+    ctx.textBaseline =
+      'middle';
 
-    ctx.stroke();
+    ctx.fillText(
+      label,
+      ball.x,
+      ball.y
+    );
 
+  }
 
-    /*
-        Lettre uniquement sur les
-        boules réponses.
-    */
-
-    if (ball.type === 'answer') {
-
-        ctx.fillStyle =
-            '#ffffff';
-
-        ctx.font =
-            `bold ${Math.max(
-                14,
-                ball.radius * .8
-            )}px Arial`;
-
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-
-        ctx.fillText(
-            ball.label,
-            ball.x,
-            ball.y
-        );
-    }
 }
 
 
-/* =========================
-   COLLISION BOULES
-========================= */
-
-function handleBallCollisions() {
-
-    /*
-        Collision entre toutes les boules.
-
-        Les boules ont la même masse.
-
-        On utilise :
-
-            impulse =
-            -(1 + restitution)
-            * vitesse relative
-            / 2
-
-        Cela permet à la boule frappée
-        de recevoir réellement de la vitesse.
-    */
-
-    for (
-        let i = 0;
-        i < balls.length;
-        i++
-    ) {
-
-        const a = balls[i];
-
-        if (!a.active) continue;
-
-
-        /*
-            Collision avec la bille blanche.
-        */
-
-        const allBalls = [
-            whiteBall,
-            ...balls
-        ];
-
-        for (
-            let j = i + 1;
-            j < allBalls.length;
-            j++
-        ) {
-
-            const b = allBalls[j];
-
-            if (!b || !b.active) continue;
-
-            if (a === b) continue;
-
-            resolveCollision(
-                a,
-                b
-            );
-        }
-    }
-
-
-    /*
-        La blanche doit également
-        être comparée à chaque boule
-        réponse.
-    */
-
-    if (whiteBall && whiteBall.active) {
-
-        for (
-            const ball of balls
-        ) {
-
-            if (!ball.active) continue;
-
-            resolveCollision(
-                whiteBall,
-                ball
-            );
-        }
-    }
-}
-
-
-/*
-    Résolution physique d'une collision.
-*/
+/* =========================================================
+   COLLISION ENTRE DEUX BOULES
+========================================================= */
 
 function resolveCollision(a, b) {
 
-    const dx = b.x - a.x;
-    const dy = b.y - a.y;
+  if (
+    !a.active ||
+    !b.active
+  ) {
+    return false;
+  }
 
-    let d = Math.hypot(
-        dx,
-        dy
+  let dx =
+    b.x - a.x;
+
+  let dy =
+    b.y - a.y;
+
+  let dist =
+    Math.hypot(
+      dx,
+      dy
     );
 
-    const minimumDistance =
-        a.radius +
-        b.radius;
+  const minimumDistance =
+    a.radius +
+    b.radius;
 
+  if (
+    dist > minimumDistance
+  ) {
+    return false;
+  }
 
-    /*
-        Si les centres sont exactement
-        au même endroit, on crée une
-        normale horizontale pour pouvoir
-        les séparer.
-    */
+  /*
+    Protection contre une distance nulle.
+  */
 
-    let nx;
-    let ny;
+  if (dist < 0.0001) {
 
-    if (d < 0.000001) {
+    dx = 1;
 
-        nx = 1;
-        ny = 0;
+    dy = 0;
 
-        d = 0;
+    dist = 1;
 
-    }
-    else {
+  }
 
-        nx = dx / d;
-        ny = dy / d;
-    }
+  const nx =
+    dx / dist;
 
+  const ny =
+    dy / dist;
 
-    /*
-        Pas de collision.
-    */
+  /*
+    Séparation physique.
+    Cela empêche les boules de rester collées.
+  */
 
-    if (
-        d > minimumDistance
-    ) {
-        return false;
-    }
+  const overlap =
+    minimumDistance - dist;
 
+  const separation =
+    (overlap + 0.08) / 2;
 
-    /*
-        1. SÉPARATION
+  a.x -=
+    nx * separation;
 
-        Très important pour empêcher
-        les boules de rester collées.
-    */
+  a.y -=
+    ny * separation;
 
-    const overlap =
-        minimumDistance - d;
+  b.x +=
+    nx * separation;
 
-    if (overlap > 0) {
+  b.y +=
+    ny * separation;
 
-        const correction =
-            (overlap + 0.05) / 2;
+  /*
+    Vitesse relative.
+  */
 
-        a.x -=
-            nx * correction;
+  const relativeVelocityX =
+    b.vx - a.vx;
 
-        a.y -=
-            ny * correction;
+  const relativeVelocityY =
+    b.vy - a.vy;
 
-        b.x +=
-            nx * correction;
+  const velocityAlongNormal =
+    relativeVelocityX * nx +
+    relativeVelocityY * ny;
 
-        b.y +=
-            ny * correction;
-    }
+  /*
+    Les boules s'éloignent déjà.
+  */
 
-
-    /*
-        2. VITESSE RELATIVE
-
-        On regarde si les boules
-        se rapprochent réellement.
-    */
-
-    const relativeVelocityX =
-        b.vx - a.vx;
-
-    const relativeVelocityY =
-        b.vy - a.vy;
-
-    const velocityAlongNormal =
-        relativeVelocityX * nx +
-        relativeVelocityY * ny;
-
-
-    /*
-        Si les boules s'éloignent déjà,
-        on ne remet PAS une impulsion.
-
-        Cela évite le collage/jitter.
-    */
-
-    if (
-        velocityAlongNormal >= 0
-    ) {
-        return true;
-    }
-
-
-    /*
-        3. IMPULSION
-
-        Même masse pour toutes
-        les boules.
-    */
-
-    const impulse =
-        -(
-            1 +
-            BALL_RESTITUTION
-        ) *
-        velocityAlongNormal /
-        2;
-
-
-    a.vx -=
-        impulse * nx;
-
-    a.vy -=
-        impulse * ny;
-
-    b.vx +=
-        impulse * nx;
-
-    b.vy +=
-        impulse * ny;
-
-
+  if (
+    velocityAlongNormal >= 0
+  ) {
     return true;
+  }
+
+  /*
+    Collision élastique.
+  */
+
+  const impulse =
+    -(1 + BALL_RESTITUTION) *
+    velocityAlongNormal /
+    2;
+
+  a.vx -=
+    impulse * nx;
+
+  a.vy -=
+    impulse * ny;
+
+  b.vx +=
+    impulse * nx;
+
+  b.vy +=
+    impulse * ny;
+
+  return true;
+
 }
 
 
-/* =========================
-   COLLISIONS AVEC LES BANDES
-========================= */
+/* =========================================================
+   COLLISIONS
+========================================================= */
+
+function handleBallCollisions() {
+
+  if (!whiteBall) {
+    return;
+  }
+
+  /*
+    Blanche contre réponses.
+  */
+
+  for (const ball of balls) {
+
+    resolveCollision(
+      whiteBall,
+      ball
+    );
+
+  }
+
+  /*
+    Réponses entre elles.
+  */
+
+  for (
+    let i = 0;
+    i < balls.length;
+    i++
+  ) {
+
+    for (
+      let j = i + 1;
+      j < balls.length;
+      j++
+    ) {
+
+      resolveCollision(
+        balls[i],
+        balls[j]
+      );
+
+    }
+
+  }
+
+}
+
+
+/* =========================================================
+   MURS
+========================================================= */
 
 function handleWallCollision(ball) {
 
-    if (!ball || !ball.active) {
-        return;
-    }
+  const left =
+    ball.radius;
 
-    const r = ball.radius;
+  const right =
+    tableWidth -
+    ball.radius;
 
+  const top =
+    ball.radius;
 
-    /*
-        Bande gauche.
-    */
+  const bottom =
+    tableHeight -
+    ball.radius;
 
-    if (ball.x - r < 0) {
+  if (ball.x < left) {
 
-        ball.x = r;
+    ball.x = left;
 
-        if (ball.vx < 0) {
+    ball.vx =
+      Math.abs(ball.vx) *
+      WALL_RESTITUTION;
 
-            ball.vx *=
-                -WALL_RESTITUTION;
-        }
-    }
+  }
 
+  if (ball.x > right) {
 
-    /*
-        Bande droite.
-    */
+    ball.x = right;
 
-    if (
-        ball.x + r >
-        tableWidth
-    ) {
+    ball.vx =
+      -Math.abs(ball.vx) *
+      WALL_RESTITUTION;
 
-        ball.x =
-            tableWidth - r;
+  }
 
-        if (ball.vx > 0) {
+  if (ball.y < top) {
 
-            ball.vx *=
-                -WALL_RESTITUTION;
-        }
-    }
+    ball.y = top;
 
+    ball.vy =
+      Math.abs(ball.vy) *
+      WALL_RESTITUTION;
 
-    /*
-        Bande haute.
-    */
+  }
 
-    if (ball.y - r < 0) {
+  if (ball.y > bottom) {
 
-        ball.y = r;
+    ball.y = bottom;
 
-        if (ball.vy < 0) {
+    ball.vy =
+      -Math.abs(ball.vy) *
+      WALL_RESTITUTION;
 
-            ball.vy *=
-                -WALL_RESTITUTION;
-        }
-    }
+  }
 
-
-    /*
-        Bande basse.
-    */
-
-    if (
-        ball.y + r >
-        tableHeight
-    ) {
-
-        ball.y =
-            tableHeight - r;
-
-        if (ball.vy > 0) {
-
-            ball.vy *=
-                -WALL_RESTITUTION;
-        }
-    }
 }
 
 
-/* =========================
+/* =========================================================
    PHYSIQUE
-========================= */
+========================================================= */
 
 function updatePhysics() {
 
-    if (!shotInProgress) {
-        return;
-    }
+  if (
+    !shotInProgress ||
+    !whiteBall
+  ) {
+    return;
+  }
 
+  const allBalls = [
+    whiteBall,
+    ...balls
+  ];
 
-    /*
-        Liste de toutes les boules.
-    */
+  /*
+    Déplacement
+  */
 
-    const movingBalls = [
-        whiteBall,
-        ...balls
-    ];
+  for (const ball of allBalls) {
 
+    ball.x += ball.vx;
 
-    /*
-        1. DÉPLACEMENT
-    */
+    ball.y += ball.vy;
 
-    movingBalls.forEach(ball => {
+    ball.vx *= BALL_FRICTION;
 
-        if (!ball || !ball.active) {
-            return;
-        }
-
-        ball.x += ball.vx;
-        ball.y += ball.vy;
-
-        /*
-            Friction.
-
-            La vitesse diminue progressivement
-            mais la boule continue réellement
-            de rouler.
-        */
-
-        ball.vx *=
-            BALL_FRICTION;
-
-        ball.vy *=
-            BALL_FRICTION;
-
-
-        /*
-            Très petite vitesse :
-            arrêt complet.
-        */
-
-        if (
-            Math.abs(ball.vx) <
-            MIN_MOVING_SPEED
-        ) {
-            ball.vx = 0;
-        }
-
-        if (
-            Math.abs(ball.vy) <
-            MIN_MOVING_SPEED
-        ) {
-            ball.vy = 0;
-        }
-
-
-        /*
-            Bandes.
-        */
-
-        handleWallCollision(ball);
-    });
-
-
-    /*
-        2. COLLISIONS ENTRE BOULES
-    */
-
-    handleBallCollisions();
-
-
-    /*
-        3. DÉTECTION DE LA PREMIÈRE
-           BOULE-RÉPONSE TOUCHÉE.
-
-        On le fait après la résolution
-        physique pour que la collision
-        continue naturellement.
-    */
+    ball.vy *= BALL_FRICTION;
 
     if (
-        whiteBall &&
-        !answerLocked &&
-        !answerHitThisShot
+      Math.abs(ball.vx) <
+      MIN_MOVING_SPEED
     ) {
 
-        let touchedBall = null;
+      ball.vx = 0;
 
-        let smallestDistance =
-            Infinity;
-
-        for (
-            const ball of balls
-        ) {
-
-            if (
-                !ball.active ||
-                ball.type !== 'answer'
-            ) {
-                continue;
-            }
-
-            const d =
-                distance(
-                    whiteBall,
-                    ball
-                );
-
-            const contactDistance =
-                whiteBall.radius +
-                ball.radius +
-                1.2;
-
-            if (
-                d <= contactDistance &&
-                d < smallestDistance
-            ) {
-
-                smallestDistance = d;
-                touchedBall = ball;
-            }
-        }
-
-
-        if (touchedBall) {
-
-            handleAnswer(
-                touchedBall
-            );
-        }
     }
 
+    if (
+      Math.abs(ball.vy) <
+      MIN_MOVING_SPEED
+    ) {
 
-    /*
-        4. EST-CE QUE TOUTES LES BOULES
-           SONT ARRÊTÉES ?
-    */
+      ball.vy = 0;
 
-    const moving =
-        movingBalls.some(ball => {
-
-            if (
-                !ball ||
-                !ball.active
-            ) {
-                return false;
-            }
-
-            return (
-                Math.abs(ball.vx) >
-                    MOVING_THRESHOLD ||
-                Math.abs(ball.vy) >
-                    MOVING_THRESHOLD
-            );
-        });
-
-
-    if (!moving) {
-
-        shotInProgress = false;
-
-        /*
-            Après une mauvaise réponse,
-            on garde le message de la
-            mauvaise réponse.
-
-            On ne dit surtout pas
-            "aucune réponse touchée".
-        */
-
-        if (
-            !answerLocked &&
-            !answerHitThisShot &&
-            gameRunning
-        ) {
-
-            messageEl.textContent =
-                'Aucune réponse touchée. Tu peux refaire ton tir.';
-        }
     }
+
+    handleWallCollision(
+      ball
+    );
+
+  }
+
+  /*
+    Collisions.
+  */
+
+  handleBallCollisions();
+
+  /*
+    Détecter la première boule
+    touchée par la blanche.
+  */
+
+  if (
+    !answerLocked &&
+    !answerHitThisShot
+  ) {
+
+    let touchedBall = null;
+
+    let closestDistance =
+      Infinity;
+
+    for (const ball of balls) {
+
+      if (!ball.active) {
+        continue;
+      }
+
+      const d =
+        distance(
+          whiteBall,
+          ball
+        );
+
+      const collisionDistance =
+        whiteBall.radius +
+        ball.radius +
+        1.2;
+
+      if (
+        d <= collisionDistance &&
+        d < closestDistance
+      ) {
+
+        closestDistance = d;
+
+        touchedBall = ball;
+
+      }
+
+    }
+
+    if (touchedBall) {
+
+      handleAnswer(
+        touchedBall
+      );
+
+    }
+
+  }
+
+  /*
+    Vérifier si les boules roulent encore.
+  */
+
+  let moving = false;
+
+  for (const ball of allBalls) {
+
+    const speed =
+      Math.hypot(
+        ball.vx,
+        ball.vy
+      );
+
+    if (
+      speed >
+      MOVING_THRESHOLD
+    ) {
+
+      moving = true;
+
+      break;
+
+    }
+
+  }
+
+  if (!moving) {
+
+    shotInProgress = false;
+
+    if (
+      !answerHitThisShot &&
+      !answerLocked
+    ) {
+
+      messageEl.textContent =
+        'Aucune réponse touchée. Tu peux refaire ton tir.';
+
+    }
+
+  }
+
 }
 
 
-/* =========================
-   RÉPONSE
-========================= */
+/* =========================================================
+   REPONSE TOUCHEE
+========================================================= */
 
 function handleAnswer(ball) {
 
-    if (
-        !ball ||
-        ball.type !== 'answer' ||
-        answerLocked ||
-        answerHitThisShot ||
-        !gameRunning
-    ) {
-        return;
-    }
+  if (
+    !ball ||
+    answerLocked ||
+    answerHitThisShot ||
+    !gameRunning
+  ) {
+    return;
+  }
+
+  answerHitThisShot = true;
+
+  selectAnswerCard(
+    ball.index
+  );
+
+  const selectedAnswer =
+    cleanText(ball.text);
+
+  const correctAnswer =
+    cleanText(
+      currentQuestion.answer
+    );
+
+  const isCorrect =
+    selectedAnswer.toLowerCase() ===
+    correctAnswer.toLowerCase();
+
+  /*
+    BONNE REPONSE
+  */
+
+  if (isCorrect) {
 
-
-    /*
-        Une seule réponse par tir.
-    */
-
-    answerHitThisShot = true;
-
-
-    const index =
-        balls.indexOf(ball);
-
-    if (index >= 0) {
-        selectAnswerCard(index);
-    }
-
-
-    /*
-        BONNE RÉPONSE
-    */
-
-    if (ball.correct) {
-
-        answerLocked = true;
-
-        score +=
-            POINTS_CORRECT;
-
-        correctAnswers++;
-
-        messageEl.textContent =
-            `Bonne réponse ! +${POINTS_CORRECT} points — ${currentQuestion.answer}`;
-
-        updateStats();
-
-
-        /*
-            On NE désactive PAS la boule.
-
-            Elle continue son mouvement
-            comme une vraie boule de billard.
-        */
-
-        if (nextQuestionTimer) {
-
-            clearTimeout(
-                nextQuestionTimer
-            );
-        }
-
-        nextQuestionTimer =
-            setTimeout(() => {
-
-                nextQuestionTimer = null;
-
-                if (!gameRunning) {
-                    return;
-                }
-
-                currentQuestionIndex++;
-
-                if (
-                    currentQuestionIndex >=
-                    gameQuestions.length
-                ) {
-
-                    finishGame();
-
-                }
-                else {
-
-                    loadCurrentQuestion();
-                }
-
-            }, 1100);
-
-    }
-
-    /*
-        MAUVAISE RÉPONSE
-    */
-
-    else {
-
-        wrongAnswers++;
-
-        /*
-            IMPORTANT :
-
-            - pas de reset
-            - pas de changement de question
-            - pas de retour de la boule
-            - pas de disparition de la boule
-
-            La boule garde sa nouvelle
-            position et sa vitesse physique.
-        */
-
-        messageEl.textContent =
-            `Mauvaise réponse. Bonne réponse : ${currentQuestion.answer}. Continue jusqu'à toucher la bonne boule.`;
-
-        updateStats();
-    }
-}
-
-
-/* =========================
-   TIR
-========================= */
-
-function shootFromDrag() {
-
-    if (
-        !whiteBall ||
-        shotInProgress ||
-        answerLocked ||
-        !gameRunning
-    ) {
-        return;
-    }
-
-    const dx =
-        dragStartX -
-        currentPointerX;
-
-    const dy =
-        dragStartY -
-        currentPointerY;
-
-    const dragDistance =
-        Math.hypot(
-            dx,
-            dy
-        );
-
-
-    /*
-        Petit mouvement :
-        on ne tire pas.
-    */
-
-    if (
-        dragDistance <
-        4
-    ) {
-        return;
-    }
-
-
-    /*
-        Limitation de puissance.
-
-        Cela empêche un tir
-        complètement irréaliste.
-    */
-
-    const maxPower =
-        Math.min(
-            30,
-            Math.max(
-                10,
-                tableWidth * .035
-            )
-        );
-
-
-    const power =
-        Math.min(
-            maxPower,
-            dragDistance * .42
-        );
-
-
-    /*
-        Direction :
-
-        On tire la bille dans la
-        direction opposée au recul.
-    */
-
-    const length =
-        Math.max(
-            0.0001,
-            dragDistance
-        );
-
-    const directionX =
-        dx / length;
-
-    const directionY =
-        dy / length;
-
-
-    whiteBall.vx =
-        directionX * power;
-
-    whiteBall.vy =
-        directionY * power;
-
-
-    /*
-        Nouveau tir :
-
-        on permet à nouveau de
-        toucher une réponse.
-    */
-
-    answerHitThisShot = false;
-
-    shotInProgress = true;
-
-    messageEl.textContent =
-        'La bille roule...';
-
-
-    dragging = false;
-}
-
-
-/* =========================
-   COORDONNÉES SOURIS / TOUCH
-========================= */
-
-function getCanvasPosition(event) {
-
-    const rect =
-        canvas.getBoundingClientRect();
-
-    let clientX;
-    let clientY;
-
-    if (
-        event.touches &&
-        event.touches.length
-    ) {
-
-        clientX =
-            event.touches[0].clientX;
-
-        clientY =
-            event.touches[0].clientY;
-
-    }
-    else if (
-        event.changedTouches &&
-        event.changedTouches.length
-    ) {
-
-        clientX =
-            event.changedTouches[0].clientX;
-
-        clientY =
-            event.changedTouches[0].clientY;
-
-    }
-    else {
-
-        clientX =
-            event.clientX;
-
-        clientY =
-            event.clientY;
-    }
-
-    return {
-
-        x:
-            (clientX - rect.left) *
-            (canvas.width / rect.width),
-
-        y:
-            (clientY - rect.top) *
-            (canvas.height / rect.height)
-    };
-}
-
-
-/* =========================
-   POINTER DOWN
-========================= */
-
-function pointerDown(event) {
-
-    if (
-        !gameRunning ||
-        shotInProgress ||
-        answerLocked ||
-        !whiteBall
-    ) {
-        return;
-    }
-
-    event.preventDefault();
-
-    const position =
-        getCanvasPosition(event);
-
-
-    /*
-        On doit commencer
-        directement sur la bille blanche.
-    */
-
-    if (
-        distance(
-            position,
-            whiteBall
-        ) >
-        whiteBall.radius * 1.8
-    ) {
-        return;
-    }
-
-    dragging = true;
-
-    dragStartX =
-        whiteBall.x;
-
-    dragStartY =
-        whiteBall.y;
-
-    currentPointerX =
-        position.x;
-
-    currentPointerY =
-        position.y;
-}
-
-
-/* =========================
-   POINTER MOVE
-========================= */
-
-function pointerMove(event) {
-
-    if (!dragging) {
-        return;
-    }
-
-    event.preventDefault();
-
-    const position =
-        getCanvasPosition(event);
-
-    currentPointerX =
-        position.x;
-
-    currentPointerY =
-        position.y;
-}
-
-
-/* =========================
-   POINTER UP
-========================= */
-
-function pointerUp(event) {
-
-    if (!dragging) {
-        return;
-    }
-
-    event.preventDefault();
-
-    const position =
-        getCanvasPosition(event);
-
-    currentPointerX =
-        position.x;
-
-    currentPointerY =
-        position.y;
-
-    shootFromDrag();
-}
-
-
-/* =========================
-   ANIMATION
-========================= */
-
-function gameLoop() {
-
-    if (gameRunning) {
-
-        updatePhysics();
-
-        drawTable();
-    }
-
-    animationFrame =
-        requestAnimationFrame(
-            gameLoop
-        );
-}
-
-
-/* =========================
-   FIN DE PARTIE
-========================= */
-
-function finishGame() {
-
-    gameRunning = false;
-
-    shotInProgress = false;
-    dragging = false;
     answerLocked = true;
-    answerHitThisShot = true;
 
-    if (nextQuestionTimer) {
+    score +=
+      POINTS_CORRECT;
 
-        clearTimeout(
-            nextQuestionTimer
-        );
-
-        nextQuestionTimer = null;
-    }
-
-    progressBarEl.style.width =
-        '100%';
-
-    const best =
-        Math.max(
-            score,
-            getBestScore()
-        );
-
-    localStorage.setItem(
-        BEST_SCORE_KEY,
-        String(best)
-    );
-
-    finalScoreEl.textContent =
-        `${score} points`;
-
-    finalCorrectEl.textContent =
-        correctAnswers;
-
-    finalWrongEl.textContent =
-        wrongAnswers;
-
-    finalBestEl.textContent =
-        best;
-
-    bestScoreEl.textContent =
-        best;
-
-    endOverlay.classList.add(
-        'show'
-    );
-}
-
-
-/* =========================
-   DÉMARRER
-========================= */
-
-function startGame() {
-
-    if (nextQuestionTimer) {
-
-        clearTimeout(
-            nextQuestionTimer
-        );
-
-        nextQuestionTimer = null;
-    }
-
-    score = 0;
-    correctAnswers = 0;
-    wrongAnswers = 0;
-
-    currentQuestionIndex = 0;
-
-    answerLocked = false;
-    answerHitThisShot = false;
-
-    shotInProgress = false;
-    dragging = false;
-
-    gameRunning = true;
-
-    endOverlay.classList.remove(
-        'show'
-    );
-
-    prepareGameQuestions();
+    correctAnswers++;
 
     updateStats();
 
-    loadCurrentQuestion();
+    messageEl.textContent =
+      'Bonne réponse !';
 
-    if (!animationFrame) {
+    resultQuestion.textContent =
+      currentQuestion.question;
 
-        gameLoop();
-    }
+    resultAnswer.textContent =
+      currentQuestion.answer;
+
+    answerResult.classList.add(
+      'show'
+    );
+
+    shotInProgress = false;
+
+    return;
+  }
+
+  /*
+    MAUVAISE REPONSE
+  */
+
+  wrongAnswers++;
+
+  /*
+    On retire exactement
+    une étoile.
+  */
+
+  stars--;
+
+  updateStats();
+
+  /*
+    Si les 5 étoiles sont perdues,
+    la partie est terminée.
+  */
+
+  if (stars <= 0) {
+
+    stars = 0;
+
+    updateStars();
+
+    finishGame(
+      'Plus d’étoiles'
+    );
+
+    return;
+
+  }
+
+  /*
+    La question reste la même.
+    Le joueur peut refaire un tir.
+  */
+
+  messageEl.textContent =
+    `Mauvaise réponse. Tu perds 1 étoile. Il te reste ${stars} étoile${stars > 1 ? 's' : ''}.`;
+
 }
 
 
-/* =========================
-   BOUTONS
-========================= */
+/* =========================================================
+   QUESTION SUIVANTE
+========================================================= */
+
+function continueToNextQuestion() {
+
+  if (
+    !answerLocked ||
+    !gameRunning
+  ) {
+    return;
+  }
+
+  answerResult.classList.remove(
+    'show'
+  );
+
+  currentQuestionIndex++;
+
+  /*
+    Toutes les questions sont terminées.
+  */
+
+  if (
+    currentQuestionIndex >=
+    gameQuestions.length
+  ) {
+
+    finishGame(
+      'Félicitations !'
+    );
+
+    return;
+
+  }
+
+  answerLocked = false;
+
+  answerHitThisShot = false;
+
+  shotInProgress = false;
+
+  loadCurrentQuestion();
+
+}
+
+
+/* =========================================================
+   TIR
+========================================================= */
+
+function shootFromDrag() {
+
+  if (
+    !whiteBall ||
+    shotInProgress ||
+    answerLocked ||
+    !gameRunning
+  ) {
+
+    dragging = false;
+
+    return;
+
+  }
+
+  const dx =
+    dragStartX -
+    currentPointerX;
+
+  const dy =
+    dragStartY -
+    currentPointerY;
+
+  const dragDistance =
+    Math.hypot(
+      dx,
+      dy
+    );
+
+  if (
+    dragDistance < 4
+  ) {
+
+    dragging = false;
+
+    return;
+
+  }
+
+  /*
+    Puissance maximale raisonnable.
+  */
+
+  const maxPower =
+    Math.min(
+      30,
+      Math.max(
+        10,
+        tableWidth * 0.035
+      )
+    );
+
+  const power =
+    Math.min(
+      maxPower,
+      dragDistance * 0.42
+    );
+
+  const length =
+    Math.max(
+      dragDistance,
+      0.001
+    );
+
+  const directionX =
+    dx / length;
+
+  const directionY =
+    dy / length;
+
+  whiteBall.vx =
+    directionX * power;
+
+  whiteBall.vy =
+    directionY * power;
+
+  answerHitThisShot = false;
+
+  shotInProgress = true;
+
+  messageEl.textContent =
+    'La bille roule...';
+
+  dragging = false;
+
+}
+
+
+/* =========================================================
+   POSITION SOURIS / DOIGT
+========================================================= */
+
+function getCanvasPosition(event) {
+
+  const rect =
+    canvas.getBoundingClientRect();
+
+  let clientX;
+  let clientY;
+
+  if (
+    event.touches &&
+    event.touches.length
+  ) {
+
+    clientX =
+      event.touches[0].clientX;
+
+    clientY =
+      event.touches[0].clientY;
+
+  } else if (
+    event.changedTouches &&
+    event.changedTouches.length
+  ) {
+
+    clientX =
+      event.changedTouches[0].clientX;
+
+    clientY =
+      event.changedTouches[0].clientY;
+
+  } else {
+
+    clientX =
+      event.clientX;
+
+    clientY =
+      event.clientY;
+
+  }
+
+  return {
+
+    x:
+      (clientX - rect.left) *
+      (canvas.width / rect.width),
+
+    y:
+      (clientY - rect.top) *
+      (canvas.height / rect.height)
+
+  };
+
+}
+
+
+/* =========================================================
+   POINTER DOWN
+========================================================= */
+
+function pointerDown(event) {
+
+  if (
+    !gameRunning ||
+    shotInProgress ||
+    answerLocked ||
+    !whiteBall
+  ) {
+    return;
+  }
+
+  const position =
+    getCanvasPosition(
+      event
+    );
+
+  const d =
+    Math.hypot(
+      position.x -
+      whiteBall.x,
+
+      position.y -
+      whiteBall.y
+    );
+
+  if (
+    d >
+    whiteBall.radius * 1.8
+  ) {
+    return;
+  }
+
+  event.preventDefault();
+
+  dragging = true;
+
+  dragStartX =
+    position.x;
+
+  dragStartY =
+    position.y;
+
+  currentPointerX =
+    position.x;
+
+  currentPointerY =
+    position.y;
+
+}
+
+
+/* =========================================================
+   POINTER MOVE
+========================================================= */
+
+function pointerMove(event) {
+
+  if (!dragging) {
+    return;
+  }
+
+  event.preventDefault();
+
+  const position =
+    getCanvasPosition(
+      event
+    );
+
+  currentPointerX =
+    position.x;
+
+  currentPointerY =
+    position.y;
+
+}
+
+
+/* =========================================================
+   POINTER UP
+========================================================= */
+
+function pointerUp(event) {
+
+  if (!dragging) {
+    return;
+  }
+
+  event.preventDefault();
+
+  const position =
+    getCanvasPosition(
+      event
+    );
+
+  currentPointerX =
+    position.x;
+
+  currentPointerY =
+    position.y;
+
+  shootFromDrag();
+
+}
+
+
+/* =========================================================
+   BOUCLE DU JEU
+========================================================= */
+
+function gameLoop() {
+
+  if (!gameRunning) {
+    return;
+  }
+
+  updatePhysics();
+
+  drawTable();
+
+  animationFrame =
+    requestAnimationFrame(
+      gameLoop
+    );
+
+}
+
+
+/* =========================================================
+   FIN DE PARTIE
+========================================================= */
+
+function finishGame(
+  title = 'Partie terminée'
+) {
+
+  gameRunning = false;
+
+  shotInProgress = false;
+
+  dragging = false;
+
+  answerLocked = true;
+
+  answerHitThisShot = true;
+
+  answerResult.classList.remove(
+    'show'
+  );
+
+  progressBarEl.style.width =
+    '100%';
+
+  const previousBest =
+    Number(
+      localStorage.getItem(
+        BEST_SCORE_KEY
+      ) || 0
+    );
+
+  const best =
+    Math.max(
+      previousBest,
+      score
+    );
+
+  localStorage.setItem(
+    BEST_SCORE_KEY,
+    String(best)
+  );
+
+  endTitle.textContent =
+    title;
+
+  finalScoreEl.textContent =
+    score;
+
+  finalCorrectEl.textContent =
+    correctAnswers;
+
+  finalWrongEl.textContent =
+    wrongAnswers;
+
+  finalBestEl.textContent =
+    best;
+
+  bestScoreEl.textContent =
+    best;
+
+  if (animationFrame) {
+
+    cancelAnimationFrame(
+      animationFrame
+    );
+
+    animationFrame = null;
+
+  }
+
+  endOverlay.classList.add(
+    'show'
+  );
+
+}
+
+
+/* =========================================================
+   DEMARRER UNE PARTIE
+========================================================= */
+
+function startGame() {
+
+  if (animationFrame) {
+
+    cancelAnimationFrame(
+      animationFrame
+    );
+
+    animationFrame = null;
+
+  }
+
+  score = 0;
+
+  correctAnswers = 0;
+
+  wrongAnswers = 0;
+
+  stars = MAX_STARS;
+
+  currentQuestionIndex = 0;
+
+  currentQuestion = null;
+
+  answerLocked = false;
+
+  answerHitThisShot = false;
+
+  shotInProgress = false;
+
+  dragging = false;
+
+  gameRunning = true;
+
+  answerResult.classList.remove(
+    'show'
+  );
+
+  endOverlay.classList.remove(
+    'show'
+  );
+
+  prepareGameQuestions();
+
+  updateStats();
+
+  loadCurrentQuestion();
+
+  drawTable();
+
+  animationFrame =
+    requestAnimationFrame(
+      gameLoop
+    );
+
+}
+
+
+/* =========================================================
+   EVENEMENTS
+========================================================= */
+
+continueBtn.addEventListener(
+  'click',
+  continueToNextQuestion
+);
 
 restartBtn.addEventListener(
-    'click',
-    startGame
+  'click',
+  startGame
 );
 
 restartSmall.addEventListener(
-    'click',
-    startGame
+  'click',
+  startGame
 );
-
-
-/* =========================
-   ÉVÉNEMENTS SOURIS
-========================= */
 
 canvas.addEventListener(
-    'mousedown',
-    pointerDown
+  'mousedown',
+  pointerDown
 );
 
 window.addEventListener(
-    'mousemove',
-    pointerMove
+  'mousemove',
+  pointerMove
 );
 
 window.addEventListener(
-    'mouseup',
-    pointerUp
+  'mouseup',
+  pointerUp
 );
-
-
-/* =========================
-   ÉVÉNEMENTS TACTILES
-========================= */
 
 canvas.addEventListener(
-    'touchstart',
-    pointerDown,
-    {
-        passive: false
-    }
+  'touchstart',
+  pointerDown,
+  {
+    passive: false
+  }
 );
 
 window.addEventListener(
-    'touchmove',
-    pointerMove,
-    {
-        passive: false
-    }
+  'touchmove',
+  pointerMove,
+  {
+    passive: false
+  }
 );
 
 window.addEventListener(
-    'touchend',
-    pointerUp,
-    {
-        passive: false
-    }
+  'touchend',
+  pointerUp,
+  {
+    passive: false
+  }
 );
 
 
-/* =========================
-   CHARGEMENT
-========================= */
+/* =========================================================
+   LANCEMENT
+========================================================= */
 
 loadQuestions();
 
