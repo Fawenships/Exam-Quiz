@@ -1,872 +1,906 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-  <meta name="theme-color" content="#24113f">
-  <meta
-    name="description"
-    content="EduBillard — Jeu éducatif de biologie par ExamQuiz Haiti."
-  >
+<meta name="theme-color" content="#24113f">
 
-  <title>EduBillard — ExamQuiz Haiti</title>
+<title>EduBillard — ExamQuiz Haiti</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f3f8;
+    color: #24113f;
+}
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.top {
+    min-height: 64px;
+    background: #fff;
+    border-bottom: 1px solid #e5e1ea;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 10px 24px;
+
+    position: sticky;
+    top: 0;
+    z-index: 50;
+}
+
+.brand {
+    color: #24113f;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.back {
+    color: #4b2481;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+/* =====================================================
+   CONTENEUR
+===================================================== */
+
+.game-wrapper {
+    width: min(1150px, 94%);
+    margin: 25px auto 50px;
+}
+
+/* =====================================================
+   TITRE
+===================================================== */
+
+.game-title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.game-title h1 {
+    font-size: clamp(30px, 5vw, 46px);
+    margin-bottom: 6px;
+}
+
+.game-title p {
+    color: #707070;
+    font-size: 15px;
+}
+
+/* =====================================================
+   HUD
+===================================================== */
+
+.hud {
+    background: #fff;
+    border: 1px solid #e2ddea;
+    border-radius: 17px;
+    padding: 14px;
+    margin-bottom: 15px;
+}
+
+.hud-top {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.hud-item {
+    background: #f8f6fa;
+    border-radius: 11px;
+    text-align: center;
+    padding: 9px;
+}
+
+.hud-item strong {
+    display: block;
+    color: #4b2481;
+    font-size: 20px;
+}
+
+.hud-item span {
+    display: block;
+    color: #777;
+    font-size: 11px;
+    margin-top: 3px;
+}
+
+.progress-container {
+    height: 8px;
+    background: #e9e5ee;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    width: 10%;
+    height: 100%;
+    background: #4b2481;
+    transition: width .3s ease;
+}
+
+/* =====================================================
+   QUESTION
+===================================================== */
+
+.question-box {
+    background: #fff;
+    border: 1px solid #e2ddea;
+    border-radius: 17px;
+    padding: 18px 22px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.question-label {
+    color: #1764c0;
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 7px;
+}
+
+.question {
+    font-size: clamp(18px, 3vw, 25px);
+    font-weight: 700;
+    line-height: 1.45;
+}
+
+/* =====================================================
+   STRUCTURE DU JEU
+===================================================== */
+
+.game-board {
+    background: #fff;
+    border: 1px solid #e2ddea;
+    border-radius: 20px;
+    padding: 15px;
+}
+
+/* =====================================================
+   REPONSES
+===================================================== */
+
+.answers-title {
+    text-align: center;
+    color: #777;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.answers-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.answer-card {
+    min-height: 62px;
+    border: 1px solid #ded8e7;
+    background: #faf9fb;
+    border-radius: 13px;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 9px 12px;
+
+    transition: .2s ease;
+}
+
+.answer-letter {
+    width: 38px;
+    height: 38px;
+    flex: 0 0 38px;
+
+    border-radius: 50%;
+
+    background: #4b2481;
+    color: #fff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: 800;
+    font-size: 14px;
+}
+
+.answer-text {
+    color: #333;
+    font-size: 14px;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+}
+
+.answer-card.selected {
+    border-color: #4b2481;
+    background: #f5f0fa;
+}
+
+/* =====================================================
+   BILLARD
+===================================================== */
+
+.table-container {
+    width: 100%;
+    background: #173c2b;
+    border-radius: 18px;
+    padding: 9px;
+    box-shadow: 0 15px 40px rgba(0,0,0,.18);
+}
+
+.table-info {
+    color: rgba(255,255,255,.85);
+    text-align: center;
+    font-size: 12px;
+    padding: 2px 5px 8px;
+}
+
+.canvas-wrapper {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 11px;
+}
+
+canvas {
+    display: block;
+    width: 100%;
+    height: auto;
+
+    border-radius: 11px;
+
+    background: #27704c;
+
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+
+    cursor: crosshair;
+}
+
+/* =====================================================
+   MESSAGE
+===================================================== */
+
+.message {
+    min-height: 46px;
+
+    margin-top: 15px;
+
+    background: #fff;
+    border: 1px solid #e2ddea;
+
+    border-radius: 13px;
+
+    padding: 11px 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.45;
+}
+
+.message.success {
+    color: #176b3a;
+    background: #f3fbf6;
+    border-color: #b9dfc8;
+}
+
+.message.error {
+    color: #a32c2c;
+    background: #fff6f6;
+    border-color: #e7bebe;
+}
+
+/* =====================================================
+   INSTRUCTIONS
+===================================================== */
+
+.instructions {
+    margin-top: 15px;
+
+    background: #fff;
+    border: 1px solid #e2ddea;
+
+    border-radius: 16px;
+
+    padding: 15px;
+
+    color: #666;
+
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.instructions strong {
+    color: #24113f;
+}
+
+/* =====================================================
+   BOUTONS
+===================================================== */
+
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.btn {
+    min-height: 44px;
+
+    padding: 0 18px;
+
+    border-radius: 10px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 0;
+
+    text-decoration: none;
+
+    font-weight: 700;
+    font-size: 14px;
+
+    cursor: pointer;
+}
+
+.btn.primary {
+    background: #4b2481;
+    color: #fff;
+}
+
+.btn.ghost {
+    background: #fff;
+    color: #4b2481;
+    border: 1px solid #d8d0e3;
+}
+
+/* =====================================================
+   FIN
+===================================================== */
+
+.overlay {
+    position: fixed;
+    inset: 0;
+
+    background: rgba(20,12,30,.78);
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    padding: 15px;
+
+    z-index: 100;
+}
+
+.overlay.show {
+    display: flex;
+}
+
+.modal {
+    width: min(520px, 100%);
+
+    background: #fff;
+
+    border-radius: 20px;
+
+    padding: 25px;
+
+    text-align: center;
+}
+
+.modal h2 {
+    font-size: 28px;
+    margin-bottom: 7px;
+}
+
+.modal p {
+    color: #666;
+}
+
+.final-score {
+    color: #4b2481;
+    font-size: 45px;
+    font-weight: 800;
+    margin: 20px 0;
+}
+
+.final-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}
+
+.final-stat {
+    background: #f7f5f9;
+    border-radius: 11px;
+    padding: 11px 5px;
+}
+
+.final-stat strong {
+    display: block;
+    color: #4b2481;
+    font-size: 19px;
+}
+
+.final-stat span {
+    display: block;
+    color: #777;
+    font-size: 10px;
+    margin-top: 3px;
+}
+
+/* =====================================================
+   TABLETTE
+===================================================== */
+
+@media (max-width: 700px) {
+
+    .hud-top {
+        grid-template-columns: repeat(2, 1fr);
     }
 
-    html {
-      width: 100%;
-      overflow-x: hidden;
-    }
+}
 
-    body {
-      font-family: Arial, sans-serif;
-      background: #f5f3f8;
-      color: #24113f;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
+/* =====================================================
+   TELEPHONE
+===================================================== */
 
-    /* =====================================================
-       HEADER
-    ===================================================== */
+@media (max-width: 600px) {
 
     .top {
-      min-height: 68px;
-      background: #fff;
-      border-bottom: 1px solid #e5e1ea;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
-      padding: 10px 25px;
-      position: sticky;
-      top: 0;
-      z-index: 20;
+        min-height: 58px;
+        padding: 9px 12px;
     }
 
     .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-      color: #24113f;
-      font-weight: 700;
-      font-size: 18px;
-      min-width: 0;
-    }
-
-    .brand img {
-      width: 38px;
-      height: 38px;
-      object-fit: contain;
-      flex-shrink: 0;
-    }
-
-    .brand span {
-      white-space: nowrap;
+        font-size: 14px;
     }
 
     .back {
-      text-decoration: none;
-      color: #4b2481;
-      font-weight: 700;
-      font-size: 14px;
-      white-space: nowrap;
+        font-size: 12px;
     }
-
-    .back:hover {
-      text-decoration: underline;
-    }
-
-    /* =====================================================
-       CONTENEUR
-    ===================================================== */
 
     .game-wrapper {
-      width: min(1180px, 94%);
-      margin: 25px auto 50px;
+        width: calc(100% - 16px);
+        margin: 14px auto 30px;
     }
 
-    /* =====================================================
-       TITRE
-    ===================================================== */
-
     .game-title {
-      text-align: center;
-      margin-bottom: 22px;
+        margin-bottom: 12px;
     }
 
     .game-title h1 {
-      font-size: clamp(30px, 5vw, 46px);
-      margin-bottom: 6px;
-      letter-spacing: -1px;
+        font-size: 30px;
     }
 
     .game-title p {
-      color: #707070;
-      font-size: 15px;
+        font-size: 12px;
     }
 
-    /* =====================================================
-       HUD
-    ===================================================== */
-
     .hud {
-      background: #fff;
-      border: 1px solid #e2ddea;
-      border-radius: 18px;
-      padding: 16px;
-      margin-bottom: 18px;
-      box-shadow: 0 5px 20px rgba(36, 17, 63, .05);
+        padding: 8px;
+        border-radius: 14px;
     }
 
     .hud-top {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-      margin-bottom: 15px;
+        gap: 6px;
+        margin-bottom: 8px;
     }
 
     .hud-item {
-      text-align: center;
-      padding: 10px 8px;
-      background: #f8f6fa;
-      border-radius: 12px;
-      min-width: 0;
+        padding: 7px 4px;
     }
 
     .hud-item strong {
-      display: block;
-      color: #4b2481;
-      font-size: 20px;
-      line-height: 1.2;
+        font-size: 17px;
     }
 
     .hud-item span {
-      display: block;
-      color: #777;
-      font-size: 11px;
-      margin-top: 4px;
+        font-size: 9px;
     }
-
-    .progress-container {
-      height: 9px;
-      background: #ebe7f0;
-      border-radius: 20px;
-      overflow: hidden;
-    }
-
-    .progress-bar {
-      width: 10%;
-      height: 100%;
-      background: #4b2481;
-      border-radius: 20px;
-      transition: width .3s ease;
-    }
-
-    /* =====================================================
-       QUESTION
-    ===================================================== */
 
     .question-box {
-      background: #fff;
-      border: 1px solid #e2ddea;
-      border-radius: 18px;
-      padding: 20px 24px;
-      margin-bottom: 18px;
-      text-align: center;
-      box-shadow: 0 5px 20px rgba(36, 17, 63, .05);
-    }
-
-    .question-label {
-      color: #1764c0;
-      font-size: 12px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: .8px;
-      margin-bottom: 8px;
+        padding: 13px 11px;
+        border-radius: 14px;
     }
 
     .question {
-      font-size: clamp(18px, 3vw, 25px);
-      font-weight: 700;
-      line-height: 1.45;
-      overflow-wrap: anywhere;
+        font-size: 16px;
     }
 
-    /* =====================================================
-       TABLE
-    ===================================================== */
-
-    .table-section {
-      background: #173c2b;
-      border-radius: 24px;
-      padding: clamp(10px, 2vw, 20px);
-      box-shadow: 0 18px 50px rgba(0, 0, 0, .18);
-      position: relative;
-      width: 100%;
+    .game-board {
+        padding: 9px;
+        border-radius: 15px;
     }
 
-    .table-top-info {
-      color: rgba(255,255,255,.85);
-      text-align: center;
-      font-size: 12px;
-      padding: 0 0 10px;
+    .answers-title {
+        font-size: 10px;
     }
 
-    .canvas-wrapper {
-      width: 100%;
-      overflow: hidden;
-      border-radius: 15px;
+    .answers-grid {
+        gap: 7px;
+        margin-bottom: 10px;
     }
 
-    canvas {
-      width: 100%;
-      height: auto;
-      display: block;
-      border-radius: 15px;
-      background: #27704c;
-      touch-action: none;
-      cursor: crosshair;
-      user-select: none;
-      -webkit-user-select: none;
+    .answer-card {
+        min-height: 58px;
+        padding: 7px;
+        gap: 7px;
+        border-radius: 10px;
     }
 
-    /* =====================================================
-       MESSAGE
-    ===================================================== */
+    .answer-letter {
+        width: 32px;
+        height: 32px;
+        flex-basis: 32px;
+        font-size: 12px;
+    }
+
+    .answer-text {
+        font-size: 12px;
+    }
+
+    .table-container {
+        padding: 5px;
+        border-radius: 13px;
+    }
+
+    .table-info {
+        font-size: 9px;
+        padding-bottom: 5px;
+    }
 
     .message {
-      min-height: 48px;
-      background: #fff;
-      border: 1px solid #e2ddea;
-      border-radius: 15px;
-      margin-top: 18px;
-      padding: 13px 18px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      font-size: 14px;
-      font-weight: 700;
-      color: #555;
-      line-height: 1.5;
+        margin-top: 10px;
+        font-size: 11px;
+        min-height: 44px;
     }
-
-    .message.success {
-      color: #176b3a;
-      border-color: #b9dfc8;
-      background: #f3fbf6;
-    }
-
-    .message.error {
-      color: #a32c2c;
-      border-color: #e7bebe;
-      background: #fff6f6;
-    }
-
-    /* =====================================================
-       INSTRUCTIONS
-    ===================================================== */
 
     .instructions {
-      background: #fff;
-      border: 1px solid #e2ddea;
-      border-radius: 18px;
-      padding: 18px 20px;
-      margin-top: 18px;
-      color: #666;
-      font-size: 14px;
-      line-height: 1.6;
-    }
-
-    .instructions-title {
-      color: #24113f;
-      font-weight: 800;
-      margin-bottom: 6px;
-    }
-
-    /* =====================================================
-       BOUTONS
-    ===================================================== */
-
-    .controls {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 18px;
+        font-size: 11px;
+        padding: 12px;
+        margin-top: 10px;
     }
 
     .btn {
-      min-height: 44px;
-      padding: 0 19px;
-      border-radius: 10px;
-      border: 0;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      cursor: pointer;
-      font-size: 14px;
-      font-weight: 700;
-      transition: .2s ease;
-    }
-
-    .btn.primary {
-      background: #4b2481;
-      color: #fff;
-    }
-
-    .btn.primary:hover {
-      background: #24113f;
-      transform: translateY(-1px);
-    }
-
-    .btn.ghost {
-      background: #fff;
-      color: #4b2481;
-      border: 1px solid #d8d0e3;
-    }
-
-    .btn.ghost:hover {
-      background: #f4f0f8;
-    }
-
-    /* =====================================================
-       FIN DE PARTIE
-    ===================================================== */
-
-    .overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(20, 12, 30, .76);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      z-index: 100;
-    }
-
-    .overlay.show {
-      display: flex;
-    }
-
-    .modal {
-      width: min(540px, 100%);
-      max-height: 90vh;
-      overflow-y: auto;
-      background: #fff;
-      border-radius: 22px;
-      padding: 30px;
-      text-align: center;
-      box-shadow: 0 25px 70px rgba(0,0,0,.28);
-    }
-
-    .modal h2 {
-      font-size: 30px;
-      margin-bottom: 8px;
-    }
-
-    .modal-subtitle {
-      color: #666;
-      line-height: 1.5;
-      margin-bottom: 20px;
-    }
-
-    .final-score {
-      font-size: 46px;
-      font-weight: 800;
-      color: #4b2481;
-      margin: 12px 0 22px;
-    }
-
-    .final-stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-bottom: 22px;
-    }
-
-    .final-stat {
-      background: #f7f5f9;
-      border-radius: 12px;
-      padding: 13px 8px;
-    }
-
-    .final-stat strong {
-      display: block;
-      font-size: 20px;
-      color: #4b2481;
-    }
-
-    .final-stat span {
-      display: block;
-      color: #777;
-      font-size: 11px;
-      margin-top: 4px;
-    }
-
-    /* =====================================================
-       TABLETTE
-    ===================================================== */
-
-    @media (max-width: 800px) {
-
-      .game-wrapper {
-        width: 95%;
-      }
-
-      .hud-top {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .table-section {
-        border-radius: 18px;
-      }
-
-    }
-
-    /* =====================================================
-       TELEPHONE
-    ===================================================== */
-
-    @media (max-width: 600px) {
-
-      body {
-        background: #f5f3f8;
-      }
-
-      .top {
-        min-height: 60px;
-        padding:
-          8px
-          12px;
-      }
-
-      .brand {
-        font-size: 14px;
-        gap: 7px;
-      }
-
-      .brand img {
-        width: 30px;
-        height: 30px;
-      }
-
-      .back {
-        font-size: 12px;
-      }
-
-      .game-wrapper {
-        width: calc(100% - 20px);
-        margin:
-          15px auto
-          30px;
-      }
-
-      .game-title {
-        margin-bottom: 14px;
-      }
-
-      .game-title h1 {
-        font-size: 30px;
-      }
-
-      .game-title p {
-        font-size: 13px;
-        line-height: 1.4;
-      }
-
-      /* HUD */
-
-      .hud {
-        padding: 9px;
-        border-radius: 15px;
-        margin-bottom: 12px;
-      }
-
-      .hud-top {
-        gap: 6px;
-        margin-bottom: 10px;
-      }
-
-      .hud-item {
-        padding: 8px 5px;
-        border-radius: 9px;
-      }
-
-      .hud-item strong {
-        font-size: 17px;
-      }
-
-      .hud-item span {
-        font-size: 10px;
-        margin-top: 2px;
-      }
-
-      .progress-container {
-        height: 7px;
-      }
-
-      /* QUESTION */
-
-      .question-box {
-        padding: 14px 12px;
-        border-radius: 15px;
-        margin-bottom: 12px;
-      }
-
-      .question-label {
-        font-size: 10px;
-        margin-bottom: 6px;
-      }
-
-      .question {
-        font-size: 17px;
-        line-height: 1.4;
-      }
-
-      /* TABLE */
-
-      .table-section {
-        padding: 6px;
-        border-radius: 15px;
-      }
-
-      .table-top-info {
-        font-size: 10px;
-        padding: 3px 4px 7px;
-      }
-
-      .canvas-wrapper {
-        border-radius: 11px;
-      }
-
-      canvas {
-        border-radius: 11px;
-      }
-
-      /* MESSAGE */
-
-      .message {
-        min-height: 46px;
-        margin-top: 12px;
-        padding: 10px 12px;
-        border-radius: 12px;
-        font-size: 12px;
-      }
-
-      /* INSTRUCTIONS */
-
-      .instructions {
-        padding: 13px;
-        margin-top: 12px;
-        border-radius: 14px;
-        font-size: 12px;
-        line-height: 1.55;
-      }
-
-      /* BUTTONS */
-
-      .controls {
-        margin-top: 12px;
-      }
-
-      .btn {
         min-height: 42px;
-        padding: 0 15px;
-        font-size: 13px;
-      }
-
-      /* MODAL */
-
-      .overlay {
-        padding: 12px;
-      }
-
-      .modal {
-        border-radius: 18px;
-        padding: 22px 15px;
-      }
-
-      .modal h2 {
-        font-size: 25px;
-      }
-
-      .final-score {
-        font-size: 38px;
-        margin: 10px 0 18px;
-      }
-
-      .final-stats {
-        gap: 6px;
-        margin-bottom: 18px;
-      }
-
-      .final-stat {
-        padding: 10px 4px;
-      }
-
-      .final-stat strong {
-        font-size: 17px;
-      }
-
-      .final-stat span {
-        font-size: 9px;
-      }
-
-    }
-
-    /* =====================================================
-       PETITS TELEPHONES
-    ===================================================== */
-
-    @media (max-width: 380px) {
-
-      .brand span {
-        display: none;
-      }
-
-      .back {
-        font-size: 11px;
-      }
-
-      .game-title h1 {
-        font-size: 27px;
-      }
-
-      .game-title p {
         font-size: 12px;
-      }
-
-      .question {
-        font-size: 16px;
-      }
-
-      .hud-item strong {
-        font-size: 16px;
-      }
-
+        padding: 0 14px;
     }
 
-  </style>
+}
+
+/* =====================================================
+   TRES PETIT TELEPHONE
+===================================================== */
+
+@media (max-width: 380px) {
+
+    .brand {
+        font-size: 13px;
+    }
+
+    .back {
+        font-size: 10px;
+    }
+
+    .game-title h1 {
+        font-size: 27px;
+    }
+
+    .answer-text {
+        font-size: 11px;
+    }
+
+    .answer-letter {
+        width: 29px;
+        height: 29px;
+        flex-basis: 29px;
+    }
+
+}
+
+</style>
 </head>
+
 
 <body>
 
+
 <header class="top">
 
-  <a class="brand" href="index.html">
-    <img
-      src="logo.png"
-      alt=""
-      onerror="this.style.display='none'"
+    <a
+        href="index.html"
+        class="brand"
     >
+        ExamQuiz Haiti
+    </a>
 
-    <span>ExamQuiz Haiti</span>
-  </a>
-
-  <a
-    class="back"
-    href="baccalaureat.html"
-  >
-    ← Retour aux jeux
-  </a>
+    <a
+        href="baccalaureat.html"
+        class="back"
+    >
+        ← Retour aux jeux
+    </a>
 
 </header>
 
 
 <main class="game-wrapper">
 
-  <!-- ===================================================
-       TITRE
-  ==================================================== -->
 
-  <div class="game-title">
+    <!-- =================================================
+         TITRE
+    ================================================== -->
 
-    <h1>EduBillard</h1>
+    <div class="game-title">
 
-    <p>
-      Réponds aux questions de biologie en jouant au billard.
-    </p>
+        <h1>
+            EduBillard
+        </h1>
 
-  </div>
-
-
-  <!-- ===================================================
-       HUD
-  ==================================================== -->
-
-  <section class="hud">
-
-    <div class="hud-top">
-
-      <div class="hud-item">
-
-        <strong id="score">
-          0
-        </strong>
-
-        <span>
-          Points
-        </span>
-
-      </div>
-
-
-      <div class="hud-item">
-
-        <strong id="questionCounter">
-          1 / 10
-        </strong>
-
-        <span>
-          Question
-        </span>
-
-      </div>
-
-
-      <div class="hud-item">
-
-        <strong id="correctCount">
-          0
-        </strong>
-
-        <span>
-          Bonnes réponses
-        </span>
-
-      </div>
-
-
-      <div class="hud-item">
-
-        <strong id="bestScore">
-          0
-        </strong>
-
-        <span>
-          Meilleur score
-        </span>
-
-      </div>
+        <p>
+            Réponds aux questions de biologie en jouant au billard.
+        </p>
 
     </div>
 
 
-    <div class="progress-container">
+    <!-- =================================================
+         HUD
+    ================================================== -->
 
-      <div
-        class="progress-bar"
-        id="progressBar"
-      ></div>
+    <section class="hud">
 
-    </div>
+        <div class="hud-top">
 
-  </section>
+            <div class="hud-item">
+
+                <strong id="score">
+                    0
+                </strong>
+
+                <span>
+                    Points
+                </span>
+
+            </div>
 
 
-  <!-- ===================================================
-       QUESTION
-  ==================================================== -->
+            <div class="hud-item">
 
-  <section class="question-box">
+                <strong id="questionCounter">
+                    1 / 10
+                </strong>
+
+                <span>
+                    Question
+                </span>
+
+            </div>
+
+
+            <div class="hud-item">
+
+                <strong id="correctCount">
+                    0
+                </strong>
+
+                <span>
+                    Bonnes réponses
+                </span>
+
+            </div>
+
+
+            <div class="hud-item">
+
+                <strong id="bestScore">
+                    0
+                </strong>
+
+                <span>
+                    Meilleur score
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="progress-container">
+
+            <div
+                class="progress-bar"
+                id="progressBar"
+            ></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         QUESTION
+    ================================================== -->
+
+    <section class="question-box">
+
+        <div
+            class="question-label"
+            id="levelLabel"
+        >
+            Niveau 1
+        </div>
+
+        <div
+            class="question"
+            id="question"
+        >
+            Chargement de la question...
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         JEU
+    ================================================== -->
+
+    <section class="game-board">
+
+
+        <div class="answers-title">
+            Choisis une réponse en frappant la bille correspondante
+        </div>
+
+
+        <!-- =============================================
+             CARTES REPONSES
+        ============================================== -->
+
+        <div
+            class="answers-grid"
+            id="answersGrid"
+        >
+
+            <!-- Remplies automatiquement par JavaScript -->
+
+        </div>
+
+
+        <!-- =============================================
+             BILLARD
+        ============================================== -->
+
+        <div class="table-container">
+
+            <div class="table-info">
+
+                Fais glisser depuis la bille blanche,
+                puis relâche pour tirer.
+
+            </div>
+
+
+            <div class="canvas-wrapper">
+
+                <canvas
+                    id="gameCanvas"
+                    width="1100"
+                    height="600"
+                ></canvas>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+    <!-- =================================================
+         MESSAGE
+    ================================================== -->
 
     <div
-      class="question-label"
-      id="levelLabel"
+        class="message"
+        id="message"
     >
-      Niveau 1
+        Tire la bille blanche vers une réponse.
     </div>
 
-    <div
-      class="question"
-      id="question"
-    >
-      Chargement de la question...
+
+    <!-- =================================================
+         INSTRUCTIONS
+    ================================================== -->
+
+    <section class="instructions">
+
+        <strong>
+            Comment jouer ?
+        </strong>
+
+        <br>
+
+        1. Appuie sur la bille blanche.
+
+        <br>
+
+        2. Fais glisser ton doigt ou ta souris
+        dans la direction opposée au tir.
+
+        <br>
+
+        3. Plus tu tires loin, plus le tir est puissant.
+
+        <br>
+
+        4. Relâche pour tirer.
+
+        <br>
+
+        La première bille A, B, C ou D touchée
+        sera ta réponse.
+
+        <br>
+
+        Une bonne réponse rapporte
+        <strong>10 points</strong>.
+
+    </section>
+
+
+    <div class="controls">
+
+        <a
+            href="baccalaureat.html"
+            class="btn ghost"
+        >
+            Retour aux jeux
+        </a>
+
     </div>
 
-  </section>
-
-
-  <!-- ===================================================
-       TABLE
-  ==================================================== -->
-
-  <section class="table-section">
-
-    <div class="table-top-info">
-      Tire depuis la bille blanche vers la réponse de ton choix.
-    </div>
-
-    <div class="canvas-wrapper">
-
-      <canvas
-        id="gameCanvas"
-        width="1100"
-        height="600"
-      ></canvas>
-
-    </div>
-
-  </section>
-
-
-  <!-- ===================================================
-       MESSAGE
-  ==================================================== -->
-
-  <div
-    class="message"
-    id="message"
-  >
-    Tire la bille blanche vers une réponse.
-  </div>
-
-
-  <!-- ===================================================
-       INSTRUCTIONS
-  ==================================================== -->
-
-  <section class="instructions">
-
-    <div class="instructions-title">
-      Comment jouer ?
-    </div>
-
-    Fais glisser la souris ou ton doigt depuis la bille blanche
-    pour choisir la direction et la puissance du tir, puis relâche.
-
-    <br>
-
-    La première bille-réponse touchée détermine ta réponse.
-
-    <br>
-
-    Une bonne réponse rapporte
-    <strong>10 points</strong>.
-
-  </section>
-
-
-  <div class="controls">
-
-    <a
-      class="btn ghost"
-      href="baccalaureat.html"
-    >
-      Retour aux jeux
-    </a>
-
-  </div>
 
 </main>
 
@@ -876,215 +910,213 @@
 ===================================================== -->
 
 <div
-  class="overlay"
-  id="endOverlay"
+    class="overlay"
+    id="endOverlay"
 >
 
-  <div class="modal">
+    <div class="modal">
 
-    <h2>
-      Partie terminée
-    </h2>
+        <h2>
+            Partie terminée
+        </h2>
 
-    <p class="modal-subtitle">
-      Tu as terminé les 10 questions d'EduBillard.
-    </p>
+        <p>
+            Tu as terminé les 10 questions.
+        </p>
 
 
-    <div
-      class="final-score"
-      id="finalScore"
-    >
-      0 points
+        <div
+            class="final-score"
+            id="finalScore"
+        >
+            0 points
+        </div>
+
+
+        <div class="final-stats">
+
+            <div class="final-stat">
+
+                <strong id="finalCorrect">
+                    0
+                </strong>
+
+                <span>
+                    Bonnes réponses
+                </span>
+
+            </div>
+
+
+            <div class="final-stat">
+
+                <strong id="finalWrong">
+                    0
+                </strong>
+
+                <span>
+                    Mauvaises réponses
+                </span>
+
+            </div>
+
+
+            <div class="final-stat">
+
+                <strong id="finalBest">
+                    0
+                </strong>
+
+                <span>
+                    Meilleur score
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="controls">
+
+            <button
+                class="btn primary"
+                id="restartBtn"
+            >
+                Rejouer
+            </button>
+
+            <a
+                href="baccalaureat.html"
+                class="btn ghost"
+            >
+                Retour aux jeux
+            </a>
+
+        </div>
+
     </div>
-
-
-    <div class="final-stats">
-
-      <div class="final-stat">
-
-        <strong id="finalCorrect">
-          0
-        </strong>
-
-        <span>
-          Bonnes réponses
-        </span>
-
-      </div>
-
-
-      <div class="final-stat">
-
-        <strong id="finalWrong">
-          0
-        </strong>
-
-        <span>
-          Mauvaises réponses
-        </span>
-
-      </div>
-
-
-      <div class="final-stat">
-
-        <strong id="finalBest">
-          0
-        </strong>
-
-        <span>
-          Meilleur score
-        </span>
-
-      </div>
-
-    </div>
-
-
-    <div class="controls">
-
-      <button
-        class="btn primary"
-        id="restartBtn"
-      >
-        Rejouer
-      </button>
-
-      <a
-        class="btn ghost"
-        href="baccalaureat.html"
-      >
-        Retour aux jeux
-      </a>
-
-    </div>
-
-  </div>
 
 </div>
 
 
 <script type="module">
 
+
 /* =========================================================
    CONFIGURATION
 ========================================================= */
 
 const QUESTIONS_URL =
-  './src/biologieQuestions.js';
+    './src/biologieQuestions.js';
 
 const TOTAL_QUESTIONS =
-  10;
+    10;
 
 const POINTS_CORRECT =
-  10;
+    10;
 
 const BEST_SCORE_KEY =
-  'edubillard_best_score';
+    'edubillard_best_score';
 
 
 /* =========================================================
-   CANVAS
+   ELEMENTS
 ========================================================= */
 
 const canvas =
-  document.getElementById(
-    'gameCanvas'
-  );
+    document.getElementById(
+        'gameCanvas'
+    );
 
 const ctx =
-  canvas.getContext('2d');
+    canvas.getContext('2d');
 
-let tableWidth =
-  canvas.width;
-
-let tableHeight =
-  canvas.height;
-
-
-/* =========================================================
-   DOM
-========================================================= */
 
 const scoreEl =
-  document.getElementById(
-    'score'
-  );
+    document.getElementById(
+        'score'
+    );
 
 const questionCounterEl =
-  document.getElementById(
-    'questionCounter'
-  );
+    document.getElementById(
+        'questionCounter'
+    );
 
 const correctCountEl =
-  document.getElementById(
-    'correctCount'
-  );
+    document.getElementById(
+        'correctCount'
+    );
 
 const bestScoreEl =
-  document.getElementById(
-    'bestScore'
-  );
+    document.getElementById(
+        'bestScore'
+    );
 
 const questionEl =
-  document.getElementById(
-    'question'
-  );
+    document.getElementById(
+        'question'
+    );
 
 const levelLabelEl =
-  document.getElementById(
-    'levelLabel'
-  );
+    document.getElementById(
+        'levelLabel'
+    );
 
 const progressBarEl =
-  document.getElementById(
-    'progressBar'
-  );
+    document.getElementById(
+        'progressBar'
+    );
 
 const messageEl =
-  document.getElementById(
-    'message'
-  );
+    document.getElementById(
+        'message'
+    );
+
+const answersGrid =
+    document.getElementById(
+        'answersGrid'
+    );
 
 const endOverlay =
-  document.getElementById(
-    'endOverlay'
-  );
+    document.getElementById(
+        'endOverlay'
+    );
 
 const finalScoreEl =
-  document.getElementById(
-    'finalScore'
-  );
+    document.getElementById(
+        'finalScore'
+    );
 
 const finalCorrectEl =
-  document.getElementById(
-    'finalCorrect'
-  );
+    document.getElementById(
+        'finalCorrect'
+    );
 
 const finalWrongEl =
-  document.getElementById(
-    'finalWrong'
-  );
+    document.getElementById(
+        'finalWrong'
+    );
 
 const finalBestEl =
-  document.getElementById(
-    'finalBest'
-  );
+    document.getElementById(
+        'finalBest'
+    );
 
 const restartBtn =
-  document.getElementById(
-    'restartBtn'
-  );
+    document.getElementById(
+        'restartBtn'
+    );
 
 
 /* =========================================================
-   QUESTIONS
+   ETAT
 ========================================================= */
 
 let biologyQuestions = [];
 
 let currentQuestionIndex = 0;
+
+let currentQuestion = null;
 
 let score = 0;
 
@@ -1092,24 +1124,11 @@ let correctAnswers = 0;
 
 let wrongAnswers = 0;
 
-let currentQuestion = null;
-
-
-/* =========================================================
-   BILLES
-========================================================= */
-
 let balls = [];
 
 let whiteBall = null;
 
 let dragging = false;
-
-let dragStartX = 0;
-
-let dragStartY = 0;
-
-let gameRunning = false;
 
 let shotInProgress = false;
 
@@ -1117,158 +1136,172 @@ let answerLocked = false;
 
 let animationFrame = null;
 
-let lastPointerPosition = null;
+let dragStartX = 0;
+
+let dragStartY = 0;
+
+let currentPointerX = 0;
+
+let currentPointerY = 0;
+
+let tableWidth =
+    canvas.width;
+
+let tableHeight =
+    canvas.height;
 
 
 /* =========================================================
    UTILITAIRES
 ========================================================= */
 
-function randomItem(array) {
-
-  return array[
-    Math.floor(
-      Math.random() *
-      array.length
-    )
-  ];
-
-}
-
-
 function shuffle(array) {
 
-  const arr = [...array];
+    const result =
+        [...array];
 
-  for (
-    let i = arr.length - 1;
-    i > 0;
-    i--
-  ) {
+    for (
+        let i = result.length - 1;
+        i > 0;
+        i--
+    ) {
 
-    const j =
-      Math.floor(
-        Math.random() *
-        (i + 1)
-      );
+        const j =
+            Math.floor(
+                Math.random() *
+                (i + 1)
+            );
 
-    [
-      arr[i],
-      arr[j]
-    ] = [
-      arr[j],
-      arr[i]
-    ];
+        [
+            result[i],
+            result[j]
+        ] =
+        [
+            result[j],
+            result[i]
+        ];
 
-  }
+    }
 
-  return arr;
+    return result;
 
 }
 
 
 function distance(a, b) {
 
-  return Math.hypot(
-    a.x - b.x,
-    a.y - b.y
-  );
+    return Math.hypot(
+        a.x - b.x,
+        a.y - b.y
+    );
+
+}
+
+
+function randomItem(array) {
+
+    return array[
+        Math.floor(
+            Math.random() *
+            array.length
+        )
+    ];
 
 }
 
 
 /* =========================================================
-   QUESTIONS
+   CHARGEMENT QUESTIONS
 ========================================================= */
 
 async function loadQuestions() {
 
-  try {
+    try {
 
-    const module =
-      await import(
-        QUESTIONS_URL
-      );
-
-
-    let source = null;
+        const module =
+            await import(
+                QUESTIONS_URL
+            );
 
 
-    if (
-      Array.isArray(
-        module.biologieQuestions
-      )
-    ) {
+        let source = null;
 
-      source =
-        module.biologieQuestions;
 
-    } else if (
-      Array.isArray(
-        module.biologyQuestions
-      )
-    ) {
+        if (
+            Array.isArray(
+                module.biologieQuestions
+            )
+        ) {
 
-      source =
-        module.biologyQuestions;
+            source =
+                module.biologieQuestions;
 
-    } else if (
-      Array.isArray(
-        module.questions
-      )
-    ) {
+        } else if (
+            Array.isArray(
+                module.biologyQuestions
+            )
+        ) {
 
-      source =
-        module.questions;
+            source =
+                module.biologyQuestions;
+
+        } else if (
+            Array.isArray(
+                module.questions
+            )
+        ) {
+
+            source =
+                module.questions;
+
+        }
+
+
+        if (
+            !source ||
+            source.length < 4
+        ) {
+
+            throw new Error(
+                'Questions introuvables.'
+            );
+
+        }
+
+
+        biologyQuestions =
+            source
+                .map(normalizeQuestion)
+                .filter(Boolean);
+
+
+        if (
+            biologyQuestions.length < 4
+        ) {
+
+            throw new Error(
+                'Pas assez de questions.'
+            );
+
+        }
+
+
+        startGame();
+
+    } catch (error) {
+
+        console.error(error);
+
+        questionEl.textContent =
+            'Impossible de charger les questions.';
+
+        messageEl.textContent =
+            'Vérifie le fichier src/biologieQuestions.js';
+
+        messageEl.className =
+            'message error';
 
     }
-
-
-    if (
-      !source ||
-      source.length < 4
-    ) {
-
-      throw new Error(
-        'Aucune question suffisante.'
-      );
-
-    }
-
-
-    biologyQuestions =
-      source
-        .map(normalizeQuestion)
-        .filter(Boolean);
-
-
-    if (
-      biologyQuestions.length < 4
-    ) {
-
-      throw new Error(
-        'Il faut au moins 4 questions.'
-      );
-
-    }
-
-
-    startGame();
-
-  } catch (error) {
-
-    console.error(error);
-
-    questionEl.textContent =
-      'Impossible de charger les questions.';
-
-    messageEl.textContent =
-      'Vérifie src/biologieQuestions.js';
-
-    messageEl.className =
-      'message error';
-
-  }
 
 }
 
@@ -1279,216 +1312,283 @@ async function loadQuestions() {
 
 function normalizeQuestion(q) {
 
-  if (!q) {
-    return null;
-  }
+    if (!q) {
+        return null;
+    }
 
 
-  let question = '';
+    let question = '';
 
-  let answer = '';
+    let answer = '';
 
+    let options = [];
 
-  if (
-    typeof q === 'string'
-  ) {
-
-    question = q;
-
-  } else {
-
-    question =
-      q.question ??
-      q.q ??
-      q.text ??
-      q.enonce ??
-      '';
-
-    answer =
-      q.answer ??
-      q.reponse ??
-      q.correct ??
-      q.correctAnswer ??
-      '';
-
-  }
-
-
-  if (!question) {
-    return null;
-  }
-
-
-  let options = [];
-
-
-  if (
-    Array.isArray(q.options)
-  ) {
-
-    options =
-      q.options;
-
-  } else if (
-    Array.isArray(q.choices)
-  ) {
-
-    options =
-      q.choices;
-
-  } else if (
-    q.a &&
-    q.b &&
-    q.c &&
-    q.d
-  ) {
-
-    options = [
-      q.a,
-      q.b,
-      q.c,
-      q.d
-    ];
-
-  }
-
-
-  if (
-    !answer &&
-    options.length
-  ) {
 
     if (
-      typeof q.correctIndex === 'number'
+        typeof q === 'string'
     ) {
 
-      answer =
-        options[
-          q.correctIndex
-        ];
+        question =
+            q;
 
-    } else if (
-      typeof q.answerIndex === 'number'
-    ) {
+    } else {
 
-      answer =
-        options[
-          q.answerIndex
-        ];
+        question =
+            q.question ??
+            q.q ??
+            q.text ??
+            q.enonce ??
+            '';
+
+        answer =
+            q.answer ??
+            q.reponse ??
+            q.correct ??
+            q.correctAnswer ??
+            '';
+
+
+        if (
+            Array.isArray(q.options)
+        ) {
+
+            options =
+                q.options;
+
+        } else if (
+            Array.isArray(q.choices)
+        ) {
+
+            options =
+                q.choices;
+
+        } else if (
+            q.a &&
+            q.b &&
+            q.c &&
+            q.d
+        ) {
+
+            options = [
+                q.a,
+                q.b,
+                q.c,
+                q.d
+            ];
+
+        }
+
+
+        if (
+            !answer &&
+            options.length
+        ) {
+
+            if (
+                typeof q.correctIndex === 'number'
+            ) {
+
+                answer =
+                    options[
+                        q.correctIndex
+                    ];
+
+            } else if (
+                typeof q.answerIndex === 'number'
+            ) {
+
+                answer =
+                    options[
+                        q.answerIndex
+                    ];
+
+            }
+
+        }
 
     }
 
-  }
+
+    if (!question) {
+        return null;
+    }
 
 
-  return {
+    return {
 
-    question:
-      String(question),
+        question:
+            String(question),
 
-    answer:
-      String(answer),
+        answer:
+            String(answer),
 
-    options:
-      options
-        .filter(Boolean)
-        .map(String),
+        options:
+            options
+                .filter(Boolean)
+                .map(String),
 
-    level:
-      q.level ??
-      q.niveau ??
-      q.difficulty ??
-      null
+        level:
+            q?.level ??
+            q?.niveau ??
+            q?.difficulty ??
+            null
 
-  };
+    };
 
 }
 
 
 /* =========================================================
-   REPONSES
+   CREATION DES 4 REPONSES
 ========================================================= */
 
 function buildAnswers(question) {
 
-  const correct =
-    String(
-      question.answer
-    ).trim();
+    const correct =
+        String(
+            question.answer
+        ).trim();
 
 
-  let wrongAnswers =
-    question.options
-      .map(String)
-      .filter(
-        option =>
-          option.trim() &&
-          option.trim() !== correct
-      );
+    let wrongAnswers =
+        question.options
+            .map(String)
+            .map(x => x.trim())
+            .filter(
+                x =>
+                    x &&
+                    x !== correct
+            );
 
 
-  if (
-    wrongAnswers.length < 3
-  ) {
+    /*
+     * Si la question n'a pas 3 mauvaises
+     * réponses, on utilise les réponses
+     * d'autres questions de biologie.
+     */
 
-    const pool =
-      biologyQuestions
-        .map(
-          q =>
-            String(q.answer).trim()
-        )
-        .filter(
-          answer =>
-            answer &&
-            answer !== correct &&
-            !wrongAnswers.includes(answer)
-        );
+    const otherAnswers =
+        biologyQuestions
+            .map(
+                q =>
+                    String(q.answer).trim()
+            )
+            .filter(
+                answer =>
+                    answer &&
+                    answer !== correct &&
+                    !wrongAnswers.includes(answer)
+            );
 
 
     wrongAnswers = [
-      ...wrongAnswers,
-      ...shuffle(pool)
+        ...wrongAnswers,
+        ...shuffle(otherAnswers)
     ];
 
-  }
+
+    wrongAnswers =
+        wrongAnswers.slice(0, 3);
 
 
-  wrongAnswers =
-    shuffle(
-      wrongAnswers
-    ).slice(0, 3);
+    return shuffle([
+
+        {
+            text: correct,
+            correct: true
+        },
+
+        ...wrongAnswers.map(
+            text => ({
+                text,
+                correct: false
+            })
+        )
+
+    ]).map(
+        (answer, index) => ({
+
+            label:
+                String.fromCharCode(
+                    65 + index
+                ),
+
+            text:
+                answer.text,
+
+            correct:
+                answer.correct
+
+        })
+    );
+
+}
 
 
-  return shuffle([
+/* =========================================================
+   REPONSES HTML
+========================================================= */
 
-    {
-      text: correct,
-      correct: true
-    },
+function renderAnswerCards() {
 
-    ...wrongAnswers.map(
-      text => ({
-        text,
-        correct: false
-      })
-    )
+    answersGrid.innerHTML = '';
 
-  ]).map(
-    (answer, index) => ({
 
-      label:
-        String.fromCharCode(
-          65 + index
-        ),
+    currentQuestion.answers
+        .forEach(
+            answer => {
 
-      text:
-        answer.text,
+                const card =
+                    document.createElement(
+                        'div'
+                    );
 
-      correct:
-        answer.correct
+                card.className =
+                    'answer-card';
 
-    })
-  );
+                card.dataset.label =
+                    answer.label;
+
+
+                const letter =
+                    document.createElement(
+                        'div'
+                    );
+
+                letter.className =
+                    'answer-letter';
+
+                letter.textContent =
+                    answer.label;
+
+
+                const text =
+                    document.createElement(
+                        'div'
+                    );
+
+                text.className =
+                    'answer-text';
+
+                text.textContent =
+                    answer.text;
+
+
+                card.appendChild(
+                    letter
+                );
+
+                card.appendChild(
+                    text
+                );
+
+
+                answersGrid.appendChild(
+                    card
+                );
+
+            }
+        );
 
 }
 
@@ -1499,37 +1599,35 @@ function buildAnswers(question) {
 
 function getQuestionLevel(question) {
 
-  const value =
-    String(
-      question?.level ?? ''
-    ).toLowerCase();
+    const level =
+        String(
+            question?.level ?? ''
+        ).toLowerCase();
 
 
-  if (
-    value.includes('3') ||
-    value.includes('difficile') ||
-    value.includes('hard') ||
-    value.includes('advanced')
-  ) {
+    if (
+        level.includes('3') ||
+        level.includes('difficile') ||
+        level.includes('hard')
+    ) {
 
-    return 'Niveau 3';
+        return 'Niveau 3';
 
-  }
-
-
-  if (
-    value.includes('2') ||
-    value.includes('moyen') ||
-    value.includes('inter') ||
-    value.includes('medium')
-  ) {
-
-    return 'Niveau 2';
-
-  }
+    }
 
 
-  return 'Niveau 1';
+    if (
+        level.includes('2') ||
+        level.includes('moyen') ||
+        level.includes('medium')
+    ) {
+
+        return 'Niveau 2';
+
+    }
+
+
+    return 'Niveau 1';
 
 }
 
@@ -1540,101 +1638,113 @@ function getQuestionLevel(question) {
 
 function startGame() {
 
-  score = 0;
+    score = 0;
 
-  correctAnswers = 0;
+    correctAnswers = 0;
 
-  wrongAnswers = 0;
+    wrongAnswers = 0;
 
-  currentQuestionIndex = 0;
+    currentQuestionIndex = 0;
 
-  gameRunning = true;
+    gameRunning = true;
 
-  shotInProgress = false;
+    shotInProgress = false;
 
-  dragging = false;
+    dragging = false;
 
-  answerLocked = false;
-
-  endOverlay.classList.remove(
-    'show'
-  );
-
-  updateStats();
-
-  loadCurrentQuestion();
+    answerLocked = false;
 
 
-  if (!animationFrame) {
+    endOverlay.classList.remove(
+        'show'
+    );
 
-    animationLoop();
 
-  }
+    updateStats();
+
+    loadCurrentQuestion();
+
+
+    if (!animationFrame) {
+
+        animationLoop();
+
+    }
 
 }
 
 
 /* =========================================================
-   QUESTION SUIVANTE
+   VARIABLE JEU
+========================================================= */
+
+let gameRunning = false;
+
+
+/* =========================================================
+   QUESTION
 ========================================================= */
 
 function loadCurrentQuestion() {
 
-  if (
-    currentQuestionIndex >=
-    TOTAL_QUESTIONS
-  ) {
-
-    finishGame();
-
-    return;
-
-  }
-
-
-  currentQuestion =
-    randomItem(
-      biologyQuestions
-    );
-
-
-  currentQuestion.answers =
-    buildAnswers(
-      currentQuestion
-    );
-
-
-  questionEl.textContent =
-    currentQuestion.question;
-
-
-  levelLabelEl.textContent =
-    getQuestionLevel(
-      currentQuestion
-    );
-
-
-  questionCounterEl.textContent =
-    `${currentQuestionIndex + 1} / ${TOTAL_QUESTIONS}`;
-
-
-  progressBarEl.style.width =
-    `${
-      (
-        (currentQuestionIndex + 1) /
+    if (
+        currentQuestionIndex >=
         TOTAL_QUESTIONS
-      ) * 100
-    }%`;
+    ) {
+
+        finishGame();
+
+        return;
+
+    }
 
 
-  messageEl.textContent =
-    'Tire la bille blanche vers une réponse.';
+    currentQuestion =
+        randomItem(
+            biologyQuestions
+        );
 
-  messageEl.className =
-    'message';
+
+    currentQuestion.answers =
+        buildAnswers(
+            currentQuestion
+        );
 
 
-  resetTable();
+    questionEl.textContent =
+        currentQuestion.question;
+
+
+    levelLabelEl.textContent =
+        getQuestionLevel(
+            currentQuestion
+        );
+
+
+    questionCounterEl.textContent =
+        `${currentQuestionIndex + 1} / ${TOTAL_QUESTIONS}`;
+
+
+    progressBarEl.style.width =
+        `${
+            (
+                (currentQuestionIndex + 1) /
+                TOTAL_QUESTIONS
+            ) * 100
+        }%`;
+
+
+    renderAnswerCards();
+
+
+    messageEl.textContent =
+        'Appuie sur la bille blanche, tire et relâche.';
+
+    messageEl.className =
+        'message';
+
+
+    resetTable();
 
 }
 
@@ -1645,25 +1755,25 @@ function loadCurrentQuestion() {
 
 function getBestScore() {
 
-  return Number(
-    localStorage.getItem(
-      BEST_SCORE_KEY
-    ) || 0
-  );
+    return Number(
+        localStorage.getItem(
+            BEST_SCORE_KEY
+        ) || 0
+    );
 
 }
 
 
 function updateStats() {
 
-  scoreEl.textContent =
-    score;
+    scoreEl.textContent =
+        score;
 
-  correctCountEl.textContent =
-    correctAnswers;
+    correctCountEl.textContent =
+        correctAnswers;
 
-  bestScoreEl.textContent =
-    getBestScore();
+    bestScoreEl.textContent =
+        getBestScore();
 
 }
 
@@ -1674,122 +1784,125 @@ function updateStats() {
 
 function resetTable() {
 
-  tableWidth =
-    canvas.width;
+    tableWidth =
+        canvas.width;
 
-  tableHeight =
-    canvas.height;
-
-  shotInProgress = false;
-
-  dragging = false;
-
-  answerLocked = false;
+    tableHeight =
+        canvas.height;
 
 
-  /*
-   * Bille blanche.
-   */
-
-  const radius =
-    Math.max(
-      18,
-      Math.min(
-        tableWidth,
-        tableHeight
-      ) * 0.028
-    );
+    const radius =
+        Math.max(
+            19,
+            Math.min(
+                tableWidth,
+                tableHeight
+            ) * 0.029
+        );
 
 
-  whiteBall = {
+    /*
+     * Bille blanche.
+     */
 
-    x:
-      tableWidth * 0.20,
+    whiteBall = {
 
-    y:
-      tableHeight / 2,
+        x:
+            tableWidth * 0.22,
 
-    vx: 0,
+        y:
+            tableHeight / 2,
 
-    vy: 0,
+        vx: 0,
 
-    radius,
+        vy: 0,
 
-    type: 'white',
+        radius,
 
-    active: true
+        type:
+            'white',
 
-  };
+        active:
+            true
 
-
-  balls = [
-    whiteBall
-  ];
-
-
-  /*
-   * Positions des quatre réponses.
-   *
-   * Sur téléphone, le canvas est simplement
-   * réduit visuellement par CSS, mais ses
-   * coordonnées internes restent propres.
-   */
-
-  const positions = [
-
-    [0.64, 0.25],
-
-    [0.82, 0.25],
-
-    [0.64, 0.75],
-
-    [0.82, 0.75]
-
-  ];
+    };
 
 
-  currentQuestion.answers
-    .forEach(
-      (answer, index) => {
-
-        const [
-          px,
-          py
-        ] =
-          positions[index];
+    balls = [
+        whiteBall
+    ];
 
 
-        balls.push({
+    /*
+     * Positions des 4 réponses.
+     */
 
-          x:
-            tableWidth * px,
+    const positions = [
 
-          y:
-            tableHeight * py,
+        [0.62, 0.25],
 
-          vx: 0,
+        [0.82, 0.25],
 
-          vy: 0,
+        [0.62, 0.75],
 
-          radius,
+        [0.82, 0.75]
 
-          type: 'answer',
+    ];
 
-          label:
-            answer.label,
 
-          text:
-            answer.text,
+    currentQuestion.answers
+        .forEach(
+            (answer, index) => {
 
-          correct:
-            answer.correct,
+                const position =
+                    positions[index];
 
-          active: true
 
-        });
+                balls.push({
 
-      }
-    );
+                    x:
+                        tableWidth *
+                        position[0],
+
+                    y:
+                        tableHeight *
+                        position[1],
+
+                    vx: 0,
+
+                    vy: 0,
+
+                    radius,
+
+                    type:
+                        'answer',
+
+                    label:
+                        answer.label,
+
+                    correct:
+                        answer.correct,
+
+                    text:
+                        answer.text,
+
+                    active:
+                        true
+
+                });
+
+            }
+        );
+
+
+    shotInProgress =
+        false;
+
+    dragging =
+        false;
+
+    answerLocked =
+        false;
 
 }
 
@@ -1800,342 +1913,259 @@ function resetTable() {
 
 function drawTable() {
 
-  ctx.clearRect(
-    0,
-    0,
-    tableWidth,
-    tableHeight
-  );
-
-
-  /*
-   * Tapis.
-   */
-
-  ctx.fillStyle =
-    '#27704c';
-
-  ctx.fillRect(
-    0,
-    0,
-    tableWidth,
-    tableHeight
-  );
-
-
-  /*
-   * Bordure intérieure.
-   */
-
-  ctx.strokeStyle =
-    'rgba(255,255,255,.15)';
-
-  ctx.lineWidth = 3;
-
-  ctx.strokeRect(
-    18,
-    18,
-    tableWidth - 36,
-    tableHeight - 36
-  );
-
-
-  /*
-   * Poches.
-   */
-
-  const pocketRadius =
-    Math.max(
-      24,
-      tableWidth * 0.029
+    ctx.clearRect(
+        0,
+        0,
+        tableWidth,
+        tableHeight
     );
 
 
-  const pockets = [
+    /*
+     * Tapis.
+     */
 
-    [0, 0],
+    ctx.fillStyle =
+        '#27704c';
 
-    [tableWidth / 2, 0],
-
-    [tableWidth, 0],
-
-    [0, tableHeight],
-
-    [tableWidth / 2, tableHeight],
-
-    [tableWidth, tableHeight]
-
-  ];
-
-
-  ctx.fillStyle =
-    '#101010';
-
-
-  pockets.forEach(
-    ([x, y]) => {
-
-      ctx.beginPath();
-
-      ctx.arc(
-        x,
-        y,
-        pocketRadius,
+    ctx.fillRect(
         0,
-        Math.PI * 2
-      );
-
-      ctx.fill();
-
-    }
-  );
+        0,
+        tableWidth,
+        tableHeight
+    );
 
 
-  balls.forEach(
-    drawBall
-  );
-
-
-  /*
-   * Ligne de visée.
-   */
-
-  if (
-    dragging &&
-    whiteBall &&
-    lastPointerPosition
-  ) {
-
-    ctx.save();
+    /*
+     * Bordure.
+     */
 
     ctx.strokeStyle =
-      'rgba(255,255,255,.55)';
+        'rgba(255,255,255,.18)';
 
-    ctx.lineWidth = 2;
+    ctx.lineWidth = 4;
 
-    ctx.setLineDash([
-      8,
-      8
-    ]);
-
-    ctx.beginPath();
-
-    ctx.moveTo(
-      whiteBall.x,
-      whiteBall.y
+    ctx.strokeRect(
+        16,
+        16,
+        tableWidth - 32,
+        tableHeight - 32
     );
 
-    ctx.lineTo(
-      lastPointerPosition.x,
-      lastPointerPosition.y
+
+    /*
+     * Poches.
+     */
+
+    const pocketRadius =
+        Math.max(
+            22,
+            tableWidth * .028
+        );
+
+
+    const pockets = [
+
+        [0, 0],
+
+        [tableWidth / 2, 0],
+
+        [tableWidth, 0],
+
+        [0, tableHeight],
+
+        [tableWidth / 2, tableHeight],
+
+        [tableWidth, tableHeight]
+
+    ];
+
+
+    ctx.fillStyle =
+        '#111';
+
+
+    pockets.forEach(
+        ([x, y]) => {
+
+            ctx.beginPath();
+
+            ctx.arc(
+                x,
+                y,
+                pocketRadius,
+                0,
+                Math.PI * 2
+            );
+
+            ctx.fill();
+
+        }
     );
 
-    ctx.stroke();
 
-    ctx.restore();
+    /*
+     * Ligne de visée.
+     */
 
-  }
+    if (
+        dragging &&
+        whiteBall
+    ) {
+
+        ctx.save();
+
+        ctx.strokeStyle =
+            'rgba(255,255,255,.65)';
+
+        ctx.lineWidth = 2;
+
+        ctx.setLineDash([
+            8,
+            8
+        ]);
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+            whiteBall.x,
+            whiteBall.y
+        );
+
+        ctx.lineTo(
+            currentPointerX,
+            currentPointerY
+        );
+
+        ctx.stroke();
+
+        ctx.restore();
+
+    }
+
+
+    /*
+     * Boules.
+     */
+
+    balls.forEach(
+        drawBall
+    );
 
 }
 
 
 /* =========================================================
-   DESSIN BILLE + TEXTE REPONSE
+   DESSIN BOULES
 ========================================================= */
 
 function drawBall(ball) {
 
-  if (!ball.active) {
-    return;
-  }
+    if (!ball.active) {
+        return;
+    }
 
 
-  ctx.save();
+    ctx.save();
 
-
-  /*
-   * Ombre.
-   */
-
-  ctx.beginPath();
-
-  ctx.arc(
-    ball.x + 3,
-    ball.y + 4,
-    ball.radius,
-    0,
-    Math.PI * 2
-  );
-
-  ctx.fillStyle =
-    'rgba(0,0,0,.25)';
-
-  ctx.fill();
-
-
-  /*
-   * Bille.
-   */
-
-  ctx.beginPath();
-
-  ctx.arc(
-    ball.x,
-    ball.y,
-    ball.radius,
-    0,
-    Math.PI * 2
-  );
-
-
-  if (
-    ball.type === 'white'
-  ) {
-
-    ctx.fillStyle =
-      '#ffffff';
-
-  } else {
 
     /*
-     * Toutes les réponses
-     * ont la même apparence.
+     * Ombre.
      */
 
+    ctx.beginPath();
+
+    ctx.arc(
+        ball.x + 3,
+        ball.y + 4,
+        ball.radius,
+        0,
+        Math.PI * 2
+    );
+
     ctx.fillStyle =
-      '#4b2481';
+        'rgba(0,0,0,.25)';
 
-  }
-
-
-  ctx.fill();
+    ctx.fill();
 
 
-  ctx.strokeStyle =
-    'rgba(0,0,0,.3)';
+    /*
+     * Boule.
+     */
 
-  ctx.lineWidth = 2;
+    ctx.beginPath();
 
-  ctx.stroke();
+    ctx.arc(
+        ball.x,
+        ball.y,
+        ball.radius,
+        0,
+        Math.PI * 2
+    );
 
 
-  /*
-   * Bille blanche.
-   */
+    if (
+        ball.type === 'white'
+    ) {
 
-  if (
-    ball.type === 'white'
-  ) {
+        ctx.fillStyle =
+            '#fff';
+
+    } else {
+
+        ctx.fillStyle =
+            '#4b2481';
+
+    }
+
+
+    ctx.fill();
+
+
+    ctx.strokeStyle =
+        'rgba(0,0,0,.35)';
+
+    ctx.lineWidth = 2;
+
+    ctx.stroke();
+
+
+    /*
+     * Lettres uniquement sur
+     * les boules de réponse.
+     */
+
+    if (
+        ball.type === 'answer'
+    ) {
+
+        ctx.fillStyle =
+            '#fff';
+
+        ctx.font =
+            `bold ${
+                Math.max(
+                    14,
+                    ball.radius * .7
+                )
+            }px Arial`;
+
+        ctx.textAlign =
+            'center';
+
+        ctx.textBaseline =
+            'middle';
+
+        ctx.fillText(
+            ball.label,
+            ball.x,
+            ball.y
+        );
+
+    }
+
 
     ctx.restore();
-
-    return;
-
-  }
-
-
-  /*
-   * Lettre.
-   */
-
-  ctx.fillStyle =
-    '#ffffff';
-
-  ctx.font =
-    `bold ${
-      Math.max(
-        13,
-        ball.radius * .65
-      )
-    }px Arial`;
-
-  ctx.textAlign =
-    'center';
-
-  ctx.textBaseline =
-    'middle';
-
-  ctx.fillText(
-    ball.label,
-    ball.x,
-    ball.y
-  );
-
-
-  /*
-   * Texte de réponse.
-   */
-
-  ctx.fillStyle =
-    '#ffffff';
-
-  ctx.font =
-    `bold ${
-      Math.max(
-        13,
-        Math.min(
-          18,
-          ball.radius * .55
-        )
-      )
-    }px Arial`;
-
-  ctx.textAlign =
-    'left';
-
-  ctx.textBaseline =
-    'middle';
-
-
-  const maxTextWidth =
-    tableWidth * 0.25;
-
-
-  let answerText =
-    String(ball.text);
-
-
-  /*
-   * Coupe les réponses trop longues
-   * pour qu'elles restent dans la table.
-   */
-
-  while (
-    ctx.measureText(
-      answerText
-    ).width > maxTextWidth &&
-    answerText.length > 12
-  ) {
-
-    answerText =
-      answerText.slice(
-        0,
-        -1
-      );
-
-  }
-
-
-  if (
-    answerText !== ball.text
-  ) {
-
-    answerText +=
-      '…';
-
-  }
-
-
-  ctx.fillText(
-    answerText,
-    ball.x +
-      ball.radius +
-      12,
-    ball.y
-  );
-
-
-  ctx.restore();
 
 }
 
@@ -2146,357 +2176,717 @@ function drawBall(ball) {
 
 function updatePhysics() {
 
-  if (
-    !shotInProgress
-  ) {
+    if (
+        !shotInProgress
+    ) {
 
-    return;
-
-  }
-
-
-  const friction =
-    0.985;
-
-
-  balls.forEach(
-    ball => {
-
-      if (!ball.active) {
         return;
-      }
-
-
-      ball.x +=
-        ball.vx;
-
-      ball.y +=
-        ball.vy;
-
-
-      ball.vx *=
-        friction;
-
-      ball.vy *=
-        friction;
-
-
-      if (
-        Math.abs(ball.vx) < 0.02
-      ) {
-
-        ball.vx = 0;
-
-      }
-
-
-      if (
-        Math.abs(ball.vy) < 0.02
-      ) {
-
-        ball.vy = 0;
-
-      }
-
-
-      /*
-       * Rebonds horizontaux.
-       */
-
-      if (
-        ball.x -
-        ball.radius < 0
-      ) {
-
-        ball.x =
-          ball.radius;
-
-        ball.vx *=
-          -0.85;
-
-      }
-
-
-      if (
-        ball.x +
-        ball.radius >
-        tableWidth
-      ) {
-
-        ball.x =
-          tableWidth -
-          ball.radius;
-
-        ball.vx *=
-          -0.85;
-
-      }
-
-
-      /*
-       * Rebonds verticaux.
-       */
-
-      if (
-        ball.y -
-        ball.radius < 0
-      ) {
-
-        ball.y =
-          ball.radius;
-
-        ball.vy *=
-          -0.85;
-
-      }
-
-
-      if (
-        ball.y +
-        ball.radius >
-        tableHeight
-      ) {
-
-        ball.y =
-          tableHeight -
-          ball.radius;
-
-        ball.vy *=
-          -0.85;
-
-      }
 
     }
-  );
 
 
-  handleBallCollisions();
+    const friction =
+        0.985;
 
-
-  /*
-   * Première réponse touchée.
-   */
-
-  if (
-    whiteBall &&
-    whiteBall.active &&
-    !answerLocked
-  ) {
 
     balls.forEach(
-      ball => {
+        ball => {
 
-        if (
-          ball.type !== 'answer' ||
-          !ball.active
+            if (!ball.active) {
+                return;
+            }
+
+
+            ball.x +=
+                ball.vx;
+
+            ball.y +=
+                ball.vy;
+
+
+            ball.vx *=
+                friction;
+
+            ball.vy *=
+                friction;
+
+
+            if (
+                Math.abs(ball.vx) < .025
+            ) {
+
+                ball.vx = 0;
+
+            }
+
+
+            if (
+                Math.abs(ball.vy) < .025
+            ) {
+
+                ball.vy = 0;
+
+            }
+
+
+            /*
+             * Gauche.
+             */
+
+            if (
+                ball.x -
+                ball.radius < 0
+            ) {
+
+                ball.x =
+                    ball.radius;
+
+                ball.vx *=
+                    -.85;
+
+            }
+
+
+            /*
+             * Droite.
+             */
+
+            if (
+                ball.x +
+                ball.radius >
+                tableWidth
+            ) {
+
+                ball.x =
+                    tableWidth -
+                    ball.radius;
+
+                ball.vx *=
+                    -.85;
+
+            }
+
+
+            /*
+             * Haut.
+             */
+
+            if (
+                ball.y -
+                ball.radius < 0
+            ) {
+
+                ball.y =
+                    ball.radius;
+
+                ball.vy *=
+                    -.85;
+
+            }
+
+
+            /*
+             * Bas.
+             */
+
+            if (
+                ball.y +
+                ball.radius >
+                tableHeight
+            ) {
+
+                ball.y =
+                    tableHeight -
+                    ball.radius;
+
+                ball.vy *=
+                    -.85;
+
+            }
+
+        }
+    );
+
+
+    handleBallCollisions();
+
+
+    /*
+     * Vérification de collision
+     * entre la blanche et les réponses.
+     */
+
+    if (
+        whiteBall &&
+        !answerLocked
+    ) {
+
+        for (
+            const ball of balls
         ) {
 
-          return;
+            if (
+                ball.type !== 'answer' ||
+                !ball.active
+            ) {
+
+                continue;
+
+            }
+
+
+            if (
+                distance(
+                    whiteBall,
+                    ball
+                ) <=
+                whiteBall.radius +
+                ball.radius
+            ) {
+
+                handleAnswer(
+                    ball
+                );
+
+                break;
+
+            }
 
         }
 
-
-        const d =
-          distance(
-            whiteBall,
-            ball
-          );
+    }
 
 
-        if (
-          d <=
-          whiteBall.radius +
-          ball.radius
-        ) {
+    /*
+     * Vérifie si toutes les boules
+     * ont arrêté de bouger.
+     */
 
-          handleAnswer(
-            ball
-          );
-
-        }
-
-      }
-    );
-
-  }
-
-
-  /*
-   * Toutes les boules arrêtées ?
-   */
-
-  const moving =
-    balls.some(
-      ball =>
-        ball.active &&
-        (
-          Math.abs(ball.vx) > 0.05 ||
-          Math.abs(ball.vy) > 0.05
-        )
-    );
-
-
-  if (
-    !moving &&
-    shotInProgress
-  ) {
-
-    shotInProgress =
-      false;
+    const moving =
+        balls.some(
+            ball =>
+                ball.active &&
+                (
+                    Math.abs(ball.vx) > .05 ||
+                    Math.abs(ball.vy) > .05
+                )
+        );
 
 
     if (
-      !answerLocked &&
-      gameRunning
+        !moving
     ) {
 
-      messageEl.textContent =
-        'Aucune réponse touchée. Tu peux refaire ton tir.';
+        shotInProgress =
+            false;
+
+
+        if (
+            !answerLocked &&
+            gameRunning
+        ) {
+
+            messageEl.textContent =
+                'Aucune réponse touchée. Tu peux refaire ton tir.';
+
+        }
 
     }
-
-  }
 
 }
 
 
 /* =========================================================
-   COLLISIONS
+   COLLISIONS ENTRE BOULES
 ========================================================= */
 
 function handleBallCollisions() {
 
-  for (
-    let i = 0;
-    i < balls.length;
-    i++
-  ) {
-
     for (
-      let j = i + 1;
-      j < balls.length;
-      j++
+        let i = 0;
+        i < balls.length;
+        i++
     ) {
 
-      const a =
-        balls[i];
+        for (
+            let j = i + 1;
+            j < balls.length;
+            j++
+        ) {
 
-      const b =
-        balls[j];
+            const a =
+                balls[i];
 
-
-      if (
-        !a.active ||
-        !b.active
-      ) {
-
-        continue;
-
-      }
+            const b =
+                balls[j];
 
 
-      const dx =
-        b.x -
-        a.x;
+            if (
+                !a.active ||
+                !b.active
+            ) {
 
-      const dy =
-        b.y -
-        a.y;
+                continue;
 
-      const d =
-        Math.hypot(
-          dx,
-          dy
-        );
+            }
 
 
-      const minDistance =
-        a.radius +
-        b.radius;
+            const dx =
+                b.x - a.x;
+
+            const dy =
+                b.y - a.y;
+
+            const d =
+                Math.hypot(
+                    dx,
+                    dy
+                );
 
 
-      if (
-        d === 0 ||
-        d > minDistance
-      ) {
-
-        continue;
-
-      }
+            const minimum =
+                a.radius +
+                b.radius;
 
 
-      const nx =
-        dx / d;
+            if (
+                d === 0 ||
+                d > minimum
+            ) {
 
-      const ny =
-        dy / d;
+                continue;
 
-
-      const overlap =
-        minDistance -
-        d;
+            }
 
 
-      a.x -=
-        nx *
-        overlap /
-        2;
+            const nx =
+                dx / d;
 
-      a.y -=
-        ny *
-        overlap /
-        2;
-
-      b.x +=
-        nx *
-        overlap /
-        2;
-
-      b.y +=
-        ny *
-        overlap /
-        2;
+            const ny =
+                dy / d;
 
 
-      const relativeVelocity =
-        (b.vx - a.vx) * nx +
-        (b.vy - a.vy) * ny;
+            const overlap =
+                minimum - d;
 
 
-      if (
-        relativeVelocity > 0
-      ) {
+            a.x -=
+                nx *
+                overlap /
+                2;
 
-        continue;
+            a.y -=
+                ny *
+                overlap /
+                2;
 
-      }
+            b.x +=
+                nx *
+                overlap /
+                2;
+
+            b.y +=
+                ny *
+                overlap /
+                2;
 
 
-      const impulse =
-        -relativeVelocity;
+            const relative =
+                (b.vx - a.vx) *
+                    nx +
+                (b.vy - a.vy) *
+                    ny;
 
 
-      a.vx -=
-        impulse *
-        nx;
+            if (
+                relative > 0
+            ) {
 
-      a.vy -=
-        impulse *
-        ny;
+                continue;
 
-      b.vx +=
-        impulse *
-        nx;
+            }
 
-      b.vy +=
-        impulse *
-        ny;
+
+            const impulse =
+                -relative;
+
+
+            a.vx -=
+                impulse *
+                nx;
+
+            a.vy -=
+                impulse *
+                ny;
+
+            b.vx +=
+                impulse *
+                nx;
+
+            b.vy +=
+                impulse *
+                ny;
+
+        }
 
     }
 
-  }
+}
+
+
+/* =========================================================
+   POSITION SOURIS / DOIGT
+========================================================= */
+
+function getPointerPosition(event) {
+
+    const rect =
+        canvas.getBoundingClientRect();
+
+
+    let clientX;
+
+    let clientY;
+
+
+    /*
+     * IMPORTANT :
+     * pour touchend, on utilisera la dernière
+     * position enregistrée et non event.touches.
+     */
+
+    if (
+        event.touches &&
+        event.touches.length > 0
+    ) {
+
+        clientX =
+            event.touches[0].clientX;
+
+        clientY =
+            event.touches[0].clientY;
+
+    } else if (
+        event.changedTouches &&
+        event.changedTouches.length > 0
+    ) {
+
+        clientX =
+            event.changedTouches[0].clientX;
+
+        clientY =
+            event.changedTouches[0].clientY;
+
+    } else {
+
+        clientX =
+            event.clientX;
+
+        clientY =
+            event.clientY;
+
+    }
+
+
+    return {
+
+        x:
+            (clientX - rect.left) *
+            canvas.width /
+            rect.width,
+
+        y:
+            (clientY - rect.top) *
+            canvas.height /
+            rect.height
+
+    };
 
 }
+
+
+/* =========================================================
+   DEBUT DU TIR
+========================================================= */
+
+function pointerDown(event) {
+
+    if (
+        !gameRunning ||
+        shotInProgress ||
+        answerLocked ||
+        !whiteBall ||
+        !whiteBall.active
+    ) {
+
+        return;
+
+    }
+
+
+    const point =
+        getPointerPosition(
+            event
+        );
+
+
+    const d =
+        Math.hypot(
+            point.x -
+                whiteBall.x,
+
+            point.y -
+                whiteBall.y
+        );
+
+
+    /*
+     * Zone de sélection plus grande
+     * sur téléphone.
+     */
+
+    if (
+        d >
+        whiteBall.radius * 2.5
+    ) {
+
+        return;
+
+    }
+
+
+    event.preventDefault();
+
+
+    dragging =
+        true;
+
+
+    dragStartX =
+        point.x;
+
+    dragStartY =
+        point.y;
+
+
+    currentPointerX =
+        point.x;
+
+    currentPointerY =
+        point.y;
+
+}
+
+
+/* =========================================================
+   MOUVEMENT DU TIR
+========================================================= */
+
+function pointerMove(event) {
+
+    if (
+        !dragging
+    ) {
+
+        return;
+
+    }
+
+
+    event.preventDefault();
+
+
+    const point =
+        getPointerPosition(
+            event
+        );
+
+
+    currentPointerX =
+        point.x;
+
+    currentPointerY =
+        point.y;
+
+}
+
+
+/* =========================================================
+   FIN DU TIR
+========================================================= */
+
+function pointerUp(event) {
+
+    if (
+        !dragging
+    ) {
+
+        return;
+
+    }
+
+
+    event.preventDefault();
+
+
+    /*
+     * Pour touchend, changedTouches est utilisé.
+     * Si rien n'est disponible, on utilise la dernière
+     * position connue.
+     */
+
+    let point;
+
+
+    if (
+        event.changedTouches &&
+        event.changedTouches.length > 0
+    ) {
+
+        point =
+            getPointerPosition(
+                event
+            );
+
+    } else {
+
+        point = {
+
+            x:
+                currentPointerX,
+
+            y:
+                currentPointerY
+
+        };
+
+    }
+
+
+    const dx =
+        dragStartX -
+        point.x;
+
+    const dy =
+        dragStartY -
+        point.y;
+
+
+    const dragDistance =
+        Math.hypot(
+            dx,
+            dy
+        );
+
+
+    /*
+     * Petite distance = petit tir.
+     * Grande distance = tir plus puissant.
+     */
+
+    if (
+        dragDistance > 8
+    ) {
+
+        const directionLength =
+            Math.hypot(
+                dx,
+                dy
+            );
+
+
+        const power =
+            Math.min(
+                19,
+                dragDistance * .13
+            );
+
+
+        whiteBall.vx =
+            (
+                dx /
+                directionLength
+            ) *
+            power;
+
+
+        whiteBall.vy =
+            (
+                dy /
+                directionLength
+            ) *
+            power;
+
+
+        shotInProgress =
+            true;
+
+
+        messageEl.textContent =
+            'Tir en cours...';
+
+    }
+
+
+    dragging =
+        false;
+
+    currentPointerX =
+        0;
+
+    currentPointerY =
+        0;
+
+}
+
+
+/* =========================================================
+   EVENEMENTS SOURIS
+========================================================= */
+
+canvas.addEventListener(
+    'mousedown',
+    pointerDown
+);
+
+canvas.addEventListener(
+    'mousemove',
+    pointerMove
+);
+
+window.addEventListener(
+    'mouseup',
+    pointerUp
+);
+
+
+/* =========================================================
+   EVENEMENTS TELEPHONE
+========================================================= */
+
+canvas.addEventListener(
+    'touchstart',
+    pointerDown,
+    {
+        passive: false
+    }
+);
+
+canvas.addEventListener(
+    'touchmove',
+    pointerMove,
+    {
+        passive: false
+    }
+);
+
+window.addEventListener(
+    'touchend',
+    pointerUp,
+    {
+        passive: false
+    }
+);
 
 
 /* =========================================================
@@ -2505,440 +2895,176 @@ function handleBallCollisions() {
 
 function handleAnswer(ball) {
 
-  if (
-    !ball.active ||
-    !shotInProgress ||
-    answerLocked
-  ) {
+    if (
+        answerLocked ||
+        !ball ||
+        ball.type !== 'answer'
+    ) {
 
-    return;
+        return;
 
-  }
-
-
-  answerLocked =
-    true;
+    }
 
 
-  ball.active =
-    false;
+    answerLocked =
+        true;
 
 
-  if (
-    ball.correct
-  ) {
-
-    score +=
-      POINTS_CORRECT;
-
-    correctAnswers++;
+    ball.active =
+        false;
 
 
-    messageEl.textContent =
-      'Bonne réponse ! +10 points';
+    /*
+     * Trouve la carte correspondante.
+     */
 
-    messageEl.className =
-      'message success';
-
-  } else {
-
-    wrongAnswers++;
-
-
-    messageEl.textContent =
-      `Mauvaise réponse. La bonne réponse était : ${currentQuestion.answer}`;
-
-    messageEl.className =
-      'message error';
-
-  }
+    const cards =
+        answersGrid.querySelectorAll(
+            '.answer-card'
+        );
 
 
-  updateStats();
+    cards.forEach(
+        card => {
 
+            if (
+                card.dataset.label ===
+                ball.label
+            ) {
 
-  setTimeout(
-    () => {
+                card.classList.add(
+                    'selected'
+                );
 
-      currentQuestionIndex++;
+            }
 
-
-      if (
-        currentQuestionIndex >=
-        TOTAL_QUESTIONS
-      ) {
-
-        finishGame();
-
-      } else {
-
-        loadCurrentQuestion();
-
-      }
-
-    },
-    1200
-  );
-
-}
-
-
-/* =========================================================
-   POSITION DU DOIGT / SOURIS
-========================================================= */
-
-function getPointerPosition(event) {
-
-  const rect =
-    canvas.getBoundingClientRect();
-
-
-  let clientX;
-
-  let clientY;
-
-
-  if (
-    event.touches &&
-    event.touches.length
-  ) {
-
-    clientX =
-      event.touches[0].clientX;
-
-    clientY =
-      event.touches[0].clientY;
-
-  } else {
-
-    clientX =
-      event.clientX;
-
-    clientY =
-      event.clientY;
-
-  }
-
-
-  return {
-
-    x:
-      (clientX - rect.left) *
-      canvas.width /
-      rect.width,
-
-    y:
-      (clientY - rect.top) *
-      canvas.height /
-      rect.height
-
-  };
-
-}
-
-
-/* =========================================================
-   POINTER DOWN
-========================================================= */
-
-function pointerDown(event) {
-
-  if (
-    !gameRunning ||
-    shotInProgress ||
-    answerLocked ||
-    !whiteBall ||
-    !whiteBall.active
-  ) {
-
-    return;
-
-  }
-
-
-  const point =
-    getPointerPosition(
-      event
+        }
     );
 
 
-  lastPointerPosition =
-    point;
+    if (
+        ball.correct
+    ) {
+
+        score +=
+            POINTS_CORRECT;
+
+        correctAnswers++;
 
 
-  const d =
-    Math.hypot(
-      point.x -
-        whiteBall.x,
+        messageEl.textContent =
+            'Bonne réponse ! +10 points';
 
-      point.y -
-        whiteBall.y
-    );
+        messageEl.className =
+            'message success';
 
+    } else {
 
-  if (
-    d <=
-    whiteBall.radius * 2
-  ) {
-
-    event.preventDefault();
+        wrongAnswers++;
 
 
-    dragging =
-      true;
+        messageEl.textContent =
+            `Mauvaise réponse. La bonne réponse était : ${currentQuestion.answer}`;
+
+        messageEl.className =
+            'message error';
+
+    }
 
 
-    dragStartX =
-      point.x;
-
-    dragStartY =
-      point.y;
-
-  }
-
-}
+    updateStats();
 
 
-/* =========================================================
-   POINTER MOVE
-========================================================= */
+    setTimeout(
+        () => {
 
-function pointerMove(event) {
-
-  if (
-    !dragging
-  ) {
-
-    return;
-
-  }
+            currentQuestionIndex++;
 
 
-  event.preventDefault();
+            if (
+                currentQuestionIndex >=
+                TOTAL_QUESTIONS
+            ) {
 
+                finishGame();
 
-  lastPointerPosition =
-    getPointerPosition(
-      event
+            } else {
+
+                loadCurrentQuestion();
+
+            }
+
+        },
+        1300
     );
 
 }
 
 
 /* =========================================================
-   POINTER UP
-========================================================= */
-
-function pointerUp(event) {
-
-  if (
-    !dragging
-  ) {
-
-    return;
-
-  }
-
-
-  event.preventDefault();
-
-
-  const point =
-    getPointerPosition(
-      event
-    );
-
-
-  const dx =
-    dragStartX -
-    point.x;
-
-  const dy =
-    dragStartY -
-    point.y;
-
-
-  const distanceDragged =
-    Math.hypot(
-      dx,
-      dy
-    );
-
-
-  const power =
-    Math.min(
-      18,
-      distanceDragged *
-      0.12
-    );
-
-
-  if (
-    power > 0.5
-  ) {
-
-    const length =
-      Math.hypot(
-        dx,
-        dy
-      );
-
-
-    whiteBall.vx =
-      (dx / length) *
-      power;
-
-    whiteBall.vy =
-      (dy / length) *
-      power;
-
-
-    shotInProgress =
-      true;
-
-  }
-
-
-  dragging =
-    false;
-
-  lastPointerPosition =
-    null;
-
-}
-
-
-/* =========================================================
-   SOURIS
-========================================================= */
-
-canvas.addEventListener(
-  'mousedown',
-  pointerDown
-);
-
-canvas.addEventListener(
-  'mousemove',
-  pointerMove
-);
-
-window.addEventListener(
-  'mouseup',
-  pointerUp
-);
-
-
-/* =========================================================
-   TOUCH
-========================================================= */
-
-canvas.addEventListener(
-  'touchstart',
-  pointerDown,
-  {
-    passive: false
-  }
-);
-
-canvas.addEventListener(
-  'touchmove',
-  pointerMove,
-  {
-    passive: false
-  }
-);
-
-window.addEventListener(
-  'touchend',
-  pointerUp,
-  {
-    passive: false
-  }
-);
-
-
-/* =========================================================
-   BOUCLE
-========================================================= */
-
-function animationLoop() {
-
-  updatePhysics();
-
-  drawTable();
-
-  animationFrame =
-    requestAnimationFrame(
-      animationLoop
-    );
-
-}
-
-
-/* =========================================================
-   FIN
+   FIN DE PARTIE
 ========================================================= */
 
 function finishGame() {
 
-  gameRunning =
-    false;
+    gameRunning =
+        false;
 
-  shotInProgress =
-    false;
+    shotInProgress =
+        false;
 
-  dragging =
-    false;
+    dragging =
+        false;
 
-  answerLocked =
-    true;
-
-
-  const previousBest =
-    getBestScore();
+    answerLocked =
+        true;
 
 
-  if (
-    score > previousBest
-  ) {
+    const oldBest =
+        getBestScore();
 
-    localStorage.setItem(
-      BEST_SCORE_KEY,
-      String(score)
+
+    if (
+        score > oldBest
+    ) {
+
+        localStorage.setItem(
+            BEST_SCORE_KEY,
+            String(score)
+        );
+
+    }
+
+
+    const best =
+        Math.max(
+            score,
+            oldBest
+        );
+
+
+    finalScoreEl.textContent =
+        `${score} points`;
+
+
+    finalCorrectEl.textContent =
+        correctAnswers;
+
+
+    finalWrongEl.textContent =
+        wrongAnswers;
+
+
+    finalBestEl.textContent =
+        best;
+
+
+    updateStats();
+
+
+    endOverlay.classList.add(
+        'show'
     );
-
-  }
-
-
-  const best =
-    Math.max(
-      score,
-      previousBest
-    );
-
-
-  finalScoreEl.textContent =
-    `${score} points`;
-
-
-  finalCorrectEl.textContent =
-    correctAnswers;
-
-
-  finalWrongEl.textContent =
-    wrongAnswers;
-
-
-  finalBestEl.textContent =
-    best;
-
-
-  updateStats();
-
-
-  endOverlay.classList.add(
-    'show'
-  );
 
 }
 
@@ -2948,9 +3074,28 @@ function finishGame() {
 ========================================================= */
 
 restartBtn.addEventListener(
-  'click',
-  startGame
+    'click',
+    startGame
 );
+
+
+/* =========================================================
+   BOUCLE
+========================================================= */
+
+function animationLoop() {
+
+    updatePhysics();
+
+    drawTable();
+
+
+    animationFrame =
+        requestAnimationFrame(
+            animationLoop
+        );
+
+}
 
 
 /* =========================================================
