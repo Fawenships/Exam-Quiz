@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 <title>Memory Quiz — ExamQuiz Haiti</title>
 
@@ -10,7 +10,6 @@
 :root {
     --purple: #24113f;
     --purple2: #4b2481;
-    --blue: #1764c0;
     --blue2: #2f80ed;
     --white: #ffffff;
     --bg: #f6f7fb;
@@ -27,35 +26,49 @@
     padding: 0;
 }
 
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
 body {
     font-family: Arial, Helvetica, sans-serif;
     background: var(--bg);
     color: var(--text);
-    min-height: 100vh;
+    overflow-x: hidden;
 }
 
 button {
     font: inherit;
+    -webkit-tap-highlight-color: transparent;
 }
 
+/* =========================
+   HEADER
+========================= */
+
 .header {
-    background: var(--white);
+    background: white;
     border-bottom: 1px solid var(--border);
-    padding: 16px 20px;
+    padding: 12px 16px;
 }
 
 .header-inner {
+    width: 100%;
     max-width: 1050px;
     margin: auto;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 15px;
+
+    gap: 10px;
 }
 
 .logo {
     color: var(--purple);
-    font-size: 21px;
+    font-size: 20px;
     font-weight: 800;
 }
 
@@ -67,123 +80,183 @@ button {
     border: 1px solid var(--border);
     background: white;
     color: var(--purple);
-    padding: 10px 15px;
+
+    min-height: 42px;
+    padding: 8px 13px;
+
     border-radius: 10px;
+
     cursor: pointer;
-    font-weight: 600;
+    font-weight: 700;
 }
 
-.back-btn:hover {
-    background: #f5f3f8;
-}
+/* =========================
+   CONTAINER
+========================= */
 
 .container {
-    width: min(100% - 28px, 1050px);
+    width: min(100% - 24px, 1050px);
     margin: auto;
-    padding: 25px 0 40px;
+    padding: 20px 0 35px;
 }
+
+/* =========================
+   HERO
+========================= */
 
 .hero {
     text-align: center;
-    margin-bottom: 22px;
+    margin-bottom: 18px;
 }
 
 .hero h1 {
-    font-size: clamp(27px, 5vw, 42px);
     color: var(--purple);
-    margin-bottom: 8px;
+    font-size: clamp(28px, 8vw, 42px);
+    line-height: 1.1;
+    margin-bottom: 7px;
 }
 
 .hero p {
     color: var(--muted);
-    font-size: 15px;
+    font-size: 14px;
+    line-height: 1.4;
 }
+
+/* =========================
+   STATS
+========================= */
 
 .stats {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    margin-bottom: 22px;
+    gap: 8px;
+
+    margin-bottom: 14px;
 }
 
 .stat {
     background: white;
     border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 14px;
+    border-radius: 12px;
+
+    padding: 10px 5px;
+
     text-align: center;
+    min-width: 0;
 }
 
 .stat-label {
     color: var(--muted);
-    font-size: 12px;
-    margin-bottom: 5px;
+    font-size: 10px;
+    margin-bottom: 4px;
 }
 
 .stat-value {
     color: var(--purple);
-    font-size: 22px;
+    font-size: 18px;
     font-weight: 800;
+
+    white-space: nowrap;
 }
+
+/* =========================
+   GAME PANEL
+========================= */
 
 .game-panel {
     background: white;
     border: 1px solid var(--border);
-    border-radius: 18px;
-    padding: 18px;
+    border-radius: 16px;
+
+    padding: 12px;
 }
 
+/* =========================
+   PROGRESS
+========================= */
+
 .progress-area {
-    margin-bottom: 18px;
+    margin-bottom: 14px;
 }
 
 .progress-top {
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    gap: 10px;
+
+    gap: 8px;
+
     color: var(--muted);
-    font-size: 13px;
-    margin-bottom: 7px;
+    font-size: 11px;
+
+    margin-bottom: 6px;
 }
 
 .progress {
     width: 100%;
-    height: 8px;
+    height: 7px;
+
     background: #e9eaf0;
+
     border-radius: 20px;
     overflow: hidden;
 }
 
 .progress-bar {
-    height: 100%;
     width: 0%;
+    height: 100%;
+
     background: var(--blue2);
+
     transition: width .3s ease;
 }
 
+/* =========================
+   CARDS
+========================= */
+
 .cards {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 13px;
-    max-width: 760px;
+    width: 100%;
+    max-width: 720px;
     margin: auto;
+
+    display: grid;
+
+    /*
+     * 3 colonnes sur téléphone.
+     * 4 colonnes sur écrans plus larges.
+     */
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+
+    gap: 10px;
 }
 
 .card {
+    position: relative;
+
+    width: 100%;
     aspect-ratio: 1 / 1;
-    perspective: 800px;
-    cursor: pointer;
+
     border: 0;
+    padding: 0;
+
     background: transparent;
-    min-width: 0;
+
+    cursor: pointer;
+
+    perspective: 900px;
 }
 
 .card-inner {
+    position: relative;
+
     width: 100%;
     height: 100%;
-    position: relative;
-    transition: transform .45s ease;
+
     transform-style: preserve-3d;
+
+    transition:
+        transform .45s ease;
 }
 
 .card.flipped .card-inner,
@@ -194,32 +267,59 @@ button {
 .card-face {
     position: absolute;
     inset: 0;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    border-radius: 14px;
+
+    width: 100%;
+    height: 100%;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     text-align: center;
-    padding: 12px;
+
+    padding: 8px;
+
+    border-radius: 12px;
+
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+
+    overflow: hidden;
 }
 
 .card-front {
-    background: linear-gradient(135deg, var(--purple), var(--purple2));
-    color: white;
-    font-size: 30px;
-    font-weight: 800;
+    background:
+        linear-gradient(
+            135deg,
+            var(--purple),
+            var(--purple2)
+        );
+
     border: 2px solid #5d3694;
+
+    color: white;
+
+    font-size: 26px;
+    font-weight: 800;
 }
 
 .card-back {
     background: white;
+
     color: var(--purple);
+
     border: 2px solid #d8d3e2;
+
     transform: rotateY(180deg);
-    font-size: clamp(12px, 1.7vw, 16px);
-    line-height: 1.35;
+
+    font-size: clamp(10px, 1.5vw, 15px);
+
+    line-height: 1.25;
+
     font-weight: 700;
+
+    overflow-wrap: anywhere;
+    word-break: normal;
 }
 
 .card.matched .card-back {
@@ -232,42 +332,89 @@ button {
     cursor: default;
 }
 
-.controls {
-    display: flex;
-    justify-content: center;
-    margin-top: 22px;
-}
-
-.restart-btn {
-    border: none;
-    background: var(--purple);
-    color: white;
-    padding: 12px 20px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-weight: 700;
-}
-
-.restart-btn:hover {
-    background: var(--purple2);
-}
+/* =========================
+   MESSAGE
+========================= */
 
 .message {
     text-align: center;
-    min-height: 24px;
-    margin-top: 14px;
+
+    min-height: 20px;
+
+    margin-top: 12px;
+
     color: var(--muted);
+
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+/* =========================
+   CONTROL
+========================= */
+
+.controls {
+    margin-top: 14px;
+}
+
+.restart-btn {
+    width: 100%;
+
+    border: 0;
+
+    background: var(--purple);
+    color: white;
+
+    min-height: 46px;
+
+    padding: 11px 16px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    font-weight: 700;
+}
+
+.restart-btn:active {
+    transform: scale(.98);
+}
+
+/* =========================
+   ERROR
+========================= */
+
+.error-message {
+    display: none;
+
+    text-align: center;
+
+    color: var(--red);
+
+    padding: 25px 10px;
+
+    font-weight: 600;
+
     font-size: 14px;
 }
+
+/* =========================
+   OVERLAY
+========================= */
 
 .overlay {
     position: fixed;
     inset: 0;
-    background: rgba(20, 12, 35, .72);
+
+    background: rgba(20, 12, 35, .74);
+
     display: none;
+
     align-items: center;
     justify-content: center;
-    padding: 20px;
+
+    padding: 16px;
+
     z-index: 100;
 }
 
@@ -276,44 +423,67 @@ button {
 }
 
 .result-box {
-    width: min(100%, 420px);
+    width: min(100%, 410px);
+
     background: white;
-    border-radius: 20px;
-    padding: 30px 22px;
+
+    border-radius: 18px;
+
+    padding: 25px 18px;
+
     text-align: center;
-    box-shadow: 0 20px 60px rgba(0,0,0,.25);
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.25);
 }
 
 .result-box h2 {
     color: var(--purple);
-    font-size: 29px;
+
+    font-size: 27px;
+
     margin-bottom: 10px;
 }
 
 .result-box p {
     color: var(--muted);
-    line-height: 1.6;
-    margin-bottom: 20px;
+
+    line-height: 1.5;
+
+    margin-bottom: 16px;
+
+    font-size: 14px;
 }
 
 .result-score {
-    font-size: 34px;
-    font-weight: 800;
     color: var(--blue2);
-    margin-bottom: 20px;
+
+    font-size: 32px;
+
+    font-weight: 800;
+
+    margin-bottom: 14px;
 }
 
 .result-buttons {
-    display: flex;
-    gap: 10px;
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 9px;
 }
 
 .result-buttons button {
-    flex: 1;
+    min-height: 46px;
+
     border: 0;
-    padding: 13px;
+
+    padding: 10px;
+
     border-radius: 10px;
+
     cursor: pointer;
+
     font-weight: 700;
 }
 
@@ -327,27 +497,19 @@ button {
     color: var(--purple);
 }
 
-.error-message {
-    display: none;
-    text-align: center;
-    color: var(--red);
-    padding: 25px;
-    font-weight: 600;
-}
+/* =====================================================
+   TABLET / PETITS ÉCRANS
+===================================================== */
 
 @media (max-width: 700px) {
 
     .container {
-        width: min(100% - 18px, 560px);
-        padding-top: 18px;
+        width: calc(100% - 18px);
+        padding-top: 16px;
     }
 
     .header {
-        padding: 12px;
-    }
-
-    .header-inner {
-        flex-direction: row;
+        padding: 10px 11px;
     }
 
     .logo {
@@ -355,12 +517,13 @@ button {
     }
 
     .back-btn {
-        padding: 9px 11px;
+        min-height: 40px;
+        padding: 7px 11px;
         font-size: 13px;
     }
 
     .hero {
-        margin-bottom: 16px;
+        margin-bottom: 14px;
     }
 
     .hero h1 {
@@ -368,41 +531,44 @@ button {
     }
 
     .hero p {
-        font-size: 13px;
+        font-size: 12px;
     }
 
     .stats {
-        grid-template-columns: repeat(4, 1fr);
-        gap: 6px;
-        margin-bottom: 15px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 7px;
     }
 
     .stat {
-        padding: 10px 4px;
-        border-radius: 11px;
+        padding: 9px;
     }
 
     .stat-label {
-        font-size: 9px;
+        font-size: 10px;
     }
 
     .stat-value {
-        font-size: 17px;
+        font-size: 18px;
     }
 
     .game-panel {
-        padding: 11px;
-        border-radius: 15px;
+        padding: 10px;
+        border-radius: 14px;
     }
 
+    /*
+     * 3 cartes par ligne sur téléphone.
+     */
     .cards {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+
         gap: 8px;
     }
 
     .card-face {
-        padding: 7px;
-        border-radius: 11px;
+        padding: 6px;
+        border-radius: 10px;
     }
 
     .card-front {
@@ -411,19 +577,55 @@ button {
 
     .card-back {
         font-size: 10px;
-        line-height: 1.25;
-    }
-
-    .restart-btn {
-        width: 100%;
-        padding: 12px;
+        line-height: 1.2;
     }
 }
 
+/* =====================================================
+   TRÈS PETITS TÉLÉPHONES
+===================================================== */
+
 @media (max-width: 380px) {
+
+    .container {
+        width: calc(100% - 12px);
+    }
+
+    .hero h1 {
+        font-size: 26px;
+    }
+
+    .hero p {
+        font-size: 11px;
+    }
+
+    .stats {
+        gap: 5px;
+    }
+
+    .stat {
+        padding: 8px 4px;
+    }
+
+    .stat-label {
+        font-size: 9px;
+    }
+
+    .stat-value {
+        font-size: 16px;
+    }
+
+    .game-panel {
+        padding: 8px;
+    }
 
     .cards {
         gap: 6px;
+    }
+
+    .card-face {
+        padding: 5px;
+        border-radius: 9px;
     }
 
     .card-front {
@@ -432,10 +634,38 @@ button {
 
     .card-back {
         font-size: 9px;
+        line-height: 1.15;
     }
 
-    .game-panel {
-        padding: 8px;
+    .result-box {
+        padding: 22px 14px;
+    }
+
+    .result-box h2 {
+        font-size: 24px;
+    }
+
+    .result-score {
+        font-size: 29px;
+    }
+}
+
+/* =====================================================
+   TÉLÉPHONES TRÈS ÉTROITS
+===================================================== */
+
+@media (max-width: 320px) {
+
+    .cards {
+        gap: 5px;
+    }
+
+    .card-front {
+        font-size: 18px;
+    }
+
+    .card-back {
+        font-size: 8px;
     }
 }
 </style>
@@ -451,8 +681,13 @@ button {
             ExamQuiz <span>Haiti</span>
         </div>
 
-        <button class="back-btn" id="backBtn">
+        <button
+            class="back-btn"
+            id="backBtn"
+            type="button">
+
             ← Retour
+
         </button>
 
     </div>
@@ -481,8 +716,12 @@ button {
                 Partie
             </div>
 
-            <div class="stat-value" id="gameNumber">
+            <div
+                class="stat-value"
+                id="gameNumber">
+
                 1
+
             </div>
 
         </div>
@@ -494,8 +733,12 @@ button {
                 Coups
             </div>
 
-            <div class="stat-value" id="moves">
+            <div
+                class="stat-value"
+                id="moves">
+
                 0
+
             </div>
 
         </div>
@@ -509,7 +752,13 @@ button {
 
             <div class="stat-value">
 
-                <span id="pairs">0</span>/<span id="totalPairs">
+                <span id="pairs">
+                    0
+                </span>
+
+                /
+
+                <span id="totalPairs">
                     6
                 </span>
 
@@ -524,8 +773,12 @@ button {
                 Temps
             </div>
 
-            <div class="stat-value" id="time">
+            <div
+                class="stat-value"
+                id="time">
+
                 00:00
+
             </div>
 
         </div>
@@ -548,6 +801,7 @@ button {
                 </span>
 
             </div>
+
 
             <div class="progress">
 
@@ -586,9 +840,10 @@ button {
 
             <button
                 class="restart-btn"
-                id="restartBtn">
+                id="restartBtn"
+                type="button">
 
-                Nouvelle partie
+                Recommencer
 
             </button>
 
@@ -609,9 +864,11 @@ button {
             Partie terminée
         </h2>
 
+
         <p id="resultMessage">
             Tu as retrouvé toutes les paires.
         </p>
+
 
         <div
             class="result-score"
@@ -621,21 +878,26 @@ button {
 
         </div>
 
+
         <p id="finalStats"></p>
+
 
         <div class="result-buttons">
 
             <button
                 class="play-again"
-                id="playAgain">
+                id="playAgain"
+                type="button">
 
                 Partie suivante
 
             </button>
 
+
             <button
                 class="exit-game"
-                id="exitGame">
+                id="exitGame"
+                type="button">
 
                 Quitter
 
@@ -654,9 +916,12 @@ button {
 
 
 /*
- * CONNEXION À jeuxQuestions.js
+ * CONNEXION AU FICHIER DES QUESTIONS
  */
-import { jeuxQuestions } from "./src/jeuxQuestions.js";
+
+import {
+    jeuxQuestions
+} from "./src/jeuxQuestions.js";
 
 
 /*
@@ -725,16 +990,13 @@ const gameNumberElement =
 const PAIRS_PER_GAME = 6;
 
 const CARD_TYPES = {
-
     QUESTION: "question",
-
     ANSWER: "answer"
-
 };
 
 
 /*
- * VARIABLES DU JEU
+ * ÉTAT DU JEU
  */
 
 let cards = [];
@@ -797,10 +1059,7 @@ function shuffle(array) {
 
 
 /*
- * QUESTIONS DISPONIBLES
- *
- * On utilise uniquement :
- * Biologie + Géologie
+ * QUESTIONS BIOLOGIE + GÉOLOGIE
  */
 
 function getAvailableQuestions() {
@@ -817,10 +1076,7 @@ function getAvailableQuestions() {
 
 
 /*
- * CHARGER UNE NOUVELLE SÉRIE
- *
- * Les questions déjà utilisées sont
- * retirées tant qu'il reste des questions.
+ * CHARGEMENT DES QUESTIONS
  */
 
 function loadQuestions() {
@@ -829,11 +1085,21 @@ function loadQuestions() {
         getAvailableQuestions();
 
 
+    if (allQuestions.length === 0) {
+
+        showError(
+            "Aucune question de Biologie ou de Géologie n'a été trouvée."
+        );
+
+        return false;
+    }
+
+
     /*
-     * Questions encore jamais utilisées.
+     * Questions jamais utilisées.
      */
 
-    let unusedQuestions =
+    let unused =
         allQuestions.filter(question => {
 
             return !usedQuestionIds.has(
@@ -844,51 +1110,48 @@ function loadQuestions() {
 
 
     /*
-     * Si toutes les questions ont été utilisées,
-     * on recommence un nouveau cycle.
+     * S'il reste moins de 6 questions,
+     * on utilise les dernières questions
+     * disponibles.
      */
 
     if (
-        unusedQuestions.length <
-        PAIRS_PER_GAME
+        unused.length < PAIRS_PER_GAME
     ) {
 
-        if (unusedQuestions.length > 0) {
+        /*
+         * Si toutes les questions ont déjà
+         * été utilisées, nouveau cycle.
+         */
 
-            pairsData =
-                shuffle(unusedQuestions);
-
-        } else {
+        if (unused.length === 0) {
 
             usedQuestionIds.clear();
 
-            pairsData =
-                shuffle(allQuestions);
+            unused =
+                [...allQuestions];
+
         }
 
-    } else {
-
-        pairsData =
-            shuffle(unusedQuestions);
     }
 
 
-    /*
-     * Prendre seulement 6 questions.
-     */
+    unused =
+        shuffle(unused);
+
 
     pairsData =
-        pairsData.slice(
+        unused.slice(
             0,
             Math.min(
                 PAIRS_PER_GAME,
-                pairsData.length
+                unused.length
             )
         );
 
 
     /*
-     * Enregistrer les questions utilisées.
+     * Enregistrer les questions.
      */
 
     pairsData.forEach(question => {
@@ -900,56 +1163,51 @@ function loadQuestions() {
     });
 
 
-    /*
-     * Vérification.
-     */
-
-    if (pairsData.length === 0) {
-
-        showError(
-            "Aucune question disponible dans jeuxQuestions.js."
-        );
-
-        return false;
-    }
-
-
-    return true;
+    return pairsData.length > 0;
 }
 
 
 /*
- * CRÉATION DES CARTES
+ * CRÉER LES CARTES
  */
 
 function createCards() {
 
     cards = [];
 
-    pairsData.forEach((pair) => {
+
+    pairsData.forEach(pair => {
 
         cards.push({
 
-            id: `question-${pair.id}`,
+            id:
+                `question-${pair.id}`,
 
-            pairId: pair.id,
+            pairId:
+                pair.id,
 
-            type: CARD_TYPES.QUESTION,
+            type:
+                CARD_TYPES.QUESTION,
 
-            text: pair.question
+            text:
+                pair.question
 
         });
 
 
         cards.push({
 
-            id: `answer-${pair.id}`,
+            id:
+                `answer-${pair.id}`,
 
-            pairId: pair.id,
+            pairId:
+                pair.id,
 
-            type: CARD_TYPES.ANSWER,
+            type:
+                CARD_TYPES.ANSWER,
 
-            text: pair.answer
+            text:
+                pair.answer
 
         });
 
@@ -965,62 +1223,76 @@ function createCards() {
 
 
 /*
- * AFFICHAGE DES CARTES
+ * AFFICHER LES CARTES
  */
 
 function renderCards() {
 
     cardsContainer.innerHTML = "";
 
-    errorMessage.style.display = "none";
+    errorMessage.style.display =
+        "none";
 
 
-    cards.forEach((cardData, index) => {
+    cards.forEach(
+        (cardData, index) => {
 
-        const button =
-            document.createElement("button");
-
-        button.type = "button";
-
-        button.className = "card";
-
-        button.dataset.index = index;
-
-
-        button.innerHTML = `
-
-            <div class="card-inner">
-
-                <div class="card-face card-front">
-                    ?
-                </div>
-
-                <div class="card-face card-back">
-                    ${escapeHTML(cardData.text)}
-                </div>
-
-            </div>
-
-        `;
-
-
-        button.addEventListener(
-            "click",
-            () => {
-
-                handleCardClick(
-                    button,
-                    index
+            const button =
+                document.createElement(
+                    "button"
                 );
 
-            }
-        );
+
+            button.type = "button";
+
+            button.className = "card";
+
+            button.dataset.index =
+                index;
 
 
-        cardsContainer.appendChild(button);
+            button.setAttribute(
+                "aria-label",
+                "Carte"
+            );
 
-    });
 
+            button.innerHTML = `
+
+                <div class="card-inner">
+
+                    <div class="card-face card-front">
+                        ?
+                    </div>
+
+                    <div class="card-face card-back">
+                        ${escapeHTML(cardData.text)}
+                    </div>
+
+                </div>
+
+            `;
+
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    handleCardClick(
+                        button,
+                        index
+                    );
+
+                }
+            );
+
+
+            cardsContainer.appendChild(
+                button
+            );
+
+        }
+    );
 }
 
 
@@ -1031,7 +1303,9 @@ function renderCards() {
 function escapeHTML(text) {
 
     const div =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
     div.textContent =
         String(text);
@@ -1069,9 +1343,9 @@ function handleCardClick(
 
     if (!gameStarted) {
 
-        startTimer();
-
         gameStarted = true;
+
+        startTimer();
     }
 
 
@@ -1083,11 +1357,8 @@ function handleCardClick(
     if (!firstCard) {
 
         firstCard = {
-
             element,
-
             index
-
         };
 
         return;
@@ -1095,11 +1366,8 @@ function handleCardClick(
 
 
     secondCard = {
-
         element,
-
         index
-
     };
 
 
@@ -1108,12 +1376,11 @@ function handleCardClick(
     updateStats();
 
     checkMatch();
-
 }
 
 
 /*
- * VÉRIFICATION DE LA PAIRE
+ * VÉRIFIER UNE PAIRE
  */
 
 function checkMatch() {
@@ -1143,6 +1410,7 @@ function checkMatch() {
             .classList
             .add("matched");
 
+
         secondCard.element
             .classList
             .add("matched");
@@ -1168,7 +1436,7 @@ function checkMatch() {
 
             setTimeout(
                 endGame,
-                550
+                500
             );
 
         }
@@ -1185,8 +1453,9 @@ function checkMatch() {
 
                 firstCard.element
                     .classList
-                    .remove("flipped");
-
+                    .remove(
+                        "flipped"
+                    );
             }
 
 
@@ -1194,17 +1463,16 @@ function checkMatch() {
 
                 secondCard.element
                     .classList
-                    .remove("flipped");
-
+                    .remove(
+                        "flipped"
+                    );
             }
 
 
             resetSelection();
 
-        }, 850);
-
+        }, 800);
     }
-
 }
 
 
@@ -1229,7 +1497,6 @@ function resetSelection() {
 function startTimer() {
 
     if (timer) {
-
         return;
     }
 
@@ -1242,7 +1509,6 @@ function startTimer() {
             updateTime();
 
         }, 1000);
-
 }
 
 
@@ -1258,18 +1524,19 @@ function stopTimer() {
 
         timer = null;
     }
-
 }
 
 
 /*
- * AFFICHAGE DU TEMPS
+ * TEMPS
  */
 
 function updateTime() {
 
     const minutes =
-        Math.floor(seconds / 60);
+        Math.floor(
+            seconds / 60
+        );
 
     const remainingSeconds =
         seconds % 60;
@@ -1286,7 +1553,6 @@ function updateTime() {
 
     timeElement.textContent =
         `${mm}:${ss}`;
-
 }
 
 
@@ -1308,23 +1574,20 @@ function updateStats() {
         pairsData.length;
 
 
-    const totalQuestions =
-        getAvailableQuestions().length;
-
-
-    const usedCount =
-        usedQuestionIds.size;
+    const allQuestions =
+        getAvailableQuestions();
 
 
     const percentage =
-        totalQuestions > 0
+        allQuestions.length > 0
 
             ? Math.min(
                 100,
                 Math.round(
-                    (usedCount /
-                    totalQuestions) *
-                    100
+                    (
+                        usedQuestionIds.size /
+                        allQuestions.length
+                    ) * 100
                 )
             )
 
@@ -1341,7 +1604,6 @@ function updateStats() {
 
     gameNumberElement.textContent =
         gameNumber;
-
 }
 
 
@@ -1364,12 +1626,11 @@ function calculateScore() {
         movePenalty -
         timePenalty
     );
-
 }
 
 
 /*
- * FIN DE PARTIE
+ * FIN DE LA PARTIE
  */
 
 function endGame() {
@@ -1389,7 +1650,6 @@ function endGame() {
 
 
     finalStats.textContent =
-
         `${moves} coups • ` +
         `${formatTime(seconds)} • ` +
         `${matchedPairs} paires`;
@@ -1413,23 +1673,21 @@ function endGame() {
     } else {
 
         resultMessage.textContent =
-            "Prépare-toi pour une nouvelle série de questions.";
+            "Une nouvelle série de questions est prête.";
 
         playAgain.textContent =
             "Partie suivante";
-
     }
 
 
     winOverlay.classList.add(
         "show"
     );
-
 }
 
 
 /*
- * FORMAT DU TEMPS
+ * FORMAT TEMPS
  */
 
 function formatTime(totalSeconds) {
@@ -1444,18 +1702,14 @@ function formatTime(totalSeconds) {
 
 
     return (
-
         `${String(minutes).padStart(2, "0")}:` +
-
         `${String(secs).padStart(2, "0")}`
-
     );
-
 }
 
 
 /*
- * NOUVELLE PARTIE
+ * PARTIE SUIVANTE
  */
 
 function startNewGame() {
@@ -1474,7 +1728,6 @@ function startNewGame() {
 
     matchedPairs = 0;
 
-
     seconds = 0;
 
     gameStarted = false;
@@ -1488,16 +1741,12 @@ function startNewGame() {
     );
 
 
-    updateTime();
-
-
     messageElement.textContent =
         "Trouve toutes les paires.";
 
 
-    /*
-     * Charge 6 nouvelles questions.
-     */
+    updateTime();
+
 
     if (loadQuestions()) {
 
@@ -1506,12 +1755,11 @@ function startNewGame() {
         updateStats();
 
     }
-
 }
 
 
 /*
- * RECOMMENCER
+ * RECOMMENCER DEPUIS LE DÉBUT
  */
 
 function resetEntireGame() {
@@ -1548,11 +1796,11 @@ function resetEntireGame() {
     );
 
 
-    updateTime();
-
-
     messageElement.textContent =
-        "Nouvelle série de questions.";
+        "Nouvelle partie.";
+
+
+    updateTime();
 
 
     if (loadQuestions()) {
@@ -1562,12 +1810,11 @@ function resetEntireGame() {
         updateStats();
 
     }
-
 }
 
 
 /*
- * AFFICHER UNE ERREUR
+ * ERREUR
  */
 
 function showError(message) {
@@ -1579,7 +1826,6 @@ function showError(message) {
 
     errorMessage.style.display =
         "block";
-
 }
 
 
@@ -1629,15 +1875,12 @@ if (
 ) {
 
     showError(
-        "Le fichier jeuxQuestions.js ne contient aucune question."
+        "Impossible de charger les questions."
     );
 
 } else {
 
     if (loadQuestions()) {
-
-        totalPairsElement.textContent =
-            pairsData.length;
 
         createCards();
 
