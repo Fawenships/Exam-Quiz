@@ -213,10 +213,7 @@ body {
 
     padding: 9px 12px;
 
-    transition:
-        background .2s ease,
-        border-color .2s ease,
-        transform .2s ease;
+    transition: .2s ease;
 }
 
 .answer-letter {
@@ -244,21 +241,9 @@ body {
     overflow-wrap: anywhere;
 }
 
-/* Mauvaise réponse frappée */
-.answer-card.wrong-selected {
-    border-color: #c54a4a;
-    background: #fff3f3;
-}
-
-/* Bonne réponse */
-.answer-card.correct-answer {
-    border-color: #2f7d4b;
-    background: #eef9f1;
-    transform: scale(1.01);
-}
-
-.answer-card.correct-answer .answer-letter {
-    background: #2f7d4b;
+.answer-card.selected {
+    border-color: #4b2481;
+    background: #f5f0fa;
 }
 
 /* =====================================================
@@ -310,7 +295,7 @@ canvas {
 ===================================================== */
 
 .message {
-    min-height: 52px;
+    min-height: 46px;
 
     margin-top: 15px;
 
@@ -342,10 +327,6 @@ canvas {
     color: #a32c2c;
     background: #fff6f6;
     border-color: #e7bebe;
-}
-
-.message strong {
-    font-weight: 800;
 }
 
 /* =====================================================
@@ -615,7 +596,7 @@ canvas {
     .message {
         margin-top: 10px;
         font-size: 11px;
-        min-height: 48px;
+        min-height: 44px;
     }
 
     .instructions {
@@ -633,7 +614,7 @@ canvas {
 }
 
 /* =====================================================
-   TELEPHONE PAYSAGE
+   TELEPHONE EN PAYSAGE
 ===================================================== */
 
 @media (max-width: 900px) and (orientation: landscape) {
@@ -641,6 +622,14 @@ canvas {
     .top {
         min-height: 48px;
         padding: 6px 12px;
+    }
+
+    .brand {
+        font-size: 14px;
+    }
+
+    .back {
+        font-size: 11px;
     }
 
     .game-wrapper {
@@ -654,6 +643,7 @@ canvas {
 
     .game-title h1 {
         font-size: 25px;
+        margin-bottom: 2px;
     }
 
     .game-title p {
@@ -683,9 +673,18 @@ canvas {
         font-size: 8px;
     }
 
+    .progress-container {
+        height: 6px;
+    }
+
     .question-box {
         padding: 8px 10px;
         margin-bottom: 8px;
+    }
+
+    .question-label {
+        font-size: 9px;
+        margin-bottom: 3px;
     }
 
     .question {
@@ -694,6 +693,11 @@ canvas {
 
     .game-board {
         padding: 7px;
+    }
+
+    .answers-title {
+        font-size: 9px;
+        margin-bottom: 5px;
     }
 
     .answers-grid {
@@ -730,7 +734,8 @@ canvas {
 
     .message {
         margin-top: 7px;
-        min-height: 35px;
+        min-height: 34px;
+        padding: 6px;
         font-size: 9px;
     }
 
@@ -739,6 +744,10 @@ canvas {
         padding: 8px;
         font-size: 9px;
         line-height: 1.4;
+    }
+
+    .controls {
+        margin-top: 7px;
     }
 
 }
@@ -765,6 +774,12 @@ canvas {
         font-size: 11px;
     }
 
+    .answer-letter {
+        width: 29px;
+        height: 29px;
+        flex-basis: 29px;
+    }
+
 }
 
 </style>
@@ -774,17 +789,11 @@ canvas {
 
 <header class="top">
 
-    <a
-        href="index.html"
-        class="brand"
-    >
+    <a href="index.html" class="brand">
         ExamQuiz Haiti
     </a>
 
-    <a
-        href="baccalaureat.html"
-        class="back"
-    >
+    <a href="baccalaureat.html" class="back">
         ← Retour aux jeux
     </a>
 
@@ -806,67 +815,31 @@ canvas {
     </div>
 
 
-    <!-- =================================================
-         HUD
-    ================================================== -->
-
     <section class="hud">
 
         <div class="hud-top">
 
             <div class="hud-item">
-
-                <strong id="score">
-                    0
-                </strong>
-
-                <span>
-                    Points
-                </span>
-
+                <strong id="score">0</strong>
+                <span>Points</span>
             </div>
 
-
             <div class="hud-item">
-
-                <strong id="questionCounter">
-                    1 / 10
-                </strong>
-
-                <span>
-                    Question
-                </span>
-
+                <strong id="questionCounter">1 / 10</strong>
+                <span>Question</span>
             </div>
 
-
             <div class="hud-item">
-
-                <strong id="correctCount">
-                    0
-                </strong>
-
-                <span>
-                    Bonnes réponses
-                </span>
-
+                <strong id="correctCount">0</strong>
+                <span>Bonnes réponses</span>
             </div>
 
-
             <div class="hud-item">
-
-                <strong id="bestScore">
-                    0
-                </strong>
-
-                <span>
-                    Meilleur score
-                </span>
-
+                <strong id="bestScore">0</strong>
+                <span>Meilleur score</span>
             </div>
 
         </div>
-
 
         <div class="progress-container">
 
@@ -879,10 +852,6 @@ canvas {
 
     </section>
 
-
-    <!-- =================================================
-         QUESTION
-    ================================================== -->
 
     <section class="question-box">
 
@@ -903,14 +872,10 @@ canvas {
     </section>
 
 
-    <!-- =================================================
-         JEU
-    ================================================== -->
-
     <section class="game-board">
 
         <div class="answers-title">
-            Frappe la boule correspondant à ta réponse
+            Choisis une réponse en frappant la bille correspondante
         </div>
 
 
@@ -923,12 +888,9 @@ canvas {
         <div class="table-container">
 
             <div class="table-info">
-
                 Fais glisser depuis la bille blanche,
                 puis relâche pour tirer.
-
             </div>
-
 
             <div class="canvas-wrapper">
 
@@ -945,10 +907,6 @@ canvas {
     </section>
 
 
-    <!-- =================================================
-         MESSAGE
-    ================================================== -->
-
     <div
         class="message"
         id="message"
@@ -957,15 +915,9 @@ canvas {
     </div>
 
 
-    <!-- =================================================
-         INSTRUCTIONS
-    ================================================== -->
-
     <section class="instructions">
 
-        <strong>
-            Comment jouer ?
-        </strong>
+        <strong>Comment jouer ?</strong>
 
         <br>
 
@@ -973,8 +925,8 @@ canvas {
 
         <br>
 
-        2. Fais glisser dans la direction opposée
-        à la direction du tir.
+        2. Fais glisser ton doigt ou ta souris
+        dans la direction opposée au tir.
 
         <br>
 
@@ -986,18 +938,8 @@ canvas {
 
         <br>
 
-        Si tu frappes une mauvaise boule,
-        la question reste active.
-
-        <br>
-
-        La bonne réponse est alors affichée
-        et tu dois frapper la bonne boule.
-
-        <br>
-
-        Seule une bonne réponse permet de passer
-        à la question suivante.
+        La première bille A, B, C ou D touchée
+        sera ta réponse.
 
         <br>
 
@@ -1021,10 +963,6 @@ canvas {
 </main>
 
 
-<!-- =====================================================
-     FIN DE PARTIE
-===================================================== -->
-
 <div
     class="overlay"
     id="endOverlay"
@@ -1040,14 +978,12 @@ canvas {
             Tu as terminé les 10 questions.
         </p>
 
-
         <div
             class="final-score"
             id="finalScore"
         >
             0 points
         </div>
-
 
         <div class="final-stats">
 
@@ -1063,7 +999,6 @@ canvas {
 
             </div>
 
-
             <div class="final-stat">
 
                 <strong id="finalWrong">
@@ -1071,11 +1006,10 @@ canvas {
                 </strong>
 
                 <span>
-                    Tentatives incorrectes
+                    Mauvaises réponses
                 </span>
 
             </div>
-
 
             <div class="final-stat">
 
@@ -1090,7 +1024,6 @@ canvas {
             </div>
 
         </div>
-
 
         <div class="controls">
 
@@ -1139,98 +1072,68 @@ const BEST_SCORE_KEY =
 ========================================================= */
 
 const canvas =
-    document.getElementById(
-        'gameCanvas'
-    );
+    document.getElementById('gameCanvas');
 
 const ctx =
-    canvas.getContext(
-        '2d'
-    );
+    canvas.getContext('2d');
 
 
 const scoreEl =
-    document.getElementById(
-        'score'
-    );
+    document.getElementById('score');
 
 const questionCounterEl =
-    document.getElementById(
-        'questionCounter'
-    );
+    document.getElementById('questionCounter');
 
 const correctCountEl =
-    document.getElementById(
-        'correctCount'
-    );
+    document.getElementById('correctCount');
 
 const bestScoreEl =
-    document.getElementById(
-        'bestScore'
-    );
+    document.getElementById('bestScore');
 
 const questionEl =
-    document.getElementById(
-        'question'
-    );
+    document.getElementById('question');
 
 const levelLabelEl =
-    document.getElementById(
-        'levelLabel'
-    );
+    document.getElementById('levelLabel');
 
 const progressBarEl =
-    document.getElementById(
-        'progressBar'
-    );
+    document.getElementById('progressBar');
 
 const messageEl =
-    document.getElementById(
-        'message'
-    );
+    document.getElementById('message');
 
 const answersGrid =
-    document.getElementById(
-        'answersGrid'
-    );
+    document.getElementById('answersGrid');
 
 const endOverlay =
-    document.getElementById(
-        'endOverlay'
-    );
+    document.getElementById('endOverlay');
 
 const finalScoreEl =
-    document.getElementById(
-        'finalScore'
-    );
+    document.getElementById('finalScore');
 
 const finalCorrectEl =
-    document.getElementById(
-        'finalCorrect'
-    );
+    document.getElementById('finalCorrect');
 
 const finalWrongEl =
-    document.getElementById(
-        'finalWrong'
-    );
+    document.getElementById('finalWrong');
 
 const finalBestEl =
-    document.getElementById(
-        'finalBest'
-    );
+    document.getElementById('finalBest');
 
 const restartBtn =
-    document.getElementById(
-        'restartBtn'
-    );
+    document.getElementById('restartBtn');
 
 
 /* =========================================================
-   ETAT
+   ETAT DU JEU
 ========================================================= */
 
 let biologyQuestions = [];
 
+/*
+ * Les questions utilisées pour cette partie.
+ * Elles sont mélangées une seule fois au début.
+ */
 let gameQuestions = [];
 
 let currentQuestionIndex = 0;
@@ -1253,8 +1156,6 @@ let shotInProgress = false;
 
 let answerLocked = false;
 
-let gameRunning = false;
-
 let animationFrame = null;
 
 let dragStartX = 0;
@@ -1271,6 +1172,8 @@ let tableWidth =
 let tableHeight =
     canvas.height;
 
+let gameRunning = false;
+
 
 /* =========================================================
    UTILITAIRES
@@ -1278,8 +1181,7 @@ let tableHeight =
 
 function shuffle(array) {
 
-    const result =
-        [...array];
+    const result = [...array];
 
     for (
         let i = result.length - 1;
@@ -1289,8 +1191,7 @@ function shuffle(array) {
 
         const j =
             Math.floor(
-                Math.random() *
-                (i + 1)
+                Math.random() * (i + 1)
             );
 
         [
@@ -1308,15 +1209,22 @@ function shuffle(array) {
 }
 
 
+function distance(a, b) {
+
+    return Math.hypot(
+        a.x - b.x,
+        a.y - b.y
+    );
+
+}
+
+
 function cleanText(value) {
 
     return String(
         value ?? ''
     )
-    .replace(
-        /\s+/g,
-        ' '
-    )
+    .replace(/\s+/g, ' ')
     .trim();
 
 }
@@ -1324,11 +1232,9 @@ function cleanText(value) {
 
 function uniqueTexts(array) {
 
+    const seen = new Set();
+
     const result = [];
-
-    const seen =
-        new Set();
-
 
     for (
         const item of array
@@ -1341,44 +1247,25 @@ function uniqueTexts(array) {
             continue;
         }
 
-
         const key =
             text.toLowerCase();
 
-
-        if (
-            seen.has(key)
-        ) {
-
+        if (seen.has(key)) {
             continue;
-
         }
 
-
         seen.add(key);
-
         result.push(text);
 
     }
-
 
     return result;
 
 }
 
 
-function distance(a, b) {
-
-    return Math.hypot(
-        a.x - b.x,
-        a.y - b.y
-    );
-
-}
-
-
 /* =========================================================
-   CHARGEMENT
+   CHARGEMENT DES QUESTIONS
 ========================================================= */
 
 async function loadQuestions() {
@@ -1438,53 +1325,47 @@ async function loadQuestions() {
 
         biologyQuestions =
             source
-                .map(
-                    normalizeQuestion
-                )
+                .map(normalizeQuestion)
                 .filter(
-                    q =>
-                        q &&
-                        q.question &&
-                        q.answer
+                    question =>
+                        question &&
+                        question.question &&
+                        question.answer
                 );
 
 
         /*
-         * Supprime les questions
-         * identiques.
+         * Supprime les questions exactement identiques.
          */
-        const uniqueQuestions =
-            [];
+        const uniqueQuestions = [];
 
-        const seen =
+        const questionKeys =
             new Set();
 
-
         for (
-            const q of biologyQuestions
+            const question of biologyQuestions
         ) {
 
             const key =
-                q.question
+                question.question
                     .toLowerCase()
                     .trim();
 
-
             if (
-                seen.has(key)
+                questionKeys.has(key)
             ) {
 
                 continue;
 
             }
 
+            questionKeys.add(key);
 
-            seen.add(key);
-
-            uniqueQuestions.push(q);
+            uniqueQuestions.push(
+                question
+            );
 
         }
-
 
         biologyQuestions =
             uniqueQuestions;
@@ -1602,10 +1483,14 @@ function normalizeQuestion(q) {
 
 
         options =
-            uniqueTexts(
-                options
-            );
+            uniqueTexts(options);
 
+
+        /*
+         * Si la bonne réponse n'est pas directement
+         * donnée, on essaie de la retrouver dans
+         * les options.
+         */
 
         if (
             !answer &&
@@ -1619,9 +1504,7 @@ function normalizeQuestion(q) {
 
                 answer =
                     cleanText(
-                        options[
-                            q.correctIndex
-                        ]
+                        options[q.correctIndex]
                     );
 
             } else if (
@@ -1631,9 +1514,7 @@ function normalizeQuestion(q) {
 
                 answer =
                     cleanText(
-                        options[
-                            q.answerIndex
-                        ]
+                        options[q.answerIndex]
                     );
 
             }
@@ -1676,16 +1557,14 @@ function normalizeQuestion(q) {
 
 
 /* =========================================================
-   PREPARATION DES QUESTIONS
+   PREPARATION DE LA PARTIE
 ========================================================= */
 
 function prepareGameQuestions() {
 
     /*
      * Mélange toutes les questions.
-     *
-     * Les 10 premières sont utilisées
-     * pour cette partie.
+     * On prend ensuite les 10 premières.
      */
     gameQuestions =
         shuffle(
@@ -1701,32 +1580,30 @@ function prepareGameQuestions() {
 
 
     /*
-     * Sécurité anti-doublon.
+     * Sécurité supplémentaire :
+     * aucune question ne doit être répétée.
      */
-    const seen =
+    const used =
         new Set();
-
 
     gameQuestions =
         gameQuestions.filter(
-            q => {
+            question => {
 
                 const key =
-                    q.question
+                    question.question
                         .toLowerCase()
                         .trim();
 
-
                 if (
-                    seen.has(key)
+                    used.has(key)
                 ) {
 
                     return false;
 
                 }
 
-
-                seen.add(key);
+                used.add(key);
 
                 return true;
 
@@ -1737,7 +1614,7 @@ function prepareGameQuestions() {
 
 
 /* =========================================================
-   CREATION DES REPONSES
+   CREATION DES 4 REPONSES
 ========================================================= */
 
 function buildAnswers(question) {
@@ -1753,10 +1630,10 @@ function buildAnswers(question) {
 
 
     /*
-     * Les options présentes directement
-     * dans la question.
+     * On commence par les options fournies
+     * directement avec la question.
      */
-    let wrong =
+    let candidates =
         uniqueTexts(
             question.options
         )
@@ -1768,28 +1645,27 @@ function buildAnswers(question) {
 
 
     /*
-     * On complète avec les réponses
-     * des autres questions.
+     * Ensuite, si nécessaire, on utilise les réponses
+     * correctes d'autres questions.
      */
     const otherAnswers =
         shuffle(
-            biologyQuestions.map(
-                q =>
-                    cleanText(
-                        q.answer
-                    )
-            )
+            biologyQuestions
+                .map(
+                    q =>
+                        cleanText(q.answer)
+                )
         );
 
 
-    wrong.push(
+    candidates.push(
         ...otherAnswers
     );
 
 
-    wrong =
+    candidates =
         uniqueTexts(
-            wrong
+            candidates
         )
         .filter(
             answer =>
@@ -1799,45 +1675,35 @@ function buildAnswers(question) {
 
 
     /*
-     * On évite d'utiliser plusieurs fois
-     * exactement la même réponse.
+     * On prend exactement 3 mauvaises réponses.
      */
-    const finalWrong =
-        wrong.slice(
-            0,
-            3
-        );
+    const wrong =
+        candidates.slice(0, 3);
 
 
-    const answers = [
-
+    /*
+     * La bonne réponse est ajoutée une seule fois.
+     */
+    const finalAnswers = [
         {
-            text:
-                correct,
-
-            correct:
-                true
+            text: correct,
+            correct: true
         },
 
-        ...finalWrong.map(
+        ...wrong.map(
             text => ({
-
                 text,
-
-                correct:
-                    false
-
+                correct: false
             })
         )
-
     ];
 
 
     /*
-     * Mélange des positions A/B/C/D.
+     * Mélange final des positions A/B/C/D.
      */
     return shuffle(
-        answers
+        finalAnswers
     )
     .map(
         (answer, index) => ({
@@ -1860,70 +1726,55 @@ function buildAnswers(question) {
 
 
 /* =========================================================
-   AFFICHAGE DES REPONSES
+   REPONSES HTML
 ========================================================= */
 
 function renderAnswerCards() {
 
-    answersGrid.innerHTML =
-        '';
+    answersGrid.innerHTML = '';
 
 
-    currentQuestion.answers
-        .forEach(
-            answer => {
+    currentQuestion.answers.forEach(
+        answer => {
 
-                const card =
-                    document.createElement(
-                        'div'
-                    );
+            const card =
+                document.createElement('div');
 
-                card.className =
-                    'answer-card';
+            card.className =
+                'answer-card';
 
-                card.dataset.label =
-                    answer.label;
+            card.dataset.label =
+                answer.label;
 
 
-                const letter =
-                    document.createElement(
-                        'div'
-                    );
+            const letter =
+                document.createElement('div');
 
-                letter.className =
-                    'answer-letter';
+            letter.className =
+                'answer-letter';
 
-                letter.textContent =
-                    answer.label;
+            letter.textContent =
+                answer.label;
 
 
-                const text =
-                    document.createElement(
-                        'div'
-                    );
+            const text =
+                document.createElement('div');
 
-                text.className =
-                    'answer-text';
+            text.className =
+                'answer-text';
 
-                text.textContent =
-                    answer.text;
+            text.textContent =
+                answer.text;
 
 
-                card.appendChild(
-                    letter
-                );
+            card.appendChild(letter);
 
-                card.appendChild(
-                    text
-                );
+            card.appendChild(text);
 
+            answersGrid.appendChild(card);
 
-                answersGrid.appendChild(
-                    card
-                );
-
-            }
-        );
+        }
+    );
 
 }
 
@@ -1990,15 +1841,16 @@ function startGame() {
     answerLocked = false;
 
 
+    /*
+     * NOUVEAU :
+     * on prépare les 10 questions une seule fois.
+     */
+    prepareGameQuestions();
+
+
     endOverlay.classList.remove(
         'show'
     );
-
-
-    /*
-     * Nouveau mélange à chaque partie.
-     */
-    prepareGameQuestions();
 
 
     updateStats();
@@ -2035,10 +1887,9 @@ function loadCurrentQuestion() {
 
     /*
      * IMPORTANT :
-     * aucune sélection aléatoire ici.
-     *
-     * On utilise la question préparée
-     * pour cette position.
+     * on prend la question à l'index actuel.
+     * On ne choisit plus une question au hasard
+     * à chaque tour.
      */
     currentQuestion =
         gameQuestions[
@@ -2062,31 +1913,28 @@ function loadCurrentQuestion() {
         );
 
 
+    const total =
+        gameQuestions.length;
+
+
     questionCounterEl.textContent =
-        `${
-            currentQuestionIndex + 1
-        } / ${
-            gameQuestions.length
-        }`;
+        `${currentQuestionIndex + 1} / ${total}`;
 
 
     progressBarEl.style.width =
         `${
             (
-                (
-                    currentQuestionIndex + 1
-                ) /
-                gameQuestions.length
-            ) *
-            100
+                (currentQuestionIndex + 1) /
+                total
+            ) * 100
         }%`;
 
 
     renderAnswerCards();
 
 
-    messageEl.innerHTML =
-        'Tire la bille blanche vers une réponse.';
+    messageEl.textContent =
+        'Appuie sur la bille blanche, tire et relâche.';
 
     messageEl.className =
         'message';
@@ -2145,17 +1993,14 @@ function resetTable() {
             Math.min(
                 tableWidth,
                 tableHeight
-            ) * .029
+            ) * 0.029
         );
 
 
-    /*
-     * Bille blanche.
-     */
     whiteBall = {
 
         x:
-            tableWidth * .22,
+            tableWidth * 0.22,
 
         y:
             tableHeight / 2,
@@ -2180,9 +2025,6 @@ function resetTable() {
     ];
 
 
-    /*
-     * Positions des réponses.
-     */
     const positions = [
 
         [0.62, 0.25],
@@ -2196,57 +2038,48 @@ function resetTable() {
     ];
 
 
-    currentQuestion.answers
-        .forEach(
-            (answer, index) => {
+    currentQuestion.answers.forEach(
+        (answer, index) => {
 
-                const position =
-                    positions[index];
+            const position =
+                positions[index];
 
 
-                balls.push({
+            balls.push({
 
-                    x:
-                        tableWidth *
-                        position[0],
+                x:
+                    tableWidth *
+                    position[0],
 
-                    y:
-                        tableHeight *
-                        position[1],
+                y:
+                    tableHeight *
+                    position[1],
 
-                    homeX:
-                        tableWidth *
-                        position[0],
+                vx: 0,
 
-                    homeY:
-                        tableHeight *
-                        position[1],
+                vy: 0,
 
-                    vx: 0,
+                radius,
 
-                    vy: 0,
+                type:
+                    'answer',
 
-                    radius,
+                label:
+                    answer.label,
 
-                    type:
-                        'answer',
+                correct:
+                    answer.correct,
 
-                    label:
-                        answer.label,
+                text:
+                    answer.text,
 
-                    correct:
-                        answer.correct,
+                active:
+                    true
 
-                    text:
-                        answer.text,
+            });
 
-                    active:
-                        true
-
-                });
-
-            }
-        );
+        }
+    );
 
 
     shotInProgress =
@@ -2275,9 +2108,6 @@ function drawTable() {
     );
 
 
-    /*
-     * Tapis.
-     */
     ctx.fillStyle =
         '#27704c';
 
@@ -2289,9 +2119,6 @@ function drawTable() {
     );
 
 
-    /*
-     * Bordure.
-     */
     ctx.strokeStyle =
         'rgba(255,255,255,.18)';
 
@@ -2305,9 +2132,6 @@ function drawTable() {
     );
 
 
-    /*
-     * Poches.
-     */
     const pocketRadius =
         Math.max(
             22,
@@ -2407,21 +2231,14 @@ function drawTable() {
 
 function drawBall(ball) {
 
-    if (
-        !ball.active
-    ) {
-
+    if (!ball.active) {
         return;
-
     }
 
 
     ctx.save();
 
 
-    /*
-     * Ombre.
-     */
     ctx.beginPath();
 
     ctx.arc(
@@ -2438,9 +2255,6 @@ function drawBall(ball) {
     ctx.fill();
 
 
-    /*
-     * Boule.
-     */
     ctx.beginPath();
 
     ctx.arc(
@@ -2478,9 +2292,6 @@ function drawBall(ball) {
     ctx.stroke();
 
 
-    /*
-     * Lettre A/B/C/D.
-     */
     if (
         ball.type === 'answer'
     ) {
@@ -2532,18 +2343,14 @@ function updatePhysics() {
 
 
     const friction =
-        .985;
+        0.985;
 
 
     balls.forEach(
         ball => {
 
-            if (
-                !ball.active
-            ) {
-
+            if (!ball.active) {
                 return;
-
             }
 
 
@@ -2579,9 +2386,6 @@ function updatePhysics() {
             }
 
 
-            /*
-             * Gauche.
-             */
             if (
                 ball.x -
                 ball.radius < 0
@@ -2596,9 +2400,6 @@ function updatePhysics() {
             }
 
 
-            /*
-             * Droite.
-             */
             if (
                 ball.x +
                 ball.radius >
@@ -2615,9 +2416,6 @@ function updatePhysics() {
             }
 
 
-            /*
-             * Haut.
-             */
             if (
                 ball.y -
                 ball.radius < 0
@@ -2632,9 +2430,6 @@ function updatePhysics() {
             }
 
 
-            /*
-             * Bas.
-             */
             if (
                 ball.y +
                 ball.radius >
@@ -2658,7 +2453,10 @@ function updatePhysics() {
 
 
     /*
-     * Recherche de la première réponse touchée.
+     * Détection de collision avec une réponse.
+     *
+     * La petite marge supplémentaire permet
+     * de rendre les tirs courts beaucoup plus fiables.
      */
     if (
         whiteBall &&
@@ -2679,10 +2477,6 @@ function updatePhysics() {
             }
 
 
-            /*
-             * Petite marge pour rendre
-             * les tirs courts fiables.
-             */
             if (
                 distance(
                     whiteBall,
@@ -2706,9 +2500,6 @@ function updatePhysics() {
     }
 
 
-    /*
-     * Vérification arrêt des boules.
-     */
     const moving =
         balls.some(
             ball =>
@@ -2744,7 +2535,7 @@ function updatePhysics() {
 
 
 /* =========================================================
-   COLLISIONS
+   COLLISIONS ENTRE BOULES
 ========================================================= */
 
 function handleBallCollisions() {
@@ -2973,17 +2764,14 @@ function pointerDown(event) {
 
     const d =
         Math.hypot(
-            point.x -
-                whiteBall.x,
-
-            point.y -
-                whiteBall.y
+            point.x - whiteBall.x,
+            point.y - whiteBall.y
         );
 
 
     /*
-     * Zone de sélection agrandie
-     * pour les téléphones.
+     * Zone de sélection assez grande
+     * pour les écrans tactiles.
      */
     if (
         d >
@@ -3018,7 +2806,7 @@ function pointerDown(event) {
 
 
 /* =========================================================
-   MOUVEMENT
+   MOUVEMENT DU TIR
 ========================================================= */
 
 function pointerMove(event) {
@@ -3113,7 +2901,13 @@ function pointerUp(event) {
 
 
     /*
-     * Tir très court accepté.
+     * CORRECTION :
+     *
+     * Avant :
+     * > 8 pixels seulement
+     *
+     * Maintenant :
+     * même un petit recul permet de tirer.
      */
     if (
         dragDistance > 1.5
@@ -3122,12 +2916,16 @@ function pointerUp(event) {
         const directionLength =
             Math.max(
                 dragDistance,
-                .001
+                0.001
             );
 
 
         /*
-         * Puissance minimale.
+         * Petite puissance minimale.
+         *
+         * Ainsi, un tir très proche
+         * peut quand même atteindre
+         * une réponse située juste devant.
          */
         const power =
             Math.min(
@@ -3179,7 +2977,7 @@ function pointerUp(event) {
 
 
 /* =========================================================
-   SOURIS
+   EVENEMENTS SOURIS
 ========================================================= */
 
 canvas.addEventListener(
@@ -3199,7 +2997,7 @@ window.addEventListener(
 
 
 /* =========================================================
-   TACTILE
+   EVENEMENTS TELEPHONE
 ========================================================= */
 
 canvas.addEventListener(
@@ -3244,258 +3042,14 @@ function handleAnswer(ball) {
     }
 
 
-    /* =====================================================
-       MAUVAISE REPONSE
-    ===================================================== */
-
-    if (
-        !ball.correct
-    ) {
-
-        /*
-         * Compte la tentative incorrecte.
-         */
-        wrongAnswers++;
-
-
-        /*
-         * Bloque temporairement les collisions.
-         */
-        answerLocked =
-            true;
-
-
-        /*
-         * Arrête toutes les boules.
-         */
-        balls.forEach(
-            currentBall => {
-
-                currentBall.vx = 0;
-
-                currentBall.vy = 0;
-
-            }
-        );
-
-
-        shotInProgress =
-            false;
-
-
-        /*
-         * Met la mauvaise réponse
-         * en évidence.
-         */
-        const cards =
-            answersGrid.querySelectorAll(
-                '.answer-card'
-            );
-
-
-        cards.forEach(
-            card => {
-
-                if (
-                    card.dataset.label ===
-                    ball.label
-                ) {
-
-                    card.classList.add(
-                        'wrong-selected'
-                    );
-
-                }
-
-            }
-        );
-
-
-        /*
-         * Trouve la carte de la bonne réponse.
-         */
-        const correctAnswer =
-            currentQuestion.answers.find(
-                answer =>
-                    answer.correct
-            );
-
-
-        /*
-         * Met la bonne réponse
-         * en évidence.
-         */
-        cards.forEach(
-            card => {
-
-                if (
-                    correctAnswer &&
-                    card.dataset.label ===
-                    correctAnswer.label
-                ) {
-
-                    card.classList.add(
-                        'correct-answer'
-                    );
-
-                }
-
-            }
-        );
-
-
-        /*
-         * Affiche clairement la bonne réponse.
-         */
-        messageEl.innerHTML =
-            `Mauvaise réponse.<br>
-             La bonne réponse est : <strong>${currentQuestion.answer}</strong>`;
-
-        messageEl.className =
-            'message error';
-
-
-        /*
-         * La mauvaise boule revient
-         * à sa position d'origine.
-         */
-        ball.x =
-            ball.homeX;
-
-        ball.y =
-            ball.homeY;
-
-        ball.vx = 0;
-        ball.vy = 0;
-
-
-        /*
-         * La bille blanche revient
-         * également à sa position de départ.
-         */
-        whiteBall.x =
-            tableWidth * .22;
-
-        whiteBall.y =
-            tableHeight / 2;
-
-        whiteBall.vx = 0;
-        whiteBall.vy = 0;
-
-
-        updateStats();
-
-
-        /*
-         * Après un court délai,
-         * le joueur peut recommencer.
-         */
-        setTimeout(
-            () => {
-
-                if (
-                    !gameRunning
-                ) {
-
-                    return;
-
-                }
-
-
-                /*
-                 * Retire le marquage de la mauvaise réponse.
-                 */
-                cards.forEach(
-                    card => {
-
-                        card.classList.remove(
-                            'wrong-selected'
-                        );
-
-                    }
-                );
-
-
-                /*
-                 * La bonne réponse reste
-                 * mise en évidence.
-                 */
-                cards.forEach(
-                    card => {
-
-                        if (
-                            correctAnswer &&
-                            card.dataset.label ===
-                            correctAnswer.label
-                        ) {
-
-                            card.classList.add(
-                                'correct-answer'
-                            );
-
-                        }
-
-                    }
-                );
-
-
-                answerLocked =
-                    false;
-
-
-                messageEl.innerHTML =
-                    `La bonne réponse est : <strong>${currentQuestion.answer}</strong><br>
-                     Frappe la boule correspondante pour continuer.`;
-
-                messageEl.className =
-                    'message';
-
-            },
-            1200
-        );
-
-
-        return;
-
-    }
-
-
-    /* =====================================================
-       BONNE REPONSE
-    ===================================================== */
-
     answerLocked =
         true;
 
 
-    shotInProgress =
-        false;
-
-
-    /*
-     * Arrête toutes les boules.
-     */
-    balls.forEach(
-        currentBall => {
-
-            currentBall.vx = 0;
-
-            currentBall.vy = 0;
-
-        }
-    );
-
-
-    /*
-     * La bonne boule est retirée.
-     */
     ball.active =
         false;
 
 
-    /*
-     * Met la bonne carte en évidence.
-     */
     const cards =
         answersGrid.querySelectorAll(
             '.answer-card'
@@ -3511,7 +3065,7 @@ function handleAnswer(ball) {
             ) {
 
                 card.classList.add(
-                    'correct-answer'
+                    'selected'
                 );
 
             }
@@ -3520,33 +3074,39 @@ function handleAnswer(ball) {
     );
 
 
-    /*
-     * Score.
-     */
-    score +=
-        POINTS_CORRECT;
+    if (
+        ball.correct
+    ) {
 
-    correctAnswers++;
+        score +=
+            POINTS_CORRECT;
+
+        correctAnswers++;
+
+
+        messageEl.textContent =
+            'Bonne réponse ! +10 points';
+
+        messageEl.className =
+            'message success';
+
+    } else {
+
+        wrongAnswers++;
+
+
+        messageEl.textContent =
+            `Mauvaise réponse. La bonne réponse était : ${currentQuestion.answer}`;
+
+        messageEl.className =
+            'message error';
+
+    }
 
 
     updateStats();
 
 
-    /*
-     * Message.
-     */
-    messageEl.innerHTML =
-        `Bonne réponse ! +10 points<br>
-         <strong>${currentQuestion.answer}</strong>`;
-
-    messageEl.className =
-        'message success';
-
-
-    /*
-     * Passage à la question suivante
-     * seulement après validation.
-     */
     setTimeout(
         () => {
 
@@ -3567,7 +3127,7 @@ function handleAnswer(ball) {
             }
 
         },
-        1500
+        1300
     );
 
 }
@@ -3657,6 +3217,14 @@ restartBtn.addEventListener(
 
 function refreshAfterResize() {
 
+    /*
+     * Le canvas garde ses dimensions internes
+     * 1100 x 600.
+     *
+     * Le CSS l'adapte à la largeur de l'écran.
+     * Cela évite de casser la physique du jeu
+     * lorsqu'on tourne le téléphone.
+     */
     requestAnimationFrame(
         () => {
 
