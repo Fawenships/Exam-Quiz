@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<title>Flèches à réponses — ExamQuiz Haiti</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    min-height: 100%;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f7f7fa;
+    color: #24113f;
+    padding: 16px;
+}
+
+.game {
+    width: min(100%, 900px);
+    margin: 0 auto;
+}
+
+/* RETOUR */
+.back-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: #24113f;
+    font-weight: 700;
+    background: white;
+    border: 1px solid #e4e1ea;
+    padding: 11px 16px;
+    border-radius: 12px;
+    margin-bottom: 18px;
+    transition: 0.2s;
+}
+
+.back-button:hover {
+    background: #f0edf5;
+}
+
+/* HEADER */
+.header {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.stat {
+    background: white;
+    border: 1px solid #e7e4eb;
+    border-radius: 14px;
+    padding: 12px 16px;
+}
+
+.stat-label {
+    display: block;
+    color: #777;
+    font-size: 12px;
+    margin-bottom: 4px;
+}
+
+.stat-value {
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.header-center {
+    text-align: center;
+}
+
+.header-center h1 {
+    font-size: clamp(22px, 5vw, 32px);
+}
+
+.header-center p {
+    color: #777;
+    font-size: 13px;
+    margin-top: 3px;
+}
+
+/* PROGRESSION */
+.progress-container {
+    background: white;
+    border: 1px solid #e7e4eb;
+    border-radius: 14px;
+    padding: 12px 14px;
+    margin-bottom: 16px;
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: 13px;
+    margin-bottom: 8px;
+    color: #666;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 9px;
+    background: #eceaf0;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background: #4b2481;
+    transition: width 0.3s ease;
+}
+
+/* QUESTION */
+.question-card {
+    background: white;
+    border: 1px solid #e4e1e9;
+    border-radius: 20px;
+    padding: clamp(20px, 5vw, 38px);
+    text-align: center;
+    margin-bottom: 18px;
+    box-shadow: 0 8px 30px rgba(36, 17, 63, 0.06);
+}
+
+.question-number {
+    color: #1764c0;
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+.question {
+    font-size: clamp(21px, 4vw, 31px);
+    line-height: 1.35;
+    font-weight: 800;
+    color: #24113f;
+}
+
+/* ZONE DES FLÈCHES */
+.arrows-area {
+    position: relative;
+    width: min(100%, 580px);
+    height: 390px;
+    margin: 0 auto 18px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 12px;
+    align-items: center;
+    justify-items: center;
+}
+
+.arrow-button {
+    width: clamp(90px, 22vw, 145px);
+    height: clamp(90px, 22vw, 145px);
+    border: none;
+    border-radius: 28px;
+    background: white;
+    border: 2px solid #e0dce7;
+    color: #24113f;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    transition:
+        transform 0.15s ease,
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease;
+    box-shadow: 0 7px 20px rgba(36, 17, 63, 0.07);
+    touch-action: manipulation;
+}
+
+.arrow-button:hover:not(:disabled) {
+    transform: scale(1.04);
+    border-color: #4b2481;
+}
+
+.arrow-button:active:not(:disabled) {
+    transform: scale(0.96);
+}
+
+.arrow-symbol {
+    font-size: clamp(42px, 10vw, 68px);
+    line-height: 1;
+    font-weight: 900;
+}
+
+.arrow-answer {
+    font-size: clamp(11px, 2.8vw, 15px);
+    font-weight: 700;
+    max-width: 90%;
+    line-height: 1.2;
+    word-break: break-word;
+}
+
+.arrow-up {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.arrow-left {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.arrow-center {
+    grid-column: 2;
+    grid-row: 2;
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: #24113f;
+    border: none;
+    color: white;
+    cursor: default;
+    box-shadow: none;
+}
+
+.arrow-center .center-icon {
+    font-size: 32px;
+    font-weight: 900;
+}
+
+.arrow-center .center-text {
+    font-size: 10px;
+    color: #dcd5e7;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.arrow-right {
+    grid-column: 3;
+    grid-row: 2;
+}
+
+.arrow-down {
+    grid-column: 2;
+    grid-row: 3;
+}
+
+/* FEEDBACK */
+.feedback {
+    min-height: 52px;
+    background: white;
+    border: 1px solid #e4e1e9;
+    border-radius: 14px;
+    padding: 14px 18px;
+    text-align: center;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.feedback.correct {
+    color: #137333;
+    background: #edf8f0;
+    border-color: #a9d9b4;
+}
+
+.feedback.wrong {
+    color: #b42318;
+    background: #fff0ef;
+    border-color: #efb2ad;
+}
+
+.arrow-button.correct {
+    background: #e7f6eb;
+    border-color: #24a148;
+    color: #137333;
+}
+
+.arrow-button.wrong {
+    background: #fff0ef;
+    border-color: #d93025;
+    color: #b42318;
+}
+
+.arrow-button.reveal {
+    background: #eef5ff;
+    border-color: #1764c0;
+    color: #1764c0;
+}
+
+.arrow-button:disabled {
+    cursor: default;
+}
+
+/* OVERLAY */
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(20, 12, 30, 0.72);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 100;
+}
+
+.overlay.active {
+    display: flex;
+}
+
+.result-card {
+    width: min(100%, 500px);
+    background: white;
+    border-radius: 24px;
+    padding: 32px 24px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+}
+
+.result-card h2 {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.result-score {
+    font-size: 48px;
+    font-weight: 900;
+    color: #4b2481;
+    margin: 15px 0;
+}
+
+.result-details {
+    color: #666;
+    line-height: 1.7;
+    margin-bottom: 22px;
+}
+
+.result-button {
+    width: 100%;
+    border: none;
+    border-radius: 13px;
+    padding: 15px;
+    font-size: 16px;
+    font-weight: 800;
+    cursor: pointer;
+    background: #4b2481;
+    color: white;
+    margin-top: 9px;
+}
+
+.result-button.secondary {
+    background: #eeeaf3;
+    color: #24113f;
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+
+    .header {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .header-center {
+        grid-column: 1 / -1;
+        grid-row: 1;
+        margin-bottom: 4px;
+    }
+
+    .stat {
+        padding: 10px 12px;
+    }
+
+    .stat-value {
+        font-size: 18px;
+    }
+
+    .arrows-area {
+        height: 330px;
+        gap: 7px;
+    }
+
+    .arrow-button {
+        border-radius: 20px;
+    }
+
+    .arrow-center {
+        width: 90px;
+        height: 90px;
+    }
+
+    .arrow-center .center-icon {
+        font-size: 25px;
+    }
+}
+
+@media (max-width: 380px) {
+    .arrows-area {
+        height: 290px;
+    }
+
+    .arrow-button {
+        width: 82px;
+        height: 82px;
+    }
+
+    .arrow-center {
+        width: 76px;
+        height: 76px;
+    }
+
+    .arrow-answer {
+        font-size: 10px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="game">
+
+    <a href="baccalaureat.html" class="back-button">
+        ← Retour aux jeux
+    </a>
+
+    <div class="header">
+
+        <div class="stat">
+            <span class="stat-label">Score</span>
+            <span class="stat-value" id="score">0</span>
+        </div>
+
+        <div class="header-center">
+            <h1>Flèches à réponses</h1>
+            <p>Choisis la bonne direction</p>
+        </div>
+
+        <div class="stat">
+            <span class="stat-label">Manche</span>
+            <span class="stat-value" id="round">1 / 20</span>
+        </div>
+
+    </div>
+
+    <div class="progress-container">
+
+        <div class="progress-info">
+            <span id="questionProgress">Question 1 / 10</span>
+            <span id="correctCount">0 correct</span>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+    </div>
+
+    <div class="question-card">
+
+        <div class="question-number" id="questionNumber">
+            QUESTION 1
+        </div>
+
+        <div class="question" id="question">
+            Chargement de la question...
+        </div>
+
+    </div>
+
+    <div class="arrows-area">
+
+        <button class="arrow-button arrow-up" data-direction="up">
+            <span class="arrow-symbol">↑</span>
+            <span class="arrow-answer"></span>
+        </button>
+
+        <button class="arrow-button arrow-left" data-direction="left">
+            <span class="arrow-symbol">←</span>
+            <span class="arrow-answer"></span>
+        </button>
+
+        <div class="arrow-center">
+            <span class="center-icon">?</span>
+            <span class="center-text">Réponse</span>
+        </div>
+
+        <button class="arrow-button arrow-right" data-direction="right">
+            <span class="arrow-symbol">→</span>
+            <span class="arrow-answer"></span>
+        </button>
+
+        <button class="arrow-button arrow-down" data-direction="down">
+            <span class="arrow-symbol">↓</span>
+            <span class="arrow-answer"></span>
+        </button>
+
+    </div>
+
+    <div class="feedback" id="feedback">
+        Choisis une flèche.
+    </div>
+
+</div>
+
+
+<!-- RESULTAT -->
+<div class="overlay" id="resultOverlay">
+
+    <div class="result-card">
+
+        <h2 id="resultTitle">Manche terminée</h2>
+
+        <div class="result-score" id="resultScore">
+            0
+        </div>
+
+        <div class="result-details" id="resultDetails">
+            Résultats de la manche
+        </div>
+
+        <button class="result-button" id="nextRoundButton">
+            Manche suivante
+        </button>
+
+        <button class="result-button secondary" id="restartButton">
+            Recommencer
+        </button>
+
+    </div>
+
+</div>
+
+
+<script type="module">
+
+import { jeuxQuestions } from "./src/jeuxQuestions.js";
+
+
+/* =========================
+   CONFIGURATION
+========================= */
+
+const QUESTIONS_PER_ROUND = 10;
+const MAX_ROUNDS = 20;
+
+
+/* =========================
+   ELEMENTS
+========================= */
+
+const scoreElement = document.getElementById("score");
+const roundElement = document.getElementById("round");
+
+const questionProgress =
+    document.getElementById("questionProgress");
+
+const correctCountElement =
+    document.getElementById("correctCount");
+
+const progressFill =
+    document.getElementById("progressFill");
+
+const questionNumber =
+    document.getElementById("questionNumber");
+
+const questionElement =
+    document.getElementById("question");
+
+const feedbackElement =
+    document.getElementById("feedback");
+
+const resultOverlay =
+    document.getElementById("resultOverlay");
+
+const resultTitle =
+    document.getElementById("resultTitle");
+
+const resultScore =
+    document.getElementById("resultScore");
+
+const resultDetails =
+    document.getElementById("resultDetails");
+
+const nextRoundButton =
+    document.getElementById("nextRoundButton");
+
+const restartButton =
+    document.getElementById("restartButton");
+
+const arrowButtons =
+    [...document.querySelectorAll(".arrow-button")];
+
+
+/* =========================
+   ETAT DU JEU
+========================= */
+
+let score = 0;
+let round = 1;
+let questionIndex = 0;
+let correctAnswers = 0;
+
+let roundQuestions = [];
+let currentQuestion = null;
+
+let questionLocked = false;
+
+
+/* =========================
+   MELANGE
+========================= */
+
+function shuffle(array) {
+
+    return [...array].sort(
+        () => Math.random() - 0.5
+    );
+
+}
+
+
+/* =========================
+   QUESTIONS
+========================= */
+
+function getQuestions() {
+
+    if (!Array.isArray(jeuxQuestions)) {
+        console.error(
+            "jeuxQuestions n'est pas un tableau."
+        );
+
+        return [];
+    }
+
+    return jeuxQuestions.filter(question => {
+
+        return (
+            question &&
+            typeof question.question === "string" &&
+            Array.isArray(question.options) &&
+            question.options.length >= 4 &&
+            typeof question.answer === "string"
+        );
+
+    });
+
+}
+
+
+/* =========================
+   NOUVELLE MANCHE
+========================= */
+
+function startRound() {
+
+    const questions = getQuestions();
+
+    if (questions.length < 4) {
+
+        questionElement.textContent =
+            "Pas assez de questions disponibles.";
+
+        arrowButtons.forEach(button => {
+            button.disabled = true;
+        });
+
+        return;
+    }
+
+
+    const shuffledQuestions =
+        shuffle(questions);
+
+
+    roundQuestions =
+        shuffledQuestions.slice(
+            0,
+            Math.min(
+                QUESTIONS_PER_ROUND,
+                shuffledQuestions.length
+            )
+        );
+
+
+    questionIndex = 0;
+    correctAnswers = 0;
+
+
+    roundElement.textContent =
+        `${round} / ${MAX_ROUNDS}`;
+
+
+    updateScore();
+
+    loadQuestion();
+
+}
+
+
+/* =========================
+   CHARGER QUESTION
+========================= */
+
+function loadQuestion() {
+
+    if (
+        questionIndex >= roundQuestions.length
+    ) {
+
+        finishRound();
+
+        return;
+    }
+
+
+    currentQuestion =
+        roundQuestions[questionIndex];
+
+
+    questionLocked = false;
+
+
+    const options =
+        shuffle(
+            currentQuestion.options
+        ).slice(0, 4);
+
+
+    /*
+     * On s'assure que la bonne réponse
+     * est bien présente.
+     */
+
+    if (
+        !options.includes(
+            currentQuestion.answer
+        )
+    ) {
+
+        options[
+            Math.floor(
+                Math.random() * options.length
+            )
+        ] = currentQuestion.answer;
+
+    }
+
+
+    /*
+     * Association des quatre réponses
+     * aux quatre directions.
+     */
+
+    const directions = [
+        "up",
+        "left",
+        "right",
+        "down"
+    ];
+
+
+    arrowButtons.forEach(
+        (button, index) => {
+
+            button.dataset.answer =
+                options[index];
+
+            const answerElement =
+                button.querySelector(
+                    ".arrow-answer"
+                );
+
+            answerElement.textContent =
+                options[index];
+
+            button.disabled = false;
+
+            button.classList.remove(
+                "correct",
+                "wrong",
+                "reveal"
+            );
+
+        }
+    );
+
+
+    questionElement.textContent =
+        currentQuestion.question;
+
+
+    questionNumber.textContent =
+        `QUESTION ${questionIndex + 1}`;
+
+
+    questionProgress.textContent =
+        `Question ${questionIndex + 1} / ${roundQuestions.length}`;
+
+
+    correctCountElement.textContent =
+        `${correctAnswers} correct`;
+
+
+    const progress =
+        (questionIndex /
+        roundQuestions.length) * 100;
+
+
+    progressFill.style.width =
+        `${progress}%`;
+
+
+    feedbackElement.className =
+        "feedback";
+
+    feedbackElement.textContent =
+        "Choisis une flèche.";
+
+}
+
+
+/* =========================
+   REPONSE
+========================= */
+
+function selectAnswer(button) {
+
+    if (
+        questionLocked ||
+        !currentQuestion
+    ) {
+        return;
+    }
+
+
+    questionLocked = true;
+
+
+    const selectedAnswer =
+        button.dataset.answer;
+
+
+    const correctAnswer =
+        currentQuestion.answer;
+
+
+    const isCorrect =
+        selectedAnswer === correctAnswer;
+
+
+    arrowButtons.forEach(
+        item => {
+            item.disabled = true;
+        }
+    );
+
+
+    if (isCorrect) {
+
+        score += 10;
+
+        correctAnswers++;
+
+
+        button.classList.add(
+            "correct"
+        );
+
+
+        feedbackElement.className =
+            "feedback correct";
+
+
+        feedbackElement.textContent =
+            "Bonne réponse ! +10 points";
+
+
+    } else {
+
+        button.classList.add(
+            "wrong"
+        );
+
+
+        const correctButton =
+            arrowButtons.find(
+                item =>
+                    item.dataset.answer ===
+                    correctAnswer
+            );
+
+
+        if (correctButton) {
+
+            correctButton.classList.add(
+                "reveal"
+            );
+
+        }
+
+
+        feedbackElement.className =
+            "feedback wrong";
+
+
+        feedbackElement.textContent =
+            `Mauvaise réponse. La bonne réponse est : ${correctAnswer}`;
+
+    }
+
+
+    updateScore();
+
+
+    correctCountElement.textContent =
+        `${correctAnswers} correct`;
+
+
+    setTimeout(() => {
+
+        questionIndex++;
+
+        loadQuestion();
+
+    }, 1200);
+
+}
+
+
+/* =========================
+   SCORE
+========================= */
+
+function updateScore() {
+
+    scoreElement.textContent =
+        score;
+
+}
+
+
+/* =========================
+   FIN DE MANCHE
+========================= */
+
+function finishRound() {
+
+    progressFill.style.width =
+        "100%";
+
+
+    resultOverlay.classList.add(
+        "active"
+    );
+
+
+    resultScore.textContent =
+        `${correctAnswers * 10} pts`;
+
+
+    resultTitle.textContent =
+        `Manche ${round} terminée`;
+
+
+    resultDetails.innerHTML =
+        `
+        ${correctAnswers} bonne(s) réponse(s)
+        sur ${roundQuestions.length}<br>
+        Score total : <strong>${score}</strong> points
+        `;
+
+
+    if (round >= MAX_ROUNDS) {
+
+        nextRoundButton.textContent =
+            "Terminer la partie";
+
+    } else {
+
+        nextRoundButton.textContent =
+            "Manche suivante";
+
+    }
+
+}
+
+
+/* =========================
+   MANCHE SUIVANTE
+========================= */
+
+nextRoundButton.addEventListener(
+    "click",
+    () => {
+
+        resultOverlay.classList.remove(
+            "active"
+        );
+
+
+        if (round >= MAX_ROUNDS) {
+
+            round = 1;
+            score = 0;
+
+        } else {
+
+            round++;
+
+        }
+
+
+        startRound();
+
+    }
+);
+
+
+/* =========================
+   RECOMMENCER
+========================= */
+
+restartButton.addEventListener(
+    "click",
+    () => {
+
+        resultOverlay.classList.remove(
+            "active"
+        );
+
+
+        score = 0;
+        round = 1;
+
+
+        startRound();
+
+    }
+);
+
+
+/* =========================
+   CLIC SUR LES FLECHES
+========================= */
+
+arrowButtons.forEach(
+    button => {
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                selectAnswer(button);
+
+            }
+        );
+
+    }
+);
+
+
+/* =========================
+   CLAVIER
+========================= */
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if (questionLocked) {
+            return;
+        }
+
+
+        let direction = null;
+
+
+        if (
+            event.key === "ArrowUp"
+        ) {
+            direction = "up";
+        }
+
+        if (
+            event.key === "ArrowLeft"
+        ) {
+            direction = "left";
+        }
+
+        if (
+            event.key === "ArrowRight"
+        ) {
+            direction = "right";
+        }
+
+        if (
+            event.key === "ArrowDown"
+        ) {
+            direction = "down";
+        }
+
+
+        if (!direction) {
+            return;
+        }
+
+
+        const button =
+            arrowButtons.find(
+                item =>
+                    item.dataset.direction ===
+                    direction
+            );
+
+
+        if (button) {
+            selectAnswer(button);
+        }
+
+    }
+);
+
+
+/* =========================
+   DEMARRAGE
+========================= */
+
+startRound();
+
+</script>
+
+</body>
+</html>
