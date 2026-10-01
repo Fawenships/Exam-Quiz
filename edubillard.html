@@ -1130,10 +1130,6 @@ const restartBtn =
 
 let biologyQuestions = [];
 
-/*
- * Les questions utilisées pour cette partie.
- * Elles sont mélangées une seule fois au début.
- */
 let gameQuestions = [];
 
 let currentQuestionIndex = 0;
@@ -1255,6 +1251,7 @@ function uniqueTexts(array) {
         }
 
         seen.add(key);
+
         result.push(text);
 
     }
@@ -1342,6 +1339,7 @@ async function loadQuestions() {
         const questionKeys =
             new Set();
 
+
         for (
             const question of biologyQuestions
         ) {
@@ -1351,6 +1349,7 @@ async function loadQuestions() {
                     .toLowerCase()
                     .trim();
 
+
             if (
                 questionKeys.has(key)
             ) {
@@ -1359,6 +1358,7 @@ async function loadQuestions() {
 
             }
 
+
             questionKeys.add(key);
 
             uniqueQuestions.push(
@@ -1366,6 +1366,7 @@ async function loadQuestions() {
             );
 
         }
+
 
         biologyQuestions =
             uniqueQuestions;
@@ -1388,11 +1389,14 @@ async function loadQuestions() {
 
         console.error(error);
 
+
         questionEl.textContent =
             'Impossible de charger les questions.';
 
+
         messageEl.textContent =
             'Vérifie le fichier src/biologieQuestions.js';
+
 
         messageEl.className =
             'message error';
@@ -1486,12 +1490,6 @@ function normalizeQuestion(q) {
             uniqueTexts(options);
 
 
-        /*
-         * Si la bonne réponse n'est pas directement
-         * donnée, on essaie de la retrouver dans
-         * les options.
-         */
-
         if (
             !answer &&
             options.length
@@ -1562,10 +1560,6 @@ function normalizeQuestion(q) {
 
 function prepareGameQuestions() {
 
-    /*
-     * Mélange toutes les questions.
-     * On prend ensuite les 10 premières.
-     */
     gameQuestions =
         shuffle(
             biologyQuestions
@@ -1579,12 +1573,9 @@ function prepareGameQuestions() {
         );
 
 
-    /*
-     * Sécurité supplémentaire :
-     * aucune question ne doit être répétée.
-     */
     const used =
         new Set();
+
 
     gameQuestions =
         gameQuestions.filter(
@@ -1595,6 +1586,7 @@ function prepareGameQuestions() {
                         .toLowerCase()
                         .trim();
 
+
                 if (
                     used.has(key)
                 ) {
@@ -1602,6 +1594,7 @@ function prepareGameQuestions() {
                     return false;
 
                 }
+
 
                 used.add(key);
 
@@ -1629,10 +1622,6 @@ function buildAnswers(question) {
         correct.toLowerCase();
 
 
-    /*
-     * On commence par les options fournies
-     * directement avec la question.
-     */
     let candidates =
         uniqueTexts(
             question.options
@@ -1644,10 +1633,6 @@ function buildAnswers(question) {
         );
 
 
-    /*
-     * Ensuite, si nécessaire, on utilise les réponses
-     * correctes d'autres questions.
-     */
     const otherAnswers =
         shuffle(
             biologyQuestions
@@ -1674,16 +1659,10 @@ function buildAnswers(question) {
         );
 
 
-    /*
-     * On prend exactement 3 mauvaises réponses.
-     */
     const wrong =
         candidates.slice(0, 3);
 
 
-    /*
-     * La bonne réponse est ajoutée une seule fois.
-     */
     const finalAnswers = [
         {
             text: correct,
@@ -1696,12 +1675,10 @@ function buildAnswers(question) {
                 correct: false
             })
         )
+
     ];
 
 
-    /*
-     * Mélange final des positions A/B/C/D.
-     */
     return shuffle(
         finalAnswers
     )
@@ -1740,8 +1717,10 @@ function renderAnswerCards() {
             const card =
                 document.createElement('div');
 
+
             card.className =
                 'answer-card';
+
 
             card.dataset.label =
                 answer.label;
@@ -1750,8 +1729,10 @@ function renderAnswerCards() {
             const letter =
                 document.createElement('div');
 
+
             letter.className =
                 'answer-letter';
+
 
             letter.textContent =
                 answer.label;
@@ -1760,18 +1741,28 @@ function renderAnswerCards() {
             const text =
                 document.createElement('div');
 
+
             text.className =
                 'answer-text';
+
 
             text.textContent =
                 answer.text;
 
 
-            card.appendChild(letter);
+            card.appendChild(
+                letter
+            );
 
-            card.appendChild(text);
 
-            answersGrid.appendChild(card);
+            card.appendChild(
+                text
+            );
+
+
+            answersGrid.appendChild(
+                card
+            );
 
         }
     );
@@ -1841,10 +1832,6 @@ function startGame() {
     answerLocked = false;
 
 
-    /*
-     * NOUVEAU :
-     * on prépare les 10 questions une seule fois.
-     */
     prepareGameQuestions();
 
 
@@ -1885,12 +1872,6 @@ function loadCurrentQuestion() {
     }
 
 
-    /*
-     * IMPORTANT :
-     * on prend la question à l'index actuel.
-     * On ne choisit plus une question au hasard
-     * à chaque tour.
-     */
     currentQuestion =
         gameQuestions[
             currentQuestionIndex
@@ -1935,6 +1916,7 @@ function loadCurrentQuestion() {
 
     messageEl.textContent =
         'Appuie sur la bille blanche, tire et relâche.';
+
 
     messageEl.className =
         'message';
@@ -2111,6 +2093,7 @@ function drawTable() {
     ctx.fillStyle =
         '#27704c';
 
+
     ctx.fillRect(
         0,
         0,
@@ -2123,6 +2106,7 @@ function drawTable() {
         'rgba(255,255,255,.18)';
 
     ctx.lineWidth = 4;
+
 
     ctx.strokeRect(
         16,
@@ -2165,6 +2149,7 @@ function drawTable() {
 
             ctx.beginPath();
 
+
             ctx.arc(
                 x,
                 y,
@@ -2172,6 +2157,7 @@ function drawTable() {
                 0,
                 Math.PI * 2
             );
+
 
             ctx.fill();
 
@@ -2189,29 +2175,37 @@ function drawTable() {
 
         ctx.save();
 
+
         ctx.strokeStyle =
             'rgba(255,255,255,.65)';
 
+
         ctx.lineWidth = 2;
+
 
         ctx.setLineDash([
             8,
             8
         ]);
 
+
         ctx.beginPath();
+
 
         ctx.moveTo(
             whiteBall.x,
             whiteBall.y
         );
 
+
         ctx.lineTo(
             currentPointerX,
             currentPointerY
         );
 
+
         ctx.stroke();
+
 
         ctx.restore();
 
@@ -2241,6 +2235,7 @@ function drawBall(ball) {
 
     ctx.beginPath();
 
+
     ctx.arc(
         ball.x + 3,
         ball.y + 4,
@@ -2249,13 +2244,16 @@ function drawBall(ball) {
         Math.PI * 2
     );
 
+
     ctx.fillStyle =
         'rgba(0,0,0,.25)';
+
 
     ctx.fill();
 
 
     ctx.beginPath();
+
 
     ctx.arc(
         ball.x,
@@ -2287,7 +2285,9 @@ function drawBall(ball) {
     ctx.strokeStyle =
         'rgba(0,0,0,.35)';
 
+
     ctx.lineWidth = 2;
+
 
     ctx.stroke();
 
@@ -2299,6 +2299,7 @@ function drawBall(ball) {
         ctx.fillStyle =
             '#fff';
 
+
         ctx.font =
             `bold ${
                 Math.max(
@@ -2307,11 +2308,14 @@ function drawBall(ball) {
                 )
             }px Arial`;
 
+
         ctx.textAlign =
             'center';
 
+
         ctx.textBaseline =
             'middle';
+
 
         ctx.fillText(
             ball.label,
@@ -2357,12 +2361,14 @@ function updatePhysics() {
             ball.x +=
                 ball.vx;
 
+
             ball.y +=
                 ball.vy;
 
 
             ball.vx *=
                 friction;
+
 
             ball.vy *=
                 friction;
@@ -2386,6 +2392,9 @@ function updatePhysics() {
             }
 
 
+            /*
+             * Bord gauche
+             */
             if (
                 ball.x -
                 ball.radius < 0
@@ -2394,12 +2403,16 @@ function updatePhysics() {
                 ball.x =
                     ball.radius;
 
+
                 ball.vx *=
                     -.85;
 
             }
 
 
+            /*
+             * Bord droit
+             */
             if (
                 ball.x +
                 ball.radius >
@@ -2410,12 +2423,16 @@ function updatePhysics() {
                     tableWidth -
                     ball.radius;
 
+
                 ball.vx *=
                     -.85;
 
             }
 
 
+            /*
+             * Bord supérieur
+             */
             if (
                 ball.y -
                 ball.radius < 0
@@ -2424,12 +2441,16 @@ function updatePhysics() {
                 ball.y =
                     ball.radius;
 
+
                 ball.vy *=
                     -.85;
 
             }
 
 
+            /*
+             * Bord inférieur
+             */
             if (
                 ball.y +
                 ball.radius >
@@ -2439,6 +2460,7 @@ function updatePhysics() {
                 ball.y =
                     tableHeight -
                     ball.radius;
+
 
                 ball.vy *=
                     -.85;
@@ -2453,10 +2475,8 @@ function updatePhysics() {
 
 
     /*
-     * Détection de collision avec une réponse.
-     *
-     * La petite marge supplémentaire permet
-     * de rendre les tirs courts beaucoup plus fiables.
+     * Détection de la première boule-réponse
+     * touchée par la boule blanche.
      */
     if (
         whiteBall &&
@@ -2491,6 +2511,7 @@ function updatePhysics() {
                     ball
                 );
 
+
                 break;
 
             }
@@ -2500,6 +2521,10 @@ function updatePhysics() {
     }
 
 
+    /*
+     * Vérifie si toutes les boules ont terminé
+     * leur mouvement.
+     */
     const moving =
         balls.some(
             ball =>
@@ -2519,13 +2544,22 @@ function updatePhysics() {
             false;
 
 
+        /*
+         * Si aucune réponse n'a encore été touchée,
+         * le joueur peut recommencer depuis la nouvelle
+         * position de la boule blanche.
+         */
         if (
             !answerLocked &&
             gameRunning
         ) {
 
             messageEl.textContent =
-                'Aucune réponse touchée. Tu peux refaire ton tir.';
+                'Les boules sont arrêtées. Tu peux tirer à nouveau.';
+
+
+            messageEl.className =
+                'message';
 
         }
 
@@ -2555,6 +2589,7 @@ function handleBallCollisions() {
             const a =
                 balls[i];
 
+
             const b =
                 balls[j];
 
@@ -2572,8 +2607,10 @@ function handleBallCollisions() {
             const dx =
                 b.x - a.x;
 
+
             const dy =
                 b.y - a.y;
+
 
             const d =
                 Math.hypot(
@@ -2600,6 +2637,7 @@ function handleBallCollisions() {
             const nx =
                 dx / d;
 
+
             const ny =
                 dy / d;
 
@@ -2608,20 +2646,29 @@ function handleBallCollisions() {
                 minimum - d;
 
 
+            /*
+             * Séparation physique des boules.
+             *
+             * Elles ne sont pas replacées à leur
+             * position initiale.
+             */
             a.x -=
                 nx *
                 overlap /
                 2;
+
 
             a.y -=
                 ny *
                 overlap /
                 2;
 
+
             b.x +=
                 nx *
                 overlap /
                 2;
+
 
             b.y +=
                 ny *
@@ -2653,13 +2700,16 @@ function handleBallCollisions() {
                 impulse *
                 nx;
 
+
             a.vy -=
                 impulse *
                 ny;
 
+
             b.vx +=
                 impulse *
                 nx;
+
 
             b.vy +=
                 impulse *
@@ -2695,6 +2745,7 @@ function getPointerPosition(event) {
         clientX =
             event.touches[0].clientX;
 
+
         clientY =
             event.touches[0].clientY;
 
@@ -2706,6 +2757,7 @@ function getPointerPosition(event) {
         clientX =
             event.changedTouches[0].clientX;
 
+
         clientY =
             event.changedTouches[0].clientY;
 
@@ -2713,6 +2765,7 @@ function getPointerPosition(event) {
 
         clientX =
             event.clientX;
+
 
         clientY =
             event.clientY;
@@ -2793,11 +2846,14 @@ function pointerDown(event) {
     dragStartX =
         point.x;
 
+
     dragStartY =
         point.y;
 
+
     currentPointerX =
         point.x;
+
 
     currentPointerY =
         point.y;
@@ -2831,6 +2887,7 @@ function pointerMove(event) {
 
     currentPointerX =
         point.x;
+
 
     currentPointerY =
         point.y;
@@ -2888,6 +2945,7 @@ function pointerUp(event) {
         dragStartX -
         point.x;
 
+
     const dy =
         dragStartY -
         point.y;
@@ -2901,13 +2959,7 @@ function pointerUp(event) {
 
 
     /*
-     * CORRECTION :
-     *
-     * Avant :
-     * > 8 pixels seulement
-     *
-     * Maintenant :
-     * même un petit recul permet de tirer.
+     * Même un petit recul permet de tirer.
      */
     if (
         dragDistance > 1.5
@@ -2921,11 +2973,7 @@ function pointerUp(event) {
 
 
         /*
-         * Petite puissance minimale.
-         *
-         * Ainsi, un tir très proche
-         * peut quand même atteindre
-         * une réponse située juste devant.
+         * Puissance minimale pour les petits tirs.
          */
         const power =
             Math.min(
@@ -2960,6 +3008,10 @@ function pointerUp(event) {
         messageEl.textContent =
             'Tir en cours...';
 
+
+        messageEl.className =
+            'message';
+
     }
 
 
@@ -2969,6 +3021,7 @@ function pointerUp(event) {
 
     currentPointerX =
         0;
+
 
     currentPointerY =
         0;
@@ -2985,10 +3038,12 @@ canvas.addEventListener(
     pointerDown
 );
 
+
 canvas.addEventListener(
     'mousemove',
     pointerMove
 );
+
 
 window.addEventListener(
     'mouseup',
@@ -3008,6 +3063,7 @@ canvas.addEventListener(
     }
 );
 
+
 canvas.addEventListener(
     'touchmove',
     pointerMove,
@@ -3015,6 +3071,7 @@ canvas.addEventListener(
         passive: false
     }
 );
+
 
 window.addEventListener(
     'touchend',
@@ -3042,22 +3099,222 @@ function handleAnswer(ball) {
     }
 
 
-    answerLocked =
-        true;
-
-
-    ball.active =
-        false;
-
-
     const cards =
         answersGrid.querySelectorAll(
             '.answer-card'
         );
 
 
+    /*
+     * =====================================================
+     * MAUVAISE REPONSE
+     * =====================================================
+     *
+     * La question reste active.
+     *
+     * La boule touchée reste à sa nouvelle position.
+     *
+     * La boule blanche reste également à sa nouvelle
+     * position.
+     *
+     * Aucun reset de la table.
+     */
+
+    if (!ball.correct) {
+
+        wrongAnswers++;
+
+
+        /*
+         * Arrête le mouvement après la collision.
+         *
+         * Les positions actuelles sont conservées.
+         */
+        balls.forEach(
+            currentBall => {
+
+                currentBall.vx = 0;
+
+                currentBall.vy = 0;
+
+            }
+        );
+
+
+        shotInProgress =
+            false;
+
+
+        /*
+         * La collision peut avoir laissé les deux boules
+         * légèrement imbriquées.
+         *
+         * On sépare uniquement la boule blanche.
+         * La mauvaise boule reste exactement à sa place.
+         */
+        if (whiteBall) {
+
+            const dx =
+                whiteBall.x -
+                ball.x;
+
+
+            const dy =
+                whiteBall.y -
+                ball.y;
+
+
+            let d =
+                Math.hypot(
+                    dx,
+                    dy
+                );
+
+
+            if (
+                d < 0.001
+            ) {
+
+                d = 1;
+
+            }
+
+
+            const minimumDistance =
+                whiteBall.radius +
+                ball.radius +
+                1;
+
+
+            if (
+                d <
+                minimumDistance
+            ) {
+
+                whiteBall.x =
+                    ball.x +
+                    (
+                        dx / d
+                    ) *
+                    minimumDistance;
+
+
+                whiteBall.y =
+                    ball.y +
+                    (
+                        dy / d
+                    ) *
+                    minimumDistance;
+
+            }
+
+        }
+
+
+        /*
+         * Marque la mauvaise réponse touchée.
+         */
+        cards.forEach(
+            card => {
+
+                card.classList.remove(
+                    'selected'
+                );
+
+
+                if (
+                    card.dataset.label ===
+                    ball.label
+                ) {
+
+                    card.classList.add(
+                        'selected'
+                    );
+
+                }
+
+            }
+        );
+
+
+        /*
+         * Affiche la bonne réponse.
+         *
+         * IMPORTANT :
+         * cela n'avance PAS la question.
+         */
+        messageEl.innerHTML =
+            `Mauvaise réponse.<br>` +
+            `<strong>Bonne réponse : ` +
+            `${currentQuestion.answer}` +
+            `</strong><br>` +
+            `Tu peux tirer à nouveau.`;
+
+
+        messageEl.className =
+            'message error';
+
+
+        updateStats();
+
+
+        /*
+         * Aucun setTimeout ici.
+         *
+         * La question reste donc active.
+         */
+
+        return;
+
+    }
+
+
+    /*
+     * =====================================================
+     * BONNE REPONSE
+     * =====================================================
+     */
+
+    answerLocked =
+        true;
+
+
+    /*
+     * La boule correcte disparaît après avoir
+     * été validée.
+     */
+    ball.active =
+        false;
+
+
+    /*
+     * Arrête le mouvement.
+     */
+    balls.forEach(
+        currentBall => {
+
+            currentBall.vx = 0;
+
+            currentBall.vy = 0;
+
+        }
+    );
+
+
+    shotInProgress =
+        false;
+
+
+    /*
+     * Marque la bonne réponse.
+     */
     cards.forEach(
         card => {
+
+            card.classList.remove(
+                'selected'
+            );
+
 
             if (
                 card.dataset.label ===
@@ -3074,39 +3331,28 @@ function handleAnswer(ball) {
     );
 
 
-    if (
-        ball.correct
-    ) {
-
-        score +=
-            POINTS_CORRECT;
-
-        correctAnswers++;
+    score +=
+        POINTS_CORRECT;
 
 
-        messageEl.textContent =
-            'Bonne réponse ! +10 points';
-
-        messageEl.className =
-            'message success';
-
-    } else {
-
-        wrongAnswers++;
+    correctAnswers++;
 
 
-        messageEl.textContent =
-            `Mauvaise réponse. La bonne réponse était : ${currentQuestion.answer}`;
+    messageEl.innerHTML =
+        `Bonne réponse ! +${POINTS_CORRECT} points<br>` +
+        `<strong>${currentQuestion.answer}</strong>`;
 
-        messageEl.className =
-            'message error';
 
-    }
+    messageEl.className =
+        'message success';
 
 
     updateStats();
 
 
+    /*
+     * Maintenant seulement, la question est terminée.
+     */
     setTimeout(
         () => {
 
@@ -3142,11 +3388,14 @@ function finishGame() {
     gameRunning =
         false;
 
+
     shotInProgress =
         false;
 
+
     dragging =
         false;
+
 
     answerLocked =
         true;
@@ -3217,14 +3466,6 @@ restartBtn.addEventListener(
 
 function refreshAfterResize() {
 
-    /*
-     * Le canvas garde ses dimensions internes
-     * 1100 x 600.
-     *
-     * Le CSS l'adapte à la largeur de l'écran.
-     * Cela évite de casser la physique du jeu
-     * lorsqu'on tourne le téléphone.
-     */
     requestAnimationFrame(
         () => {
 
