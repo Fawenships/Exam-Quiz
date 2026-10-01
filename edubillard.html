@@ -1,437 +1,1284 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#24113f">
-<title>EduBillard — ExamQuiz Haiti</title>
-<meta name="description" content="EduBillard : jeu de billard éducatif basé sur les questions de biologie d'ExamQuiz Haiti.">
-<style>
-:root{--c1:#24113f;--c2:#4b2481;--c3:#1764c0;--c4:#2f80ed;--bg:#f3f1f9;--text:#1d1733;--muted:#6a6383;--ok:#1f9d61;--ko:#d64545;--line:#e2ddf0}
-*{box-sizing:border-box}
-[hidden]{display:none!important}
-body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;line-height:1.45}
-.top{background:linear-gradient(135deg,var(--c1),var(--c2));color:#fff;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px}
-.brand{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;font-weight:700}
-.brand img{height:32px;width:auto}
-.back{color:#fff;text-decoration:none;font-size:14px;border:1px solid rgba(255,255,255,.4);padding:7px 12px;border-radius:8px}
-.wrap{max-width:960px;margin:0 auto;padding:16px}
-.panel{background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px}
-.panel.error{border-color:var(--ko)}
-.panel.error pre{white-space:pre-wrap;font-size:12px;background:#faf8ff;padding:10px;border-radius:8px;overflow:auto}
-.titlebar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:10px}
-h1{margin:0;font-size:28px;color:var(--c1);letter-spacing:-.3px}
-.sub{margin:2px 0 0;color:var(--muted);font-size:14px}
-.stats{display:flex;gap:8px}
-.pill{background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:14px;font-weight:600;color:var(--c2)}
-.pill b{color:var(--c3);font-size:16px}
-.progress{height:6px;background:var(--line);border-radius:6px;overflow:hidden;margin-bottom:12px}
-.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--c3),var(--c4));transition:width .3s}
-.qcard{background:#fff;border:1px solid var(--line);border-left:5px solid var(--c3);border-radius:12px;padding:14px 18px;margin-bottom:12px}
-.qcard p{margin:0;font-size:18px;font-weight:600;color:var(--c1)}
-.stage{position:relative}
-canvas{display:block;margin:0 auto;height:auto;touch-action:none;user-select:none;-webkit-user-select:none;border-radius:14px;box-shadow:0 6px 22px rgba(36,17,63,.25);cursor:crosshair}
-.flash{position:absolute;top:34px;left:50%;transform:translateX(-50%);padding:8px 18px;border-radius:999px;color:#fff;font-weight:700;pointer-events:none;white-space:nowrap}
-.flash.ok{background:var(--ok)}.flash.ko{background:var(--ko)}
-.hintrow{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:10px 2px;color:var(--muted);font-size:13px}
-.power{display:flex;align-items:center;gap:8px}
-.pbar{width:110px;height:8px;background:var(--line);border-radius:6px;overflow:hidden}
-.pbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--c4),var(--c2))}
-.result{border-radius:12px;padding:14px 18px;margin:0 0 12px;background:#fff;border:2px solid var(--line)}
-.result.ok{border-color:var(--ok)}.result.ko{border-color:var(--ko)}
-.result strong{font-size:17px}
-.result.ok strong{color:var(--ok)}.result.ko strong{color:var(--ko)}
-.result p{margin:6px 0 0;font-size:15px}
-.result .btn{margin-top:12px}
-.answers{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
-.ans{display:flex;align-items:center;gap:10px;background:#fff;border:2px solid var(--line);border-radius:10px;padding:10px 12px;font-size:15px}
-.ans.good{border-color:var(--ok);background:#effaf4}
-.ans.bad{border-color:var(--ko);background:#fdf0f0}
-.dot{flex:none;width:30px;height:30px;border-radius:50%;background:#fff;border:3px solid;display:grid;place-items:center;font-weight:800;font-size:14px;color:var(--c1)}
-.controls{display:flex;gap:10px;flex-wrap:wrap}
-.btn{font:inherit;font-weight:600;font-size:15px;padding:11px 18px;border-radius:10px;border:2px solid transparent;cursor:pointer;text-decoration:none;display:inline-block;text-align:center}
-.btn.primary{background:linear-gradient(135deg,var(--c3),var(--c4));color:#fff}
-.btn.ghost{background:#fff;color:var(--c2);border-color:var(--line)}
-.btn:focus-visible,.back:focus-visible{outline:3px solid var(--c4);outline-offset:2px}
-.endcard{text-align:center;padding:32px 20px}
-.endcard .big{font-size:48px;font-weight:800;color:var(--c3);margin:6px 0}
-.endcard .controls{justify-content:center;margin-top:18px}
-@media(max-width:640px){.wrap{padding:10px}.top{padding:10px 12px}.answers{grid-template-columns:1fr}h1{font-size:24px}.qcard p{font-size:16px}.stats{width:100%}.pill{flex:1;text-align:center}.controls .btn{flex:1}}
-@media(max-height:520px) and (orientation:landscape){.top{padding:6px 14px}.sub{display:none}h1{font-size:20px}.titlebar{margin-bottom:6px}.qcard{padding:8px 14px;margin-bottom:8px}.qcard p{font-size:15px}.hintrow{margin:6px 2px}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="theme-color" content="#24113f">
+  <meta name="description" content="EduBillard — Un jeu éducatif basé sur les questions de biologie d'ExamQuiz Haiti.">
+
+  <title>EduBillard — ExamQuiz Haiti</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f3f8;
+      color: #24113f;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .top {
+      height: 70px;
+      background: #fff;
+      border-bottom: 1px solid #e5e1ea;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 25px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: #24113f;
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    .brand img {
+      width: 38px;
+      height: 38px;
+      object-fit: contain;
+    }
+
+    .back {
+      text-decoration: none;
+      color: #4b2481;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .back:hover {
+      text-decoration: underline;
+    }
+
+    .game-wrapper {
+      width: min(1100px, 94%);
+      margin: 25px auto;
+    }
+
+    .game-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .game-header h1 {
+      font-size: clamp(28px, 5vw, 42px);
+      margin-bottom: 8px;
+    }
+
+    .game-header p {
+      color: #666;
+      font-size: 15px;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 20px 0;
+    }
+
+    .stat {
+      background: #fff;
+      border: 1px solid #e3deea;
+      border-radius: 12px;
+      padding: 10px 18px;
+      min-width: 110px;
+      text-align: center;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 20px;
+      color: #4b2481;
+    }
+
+    .stat span {
+      display: block;
+      margin-top: 3px;
+      color: #777;
+      font-size: 12px;
+    }
+
+    .question-box {
+      background: #fff;
+      border: 1px solid #e3deea;
+      border-radius: 16px;
+      padding: 18px 20px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .question-number {
+      color: #1764c0;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .question {
+      font-size: clamp(17px, 3vw, 23px);
+      font-weight: 700;
+      line-height: 1.4;
+    }
+
+    .table-container {
+      width: 100%;
+      position: relative;
+      border-radius: 24px;
+      padding: clamp(12px, 2vw, 22px);
+      background: #173c2b;
+      box-shadow: 0 15px 45px rgba(0, 0, 0, .18);
+      overflow: hidden;
+    }
+
+    canvas {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 15px;
+      background: #27704c;
+      touch-action: none;
+      cursor: crosshair;
+    }
+
+    .instructions {
+      background: #fff;
+      border: 1px solid #e3deea;
+      border-radius: 16px;
+      padding: 18px;
+      margin-top: 20px;
+      line-height: 1.6;
+      color: #555;
+      font-size: 14px;
+    }
+
+    .instructions strong {
+      color: #24113f;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 0 18px;
+      border-radius: 10px;
+      text-decoration: none;
+      border: 0;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 14px;
+      transition: .2s ease;
+    }
+
+    .btn.primary {
+      background: #4b2481;
+      color: #fff;
+    }
+
+    .btn.primary:hover {
+      background: #24113f;
+      transform: translateY(-1px);
+    }
+
+    .btn.ghost {
+      background: #fff;
+      color: #4b2481;
+      border: 1px solid #d8d0e3;
+    }
+
+    .btn.ghost:hover {
+      background: #f4f0f8;
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(20, 12, 30, .72);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 100;
+    }
+
+    .overlay.show {
+      display: flex;
+    }
+
+    .modal {
+      width: min(500px, 100%);
+      background: #fff;
+      border-radius: 20px;
+      padding: 30px;
+      text-align: center;
+      box-shadow: 0 25px 70px rgba(0, 0, 0, .25);
+    }
+
+    .modal h2 {
+      margin-bottom: 10px;
+      font-size: 30px;
+    }
+
+    .modal p {
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .result-score {
+      font-size: 42px;
+      font-weight: 800;
+      color: #4b2481;
+      margin: 15px 0;
+    }
+
+    .message {
+      min-height: 24px;
+      margin-top: 15px;
+      text-align: center;
+      font-weight: 700;
+      color: #555;
+    }
+
+    @media (max-width: 700px) {
+      .top {
+        padding: 0 15px;
+        height: 62px;
+      }
+
+      .brand {
+        font-size: 15px;
+      }
+
+      .brand img {
+        width: 32px;
+        height: 32px;
+      }
+
+      .game-wrapper {
+        width: 96%;
+        margin-top: 18px;
+      }
+
+      .question-box {
+        padding: 15px;
+      }
+
+      .table-container {
+        padding: 10px;
+        border-radius: 17px;
+      }
+
+      .instructions {
+        font-size: 13px;
+      }
+    }
+  </style>
 </head>
+
 <body>
+
 <header class="top">
-  <a class="brand" href="index.html"><img src="logo.png" alt="" onerror="this.style.display='none'"><span>ExamQuiz Haiti</span></a>
-  <a class="back" href="categories.html">Retour aux jeux</a>
+  <a class="brand" href="index.html">
+    <img src="logo.png" alt="" onerror="this.style.display='none'">
+    <span>ExamQuiz Haiti</span>
+  </a>
+
+  <a class="back" href="baccalaureat.html">Retour aux jeux</a>
 </header>
-<main class="wrap">
-  <div id="loading" class="panel">Chargement des questions…</div>
-  <div id="error" class="panel error" hidden></div>
 
-  <section id="game" hidden>
-    <div class="titlebar">
-      <div><h1>EduBillard</h1><p class="sub">Biologie : touche la boule qui porte la bonne réponse</p></div>
-      <div class="stats"><span class="pill" id="qLabel">Question 1/10</span><span class="pill">Score <b id="score">0</b></span></div>
-    </div>
-    <div class="progress"><i id="bar"></i></div>
-    <div class="qcard"><p id="qText"></p></div>
-    <div class="stage">
-      <canvas id="cv" role="img" aria-label="Table de billard avec la boule blanche et quatre boules-réponses"></canvas>
-      <div class="flash" id="flash" hidden></div>
-    </div>
-    <div class="hintrow">
-      <span id="hint"></span>
-      <span class="power"><span>Puissance</span><span class="pbar"><i id="pfill"></i></span></span>
-    </div>
-    <div class="result" id="result" hidden aria-live="polite"></div>
-    <div class="answers" id="answers"></div>
-    <div class="controls">
-      <button class="btn ghost" id="restartBtn" type="button">Recommencer</button>
-      <a class="btn ghost" href="categories.html">Retour aux jeux</a>
-    </div>
-  </section>
+<main class="game-wrapper">
 
-  <section id="end" class="panel endcard" hidden>
-    <h1>Partie terminée</h1>
-    <div class="big" id="endScore"></div>
-    <p id="endText"></p>
-    <div class="controls">
-      <button class="btn primary" id="againBtn" type="button">Rejouer</button>
-      <a class="btn ghost" href="categories.html">Retour aux jeux</a>
+  <div class="game-header">
+    <h1>EduBillard</h1>
+    <p>Réponds aux questions de biologie en jouant au billard.</p>
+  </div>
+
+  <div class="stats">
+    <div class="stat">
+      <strong id="score">0</strong>
+      <span>Points</span>
     </div>
-  </section>
+
+    <div class="stat">
+      <strong id="questionCounter">1 / 10</strong>
+      <span>Question</span>
+    </div>
+  </div>
+
+  <div class="question-box">
+    <div class="question-number" id="questionNumber">
+      Question 1
+    </div>
+
+    <div class="question" id="question">
+      Chargement de la question...
+    </div>
+  </div>
+
+  <div class="table-container">
+    <canvas id="gameCanvas" width="1000" height="560"></canvas>
+  </div>
+
+  <div class="message" id="message"></div>
+
+  <div class="controls">
+    <a class="btn ghost" href="baccalaureat.html">Retour aux jeux</a>
+  </div>
+
+  <div class="instructions">
+    <strong>Comment jouer ?</strong><br>
+    Fais glisser la souris ou ton doigt depuis la bille blanche pour choisir
+    la direction et la puissance du tir, puis relâche.
+    <br><br>
+    La première bille-réponse touchée détermine ta réponse.
+    Une bonne réponse rapporte <strong>10 points</strong>.
+  </div>
+
 </main>
 
-<script>
-(function () {
-'use strict';
-var QUESTIONS_URL = './src/biologieQuestions.js';
-var ROUND = 10, POINTS = 10, MAX_LEN = 110;
+<div class="overlay" id="endOverlay">
+  <div class="modal">
+    <h2>Partie terminée</h2>
 
-/* ---------- Lecture des questions (s'adapte à la structure du fichier) ---------- */
-var Q_KEYS = ['question','q','text','enonce','énoncé','prompt','intitule','intitulé','libelle','libellé','statement','title','label'];
-var OPT_KEYS = ['options','choices','answers','reponses','réponses','propositions','choix','responses'];
-var ANS_KEYS = ['answer','correct','correctanswer','correct_answer','correctoption','correctindex','correct_index','answerindex','answer_index','reponse','réponse','bonnereponse','bonne_reponse','rightanswer','right_answer','correctchoice'];
-var EXP_KEYS = ['explanation','explication','correction','resolution','résolution','solution','feedback','rationale','details','détails','detail'];
-var TXT_KEYS = ['text','label','value','texte','reponse','réponse','answer','option','name','content','title'];
+    <p>
+      Tu as terminé les 10 questions de cette partie.
+    </p>
 
-function norm(s){return String(s).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ').trim();}
-function str(v){return (typeof v==='string'||typeof v==='number')?String(v).trim():'';}
-function lower(o){var r={};Object.keys(o).forEach(function(k){r[k.toLowerCase()]=o[k];});return r;}
-function pick(lk,keys){for(var i=0;i<keys.length;i++){var v=lk[keys[i]];if(v!==undefined&&v!==null&&v!=='')return v;}}
-function optText(x){if(x&&typeof x==='object'){return str(pick(lower(x),TXT_KEYS));}return str(x);}
+    <div class="result-score" id="finalScore">
+      0 points
+    </div>
 
-function resolveCorrect(lk){
-  var opts=null,optKeys=null,i,k,v;
-  for(i=0;i<OPT_KEYS.length&&!opts;i++){v=lk[OPT_KEYS[i]];
-    if(Array.isArray(v)&&v.length>=2)opts=v;
-    else if(v&&typeof v==='object'&&!Array.isArray(v)&&Object.keys(v).length>=2){optKeys=Object.keys(v);opts=optKeys.map(function(x){return v[x];});}}
-  var texts=opts?opts.map(optText):null;
-  var ans=pick(lk,ANS_KEYS);
-  if(opts&&ans===undefined){
-    i=opts.findIndex(function(o){return o&&typeof o==='object'&&(o.correct===true||o.isCorrect===true||o.correcte===true);});
-    return i>=0?texts[i]:'';
+    <div class="controls">
+      <button class="btn primary" id="restartBtn">
+        Rejouer
+      </button>
+
+      <a class="btn ghost" href="baccalaureat.html">
+        Retour aux jeux
+      </a>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+
+/* =========================================================
+   CONFIGURATION
+========================================================= */
+
+const QUESTIONS_URL = './src/biologieQuestions.js';
+
+const TOTAL_QUESTIONS = 10;
+const POINTS_CORRECT = 10;
+
+
+/* =========================================================
+   CANVAS
+========================================================= */
+
+const canvas = document.getElementById('gameCanvas');
+const ctx = canvas.getContext('2d');
+
+let tableWidth = canvas.width;
+let tableHeight = canvas.height;
+
+
+/* =========================================================
+   DOM
+========================================================= */
+
+const scoreEl = document.getElementById('score');
+const questionCounterEl = document.getElementById('questionCounter');
+const questionNumberEl = document.getElementById('questionNumber');
+const questionEl = document.getElementById('question');
+const messageEl = document.getElementById('message');
+
+const endOverlay = document.getElementById('endOverlay');
+const finalScoreEl = document.getElementById('finalScore');
+const restartBtn = document.getElementById('restartBtn');
+
+
+/* =========================================================
+   QUESTIONS
+========================================================= */
+
+let biologyQuestions = [];
+
+let currentQuestionIndex = 0;
+let score = 0;
+let currentQuestion = null;
+
+
+/* =========================================================
+   BALLS
+========================================================= */
+
+let balls = [];
+
+let whiteBall = null;
+
+let dragging = false;
+let dragStartX = 0;
+let dragStartY = 0;
+
+let gameRunning = false;
+let shotInProgress = false;
+
+let animationFrame = null;
+
+
+/* =========================================================
+   UTILITAIRES
+========================================================= */
+
+function randomItem(array) {
+  return array[Math.floor(Math.random() * array.length)];
+}
+
+function shuffle(array) {
+  const arr = [...array];
+
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+
+    [arr[i], arr[j]] = [arr[j], arr[i]];
   }
-  if(ans===undefined)return '';
-  if(Array.isArray(ans))ans=ans[0];
-  if(opts){
-    if(typeof ans==='number'){i=ans>=texts.length?ans-1:ans;return texts[i]||'';}
-    var s=str(ans);
-    i=texts.findIndex(function(t){return norm(t)===norm(s);});if(i>=0)return texts[i];
-    if(optKeys){i=optKeys.findIndex(function(x){return norm(x)===norm(s);});if(i>=0)return texts[i];}
-    if(/^[A-Za-z]$/.test(s)&&texts[s.toUpperCase().charCodeAt(0)-65])return texts[s.toUpperCase().charCodeAt(0)-65];
-    if(/^\d+$/.test(s)){i=+s>=texts.length?+s-1:+s;if(texts[i])return texts[i];}
-    return s;
+
+  return arr;
+}
+
+function distance(a, b) {
+  return Math.hypot(a.x - b.x, a.y - b.y);
+}
+
+
+/* =========================================================
+   CHARGEMENT DES QUESTIONS
+========================================================= */
+
+async function loadQuestions() {
+
+  try {
+
+    const module = await import(QUESTIONS_URL);
+
+    let source = null;
+
+    if (Array.isArray(module.biologieQuestions)) {
+      source = module.biologieQuestions;
+    } else if (Array.isArray(module.biologyQuestions)) {
+      source = module.biologyQuestions;
+    } else if (Array.isArray(module.questions)) {
+      source = module.questions;
+    }
+
+    if (!source || !source.length) {
+      throw new Error('Aucune question de biologie trouvée.');
+    }
+
+    biologyQuestions = source
+      .map(normalizeQuestion)
+      .filter(Boolean);
+
+    if (biologyQuestions.length < 4) {
+      throw new Error('Il faut au moins 4 questions de biologie.');
+    }
+
+    startGame();
+
+  } catch (error) {
+
+    console.error(error);
+
+    questionEl.textContent =
+      'Impossible de charger les questions de biologie.';
+
+    messageEl.textContent =
+      'Vérifie le fichier src/biologieQuestions.js';
+
   }
-  return str(ans);
 }
-function explText(lk,answer){
-  for(var i=0;i<EXP_KEYS.length;i++){var v=lk[EXP_KEYS[i]];
-    if(Array.isArray(v))v=v.map(str).filter(Boolean).join(' ');
-    v=str(v);if(v&&norm(v)!==norm(answer))return v;}
-  return '';
-}
-function collect(node,out,seen,depth){
-  if(!node||typeof node!=='object'||seen.has(node)||depth>8)return;
-  seen.add(node);
-  if(Array.isArray(node)){node.forEach(function(n){collect(n,out,seen,depth+1);});return;}
-  var lk=lower(node),q=str(pick(lk,Q_KEYS));
-  if(q.length>=6){var a=resolveCorrect(lk);
-    if(a){out.push({question:q,answer:a,explanation:explText(lk,a)});return;}}
-  Object.keys(node).forEach(function(k){collect(node[k],out,seen,depth+1);});
-}
-function extract(roots){
-  var out=[],seen=new Set(),uniq=new Map();
-  roots.forEach(function(r){collect(r,out,seen,0);});
-  out.forEach(function(q){var k=norm(q.question);if(!uniq.has(k))uniq.set(k,q);});
-  return Array.from(uniq.values());
-}
-function evalLegacy(src){
-  var code=src.replace(/^\s*export\s+default\s+/m,'var __default = ')
-    .replace(/^\s*export\s*\{[^}]*\}\s*;?/gm,'')
-    .replace(/^\s*export\s+(?=(?:async\s+)?(?:const|let|var|function|class)\b)/gm,'');
-  var names=new Set(),re=/^\s*(?:const|let|var)\s+([A-Za-z_$][\w$]*)\s*=/gm,m;
-  while((m=re.exec(code)))names.add(m[1]);
-  var items=['typeof __default!=="undefined"?__default:undefined'];
-  names.forEach(function(n){items.push('typeof '+n+'!=="undefined"?'+n+':undefined');});
-  var mod={exports:{}};
-  var roots=new Function('module','exports',code+'\n;return ['+items.join(',')+'];')(mod,mod.exports);
-  roots.push(mod.exports);return roots;
-}
-async function loadQuestions(){
-  var list=[],roots=[];
-  try{var ns=await import(QUESTIONS_URL);Object.keys(ns).forEach(function(k){roots.push(ns[k]);});list=extract(roots);}
-  catch(e){console.info('[EduBillard] import() impossible, lecture du texte du fichier',e);}
-  if(list.length<5){
-    var res=await fetch(QUESTIONS_URL,{cache:'no-cache'});
-    if(!res.ok)throw new Error('Fichier introuvable ('+res.status+') : '+QUESTIONS_URL);
-    list=extract(evalLegacy(await res.text()));
+
+
+/* =========================================================
+   NORMALISATION DES QUESTIONS
+========================================================= */
+
+function normalizeQuestion(q) {
+
+  if (!q) return null;
+
+  let question = '';
+  let answer = '';
+
+  if (typeof q === 'string') {
+    question = q;
+  } else {
+
+    question =
+      q.question ??
+      q.q ??
+      q.text ??
+      q.enonce ??
+      '';
+
+    answer =
+      q.answer ??
+      q.reponse ??
+      q.correct ??
+      q.correctAnswer ??
+      '';
   }
-  console.info('[EduBillard] '+list.length+' questions détectées. Exemple :',list[0]);
-  return list;
+
+  if (!question) return null;
+
+  let options = [];
+
+  if (Array.isArray(q.options)) {
+    options = q.options;
+  }
+
+  if (Array.isArray(q.choices)) {
+    options = q.choices;
+  }
+
+  if (!answer && options.length) {
+    if (typeof q.correctIndex === 'number') {
+      answer = options[q.correctIndex];
+    }
+  }
+
+  if (!answer && typeof q.answerIndex === 'number') {
+    answer = options[q.answerIndex];
+  }
+
+  if (!answer) {
+    answer =
+      q.correctAnswer ??
+      q.reponse ??
+      q.answer ??
+      '';
+  }
+
+  if (!options.length && q.a && q.b && q.c && q.d) {
+    options = [q.a, q.b, q.c, q.d];
+  }
+
+  return {
+    question: String(question),
+    answer: String(answer),
+    options: options.map(String)
+  };
 }
 
-/* ---------- Manche : 1 bonne réponse + 3 mauvaises issues d'autres questions ---------- */
-function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
-var isNum=function(s){return /^[\d\s.,%+\-]+$/.test(s);};
-function buildRound(q,pool){
-  var key=norm(q.answer),seen=new Set([key]),c=[];
-  pool.forEach(function(o){var k=norm(o.answer);if(!k||seen.has(k))return;seen.add(k);
-    var score=Math.abs(o.answer.length-q.answer.length)+Math.random()*14;
-    if(isNum(o.answer)!==isNum(q.answer))score+=1000;
-    if(k.indexOf(key)>=0||key.indexOf(k)>=0)score+=500;
-    c.push({t:o.answer,s:score});});
-  c.sort(function(a,b){return a.s-b.s;});
-  var list=[{text:q.answer,correct:true}].concat(c.slice(0,3).map(function(x){return {text:x.t,correct:false};}));
-  return shuffle(list);
+
+/* =========================================================
+   CREATION DES REPONSES
+========================================================= */
+
+function buildAnswers(question) {
+
+  let correct = question.answer;
+
+  let wrongAnswers = question.options
+    .filter(option => option !== correct);
+
+  if (wrongAnswers.length < 3) {
+
+    const pool = biologyQuestions
+      .map(q => q.answer)
+      .filter(answer =>
+        answer &&
+        answer !== correct &&
+        !wrongAnswers.includes(answer)
+      );
+
+    wrongAnswers = [
+      ...wrongAnswers,
+      ...shuffle(pool)
+    ];
+  }
+
+  wrongAnswers = shuffle(wrongAnswers).slice(0, 3);
+
+  return shuffle([
+    {
+      label: 'A',
+      text: correct,
+      correct: true
+    },
+    ...wrongAnswers.map((text, index) => ({
+      label: String.fromCharCode(65 + index + 1),
+      text,
+      correct: false
+    }))
+  ]);
 }
 
-/* ---------- Jeu ---------- */
-var $=function(id){return document.getElementById(id);};
-var canvas=$('cv'),ctx=canvas.getContext('2d');
-var dpr=Math.min(window.devicePixelRatio||1,2);
-var COLORS=['#f2c94c','#e5484d','#3fb871','#d95fd0'];
-var LETTERS=['A','B','C','D'];
-var W=800,H=440,RAIL=22,R=13,DT=1/240;
-var DAMP=1.1,ROLL=110,STOP=8,REST_WALL=.88,REST_BALL=.96,MAX_SPEED=1500,MAX_DRAG=150,MIN_DRAG=16;
-var all=[],deck=[],qi=0,score=0,good=0,round=[],balls=[],cue=null;
-var phase='aim',aiming=null,hitBall=null,correctBall=null,last=0,acc=0,started=false;
 
-/* Table dimensionnée en pixels réels : les boules gardent une taille constante et la physique est mise à l'échelle */
-function setupTable(){
-  var vw=window.innerWidth,vh=window.innerHeight,portrait=vw<900&&vh>vw;
-  var ratio=portrait?400/680:800/440;
-  var w=Math.min($('game').clientWidth||vw-32,vh*.72*ratio,960);
-  W=Math.round(Math.max(w,280));H=Math.round(W/ratio);
-  canvas.width=Math.round(W*dpr);canvas.height=Math.round(H*dpr);
-  canvas.style.width=W+'px';
-  var sc=Math.max(W,H)/(portrait?680:800);
-  ROLL=110*sc;STOP=8*sc;MAX_SPEED=1500*sc;MAX_DRAG=Math.max(70,150*sc);
+/* =========================================================
+   DEMARRAGE
+========================================================= */
+
+function startGame() {
+
+  score = 0;
+  currentQuestionIndex = 0;
+
+  endOverlay.classList.remove('show');
+
+  updateStats();
+
+  gameRunning = true;
+
+  loadCurrentQuestion();
+
+  if (!animationFrame) {
+    animationLoop();
+  }
 }
-var resizeTimer=null;
-function relayout(){
-  if(!balls.length||$('game').hidden)return;
-  var oW=W,oH=H;
-  setupTable();
-  if((oH>oW)!==(H>W)&&phase!=='resolved'){spawn();phase='aim';aiming=null;setHint('Appuie sur la table, tire en arrière puis relâche pour viser et tirer.');return;}
-  var bd=bounds();
-  balls.forEach(function(b){
-    b.x=Math.min(bd.r,Math.max(bd.l,b.x/oW*W));b.y=Math.min(bd.b,Math.max(bd.t,b.y/oH*H));
-    b.vx*=W/oW;b.vy*=H/oH;
+
+
+/* =========================================================
+   QUESTION
+========================================================= */
+
+function loadCurrentQuestion() {
+
+  if (currentQuestionIndex >= TOTAL_QUESTIONS) {
+    finishGame();
+    return;
+  }
+
+  currentQuestion =
+    randomItem(biologyQuestions);
+
+  const answers = buildAnswers(currentQuestion);
+
+  currentQuestion.answers = answers;
+
+  questionEl.textContent =
+    currentQuestion.question;
+
+  questionNumberEl.textContent =
+    `Question ${currentQuestionIndex + 1}`;
+
+  questionCounterEl.textContent =
+    `${currentQuestionIndex + 1} / ${TOTAL_QUESTIONS}`;
+
+  messageEl.textContent = '';
+
+  resetTable();
+}
+
+
+/* =========================================================
+   STATISTIQUES
+========================================================= */
+
+function updateStats() {
+  scoreEl.textContent = score;
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+function resetTable() {
+
+  tableWidth = canvas.width;
+  tableHeight = canvas.height;
+
+  shotInProgress = false;
+  dragging = false;
+
+  const radius = Math.max(
+    15,
+    Math.min(tableWidth, tableHeight) * 0.025
+  );
+
+  whiteBall = {
+    x: tableWidth * 0.22,
+    y: tableHeight / 2,
+    vx: 0,
+    vy: 0,
+    radius,
+    type: 'white',
+    active: true
+  };
+
+  balls = [whiteBall];
+
+  const positions = [
+    [0.68, 0.30],
+    [0.80, 0.30],
+    [0.68, 0.50],
+    [0.80, 0.50]
+  ];
+
+  currentQuestion.answers.forEach((answer, index) => {
+
+    const position = positions[index];
+
+    balls.push({
+      x: tableWidth * position[0],
+      y: tableHeight * position[1],
+      vx: 0,
+      vy: 0,
+      radius,
+      type: 'answer',
+      label: answer.label,
+      text: answer.text,
+      correct: answer.correct,
+      active: true
+    });
+
   });
 }
-window.addEventListener('resize',function(){clearTimeout(resizeTimer);resizeTimer=setTimeout(relayout,150);});
-window.addEventListener('orientationchange',function(){clearTimeout(resizeTimer);resizeTimer=setTimeout(relayout,300);});
-function newGame(){
-  $('end').hidden=true;$('game').hidden=false;
-  setupTable();
-  deck=shuffle(all).slice(0,Math.min(ROUND,all.length));
-  qi=0;score=0;good=0;loadQuestion();
-  if(!started){started=true;requestAnimationFrame(function(t){last=t;frame(t);});}
-}
-function el(tag,cls,txt){var e=document.createElement(tag);if(cls)e.className=cls;if(txt!==undefined)e.textContent=txt;return e;}
-function loadQuestion(){
-  var q=deck[qi];round=buildRound(q,all);
-  $('qText').textContent=q.question;
-  $('qLabel').textContent='Question '+(qi+1)+'/'+deck.length;
-  $('score').textContent=score;
-  $('bar').style.width=(qi/deck.length*100)+'%';
-  var box=$('answers');box.textContent='';
-  round.forEach(function(a,i){
-    var d=el('div','ans');d.id='ans'+i;
-    var dot=el('span','dot',LETTERS[i]);dot.style.borderColor=COLORS[i];
-    d.appendChild(dot);d.appendChild(el('span','',a.text));box.appendChild(d);
+
+
+/* =========================================================
+   DESSIN DE LA TABLE
+========================================================= */
+
+function drawTable() {
+
+  ctx.clearRect(
+    0,
+    0,
+    tableWidth,
+    tableHeight
+  );
+
+  ctx.fillStyle = '#27704c';
+
+  ctx.fillRect(
+    0,
+    0,
+    tableWidth,
+    tableHeight
+  );
+
+  const pocketRadius =
+    Math.max(20, tableWidth * 0.027);
+
+  const pockets = [
+    [0, 0],
+    [tableWidth / 2, 0],
+    [tableWidth, 0],
+    [0, tableHeight],
+    [tableWidth / 2, tableHeight],
+    [tableWidth, tableHeight]
+  ];
+
+  ctx.fillStyle = '#101010';
+
+  pockets.forEach(([x, y]) => {
+
+    ctx.beginPath();
+
+    ctx.arc(
+      x,
+      y,
+      pocketRadius,
+      0,
+      Math.PI * 2
+    );
+
+    ctx.fill();
+
   });
-  $('result').hidden=true;$('flash').hidden=true;
-  spawn();phase='aim';aiming=null;hitBall=null;
-  setHint('Appuie sur la table, tire en arrière puis relâche pour viser et tirer.');
-  $('pfill').style.width='0';
-}
-function setHint(t){$('hint').textContent=t;}
-function spawn(){
-  var portrait=H>W,cx=W/2,cy=H/2;
-  var cp=portrait?{x:cx,y:H*.8}:{x:W*.24,y:cy};
-  var ct=portrait?{x:cx,y:H*.3}:{x:W*.7,y:cy};
-  var rot=Math.random()*Math.PI*2,s=Math.max(34,Math.min(56,Math.min(W,H)*.1));
-  balls=[];cue={x:cp.x,y:cp.y,vx:0,vy:0,cue:true};balls.push(cue);
-  [[-s,0],[s,0],[0,-s],[0,s]].forEach(function(o,i){
-    var jx=o[0]+(Math.random()-.5)*12,jy=o[1]+(Math.random()-.5)*12;
-    var b={x:ct.x+jx*Math.cos(rot)-jy*Math.sin(rot),y:ct.y+jx*Math.sin(rot)+jy*Math.cos(rot),vx:0,vy:0,idx:i};
-    balls.push(b);
-  });
-  // la lettre i est attribuée dans l'ordre des positions, déjà mélangées par la rotation aléatoire
-  correctBall=balls.filter(function(b){return !b.cue&&round[b.idx].correct;})[0];
+
+  balls.forEach(drawBall);
 }
 
-/* ---------- Physique ---------- */
-function bounds(){return {l:RAIL+R,r:W-RAIL-R,t:RAIL+R,b:H-RAIL-R};}
-function moving(){return balls.some(function(b){return b.vx||b.vy;});}
-function step(dt){
-  var bd=bounds(),i,j,b;
-  for(i=0;i<balls.length;i++){b=balls[i];
-    b.x+=b.vx*dt;b.y+=b.vy*dt;
-    var sp=Math.hypot(b.vx,b.vy);
-    if(sp){var s2=sp*Math.exp(-DAMP*dt)-ROLL*dt;
-      if(s2<STOP){b.vx=b.vy=0;}else{var k=s2/sp;b.vx*=k;b.vy*=k;}}
-    if(b.x<bd.l){b.x=bd.l;if(b.vx<0)b.vx=-b.vx*REST_WALL;}
-    else if(b.x>bd.r){b.x=bd.r;if(b.vx>0)b.vx=-b.vx*REST_WALL;}
-    if(b.y<bd.t){b.y=bd.t;if(b.vy<0)b.vy=-b.vy*REST_WALL;}
-    else if(b.y>bd.b){b.y=bd.b;if(b.vy>0)b.vy=-b.vy*REST_WALL;}
+
+/* =========================================================
+   DESSIN DES BILLES
+========================================================= */
+
+function drawBall(ball) {
+
+  if (!ball.active) return;
+
+  ctx.save();
+
+  ctx.beginPath();
+
+  ctx.arc(
+    ball.x,
+    ball.y,
+    ball.radius,
+    0,
+    Math.PI * 2
+  );
+
+  if (ball.type === 'white') {
+
+    ctx.fillStyle = '#ffffff';
+
+  } else {
+
+    ctx.fillStyle =
+      ball.correct
+        ? '#1764c0'
+        : '#777';
+
   }
-  for(i=0;i<balls.length;i++)for(j=i+1;j<balls.length;j++){
-    var a=balls[i],c=balls[j],dx=a.x-c.x,dy=a.y-c.y,d2=dx*dx+dy*dy,md=2*R;
-    if(d2>=md*md||d2===0)continue;
-    var d=Math.sqrt(d2),nx=dx/d,ny=dy/d,ov=(md-d)/2;
-    a.x+=nx*ov;a.y+=ny*ov;c.x-=nx*ov;c.y-=ny*ov;
-    var rel=(a.vx-c.vx)*nx+(a.vy-c.vy)*ny;
-    if(rel<0){var imp=-(1+REST_BALL)*rel/2;a.vx+=imp*nx;a.vy+=imp*ny;c.vx-=imp*nx;c.vy-=imp*ny;}
-    if(phase==='moving'){
-      if(a.cue&&!c.cue)resolve(c);else if(c.cue&&!a.cue)resolve(a);
+
+  ctx.fill();
+
+  ctx.strokeStyle = 'rgba(0,0,0,.25)';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  if (ball.type === 'answer') {
+
+    ctx.fillStyle = '#fff';
+
+    ctx.font =
+      `bold ${Math.max(12, ball.radius * .75)}px Arial`;
+
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+
+    ctx.fillText(
+      ball.label,
+      ball.x,
+      ball.y
+    );
+  }
+
+  ctx.restore();
+}
+
+
+/* =========================================================
+   PHYSIQUE
+========================================================= */
+
+function updatePhysics() {
+
+  if (!shotInProgress) return;
+
+  const friction = 0.985;
+
+  balls.forEach(ball => {
+
+    if (!ball.active) return;
+
+    ball.x += ball.vx;
+    ball.y += ball.vy;
+
+    ball.vx *= friction;
+    ball.vy *= friction;
+
+    if (
+      Math.abs(ball.vx) < 0.02 &&
+      Math.abs(ball.vy) < 0.02
+    ) {
+      ball.vx = 0;
+      ball.vy = 0;
+    }
+
+    if (ball.x - ball.radius < 0) {
+
+      ball.x = ball.radius;
+      ball.vx *= -0.85;
+
+    }
+
+    if (ball.x + ball.radius > tableWidth) {
+
+      ball.x = tableWidth - ball.radius;
+      ball.vx *= -0.85;
+
+    }
+
+    if (ball.y - ball.radius < 0) {
+
+      ball.y = ball.radius;
+      ball.vy *= -0.85;
+
+    }
+
+    if (ball.y + ball.radius > tableHeight) {
+
+      ball.y = tableHeight - ball.radius;
+      ball.vy *= -0.85;
+
+    }
+
+  });
+
+  handleBallCollisions();
+
+  if (whiteBall) {
+
+    balls.forEach(ball => {
+
+      if (
+        ball.type !== 'answer' ||
+        !ball.active ||
+        !whiteBall.active
+      ) {
+        return;
+      }
+
+      const d = distance(
+        whiteBall,
+        ball
+      );
+
+      if (d <= whiteBall.radius + ball.radius) {
+
+        handleAnswer(ball);
+
+      }
+
+    });
+
+  }
+
+  const moving = balls.some(ball =>
+    ball.active &&
+    (
+      Math.abs(ball.vx) > 0.05 ||
+      Math.abs(ball.vy) > 0.05
+    )
+  );
+
+  if (!moving && shotInProgress) {
+
+    shotInProgress = false;
+
+    setTimeout(() => {
+
+      if (gameRunning && currentQuestionIndex < TOTAL_QUESTIONS) {
+        resetTable();
+      }
+
+    }, 400);
+  }
+}
+
+
+/* =========================================================
+   COLLISIONS
+========================================================= */
+
+function handleBallCollisions() {
+
+  for (let i = 0; i < balls.length; i++) {
+
+    for (let j = i + 1; j < balls.length; j++) {
+
+      const a = balls[i];
+      const b = balls[j];
+
+      if (!a.active || !b.active) continue;
+
+      const dx = b.x - a.x;
+      const dy = b.y - a.y;
+
+      const d = Math.hypot(dx, dy);
+
+      const minDistance =
+        a.radius + b.radius;
+
+      if (
+        d === 0 ||
+        d > minDistance
+      ) {
+        continue;
+      }
+
+      const nx = dx / d;
+      const ny = dy / d;
+
+      const overlap =
+        minDistance - d;
+
+      a.x -= nx * overlap / 2;
+      a.y -= ny * overlap / 2;
+
+      b.x += nx * overlap / 2;
+      b.y += ny * overlap / 2;
+
+      const relativeVelocity =
+        (b.vx - a.vx) * nx +
+        (b.vy - a.vy) * ny;
+
+      if (relativeVelocity > 0) continue;
+
+      const impulse =
+        -relativeVelocity;
+
+      a.vx -= impulse * nx;
+      a.vy -= impulse * ny;
+
+      b.vx += impulse * nx;
+      b.vy += impulse * ny;
     }
   }
 }
-function rayCast(dx,dy){
-  var bd=bounds(),t=Infinity,i;
-  if(dx>0)t=Math.min(t,(bd.r-cue.x)/dx);else if(dx<0)t=Math.min(t,(bd.l-cue.x)/dx);
-  if(dy>0)t=Math.min(t,(bd.b-cue.y)/dy);else if(dy<0)t=Math.min(t,(bd.t-cue.y)/dy);
-  for(i=1;i<balls.length;i++){var b=balls[i],fx=cue.x-b.x,fy=cue.y-b.y;
-    var B=fx*dx+fy*dy,C=fx*fx+fy*fy-4*R*R,D=B*B-C;
-    if(D>=0){var tt=-B-Math.sqrt(D);if(tt>0&&tt<t)t=tt;}}
-  return t;
-}
 
-/* ---------- Résolution ---------- */
-function resolve(ball){
-  if(phase!=='moving')return;
-  phase='resolved';hitBall=ball;
-  var q=deck[qi],a=round[ball.idx],ok=a.correct;
-  if(ok){score+=POINTS;good++;}
-  $('score').textContent=score;
-  $('ans'+ball.idx).classList.add(ok?'good':'bad');
-  $('ans'+correctBall.idx).classList.add('good');
-  var f=$('flash');f.className='flash '+(ok?'ok':'ko');f.textContent=ok?'Bonne réponse ! +'+POINTS:'Mauvaise réponse';f.hidden=false;
-  var r=$('result');r.textContent='';r.className='result '+(ok?'ok':'ko');
-  r.appendChild(el('strong','',ok?'Bonne réponse ! +'+POINTS+' points':'Mauvaise réponse : 0 point'));
-  if(!ok){var p=el('p','','Correction : la bonne réponse était ');p.appendChild(el('b','',q.answer));r.appendChild(p);}
-  if(q.explanation)r.appendChild(el('p','',q.explanation));
-  var nb=el('button','btn primary',qi+1>=deck.length?'Voir le résultat':'Question suivante');nb.type='button';
-  nb.addEventListener('click',next);r.appendChild(nb);
-  r.hidden=false;setHint('Résultat affiché. Passe à la suite quand tu es prêt.');
-  r.scrollIntoView({behavior:'smooth',block:'nearest'});
-}
-function next(){qi++;if(qi>=deck.length)endGame();else loadQuestion();}
-function endGame(){
-  $('game').hidden=true;$('end').hidden=false;
-  var max=deck.length*POINTS;
-  $('endScore').textContent=score+' / '+max;
-  var pc=score/max;
-  $('endText').textContent=good+' bonne'+(good>1?'s':'')+' réponse'+(good>1?'s':'')+' sur '+deck.length+'. '+
-    (pc>=.8?'Excellent travail !':pc>=.5?'Bon résultat, continue à t\u2019entraîner.':'Continue de réviser, tu vas progresser.');
-}
 
-/* ---------- Contrôles souris / tactile ---------- */
-function pos(e){var r=canvas.getBoundingClientRect();return {x:(e.clientX-r.left)*W/r.width,y:(e.clientY-r.top)*H/r.height};}
-canvas.addEventListener('pointerdown',function(e){
-  if(phase!=='aim'||(e.pointerType==='mouse'&&e.button!==0))return;
-  try{canvas.setPointerCapture(e.pointerId);}catch(_){}
-  var p=pos(e);aiming={sx:p.x,sy:p.y,cx:p.x,cy:p.y};e.preventDefault();
-});
-canvas.addEventListener('pointermove',function(e){
-  if(!aiming)return;var p=pos(e);aiming.cx=p.x;aiming.cy=p.y;
-  $('pfill').style.width=Math.round(power()*100)+'%';e.preventDefault();
-});
-function power(){var d=Math.hypot(aiming.sx-aiming.cx,aiming.sy-aiming.cy);return Math.min(d,MAX_DRAG)/MAX_DRAG;}
-function endAim(e){
-  if(!aiming)return;
-  var dx=aiming.sx-aiming.cx,dy=aiming.sy-aiming.cy,d=Math.hypot(dx,dy),pw=power();
-  aiming=null;$('pfill').style.width='0';
-  if(d<MIN_DRAG||phase!=='aim')return;
-  cue.vx=dx/d*pw*MAX_SPEED;cue.vy=dy/d*pw*MAX_SPEED;phase='moving';
-  setHint('La boule est en mouvement…');
-}
-canvas.addEventListener('pointerup',endAim);
-canvas.addEventListener('pointercancel',function(){aiming=null;$('pfill').style.width='0';});
+/* =========================================================
+   REPONSE
+========================================================= */
 
-/* ---------- Rendu ---------- */
-function rr(x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}
-function drawBall(b,label,color){
-  ctx.fillStyle='rgba(0,0,0,.28)';ctx.beginPath();ctx.arc(b.x+2.5,b.y+3.5,R,0,7);ctx.fill();
-  ctx.fillStyle=color;ctx.beginPath();ctx.arc(b.x,b.y,R,0,7);ctx.fill();
-  var g=ctx.createRadialGradient(b.x-R*.4,b.y-R*.45,1,b.x,b.y,R);
-  g.addColorStop(0,'rgba(255,255,255,.65)');g.addColorStop(.5,'rgba(255,255,255,0)');g.addColorStop(1,'rgba(0,0,0,.22)');
-  ctx.fillStyle=g;ctx.beginPath();ctx.arc(b.x,b.y,R,0,7);ctx.fill();
-  if(label){ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(b.x,b.y,R*.62,0,7);ctx.fill();
-    ctx.fillStyle='#24113f';ctx.font='bold 12px system-ui,Arial';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(label,b.x,b.y+.5);}
-}
-function ring(b,color){ctx.strokeStyle=color;ctx.lineWidth=3;ctx.beginPath();ctx.arc(b.x,b.y,R+5,0,7);ctx.stroke();}
-function draw(){
-  ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,W,H);
-  ctx.fillStyle='#24113f';rr(0,0,W,H,16);ctx.fill();
-  ctx.strokeStyle='rgba(255,255,255,.12)';ctx.lineWidth=2;rr(3,3,W-6,H-6,13);ctx.stroke();
-  var g=ctx.createRadialGradient(W/2,H/2,20,W/2,H/2,Math.max(W,H)*.7);
-  g.addColorStop(0,'#2a7be0');g.addColorStop(1,'#0f4a96');
-  ctx.fillStyle=g;rr(RAIL,RAIL,W-2*RAIL,H-2*RAIL,6);ctx.fill();
-  ctx.strokeStyle='rgba(0,0,0,.35)';ctx.lineWidth=2;ctx.stroke();
-  if(phase==='aim'&&aiming&&power()>.02){
-    var dx=aiming.sx-aiming.cx,dy=aiming.sy-aiming.cy,d=Math.hypot(dx,dy);
-    if(d>=MIN_DRAG){dx/=d;dy/=d;var t=rayCast(dx,dy);
-      ctx.setLineDash([6,7]);ctx.strokeStyle='rgba(255,255,255,.85)';ctx.lineWidth=2;
-      ctx.beginPath();ctx.moveTo(cue.x+dx*R,cue.y+dy*R);ctx.lineTo(cue.x+dx*t,cue.y+dy*t);ctx.stroke();ctx.setLineDash([]);
-      ctx.beginPath();ctx.arc(cue.x+dx*t,cue.y+dy*t,R,0,7);ctx.stroke();
-      var gap=R+6+power()*40,sx=cue.x-dx*gap,sy=cue.y-dy*gap;
-      var sg=ctx.createLinearGradient(sx,sy,sx-dx*190,sy-dy*190);sg.addColorStop(0,'#e9d8a6');sg.addColorStop(1,'#7a4e2b');
-      ctx.strokeStyle=sg;ctx.lineWidth=5;ctx.lineCap='round';
-      ctx.beginPath();ctx.moveTo(sx,sy);ctx.lineTo(sx-dx*190,sy-dy*190);ctx.stroke();ctx.lineCap='butt';}
+function handleAnswer(ball) {
+
+  if (!ball.active || !shotInProgress) {
+    return;
   }
-  balls.forEach(function(b){if(!b.cue)drawBall(b,LETTERS[b.idx],COLORS[b.idx]);});
-  drawBall(cue,'','#f7f7fb');
-  if(phase==='resolved'){ring(correctBall,'#2ecc71');if(hitBall!==correctBall)ring(hitBall,'#ff5a5a');}
-}
-function frame(t){
-  acc+=Math.min(.05,(t-last)/1000||0);last=t;
-  while(acc>=DT){step(DT);acc-=DT;}
-  if(phase==='moving'&&!moving()){phase='aim';setHint('Aucune boule-réponse touchée. Tu peux tirer à nouveau.');}
-  draw();requestAnimationFrame(frame);
+
+  ball.active = false;
+
+  if (ball.correct) {
+
+    score += POINTS_CORRECT;
+
+    messageEl.textContent =
+      'Bonne réponse ! +10 points';
+
+  } else {
+
+    messageEl.textContent =
+      `Mauvaise réponse. La bonne réponse était : ${currentQuestion.answer}`;
+
+  }
+
+  updateStats();
+
+  setTimeout(() => {
+
+    currentQuestionIndex++;
+
+    if (currentQuestionIndex >= TOTAL_QUESTIONS) {
+
+      finishGame();
+
+    } else {
+
+      loadCurrentQuestion();
+
+    }
+
+  }, 1200);
 }
 
-/* ---------- Démarrage ---------- */
-function fail(msg){
-  $('loading').hidden=true;var e=$('error');e.hidden=false;e.textContent='';
-  e.appendChild(el('strong','','Impossible de lancer EduBillard'));
-  e.appendChild(el('p','',msg));
-  e.appendChild(el('p','','Ouvre la page depuis le site (GitHub Pages) ou un serveur local, pas en double-cliquant sur le fichier. Si le problème continue, vérifie la console du navigateur (F12).'));
+
+/* =========================================================
+   SOURIS / TOUCH
+========================================================= */
+
+function getPointerPosition(event) {
+
+  const rect =
+    canvas.getBoundingClientRect();
+
+  let clientX;
+  let clientY;
+
+  if (event.touches && event.touches.length) {
+
+    clientX =
+      event.touches[0].clientX;
+
+    clientY =
+      event.touches[0].clientY;
+
+  } else {
+
+    clientX = event.clientX;
+    clientY = event.clientY;
+
+  }
+
+  return {
+    x:
+      (clientX - rect.left) *
+      canvas.width /
+      rect.width,
+
+    y:
+      (clientY - rect.top) *
+      canvas.height /
+      rect.height
+  };
 }
-$('restartBtn').addEventListener('click',newGame);
-$('againBtn').addEventListener('click',newGame);
-loadQuestions().then(function(list){
-  var usable=list.filter(function(q){return q.answer.length<=MAX_LEN;});
-  if(usable.length<8)usable=list;
-  var distinct=new Set(usable.map(function(q){return norm(q.answer);}));
-  if(usable.length<4||distinct.size<4)throw new Error('Pas assez de questions exploitables ('+usable.length+' trouvées, 4 réponses différentes minimum). La structure de '+QUESTIONS_URL+' n\u2019a pas été reconnue.');
-  all=usable;$('loading').hidden=true;newGame();
-}).catch(function(e){console.error(e);fail(e&&e.message?e.message:String(e));});
-})();
+
+
+function pointerDown(event) {
+
+  if (
+    !gameRunning ||
+    shotInProgress ||
+    !whiteBall ||
+    !whiteBall.active
+  ) {
+    return;
+  }
+
+  const point =
+    getPointerPosition(event);
+
+  const d =
+    Math.hypot(
+      point.x - whiteBall.x,
+      point.y - whiteBall.y
+    );
+
+  if (d <= whiteBall.radius * 2) {
+
+    event.preventDefault();
+
+    dragging = true;
+
+    dragStartX = point.x;
+    dragStartY = point.y;
+  }
+}
+
+
+function pointerUp(event) {
+
+  if (!dragging) return;
+
+  event.preventDefault();
+
+  const point =
+    getPointerPosition(event);
+
+  const dx =
+    dragStartX - point.x;
+
+  const dy =
+    dragStartY - point.y;
+
+  const power =
+    Math.min(
+      18,
+      Math.hypot(dx, dy) * 0.12
+    );
+
+  if (power > 0.5) {
+
+    const length =
+      Math.hypot(dx, dy);
+
+    whiteBall.vx =
+      (dx / length) * power;
+
+    whiteBall.vy =
+      (dy / length) * power;
+
+    shotInProgress = true;
+  }
+
+  dragging = false;
+}
+
+
+canvas.addEventListener(
+  'mousedown',
+  pointerDown
+);
+
+window.addEventListener(
+  'mouseup',
+  pointerUp
+);
+
+canvas.addEventListener(
+  'touchstart',
+  pointerDown,
+  { passive: false }
+);
+
+window.addEventListener(
+  'touchend',
+  pointerUp,
+  { passive: false }
+);
+
+
+/* =========================================================
+   BOUCLE DE JEU
+========================================================= */
+
+function animationLoop() {
+
+  updatePhysics();
+
+  drawTable();
+
+  animationFrame =
+    requestAnimationFrame(animationLoop);
+}
+
+
+/* =========================================================
+   FIN DE PARTIE
+========================================================= */
+
+function finishGame() {
+
+  gameRunning = false;
+  shotInProgress = false;
+  dragging = false;
+
+  finalScoreEl.textContent =
+    `${score} points`;
+
+  endOverlay.classList.add('show');
+}
+
+
+/* =========================================================
+   RESTART
+========================================================= */
+
+restartBtn.addEventListener(
+  'click',
+  startGame
+);
+
+
+/* =========================================================
+   LANCEMENT
+========================================================= */
+
+loadQuestions();
+
 </script>
+
 </body>
 </html>
