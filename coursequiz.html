@@ -1,0 +1,1415 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<title>Course Quiz — ExamQuiz Haiti</title>
+
+<style>
+:root{
+    --purple:#24113f;
+    --purple2:#4b2481;
+    --blue:#1764c0;
+    --blue2:#2f80ed;
+    --green:#16834b;
+    --red:#c62828;
+    --bg:#f5f5f7;
+    --white:#fff;
+    --text:#171717;
+    --muted:#707070;
+    --border:#e3e3e7;
+}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh;
+}
+
+button{
+    font:inherit;
+    cursor:pointer;
+}
+
+.page{
+    width:100%;
+    max-width:900px;
+    margin:auto;
+    padding:12px;
+}
+
+/* HEADER */
+
+.topbar{
+    background:var(--white);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:14px 16px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:12px;
+}
+
+.logo{
+    color:var(--purple);
+    font-size:18px;
+    font-weight:900;
+}
+
+.course-info{
+    color:var(--muted);
+    font-size:13px;
+    font-weight:700;
+}
+
+/* PLAYERS */
+
+.players{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-bottom:12px;
+}
+
+.player{
+    background:white;
+    border:2px solid var(--border);
+    border-radius:15px;
+    padding:12px;
+}
+
+.player.active{
+    border-color:var(--blue2);
+}
+
+.player-head{
+    display:flex;
+    justify-content:space-between;
+    gap:8px;
+    margin-bottom:10px;
+}
+
+.player-name{
+    font-weight:800;
+}
+
+.player-position{
+    color:var(--muted);
+    font-size:13px;
+    font-weight:700;
+}
+
+/* TRACK */
+
+.track{
+    position:relative;
+    height:48px;
+    border-radius:25px;
+    background:#ececef;
+    overflow:hidden;
+    border:1px solid var(--border);
+}
+
+.track-line{
+    position:absolute;
+    left:5%;
+    right:5%;
+    top:50%;
+    height:4px;
+    transform:translateY(-50%);
+    background:#d1d1d6;
+}
+
+.runner{
+    position:absolute;
+    top:50%;
+    left:5%;
+    width:34px;
+    height:34px;
+    transform:translate(-50%,-50%);
+    border-radius:50%;
+    background:var(--purple2);
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:14px;
+    font-weight:900;
+    transition:left .35s ease;
+    z-index:2;
+}
+
+.finish{
+    position:absolute;
+    right:3%;
+    top:50%;
+    transform:translateY(-50%);
+    font-size:18px;
+    font-weight:900;
+    color:var(--purple);
+}
+
+/* QUESTION */
+
+.game{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:20px;
+}
+
+.turn{
+    text-align:center;
+    color:var(--blue);
+    font-size:14px;
+    font-weight:900;
+    margin-bottom:10px;
+}
+
+.progress{
+    height:7px;
+    background:#ededf0;
+    border-radius:10px;
+    overflow:hidden;
+    margin-bottom:18px;
+}
+
+.progress-bar{
+    width:0%;
+    height:100%;
+    background:var(--blue2);
+    transition:width .25s ease;
+}
+
+.question-number{
+    text-align:center;
+    color:var(--muted);
+    font-size:13px;
+    margin-bottom:9px;
+}
+
+.question{
+    text-align:center;
+    font-size:22px;
+    line-height:1.35;
+    font-weight:900;
+    max-width:720px;
+    margin:0 auto 20px;
+}
+
+/* OPTIONS */
+
+.options{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:11px;
+}
+
+.option{
+    min-height:62px;
+    padding:12px;
+    border:2px solid var(--border);
+    border-radius:14px;
+    background:white;
+    text-align:left;
+    font-weight:700;
+    transition:.15s;
+}
+
+.option:hover{
+    border-color:var(--blue2);
+}
+
+.option:active{
+    transform:scale(.98);
+}
+
+.option.correct{
+    background:#edf8f1;
+    border-color:var(--green);
+    color:var(--green);
+}
+
+.option.wrong{
+    background:#fff0f0;
+    border-color:var(--red);
+    color:var(--red);
+}
+
+.option:disabled{
+    cursor:default;
+}
+
+/* FEEDBACK */
+
+.feedback{
+    display:none;
+    margin-top:13px;
+    padding:13px;
+    border-radius:12px;
+    text-align:center;
+    font-size:14px;
+    font-weight:800;
+}
+
+.feedback.show{
+    display:block;
+}
+
+.feedback.correct{
+    background:#edf8f1;
+    color:var(--green);
+}
+
+.feedback.wrong{
+    background:#fff0f0;
+    color:var(--red);
+}
+
+.next{
+    display:none;
+    width:100%;
+    min-height:52px;
+    margin-top:10px;
+    border:0;
+    border-radius:13px;
+    background:var(--purple2);
+    color:white;
+    font-weight:900;
+}
+
+.next.show{
+    display:block;
+}
+
+.category{
+    text-align:center;
+    color:var(--muted);
+    font-size:12px;
+    margin-top:13px;
+}
+
+/* OVERLAY */
+
+.overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(20,12,30,.72);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:18px;
+    z-index:20;
+}
+
+.overlay.show{
+    display:flex;
+}
+
+.result{
+    width:100%;
+    max-width:440px;
+    background:white;
+    border-radius:20px;
+    padding:24px 18px;
+    text-align:center;
+}
+
+.result-title{
+    color:var(--purple);
+    font-size:27px;
+    font-weight:900;
+}
+
+.result-text{
+    margin:12px 0 18px;
+    font-size:18px;
+    font-weight:800;
+}
+
+.result-scores{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-bottom:16px;
+}
+
+.result-player{
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:13px;
+}
+
+.result-player strong{
+    display:block;
+    color:var(--muted);
+    font-size:13px;
+    margin-bottom:5px;
+}
+
+.result-player span{
+    color:var(--purple);
+    font-size:28px;
+    font-weight:900;
+}
+
+.result-button{
+    width:100%;
+    min-height:52px;
+    border:0;
+    border-radius:13px;
+    background:var(--purple2);
+    color:white;
+    font-weight:900;
+    margin-top:8px;
+}
+
+.result-button.secondary{
+    background:#ededf0;
+    color:var(--text);
+}
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    .page{
+        padding:8px;
+    }
+
+    .topbar{
+        padding:11px 12px;
+        border-radius:13px;
+    }
+
+    .logo{
+        font-size:16px;
+    }
+
+    .course-info{
+        font-size:11px;
+    }
+
+    .players{
+        gap:7px;
+    }
+
+    .player{
+        padding:9px;
+        border-radius:13px;
+    }
+
+    .player-name{
+        font-size:13px;
+    }
+
+    .player-position{
+        font-size:11px;
+    }
+
+    .track{
+        height:42px;
+    }
+
+    .runner{
+        width:30px;
+        height:30px;
+        font-size:12px;
+    }
+
+    .game{
+        padding:14px 10px;
+        border-radius:15px;
+    }
+
+    .turn{
+        font-size:13px;
+    }
+
+    .question{
+        font-size:18px;
+    }
+
+    .options{
+        grid-template-columns:1fr;
+        gap:8px;
+    }
+
+    .option{
+        min-height:57px;
+        font-size:14px;
+    }
+}
+
+@media(max-width:360px){
+
+    .question{
+        font-size:17px;
+    }
+
+    .player-name{
+        font-size:12px;
+    }
+
+    .option{
+        font-size:13px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+    <header class="topbar">
+
+        <div class="logo">
+            ExamQuiz
+        </div>
+
+        <div class="course-info" id="courseInfo">
+            Course 1 / 20
+        </div>
+
+    </header>
+
+
+    <!-- JOUEURS -->
+
+    <section class="players">
+
+        <div class="player active" id="player1">
+
+            <div class="player-head">
+
+                <div class="player-name">
+                    Joueur 1
+                </div>
+
+                <div class="player-position" id="position1">
+                    0 / 10
+                </div>
+
+            </div>
+
+            <div class="track">
+
+                <div class="track-line"></div>
+
+                <div class="runner" id="runner1">
+                    1
+                </div>
+
+                <div class="finish">
+                    FIN
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="player" id="player2">
+
+            <div class="player-head">
+
+                <div class="player-name">
+                    Joueur 2
+                </div>
+
+                <div class="player-position" id="position2">
+                    0 / 10
+                </div>
+
+            </div>
+
+            <div class="track">
+
+                <div class="track-line"></div>
+
+                <div class="runner" id="runner2">
+                    2
+                </div>
+
+                <div class="finish">
+                    FIN
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- QUESTION -->
+
+    <main class="game">
+
+        <div class="turn" id="turn">
+            Tour de Joueur 1
+        </div>
+
+
+        <div class="progress">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+
+        <div class="question-number" id="questionNumber">
+            Question 1 / 10
+        </div>
+
+
+        <div class="question" id="question">
+            Chargement...
+        </div>
+
+
+        <div class="options" id="options"></div>
+
+
+        <div class="feedback" id="feedback"></div>
+
+
+        <button
+            type="button"
+            class="next"
+            id="nextButton"
+        >
+            Continuer
+        </button>
+
+
+        <div class="category" id="category"></div>
+
+    </main>
+
+</div>
+
+
+<!-- RESULTAT -->
+
+<div class="overlay" id="overlay">
+
+    <div class="result">
+
+        <div class="result-title" id="resultTitle">
+            Course terminée
+        </div>
+
+
+        <div class="result-text" id="resultText"></div>
+
+
+        <div class="result-scores">
+
+            <div class="result-player">
+
+                <strong>
+                    Joueur 1
+                </strong>
+
+                <span id="final1">
+                    0
+                </span>
+
+            </div>
+
+
+            <div class="result-player">
+
+                <strong>
+                    Joueur 2
+                </strong>
+
+                <span id="final2">
+                    0
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <button
+            type="button"
+            class="result-button"
+            id="nextRace"
+        >
+            Course suivante
+        </button>
+
+
+        <button
+            type="button"
+            class="result-button secondary"
+            id="restart"
+        >
+            Nouvelle partie
+        </button>
+
+    </div>
+
+</div>
+
+
+<script type="module">
+
+import { jeuxQuestions } from "./src/jeuxQuestions.js";
+
+
+/* =========================
+   CONFIGURATION
+========================= */
+
+const QUESTIONS_PER_RACE = 10;
+const MAX_RACES = 20;
+
+
+/* =========================
+   ETAT
+========================= */
+
+let questions = [];
+
+let questionIndex = 0;
+
+let currentPlayer = 1;
+
+let raceNumber = 1;
+
+let player1Progress = 0;
+let player2Progress = 0;
+
+let totalScore1 = 0;
+let totalScore2 = 0;
+
+let answered = false;
+let gameFinished = false;
+
+
+/* =========================
+   ELEMENTS
+========================= */
+
+const courseInfo =
+    document.getElementById("courseInfo");
+
+const turn =
+    document.getElementById("turn");
+
+const questionNumber =
+    document.getElementById("questionNumber");
+
+const question =
+    document.getElementById("question");
+
+const options =
+    document.getElementById("options");
+
+const feedback =
+    document.getElementById("feedback");
+
+const nextButton =
+    document.getElementById("nextButton");
+
+const progressBar =
+    document.getElementById("progressBar");
+
+const category =
+    document.getElementById("category");
+
+const player1 =
+    document.getElementById("player1");
+
+const player2 =
+    document.getElementById("player2");
+
+const runner1 =
+    document.getElementById("runner1");
+
+const runner2 =
+    document.getElementById("runner2");
+
+const position1 =
+    document.getElementById("position1");
+
+const position2 =
+    document.getElementById("position2");
+
+const overlay =
+    document.getElementById("overlay");
+
+const resultTitle =
+    document.getElementById("resultTitle");
+
+const resultText =
+    document.getElementById("resultText");
+
+const final1 =
+    document.getElementById("final1");
+
+const final2 =
+    document.getElementById("final2");
+
+const nextRace =
+    document.getElementById("nextRace");
+
+const restart =
+    document.getElementById("restart");
+
+
+/* =========================
+   MELANGE
+========================= */
+
+function shuffle(array){
+
+    const copy = [...array];
+
+    for(
+        let i = copy.length - 1;
+        i > 0;
+        i--
+    ){
+
+        const j =
+            Math.floor(
+                Math.random() * (i + 1)
+            );
+
+        [
+            copy[i],
+            copy[j]
+        ] = [
+            copy[j],
+            copy[i]
+        ];
+    }
+
+    return copy;
+}
+
+
+/* =========================
+   CHARGER COURSE
+========================= */
+
+function loadRace(){
+
+    if(
+        !Array.isArray(jeuxQuestions) ||
+        jeuxQuestions.length === 0
+    ){
+
+        question.textContent =
+            "Aucune question disponible.";
+
+        return false;
+    }
+
+
+    questions =
+        shuffle(jeuxQuestions)
+        .slice(
+            0,
+            Math.min(
+                QUESTIONS_PER_RACE,
+                jeuxQuestions.length
+            )
+        );
+
+
+    questionIndex = 0;
+
+    currentPlayer = 1;
+
+    player1Progress = 0;
+
+    player2Progress = 0;
+
+    updateRaceDisplay();
+
+    return true;
+}
+
+
+/* =========================
+   POSITION JOUEURS
+========================= */
+
+function updateRaceDisplay(){
+
+    position1.textContent =
+        `${player1Progress} / ${QUESTIONS_PER_RACE}`;
+
+    position2.textContent =
+        `${player2Progress} / ${QUESTIONS_PER_RACE}`;
+
+
+    const percent1 =
+        5 +
+        (
+            player1Progress /
+            QUESTIONS_PER_RACE
+        ) * 90;
+
+
+    const percent2 =
+        5 +
+        (
+            player2Progress /
+            QUESTIONS_PER_RACE
+        ) * 90;
+
+
+    runner1.style.left =
+        `${Math.min(percent1,95)}%`;
+
+    runner2.style.left =
+        `${Math.min(percent2,95)}%`;
+
+
+    player1.classList.toggle(
+        "active",
+        currentPlayer === 1
+    );
+
+    player2.classList.toggle(
+        "active",
+        currentPlayer === 2
+    );
+}
+
+
+/* =========================
+   AFFICHER QUESTION
+========================= */
+
+function displayQuestion(){
+
+    if(
+        questionIndex >= questions.length
+    ){
+
+        endRace();
+
+        return;
+    }
+
+
+    answered = false;
+
+
+    const currentQuestion =
+        questions[questionIndex];
+
+
+    questionNumber.textContent =
+        `Question ${
+            questionIndex + 1
+        } / ${
+            questions.length
+        }`;
+
+
+    question.textContent =
+        currentQuestion.question;
+
+
+    turn.textContent =
+        `Tour de Joueur ${currentPlayer}`;
+
+
+    category.textContent =
+        currentQuestion.category
+        ? `Catégorie : ${currentQuestion.category}`
+        : "";
+
+
+    progressBar.style.width =
+        `${
+            (
+                questionIndex /
+                questions.length
+            ) * 100
+        }%`;
+
+
+    feedback.className =
+        "feedback";
+
+    feedback.textContent =
+        "";
+
+
+    nextButton.className =
+        "next";
+
+
+    options.innerHTML =
+        "";
+
+
+    const shuffledOptions =
+        shuffle(
+            currentQuestion.options || []
+        );
+
+
+    shuffledOptions.forEach(
+        optionText => {
+
+            const button =
+                document.createElement(
+                    "button"
+                );
+
+
+            button.type =
+                "button";
+
+            button.className =
+                "option";
+
+            button.textContent =
+                optionText;
+
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    answerQuestion(
+                        button,
+                        optionText,
+                        currentQuestion
+                    );
+
+                }
+            );
+
+
+            options.appendChild(
+                button
+            );
+
+        }
+    );
+
+
+    updateRaceDisplay();
+}
+
+
+/* =========================
+   REPONSE
+========================= */
+
+function answerQuestion(
+    clickedButton,
+    selectedAnswer,
+    currentQuestion
+){
+
+    if(answered) return;
+
+
+    answered = true;
+
+
+    const buttons =
+        options.querySelectorAll(
+            ".option"
+        );
+
+
+    buttons.forEach(button => {
+
+        button.disabled = true;
+
+
+        if(
+            button.textContent ===
+            currentQuestion.answer
+        ){
+
+            button.classList.add(
+                "correct"
+            );
+
+        }
+
+    });
+
+
+    const correct =
+        selectedAnswer ===
+        currentQuestion.answer;
+
+
+    if(correct){
+
+        clickedButton.classList.add(
+            "correct"
+        );
+
+
+        if(currentPlayer === 1){
+
+            player1Progress++;
+
+            totalScore1 += 10;
+
+        }else{
+
+            player2Progress++;
+
+            totalScore2 += 10;
+
+        }
+
+
+        feedback.textContent =
+            `Bonne réponse ! Joueur ${
+                currentPlayer
+            } avance d'une position.`;
+
+
+        feedback.className =
+            "feedback show correct";
+
+    }else{
+
+        clickedButton.classList.add(
+            "wrong"
+        );
+
+
+        feedback.textContent =
+            `Mauvaise réponse. La bonne réponse était : ${
+                currentQuestion.answer
+            }`;
+
+
+        feedback.className =
+            "feedback show wrong";
+
+    }
+
+
+    updateRaceDisplay();
+
+
+    /*
+       Si un joueur atteint la ligne
+       d'arrivée, la course est terminée.
+    */
+
+    if(
+        player1Progress >=
+        QUESTIONS_PER_RACE ||
+        player2Progress >=
+        QUESTIONS_PER_RACE
+    ){
+
+        nextButton.textContent =
+            "Voir le résultat";
+
+    }else{
+
+        nextButton.textContent =
+            "Continuer";
+
+    }
+
+
+    nextButton.className =
+        "next show";
+}
+
+
+/* =========================
+   QUESTION SUIVANTE
+========================= */
+
+function nextQuestion(){
+
+    if(!answered) return;
+
+
+    if(
+        player1Progress >=
+        QUESTIONS_PER_RACE ||
+        player2Progress >=
+        QUESTIONS_PER_RACE
+    ){
+
+        endRace();
+
+        return;
+    }
+
+
+    questionIndex++;
+
+
+    currentPlayer =
+        currentPlayer === 1
+        ? 2
+        : 1;
+
+
+    displayQuestion();
+}
+
+
+/* =========================
+   FIN COURSE
+========================= */
+
+function endRace(){
+
+    final1.textContent =
+        player1Progress;
+
+    final2.textContent =
+        player2Progress;
+
+
+    if(
+        player1Progress >
+        player2Progress
+    ){
+
+        resultText.textContent =
+            "Joueur 1 remporte la course !";
+
+    }
+    else if(
+        player2Progress >
+        player1Progress
+    ){
+
+        resultText.textContent =
+            "Joueur 2 remporte la course !";
+
+    }
+    else{
+
+        resultText.textContent =
+            "La course se termine par une égalité !";
+
+    }
+
+
+    resultTitle.textContent =
+        `Course ${raceNumber} terminée`;
+
+
+    if(
+        raceNumber >= MAX_RACES
+    ){
+
+        endGame();
+
+        return;
+    }
+
+
+    nextRace.textContent =
+        "Course suivante";
+
+
+    overlay.classList.add(
+        "show"
+    );
+}
+
+
+/* =========================
+   FIN DES 20 COURSES
+========================= */
+
+function endGame(){
+
+    gameFinished = true;
+
+
+    resultTitle.textContent =
+        "Championnat terminé";
+
+
+    if(
+        totalScore1 >
+        totalScore2
+    ){
+
+        resultText.textContent =
+            "Joueur 1 termine avec le plus de points.";
+
+    }
+    else if(
+        totalScore2 >
+        totalScore1
+    ){
+
+        resultText.textContent =
+            "Joueur 2 termine avec le plus de points.";
+
+    }
+    else{
+
+        resultText.textContent =
+            "Les deux joueurs terminent à égalité.";
+
+    }
+
+
+    /*
+       À la fin du championnat,
+       on affiche les points totaux.
+    */
+
+    final1.textContent =
+        totalScore1;
+
+    final2.textContent =
+        totalScore2;
+
+
+    nextRace.textContent =
+        "Nouvelle partie";
+
+
+    overlay.classList.add(
+        "show"
+    );
+}
+
+
+/* =========================
+   COURSE SUIVANTE
+========================= */
+
+function startNextRace(){
+
+    if(gameFinished){
+
+        restartGame();
+
+        return;
+    }
+
+
+    raceNumber++;
+
+
+    courseInfo.textContent =
+        `Course ${raceNumber} / ${MAX_RACES}`;
+
+
+    overlay.classList.remove(
+        "show"
+    );
+
+
+    if(loadRace()){
+
+        displayQuestion();
+
+    }
+}
+
+
+/* =========================
+   RECOMMENCER
+========================= */
+
+function restartGame(){
+
+    raceNumber = 1;
+
+    questionIndex = 0;
+
+    currentPlayer = 1;
+
+    player1Progress = 0;
+
+    player2Progress = 0;
+
+    totalScore1 = 0;
+
+    totalScore2 = 0;
+
+    answered = false;
+
+    gameFinished = false;
+
+
+    courseInfo.textContent =
+        `Course 1 / ${MAX_RACES}`;
+
+
+    overlay.classList.remove(
+        "show"
+    );
+
+
+    nextRace.textContent =
+        "Course suivante";
+
+
+    if(loadRace()){
+
+        displayQuestion();
+
+    }
+}
+
+
+/* =========================
+   EVENEMENTS
+========================= */
+
+nextButton.addEventListener(
+    "click",
+    nextQuestion
+);
+
+nextRace.addEventListener(
+    "click",
+    startNextRace
+);
+
+restart.addEventListener(
+    "click",
+    restartGame
+);
+
+
+/* =========================
+   DEMARRAGE
+========================= */
+
+if(loadRace()){
+
+    displayQuestion();
+
+}
+
+</script>
+
+</body>
+</html>
