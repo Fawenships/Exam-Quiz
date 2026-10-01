@@ -185,6 +185,8 @@ canvas{
   cursor:pointer;
   color:#fff;
   background:var(--purple2);
+  text-decoration:none;
+  display:inline-block;
 }
 
 .btn:hover{
@@ -283,6 +285,7 @@ canvas{
 }
 
 @media(max-width:700px){
+
   .hud{
     grid-template-columns:repeat(2,1fr);
   }
@@ -306,118 +309,243 @@ canvas{
 
 <header class="topbar">
   <div class="topbar-inner">
-    <a class="back" href="baccalaureat.html">← Retour</a>
-    <div class="brand">ExamQuiz Haiti</div>
+
+    <a class="back" href="baccalaureat.html">
+      ← Retour
+    </a>
+
+    <div class="brand">
+      ExamQuiz Haiti
+    </div>
+
   </div>
 </header>
+
 
 <main class="page">
 
   <div class="header">
-    <h1>Défense du château</h1>
-    <p>Défends ton château contre des vagues d’ennemis en répondant correctement.</p>
+
+    <h1>
+      Défense du château
+    </h1>
+
+    <p>
+      Défends ton château contre des vagues d’ennemis en répondant correctement.
+    </p>
+
   </div>
 
+
   <section class="hud">
-    <div class="hud-card">
-      <div class="hud-label">Vies</div>
-      <div class="hud-value" id="lives">❤️❤️❤️❤️❤️</div>
-    </div>
 
     <div class="hud-card">
-      <div class="hud-label">Score</div>
-      <div class="hud-value" id="score">0</div>
-    </div>
+      <div class="hud-label">
+        Vies
+      </div>
 
-    <div class="hud-card">
-      <div class="hud-label">Vague</div>
-      <div class="hud-value" id="wave">1</div>
-    </div>
-
-    <div class="hud-card">
-      <div class="hud-label">Ennemis</div>
-      <div class="hud-value" id="enemyCount">0</div>
-    </div>
-  </section>
-
-  <div class="game-wrap">
-
-    <canvas id="gameCanvas" width="1200" height="675"></canvas>
-
-    <div class="overlay" id="startOverlay">
-      <div class="overlay-box">
-        <h2>Défense du château</h2>
-        <p>
-          Réponds correctement pour attaquer les ennemis.
-          Chaque vague contient de plus en plus d’ennemis.
-          Les géants et les boss demandent plusieurs bonnes réponses.
-        </p>
-
-        <button class="btn" id="startBtn">
-          Commencer
-        </button>
+      <div class="hud-value" id="lives">
+        ❤️❤️❤️❤️❤️
       </div>
     </div>
 
-    <div class="overlay hidden" id="gameOverOverlay">
+
+    <div class="hud-card">
+      <div class="hud-label">
+        Score
+      </div>
+
+      <div class="hud-value" id="score">
+        0
+      </div>
+    </div>
+
+
+    <div class="hud-card">
+      <div class="hud-label">
+        Vague
+      </div>
+
+      <div class="hud-value" id="wave">
+        1
+      </div>
+    </div>
+
+
+    <div class="hud-card">
+      <div class="hud-label">
+        Ennemis
+      </div>
+
+      <div class="hud-value" id="enemyCount">
+        0
+      </div>
+    </div>
+
+  </section>
+
+
+  <div class="game-wrap">
+
+    <canvas
+      id="gameCanvas"
+      width="1200"
+      height="675">
+    </canvas>
+
+
+    <!-- START -->
+
+    <div
+      class="overlay"
+      id="startOverlay">
+
       <div class="overlay-box">
-        <h2>Château vaincu</h2>
+
+        <h2>
+          Défense du château
+        </h2>
+
+        <p>
+          Réponds correctement aux questions
+          pour attaquer les ennemis.
+          Chaque vague devient plus difficile.
+        </p>
+
+        <button
+          class="btn"
+          id="startBtn">
+
+          Commencer
+
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- GAME OVER -->
+
+    <div
+      class="overlay hidden"
+      id="gameOverOverlay">
+
+      <div class="overlay-box">
+
+        <h2>
+          Château vaincu
+        </h2>
 
         <p>
           Score final :
-          <strong id="finalScore">0</strong>
+          <strong id="finalScore">
+            0
+          </strong>
         </p>
 
         <p>
           Vague atteinte :
-          <strong id="finalWave">1</strong>
+          <strong id="finalWave">
+            1
+          </strong>
         </p>
 
         <div class="controls">
-          <button class="btn" id="restartBtn">
+
+          <button
+            class="btn"
+            id="restartBtn">
+
             Recommencer
+
           </button>
 
-          <a class="btn secondary" href="baccalaureat.html">
+          <a
+            class="btn secondary"
+            href="baccalaureat.html">
+
             Retour aux jeux
+
           </a>
+
         </div>
+
       </div>
+
     </div>
 
-    <div class="overlay hidden" id="victoryOverlay">
+
+    <!-- VAGUE TERMINÉE -->
+
+    <div
+      class="overlay hidden"
+      id="victoryOverlay">
+
       <div class="overlay-box">
-        <h2>Vague terminée</h2>
+
+        <h2>
+          Vague terminée
+        </h2>
 
         <p>
-          Tous les ennemis de cette vague ont été vaincus.
+          Tous les ennemis de cette vague
+          ont été vaincus.
         </p>
 
         <p>
           Score :
-          <strong id="waveScore">0</strong>
+          <strong id="waveScore">
+            0
+          </strong>
         </p>
 
-        <button class="btn" id="continueBtn">
+        <button
+          class="btn"
+          id="continueBtn">
+
           Vague suivante
+
         </button>
+
       </div>
+
     </div>
 
   </div>
 
+
+  <!-- QUESTION -->
+
   <section class="question-panel">
 
     <div class="question-meta">
-      <span id="enemyType">En attente</span>
-      <span id="enemyHp">—</span>
+
+      <span id="enemyType">
+        En attente
+      </span>
+
+      <span id="enemyHp">
+        —
+      </span>
+
     </div>
 
-    <div class="question" id="question">
+
+    <div
+      class="question"
+      id="question">
+
       Appuie sur « Commencer » pour jouer.
+
     </div>
 
-    <div class="options" id="options"></div>
+
+    <div
+      class="options"
+      id="options">
+    </div>
+
 
     <div id="feedback"></div>
 
@@ -425,195 +553,589 @@ canvas{
 
 </main>
 
+
 <script type="module">
 
-const QUESTIONS_URL = "./src/jeuxQuestions.js";
+/* =========================================================
+   CONFIGURATION
+========================================================= */
+
+const QUESTIONS_URL =
+  "./src/jeuxQuestions.js";
 
 const MAX_LIVES = 5;
+
 const POINTS_CORRECT = 10;
-
-const canvas = document.getElementById("gameCanvas");
-const ctx = canvas.getContext("2d");
-
-const livesEl = document.getElementById("lives");
-const scoreEl = document.getElementById("score");
-const waveEl = document.getElementById("wave");
-const enemyCountEl = document.getElementById("enemyCount");
-
-const questionEl = document.getElementById("question");
-const optionsEl = document.getElementById("options");
-const feedbackEl = document.getElementById("feedback");
-
-const enemyTypeEl = document.getElementById("enemyType");
-const enemyHpEl = document.getElementById("enemyHp");
-
-const startOverlay = document.getElementById("startOverlay");
-const gameOverOverlay = document.getElementById("gameOverOverlay");
-const victoryOverlay = document.getElementById("victoryOverlay");
-
-const startBtn = document.getElementById("startBtn");
-const restartBtn = document.getElementById("restartBtn");
-const continueBtn = document.getElementById("continueBtn");
-
-const finalScoreEl = document.getElementById("finalScore");
-const finalWaveEl = document.getElementById("finalWave");
-const waveScoreEl = document.getElementById("waveScore");
-
-let questions = [];
-let questionPool = [];
-let usedQuestions = new Set();
-
-let lives = MAX_LIVES;
-let score = 0;
-let wave = 1;
-
-let enemies = [];
-let projectiles = [];
-
-let currentEnemy = null;
-let currentQuestion = null;
-
-let gameStarted = false;
-let gameOver = false;
-let waveFinished = false;
-let answerLocked = false;
-
-let lastTime = 0;
 
 
 /* =========================================================
-   OUTILS
+   DOM
+========================================================= */
+
+const canvas =
+  document.getElementById("gameCanvas");
+
+const ctx =
+  canvas.getContext("2d");
+
+const livesEl =
+  document.getElementById("lives");
+
+const scoreEl =
+  document.getElementById("score");
+
+const waveEl =
+  document.getElementById("wave");
+
+const enemyCountEl =
+  document.getElementById("enemyCount");
+
+const questionEl =
+  document.getElementById("question");
+
+const optionsEl =
+  document.getElementById("options");
+
+const feedbackEl =
+  document.getElementById("feedback");
+
+const enemyTypeEl =
+  document.getElementById("enemyType");
+
+const enemyHpEl =
+  document.getElementById("enemyHp");
+
+const startOverlay =
+  document.getElementById("startOverlay");
+
+const gameOverOverlay =
+  document.getElementById("gameOverOverlay");
+
+const victoryOverlay =
+  document.getElementById("victoryOverlay");
+
+const startBtn =
+  document.getElementById("startBtn");
+
+const restartBtn =
+  document.getElementById("restartBtn");
+
+const continueBtn =
+  document.getElementById("continueBtn");
+
+const finalScoreEl =
+  document.getElementById("finalScore");
+
+const finalWaveEl =
+  document.getElementById("finalWave");
+
+const waveScoreEl =
+  document.getElementById("waveScore");
+
+
+/* =========================================================
+   ÉTAT
+========================================================= */
+
+let questions = [];
+
+let questionPool = [];
+
+let usedQuestionIds =
+  new Set();
+
+let lives =
+  MAX_LIVES;
+
+let score =
+  0;
+
+let wave =
+  1;
+
+let enemies =
+  [];
+
+let projectiles =
+  [];
+
+let currentEnemy =
+  null;
+
+let currentQuestion =
+  null;
+
+let gameStarted =
+  false;
+
+let gameOver =
+  false;
+
+let waveFinished =
+  false;
+
+let answerLocked =
+  false;
+
+let lastTime =
+  0;
+
+
+/* =========================================================
+   UTILITAIRES
 ========================================================= */
 
 function shuffle(array){
 
-  const copy = [...array];
+  const copy =
+    [...array];
 
-  for(let i = copy.length - 1; i > 0; i--){
+  for(
+    let i = copy.length - 1;
+    i > 0;
+    i--
+  ){
 
-    const j = Math.floor(Math.random() * (i + 1));
+    const j =
+      Math.floor(
+        Math.random() * (i + 1)
+      );
 
-    [copy[i], copy[j]] = [copy[j], copy[i]];
+    [
+      copy[i],
+      copy[j]
+    ] = [
+      copy[j],
+      copy[i]
+    ];
   }
 
   return copy;
 }
 
 
-function normalizeQuestion(q,index){
+function cleanText(value){
 
-  if(!q || typeof q !== "object"){
+  if(
+    value === null ||
+    value === undefined
+  ){
+    return "";
+  }
+
+  return String(value).trim();
+}
+
+
+/* =========================================================
+   NORMALISATION DES QUESTIONS
+========================================================= */
+
+function normalizeQuestion(raw,index){
+
+  if(
+    !raw ||
+    typeof raw !== "object"
+  ){
     return null;
   }
 
-  const text =
-    q.question ??
-    q.questionText ??
-    q.text ??
-    q.enonce ??
-    q.title ??
+
+  /* QUESTION */
+
+  const questionText =
+    raw.question ??
+    raw.questionText ??
+    raw.text ??
+    raw.enonce ??
+    raw.énoncé ??
+    raw.enoncé ??
+    raw.prompt ??
     "";
 
-  if(!String(text).trim()){
+
+  if(
+    !cleanText(questionText)
+  ){
     return null;
   }
 
-  let options =
-    q.options ??
-    q.answers ??
-    q.choices ??
-    q.propositions ??
+
+  /* OPTIONS */
+
+  let rawOptions =
+    raw.options ??
+    raw.answers ??
+    raw.choices ??
+    raw.propositions ??
+    raw.choix ??
     [];
 
-  if(!Array.isArray(options)){
+
+  if(
+    !Array.isArray(rawOptions)
+  ){
     return null;
   }
 
-  options = options.map(option => {
 
-    if(typeof option === "object" && option !== null){
+  /*
+   * Conversion des options
+   */
 
-      return String(
-        option.text ??
-        option.label ??
-        option.answer ??
-        option.value ??
-        ""
+  const options = [];
+
+  const optionObjects = [];
+
+
+  rawOptions.forEach(
+    option => {
+
+      if(
+        option &&
+        typeof option === "object"
+      ){
+
+        const text =
+          option.text ??
+          option.label ??
+          option.answer ??
+          option.value ??
+          option.name ??
+          "";
+
+        options.push(
+          cleanText(text)
+        );
+
+        optionObjects.push(
+          option
+        );
+
+      }else{
+
+        options.push(
+          cleanText(option)
+        );
+
+        optionObjects.push(
+          null
+        );
+      }
+
+    }
+  );
+
+
+  /*
+   * Retirer les options vides.
+   */
+
+  const validOptions = [];
+
+  const validObjects = [];
+
+  for(
+    let i = 0;
+    i < options.length;
+    i++
+  ){
+
+    if(options[i]){
+
+      validOptions.push(
+        options[i]
+      );
+
+      validObjects.push(
+        optionObjects[i]
       );
     }
+  }
 
-    return String(option);
-  }).filter(Boolean);
 
-  if(options.length < 2){
+  if(
+    validOptions.length < 2
+  ){
     return null;
   }
 
-  let correct =
-    q.correctAnswer ??
-    q.correct ??
-    q.answer ??
-    q.correctOption ??
-    q.correctIndex ??
-    q.answerIndex ??
-    null;
+
+  /* =======================================================
+     TROUVER LA BONNE RÉPONSE
+  ======================================================= */
 
   let correctIndex = -1;
 
-  if(typeof correct === "number"){
 
-    if(correct >= 0 && correct < options.length){
-      correctIndex = correct;
+  /*
+   * Cas :
+   * correctIndex
+   */
+
+  if(
+    Number.isInteger(
+      raw.correctIndex
+    )
+  ){
+
+    correctIndex =
+      raw.correctIndex;
+
+  }
+
+
+  /*
+   * Cas :
+   * answerIndex
+   */
+
+  if(
+    correctIndex === -1 &&
+    Number.isInteger(
+      raw.answerIndex
+    )
+  ){
+
+    correctIndex =
+      raw.answerIndex;
+
+  }
+
+
+  /*
+   * Cas :
+   * correctAnswerIndex
+   */
+
+  if(
+    correctIndex === -1 &&
+    Number.isInteger(
+      raw.correctAnswerIndex
+    )
+  ){
+
+    correctIndex =
+      raw.correctAnswerIndex;
+
+  }
+
+
+  /*
+   * Cas :
+   * correct = 0/1/2/3
+   */
+
+  if(
+    correctIndex === -1 &&
+    Number.isInteger(raw.correct)
+  ){
+
+    correctIndex =
+      raw.correct;
+
+  }
+
+
+  /*
+   * Cas :
+   * answer = 0/1/2/3
+   */
+
+  if(
+    correctIndex === -1 &&
+    Number.isInteger(raw.answer)
+  ){
+
+    correctIndex =
+      raw.answer;
+
+  }
+
+
+  /*
+   * Cas :
+   * correctOption = 0/1/2/3
+   */
+
+  if(
+    correctIndex === -1 &&
+    Number.isInteger(raw.correctOption)
+  ){
+
+    correctIndex =
+      raw.correctOption;
+
+  }
+
+
+  /*
+   * Cas :
+   * correctAnswer = nombre
+   */
+
+  if(
+    correctIndex === -1 &&
+    typeof raw.correctAnswer === "number"
+  ){
+
+    correctIndex =
+      raw.correctAnswer;
+
+  }
+
+
+  /*
+   * Cas :
+   * bonne réponse sous forme de texte
+   */
+
+  let correctValue =
+    raw.correctAnswer ??
+    raw.answer ??
+    raw.correct ??
+    raw.correctOption ??
+    raw.solution ??
+    raw.rightAnswer ??
+    null;
+
+
+  if(
+    correctIndex === -1 &&
+    typeof correctValue === "string"
+  ){
+
+    const wanted =
+      correctValue
+        .trim()
+        .toLowerCase();
+
+
+    /*
+     * A/B/C/D
+     */
+
+    if(
+      wanted.length === 1 &&
+      "abcd".includes(wanted)
+    ){
+
+      correctIndex =
+        "abcd".indexOf(wanted);
+
     }
 
-    if(correctIndex === -1 && correct > 0 && correct <= options.length){
-      correctIndex = correct - 1;
+
+    /*
+     * Texte exact d'une option
+     */
+
+    if(
+      correctIndex === -1
+    ){
+
+      correctIndex =
+        validOptions.findIndex(
+          option =>
+            option
+              .trim()
+              .toLowerCase() === wanted
+        );
+
+    }
+
+  }
+
+
+  /*
+   * Certains fichiers mettent la bonne
+   * réponse dans les objets option.
+   *
+   * Exemple :
+   * options: [
+   *   {text:"Paris", correct:false},
+   *   {text:"Port-au-Prince", correct:true}
+   * ]
+   */
+
+  if(
+    correctIndex === -1
+  ){
+
+    const objectIndex =
+      validObjects.findIndex(
+        option =>
+          option &&
+          (
+            option.correct === true ||
+            option.isCorrect === true ||
+            option.isAnswer === true
+          )
+      );
+
+    if(
+      objectIndex >= 0
+    ){
+
+      correctIndex =
+        objectIndex;
     }
   }
 
-  if(correctIndex === -1 && typeof correct === "string"){
 
-    const value = correct.trim().toLowerCase();
+  /*
+   * Correction des index 1-4.
+   */
 
-    correctIndex = options.findIndex(
-      option => option.trim().toLowerCase() === value
+  if(
+    correctIndex >= validOptions.length &&
+    correctIndex > 0 &&
+    correctIndex <= validOptions.length
+  ){
+
+    correctIndex--;
+  }
+
+
+  /*
+   * Dernière vérification.
+   */
+
+  if(
+    correctIndex < 0 ||
+    correctIndex >= validOptions.length
+  ){
+
+    console.warn(
+      "Question ignorée : réponse introuvable",
+      raw
     );
 
-    if(correctIndex === -1){
-
-      const letterIndex = "abcd".indexOf(value);
-
-      if(letterIndex >= 0 && letterIndex < options.length){
-        correctIndex = letterIndex;
-      }
-    }
-  }
-
-  if(correctIndex === -1 && typeof q.correctIndex === "number"){
-
-    correctIndex = q.correctIndex;
-
-    if(correctIndex >= options.length){
-      correctIndex--;
-    }
-  }
-
-  if(correctIndex < 0 || correctIndex >= options.length){
     return null;
   }
 
-  const difficulty = String(
-    q.difficulty ??
-    q.niveau ??
-    ""
-  ).toLowerCase();
 
   return {
-    id: q.id ?? `question-${index}`,
-    question: String(text),
-    options,
+
+    id:
+      raw.id ??
+      raw.questionId ??
+      `question-${index}`,
+
+    question:
+      cleanText(questionText),
+
+    options:
+      validOptions,
+
     correctIndex,
-    difficulty
+
+    difficulty:
+      cleanText(
+        raw.difficulty ??
+        raw.niveau ??
+        ""
+      ).toLowerCase()
   };
 }
 
@@ -626,163 +1148,348 @@ async function loadQuestions(){
 
   try{
 
-    const module = await import(
-      `${QUESTIONS_URL}?v=${Date.now()}`
+    const module =
+      await import(
+        `${QUESTIONS_URL}?v=${Date.now()}`
+      );
+
+
+    console.log(
+      "jeuxQuestions.js chargé :",
+      module
     );
 
-    let data =
-      module.default ??
-      module.questions ??
-      module.jeuxQuestions ??
-      module;
 
-    let raw = [];
+    let rawQuestions = [];
 
-    if(Array.isArray(data)){
-      raw = data;
+
+    /*
+     * EXPORT DEFAULT
+     */
+
+    if(
+      Array.isArray(module.default)
+    ){
+
+      rawQuestions =
+        module.default;
     }
-    else if(data && Array.isArray(data.questions)){
-      raw = data.questions;
+
+
+    /*
+     * EXPORT :
+     * jeuxQuestions
+     */
+
+    if(
+      !rawQuestions.length &&
+      Array.isArray(module.jeuxQuestions)
+    ){
+
+      rawQuestions =
+        module.jeuxQuestions;
     }
-    else{
 
-      for(const key of Object.keys(data || {})){
 
-        if(Array.isArray(data[key])){
-          raw = data[key];
+    /*
+     * EXPORT :
+     * questions
+     */
+
+    if(
+      !rawQuestions.length &&
+      Array.isArray(module.questions)
+    ){
+
+      rawQuestions =
+        module.questions;
+    }
+
+
+    /*
+     * EXPORT :
+     * QUESTIONS
+     */
+
+    if(
+      !rawQuestions.length &&
+      Array.isArray(module.QUESTIONS)
+    ){
+
+      rawQuestions =
+        module.QUESTIONS;
+    }
+
+
+    /*
+     * EXPORT :
+     * data
+     */
+
+    if(
+      !rawQuestions.length &&
+      module.data &&
+      Array.isArray(module.data)
+    ){
+
+      rawQuestions =
+        module.data;
+    }
+
+
+    /*
+     * EXPORT :
+     * data.questions
+     */
+
+    if(
+      !rawQuestions.length &&
+      module.data &&
+      Array.isArray(module.data.questions)
+    ){
+
+      rawQuestions =
+        module.data.questions;
+    }
+
+
+    /*
+     * Cherche automatiquement
+     * un tableau exporté.
+     */
+
+    if(
+      !rawQuestions.length
+    ){
+
+      for(
+        const key of Object.keys(module)
+      ){
+
+        if(
+          Array.isArray(module[key])
+        ){
+
+          rawQuestions =
+            module[key];
+
+          console.log(
+            "Banque détectée dans l'export :",
+            key
+          );
+
           break;
         }
       }
     }
 
-    const normalized = raw
-      .map(normalizeQuestion)
-      .filter(Boolean);
 
-    if(normalized.length){
+    console.log(
+      "Nombre brut de questions :",
+      rawQuestions.length
+    );
+
+
+    /*
+     * Normalisation
+     */
+
+    const normalized =
+      rawQuestions
+        .map(
+          normalizeQuestion
+        )
+        .filter(Boolean);
+
+
+    console.log(
+      "Nombre de questions utilisables :",
+      normalized.length
+    );
+
+
+    if(
+      normalized.length
+    ){
+
       return normalized;
     }
+
+
+    console.error(
+      "Aucune question utilisable trouvée."
+    );
 
   }catch(error){
 
     console.error(
-      "Erreur lors du chargement des questions :",
+      "Erreur pendant le chargement des questions :",
       error
     );
   }
 
+
+  /*
+   * QUESTIONS DE SECOURS
+   */
+
   return [
+
     {
       id:"fallback-1",
-      question:"Quel organe produit principalement l’insuline ?",
+
+      question:
+        "Quel organe produit principalement l'insuline ?",
+
       options:[
         "Le foie",
         "Le pancréas",
         "Le cœur",
         "Le rein"
       ],
-      correctIndex:1,
-      difficulty:"facile"
+
+      correctIndex:1
     },
+
+
     {
       id:"fallback-2",
-      question:"Quelle est la formule chimique de l’eau ?",
+
+      question:
+        "Quelle est la formule chimique de l'eau ?",
+
       options:[
         "CO₂",
         "O₂",
         "H₂O",
         "NaCl"
       ],
-      correctIndex:2,
-      difficulty:"facile"
+
+      correctIndex:2
     },
+
+
     {
       id:"fallback-3",
-      question:"Combien font 12 × 8 ?",
+
+      question:
+        "Combien font 12 × 8 ?",
+
       options:[
         "86",
         "96",
         "108",
         "112"
       ],
-      correctIndex:1,
-      difficulty:"facile"
+
+      correctIndex:1
     },
+
+
     {
       id:"fallback-4",
-      question:"Quelle planète est la plus proche du Soleil ?",
+
+      question:
+        "Quelle planète est la plus proche du Soleil ?",
+
       options:[
         "Mars",
         "Vénus",
         "Mercure",
         "Jupiter"
       ],
-      correctIndex:2,
-      difficulty:"facile"
+
+      correctIndex:2
     },
+
+
     {
       id:"fallback-5",
-      question:"Quel gaz les plantes utilisent-elles principalement pour la photosynthèse ?",
+
+      question:
+        "Quel gaz les plantes utilisent-elles principalement pour la photosynthèse ?",
+
       options:[
         "Oxygène",
         "Azote",
         "Hydrogène",
         "Dioxyde de carbone"
       ],
-      correctIndex:3,
-      difficulty:"moyen"
+
+      correctIndex:3
     }
+
   ];
 }
 
 
 /* =========================================================
-   BANQUE DE QUESTIONS
+   BANQUE SANS RÉPÉTITION
 ========================================================= */
 
 function rebuildQuestionPool(){
 
-  if(usedQuestions.size >= questions.length){
+  /*
+   * Quand toutes les questions ont été utilisées,
+   * on recommence un nouveau cycle.
+   */
 
-    usedQuestions.clear();
+  if(
+    usedQuestionIds.size >= questions.length
+  ){
+
+    usedQuestionIds.clear();
   }
 
-  const available = questions.filter(
-    q => !usedQuestions.has(String(q.id))
-  );
 
-  questionPool = shuffle(
-    available.length ? available : questions
-  );
+  const available =
+    questions.filter(
+      question =>
+        !usedQuestionIds.has(
+          String(question.id)
+        )
+    );
+
+
+  questionPool =
+    shuffle(
+      available.length
+        ? available
+        : questions
+    );
 }
 
 
 function getNextQuestion(){
 
-  if(questionPool.length === 0){
+  if(
+    questionPool.length === 0
+  ){
 
     rebuildQuestionPool();
   }
 
-  let question = questionPool.pop();
 
-  if(!question){
+  const question =
+    questionPool.pop();
 
-    rebuildQuestionPool();
-    question = questionPool.pop();
-  }
 
   if(question){
 
-    usedQuestions.add(String(question.id));
+    usedQuestionIds.add(
+      String(question.id)
+    );
+
+    return question;
   }
 
-  return question;
+
+  return null;
 }
 
 
 /* =========================================================
-   ENNEMIS
+   TYPES D'ENNEMIS
 ========================================================= */
 
 const ENEMY_TYPES = {
@@ -820,12 +1527,16 @@ const ENEMY_TYPES = {
 
 function createEnemy(type){
 
-  const data = ENEMY_TYPES[type];
+  const data =
+    ENEMY_TYPES[type];
 
-  const speedBonus = Math.min(
-    wave * 1.7,
-    35
-  );
+
+  const speedBonus =
+    Math.min(
+      wave * 1.7,
+      35
+    );
+
 
   return {
 
@@ -836,162 +1547,252 @@ function createEnemy(type){
     type,
 
     x:
-      1140 +
-      Math.random() * 120,
+      1150 +
+      Math.random() * 180,
 
-    y:425,
+    y:
+      425,
 
     speed:
-      data.speed + speedBonus,
+      data.speed +
+      speedBonus,
 
-    hp:data.hp,
+    hp:
+      data.hp,
 
-    maxHp:data.hp,
+    maxHp:
+      data.hp,
 
-    radius:data.radius,
+    radius:
+      data.radius,
 
     alive:true,
 
-    targetQuestion:null,
-
-    attackCooldown:0
+    targetQuestion:null
   };
 }
 
 
 /* =========================================================
-   PLUS D'ENNEMIS À CHAQUE VAGUE
+   NOMBRE D'ENNEMIS
 ========================================================= */
 
 function getWaveEnemies(){
 
   const result = [];
 
+
   /*
-    Vague 1 : 4
-    Vague 2 : 6
-    Vague 3 : 8
-    Vague 4 : 10
-    Vague 5 : 12 + boss
-    etc.
-  */
+   * 1 = 4
+   * 2 = 6
+   * 3 = 8
+   * 4 = 10
+   * 5 = 12 + boss
+   * etc.
+   */
 
-  const amount = Math.min(
-    4 + (wave - 1) * 2,
-    30
-  );
+  const amount =
+    Math.min(
+      4 + (wave - 1) * 2,
+      30
+    );
 
-  for(let i = 0; i < amount; i++){
 
-    let type = "soldier";
+  for(
+    let i = 0;
+    i < amount;
+    i++
+  ){
 
-    if(wave >= 3 && i % 4 === 0){
-      type = "cavalier";
+    let type =
+      "soldier";
+
+
+    if(
+      wave >= 3 &&
+      i % 4 === 0
+    ){
+
+      type =
+        "cavalier";
     }
 
-    if(wave >= 5 && i % 6 === 0){
-      type = "giant";
+
+    if(
+      wave >= 5 &&
+      i % 6 === 0
+    ){
+
+      type =
+        "giant";
     }
 
-    if(wave >= 8 && i % 8 === 0){
-      type = "giant";
+
+    if(
+      wave >= 8 &&
+      i % 8 === 0
+    ){
+
+      type =
+        "giant";
     }
+
 
     result.push(
       createEnemy(type)
     );
   }
 
-  /*
-    Boss toutes les 5 vagues.
-  */
 
-  if(wave % 5 === 0){
+  /*
+   * Boss toutes les 5 vagues.
+   */
+
+  if(
+    wave % 5 === 0
+  ){
 
     result.push(
       createEnemy("boss")
     );
   }
 
+
   return result;
 }
 
 
 /* =========================================================
-   VAGUE
+   DÉMARRER UNE VAGUE
 ========================================================= */
 
 function startWave(){
 
-  waveFinished = false;
+  waveFinished =
+    false;
 
-  enemies = getWaveEnemies();
+  enemies =
+    getWaveEnemies();
 
-  projectiles = [];
+  projectiles =
+    [];
 
-  currentEnemy = null;
-  currentQuestion = null;
+  currentEnemy =
+    null;
 
-  answerLocked = false;
+  currentQuestion =
+    null;
+
+  answerLocked =
+    false;
 
   updateHUD();
 
-  showNextEnemyQuestion();
+  showNextQuestion();
 }
 
 
-function showNextEnemyQuestion(){
+/* =========================================================
+   QUESTION SUIVANTE
+========================================================= */
 
-  if(gameOver || waveFinished){
+function showNextQuestion(){
+
+  if(
+    gameOver ||
+    waveFinished
+  ){
+
     return;
   }
 
-  const alive = enemies.filter(
-    enemy => enemy.alive
-  );
 
-  if(alive.length === 0){
+  const alive =
+    enemies.filter(
+      enemy =>
+        enemy.alive
+    );
+
+
+  if(
+    !alive.length
+  ){
 
     finishWave();
+
     return;
   }
 
+
   /*
-    On cherche en priorité l'ennemi
-    qui attend une question.
-  */
+   * On garde l'ennemi actuel s'il
+   * est encore vivant et nécessite
+   * une question.
+   */
 
   let enemy =
-    alive.find(
-      e => e === currentEnemy && e.alive
-    );
+    null;
+
+
+  if(
+    currentEnemy &&
+    currentEnemy.alive &&
+    !currentEnemy.targetQuestion
+  ){
+
+    enemy =
+      currentEnemy;
+  }
+
+
+  /*
+   * Sinon chercher un ennemi sans question.
+   */
 
   if(!enemy){
 
     enemy =
       alive.find(
-        e => !e.targetQuestion
+        e =>
+          !e.targetQuestion
       );
   }
 
-  if(!enemy){
-
-    enemy = alive[0];
-  }
-
-  currentEnemy = enemy;
 
   /*
-    Chaque attaque obtient une nouvelle question.
-  */
+   * Sinon prendre le premier vivant.
+   */
 
-  currentQuestion = getNextQuestion();
+  if(!enemy){
 
-  if(!currentQuestion){
+    enemy =
+      alive[0];
+  }
+
+
+  currentEnemy =
+    enemy;
+
+
+  currentQuestion =
+    getNextQuestion();
+
+
+  if(
+    !currentQuestion
+  ){
+
+    console.error(
+      "Impossible de récupérer une question."
+    );
+
     return;
   }
 
-  enemy.targetQuestion = currentQuestion;
+
+  enemy.targetQuestion =
+    currentQuestion;
+
 
   displayQuestion(
     currentQuestion,
@@ -1001,54 +1802,87 @@ function showNextEnemyQuestion(){
 
 
 /* =========================================================
-   AFFICHAGE QUESTION
+   AFFICHER QUESTION
 ========================================================= */
 
-function displayQuestion(question,enemy){
+function displayQuestion(
+  question,
+  enemy
+){
 
-  answerLocked = false;
+  answerLocked =
+    false;
+
 
   enemyTypeEl.textContent =
-    ENEMY_TYPES[enemy.type].name;
+    ENEMY_TYPES[
+      enemy.type
+    ].name;
+
 
   enemyHpEl.textContent =
     `PV : ${enemy.hp}/${enemy.maxHp}`;
 
+
   questionEl.textContent =
     question.question;
 
-  feedbackEl.textContent = "";
-  feedbackEl.className = "";
 
-  optionsEl.innerHTML = "";
+  feedbackEl.textContent =
+    "";
+
+  feedbackEl.className =
+    "";
+
+
+  optionsEl.innerHTML =
+    "";
+
 
   question.options.forEach(
     (option,index) => {
 
       const button =
-        document.createElement("button");
+        document.createElement(
+          "button"
+        );
 
-      button.className = "option";
+
+      button.className =
+        "option";
+
+
+      button.type =
+        "button";
+
 
       button.textContent =
         `${String.fromCharCode(65 + index)}. ${option}`;
 
+
       button.addEventListener(
         "click",
-        () => answerQuestion(index)
+        () =>
+          answerQuestion(index)
       );
 
-      optionsEl.appendChild(button);
+
+      optionsEl.appendChild(
+        button
+      );
+
     }
   );
 }
 
 
 /* =========================================================
-   RÉPONSE
+   RÉPONDRE
 ========================================================= */
 
-function answerQuestion(selectedIndex){
+function answerQuestion(
+  selectedIndex
+){
 
   if(
     answerLocked ||
@@ -1058,97 +1892,128 @@ function answerQuestion(selectedIndex){
     !currentEnemy ||
     !currentEnemy.alive
   ){
+
     return;
   }
 
-  answerLocked = true;
+
+  answerLocked =
+    true;
+
 
   const buttons =
-    [...optionsEl.querySelectorAll(".option")];
+    [
+      ...optionsEl.querySelectorAll(
+        ".option"
+      )
+    ];
+
 
   buttons.forEach(
-    button => button.disabled = true
+    button =>
+      button.disabled = true
   );
+
 
   const correctIndex =
     currentQuestion.correctIndex;
 
-  if(selectedIndex === correctIndex){
 
-    buttons[selectedIndex]?.classList.add(
+  if(
+    selectedIndex === correctIndex
+  ){
+
+    buttons[
+      selectedIndex
+    ]?.classList.add(
       "correct"
     );
 
+
     feedbackEl.textContent =
-      "Bonne réponse ! Le château attaque.";
+      "Bonne réponse ! Attaque réussie.";
 
-    feedbackEl.className = "good";
+    feedbackEl.className =
+      "good";
 
-    score += POINTS_CORRECT;
+
+    score +=
+      POINTS_CORRECT;
+
 
     launchProjectile(
       currentEnemy
     );
 
-    /*
-      Très important :
-      l'ennemi conserve son statut de cible
-      jusqu'à ce que le projectile le touche.
-    */
 
   }else{
 
-    buttons[selectedIndex]?.classList.add(
+    buttons[
+      selectedIndex
+    ]?.classList.add(
       "wrong"
     );
 
-    buttons[correctIndex]?.classList.add(
+
+    buttons[
+      correctIndex
+    ]?.classList.add(
       "correct"
     );
+
 
     feedbackEl.textContent =
       "Mauvaise réponse. L'ennemi continue d'avancer.";
 
-    feedbackEl.className = "bad";
+    feedbackEl.className =
+      "bad";
 
-    /*
-      Une mauvaise réponse ne détruit pas
-      l'ennemi.
-    */
 
-    currentEnemy.targetQuestion = null;
+    currentEnemy.targetQuestion =
+      null;
 
-    setTimeout(() => {
 
-      if(!gameOver && !waveFinished){
+    setTimeout(
+      () => {
 
-        showNextEnemyQuestion();
-      }
+        if(
+          !gameOver &&
+          !waveFinished
+        ){
 
-    },650);
+          showNextQuestion();
+        }
+
+      },
+      700
+    );
   }
+
 
   updateHUD();
 }
 
 
 /* =========================================================
-   PROJECTILE
+   TIR
 ========================================================= */
 
-function launchProjectile(enemy){
+function launchProjectile(
+  enemy
+){
 
   projectiles.push({
 
     x:300,
 
-    y:425,
+    y:420,
 
     target:enemy,
 
     speed:700,
 
     alive:true
+
   });
 }
 
@@ -1157,140 +2022,205 @@ function launchProjectile(enemy){
    IMPACT
 ========================================================= */
 
-function hitEnemy(enemy){
+function hitEnemy(
+  enemy
+){
 
   if(
     !enemy ||
     !enemy.alive
   ){
+
     return;
   }
+
 
   enemy.hp--;
 
-  enemy.targetQuestion = null;
+
+  enemy.targetQuestion =
+    null;
+
 
   /*
-    Si l'ennemi possède encore des PV,
-    il reçoit immédiatement une nouvelle question.
+   * Géant ou boss encore vivant.
+   *
+   * Il reçoit immédiatement
+   * une nouvelle question.
+   */
 
-    Cela rend les géants et les boss
-    réellement plus difficiles.
-  */
+  if(
+    enemy.hp > 0
+  ){
 
-  if(enemy.hp > 0){
+    currentEnemy =
+      enemy;
 
-    currentEnemy = enemy;
 
-    currentQuestion = getNextQuestion();
+    currentQuestion =
+      getNextQuestion();
 
-    setTimeout(() => {
 
-      if(
-        !gameOver &&
-        !waveFinished &&
-        enemy.alive
-      ){
+    setTimeout(
+      () => {
 
-        displayQuestion(
-          currentQuestion,
-          enemy
-        );
+        if(
+          !gameOver &&
+          !waveFinished &&
+          enemy.alive &&
+          currentQuestion
+        ){
 
-        updateHUD();
-      }
+          displayQuestion(
+            currentQuestion,
+            enemy
+          );
 
-    },350);
+          updateHUD();
+        }
+
+      },
+      350
+    );
+
 
     return;
   }
 
+
   /*
-    Ennemi détruit.
-  */
+   * Ennemi détruit.
+   */
 
-  enemy.alive = false;
+  enemy.alive =
+    false;
 
-  score += 5;
 
-  if(currentEnemy === enemy){
+  score +=
+    5;
 
-    currentEnemy = null;
-    currentQuestion = null;
+
+  if(
+    currentEnemy === enemy
+  ){
+
+    currentEnemy =
+      null;
+
+    currentQuestion =
+      null;
   }
 
-  setTimeout(() => {
 
-    if(
-      !gameOver &&
-      !waveFinished
-    ){
+  updateHUD();
 
-      showNextEnemyQuestion();
-    }
-
-  },300);
 
   checkWaveFinished();
 
-  updateHUD();
+
+  if(
+    !waveFinished &&
+    !gameOver
+  ){
+
+    setTimeout(
+      () => {
+
+        showNextQuestion();
+
+      },
+      350
+    );
+  }
 }
 
 
 /* =========================================================
-   PERTE D'UNE VIE
+   ENNEMI AU CHÂTEAU
 ========================================================= */
 
-function loseLife(enemy){
+function loseLife(
+  enemy
+){
 
-  if(!enemy.alive){
+  if(
+    !enemy.alive
+  ){
+
     return;
   }
 
-  enemy.alive = false;
 
-  enemy.targetQuestion = null;
+  enemy.alive =
+    false;
+
+
+  enemy.targetQuestion =
+    null;
+
 
   lives--;
 
-  if(currentEnemy === enemy){
 
-    currentEnemy = null;
-    currentQuestion = null;
+  if(
+    currentEnemy === enemy
+  ){
+
+    currentEnemy =
+      null;
+
+    currentQuestion =
+      null;
   }
+
 
   updateHUD();
 
-  if(lives <= 0){
+
+  if(
+    lives <= 0
+  ){
 
     endGame();
 
     return;
   }
 
-  setTimeout(() => {
 
-    if(!gameOver && !waveFinished){
+  checkWaveFinished();
 
-      showNextEnemyQuestion();
-    }
 
-  },350);
+  if(
+    !waveFinished &&
+    !gameOver
+  ){
+
+    setTimeout(
+      () => {
+
+        showNextQuestion();
+
+      },
+      300
+    );
+  }
 }
 
 
 /* =========================================================
-   FIN VAGUE
+   FIN DE VAGUE
 ========================================================= */
 
 function checkWaveFinished(){
 
-  const remaining =
+  const alive =
     enemies.some(
-      enemy => enemy.alive
+      enemy =>
+        enemy.alive
     );
 
-  if(!remaining){
+
+  if(!alive){
 
     finishWave();
   }
@@ -1299,31 +2229,51 @@ function checkWaveFinished(){
 
 function finishWave(){
 
-  if(waveFinished || gameOver){
+  if(
+    waveFinished ||
+    gameOver
+  ){
+
     return;
   }
 
-  waveFinished = true;
 
-  currentEnemy = null;
-  currentQuestion = null;
+  waveFinished =
+    true;
 
-  optionsEl.innerHTML = "";
+
+  currentEnemy =
+    null;
+
+
+  currentQuestion =
+    null;
+
+
+  optionsEl.innerHTML =
+    "";
+
 
   questionEl.textContent =
     "Tous les ennemis ont été vaincus.";
 
+
   enemyTypeEl.textContent =
     "Vague terminée";
 
-  enemyHpEl.textContent = "—";
+
+  enemyHpEl.textContent =
+    "—";
+
 
   waveScoreEl.textContent =
     score;
 
+
   victoryOverlay.classList.remove(
     "hidden"
   );
+
 
   updateHUD();
 }
@@ -1339,34 +2289,49 @@ function continueWave(){
     "hidden"
   );
 
+
   wave++;
+
 
   startWave();
 }
 
 
 /* =========================================================
-   FIN DU JEU
+   GAME OVER
 ========================================================= */
 
 function endGame(){
 
-  gameOver = true;
-  gameStarted = false;
+  gameOver =
+    true;
 
-  currentEnemy = null;
-  currentQuestion = null;
+  gameStarted =
+    false;
 
-  optionsEl.innerHTML = "";
+
+  currentEnemy =
+    null;
+
+  currentQuestion =
+    null;
+
+
+  optionsEl.innerHTML =
+    "";
+
 
   questionEl.textContent =
     "Le château n'a plus de vies.";
 
+
   finalScoreEl.textContent =
     score;
 
+
   finalWaveEl.textContent =
     wave;
+
 
   gameOverOverlay.classList.remove(
     "hidden"
@@ -1380,31 +2345,44 @@ function endGame(){
 
 function resetGame(){
 
-  lives = MAX_LIVES;
+  lives =
+    MAX_LIVES;
 
-  score = 0;
+  score =
+    0;
 
-  wave = 1;
+  wave =
+    1;
 
-  enemies = [];
+  enemies =
+    [];
 
-  projectiles = [];
+  projectiles =
+    [];
 
-  currentEnemy = null;
+  currentEnemy =
+    null;
 
-  currentQuestion = null;
+  currentQuestion =
+    null;
 
-  usedQuestions.clear();
+  usedQuestionIds.clear();
 
-  questionPool = [];
+  questionPool =
+    [];
 
-  gameOver = false;
+  gameOver =
+    false;
 
-  waveFinished = false;
+  waveFinished =
+    false;
 
-  answerLocked = false;
+  answerLocked =
+    false;
 
-  gameStarted = true;
+  gameStarted =
+    true;
+
 
   gameOverOverlay.classList.add(
     "hidden"
@@ -1417,6 +2395,7 @@ function resetGame(){
   startOverlay.classList.add(
     "hidden"
   );
+
 
   rebuildQuestionPool();
 
@@ -1437,41 +2416,53 @@ function updateHUD(){
       Math.max(0,lives)
     );
 
+
   scoreEl.textContent =
     score;
+
 
   waveEl.textContent =
     wave;
 
+
   enemyCountEl.textContent =
     enemies.filter(
-      enemy => enemy.alive
+      enemy =>
+        enemy.alive
     ).length;
 }
 
 
 /* =========================================================
-   CANVAS
+   DESSIN DU CIEL
 ========================================================= */
 
 function drawSky(){
 
   const gradient =
     ctx.createLinearGradient(
-      0,0,0,675
+      0,
+      0,
+      0,
+      675
     );
+
 
   gradient.addColorStop(
     0,
     "#10182b"
   );
 
+
   gradient.addColorStop(
     1,
     "#405a79"
   );
 
-  ctx.fillStyle = gradient;
+
+  ctx.fillStyle =
+    gradient;
+
 
   ctx.fillRect(
     0,
@@ -1487,7 +2478,9 @@ function drawMoon(){
   ctx.fillStyle =
     "#f3e9bb";
 
+
   ctx.beginPath();
+
 
   ctx.arc(
     980,
@@ -1497,16 +2490,23 @@ function drawMoon(){
     Math.PI * 2
   );
 
+
   ctx.fill();
 }
 
 
-function drawCloud(x,y,scale=1){
+function drawCloud(
+  x,
+  y,
+  scale = 1
+){
 
   ctx.fillStyle =
     "rgba(255,255,255,.13)";
 
+
   ctx.beginPath();
+
 
   ctx.arc(
     x,
@@ -1516,6 +2516,7 @@ function drawCloud(x,y,scale=1){
     Math.PI * 2
   );
 
+
   ctx.arc(
     x + 35 * scale,
     y - 12 * scale,
@@ -1524,6 +2525,7 @@ function drawCloud(x,y,scale=1){
     Math.PI * 2
   );
 
+
   ctx.arc(
     x + 75 * scale,
     y,
@@ -1531,6 +2533,7 @@ function drawCloud(x,y,scale=1){
     0,
     Math.PI * 2
   );
+
 
   ctx.fill();
 }
@@ -1541,27 +2544,78 @@ function drawMountains(){
   ctx.fillStyle =
     "#1c2938";
 
+
   ctx.beginPath();
 
-  ctx.moveTo(0,430);
 
-  ctx.lineTo(180,245);
-  ctx.lineTo(330,430);
+  ctx.moveTo(
+    0,
+    430
+  );
 
-  ctx.lineTo(470,220);
-  ctx.lineTo(650,430);
 
-  ctx.lineTo(800,260);
-  ctx.lineTo(1010,430);
+  ctx.lineTo(
+    180,
+    245
+  );
 
-  ctx.lineTo(1130,285);
-  ctx.lineTo(1200,350);
 
-  ctx.lineTo(1200,500);
+  ctx.lineTo(
+    330,
+    430
+  );
 
-  ctx.lineTo(0,500);
+
+  ctx.lineTo(
+    470,
+    220
+  );
+
+
+  ctx.lineTo(
+    650,
+    430
+  );
+
+
+  ctx.lineTo(
+    800,
+    260
+  );
+
+
+  ctx.lineTo(
+    1010,
+    430
+  );
+
+
+  ctx.lineTo(
+    1130,
+    285
+  );
+
+
+  ctx.lineTo(
+    1200,
+    350
+  );
+
+
+  ctx.lineTo(
+    1200,
+    500
+  );
+
+
+  ctx.lineTo(
+    0,
+    500
+  );
+
 
   ctx.closePath();
+
 
   ctx.fill();
 }
@@ -1572,6 +2626,7 @@ function drawGround(){
   ctx.fillStyle =
     "#18271c";
 
+
   ctx.fillRect(
     0,
     450,
@@ -1579,8 +2634,10 @@ function drawGround(){
     225
   );
 
+
   ctx.fillStyle =
     "#233a25";
+
 
   ctx.fillRect(
     0,
@@ -1598,12 +2655,17 @@ function drawGround(){
 function drawCastle(){
 
   const x = 110;
+
   const y = 315;
+
   const w = 190;
+
   const h = 190;
+
 
   ctx.fillStyle =
     "#70777d";
+
 
   ctx.fillRect(
     x,
@@ -1612,8 +2674,10 @@ function drawCastle(){
     h
   );
 
+
   ctx.fillStyle =
     "#555c62";
+
 
   ctx.fillRect(
     x + 65,
@@ -1622,8 +2686,10 @@ function drawCastle(){
     95
   );
 
+
   ctx.fillStyle =
     "#353b42";
+
 
   ctx.fillRect(
     x + 82,
@@ -1632,12 +2698,14 @@ function drawCastle(){
     60
   );
 
+
   drawTower(
     x - 15,
     y - 75,
     65,
     100
   );
+
 
   drawTower(
     x + w - 50,
@@ -1646,8 +2714,10 @@ function drawCastle(){
     100
   );
 
+
   ctx.fillStyle =
     "#8b2020";
+
 
   ctx.fillRect(
     x + 85,
@@ -1658,10 +2728,16 @@ function drawCastle(){
 }
 
 
-function drawTower(x,y,w,h){
+function drawTower(
+  x,
+  y,
+  w,
+  h
+){
 
   ctx.fillStyle =
     "#777f86";
+
 
   ctx.fillRect(
     x,
@@ -1670,32 +2746,41 @@ function drawTower(x,y,w,h){
     h
   );
 
+
   ctx.fillStyle =
     "#3c4147";
 
+
   ctx.beginPath();
+
 
   ctx.moveTo(
     x - 8,
     y
   );
 
+
   ctx.lineTo(
     x + w / 2,
     y - 48
   );
+
 
   ctx.lineTo(
     x + w + 8,
     y
   );
 
+
   ctx.closePath();
+
 
   ctx.fill();
 
+
   ctx.fillStyle =
     "#20252b";
+
 
   ctx.fillRect(
     x + 22,
@@ -1710,38 +2795,63 @@ function drawTower(x,y,w,h){
    ENNEMIS
 ========================================================= */
 
-function drawEnemy(enemy){
+function drawEnemy(
+  enemy
+){
 
-  if(!enemy.alive){
+  if(
+    !enemy.alive
+  ){
+
     return;
   }
+
 
   const r =
     enemy.radius;
 
+
   let bodyColor =
     "#9b3434";
 
-  if(enemy.type === "cavalier"){
-    bodyColor = "#6d3eaa";
+
+  if(
+    enemy.type === "cavalier"
+  ){
+
+    bodyColor =
+      "#6d3eaa";
   }
 
-  if(enemy.type === "giant"){
-    bodyColor = "#79562d";
+
+  if(
+    enemy.type === "giant"
+  ){
+
+    bodyColor =
+      "#79562d";
   }
 
-  if(enemy.type === "boss"){
-    bodyColor = "#b27a1c";
+
+  if(
+    enemy.type === "boss"
+  ){
+
+    bodyColor =
+      "#b27a1c";
   }
+
 
   /*
-    Ombre
-  */
+   * Ombre
+   */
 
   ctx.fillStyle =
     "rgba(0,0,0,.35)";
 
+
   ctx.beginPath();
+
 
   ctx.ellipse(
     enemy.x,
@@ -1753,16 +2863,20 @@ function drawEnemy(enemy){
     Math.PI * 2
   );
 
+
   ctx.fill();
 
+
   /*
-    Corps
-  */
+   * Corps
+   */
 
   ctx.fillStyle =
     bodyColor;
 
+
   ctx.beginPath();
+
 
   ctx.arc(
     enemy.x,
@@ -1772,16 +2886,20 @@ function drawEnemy(enemy){
     Math.PI * 2
   );
 
+
   ctx.fill();
 
+
   /*
-    Tête
-  */
+   * Tête
+   */
 
   ctx.fillStyle =
     "#d2a07c";
 
+
   ctx.beginPath();
+
 
   ctx.arc(
     enemy.x,
@@ -1791,16 +2909,20 @@ function drawEnemy(enemy){
     Math.PI * 2
   );
 
+
   ctx.fill();
 
+
   /*
-    Yeux
-  */
+   * Yeux
+   */
 
   ctx.fillStyle =
     "#111";
 
+
   ctx.beginPath();
+
 
   ctx.arc(
     enemy.x - r * .16,
@@ -1810,6 +2932,7 @@ function drawEnemy(enemy){
     Math.PI * 2
   );
 
+
   ctx.arc(
     enemy.x + r * .16,
     enemy.y - r * .77,
@@ -1818,25 +2941,31 @@ function drawEnemy(enemy){
     Math.PI * 2
   );
 
+
   ctx.fill();
 
+
   /*
-    Barre de vie
-  */
+   * Barre de vie
+   */
 
   const barWidth =
     r * 2;
 
-  const barHeight = 7;
+  const barHeight =
+    7;
 
   const ratio =
     Math.max(
       0,
-      enemy.hp / enemy.maxHp
+      enemy.hp /
+      enemy.maxHp
     );
+
 
   ctx.fillStyle =
     "#222";
+
 
   ctx.fillRect(
     enemy.x - barWidth / 2,
@@ -1845,10 +2974,12 @@ function drawEnemy(enemy){
     barHeight
   );
 
+
   ctx.fillStyle =
     enemy.type === "boss"
       ? "#e5b52b"
       : "#40c878";
+
 
   ctx.fillRect(
     enemy.x - barWidth / 2,
@@ -1857,21 +2988,27 @@ function drawEnemy(enemy){
     barHeight
   );
 
+
   /*
-    Nom
-  */
+   * Nom
+   */
 
   ctx.fillStyle =
     "#fff";
 
+
   ctx.font =
     "bold 12px Arial";
+
 
   ctx.textAlign =
     "center";
 
+
   ctx.fillText(
-    ENEMY_TYPES[enemy.type].name,
+    ENEMY_TYPES[
+      enemy.type
+    ].name,
     enemy.x,
     enemy.y + r + 17
   );
@@ -1887,14 +3024,20 @@ function drawProjectiles(){
   projectiles.forEach(
     projectile => {
 
-      if(!projectile.alive){
+      if(
+        !projectile.alive
+      ){
+
         return;
       }
+
 
       ctx.fillStyle =
         "#f3c44f";
 
+
       ctx.beginPath();
+
 
       ctx.arc(
         projectile.x,
@@ -1904,16 +3047,23 @@ function drawProjectiles(){
         Math.PI * 2
       );
 
+
       ctx.fill();
+
 
       ctx.shadowColor =
         "#ffd86a";
 
-      ctx.shadowBlur = 15;
+
+      ctx.shadowBlur =
+        15;
+
 
       ctx.fill();
 
-      ctx.shadowBlur = 0;
+
+      ctx.shadowBlur =
+        0;
     }
   );
 }
@@ -1925,42 +3075,54 @@ function drawProjectiles(){
 
 function update(dt){
 
-  if(!gameStarted || gameOver){
+  if(
+    !gameStarted ||
+    gameOver
+  ){
+
     return;
   }
 
+
   /*
-    Déplacement des ennemis.
-  */
+   * ENNEMIS
+   */
 
   enemies.forEach(
     enemy => {
 
-      if(!enemy.alive){
+      if(
+        !enemy.alive
+      ){
+
         return;
       }
 
-      /*
-        Les ennemis avancent continuellement.
-      */
 
       enemy.x -=
         enemy.speed * dt;
 
+
       /*
-        Le château est atteint.
-      */
+       * Le château est atteint.
+       */
 
-      if(enemy.x <= 315){
+      if(
+        enemy.x <= 315
+      ){
 
-        loseLife(enemy);
+        loseLife(
+          enemy
+        );
       }
+
     }
   );
 
+
   /*
-    Projectiles.
-  */
+   * PROJECTILES
+   */
 
   projectiles.forEach(
     projectile => {
@@ -1971,21 +3133,26 @@ function update(dt){
         !projectile.target.alive
       ){
 
-        projectile.alive = false;
+        projectile.alive =
+          false;
 
         return;
       }
 
+
       const target =
         projectile.target;
+
 
       const dx =
         target.x -
         projectile.x;
 
+
       const dy =
         target.y -
         projectile.y;
+
 
       const distance =
         Math.sqrt(
@@ -1993,25 +3160,40 @@ function update(dt){
           dy * dy
         );
 
-      if(distance < 25){
 
-        projectile.alive = false;
+      if(
+        distance < 25
+      ){
 
-        hitEnemy(target);
+        projectile.alive =
+          false;
+
+
+        hitEnemy(
+          target
+        );
+
 
         return;
       }
 
+
       const step =
         projectile.speed * dt;
 
+
       projectile.x +=
-        dx / distance * step;
+        dx / distance *
+        step;
+
 
       projectile.y +=
-        dy / distance * step;
+        dy / distance *
+        step;
+
     }
   );
+
 
   projectiles =
     projectiles.filter(
@@ -2019,7 +3201,9 @@ function update(dt){
         projectile.alive
     );
 
+
   updateHUD();
+
 
   checkWaveFinished();
 }
@@ -2059,42 +3243,51 @@ function draw(){
 
   drawCastle();
 
+
   enemies.forEach(
     drawEnemy
   );
+
 
   drawProjectiles();
 }
 
 
 /* =========================================================
-   BOUCLE DE JEU
+   BOUCLE
 ========================================================= */
 
 function loop(timestamp){
 
-  if(!lastTime){
-    lastTime = timestamp;
+  if(
+    !lastTime
+  ){
+
+    lastTime =
+      timestamp;
   }
 
+
   let dt =
-    (timestamp - lastTime) / 1000;
+    (timestamp - lastTime) /
+    1000;
 
-  lastTime = timestamp;
 
-  /*
-    Évite les gros sauts lorsque
-    l'onglet revient au premier plan.
-  */
+  lastTime =
+    timestamp;
 
-  dt = Math.min(
-    dt,
-    .04
-  );
+
+  dt =
+    Math.min(
+      dt,
+      .04
+    );
+
 
   update(dt);
 
   draw();
+
 
   requestAnimationFrame(
     loop
@@ -2114,22 +3307,28 @@ document.addEventListener(
       answerLocked ||
       !currentQuestion
     ){
+
       return;
     }
+
 
     const key =
       event.key.toLowerCase();
 
+
     const map = {
+
       a:0,
       b:1,
       c:2,
       d:3,
+
       "1":0,
       "2":1,
       "3":2,
       "4":3
     };
+
 
     if(
       Object.prototype.hasOwnProperty.call(
@@ -2141,12 +3340,15 @@ document.addEventListener(
       const index =
         map[key];
 
+
       if(
         index <
         currentQuestion.options.length
       ){
 
-        answerQuestion(index);
+        answerQuestion(
+          index
+        );
       }
     }
   }
@@ -2159,26 +3361,19 @@ document.addEventListener(
 
 startBtn.addEventListener(
   "click",
-  () => {
-
-    resetGame();
-  }
+  resetGame
 );
+
 
 restartBtn.addEventListener(
   "click",
-  () => {
-
-    resetGame();
-  }
+  resetGame
 );
+
 
 continueBtn.addEventListener(
   "click",
-  () => {
-
-    continueWave();
-  }
+  continueWave
 );
 
 
@@ -2191,16 +3386,28 @@ async function init(){
   questions =
     await loadQuestions();
 
+
+  console.log(
+    "BANQUE FINALE :",
+    questions.length,
+    "questions"
+  );
+
+
   rebuildQuestionPool();
+
 
   updateHUD();
 
+
   draw();
+
 
   requestAnimationFrame(
     loop
   );
 }
+
 
 init();
 
