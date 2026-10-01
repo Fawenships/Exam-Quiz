@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
   <meta name="theme-color" content="#24113f">
   <meta
@@ -19,6 +19,11 @@
       padding: 0;
     }
 
+    html {
+      width: 100%;
+      overflow-x: hidden;
+    }
+
     body {
       font-family: Arial, sans-serif;
       background: #f5f3f8;
@@ -32,13 +37,14 @@
     ===================================================== */
 
     .top {
-      height: 68px;
+      min-height: 68px;
       background: #fff;
       border-bottom: 1px solid #e5e1ea;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 25px;
+      gap: 15px;
+      padding: 10px 25px;
       position: sticky;
       top: 0;
       z-index: 20;
@@ -52,12 +58,18 @@
       color: #24113f;
       font-weight: 700;
       font-size: 18px;
+      min-width: 0;
     }
 
     .brand img {
       width: 38px;
       height: 38px;
       object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .brand span {
+      white-space: nowrap;
     }
 
     .back {
@@ -65,6 +77,7 @@
       color: #4b2481;
       font-weight: 700;
       font-size: 14px;
+      white-space: nowrap;
     }
 
     .back:hover {
@@ -72,13 +85,17 @@
     }
 
     /* =====================================================
-       MAIN
+       CONTENEUR
     ===================================================== */
 
     .game-wrapper {
       width: min(1180px, 94%);
       margin: 25px auto 50px;
     }
+
+    /* =====================================================
+       TITRE
+    ===================================================== */
 
     .game-title {
       text-align: center;
@@ -121,6 +138,7 @@
       padding: 10px 8px;
       background: #f8f6fa;
       border-radius: 12px;
+      min-width: 0;
     }
 
     .hud-item strong {
@@ -179,6 +197,7 @@
       font-size: clamp(18px, 3vw, 25px);
       font-weight: 700;
       line-height: 1.45;
+      overflow-wrap: anywhere;
     }
 
     /* =====================================================
@@ -191,13 +210,20 @@
       padding: clamp(10px, 2vw, 20px);
       box-shadow: 0 18px 50px rgba(0, 0, 0, .18);
       position: relative;
+      width: 100%;
     }
 
     .table-top-info {
-      color: rgba(255,255,255,.8);
+      color: rgba(255,255,255,.85);
       text-align: center;
       font-size: 12px;
       padding: 0 0 10px;
+    }
+
+    .canvas-wrapper {
+      width: 100%;
+      overflow: hidden;
+      border-radius: 15px;
     }
 
     canvas {
@@ -208,6 +234,8 @@
       background: #27704c;
       touch-action: none;
       cursor: crosshair;
+      user-select: none;
+      -webkit-user-select: none;
     }
 
     /* =====================================================
@@ -265,7 +293,7 @@
     }
 
     /* =====================================================
-       BUTTONS
+       BOUTONS
     ===================================================== */
 
     .controls {
@@ -312,7 +340,7 @@
     }
 
     /* =====================================================
-       END SCREEN
+       FIN DE PARTIE
     ===================================================== */
 
     .overlay {
@@ -332,6 +360,8 @@
 
     .modal {
       width: min(540px, 100%);
+      max-height: 90vh;
+      overflow-y: auto;
       background: #fff;
       border-radius: 22px;
       padding: 30px;
@@ -384,100 +414,248 @@
     }
 
     /* =====================================================
-       MOBILE
+       TABLETTE
     ===================================================== */
 
-    @media (max-width: 700px) {
-
-      .top {
-        height: 62px;
-        padding: 0 14px;
-      }
-
-      .brand {
-        font-size: 15px;
-      }
-
-      .brand img {
-        width: 31px;
-        height: 31px;
-      }
+    @media (max-width: 800px) {
 
       .game-wrapper {
-        width: 96%;
-        margin-top: 18px;
-      }
-
-      .game-title {
-        margin-bottom: 16px;
-      }
-
-      .hud {
-        padding: 10px;
+        width: 95%;
       }
 
       .hud-top {
         grid-template-columns: repeat(2, 1fr);
-        gap: 7px;
-      }
-
-      .hud-item {
-        padding: 9px 5px;
-      }
-
-      .hud-item strong {
-        font-size: 18px;
-      }
-
-      .question-box {
-        padding: 15px;
       }
 
       .table-section {
-        padding: 8px;
-        border-radius: 17px;
+        border-radius: 18px;
       }
 
-      .table-top-info {
-        font-size: 11px;
-        padding-bottom: 7px;
-      }
-
-      .message {
-        font-size: 13px;
-      }
-
-      .instructions {
-        font-size: 13px;
-      }
-
-      .final-stats {
-        grid-template-columns: 1fr 1fr 1fr;
-      }
-
-      .modal {
-        padding: 24px 18px;
-      }
     }
 
-    @media (max-width: 430px) {
+    /* =====================================================
+       TELEPHONE
+    ===================================================== */
+
+    @media (max-width: 600px) {
+
+      body {
+        background: #f5f3f8;
+      }
+
+      .top {
+        min-height: 60px;
+        padding:
+          8px
+          12px;
+      }
+
+      .brand {
+        font-size: 14px;
+        gap: 7px;
+      }
+
+      .brand img {
+        width: 30px;
+        height: 30px;
+      }
 
       .back {
         font-size: 12px;
       }
 
+      .game-wrapper {
+        width: calc(100% - 20px);
+        margin:
+          15px auto
+          30px;
+      }
+
+      .game-title {
+        margin-bottom: 14px;
+      }
+
+      .game-title h1 {
+        font-size: 30px;
+      }
+
+      .game-title p {
+        font-size: 13px;
+        line-height: 1.4;
+      }
+
+      /* HUD */
+
+      .hud {
+        padding: 9px;
+        border-radius: 15px;
+        margin-bottom: 12px;
+      }
+
+      .hud-top {
+        gap: 6px;
+        margin-bottom: 10px;
+      }
+
+      .hud-item {
+        padding: 8px 5px;
+        border-radius: 9px;
+      }
+
+      .hud-item strong {
+        font-size: 17px;
+      }
+
+      .hud-item span {
+        font-size: 10px;
+        margin-top: 2px;
+      }
+
+      .progress-container {
+        height: 7px;
+      }
+
+      /* QUESTION */
+
+      .question-box {
+        padding: 14px 12px;
+        border-radius: 15px;
+        margin-bottom: 12px;
+      }
+
+      .question-label {
+        font-size: 10px;
+        margin-bottom: 6px;
+      }
+
       .question {
         font-size: 17px;
+        line-height: 1.4;
+      }
+
+      /* TABLE */
+
+      .table-section {
+        padding: 6px;
+        border-radius: 15px;
+      }
+
+      .table-top-info {
+        font-size: 10px;
+        padding: 3px 4px 7px;
+      }
+
+      .canvas-wrapper {
+        border-radius: 11px;
+      }
+
+      canvas {
+        border-radius: 11px;
+      }
+
+      /* MESSAGE */
+
+      .message {
+        min-height: 46px;
+        margin-top: 12px;
+        padding: 10px 12px;
+        border-radius: 12px;
+        font-size: 12px;
+      }
+
+      /* INSTRUCTIONS */
+
+      .instructions {
+        padding: 13px;
+        margin-top: 12px;
+        border-radius: 14px;
+        font-size: 12px;
+        line-height: 1.55;
+      }
+
+      /* BUTTONS */
+
+      .controls {
+        margin-top: 12px;
+      }
+
+      .btn {
+        min-height: 42px;
+        padding: 0 15px;
+        font-size: 13px;
+      }
+
+      /* MODAL */
+
+      .overlay {
+        padding: 12px;
+      }
+
+      .modal {
+        border-radius: 18px;
+        padding: 22px 15px;
+      }
+
+      .modal h2 {
+        font-size: 25px;
       }
 
       .final-score {
         font-size: 38px;
+        margin: 10px 0 18px;
+      }
+
+      .final-stats {
+        gap: 6px;
+        margin-bottom: 18px;
+      }
+
+      .final-stat {
+        padding: 10px 4px;
       }
 
       .final-stat strong {
         font-size: 17px;
       }
+
+      .final-stat span {
+        font-size: 9px;
+      }
+
     }
+
+    /* =====================================================
+       PETITS TELEPHONES
+    ===================================================== */
+
+    @media (max-width: 380px) {
+
+      .brand span {
+        display: none;
+      }
+
+      .back {
+        font-size: 11px;
+      }
+
+      .game-title h1 {
+        font-size: 27px;
+      }
+
+      .game-title p {
+        font-size: 12px;
+      }
+
+      .question {
+        font-size: 16px;
+      }
+
+      .hud-item strong {
+        font-size: 16px;
+      }
+
+    }
+
   </style>
 </head>
 
@@ -486,11 +664,19 @@
 <header class="top">
 
   <a class="brand" href="index.html">
-    <img src="logo.png" alt="" onerror="this.style.display='none'">
+    <img
+      src="logo.png"
+      alt=""
+      onerror="this.style.display='none'"
+    >
+
     <span>ExamQuiz Haiti</span>
   </a>
 
-  <a class="back" href="baccalaureat.html">
+  <a
+    class="back"
+    href="baccalaureat.html"
+  >
     ← Retour aux jeux
   </a>
 
@@ -499,67 +685,121 @@
 
 <main class="game-wrapper">
 
-  <!-- TITRE -->
+  <!-- ===================================================
+       TITRE
+  ==================================================== -->
 
   <div class="game-title">
+
     <h1>EduBillard</h1>
+
     <p>
       Réponds aux questions de biologie en jouant au billard.
     </p>
+
   </div>
 
 
-  <!-- HUD -->
+  <!-- ===================================================
+       HUD
+  ==================================================== -->
 
   <section class="hud">
 
     <div class="hud-top">
 
       <div class="hud-item">
-        <strong id="score">0</strong>
-        <span>Points</span>
+
+        <strong id="score">
+          0
+        </strong>
+
+        <span>
+          Points
+        </span>
+
       </div>
 
-      <div class="hud-item">
-        <strong id="questionCounter">1 / 10</strong>
-        <span>Question</span>
-      </div>
 
       <div class="hud-item">
-        <strong id="correctCount">0</strong>
-        <span>Bonnes réponses</span>
+
+        <strong id="questionCounter">
+          1 / 10
+        </strong>
+
+        <span>
+          Question
+        </span>
+
       </div>
 
+
       <div class="hud-item">
-        <strong id="bestScore">0</strong>
-        <span>Meilleur score</span>
+
+        <strong id="correctCount">
+          0
+        </strong>
+
+        <span>
+          Bonnes réponses
+        </span>
+
+      </div>
+
+
+      <div class="hud-item">
+
+        <strong id="bestScore">
+          0
+        </strong>
+
+        <span>
+          Meilleur score
+        </span>
+
       </div>
 
     </div>
 
+
     <div class="progress-container">
-      <div class="progress-bar" id="progressBar"></div>
+
+      <div
+        class="progress-bar"
+        id="progressBar"
+      ></div>
+
     </div>
 
   </section>
 
 
-  <!-- QUESTION -->
+  <!-- ===================================================
+       QUESTION
+  ==================================================== -->
 
   <section class="question-box">
 
-    <div class="question-label" id="levelLabel">
+    <div
+      class="question-label"
+      id="levelLabel"
+    >
       Niveau 1
     </div>
 
-    <div class="question" id="question">
+    <div
+      class="question"
+      id="question"
+    >
       Chargement de la question...
     </div>
 
   </section>
 
 
-  <!-- TABLE -->
+  <!-- ===================================================
+       TABLE
+  ==================================================== -->
 
   <section class="table-section">
 
@@ -567,23 +807,34 @@
       Tire depuis la bille blanche vers la réponse de ton choix.
     </div>
 
-    <canvas
-      id="gameCanvas"
-      width="1100"
-      height="600"
-    ></canvas>
+    <div class="canvas-wrapper">
+
+      <canvas
+        id="gameCanvas"
+        width="1100"
+        height="600"
+      ></canvas>
+
+    </div>
 
   </section>
 
 
-  <!-- MESSAGE -->
+  <!-- ===================================================
+       MESSAGE
+  ==================================================== -->
 
-  <div class="message" id="message">
-    Choisis une réponse en tirant la bille blanche.
+  <div
+    class="message"
+    id="message"
+  >
+    Tire la bille blanche vers une réponse.
   </div>
 
 
-  <!-- INSTRUCTIONS -->
+  <!-- ===================================================
+       INSTRUCTIONS
+  ==================================================== -->
 
   <section class="instructions">
 
@@ -600,12 +851,11 @@
 
     <br>
 
-    Une bonne réponse rapporte <strong>10 points</strong>.
+    Une bonne réponse rapporte
+    <strong>10 points</strong>.
 
   </section>
 
-
-  <!-- CONTROLS -->
 
   <div class="controls">
 
@@ -625,44 +875,72 @@
      FIN DE PARTIE
 ===================================================== -->
 
-<div class="overlay" id="endOverlay">
+<div
+  class="overlay"
+  id="endOverlay"
+>
 
   <div class="modal">
 
-    <h2>Partie terminée</h2>
+    <h2>
+      Partie terminée
+    </h2>
 
     <p class="modal-subtitle">
       Tu as terminé les 10 questions d'EduBillard.
     </p>
 
-    <div class="final-score" id="finalScore">
+
+    <div
+      class="final-score"
+      id="finalScore"
+    >
       0 points
     </div>
+
 
     <div class="final-stats">
 
       <div class="final-stat">
+
         <strong id="finalCorrect">
           0
         </strong>
-        <span>Bonnes réponses</span>
+
+        <span>
+          Bonnes réponses
+        </span>
+
       </div>
 
+
       <div class="final-stat">
+
         <strong id="finalWrong">
           0
         </strong>
-        <span>Mauvaises réponses</span>
+
+        <span>
+          Mauvaises réponses
+        </span>
+
       </div>
 
+
       <div class="final-stat">
+
         <strong id="finalBest">
           0
         </strong>
-        <span>Meilleur score</span>
+
+        <span>
+          Meilleur score
+        </span>
+
       </div>
 
     </div>
+
 
     <div class="controls">
 
@@ -693,23 +971,36 @@
    CONFIGURATION
 ========================================================= */
 
-const QUESTIONS_URL = './src/biologieQuestions.js';
+const QUESTIONS_URL =
+  './src/biologieQuestions.js';
 
-const TOTAL_QUESTIONS = 10;
-const POINTS_CORRECT = 10;
+const TOTAL_QUESTIONS =
+  10;
 
-const BEST_SCORE_KEY = 'edubillard_best_score';
+const POINTS_CORRECT =
+  10;
+
+const BEST_SCORE_KEY =
+  'edubillard_best_score';
 
 
 /* =========================================================
    CANVAS
 ========================================================= */
 
-const canvas = document.getElementById('gameCanvas');
-const ctx = canvas.getContext('2d');
+const canvas =
+  document.getElementById(
+    'gameCanvas'
+  );
 
-let tableWidth = canvas.width;
-let tableHeight = canvas.height;
+const ctx =
+  canvas.getContext('2d');
+
+let tableWidth =
+  canvas.width;
+
+let tableHeight =
+  canvas.height;
 
 
 /* =========================================================
@@ -717,46 +1008,74 @@ let tableHeight = canvas.height;
 ========================================================= */
 
 const scoreEl =
-  document.getElementById('score');
+  document.getElementById(
+    'score'
+  );
 
 const questionCounterEl =
-  document.getElementById('questionCounter');
+  document.getElementById(
+    'questionCounter'
+  );
 
 const correctCountEl =
-  document.getElementById('correctCount');
+  document.getElementById(
+    'correctCount'
+  );
 
 const bestScoreEl =
-  document.getElementById('bestScore');
+  document.getElementById(
+    'bestScore'
+  );
 
 const questionEl =
-  document.getElementById('question');
+  document.getElementById(
+    'question'
+  );
 
 const levelLabelEl =
-  document.getElementById('levelLabel');
+  document.getElementById(
+    'levelLabel'
+  );
 
 const progressBarEl =
-  document.getElementById('progressBar');
+  document.getElementById(
+    'progressBar'
+  );
 
 const messageEl =
-  document.getElementById('message');
+  document.getElementById(
+    'message'
+  );
 
 const endOverlay =
-  document.getElementById('endOverlay');
+  document.getElementById(
+    'endOverlay'
+  );
 
 const finalScoreEl =
-  document.getElementById('finalScore');
+  document.getElementById(
+    'finalScore'
+  );
 
 const finalCorrectEl =
-  document.getElementById('finalCorrect');
+  document.getElementById(
+    'finalCorrect'
+  );
 
 const finalWrongEl =
-  document.getElementById('finalWrong');
+  document.getElementById(
+    'finalWrong'
+  );
 
 const finalBestEl =
-  document.getElementById('finalBest');
+  document.getElementById(
+    'finalBest'
+  );
 
 const restartBtn =
-  document.getElementById('restartBtn');
+  document.getElementById(
+    'restartBtn'
+  );
 
 
 /* =========================================================
@@ -766,15 +1085,18 @@ const restartBtn =
 let biologyQuestions = [];
 
 let currentQuestionIndex = 0;
+
 let score = 0;
+
 let correctAnswers = 0;
+
 let wrongAnswers = 0;
 
 let currentQuestion = null;
 
 
 /* =========================================================
-   BALLS
+   BILLES
 ========================================================= */
 
 let balls = [];
@@ -784,14 +1106,18 @@ let whiteBall = null;
 let dragging = false;
 
 let dragStartX = 0;
+
 let dragStartY = 0;
 
 let gameRunning = false;
+
 let shotInProgress = false;
 
 let answerLocked = false;
 
 let animationFrame = null;
+
+let lastPointerPosition = null;
 
 
 /* =========================================================
@@ -801,7 +1127,10 @@ let animationFrame = null;
 function randomItem(array) {
 
   return array[
-    Math.floor(Math.random() * array.length)
+    Math.floor(
+      Math.random() *
+      array.length
+    )
   ];
 
 }
@@ -818,7 +1147,10 @@ function shuffle(array) {
   ) {
 
     const j =
-      Math.floor(Math.random() * (i + 1));
+      Math.floor(
+        Math.random() *
+        (i + 1)
+      );
 
     [
       arr[i],
@@ -846,7 +1178,7 @@ function distance(a, b) {
 
 
 /* =========================================================
-   CHARGEMENT DES QUESTIONS
+   QUESTIONS
 ========================================================= */
 
 async function loadQuestions() {
@@ -854,9 +1186,13 @@ async function loadQuestions() {
   try {
 
     const module =
-      await import(QUESTIONS_URL);
+      await import(
+        QUESTIONS_URL
+      );
+
 
     let source = null;
+
 
     if (
       Array.isArray(
@@ -877,7 +1213,9 @@ async function loadQuestions() {
         module.biologyQuestions;
 
     } else if (
-      Array.isArray(module.questions)
+      Array.isArray(
+        module.questions
+      )
     ) {
 
       source =
@@ -885,21 +1223,24 @@ async function loadQuestions() {
 
     }
 
+
     if (
       !source ||
-      !source.length
+      source.length < 4
     ) {
 
       throw new Error(
-        'Aucune question de biologie trouvée.'
+        'Aucune question suffisante.'
       );
 
     }
+
 
     biologyQuestions =
       source
         .map(normalizeQuestion)
         .filter(Boolean);
+
 
     if (
       biologyQuestions.length < 4
@@ -911,6 +1252,7 @@ async function loadQuestions() {
 
     }
 
+
     startGame();
 
   } catch (error) {
@@ -918,10 +1260,10 @@ async function loadQuestions() {
     console.error(error);
 
     questionEl.textContent =
-      'Impossible de charger les questions de biologie.';
+      'Impossible de charger les questions.';
 
     messageEl.textContent =
-      'Vérifie le fichier src/biologieQuestions.js';
+      'Vérifie src/biologieQuestions.js';
 
     messageEl.className =
       'message error';
@@ -941,10 +1283,15 @@ function normalizeQuestion(q) {
     return null;
   }
 
+
   let question = '';
+
   let answer = '';
 
-  if (typeof q === 'string') {
+
+  if (
+    typeof q === 'string'
+  ) {
 
     question = q;
 
@@ -966,11 +1313,14 @@ function normalizeQuestion(q) {
 
   }
 
+
   if (!question) {
     return null;
   }
 
+
   let options = [];
+
 
   if (
     Array.isArray(q.options)
@@ -1002,6 +1352,7 @@ function normalizeQuestion(q) {
 
   }
 
+
   if (
     !answer &&
     options.length
@@ -1012,18 +1363,23 @@ function normalizeQuestion(q) {
     ) {
 
       answer =
-        options[q.correctIndex];
+        options[
+          q.correctIndex
+        ];
 
     } else if (
       typeof q.answerIndex === 'number'
     ) {
 
       answer =
-        options[q.answerIndex];
+        options[
+          q.answerIndex
+        ];
 
     }
 
   }
+
 
   return {
 
@@ -1050,26 +1406,26 @@ function normalizeQuestion(q) {
 
 
 /* =========================================================
-   CONSTRUIRE LES 4 REPONSES
+   REPONSES
 ========================================================= */
 
 function buildAnswers(question) {
 
   const correct =
-    String(question.answer).trim();
+    String(
+      question.answer
+    ).trim();
+
 
   let wrongAnswers =
     question.options
       .map(String)
-      .filter(option =>
-        option.trim() &&
-        option.trim() !== correct
+      .filter(
+        option =>
+          option.trim() &&
+          option.trim() !== correct
       );
 
-  /*
-   * Si la question contient déjà
-   * 3 mauvaises réponses, on les utilise.
-   */
 
   if (
     wrongAnswers.length < 3
@@ -1077,14 +1433,17 @@ function buildAnswers(question) {
 
     const pool =
       biologyQuestions
-        .map(q =>
-          String(q.answer).trim()
+        .map(
+          q =>
+            String(q.answer).trim()
         )
-        .filter(answer =>
-          answer &&
-          answer !== correct &&
-          !wrongAnswers.includes(answer)
+        .filter(
+          answer =>
+            answer &&
+            answer !== correct &&
+            !wrongAnswers.includes(answer)
         );
+
 
     wrongAnswers = [
       ...wrongAnswers,
@@ -1093,35 +1452,29 @@ function buildAnswers(question) {
 
   }
 
+
   wrongAnswers =
-    shuffle(wrongAnswers)
-      .slice(0, 3);
+    shuffle(
+      wrongAnswers
+    ).slice(0, 3);
 
 
-  /*
-   * On place d'abord la bonne réponse
-   * puis on mélange tout.
-   */
-
-  const answers = [
+  return shuffle([
 
     {
       text: correct,
       correct: true
     },
 
-    ...wrongAnswers.map(text => ({
+    ...wrongAnswers.map(
+      text => ({
+        text,
+        correct: false
+      })
+    )
 
-      text,
-      correct: false
-
-    }))
-
-  ];
-
-
-  return shuffle(answers)
-    .map((answer, index) => ({
+  ]).map(
+    (answer, index) => ({
 
       label:
         String.fromCharCode(
@@ -1134,7 +1487,8 @@ function buildAnswers(question) {
       correct:
         answer.correct
 
-    }));
+    })
+  );
 
 }
 
@@ -1150,6 +1504,7 @@ function getQuestionLevel(question) {
       question?.level ?? ''
     ).toLowerCase();
 
+
   if (
     value.includes('3') ||
     value.includes('difficile') ||
@@ -1161,6 +1516,7 @@ function getQuestionLevel(question) {
 
   }
 
+
   if (
     value.includes('2') ||
     value.includes('moyen') ||
@@ -1171,6 +1527,7 @@ function getQuestionLevel(question) {
     return 'Niveau 2';
 
   }
+
 
   return 'Niveau 1';
 
@@ -1184,20 +1541,29 @@ function getQuestionLevel(question) {
 function startGame() {
 
   score = 0;
+
   correctAnswers = 0;
+
   wrongAnswers = 0;
+
   currentQuestionIndex = 0;
 
   gameRunning = true;
+
   shotInProgress = false;
+
   dragging = false;
+
   answerLocked = false;
 
-  endOverlay.classList.remove('show');
+  endOverlay.classList.remove(
+    'show'
+  );
 
   updateStats();
 
   loadCurrentQuestion();
+
 
   if (!animationFrame) {
 
@@ -1209,7 +1575,7 @@ function startGame() {
 
 
 /* =========================================================
-   CHARGER QUESTION
+   QUESTION SUIVANTE
 ========================================================= */
 
 function loadCurrentQuestion() {
@@ -1226,19 +1592,11 @@ function loadCurrentQuestion() {
   }
 
 
-  /*
-   * On choisit une question.
-   */
-
   currentQuestion =
     randomItem(
       biologyQuestions
     );
 
-
-  /*
-   * On construit les quatre réponses.
-   */
 
   currentQuestion.answers =
     buildAnswers(
@@ -1246,17 +1604,9 @@ function loadCurrentQuestion() {
     );
 
 
-  /*
-   * Affichage de la question.
-   */
-
   questionEl.textContent =
     currentQuestion.question;
 
-
-  /*
-   * Affichage du niveau.
-   */
 
   levelLabelEl.textContent =
     getQuestionLevel(
@@ -1264,31 +1614,18 @@ function loadCurrentQuestion() {
     );
 
 
-  /*
-   * Compteur.
-   */
-
   questionCounterEl.textContent =
     `${currentQuestionIndex + 1} / ${TOTAL_QUESTIONS}`;
 
 
-  /*
-   * Progression.
-   */
-
-  const progress =
-    (
-      (currentQuestionIndex + 1) /
-      TOTAL_QUESTIONS
-    ) * 100;
-
   progressBarEl.style.width =
-    `${progress}%`;
+    `${
+      (
+        (currentQuestionIndex + 1) /
+        TOTAL_QUESTIONS
+      ) * 100
+    }%`;
 
-
-  /*
-   * Message.
-   */
 
   messageEl.textContent =
     'Tire la bille blanche vers une réponse.';
@@ -1303,7 +1640,7 @@ function loadCurrentQuestion() {
 
 
 /* =========================================================
-   STATISTIQUES
+   STATS
 ========================================================= */
 
 function getBestScore() {
@@ -1344,12 +1681,14 @@ function resetTable() {
     canvas.height;
 
   shotInProgress = false;
+
   dragging = false;
+
   answerLocked = false;
 
 
   /*
-   * Taille des boules.
+   * Bille blanche.
    */
 
   const radius =
@@ -1362,10 +1701,6 @@ function resetTable() {
     );
 
 
-  /*
-   * Bille blanche.
-   */
-
   whiteBall = {
 
     x:
@@ -1375,6 +1710,7 @@ function resetTable() {
       tableHeight / 2,
 
     vx: 0,
+
     vy: 0,
 
     radius,
@@ -1392,18 +1728,22 @@ function resetTable() {
 
 
   /*
-   * Positions des réponses.
+   * Positions des quatre réponses.
+   *
+   * Sur téléphone, le canvas est simplement
+   * réduit visuellement par CSS, mais ses
+   * coordonnées internes restent propres.
    */
 
   const positions = [
 
-    [0.68, 0.27],
+    [0.64, 0.25],
 
-    [0.82, 0.27],
+    [0.82, 0.25],
 
-    [0.68, 0.73],
+    [0.64, 0.75],
 
-    [0.82, 0.73]
+    [0.82, 0.75]
 
   ];
 
@@ -1412,21 +1752,23 @@ function resetTable() {
     .forEach(
       (answer, index) => {
 
-        const position =
+        const [
+          px,
+          py
+        ] =
           positions[index];
 
 
         balls.push({
 
           x:
-            tableWidth *
-            position[0],
+            tableWidth * px,
 
           y:
-            tableHeight *
-            position[1],
+            tableHeight * py,
 
           vx: 0,
+
           vy: 0,
 
           radius,
@@ -1453,7 +1795,7 @@ function resetTable() {
 
 
 /* =========================================================
-   DESSIN DE LA TABLE
+   DESSIN TABLE
 ========================================================= */
 
 function drawTable() {
@@ -1482,19 +1824,19 @@ function drawTable() {
 
 
   /*
-   * Lignes décoratives.
+   * Bordure intérieure.
    */
 
   ctx.strokeStyle =
-    'rgba(255,255,255,.12)';
+    'rgba(255,255,255,.15)';
 
-  ctx.lineWidth = 2;
+  ctx.lineWidth = 3;
 
   ctx.strokeRect(
-    20,
-    20,
-    tableWidth - 40,
-    tableHeight - 40
+    18,
+    18,
+    tableWidth - 36,
+    tableHeight - 36
   );
 
 
@@ -1549,59 +1891,48 @@ function drawTable() {
   );
 
 
-  /*
-   * Dessiner les boules.
-   */
-
   balls.forEach(
     drawBall
   );
 
 
   /*
-   * Afficher la ligne de tir
-   * pendant le déplacement.
+   * Ligne de visée.
    */
 
   if (
     dragging &&
-    whiteBall
+    whiteBall &&
+    lastPointerPosition
   ) {
 
-    const point =
-      getCurrentPointerPosition();
+    ctx.save();
 
-    if (point) {
+    ctx.strokeStyle =
+      'rgba(255,255,255,.55)';
 
-      ctx.save();
+    ctx.lineWidth = 2;
 
-      ctx.strokeStyle =
-        'rgba(255,255,255,.55)';
+    ctx.setLineDash([
+      8,
+      8
+    ]);
 
-      ctx.lineWidth = 2;
+    ctx.beginPath();
 
-      ctx.setLineDash([
-        8,
-        8
-      ]);
+    ctx.moveTo(
+      whiteBall.x,
+      whiteBall.y
+    );
 
-      ctx.beginPath();
+    ctx.lineTo(
+      lastPointerPosition.x,
+      lastPointerPosition.y
+    );
 
-      ctx.moveTo(
-        whiteBall.x,
-        whiteBall.y
-      );
+    ctx.stroke();
 
-      ctx.lineTo(
-        point.x,
-        point.y
-      );
-
-      ctx.stroke();
-
-      ctx.restore();
-
-    }
+    ctx.restore();
 
   }
 
@@ -1609,7 +1940,7 @@ function drawTable() {
 
 
 /* =========================================================
-   DESSIN DES BOULES
+   DESSIN BILLE + TEXTE REPONSE
 ========================================================= */
 
 function drawBall(ball) {
@@ -1643,7 +1974,7 @@ function drawBall(ball) {
 
 
   /*
-   * Boule.
+   * Bille.
    */
 
   ctx.beginPath();
@@ -1667,11 +1998,8 @@ function drawBall(ball) {
   } else {
 
     /*
-     * IMPORTANT :
-     * Toutes les réponses ont
-     * exactement la même couleur.
-     * La bonne réponse n'est
-     * donc pas visible avant le tir.
+     * Toutes les réponses
+     * ont la même apparence.
      */
 
     ctx.fillStyle =
@@ -1707,17 +2035,19 @@ function drawBall(ball) {
 
 
   /*
-   * Lettre A / B / C / D
+   * Lettre.
    */
 
   ctx.fillStyle =
     '#ffffff';
 
   ctx.font =
-    `bold ${Math.max(
-      13,
-      ball.radius * .65
-    )}px Arial`;
+    `bold ${
+      Math.max(
+        13,
+        ball.radius * .65
+      )
+    }px Arial`;
 
   ctx.textAlign =
     'center';
@@ -1733,23 +2063,22 @@ function drawBall(ball) {
 
 
   /*
-   * Réponse textuelle.
-   *
-   * Elle est affichée à droite
-   * de la bille.
+   * Texte de réponse.
    */
 
   ctx.fillStyle =
     '#ffffff';
 
   ctx.font =
-    `bold ${Math.max(
-      13,
-      Math.min(
-        19,
-        ball.radius * .55
+    `bold ${
+      Math.max(
+        13,
+        Math.min(
+          18,
+          ball.radius * .55
+        )
       )
-    )}px Arial`;
+    }px Arial`;
 
   ctx.textAlign =
     'left';
@@ -1759,22 +2088,23 @@ function drawBall(ball) {
 
 
   const maxTextWidth =
-    tableWidth * 0.24;
+    tableWidth * 0.25;
 
 
   let answerText =
-    ball.text;
+    String(ball.text);
 
 
   /*
-   * Réduction du texte trop long.
+   * Coupe les réponses trop longues
+   * pour qu'elles restent dans la table.
    */
 
   while (
     ctx.measureText(
       answerText
     ).width > maxTextWidth &&
-    answerText.length > 10
+    answerText.length > 12
   ) {
 
     answerText =
@@ -1798,7 +2128,9 @@ function drawBall(ball) {
 
   ctx.fillText(
     answerText,
-    ball.x + ball.radius + 12,
+    ball.x +
+      ball.radius +
+      12,
     ball.y
   );
 
@@ -1835,8 +2167,11 @@ function updatePhysics() {
       }
 
 
-      ball.x += ball.vx;
-      ball.y += ball.vy;
+      ball.x +=
+        ball.vx;
+
+      ball.y +=
+        ball.vy;
 
 
       ball.vx *=
@@ -1865,7 +2200,7 @@ function updatePhysics() {
 
 
       /*
-       * Mur gauche.
+       * Rebonds horizontaux.
        */
 
       if (
@@ -1881,10 +2216,6 @@ function updatePhysics() {
 
       }
 
-
-      /*
-       * Mur droit.
-       */
 
       if (
         ball.x +
@@ -1903,7 +2234,7 @@ function updatePhysics() {
 
 
       /*
-       * Mur haut.
+       * Rebonds verticaux.
        */
 
       if (
@@ -1919,10 +2250,6 @@ function updatePhysics() {
 
       }
 
-
-      /*
-       * Mur bas.
-       */
 
       if (
         ball.y +
@@ -1947,8 +2274,7 @@ function updatePhysics() {
 
 
   /*
-   * Détection de la première
-   * réponse touchée.
+   * Première réponse touchée.
    */
 
   if (
@@ -1996,8 +2322,7 @@ function updatePhysics() {
 
 
   /*
-   * Vérifier si toutes les boules
-   * sont arrêtées.
+   * Toutes les boules arrêtées ?
    */
 
   const moving =
@@ -2019,12 +2344,6 @@ function updatePhysics() {
     shotInProgress =
       false;
 
-
-    /*
-     * Si aucune réponse n'a été touchée,
-     * le joueur peut simplement refaire
-     * un tir.
-     */
 
     if (
       !answerLocked &&
@@ -2077,10 +2396,12 @@ function handleBallCollisions() {
 
 
       const dx =
-        b.x - a.x;
+        b.x -
+        a.x;
 
       const dy =
-        b.y - a.y;
+        b.y -
+        a.y;
 
       const d =
         Math.hypot(
@@ -2112,12 +2433,9 @@ function handleBallCollisions() {
 
 
       const overlap =
-        minDistance - d;
+        minDistance -
+        d;
 
-
-      /*
-       * Séparation des boules.
-       */
 
       a.x -=
         nx *
@@ -2140,10 +2458,6 @@ function handleBallCollisions() {
         2;
 
 
-      /*
-       * Vitesse relative.
-       */
-
       const relativeVelocity =
         (b.vx - a.vx) * nx +
         (b.vy - a.vy) * ny;
@@ -2157,10 +2471,6 @@ function handleBallCollisions() {
 
       }
 
-
-      /*
-       * Collision élastique simplifiée.
-       */
 
       const impulse =
         -relativeVelocity;
@@ -2206,10 +2516,6 @@ function handleAnswer(ball) {
   }
 
 
-  /*
-   * Verrouillage immédiat.
-   */
-
   answerLocked =
     true;
 
@@ -2222,10 +2528,6 @@ function handleAnswer(ball) {
     ball.correct
   ) {
 
-    /*
-     * +10 immédiatement.
-     */
-
     score +=
       POINTS_CORRECT;
 
@@ -2237,7 +2539,6 @@ function handleAnswer(ball) {
 
     messageEl.className =
       'message success';
-
 
   } else {
 
@@ -2255,10 +2556,6 @@ function handleAnswer(ball) {
 
   updateStats();
 
-
-  /*
-   * Passage à la question suivante.
-   */
 
   setTimeout(
     () => {
@@ -2287,12 +2584,8 @@ function handleAnswer(ball) {
 
 
 /* =========================================================
-   POINTER
+   POSITION DU DOIGT / SOURIS
 ========================================================= */
-
-let lastPointerPosition =
-  null;
-
 
 function getPointerPosition(event) {
 
@@ -2301,6 +2594,7 @@ function getPointerPosition(event) {
 
 
   let clientX;
+
   let clientY;
 
 
@@ -2343,13 +2637,6 @@ function getPointerPosition(event) {
 }
 
 
-function getCurrentPointerPosition() {
-
-  return lastPointerPosition;
-
-}
-
-
 /* =========================================================
    POINTER DOWN
 ========================================================= */
@@ -2382,10 +2669,10 @@ function pointerDown(event) {
   const d =
     Math.hypot(
       point.x -
-      whiteBall.x,
+        whiteBall.x,
 
       point.y -
-      whiteBall.y
+        whiteBall.y
     );
 
 
@@ -2466,7 +2753,6 @@ function pointerUp(event) {
     dragStartX -
     point.x;
 
-
   const dy =
     dragStartY -
     point.y;
@@ -2478,10 +2764,6 @@ function pointerUp(event) {
       dy
     );
 
-
-  /*
-   * Puissance du tir.
-   */
 
   const power =
     Math.min(
@@ -2506,7 +2788,6 @@ function pointerUp(event) {
       (dx / length) *
       power;
 
-
     whiteBall.vy =
       (dy / length) *
       power;
@@ -2521,7 +2802,6 @@ function pointerUp(event) {
   dragging =
     false;
 
-
   lastPointerPosition =
     null;
 
@@ -2529,7 +2809,7 @@ function pointerUp(event) {
 
 
 /* =========================================================
-   EVENTS SOURIS
+   SOURIS
 ========================================================= */
 
 canvas.addEventListener(
@@ -2537,12 +2817,10 @@ canvas.addEventListener(
   pointerDown
 );
 
-
 canvas.addEventListener(
   'mousemove',
   pointerMove
 );
-
 
 window.addEventListener(
   'mouseup',
@@ -2551,7 +2829,7 @@ window.addEventListener(
 
 
 /* =========================================================
-   EVENTS TOUCH
+   TOUCH
 ========================================================= */
 
 canvas.addEventListener(
@@ -2562,7 +2840,6 @@ canvas.addEventListener(
   }
 );
 
-
 canvas.addEventListener(
   'touchmove',
   pointerMove,
@@ -2570,7 +2847,6 @@ canvas.addEventListener(
     passive: false
   }
 );
-
 
 window.addEventListener(
   'touchend',
@@ -2582,7 +2858,7 @@ window.addEventListener(
 
 
 /* =========================================================
-   BOUCLE DE JEU
+   BOUCLE
 ========================================================= */
 
 function animationLoop() {
@@ -2600,7 +2876,7 @@ function animationLoop() {
 
 
 /* =========================================================
-   FIN DE PARTIE
+   FIN
 ========================================================= */
 
 function finishGame() {
@@ -2617,10 +2893,6 @@ function finishGame() {
   answerLocked =
     true;
 
-
-  /*
-   * Meilleur score.
-   */
 
   const previousBest =
     getBestScore();
@@ -2644,10 +2916,6 @@ function finishGame() {
       previousBest
     );
 
-
-  /*
-   * Résultats.
-   */
 
   finalScoreEl.textContent =
     `${score} points`;
@@ -2676,7 +2944,7 @@ function finishGame() {
 
 
 /* =========================================================
-   RESTART
+   REJOUER
 ========================================================= */
 
 restartBtn.addEventListener(
