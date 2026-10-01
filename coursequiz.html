@@ -1,1804 +1,412 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
->
-
-<title>Course Quiz — ExamQuiz Haiti</title>
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Course des savoirs</title>
 <style>
-
-:root{
-    --purple:#24113f;
-    --purple2:#4b2481;
-    --blue:#1764c0;
-    --blue2:#2f80ed;
-    --white:#ffffff;
-    --bg:#f5f5f7;
-    --text:#171717;
-    --muted:#707070;
-    --border:#e4e4e7;
-    --green:#16834b;
-    --red:#c62828;
-}
-
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
-
-body{
-    font-family:Arial, Helvetica, sans-serif;
-    background:var(--bg);
-    color:var(--text);
-    min-height:100vh;
-}
-
-button{
-    font:inherit;
-    border:none;
-    cursor:pointer;
-}
-
-.page{
-    width:100%;
-    max-width:900px;
-    margin:auto;
-    padding:12px;
-}
-
-/* RETOUR */
-
-.back-button{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    width:100%;
-    min-height:46px;
-
-    margin-bottom:12px;
-    padding:10px 14px;
-
-    border:1px solid var(--border);
-    border-radius:13px;
-
-    background:var(--white);
-    color:var(--purple);
-
-    text-decoration:none;
-
-    font-size:14px;
-    font-weight:800;
-
-    transition:.15s;
-}
-
-.back-button:hover{
-    border-color:var(--purple2);
-}
-
-.back-button:active{
-    transform:scale(.98);
-}
-
-
-/* HEADER */
-
-.topbar{
-    background:var(--white);
-
-    border:1px solid var(--border);
-    border-radius:16px;
-
-    padding:14px 16px;
-
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-
-    gap:12px;
-
-    margin-bottom:14px;
-}
-
-.logo{
-    font-size:18px;
-    font-weight:800;
-    color:var(--purple);
-}
-
-.race-label{
-    font-size:14px;
-    color:var(--muted);
-    font-weight:700;
-}
-
-
-/* SCORE */
-
-.scoreboard{
-
-    display:grid;
-
-    grid-template-columns:1fr auto 1fr;
-
-    gap:10px;
-
-    align-items:center;
-
-    margin-bottom:14px;
-}
-
-.player{
-
-    background:var(--white);
-
-    border:2px solid var(--border);
-
-    border-radius:16px;
-
-    padding:12px;
-
-    text-align:center;
-
-    transition:.2s;
-}
-
-.player.active{
-
-    border-color:var(--blue2);
-
-    box-shadow:
-        0 0 0 3px rgba(47,128,237,.10);
-}
-
-.player-name{
-
-    font-size:13px;
-
-    font-weight:700;
-
-    color:var(--muted);
-}
-
-.player-score{
-
-    font-size:30px;
-
-    font-weight:800;
-
-    color:var(--purple);
-
-    margin-top:3px;
-}
-
-.vs{
-
-    font-size:13px;
-
-    font-weight:900;
-
-    color:var(--muted);
-}
-
-
-/* COURSE */
-
-.race-card{
-
-    background:var(--white);
-
-    border:1px solid var(--border);
-
-    border-radius:18px;
-
-    padding:18px;
-
-    margin-bottom:14px;
-}
-
-.track-title{
-
-    text-align:center;
-
-    font-size:14px;
-
-    font-weight:800;
-
-    color:var(--muted);
-
-    margin-bottom:14px;
-}
-
-.track{
-
-    position:relative;
-
-    height:70px;
-
-    background:#f0f0f2;
-
-    border:1px solid var(--border);
-
-    border-radius:16px;
-
-    margin-bottom:12px;
-
-    overflow:hidden;
-}
-
-.track:last-child{
-    margin-bottom:0;
-}
-
-.track-line{
-
-    position:absolute;
-
-    left:16px;
-    right:16px;
-
-    top:50%;
-
-    height:4px;
-
-    background:#d5d5d8;
-
-    transform:translateY(-50%);
-}
-
-.runner{
-
-    position:absolute;
-
-    top:50%;
-
-    left:16px;
-
-    width:38px;
-    height:38px;
-
-    border-radius:50%;
-
-    background:var(--purple2);
-
-    color:white;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    font-weight:900;
-
-    transform:
-        translateY(-50%);
-
-    transition:
-        left .35s ease;
-}
-
-.runner.player2{
-    background:var(--blue);
-}
-
-.finish{
-
-    position:absolute;
-
-    right:10px;
-
-    top:8px;
-    bottom:8px;
-
-    width:4px;
-
-    background:var(--purple);
-}
-
-
-/* QUESTION */
-
-.game-card{
-
-    background:var(--white);
-
-    border:1px solid var(--border);
-
-    border-radius:18px;
-
-    padding:20px;
-}
-
-.turn{
-
-    text-align:center;
-
-    font-size:14px;
-
-    color:var(--blue);
-
-    font-weight:800;
-
-    margin-bottom:10px;
-}
-
-.question-number{
-
-    text-align:center;
-
-    color:var(--muted);
-
-    font-size:13px;
-
-    margin-bottom:10px;
-}
-
-.question{
-
-    font-size:22px;
-
-    line-height:1.35;
-
-    font-weight:800;
-
-    text-align:center;
-
-    max-width:720px;
-
-    margin:0 auto 22px;
-}
-
-
-/* OPTIONS */
-
-.options{
-
-    display:grid;
-
-    grid-template-columns:1fr 1fr;
-
-    gap:12px;
-}
-
-.option{
-
-    min-height:64px;
-
-    border:2px solid var(--border);
-
-    border-radius:14px;
-
-    background:white;
-
-    padding:12px;
-
-    font-weight:700;
-
-    text-align:left;
-
-    transition:.15s;
-}
-
-.option:hover{
-
-    border-color:var(--blue2);
-}
-
-.option:active{
-
-    transform:scale(.98);
-}
-
-.option.correct{
-
-    border-color:var(--green);
-
-    background:#eef9f2;
-
-    color:var(--green);
-}
-
-.option.wrong{
-
-    border-color:var(--red);
-
-    background:#fff0f0;
-
-    color:var(--red);
-}
-
-.option:disabled{
-
-    cursor:default;
-}
-
-
-/* FEEDBACK */
-
-.feedback{
-
-    margin-top:16px;
-
-    padding:14px;
-
-    border-radius:12px;
-
-    text-align:center;
-
-    font-weight:700;
-
-    display:none;
-}
-
-.feedback.show{
-
-    display:block;
-}
-
-.feedback.correct{
-
-    background:#eef9f2;
-
-    color:var(--green);
-}
-
-.feedback.wrong{
-
-    background:#fff0f0;
-
-    color:var(--red);
-}
-
-
-/* NEXT */
-
-.next-btn{
-
-    width:100%;
-
-    margin-top:12px;
-
-    min-height:52px;
-
-    border-radius:13px;
-
-    background:var(--purple2);
-
-    color:white;
-
-    font-weight:800;
-
-    display:none;
-}
-
-.next-btn.show{
-
-    display:block;
-}
-
-.next-btn:active{
-
-    transform:scale(.98);
-}
-
-
-/* CATEGORY */
-
-.category{
-
-    margin-top:14px;
-
-    text-align:center;
-
-    color:var(--muted);
-
-    font-size:13px;
-}
-
-
-/* OVERLAY */
-
-.overlay{
-
-    position:fixed;
-
-    inset:0;
-
-    background:rgba(20,12,30,.72);
-
-    display:none;
-
-    align-items:center;
-
-    justify-content:center;
-
-    padding:20px;
-
-    z-index:50;
-}
-
-.overlay.show{
-
-    display:flex;
-}
-
-.result-box{
-
-    width:100%;
-
-    max-width:450px;
-
-    background:white;
-
-    border-radius:20px;
-
-    padding:26px 20px;
-
-    text-align:center;
-}
-
-.result-title{
-
-    font-size:27px;
-
-    font-weight:900;
-
-    color:var(--purple);
-
-    margin-bottom:10px;
-}
-
-.result-winner{
-
-    font-size:19px;
-
-    font-weight:800;
-
-    margin:16px 0;
-}
-
-.final-score{
-
-    display:grid;
-
-    grid-template-columns:1fr 1fr;
-
-    gap:10px;
-
-    margin:18px 0;
-}
-
-.final-player{
-
-    border:1px solid var(--border);
-
-    border-radius:14px;
-
-    padding:14px;
-}
-
-.final-player strong{
-
-    display:block;
-
-    color:var(--muted);
-
-    margin-bottom:6px;
-}
-
-.final-player span{
-
-    font-size:30px;
-
-    font-weight:900;
-
-    color:var(--purple);
-}
-
-.action-btn{
-
-    width:100%;
-
-    min-height:52px;
-
-    border-radius:13px;
-
-    background:var(--purple2);
-
-    color:white;
-
-    font-weight:800;
-
-    margin-top:8px;
-}
-
-.action-btn:active{
-
-    transform:scale(.98);
-}
-
-.secondary-btn{
-
-    background:#eeeef1;
-
-    color:var(--text);
-}
-
-
-/* MOBILE */
-
-@media(max-width:600px){
-
-    .page{
-
-        padding:9px;
-    }
-
-    .back-button{
-
-        min-height:44px;
-
-        font-size:13px;
-
-        margin-bottom:9px;
-    }
-
-    .topbar{
-
-        border-radius:13px;
-
-        padding:12px;
-    }
-
-    .logo{
-
-        font-size:16px;
-    }
-
-    .race-label{
-
-        font-size:12px;
-    }
-
-    .scoreboard{
-
-        gap:6px;
-    }
-
-    .player{
-
-        padding:10px 6px;
-
-        border-radius:13px;
-    }
-
-    .player-name{
-
-        font-size:12px;
-    }
-
-    .player-score{
-
-        font-size:27px;
-    }
-
-    .vs{
-
-        font-size:11px;
-    }
-
-    .race-card{
-
-        padding:12px;
-
-        border-radius:15px;
-    }
-
-    .track{
-
-        height:58px;
-
-        border-radius:13px;
-    }
-
-    .runner{
-
-        width:32px;
-        height:32px;
-
-        font-size:12px;
-
-        left:10px;
-    }
-
-    .track-line{
-
-        left:12px;
-        right:12px;
-    }
-
-    .finish{
-
-        right:7px;
-    }
-
-    .game-card{
-
-        padding:14px 10px;
-
-        border-radius:15px;
-    }
-
-    .question{
-
-        font-size:19px;
-
-        line-height:1.35;
-
-        margin-bottom:18px;
-    }
-
-    .options{
-
-        grid-template-columns:1fr;
-
-        gap:9px;
-    }
-
-    .option{
-
-        min-height:58px;
-
-        padding:11px;
-
-        font-size:14px;
-    }
-
-    .result-box{
-
-        padding:22px 15px;
-    }
-
-    .result-title{
-
-        font-size:24px;
-    }
-
-    .result-winner{
-
-        font-size:18px;
-    }
-}
-
-@media(max-width:360px){
-
-    .question{
-
-        font-size:17px;
-    }
-
-    .player-score{
-
-        font-size:24px;
-    }
-
-    .option{
-
-        font-size:13px;
-    }
-}
-
+:root{--bg:#10171f;--pn:#17212c;--ln:#2c3b4b;--tx:#e9eff5;--mu:#97a8b8;--ac:#e8a23c;--ok:#3a9d63;--ko:#cf4b47}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--tx);font-family:"Segoe UI",system-ui,-apple-system,Roboto,sans-serif}
+#app{height:100dvh;max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:8px;padding:8px 8px max(8px,env(safe-area-inset-bottom))}
+#hud{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;background:var(--pn);border:1px solid var(--ln);border-radius:12px;padding:8px 12px}
+.btn{font:inherit;font-weight:600;font-size:14px;color:var(--tx);background:#223142;border:1px solid var(--ln);border-radius:9px;padding:8px 14px;cursor:pointer;text-decoration:none;display:inline-block}
+.btn:hover{background:#2a3c50}.btn.pri{background:var(--ac);color:#1a1206;border-color:var(--ac)}.btn.pri:hover{background:#f0b255}
+.btn:focus-visible,.opt:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+.stat{display:flex;flex-direction:column;line-height:1.1}.stat span{font-size:11px;color:var(--mu)}.stat b{font-size:20px;font-variant-numeric:tabular-nums}
+.pg{flex:1;min-width:130px}.pg span{font-size:11px;color:var(--mu)}
+.bar{height:8px;background:#0c1218;border-radius:6px;overflow:hidden;margin-top:4px}.bar i{display:block;height:100%;width:0;background:var(--ac);transition:width .4s}
+#stage{position:relative;flex:1;min-height:0;border-radius:12px;overflow:hidden;border:1px solid var(--ln);background:#6fa8dc}
+#c{width:100%;height:100%;display:block;object-fit:contain}
+#ov{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(8,12,17,.62);padding:12px}
+.card{background:var(--pn);border:1px solid var(--ln);border-radius:14px;padding:22px 26px;text-align:center;max-width:380px;width:100%}
+.card h2{margin:0 0 8px;font-size:30px;letter-spacing:.5px}.card p{margin:0 0 18px;color:var(--mu);line-height:1.6}.card p b{color:var(--tx)}
+.row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+#panel{background:var(--pn);border:1px solid var(--ln);border-radius:12px;padding:12px 14px;min-height:196px;display:flex;flex-direction:column;justify-content:center}
+#status{color:var(--mu);text-align:center;font-size:15px}
+.lbl{font-size:12px;color:var(--ac);font-weight:700;letter-spacing:.6px;margin-bottom:4px}
+#qt{margin:0 0 10px;font-size:clamp(15px,2.4vw,19px);font-weight:600;line-height:1.35}
+#opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.opt{display:flex;align-items:center;gap:10px;text-align:left;font:inherit;font-size:15px;color:var(--tx);background:#1f2d3b;border:1px solid var(--ln);border-radius:10px;padding:10px 12px;min-height:48px;cursor:pointer}
+.opt:hover:not(:disabled){background:#27394c}.opt b{flex:none;width:26px;height:26px;border-radius:7px;background:#0f1822;display:grid;place-items:center;font-size:13px;color:var(--ac)}
+.opt.good{background:#1d4a32;border-color:var(--ok)}.opt.bad{background:#58242a;border-color:var(--ko)}.opt:disabled{cursor:default}
+.hint{margin-top:8px;font-size:12px;color:var(--mu)}
+@media(hover:none){.hint{display:none}}
+@media(max-width:560px){#opts{grid-template-columns:1fr}#panel{min-height:230px}.stat b{font-size:17px}}
+@media(max-height:520px) and (orientation:landscape){#panel{min-height:150px;padding:8px 10px}#opts{gap:5px}.opt{min-height:38px;padding:6px 10px;font-size:13px}#qt{margin-bottom:6px}.hint{display:none}}
 </style>
 </head>
-
 <body>
-
-<div class="page">
-
-    <!-- RETOUR -->
-
-    <a
-        href="baccalaureat.html"
-        class="back-button"
-    >
-        ← Retour aux jeux
-    </a>
-
-
-    <!-- HEADER -->
-
-    <header class="topbar">
-
-        <div class="logo">
-            ExamQuiz
-        </div>
-
-        <div
-            class="race-label"
-            id="raceLabel"
-        >
-            Course 1 / 20
-        </div>
-
-    </header>
-
-
-    <!-- SCORE -->
-
-    <section class="scoreboard">
-
-        <div
-            class="player active"
-            id="player1Card"
-        >
-
-            <div class="player-name">
-                Joueur 1
-            </div>
-
-            <div
-                class="player-score"
-                id="score1"
-            >
-                0
-            </div>
-
-        </div>
-
-
-        <div class="vs">
-            VS
-        </div>
-
-
-        <div
-            class="player"
-            id="player2Card"
-        >
-
-            <div class="player-name">
-                Joueur 2
-            </div>
-
-            <div
-                class="player-score"
-                id="score2"
-            >
-                0
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- COURSE -->
-
-    <section class="race-card">
-
-        <div class="track-title">
-            Course
-        </div>
-
-
-        <!-- JOUEUR 1 -->
-
-        <div class="track">
-
-            <div class="track-line"></div>
-
-            <div
-                class="runner"
-                id="runner1"
-            >
-                1
-            </div>
-
-            <div class="finish"></div>
-
-        </div>
-
-
-        <!-- JOUEUR 2 -->
-
-        <div class="track">
-
-            <div class="track-line"></div>
-
-            <div
-                class="runner player2"
-                id="runner2"
-            >
-                2
-            </div>
-
-            <div class="finish"></div>
-
-        </div>
-
-    </section>
-
-
-    <!-- JEU -->
-
-    <main class="game-card">
-
-        <div
-            class="turn"
-            id="turnLabel"
-        >
-            Tour de Joueur 1
-        </div>
-
-
-        <div
-            class="question-number"
-            id="questionNumber"
-        >
-            Question 1 / 10
-        </div>
-
-
-        <div
-            class="question"
-            id="question"
-        >
-            Chargement...
-        </div>
-
-
-        <div
-            class="options"
-            id="options"
-        ></div>
-
-
-        <div
-            class="feedback"
-            id="feedback"
-        ></div>
-
-
-        <button
-            type="button"
-            class="next-btn"
-            id="nextBtn"
-        >
-            Question suivante
-        </button>
-
-
-        <div
-            class="category"
-            id="category"
-        ></div>
-
-    </main>
-
-</div>
-
-
-<!-- RESULTAT -->
-
-<div
-    class="overlay"
-    id="resultOverlay"
->
-
-    <div class="result-box">
-
-        <div
-            class="result-title"
-            id="resultTitle"
-        >
-            Course terminée
-        </div>
-
-
-        <div
-            class="result-winner"
-            id="winnerText"
-        ></div>
-
-
-        <div class="final-score">
-
-            <div class="final-player">
-
-                <strong>
-                    Joueur 1
-                </strong>
-
-                <span id="finalScore1">
-                    0
-                </span>
-
-            </div>
-
-
-            <div class="final-player">
-
-                <strong>
-                    Joueur 2
-                </strong>
-
-                <span id="finalScore2">
-                    0
-                </span>
-
-            </div>
-
-        </div>
-
-
-        <button
-            type="button"
-            class="action-btn"
-            id="nextRaceBtn"
-        >
-            Course suivante
-        </button>
-
-
-        <button
-            type="button"
-            class="action-btn secondary-btn"
-            id="restartBtn"
-        >
-            Recommencer
-        </button>
-
+<div id="app">
+  <header id="hud">
+    <a id="back" class="btn" href="./">Retour aux jeux</a>
+    <button id="rs2" class="btn" type="button">Recommencer</button>
+    <div class="stat"><span>Score</span><b id="sc">0</b></div>
+    <div class="stat"><span>Épreuves franchies</span><b id="dn">0</b></div>
+    <div class="pg"><span id="pl">Palier 1</span><div class="bar"><i id="pb"></i></div></div>
+  </header>
+  <div id="stage">
+    <canvas id="c"></canvas>
+    <div id="ov" hidden>
+      <div class="card">
+        <h2 id="ot">GAME OVER</h2>
+        <p id="os"></p>
+        <div class="row"><button id="rs" class="btn pri" type="button">Recommencer</button><a id="b2" class="btn" href="./">Retour aux jeux</a></div>
+      </div>
     </div>
-
+  </div>
+  <section id="panel">
+    <div id="status">Chargement…</div>
+    <div id="qbox" hidden>
+      <div class="lbl">QUESTION</div>
+      <p id="qt"></p>
+      <div id="opts"></div>
+      <div class="hint">Clavier : A, B, C, D ou 1 à 4</div>
+    </div>
+  </section>
 </div>
 
+<script>
+/* ===== Réglages à adapter à ton projet ===== */
+const QUESTIONS_URL = './src/jeuxQuestions.js';   // chemin du fichier de questions (jamais modifié)
+const BACK_URL = './';                            // page "jeux"
+document.getElementById('back').href = BACK_URL;
+document.getElementById('b2').href = BACK_URL;
 
-<script type="module">
+/* ===== Questions : lecture souple de src/jeuxQuestions.js, uniquement facile + moyen ===== */
+const FALLBACK=[
+ {question:"Combien font 7 × 8 ?",options:["54","56","58","64"],answer:1,difficulte:"facile"},
+ {question:"Quelle est la capitale de la France ?",options:["Lyon","Marseille","Paris","Lille"],answer:2,difficulte:"facile"},
+ {question:"Quel gaz les plantes absorbent-elles pour la photosynthèse ?",options:["Oxygène","Azote","Hélium","Dioxyde de carbone"],answer:3,difficulte:"moyen"},
+ {question:"Combien de côtés a un hexagone ?",options:["5","6","7","8"],answer:1,difficulte:"facile"},
+ {question:"Quel est le symbole chimique de l'eau ?",options:["H2O","CO2","O2","NaCl"],answer:0,difficulte:"facile"},
+ {question:"Quelle planète est la plus proche du Soleil ?",options:["Vénus","Mars","Mercure","Terre"],answer:2,difficulte:"moyen"},
+ {question:"Quel est le résultat de 15 + 27 ?",options:["42","41","43","52"],answer:0,difficulte:"facile"},
+ {question:"Combien y a-t-il de continents ?",options:["5","6","7","8"],answer:2,difficulte:"moyen"}
+];
+const nz=s=>String(s==null?'':s).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+function collect(v,out,d=0){
+  if(!v||typeof v!=='object'||d>5)return;
+  if(!Array.isArray(v)&&(v.question||v.q||v.enonce)){out.push(v);return}
+  Object.values(v).forEach(x=>collect(x,out,d+1));
+}
+function norm(x){
+  const q=x.question||x.q||x.enonce;
+  let o=x.options||x.choices||x.choix||x.reponses||x.answers||x.propositions;
+  if(o&&!Array.isArray(o))o=Object.values(o);
+  if(!q||!Array.isArray(o)||o.length<2)return null;
+  o=o.map(v=>v&&typeof v==='object'?(v.text||v.texte||v.label||''):String(v));
+  const a=[x.answer,x.reponse,x.correct,x.bonneReponse,x.correctAnswer,x.correctIndex,x.bonne_reponse,x.reponseCorrecte].find(v=>v!==undefined);
+  let i=-1;
+  if(typeof a==='number')i=a;
+  else if(typeof a==='string'){
+    const s=a.trim();i=o.findIndex(v=>nz(v)===nz(s));
+    if(i<0&&/^[A-Da-d]$/.test(s))i='abcd'.indexOf(s.toLowerCase());
+    if(i<0&&/^\d+$/.test(s))i=+s;
+  }
+  if(i<0||i>=o.length)return null;
+  let opts=o.map((t,k)=>({t,ok:k===i}));
+  if(opts.length>4){const good=opts.find(z=>z.ok);opts=[good,...shuffle(opts.filter(z=>!z.ok)).slice(0,3)]}
+  return{q:String(q),opts,lv:nz(x.difficulte||x.difficulty||x.niveau||x.level||'')};
+}
+async function loadQuestions(){
+  try{
+    const m=await import(QUESTIONS_URL),raw=[],seen=new Set();
+    collect(m,raw);
+    const L=raw.map(norm).filter(x=>x&&!seen.has(x.q)&&seen.add(x.q)&&(!x.lv||/facile|moyen|easy|medium/.test(x.lv)));
+    if(L.length>=3)return L;
+  }catch(e){console.warn('Questions : import impossible, questions de secours utilisées.',e)}
+  return FALLBACK.map(norm);
+}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
 
-import {
-    jeuxQuestions
-} from "./src/jeuxQuestions.js";
+/* ===== Constantes du monde ===== */
+const W=960,H=540,GY=410,PX=260,SPEED=285,HW=150,SP=1100,H0=1150,STOP=190;
+const cv=document.getElementById('c'),ctx=cv.getContext('2d');
+const dpr=Math.min(window.devicePixelRatio||1,2);cv.width=W*dpr;cv.height=H*dpr;
+const hx=k=>H0+k*SP;
+const rnd=n=>{const x=Math.sin(n*127.1+311.7)*43758.5453;return x-Math.floor(x)};
+const sm=t=>t*t*(3-2*t);
+let cam=0,S=null,POOL=[],last=0;
 
+/* ===== Ciel pré-rendu ===== */
+const sky=document.createElement('canvas');sky.width=W;sky.height=H;
+(function(){const g=sky.getContext('2d');let r=g.createLinearGradient(0,0,0,GY);
+r.addColorStop(0,'#6aa3d8');r.addColorStop(.6,'#bcdcef');r.addColorStop(1,'#f3e8cd');g.fillStyle=r;g.fillRect(0,0,W,H);
+r=g.createRadialGradient(730,125,5,730,125,210);r.addColorStop(0,'rgba(255,249,224,.95)');r.addColorStop(.2,'rgba(255,241,205,.5)');r.addColorStop(1,'rgba(255,241,205,0)');g.fillStyle=r;g.fillRect(0,0,W,H)})();
 
-/* CONFIGURATION */
-
-const QUESTIONS_PER_RACE = 10;
-
-const MAX_RACES = 20;
-
-
-/* ETAT */
-
-let allQuestions = [];
-
-let currentQuestions = [];
-
-let currentQuestionIndex = 0;
-
-let currentPlayer = 1;
-
-let raceNumber = 1;
-
-let score1 = 0;
-
-let score2 = 0;
-
-let progress1 = 0;
-
-let progress2 = 0;
-
-let answered = false;
-
-let gameFinished = false;
-
-
-/* ELEMENTS */
-
-const questionElement =
-    document.getElementById("question");
-
-const optionsElement =
-    document.getElementById("options");
-
-const feedbackElement =
-    document.getElementById("feedback");
-
-const nextBtn =
-    document.getElementById("nextBtn");
-
-const turnLabel =
-    document.getElementById("turnLabel");
-
-const questionNumber =
-    document.getElementById("questionNumber");
-
-const categoryElement =
-    document.getElementById("category");
-
-const score1Element =
-    document.getElementById("score1");
-
-const score2Element =
-    document.getElementById("score2");
-
-const player1Card =
-    document.getElementById("player1Card");
-
-const player2Card =
-    document.getElementById("player2Card");
-
-const raceLabel =
-    document.getElementById("raceLabel");
-
-const runner1 =
-    document.getElementById("runner1");
-
-const runner2 =
-    document.getElementById("runner2");
-
-const resultOverlay =
-    document.getElementById("resultOverlay");
-
-const resultTitle =
-    document.getElementById("resultTitle");
-
-const winnerText =
-    document.getElementById("winnerText");
-
-const finalScore1 =
-    document.getElementById("finalScore1");
-
-const finalScore2 =
-    document.getElementById("finalScore2");
-
-const nextRaceBtn =
-    document.getElementById("nextRaceBtn");
-
-const restartBtn =
-    document.getElementById("restartBtn");
-
-
-/* MELANGE */
-
-function shuffle(array){
-
-    const copy = [...array];
-
-    for(
-        let i = copy.length - 1;
-        i > 0;
-        i--
-    ){
-
-        const j =
-            Math.floor(
-                Math.random() * (i + 1)
-            );
-
-        [
-            copy[i],
-            copy[j]
-        ] = [
-            copy[j],
-            copy[i]
-        ];
-    }
-
-    return copy;
+/* ===== Décor ===== */
+const LY=[
+ {p:.06,b:300,a:110,f:.004,c:'#a9bfd0'},
+ {p:.14,b:332,a:90,f:.006,c:'#8fb0a2',t:['#6d9a84','#4e6b5a',95,1]},
+ {p:.3,b:362,a:55,f:.009,c:'#6f9b6a',t:['#4d8355','#4a3a2a',125,5]}
+];
+const yh=(L,x)=>{const u=(x+cam*L.p)*L.f;return L.b-L.a*(.5+.3*Math.sin(u)+.2*Math.sin(u*2.3+1)+.1*Math.sin(u*5.1))};
+function layer(L){
+  ctx.fillStyle=L.c;ctx.beginPath();ctx.moveTo(0,GY);
+  for(let x=0;x<=W+12;x+=12)ctx.lineTo(x,yh(L,x));
+  ctx.lineTo(W+12,GY);ctx.fill();
+  if(!L.t)return;
+  const[c1,c2,gap,sd]=L.t,o=cam*L.p,i0=Math.floor(o/gap);
+  for(let i=i0;i<i0+W/gap+2;i++){
+    if(rnd(i+sd)<.35)continue;
+    const x=i*gap-o+rnd(i*3+sd)*gap*.6,s=gap*(.7+rnd(i+9)*.5),y=yh(L,x)+4;
+    ctx.fillStyle=c2;ctx.fillRect(x-2,y-s*.3,4,s*.3);ctx.fillStyle=c1;
+    [[0,.55,.26,.3],[-.14,.4,.2,.2],[.14,.4,.2,.2]].forEach(e=>{ctx.beginPath();ctx.ellipse(x+e[0]*s,y-e[1]*s,e[2]*s,e[3]*s,0,0,7);ctx.fill()});
+  }
+}
+function clouds(){
+  ctx.fillStyle='rgba(255,255,255,.72)';
+  for(let i=0;i<6;i++){
+    const x=W+150-((i*300+cam*.04+S.t*5)%(W+300)),y=55+(i%3)*45,s=.8+(i%2)*.4;
+    [[0,0,46],[-34,6,32],[36,8,34],[10,-10,30]].forEach(e=>{ctx.beginPath();ctx.ellipse(x+e[0]*s,y+e[1]*s,e[2]*s,e[2]*s*.5,0,0,7);ctx.fill()});
+  }
+}
+function holesVis(){
+  const a=[],k0=Math.max(0,Math.floor((cam-H0)/SP)-1),k1=Math.floor((cam+W-H0)/SP)+1;
+  for(let k=k0;k<=k1;k++){const l=hx(k)-cam;if(l>-HW-40&&l<W+40)a.push({l,k})}
+  return a;
+}
+const inHole=(x,hs,m=0)=>hs.some(h=>x>h.l-m&&x<h.l+HW+m);
+function bushes(hs){
+  const g=230,o=cam*.8,i0=Math.floor(o/g);
+  for(let i=i0;i<i0+W/g+2;i++){
+    if(rnd(i+21)<.3)continue;const x=i*g-o+rnd(i)*90;if(inHole(x,hs,40))continue;
+    ctx.fillStyle='#35703a';[[0,-12,34,20],[-24,-6,22,14],[24,-6,24,15]].forEach(e=>{ctx.beginPath();ctx.ellipse(x+e[0],GY+e[1],e[2],e[3],0,0,7);ctx.fill()});
+    ctx.fillStyle='#4a8b46';ctx.beginPath();ctx.ellipse(x-6,GY-20,20,10,0,0,7);ctx.fill();
+  }
+}
+function seg(a,b){
+  if(b<=a)return;
+  ctx.save();ctx.beginPath();ctx.rect(a,GY-4,b-a,H);ctx.clip();
+  let g=ctx.createLinearGradient(0,GY,0,H);g.addColorStop(0,'#8e6341');g.addColorStop(1,'#46301f');
+  ctx.fillStyle=g;ctx.fillRect(a,GY,b-a,H-GY);
+  const o=Math.floor(cam/60);
+  for(let i=o-1;i<o+W/60+2;i++){
+    const x=i*60-cam;
+    ctx.fillStyle='rgba(38,24,14,.28)';ctx.fillRect(x+rnd(i)*30,GY+32+rnd(i+4)*22,24+rnd(i+2)*22,3);
+    ctx.fillStyle=rnd(i+3)<.5?'#aa9d8d':'#6c5846';ctx.beginPath();
+    ctx.ellipse(x+rnd(i+7)*50,GY+22+rnd(i+9)*100,3+rnd(i+1)*4,2+rnd(i+5)*3,0,0,7);ctx.fill();
+  }
+  ctx.fillStyle='#3a6e31';ctx.fillRect(a,GY+12,b-a,3);
+  ctx.fillStyle='#4e8c3f';ctx.fillRect(a,GY,b-a,12);
+  ctx.fillStyle='#7bb956';ctx.fillRect(a,GY-1,b-a,4);
+  ctx.restore();
+}
+function rr(x,y,w,h,r){ctx.beginPath();if(ctx.roundRect)ctx.roundRect(x,y,w,h,r);else ctx.rect(x,y,w,h);ctx.fill()}
+function pit(h){
+  const l=h.l;
+  let g=ctx.createLinearGradient(0,GY,0,H);g.addColorStop(0,'#1c1510');g.addColorStop(1,'#040506');
+  ctx.fillStyle=g;ctx.fillRect(l,GY,HW,H-GY);
+  g=ctx.createLinearGradient(l,0,l+26,0);g.addColorStop(0,'rgba(0,0,0,.6)');g.addColorStop(1,'rgba(0,0,0,0)');ctx.fillStyle=g;ctx.fillRect(l,GY,26,H-GY);
+  g=ctx.createLinearGradient(l+HW,0,l+HW-26,0);g.addColorStop(0,'rgba(0,0,0,.6)');g.addColorStop(1,'rgba(0,0,0,0)');ctx.fillStyle=g;ctx.fillRect(l+HW-26,GY,26,H-GY);
+  ctx.fillStyle='#9d9c96';rr(l-12,GY-4,15,10,3);rr(l+HW-3,GY-4,15,10,3);
+  ctx.fillStyle='#7b7a75';ctx.fillRect(l-12,GY+3,15,3);ctx.fillRect(l+HW-3,GY+3,15,3);
+  const x=l-72;
+  ctx.fillStyle='#6a492e';ctx.fillRect(x,GY-50,5,50);
+  ctx.fillStyle='#d9a62e';rr(x-14,GY-58,34,13,2);
+  ctx.fillStyle='#2b2b2b';for(let i=0;i<3;i++)ctx.fillRect(x-9+i*11,GY-58,5,13);
+}
+function tufts(hs){
+  const o=Math.floor(cam/46);
+  for(let i=o-1;i<o+W/46+2;i++){
+    const x=i*46-cam+rnd(i)*24;if(inHole(x,hs,6))continue;
+    ctx.strokeStyle=i%3?'#3c7a35':'#5b9a43';ctx.lineWidth=2;ctx.beginPath();
+    for(let b=-1;b<=1;b++){const sw=Math.sin(S.t*2+i+b)*2;ctx.moveTo(x+b*4,GY+3);ctx.quadraticCurveTo(x+b*5+sw,GY-9,x+b*8+sw*1.6,GY-15-rnd(i+b)*8)}
+    ctx.stroke();
+    if(rnd(i+50)<.12){ctx.fillStyle=rnd(i+8)<.5?'#f4f0e6':'#f2c94c';ctx.beginPath();ctx.arc(x+10,GY-9,2.6,0,7);ctx.fill()}
+  }
 }
 
-
-/* PREPARER UNE COURSE */
-
-function prepareRace(){
-
-    if(
-        !Array.isArray(jeuxQuestions) ||
-        jeuxQuestions.length === 0
-    ){
-
-        questionElement.textContent =
-            "Aucune question disponible.";
-
-        optionsElement.innerHTML = "";
-
-        return false;
-    }
-
-
-    allQuestions =
-        [...jeuxQuestions];
-
-
-    currentQuestions =
-        shuffle(allQuestions)
-        .slice(
-            0,
-            Math.min(
-                QUESTIONS_PER_RACE,
-                allQuestions.length
-            )
-        );
-
-
-    return currentQuestions.length > 0;
+/* ===== Personnage humain : squelette articulé + silhouette détaillée ===== */
+const SK='#c98f63',SKd='#a8714a',SH='#1f6f8b',SHd='#175569',ST='#e8963a',SO='#232b35',SOd='#181e26',HR='#15100d';
+const P={
+ idle:[.08,.2,-.08,.2,.08,.45,-.08,.45,.04],
+ crouch:[.9,1.7,.7,1.5,-1.1,.5,-.9,.5,.55],
+ air:[-.5,1.7,1.3,.4,1.5,1.3,-.7,1.0,.12],
+ prep:[.5,.6,.9,.3,.5,.9,.3,.9,.18],
+ land:[1.0,1.8,.8,1.6,-.6,.8,-.4,.8,.5],
+ flail:[1.0,1.2,-.5,.8,2.5,.4,-2.3,.4,.45]
+};
+function runPose(ph){
+  const c=a=>.3+1.15*Math.max(0,Math.cos(a)),b=ph+Math.PI;
+  return[.9*Math.sin(ph),c(ph),.9*Math.sin(b),c(b),-.85*Math.sin(ph),1.3,-.85*Math.sin(b),1.3,.2+.03*Math.sin(2*ph)];
+}
+const lerpP=(a,b,t)=>a.map((v,i)=>v+(b[i]-v)*t);
+const pt=(o,a,l)=>({x:o.x+Math.sin(a)*l,y:o.y+Math.cos(a)*l});
+const mix=(a,b,t)=>({x:a.x+(b.x-a.x)*t,y:a.y+(b.y-a.y)*t});
+function limb(a,b,r1,r2,c){
+  const dx=b.x-a.x,dy=b.y-a.y,L=Math.hypot(dx,dy)||1,nx=-dy/L,ny=dx/L;
+  ctx.fillStyle=c;ctx.beginPath();
+  ctx.moveTo(a.x+nx*r1,a.y+ny*r1);ctx.lineTo(b.x+nx*r2,b.y+ny*r2);ctx.lineTo(b.x-nx*r2,b.y-ny*r2);ctx.lineTo(a.x-nx*r1,a.y-ny*r1);ctx.fill();
+  ctx.beginPath();ctx.arc(a.x,a.y,r1,0,7);ctx.fill();
+  ctx.beginPath();ctx.arc(b.x,b.y,r2,0,7);ctx.fill();
+}
+function shoe(F,ang,far){
+  ctx.save();ctx.translate(F.x,F.y);ctx.rotate(ang);
+  ctx.fillStyle=far?'#c4c4bf':'#f2f2ee';ctx.beginPath();
+  ctx.moveTo(-8,-6);ctx.lineTo(5,-6);ctx.quadraticCurveTo(10,-3,17,4);ctx.quadraticCurveTo(20,8,15,9);ctx.lineTo(-8,9);ctx.quadraticCurveTo(-12,3,-8,-6);ctx.fill();
+  ctx.strokeStyle=far?'#b87a30':ST;ctx.lineWidth=3;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(-8,8);ctx.lineTo(15,8);ctx.stroke();
+  ctx.strokeStyle='rgba(30,40,50,.35)';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(-2,-2);ctx.quadraticCurveTo(5,0,9,4);ctx.stroke();
+  ctx.restore();
+}
+function leg(hip,t,k,far){
+  const K=pt(hip,t,40),F=pt(K,t-k,40);
+  limb(hip,K,10,7.2,far?SKd:SK);
+  limb(hip,mix(hip,K,.62),12.5,10.8,far?SOd:SO);
+  limb(K,F,6.6,4.6,far?SKd:SK);
+  limb(mix(K,F,.7),F,5.2,4.8,far?'#cfcfcb':'#f4f4f0');
+  shoe(F,Math.max(-.5,Math.min(.6,(t-k)*.4+.05)),far);
+}
+function arm(sh,a,e,far){
+  const E=pt(sh,a,27),Hh=pt(E,a+e,26);
+  limb(sh,E,6.2,5.4,far?SKd:SK);
+  limb(sh,mix(sh,E,.58),8.4,7.6,far?SHd:SH);
+  limb(E,Hh,5.4,4.3,far?SKd:SK);
+  ctx.fillStyle=far?SKd:SK;ctx.beginPath();ctx.arc(Hh.x,Hh.y,4.8,0,7);ctx.fill();
+}
+function head(panic){
+  ctx.fillStyle=SK;ctx.beginPath();ctx.ellipse(0,0,12.5,14.5,0,0,7);ctx.fill();
+  ctx.fillStyle=SKd;ctx.beginPath();ctx.ellipse(-4,1,3,4.2,0,0,7);ctx.fill();
+  ctx.fillStyle=HR;ctx.beginPath();
+  ctx.moveTo(13,-5);ctx.bezierCurveTo(13,-21,-9,-22,-12.5,-6);ctx.bezierCurveTo(-15,1,-13,8,-9,12);ctx.lineTo(-5,4);ctx.bezierCurveTo(-2,-3,6,-6,13,-5);ctx.fill();
+  ctx.strokeStyle='rgba(255,255,255,.2)';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(-6,-15);ctx.quadraticCurveTo(2,-19,8,-14);ctx.stroke();
+  ctx.strokeStyle='#c0392b';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(-12,-6);ctx.quadraticCurveTo(0,-9,12.5,-6);ctx.stroke();
+  ctx.strokeStyle=HR;ctx.lineWidth=1.8;ctx.beginPath();ctx.moveTo(5,panic?-12:-3);ctx.lineTo(11,panic?-13:-3.3);ctx.stroke();
+  ctx.fillStyle='#fff';ctx.beginPath();ctx.ellipse(8,1.5,3.4,panic?3.6:2.4,0,0,7);ctx.fill();
+  ctx.fillStyle='#1b1b1b';ctx.beginPath();ctx.arc(9,1.5,1.5,0,7);ctx.fill();
+  ctx.strokeStyle=SKd;ctx.lineWidth=1.4;ctx.beginPath();ctx.moveTo(12,2);ctx.lineTo(15,6.5);ctx.lineTo(12,7);ctx.stroke();
+  if(panic){ctx.fillStyle='#4a1d1d';ctx.beginPath();ctx.ellipse(8.5,10,2.6,3.6,0,0,7);ctx.fill()}
+  else{ctx.strokeStyle='#6b3326';ctx.lineWidth=1.6;ctx.beginPath();ctx.moveTo(5,9.5);ctx.quadraticCurveTo(8.5,11,11.5,9);ctx.stroke()}
+}
+function figure(x,y,p,rot,panic){
+  const hip={x:0,y:0},ln=p[8];
+  const fL=pt(pt(hip,p[0],40),p[0]-p[1],40),fR=pt(pt(hip,p[2],40),p[2]-p[3],40);
+  const off=-(Math.max(fL.y,fR.y)+9);
+  const sh={x:Math.sin(ln)*46,y:-Math.cos(ln)*46};
+  ctx.save();ctx.translate(x,y);ctx.scale(.8,.8);ctx.translate(0,off);ctx.rotate(rot);
+  arm(sh,p[4],p[5],true);
+  leg(hip,p[0],p[1],true);
+  ctx.save();ctx.rotate(ln);
+  ctx.fillStyle=SH;ctx.beginPath();
+  ctx.moveTo(-11,3);ctx.bezierCurveTo(-16,-18,-14,-34,-10,-47);ctx.quadraticCurveTo(0,-51,10,-47);ctx.bezierCurveTo(15,-34,15,-16,11.5,3);ctx.fill();
+  ctx.strokeStyle=ST;ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(-12.5,-10);ctx.quadraticCurveTo(0,-7,12.5,-10);ctx.stroke();
+  ctx.fillStyle=SO;ctx.beginPath();ctx.ellipse(0,1,13.5,9,0,0,7);ctx.fill();
+  ctx.fillStyle=SK;ctx.beginPath();ctx.moveTo(-5,-48);ctx.lineTo(6,-48);ctx.lineTo(5,-56);ctx.lineTo(-3,-56);ctx.fill();
+  ctx.save();ctx.translate(3,-70);ctx.rotate(-ln*.7);head(panic);ctx.restore();
+  ctx.restore();
+  leg(hip,p[2],p[3],false);
+  arm(sh,p[6],p[7],false);
+  ctx.restore();
 }
 
-
-/* SCORE */
-
-function updateScore(){
-
-    score1Element.textContent =
-        score1;
-
-    score2Element.textContent =
-        score2;
-
-
-    player1Card.classList.toggle(
-        "active",
-        currentPlayer === 1
-    );
-
-
-    player2Card.classList.toggle(
-        "active",
-        currentPlayer === 2
-    );
+/* ===== État du jeu ===== */
+const $=id=>document.getElementById(id);
+function nextQ(){if(!S.order.length)S.order=shuffle(POOL.slice());return S.order.pop()}
+function reset(){
+  S={st:'RUN',t:0,cam:0,k:0,score:0,done:0,ph:0,jt:0,ok:true,cred:0,lift:0,fy:0,fvy:0,fvx:0,dx:0,rot:0,panic:0,pose:P.idle.slice(),order:[],q:null};
+  $('ov').hidden=true;$('qbox').hidden=true;$('status').hidden=false;
+  setStatus('En course… un obstacle approche.');hud();
+}
+function setStatus(t){$('status').textContent=t}
+function hud(){
+  $('sc').textContent=S.score;$('dn').textContent=S.done;
+  $('pl').textContent='Palier '+(Math.floor(S.done/10)+1)+' — '+(S.done%10)+'/10';
+  $('pb').style.width=(S.done%10)*10+'%';
+}
+function showQ(){
+  S.q=nextQ();S.q.shown=shuffle(S.q.opts.slice());
+  $('qt').textContent=S.q.q;
+  const box=$('opts');box.innerHTML='';
+  S.q.shown.forEach((o,i)=>{
+    const b=document.createElement('button');b.type='button';b.className='opt';
+    b.innerHTML='<b>'+'ABCD'[i]+'</b><span></span>';b.lastChild.textContent=o.t;
+    b.onclick=()=>answer(i);box.appendChild(b);
+  });
+  $('status').hidden=true;$('qbox').hidden=false;
+}
+function answer(i){
+  if(!S||S.st!=='Q')return;const o=S.q.shown[i];if(!o)return;
+  const bs=$('opts').children;
+  [...bs].forEach((b,k)=>{b.disabled=true;if(S.q.shown[k].ok)b.classList.add('good');else if(k===i)b.classList.add('bad')});
+  S.ok=o.ok;S.st='JUMP';S.jt=0;S.cred=0;S.rot=0;S.panic=0;
+  setTimeout(()=>{if(S&&S.st!=='Q'){$('qbox').hidden=true;$('status').hidden=false;setStatus(S.ok?'Bonne réponse ! Le saut est lancé.':'Mauvaise réponse… le saut est raté.')}},650);
+}
+function endScreen(){
+  $('ot').textContent='GAME OVER';
+  $('os').innerHTML='Score : <b>'+S.score+'</b><br>Épreuves réussies : <b>'+S.done+'</b>';
+  $('ov').hidden=false;$('rs').focus({preventScroll:true});
 }
 
-
-/* POSITION DES JOUEURS */
-
-function updateRunners(){
-
-    const trackWidth =
-        document.querySelector(".track")
-        .clientWidth;
-
-
-    const runnerWidth =
-        runner1.offsetWidth;
-
-
-    const start = 10;
-
-
-    const finish =
-        Math.max(
-            start,
-            trackWidth -
-            runnerWidth -
-            14
-        );
-
-
-    const maxProgress =
-        Math.max(
-            1,
-            QUESTIONS_PER_RACE
-        );
-
-
-    const position1 =
-        start +
-        (
-            progress1 /
-            maxProgress
-        ) *
-        (
-            finish -
-            start
-        );
-
-
-    const position2 =
-        start +
-        (
-            progress2 /
-            maxProgress
-        ) *
-        (
-            finish -
-            start
-        );
-
-
-    runner1.style.left =
-        `${position1}px`;
-
-    runner2.style.left =
-        `${position2}px`;
+function step(dt){
+  S.t+=dt;let tgt=P.idle,k=12;
+  if(S.st==='RUN'){
+    S.cam+=SPEED*dt;S.ph+=dt*11;tgt=runPose(S.ph);k=35;
+    if(hx(S.k)-S.cam-PX<=STOP){S.cam=hx(S.k)-PX-STOP;S.st='Q';showQ()}
+  }else if(S.st==='Q'){
+    tgt=P.idle.slice();const s=Math.sin(S.t*2.6);tgt[8]+=.025*s;tgt[4]+=.05*s;tgt[6]-=.05*s;k=10;
+  }else if(S.st==='JUMP'){
+    S.jt+=dt;const ok=S.ok,CR=.14,F=ok?.9:.72,LD=.26,Hh=ok?135:72,D=ok?430:245,t=S.jt;
+    if(t<CR){tgt=P.crouch;k=22}
+    else if(t<CR+F){
+      const f=(t-CR)/F;S.cam+=D/F*dt;S.lift=4*Hh*f*(1-f);
+      if(ok){tgt=f<.72?P.air:P.prep;k=14}
+      else{tgt=f<.45?P.air:P.flail;k=10;S.rot=.55*sm(f);S.panic=f>.55?1:0}
+    }else if(ok){
+      S.lift=0;tgt=P.land;k=18;
+      if(!S.cred){S.cred=1;S.score+=10;S.done++;hud()}
+      S.cam+=110*dt*Math.max(0,1-(t-CR-F)/LD);
+      if(t>CR+F+LD){S.st='RUN';S.k++;setStatus('En course… un obstacle approche.')}
+    }else{S.st='FALL';S.fvy=380;S.fvx=110;S.fy=0;S.dx=0;S.lift=0;S.panic=1}
+  }else if(S.st==='FALL'){
+    S.fvy+=1500*dt;S.fy+=S.fvy*dt;S.dx+=S.fvx*dt;S.fvx*=Math.pow(.3,dt);
+    S.rot+=(1.55-S.rot)*Math.min(1,dt*3);tgt=P.flail;k=9;
+    if(S.fy>250){S.st='OVER';endScreen()}
+  }else{tgt=S.pose;k=0}
+  S.pose=lerpP(S.pose,tgt,1-Math.exp(-dt*k));
 }
 
-
-/* AFFICHER QUESTION */
-
-function displayQuestion(){
-
-    if(
-        currentQuestionIndex >=
-        currentQuestions.length
-    ){
-
-        endRace();
-
-        return;
-    }
-
-
-    answered = false;
-
-
-    const currentQuestion =
-        currentQuestions[
-            currentQuestionIndex
-        ];
-
-
-    questionNumber.textContent =
-        `Question ${
-            currentQuestionIndex + 1
-        } / ${
-            currentQuestions.length
-        }`;
-
-
-    questionElement.textContent =
-        currentQuestion.question;
-
-
-    turnLabel.textContent =
-        `Tour de Joueur ${currentPlayer}`;
-
-
-    categoryElement.textContent =
-        currentQuestion.category
-        ? `Catégorie : ${currentQuestion.category}`
-        : "";
-
-
-    feedbackElement.className =
-        "feedback";
-
-    feedbackElement.textContent =
-        "";
-
-
-    nextBtn.className =
-        "next-btn";
-
-
-    optionsElement.innerHTML =
-        "";
-
-
-    const options =
-        shuffle(
-            currentQuestion.options || []
-        );
-
-
-    options.forEach(option => {
-
-        const button =
-            document.createElement("button");
-
-
-        button.type =
-            "button";
-
-
-        button.className =
-            "option";
-
-
-        button.textContent =
-            option;
-
-
-        button.addEventListener(
-            "click",
-            () => {
-
-                answerQuestion(
-                    button,
-                    option,
-                    currentQuestion
-                );
-
-            }
-        );
-
-
-        optionsElement.appendChild(
-            button
-        );
-
-    });
-
-
-    updateScore();
-
-    updateRunners();
+function render(){
+  ctx.setTransform(dpr,0,0,dpr,0,0);cam=S.cam;
+  ctx.drawImage(sky,0,0);clouds();
+  LY.forEach(layer);
+  const hs=holesVis();
+  bushes(hs);
+  let x0=-10;hs.forEach(h=>{seg(x0,h.l);x0=h.l+HW});seg(x0,W+10);
+  hs.forEach(pit);
+  const cx=PX+S.dx,cy=GY-S.lift+S.fy;
+  if(S.st!=='FALL'&&S.st!=='OVER'){
+    ctx.fillStyle='rgba(20,30,15,'+(.28-S.lift/700)+')';ctx.beginPath();ctx.ellipse(cx,GY+3,24-S.lift/9,5,0,0,7);ctx.fill();
+  }
+  ctx.save();
+  if(S.st==='FALL'||S.st==='OVER'){
+    const l=hx(S.k)-cam;ctx.beginPath();ctx.rect(0,0,W,GY);ctx.rect(l,GY,HW,H);ctx.clip();
+  }
+  figure(cx,cy,S.pose,S.rot,S.panic);
+  ctx.restore();
+  tufts(hs);
+  const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,'rgba(0,0,0,.08)');g.addColorStop(.3,'rgba(0,0,0,0)');g.addColorStop(1,'rgba(0,0,0,.2)');
+  ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+}
+function frame(ts){
+  const dt=Math.min((ts-last)/1000||0,.05);last=ts;
+  step(dt);render();requestAnimationFrame(frame);
 }
 
-
-/* REPONDRE */
-
-function answerQuestion(
-    clickedButton,
-    selectedAnswer,
-    currentQuestion
-){
-
-    if(answered) return;
-
-
-    answered = true;
-
-
-    const buttons =
-        optionsElement.querySelectorAll(
-            ".option"
-        );
-
-
-    buttons.forEach(button => {
-
-        button.disabled = true;
-
-
-        if(
-            button.textContent ===
-            currentQuestion.answer
-        ){
-
-            button.classList.add(
-                "correct"
-            );
-
-        }
-
-    });
-
-
-    const isCorrect =
-        selectedAnswer ===
-        currentQuestion.answer;
-
-
-    if(isCorrect){
-
-        clickedButton.classList.add(
-            "correct"
-        );
-
-
-        if(currentPlayer === 1){
-
-            score1 += 10;
-
-            progress1++;
-
-        }
-        else{
-
-            score2 += 10;
-
-            progress2++;
-
-        }
-
-
-        feedbackElement.textContent =
-            `Bonne réponse ! Joueur ${
-                currentPlayer
-            } avance de 1 position et gagne 10 points.`;
-
-
-        feedbackElement.className =
-            "feedback show correct";
-
-
-        updateScore();
-
-        updateRunners();
-
-    }
-    else{
-
-        clickedButton.classList.add(
-            "wrong"
-        );
-
-
-        feedbackElement.textContent =
-            `Mauvaise réponse. La bonne réponse était : ${
-                currentQuestion.answer
-            }`;
-
-
-        feedbackElement.className =
-            "feedback show wrong";
-
-    }
-
-
-    nextBtn.className =
-        "next-btn show";
-}
-
-
-/* QUESTION SUIVANTE */
-
-function nextQuestion(){
-
-    if(!answered) return;
-
-
-    currentQuestionIndex++;
-
-
-    currentPlayer =
-        currentPlayer === 1
-        ? 2
-        : 1;
-
-
-    displayQuestion();
-}
-
-
-/* FIN DE COURSE */
-
-function endRace(){
-
-    finalScore1.textContent =
-        score1;
-
-    finalScore2.textContent =
-        score2;
-
-
-    resultTitle.textContent =
-        `Course ${raceNumber} terminée`;
-
-
-    if(progress1 > progress2){
-
-        winnerText.textContent =
-            "Joueur 1 atteint la meilleure position.";
-
-    }
-    else if(progress2 > progress1){
-
-        winnerText.textContent =
-            "Joueur 2 atteint la meilleure position.";
-
-    }
-    else{
-
-        winnerText.textContent =
-            "Les deux joueurs terminent à égalité.";
-
-    }
-
-
-    if(
-        raceNumber >= MAX_RACES
-    ){
-
-        endGame();
-
-        return;
-    }
-
-
-    nextRaceBtn.textContent =
-        "Course suivante";
-
-
-    resultOverlay.classList.add(
-        "show"
-    );
-}
-
-
-/* FIN DES 20 COURSES */
-
-function endGame(){
-
-    gameFinished = true;
-
-
-    resultTitle.textContent =
-        "Course Quiz terminée";
-
-
-    if(score1 > score2){
-
-        winnerText.textContent =
-            "Joueur 1 termine avec le plus de points.";
-
-    }
-    else if(score2 > score1){
-
-        winnerText.textContent =
-            "Joueur 2 termine avec le plus de points.";
-
-    }
-    else{
-
-        winnerText.textContent =
-            "La partie se termine par une égalité.";
-
-    }
-
-
-    finalScore1.textContent =
-        score1;
-
-    finalScore2.textContent =
-        score2;
-
-
-    nextRaceBtn.textContent =
-        "Nouvelle partie";
-
-
-    resultOverlay.classList.add(
-        "show"
-    );
-}
-
-
-/* COURSE SUIVANTE */
-
-function startNextRace(){
-
-    if(gameFinished){
-
-        restartGame();
-
-        return;
-    }
-
-
-    if(
-        raceNumber >= MAX_RACES
-    ){
-
-        endGame();
-
-        return;
-    }
-
-
-    raceNumber++;
-
-    currentQuestionIndex = 0;
-
-    currentPlayer = 1;
-
-    progress1 = 0;
-
-    progress2 = 0;
-
-
-    raceLabel.textContent =
-        `Course ${
-            raceNumber
-        } / ${
-            MAX_RACES
-        }`;
-
-
-    resultOverlay.classList.remove(
-        "show"
-    );
-
-
-    if(prepareRace()){
-
-        updateRunners();
-
-        displayQuestion();
-
-    }
-}
-
-
-/* RECOMMENCER */
-
-function restartGame(){
-
-    raceNumber = 1;
-
-    currentQuestionIndex = 0;
-
-    currentPlayer = 1;
-
-    score1 = 0;
-
-    score2 = 0;
-
-    progress1 = 0;
-
-    progress2 = 0;
-
-    answered = false;
-
-    gameFinished = false;
-
-
-    raceLabel.textContent =
-        `Course 1 / ${MAX_RACES}`;
-
-
-    resultOverlay.classList.remove(
-        "show"
-    );
-
-
-    nextRaceBtn.textContent =
-        "Course suivante";
-
-
-    updateRunners();
-
-
-    if(prepareRace()){
-
-        displayQuestion();
-
-    }
-}
-
-
-/* EVENEMENTS */
-
-nextBtn.addEventListener(
-    "click",
-    nextQuestion
-);
-
-
-nextRaceBtn.addEventListener(
-    "click",
-    startNextRace
-);
-
-
-restartBtn.addEventListener(
-    "click",
-    restartGame
-);
-
-
-window.addEventListener(
-    "resize",
-    updateRunners
-);
-
-
-/* DEMARRAGE */
-
-if(prepareRace()){
-
-    displayQuestion();
-
-}
-
+/* ===== Commandes ===== */
+$('rs').onclick=$('rs2').onclick=()=>{reset()};
+addEventListener('keydown',e=>{
+  if(!S)return;
+  const ov=!$('ov').hidden;
+  if(ov&&(e.key==='Enter'||e.key===' ')&&document.activeElement.tagName!=='A'){e.preventDefault();reset();return}
+  const i='abcd'.indexOf(e.key.toLowerCase()),n=['1','2','3','4'].indexOf(e.key),j=i>=0?i:n;
+  if(j>=0&&S.st==='Q')answer(j);
+});
+
+(async function(){
+  POOL=await loadQuestions();reset();requestAnimationFrame(frame);
+})();
 </script>
-
 </body>
 </html>
