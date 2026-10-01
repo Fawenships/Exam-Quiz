@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 <title>EduBillard — ExamQuiz Haiti</title>
 
@@ -12,488 +12,831 @@
 >
 
 <style>
-  * {
-    box-sizing: border-box;
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f6f4f8;
+  color: #24113f;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+header {
+  background: #24113f;
+  color: white;
+  padding: 16px 24px;
+}
+
+.header-inner {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.brand {
+  font-size: 21px;
+  font-weight: 700;
+}
+
+.back-link {
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  border: 1px solid rgba(255,255,255,.35);
+  padding: 9px 14px;
+  border-radius: 8px;
+}
+
+.back-link:hover {
+  background: rgba(255,255,255,.1);
+}
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+main {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 28px 20px 50px;
+}
+
+.page-title {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.page-title h1 {
+  margin: 0 0 8px;
+  font-size: 34px;
+}
+
+.page-title p {
+  margin: 0;
+  color: #666;
+}
+
+/* =========================================================
+   HUD
+========================================================= */
+
+.hud {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.hud-box {
+  min-width: 0;
+  background: white;
+  border: 1px solid #e4e0e9;
+  border-radius: 12px;
+  padding: 13px 8px;
+  text-align: center;
+}
+
+.hud-label {
+  color: #777;
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+.hud-value {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.stars {
+  font-size: 19px;
+  letter-spacing: 2px;
+  white-space: nowrap;
+  line-height: 1.2;
+}
+
+.star-active {
+  color: #24113f;
+}
+
+.star-lost {
+  color: #d6d3da;
+}
+
+/* =========================================================
+   QUESTION
+========================================================= */
+
+.question-box {
+  background: white;
+  border: 1px solid #e4e0e9;
+  border-radius: 14px;
+  padding: 18px 20px;
+  margin-bottom: 18px;
+}
+
+.question-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.level-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #4b2481;
+}
+
+.question-number {
+  font-size: 13px;
+  color: #777;
+}
+
+.question-text {
+  font-size: 20px;
+  line-height: 1.45;
+  font-weight: 600;
+  margin-bottom: 14px;
+  overflow-wrap: anywhere;
+}
+
+.progress-container {
+  width: 100%;
+  height: 7px;
+  background: #ebe8ef;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  width: 0%;
+  height: 100%;
+  background: #4b2481;
+  transition: width .25s ease;
+}
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.table-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 25px;
+  background: #123d27;
+  box-shadow: 0 12px 35px rgba(0,0,0,.16);
+}
+
+#gameCanvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1100 / 600;
+  background: #17613b;
+  touch-action: none;
+  cursor: default;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* =========================================================
+   RESULTAT
+========================================================= */
+
+.answer-result {
+  position: absolute;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(20, 12, 30, .68);
+  z-index: 10;
+}
+
+.answer-result.show {
+  display: flex;
+}
+
+.answer-result-content {
+  width: min(560px, 94%);
+  background: white;
+  border-radius: 18px;
+  padding: 25px;
+  text-align: center;
+  box-shadow: 0 18px 45px rgba(0,0,0,.28);
+}
+
+.answer-result-title {
+  font-size: 26px;
+  font-weight: 800;
+  color: #24113f;
+  margin-bottom: 14px;
+}
+
+.answer-result-question {
+  color: #444;
+  line-height: 1.5;
+  margin-bottom: 18px;
+  overflow-wrap: anywhere;
+}
+
+.answer-result-answer {
+  background: #f5f2f8;
+  border-radius: 10px;
+  padding: 13px;
+  margin-bottom: 18px;
+}
+
+.answer-result-answer span {
+  color: #666;
+}
+
+.answer-result-answer strong {
+  display: block;
+  margin-top: 5px;
+  color: #24113f;
+  overflow-wrap: anywhere;
+}
+
+.continue-btn {
+  border: 0;
+  background: #24113f;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 9px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  min-height: 44px;
+}
+
+.continue-btn:hover {
+  background: #4b2481;
+}
+
+/* =========================================================
+   REPONSES
+========================================================= */
+
+.answers-title {
+  margin: 22px 0 10px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.answers-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.answer-card {
+  min-width: 0;
+  background: white;
+  border: 2px solid #e1dde7;
+  border-radius: 12px;
+  padding: 13px;
+  min-height: 75px;
+  cursor: pointer;
+  transition: .15s ease;
+  overflow: hidden;
+}
+
+.answer-card:hover {
+  border-color: #4b2481;
+}
+
+.answer-card.selected {
+  border-color: #4b2481;
+  background: #f4f0f8;
+}
+
+.answer-letter {
+  font-weight: 800;
+  color: #4b2481;
+  margin-bottom: 5px;
+}
+
+.answer-text {
+  font-size: 14px;
+  line-height: 1.35;
+  color: #333;
+  overflow-wrap: anywhere;
+}
+
+/* =========================================================
+   MESSAGE
+========================================================= */
+
+.message {
+  min-height: 25px;
+  text-align: center;
+  margin: 16px 0;
+  font-weight: 600;
+  color: #4b2481;
+  line-height: 1.4;
+}
+
+/* =========================================================
+   INSTRUCTIONS
+========================================================= */
+
+.instructions {
+  background: white;
+  border: 1px solid #e4e0e9;
+  border-radius: 14px;
+  padding: 18px;
+  margin-top: 18px;
+}
+
+.instructions h2 {
+  font-size: 17px;
+  margin: 0 0 10px;
+}
+
+.instructions p {
+  margin: 6px 0;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* =========================================================
+   RESTART
+========================================================= */
+
+.restart-small {
+  display: block;
+  margin: 20px auto 0;
+  border: 1px solid #24113f;
+  background: white;
+  color: #24113f;
+  padding: 11px 20px;
+  border-radius: 9px;
+  font-weight: 700;
+  cursor: pointer;
+  min-height: 44px;
+}
+
+.restart-small:hover {
+  background: #24113f;
+  color: white;
+}
+
+/* =========================================================
+   FIN
+========================================================= */
+
+.end-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 12, 30, .75);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 100;
+}
+
+.end-overlay.show {
+  display: flex;
+}
+
+.end-box {
+  width: min(500px, 95%);
+  background: white;
+  border-radius: 18px;
+  padding: 30px;
+  text-align: center;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.end-box h2 {
+  margin-top: 0;
+  font-size: 28px;
+  color: #24113f;
+}
+
+.final-score {
+  font-size: 40px;
+  font-weight: 800;
+  color: #4b2481;
+  margin: 15px 0;
+}
+
+.final-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.final-stat {
+  background: #f5f2f8;
+  border-radius: 10px;
+  padding: 12px;
+}
+
+.final-stat strong {
+  display: block;
+  font-size: 20px;
+  color: #24113f;
+}
+
+.final-stat span {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+  color: #777;
+}
+
+.restart-btn {
+  width: 100%;
+  border: 0;
+  background: #24113f;
+  color: white;
+  padding: 13px;
+  border-radius: 9px;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  min-height: 46px;
+}
+
+.restart-btn:hover {
+  background: #4b2481;
+}
+
+/* =========================================================
+   TABLETTE
+========================================================= */
+
+@media (max-width: 950px) {
+
+  .hud {
+    grid-template-columns: repeat(3, 1fr);
   }
 
-  body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background: #f6f4f8;
-    color: #24113f;
+  .answers-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
+}
+
+/* =========================================================
+   TELEPHONE
+========================================================= */
+
+@media (max-width: 700px) {
 
   header {
-    background: #24113f;
-    color: white;
-    padding: 16px 24px;
+    padding: 11px 12px;
   }
 
   .header-inner {
-    max-width: 1200px;
-    margin: auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
+    gap: 8px;
   }
 
   .brand {
-    font-size: 21px;
-    font-weight: 700;
+    font-size: 17px;
   }
 
   .back-link {
-    color: white;
-    text-decoration: none;
-    font-size: 14px;
-    border: 1px solid rgba(255,255,255,.35);
-    padding: 9px 14px;
-    border-radius: 8px;
-  }
-
-  .back-link:hover {
-    background: rgba(255,255,255,.1);
+    padding: 8px 10px;
+    font-size: 12px;
   }
 
   main {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 28px 20px 50px;
+    padding: 16px 9px 28px;
   }
 
   .page-title {
-    text-align: center;
-    margin-bottom: 24px;
+    margin-bottom: 14px;
   }
 
   .page-title h1 {
-    margin: 0 0 8px;
-    font-size: 34px;
+    font-size: 25px;
+    margin-bottom: 4px;
   }
 
   .page-title p {
-    margin: 0;
-    color: #666;
+    font-size: 12px;
+    line-height: 1.4;
   }
 
   /* HUD */
 
   .hud {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 12px;
-    margin-bottom: 18px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+    margin-bottom: 10px;
   }
 
   .hud-box {
-    background: white;
-    border: 1px solid #e4e0e9;
-    border-radius: 12px;
-    padding: 13px;
-    text-align: center;
+    padding: 8px 5px;
+    border-radius: 9px;
   }
 
   .hud-label {
-    color: #777;
-    font-size: 12px;
-    margin-bottom: 5px;
+    font-size: 9px;
+    margin-bottom: 3px;
   }
 
   .hud-value {
-    font-size: 20px;
-    font-weight: 700;
+    font-size: 16px;
   }
 
   .stars {
-    font-size: 19px;
-    letter-spacing: 2px;
-    white-space: nowrap;
-    line-height: 1.2;
-  }
-
-  .star-active {
-    color: #24113f;
-  }
-
-  .star-lost {
-    color: #d6d3da;
+    font-size: 16px;
+    letter-spacing: 1px;
   }
 
   /* QUESTION */
 
   .question-box {
-    background: white;
-    border: 1px solid #e4e0e9;
-    border-radius: 14px;
-    padding: 18px 20px;
-    margin-bottom: 18px;
-  }
-
-  .question-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 15px;
+    padding: 11px;
+    border-radius: 10px;
     margin-bottom: 10px;
   }
 
-  .level-label {
-    font-size: 13px;
-    font-weight: 700;
-    color: #4b2481;
+  .question-top {
+    margin-bottom: 6px;
   }
 
+  .level-label,
   .question-number {
-    font-size: 13px;
-    color: #777;
+    font-size: 10px;
   }
 
   .question-text {
-    font-size: 20px;
-    line-height: 1.45;
-    font-weight: 600;
-    margin-bottom: 14px;
+    font-size: 15px;
+    line-height: 1.4;
+    margin-bottom: 8px;
   }
 
   .progress-container {
-    width: 100%;
-    height: 7px;
-    background: #ebe8ef;
-    border-radius: 10px;
-    overflow: hidden;
-  }
-
-  .progress-bar {
-    width: 0%;
-    height: 100%;
-    background: #4b2481;
-    transition: width .25s ease;
+    height: 5px;
   }
 
   /* TABLE */
 
   .table-wrapper {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-    border-radius: 25px;
-    background: #123d27;
-    box-shadow: 0 12px 35px rgba(0,0,0,.16);
+    border-radius: 13px;
+    box-shadow: 0 6px 16px rgba(0,0,0,.15);
   }
 
   #gameCanvas {
-    display: block;
     width: 100%;
     height: auto;
-    background: #17613b;
-    touch-action: none;
-    cursor: default;
-  }
-
-  /* RESULTAT */
-
-  .answer-result {
-    position: absolute;
-    inset: 0;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    background: rgba(20, 12, 30, .68);
-    z-index: 10;
-  }
-
-  .answer-result.show {
-    display: flex;
-  }
-
-  .answer-result-content {
-    width: min(560px, 94%);
-    background: white;
-    border-radius: 18px;
-    padding: 25px;
-    text-align: center;
-    box-shadow: 0 18px 45px rgba(0,0,0,.28);
-  }
-
-  .answer-result-title {
-    font-size: 26px;
-    font-weight: 800;
-    color: #24113f;
-    margin-bottom: 14px;
-  }
-
-  .answer-result-question {
-    color: #444;
-    line-height: 1.5;
-    margin-bottom: 18px;
-  }
-
-  .answer-result-answer {
-    background: #f5f2f8;
-    border-radius: 10px;
-    padding: 13px;
-    margin-bottom: 18px;
-  }
-
-  .answer-result-answer span {
-    color: #666;
-  }
-
-  .answer-result-answer strong {
-    display: block;
-    margin-top: 5px;
-    color: #24113f;
-  }
-
-  .continue-btn {
-    border: 0;
-    background: #24113f;
-    color: white;
-    padding: 12px 24px;
-    border-radius: 9px;
-    font-size: 15px;
-    font-weight: 700;
-    cursor: pointer;
-  }
-
-  .continue-btn:hover {
-    background: #4b2481;
   }
 
   /* REPONSES */
 
   .answers-title {
-    margin: 22px 0 10px;
-    font-size: 15px;
-    font-weight: 700;
+    margin: 12px 0 6px;
+    font-size: 12px;
   }
 
   .answers-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
   }
 
   .answer-card {
-    background: white;
-    border: 2px solid #e1dde7;
-    border-radius: 12px;
-    padding: 13px;
-    min-height: 75px;
-    cursor: pointer;
-    transition: .15s ease;
-  }
-
-  .answer-card:hover {
-    border-color: #4b2481;
-  }
-
-  .answer-card.selected {
-    border-color: #4b2481;
-    background: #f4f0f8;
+    min-height: 60px;
+    padding: 8px;
+    border-radius: 8px;
   }
 
   .answer-letter {
-    font-weight: 800;
-    color: #4b2481;
-    margin-bottom: 5px;
+    font-size: 12px;
+    margin-bottom: 2px;
   }
 
   .answer-text {
-    font-size: 14px;
-    line-height: 1.35;
-    color: #333;
+    font-size: 11px;
+    line-height: 1.3;
   }
 
   /* MESSAGE */
 
   .message {
-    min-height: 25px;
-    text-align: center;
-    margin: 16px 0;
-    font-weight: 600;
-    color: #4b2481;
+    min-height: 20px;
+    margin: 9px 0;
+    font-size: 11px;
   }
 
   /* INSTRUCTIONS */
 
   .instructions {
-    background: white;
-    border: 1px solid #e4e0e9;
-    border-radius: 14px;
-    padding: 18px;
-    margin-top: 18px;
+    padding: 12px;
+    margin-top: 11px;
+    border-radius: 10px;
   }
 
   .instructions h2 {
-    font-size: 17px;
-    margin: 0 0 10px;
+    font-size: 14px;
+    margin-bottom: 6px;
   }
 
   .instructions p {
-    margin: 6px 0;
-    color: #555;
-    line-height: 1.5;
+    font-size: 11px;
+    margin: 4px 0;
+    line-height: 1.4;
   }
-
-  /* BUTTON */
 
   .restart-small {
-    display: block;
-    margin: 20px auto 0;
-    border: 1px solid #24113f;
-    background: white;
-    color: #24113f;
-    padding: 11px 20px;
-    border-radius: 9px;
-    font-weight: 700;
-    cursor: pointer;
+    width: 100%;
+    margin-top: 12px;
+    padding: 10px;
+    font-size: 12px;
   }
 
-  .restart-small:hover {
-    background: #24113f;
-    color: white;
+  /* RESULTAT */
+
+  .answer-result {
+    padding: 8px;
+  }
+
+  .answer-result-content {
+    width: 100%;
+    max-width: 340px;
+    padding: 15px 11px;
+    border-radius: 12px;
+  }
+
+  .answer-result-title {
+    font-size: 20px;
+    margin-bottom: 8px;
+  }
+
+  .answer-result-question {
+    font-size: 12px;
+    line-height: 1.4;
+    margin-bottom: 10px;
+  }
+
+  .answer-result-answer {
+    padding: 9px;
+    margin-bottom: 10px;
+    font-size: 12px;
+  }
+
+  .continue-btn {
+    width: 100%;
+    min-height: 44px;
+    padding: 9px;
+    font-size: 13px;
   }
 
   /* FIN */
 
   .end-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(20, 12, 30, .75);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    z-index: 100;
-  }
-
-  .end-overlay.show {
-    display: flex;
+    padding: 10px;
   }
 
   .end-box {
-    width: min(500px, 95%);
-    background: white;
-    border-radius: 18px;
-    padding: 30px;
-    text-align: center;
+    width: 100%;
+    max-width: 360px;
+    padding: 20px 13px;
+    border-radius: 13px;
   }
 
   .end-box h2 {
-    margin-top: 0;
-    font-size: 28px;
-    color: #24113f;
+    font-size: 22px;
   }
 
   .final-score {
-    font-size: 40px;
-    font-weight: 800;
-    color: #4b2481;
-    margin: 15px 0;
+    font-size: 33px;
   }
 
   .final-stats {
-    display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    margin: 20px 0;
+    gap: 5px;
+    margin: 14px 0;
   }
 
   .final-stat {
-    background: #f5f2f8;
-    border-radius: 10px;
-    padding: 12px;
+    padding: 8px 3px;
   }
 
   .final-stat strong {
-    display: block;
-    font-size: 20px;
-    color: #24113f;
+    font-size: 16px;
   }
 
   .final-stat span {
-    display: block;
-    margin-top: 4px;
-    font-size: 12px;
-    color: #777;
+    font-size: 8px;
   }
 
   .restart-btn {
-    width: 100%;
-    border: 0;
-    background: #24113f;
-    color: white;
-    padding: 13px;
-    border-radius: 9px;
-    font-weight: 700;
+    min-height: 44px;
+  }
+}
+
+/* =========================================================
+   PETITS TELEPHONES
+========================================================= */
+
+@media (max-width: 380px) {
+
+  main {
+    padding-left: 6px;
+    padding-right: 6px;
+  }
+
+  .brand {
     font-size: 15px;
-    cursor: pointer;
   }
 
-  .restart-btn:hover {
-    background: #4b2481;
+  .back-link {
+    font-size: 11px;
+    padding: 7px 8px;
   }
 
-  @media (max-width: 900px) {
-    .hud {
-      grid-template-columns: repeat(3, 1fr);
-    }
-
-    .answers-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
+  .page-title h1 {
+    font-size: 22px;
   }
 
-  @media (max-width: 600px) {
-    header {
-      padding: 14px 15px;
-    }
-
-    main {
-      padding: 22px 12px 35px;
-    }
-
-    .page-title h1 {
-      font-size: 27px;
-    }
-
-    .hud {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    .hud-box:last-child {
-      grid-column: span 2;
-    }
-
-    .question-text {
-      font-size: 17px;
-    }
-
-    .question-top {
-      align-items: flex-start;
-      flex-direction: column;
-      gap: 5px;
-    }
-
-    .answers-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .answer-card {
-      min-height: auto;
-    }
-
-    .answer-result-content {
-      padding: 20px;
-    }
-
-    .final-stats {
-      grid-template-columns: 1fr;
-    }
+  .page-title p {
+    font-size: 11px;
   }
+
+  .hud {
+    gap: 4px;
+  }
+
+  .hud-box {
+    padding: 7px 3px;
+  }
+
+  .hud-value {
+    font-size: 14px;
+  }
+
+  .stars {
+    font-size: 14px;
+    letter-spacing: 0;
+  }
+
+  .question-text {
+    font-size: 14px;
+  }
+
+  .answer-card {
+    min-height: 56px;
+    padding: 7px;
+  }
+
+  .answer-text {
+    font-size: 10px;
+  }
+}
+
+/* =========================================================
+   TRES PETITS ECRANS
+========================================================= */
+
+@media (max-width: 330px) {
+
+  .hud-label {
+    font-size: 8px;
+  }
+
+  .hud-value {
+    font-size: 13px;
+  }
+
+  .stars {
+    font-size: 13px;
+  }
+
+  .question-text {
+    font-size: 13px;
+  }
+
+  .answer-text {
+    font-size: 9px;
+  }
+}
 </style>
 </head>
 
@@ -501,69 +844,168 @@
 
 <header>
   <div class="header-inner">
-    <div class="brand">ExamQuiz Haiti</div>
-    <a class="back-link" href="baccalaureat.html">Retour</a>
+
+    <div class="brand">
+      ExamQuiz Haiti
+    </div>
+
+    <a
+      class="back-link"
+      href="baccalaureat.html"
+    >
+      Retour
+    </a>
+
   </div>
 </header>
 
 <main>
 
   <section class="page-title">
+
     <h1>EduBillard</h1>
-    <p>Réponds aux questions de biologie en jouant au billard.</p>
+
+    <p>
+      Apprends la biologie en jouant au billard.
+    </p>
+
   </section>
 
-  <!-- HUD -->
+
+  <!-- =====================================================
+       HUD
+  ====================================================== -->
 
   <section class="hud">
 
     <div class="hud-box">
-      <div class="hud-label">Score</div>
-      <div class="hud-value" id="score">0</div>
+
+      <div class="hud-label">
+        Score
+      </div>
+
+      <div
+        class="hud-value"
+        id="score"
+      >
+        0
+      </div>
+
     </div>
 
-    <div class="hud-box">
-      <div class="hud-label">Question</div>
-      <div class="hud-value" id="questionCounter">1 / 10</div>
-    </div>
 
     <div class="hud-box">
-      <div class="hud-label">Bonnes réponses</div>
-      <div class="hud-value" id="correctCount">0</div>
+
+      <div class="hud-label">
+        Question
+      </div>
+
+      <div
+        class="hud-value"
+        id="questionCounter"
+      >
+        1 / 10
+      </div>
+
     </div>
 
-    <div class="hud-box">
-      <div class="hud-label">Meilleur score</div>
-      <div class="hud-value" id="bestScore">0</div>
-    </div>
 
     <div class="hud-box">
-      <div class="hud-label">Étoiles</div>
-      <div class="hud-value stars" id="stars"></div>
+
+      <div class="hud-label">
+        Bonnes réponses
+      </div>
+
+      <div
+        class="hud-value"
+        id="correctCount"
+      >
+        0
+      </div>
+
+    </div>
+
+
+    <div class="hud-box">
+
+      <div class="hud-label">
+        Meilleur score
+      </div>
+
+      <div
+        class="hud-value"
+        id="bestScore"
+      >
+        0
+      </div>
+
+    </div>
+
+
+    <div class="hud-box">
+
+      <div class="hud-label">
+        Étoiles
+      </div>
+
+      <div
+        class="hud-value stars"
+        id="stars"
+      ></div>
+
     </div>
 
   </section>
 
-  <!-- QUESTION -->
+
+  <!-- =====================================================
+       QUESTION
+  ====================================================== -->
 
   <section class="question-box">
 
     <div class="question-top">
-      <div class="level-label" id="levelLabel">Biologie</div>
-      <div class="question-number" id="questionNumber">Question 1</div>
+
+      <div
+        class="level-label"
+        id="levelLabel"
+      >
+        Biologie
+      </div>
+
+      <div
+        class="question-number"
+        id="questionNumber"
+      >
+        Question 1
+      </div>
+
     </div>
 
-    <div class="question-text" id="question">
+
+    <div
+      class="question-text"
+      id="question"
+    >
       Chargement de la question...
     </div>
 
+
     <div class="progress-container">
-      <div class="progress-bar" id="progressBar"></div>
+
+      <div
+        class="progress-bar"
+        id="progressBar"
+      ></div>
+
     </div>
 
   </section>
 
-  <!-- BILLARD -->
+
+  <!-- =====================================================
+       BILLARD
+  ====================================================== -->
 
   <section class="table-wrapper">
 
@@ -573,9 +1015,13 @@
       height="600"
     ></canvas>
 
-    <!-- RESULTAT BONNE REPONSE -->
 
-    <div class="answer-result" id="answerResult">
+    <!-- RESULTAT -->
+
+    <div
+      class="answer-result"
+      id="answerResult"
+    >
 
       <div class="answer-result-content">
 
@@ -590,9 +1036,13 @@
 
         <div class="answer-result-answer">
 
-          <span>Réponse :</span>
+          <span>
+            Réponse :
+          </span>
 
-          <strong id="resultAnswer"></strong>
+          <strong
+            id="resultAnswer"
+          ></strong>
 
         </div>
 
@@ -610,7 +1060,10 @@
 
   </section>
 
-  <!-- REPONSES -->
+
+  <!-- =====================================================
+       REPONSES
+  ====================================================== -->
 
   <div class="answers-title">
     Réponses disponibles
@@ -621,6 +1074,7 @@
     id="answersGrid"
   ></section>
 
+
   <div
     class="message"
     id="message"
@@ -629,11 +1083,16 @@
     Tire la bille blanche vers l'arrière puis relâche-la.
   </div>
 
-  <!-- INSTRUCTIONS -->
+
+  <!-- =====================================================
+       INSTRUCTIONS
+  ====================================================== -->
 
   <section class="instructions">
 
-    <h2>Comment jouer ?</h2>
+    <h2>
+      Comment jouer ?
+    </h2>
 
     <p>
       1. Place ton doigt ou ta souris sur la bille blanche.
@@ -652,14 +1111,15 @@
     </p>
 
     <p>
-      5. Une mauvaise réponse te fait perdre une étoile.
+      5. Une mauvaise réponse fait perdre 1 étoile.
     </p>
 
     <p>
-      6. Tu dois toucher la bonne réponse pour passer à la question suivante.
+      6. Touche la bonne réponse pour passer à la suivante.
     </p>
 
   </section>
+
 
   <button
     type="button"
@@ -671,7 +1131,10 @@
 
 </main>
 
-<!-- FIN DE PARTIE -->
+
+<!-- =========================================================
+     FIN DE PARTIE
+========================================================= -->
 
 <div
   class="end-overlay"
@@ -685,27 +1148,58 @@
     </h2>
 
     <div class="final-score">
-      <span id="finalScore">0</span> points
+
+      <span id="finalScore">
+        0
+      </span>
+
+      points
+
     </div>
+
 
     <div class="final-stats">
 
       <div class="final-stat">
-        <strong id="finalCorrect">0</strong>
-        <span>Bonnes réponses</span>
+
+        <strong id="finalCorrect">
+          0
+        </strong>
+
+        <span>
+          Bonnes réponses
+        </span>
+
       </div>
 
-      <div class="final-stat">
-        <strong id="finalWrong">0</strong>
-        <span>Mauvaises réponses</span>
-      </div>
 
       <div class="final-stat">
-        <strong id="finalBest">0</strong>
-        <span>Meilleur score</span>
+
+        <strong id="finalWrong">
+          0
+        </strong>
+
+        <span>
+          Mauvaises réponses
+        </span>
+
+      </div>
+
+
+      <div class="final-stat">
+
+        <strong id="finalBest">
+          0
+        </strong>
+
+        <span>
+          Meilleur score
+        </span>
+
       </div>
 
     </div>
+
 
     <button
       type="button"
@@ -719,100 +1213,159 @@
 
 </div>
 
+
 <script type="module">
 
 /* =========================================================
    CONFIGURATION
 ========================================================= */
 
-const QUESTIONS_URL = './src/biologieQuestions.js';
+const QUESTIONS_URL =
+  './src/biologieQuestions.js';
 
-const TOTAL_QUESTIONS = 10;
+const TOTAL_QUESTIONS =
+  10;
 
-const POINTS_CORRECT = 10;
+const POINTS_CORRECT =
+  10;
 
-const MAX_STARS = 5;
+const MAX_STARS =
+  5;
 
-const BEST_SCORE_KEY = 'edubillard_best_score';
+const BEST_SCORE_KEY =
+  'edubillard_best_score';
 
 
 /* =========================================================
    DOM
 ========================================================= */
 
-const canvas = document.getElementById('gameCanvas');
-const ctx = canvas.getContext('2d');
+const canvas =
+  document.getElementById(
+    'gameCanvas'
+  );
 
-const scoreEl = document.getElementById('score');
+const ctx =
+  canvas.getContext('2d');
+
+const scoreEl =
+  document.getElementById(
+    'score'
+  );
+
 const questionCounterEl =
-  document.getElementById('questionCounter');
+  document.getElementById(
+    'questionCounter'
+  );
 
 const correctCountEl =
-  document.getElementById('correctCount');
+  document.getElementById(
+    'correctCount'
+  );
 
 const bestScoreEl =
-  document.getElementById('bestScore');
+  document.getElementById(
+    'bestScore'
+  );
 
 const starsEl =
-  document.getElementById('stars');
+  document.getElementById(
+    'stars'
+  );
 
 const questionEl =
-  document.getElementById('question');
+  document.getElementById(
+    'question'
+  );
 
 const questionNumberEl =
-  document.getElementById('questionNumber');
+  document.getElementById(
+    'questionNumber'
+  );
 
 const levelLabelEl =
-  document.getElementById('levelLabel');
+  document.getElementById(
+    'levelLabel'
+  );
 
 const progressBarEl =
-  document.getElementById('progressBar');
+  document.getElementById(
+    'progressBar'
+  );
 
 const messageEl =
-  document.getElementById('message');
+  document.getElementById(
+    'message'
+  );
 
 const answersGrid =
-  document.getElementById('answersGrid');
+  document.getElementById(
+    'answersGrid'
+  );
 
 const answerResult =
-  document.getElementById('answerResult');
+  document.getElementById(
+    'answerResult'
+  );
 
 const resultQuestion =
-  document.getElementById('resultQuestion');
+  document.getElementById(
+    'resultQuestion'
+  );
 
 const resultAnswer =
-  document.getElementById('resultAnswer');
+  document.getElementById(
+    'resultAnswer'
+  );
 
 const continueBtn =
-  document.getElementById('continueBtn');
+  document.getElementById(
+    'continueBtn'
+  );
 
 const endOverlay =
-  document.getElementById('endOverlay');
+  document.getElementById(
+    'endOverlay'
+  );
 
 const endTitle =
-  document.getElementById('endTitle');
+  document.getElementById(
+    'endTitle'
+  );
 
 const finalScoreEl =
-  document.getElementById('finalScore');
+  document.getElementById(
+    'finalScore'
+  );
 
 const finalCorrectEl =
-  document.getElementById('finalCorrect');
+  document.getElementById(
+    'finalCorrect'
+  );
 
 const finalWrongEl =
-  document.getElementById('finalWrong');
+  document.getElementById(
+    'finalWrong'
+  );
 
 const finalBestEl =
-  document.getElementById('finalBest');
+  document.getElementById(
+    'finalBest'
+  );
 
 const restartBtn =
-  document.getElementById('restartBtn');
+  document.getElementById(
+    'restartBtn'
+  );
 
 const restartSmall =
-  document.getElementById('restartSmall');
+  document.getElementById(
+    'restartSmall'
+  );
 
 
 /* =========================================================
-   ETAT DU JEU
+   ETAT
 ========================================================= */
 
 let biologyQuestions = [];
@@ -853,9 +1406,11 @@ let currentPointerX = 0;
 
 let currentPointerY = 0;
 
-let tableWidth = canvas.width;
+let tableWidth =
+  canvas.width;
 
-let tableHeight = canvas.height;
+let tableHeight =
+  canvas.height;
 
 let gameRunning = false;
 
@@ -864,15 +1419,20 @@ let gameRunning = false;
    PHYSIQUE
 ========================================================= */
 
-const BALL_FRICTION = 0.987;
+const BALL_FRICTION =
+  0.987;
 
-const BALL_RESTITUTION = 0.96;
+const BALL_RESTITUTION =
+  0.96;
 
-const WALL_RESTITUTION = 0.90;
+const WALL_RESTITUTION =
+  0.90;
 
-const MIN_MOVING_SPEED = 0.025;
+const MIN_MOVING_SPEED =
+  0.025;
 
-const MOVING_THRESHOLD = 0.05;
+const MOVING_THRESHOLD =
+  0.05;
 
 
 /* =========================================================
@@ -881,7 +1441,8 @@ const MOVING_THRESHOLD = 0.05;
 
 function shuffle(array) {
 
-  const copy = [...array];
+  const copy =
+    [...array];
 
   for (
     let i = copy.length - 1;
@@ -890,7 +1451,10 @@ function shuffle(array) {
   ) {
 
     const j =
-      Math.floor(Math.random() * (i + 1));
+      Math.floor(
+        Math.random() *
+        (i + 1)
+      );
 
     [
       copy[i],
@@ -900,9 +1464,11 @@ function shuffle(array) {
       copy[j],
       copy[i]
     ];
+
   }
 
   return copy;
+
 }
 
 
@@ -916,6 +1482,7 @@ function cleanText(value) {
   }
 
   return String(value).trim();
+
 }
 
 
@@ -925,46 +1492,62 @@ function distance(a, b) {
     a.x - b.x,
     a.y - b.y
   );
+
 }
 
 
 /* =========================================================
-   NORMALISATION DES QUESTIONS
+   NORMALISATION
 ========================================================= */
 
 function normalizeQuestion(raw) {
 
-  if (!raw || typeof raw !== 'object') {
+  if (
+    !raw ||
+    typeof raw !== 'object'
+  ) {
     return null;
   }
 
-  const question = cleanText(
-    raw.question ??
-    raw.q ??
-    raw.text ??
-    raw.enonce
-  );
+  const question =
+    cleanText(
+      raw.question ??
+      raw.q ??
+      raw.text ??
+      raw.enonce
+    );
 
-  let answer = cleanText(
-    raw.answer ??
-    raw.reponse ??
-    raw.correct ??
-    raw.correctAnswer
-  );
+  let answer =
+    cleanText(
+      raw.answer ??
+      raw.reponse ??
+      raw.correct ??
+      raw.correctAnswer
+    );
 
   let options = [];
 
-  if (Array.isArray(raw.options)) {
+  if (
+    Array.isArray(
+      raw.options
+    )
+  ) {
 
-    options = raw.options
-      .map(cleanText)
-      .filter(Boolean);
+    options =
+      raw.options
+        .map(cleanText)
+        .filter(Boolean);
 
-  } else if (Array.isArray(raw.choices)) {
+  } else if (
+    Array.isArray(
+      raw.choices
+    )
+  ) {
 
-    options = raw.choices
-      .map(cleanText)
-      .filter(Boolean);
+    options =
+      raw.choices
+        .map(cleanText)
+        .filter(Boolean);
 
   } else {
 
@@ -980,9 +1563,13 @@ function normalizeQuestion(raw) {
   }
 
   const correctIndex =
-    Number.isInteger(raw.correctIndex)
+    Number.isInteger(
+      raw.correctIndex
+    )
       ? raw.correctIndex
-      : Number.isInteger(raw.answerIndex)
+      : Number.isInteger(
+          raw.answerIndex
+        )
         ? raw.answerIndex
         : -1;
 
@@ -991,7 +1578,10 @@ function normalizeQuestion(raw) {
     correctIndex >= 0 &&
     options[correctIndex]
   ) {
-    answer = options[correctIndex];
+
+    answer =
+      options[correctIndex];
+
   }
 
   if (
@@ -1008,7 +1598,11 @@ function normalizeQuestion(raw) {
         answer.toLowerCase()
     )
   ) {
-    options.unshift(answer);
+
+    options.unshift(
+      answer
+    );
+
   }
 
   const level =
@@ -1020,14 +1614,17 @@ function normalizeQuestion(raw) {
   return {
     question,
     answer,
-    options: [...new Set(options)],
+    options: [
+      ...new Set(options)
+    ],
     level
   };
+
 }
 
 
 /* =========================================================
-   CHARGEMENT BIOLOGIE
+   CHARGEMENT
 ========================================================= */
 
 async function loadQuestions() {
@@ -1048,10 +1645,12 @@ async function loadQuestions() {
       module.questions ??
       module.default;
 
-    if (!Array.isArray(source)) {
+    if (
+      !Array.isArray(source)
+    ) {
 
       throw new Error(
-        'Le fichier biologieQuestions.js ne contient pas de tableau de questions.'
+        'Format des questions invalide.'
       );
 
     }
@@ -1063,31 +1662,42 @@ async function loadQuestions() {
 
     const unique = [];
 
-    const seen = new Set();
+    const seen =
+      new Set();
 
-    for (const question of biologyQuestions) {
+    for (
+      const question
+      of biologyQuestions
+    ) {
 
       const key =
         question.question
           .toLowerCase()
           .trim();
 
-      if (!seen.has(key)) {
+      if (
+        !seen.has(key)
+      ) {
 
         seen.add(key);
 
-        unique.push(question);
+        unique.push(
+          question
+        );
 
       }
 
     }
 
-    biologyQuestions = unique;
+    biologyQuestions =
+      unique;
 
-    if (biologyQuestions.length < 4) {
+    if (
+      biologyQuestions.length < 4
+    ) {
 
       throw new Error(
-        'Il faut au moins 4 questions de biologie.'
+        'Il faut au moins 4 questions.'
       );
 
     }
@@ -1107,64 +1717,45 @@ async function loadQuestions() {
 
 
 /* =========================================================
-   PREPARER LES QUESTIONS
+   PREPARATION
 ========================================================= */
 
 function prepareGameQuestions() {
 
   gameQuestions =
-    shuffle(biologyQuestions)
-      .slice(
-        0,
-        Math.min(
-          TOTAL_QUESTIONS,
-          biologyQuestions.length
-        )
-      );
+    shuffle(
+      biologyQuestions
+    ).slice(
+      0,
+      Math.min(
+        TOTAL_QUESTIONS,
+        biologyQuestions.length
+      )
+    );
 
 }
 
 
 /* =========================================================
-   CONSTRUIRE LES REPONSES
+   REPONSES
 ========================================================= */
 
 function buildAnswers(question) {
 
   const correct =
-    cleanText(question.answer);
+    cleanText(
+      question.answer
+    );
 
   const wrongCandidates = [];
 
-  /*
-    On récupère d'abord les options
-    de la question actuelle.
-  */
-
-  for (const option of question.options) {
-
-    const text = cleanText(option);
-
-    if (
-      text &&
-      text.toLowerCase() !==
-      correct.toLowerCase()
-    ) {
-
-      wrongCandidates.push(text);
-
-    }
-
-  }
-
-  /*
-    Puis les bonnes réponses des autres questions.
-  */
-
-  for (const item of biologyQuestions) {
+  for (
+    const option
+    of question.options
+  ) {
 
     const text =
-      cleanText(item.answer);
+      cleanText(option);
 
     if (
       text &&
@@ -1172,19 +1763,47 @@ function buildAnswers(question) {
       correct.toLowerCase()
     ) {
 
-      wrongCandidates.push(text);
+      wrongCandidates.push(
+        text
+      );
 
     }
 
   }
 
-  /*
-    Puis toutes les options disponibles.
-  */
+  for (
+    const item
+    of biologyQuestions
+  ) {
 
-  for (const item of biologyQuestions) {
+    const text =
+      cleanText(
+        item.answer
+      );
 
-    for (const option of item.options) {
+    if (
+      text &&
+      text.toLowerCase() !==
+      correct.toLowerCase()
+    ) {
+
+      wrongCandidates.push(
+        text
+      );
+
+    }
+
+  }
+
+  for (
+    const item
+    of biologyQuestions
+  ) {
+
+    for (
+      const option
+      of item.options
+    ) {
 
       const text =
         cleanText(option);
@@ -1195,7 +1814,9 @@ function buildAnswers(question) {
         correct.toLowerCase()
       ) {
 
-        wrongCandidates.push(text);
+        wrongCandidates.push(
+          text
+        );
 
       }
 
@@ -1205,9 +1826,15 @@ function buildAnswers(question) {
 
   const uniqueWrong = [];
 
-  const seen = new Set();
+  const seen =
+    new Set();
 
-  for (const candidate of shuffle(wrongCandidates)) {
+  for (
+    const candidate
+    of shuffle(
+      wrongCandidates
+    )
+  ) {
 
     const key =
       candidate.toLowerCase();
@@ -1219,29 +1846,27 @@ function buildAnswers(question) {
 
       seen.add(key);
 
-      uniqueWrong.push(candidate);
+      uniqueWrong.push(
+        candidate
+      );
 
     }
 
-    if (uniqueWrong.length >= 3) {
+    if (
+      uniqueWrong.length >= 3
+    ) {
       break;
     }
 
   }
 
-  const answers =
-    shuffle([
-      correct,
-      ...uniqueWrong
-    ]);
+  return shuffle([
+    correct,
+    ...uniqueWrong
+  ]).slice(0, 4);
 
-  return answers.slice(0, 4);
 }
 
-
-/* =========================================================
-   AFFICHER LES REPONSES
-========================================================= */
 
 function renderAnswerCards(answers) {
 
@@ -1251,14 +1876,20 @@ function renderAnswerCards(answers) {
     (answer, index) => {
 
       const card =
-        document.createElement('div');
+        document.createElement(
+          'div'
+        );
 
-      card.className = 'answer-card';
+      card.className =
+        'answer-card';
 
-      card.dataset.index = index;
+      card.dataset.index =
+        index;
 
       const letter =
-        document.createElement('div');
+        document.createElement(
+          'div'
+        );
 
       letter.className =
         'answer-letter';
@@ -1269,7 +1900,9 @@ function renderAnswerCards(answers) {
         );
 
       const text =
-        document.createElement('div');
+        document.createElement(
+          'div'
+        );
 
       text.className =
         'answer-text';
@@ -1277,16 +1910,23 @@ function renderAnswerCards(answers) {
       text.textContent =
         answer;
 
-      card.appendChild(letter);
+      card.appendChild(
+        letter
+      );
 
-      card.appendChild(text);
+      card.appendChild(
+        text
+      );
 
       card.addEventListener(
         'click',
-        () => selectAnswerCard(index)
+        () =>
+          selectAnswerCard(index)
       );
 
-      answersGrid.appendChild(card);
+      answersGrid.appendChild(
+        card
+      );
 
     }
   );
@@ -1306,7 +1946,9 @@ function selectAnswerCard(index) {
 
       card.classList.toggle(
         'selected',
-        Number(card.dataset.index) === index
+        Number(
+          card.dataset.index
+        ) === index
       );
 
     }
@@ -1322,8 +1964,9 @@ function selectAnswerCard(index) {
 function getQuestionLevel(question) {
 
   const level =
-    String(question.level)
-      .toLowerCase();
+    String(
+      question.level
+    ).toLowerCase();
 
   if (
     level.includes('3') ||
@@ -1347,6 +1990,7 @@ function getQuestionLevel(question) {
   }
 
   return 'Biologie';
+
 }
 
 
@@ -1365,25 +2009,33 @@ function updateStars() {
   ) {
 
     const star =
-      document.createElement('span');
+      document.createElement(
+        'span'
+      );
 
-    if (i < stars) {
+    if (
+      i < stars
+    ) {
 
-      star.textContent = '★';
+      star.textContent =
+        '★';
 
       star.className =
         'star-active';
 
     } else {
 
-      star.textContent = '☆';
+      star.textContent =
+        '☆';
 
       star.className =
         'star-lost';
 
     }
 
-    starsEl.appendChild(star);
+    starsEl.appendChild(
+      star
+    );
 
   }
 
@@ -1391,7 +2043,7 @@ function updateStars() {
 
 
 /* =========================================================
-   STATISTIQUES
+   STATS
 ========================================================= */
 
 function updateStats() {
@@ -1424,7 +2076,7 @@ function updateStats() {
 
 
 /* =========================================================
-   QUESTION ACTUELLE
+   QUESTION
 ========================================================= */
 
 function loadCurrentQuestion() {
@@ -1434,9 +2086,13 @@ function loadCurrentQuestion() {
       currentQuestionIndex
     ];
 
-  if (!currentQuestion) {
+  if (
+    !currentQuestion
+  ) {
 
-    finishGame();
+    finishGame(
+      'Félicitations !'
+    );
 
     return;
 
@@ -1481,7 +2137,7 @@ function loadCurrentQuestion() {
 
 
 /* =========================================================
-   CREER LA TABLE
+   TABLE
 ========================================================= */
 
 function resetTable(answers) {
@@ -1492,20 +2148,27 @@ function resetTable(answers) {
   tableHeight =
     canvas.height;
 
+  /*
+    Boules légèrement plus grandes,
+    particulièrement utiles sur téléphone.
+  */
+
   const radius =
     Math.max(
       18,
       Math.min(
         tableWidth,
         tableHeight
-      ) * 0.029
+      ) * 0.034
     );
 
   whiteBall = {
 
-    x: tableWidth * 0.22,
+    x:
+      tableWidth * 0.20,
 
-    y: tableHeight * 0.50,
+    y:
+      tableHeight * 0.50,
 
     vx: 0,
 
@@ -1519,26 +2182,31 @@ function resetTable(answers) {
 
   };
 
+  /*
+    Positions plus rapprochées
+    pour faciliter le jeu mobile.
+  */
+
   const positions = [
 
     [
-      tableWidth * 0.64,
-      tableHeight * 0.25
+      tableWidth * 0.62,
+      tableHeight * 0.30
     ],
 
     [
-      tableWidth * 0.82,
-      tableHeight * 0.25
+      tableWidth * 0.80,
+      tableHeight * 0.30
     ],
 
     [
-      tableWidth * 0.64,
-      tableHeight * 0.75
+      tableWidth * 0.62,
+      tableHeight * 0.70
     ],
 
     [
-      tableWidth * 0.82,
-      tableHeight * 0.75
+      tableWidth * 0.80,
+      tableHeight * 0.70
     ]
 
   ];
@@ -1547,9 +2215,11 @@ function resetTable(answers) {
     answers.map(
       (answer, index) => ({
 
-        x: positions[index][0],
+        x:
+          positions[index][0],
 
-        y: positions[index][1],
+        y:
+          positions[index][1],
 
         vx: 0,
 
@@ -1580,7 +2250,7 @@ function resetTable(answers) {
 
 
 /* =========================================================
-   DESSIN DE LA TABLE
+   DESSIN TABLE
 ========================================================= */
 
 function drawTable() {
@@ -1607,7 +2277,7 @@ function drawTable() {
   );
 
   /*
-    Bordure intérieure
+    Bord
   */
 
   ctx.strokeStyle =
@@ -1623,7 +2293,7 @@ function drawTable() {
   );
 
   /*
-    Ligne centrale discrète
+    Ligne centrale
   */
 
   ctx.strokeStyle =
@@ -1646,31 +2316,56 @@ function drawTable() {
   ctx.stroke();
 
   /*
-    Six poches
+    Poches
   */
 
-  const pocketRadius = 28;
+  const pocketRadius =
+    Math.max(
+      22,
+      Math.min(
+        tableWidth,
+        tableHeight
+      ) * 0.047
+    );
 
   const pockets = [
 
     [18, 18],
 
-    [tableWidth / 2, 13],
+    [
+      tableWidth / 2,
+      13
+    ],
 
-    [tableWidth - 18, 18],
+    [
+      tableWidth - 18,
+      18
+    ],
 
-    [18, tableHeight - 18],
+    [
+      18,
+      tableHeight - 18
+    ],
 
-    [tableWidth / 2, tableHeight - 13],
+    [
+      tableWidth / 2,
+      tableHeight - 13
+    ],
 
-    [tableWidth - 18, tableHeight - 18]
+    [
+      tableWidth - 18,
+      tableHeight - 18
+    ]
 
   ];
 
   ctx.fillStyle =
     '#07150d';
 
-  for (const pocket of pockets) {
+  for (
+    const pocket
+    of pockets
+  ) {
 
     ctx.beginPath();
 
@@ -1728,7 +2423,7 @@ function drawTable() {
   }
 
   /*
-    Boule blanche
+    Bille blanche
   */
 
   if (whiteBall) {
@@ -1745,9 +2440,14 @@ function drawTable() {
     Boules réponses
   */
 
-  for (const ball of balls) {
+  for (
+    const ball
+    of balls
+  ) {
 
-    if (!ball.active) {
+    if (
+      !ball.active
+    ) {
       continue;
     }
 
@@ -1765,7 +2465,7 @@ function drawTable() {
 
 
 /* =========================================================
-   DESSIN D'UNE BOULE
+   DESSIN BOULE
 ========================================================= */
 
 function drawBall(
@@ -1776,15 +2476,19 @@ function drawBall(
 
   const gradient =
     ctx.createRadialGradient(
-      ball.x - ball.radius * .35,
-      ball.y - ball.radius * .35,
+      ball.x -
+        ball.radius * .35,
+      ball.y -
+        ball.radius * .35,
       ball.radius * .12,
       ball.x,
       ball.y,
       ball.radius
     );
 
-  if (baseColor === '#ffffff') {
+  if (
+    baseColor === '#ffffff'
+  ) {
 
     gradient.addColorStop(
       0,
@@ -1792,7 +2496,7 @@ function drawBall(
     );
 
     gradient.addColorStop(
-      0.55,
+      .55,
       '#f3f3f3'
     );
 
@@ -1809,12 +2513,12 @@ function drawBall(
     );
 
     gradient.addColorStop(
-      0.15,
+      .15,
       '#eeeeee'
     );
 
     gradient.addColorStop(
-      0.55,
+      .55,
       '#d1d1d1'
     );
 
@@ -1876,7 +2580,7 @@ function drawBall(
 
 
 /* =========================================================
-   COLLISION ENTRE DEUX BOULES
+   COLLISION
 ========================================================= */
 
 function resolveCollision(a, b) {
@@ -1910,11 +2614,9 @@ function resolveCollision(a, b) {
     return false;
   }
 
-  /*
-    Protection contre une distance nulle.
-  */
-
-  if (dist < 0.0001) {
+  if (
+    dist < 0.0001
+  ) {
 
     dx = 1;
 
@@ -1931,15 +2633,15 @@ function resolveCollision(a, b) {
     dy / dist;
 
   /*
-    Séparation physique.
-    Cela empêche les boules de rester collées.
+    Séparation.
+    Empêche les boules de se coller.
   */
 
   const overlap =
     minimumDistance - dist;
 
   const separation =
-    (overlap + 0.08) / 2;
+    (overlap + .08) / 2;
 
   a.x -=
     nx * separation;
@@ -1953,10 +2655,6 @@ function resolveCollision(a, b) {
   b.y +=
     ny * separation;
 
-  /*
-    Vitesse relative.
-  */
-
   const relativeVelocityX =
     b.vx - a.vx;
 
@@ -1967,14 +2665,12 @@ function resolveCollision(a, b) {
     relativeVelocityX * nx +
     relativeVelocityY * ny;
 
-  /*
-    Les boules s'éloignent déjà.
-  */
-
   if (
     velocityAlongNormal >= 0
   ) {
+
     return true;
+
   }
 
   /*
@@ -2004,7 +2700,7 @@ function resolveCollision(a, b) {
 
 
 /* =========================================================
-   COLLISIONS
+   COLLISIONS BOULES
 ========================================================= */
 
 function handleBallCollisions() {
@@ -2013,11 +2709,10 @@ function handleBallCollisions() {
     return;
   }
 
-  /*
-    Blanche contre réponses.
-  */
-
-  for (const ball of balls) {
+  for (
+    const ball
+    of balls
+  ) {
 
     resolveCollision(
       whiteBall,
@@ -2025,10 +2720,6 @@ function handleBallCollisions() {
     );
 
   }
-
-  /*
-    Réponses entre elles.
-  */
 
   for (
     let i = 0;
@@ -2074,42 +2765,62 @@ function handleWallCollision(ball) {
     tableHeight -
     ball.radius;
 
-  if (ball.x < left) {
+  if (
+    ball.x < left
+  ) {
 
-    ball.x = left;
-
-    ball.vx =
-      Math.abs(ball.vx) *
-      WALL_RESTITUTION;
-
-  }
-
-  if (ball.x > right) {
-
-    ball.x = right;
+    ball.x =
+      left;
 
     ball.vx =
-      -Math.abs(ball.vx) *
+      Math.abs(
+        ball.vx
+      ) *
       WALL_RESTITUTION;
 
   }
 
-  if (ball.y < top) {
+  if (
+    ball.x > right
+  ) {
 
-    ball.y = top;
+    ball.x =
+      right;
 
-    ball.vy =
-      Math.abs(ball.vy) *
+    ball.vx =
+      -Math.abs(
+        ball.vx
+      ) *
       WALL_RESTITUTION;
 
   }
 
-  if (ball.y > bottom) {
+  if (
+    ball.y < top
+  ) {
 
-    ball.y = bottom;
+    ball.y =
+      top;
 
     ball.vy =
-      -Math.abs(ball.vy) *
+      Math.abs(
+        ball.vy
+      ) *
+      WALL_RESTITUTION;
+
+  }
+
+  if (
+    ball.y > bottom
+  ) {
+
+    ball.y =
+      bottom;
+
+    ball.vy =
+      -Math.abs(
+        ball.vy
+      ) *
       WALL_RESTITUTION;
 
   }
@@ -2136,21 +2847,30 @@ function updatePhysics() {
   ];
 
   /*
-    Déplacement
+    Mouvement
   */
 
-  for (const ball of allBalls) {
+  for (
+    const ball
+    of allBalls
+  ) {
 
-    ball.x += ball.vx;
+    ball.x +=
+      ball.vx;
 
-    ball.y += ball.vy;
+    ball.y +=
+      ball.vy;
 
-    ball.vx *= BALL_FRICTION;
+    ball.vx *=
+      BALL_FRICTION;
 
-    ball.vy *= BALL_FRICTION;
+    ball.vy *=
+      BALL_FRICTION;
 
     if (
-      Math.abs(ball.vx) <
+      Math.abs(
+        ball.vx
+      ) <
       MIN_MOVING_SPEED
     ) {
 
@@ -2159,7 +2879,9 @@ function updatePhysics() {
     }
 
     if (
-      Math.abs(ball.vy) <
+      Math.abs(
+        ball.vy
+      ) <
       MIN_MOVING_SPEED
     ) {
 
@@ -2174,14 +2896,14 @@ function updatePhysics() {
   }
 
   /*
-    Collisions.
+    Collisions
   */
 
   handleBallCollisions();
 
   /*
-    Détecter la première boule
-    touchée par la blanche.
+    Détection du premier
+    contact avec une réponse.
   */
 
   if (
@@ -2194,9 +2916,14 @@ function updatePhysics() {
     let closestDistance =
       Infinity;
 
-    for (const ball of balls) {
+    for (
+      const ball
+      of balls
+    ) {
 
-      if (!ball.active) {
+      if (
+        !ball.active
+      ) {
         continue;
       }
 
@@ -2216,15 +2943,19 @@ function updatePhysics() {
         d < closestDistance
       ) {
 
-        closestDistance = d;
+        closestDistance =
+          d;
 
-        touchedBall = ball;
+        touchedBall =
+          ball;
 
       }
 
     }
 
-    if (touchedBall) {
+    if (
+      touchedBall
+    ) {
 
       handleAnswer(
         touchedBall
@@ -2235,12 +2966,15 @@ function updatePhysics() {
   }
 
   /*
-    Vérifier si les boules roulent encore.
+    Vérifier mouvement.
   */
 
   let moving = false;
 
-  for (const ball of allBalls) {
+  for (
+    const ball
+    of allBalls
+  ) {
 
     const speed =
       Math.hypot(
@@ -2261,9 +2995,12 @@ function updatePhysics() {
 
   }
 
-  if (!moving) {
+  if (
+    !moving
+  ) {
 
-    shotInProgress = false;
+    shotInProgress =
+      false;
 
     if (
       !answerHitThisShot &&
@@ -2281,7 +3018,7 @@ function updatePhysics() {
 
 
 /* =========================================================
-   REPONSE TOUCHEE
+   REPONSE
 ========================================================= */
 
 function handleAnswer(ball) {
@@ -2295,14 +3032,17 @@ function handleAnswer(ball) {
     return;
   }
 
-  answerHitThisShot = true;
+  answerHitThisShot =
+    true;
 
   selectAnswerCard(
     ball.index
   );
 
   const selectedAnswer =
-    cleanText(ball.text);
+    cleanText(
+      ball.text
+    );
 
   const correctAnswer =
     cleanText(
@@ -2313,13 +3053,17 @@ function handleAnswer(ball) {
     selectedAnswer.toLowerCase() ===
     correctAnswer.toLowerCase();
 
+
   /*
     BONNE REPONSE
   */
 
-  if (isCorrect) {
+  if (
+    isCorrect
+  ) {
 
-    answerLocked = true;
+    answerLocked =
+      true;
 
     score +=
       POINTS_CORRECT;
@@ -2341,10 +3085,13 @@ function handleAnswer(ball) {
       'show'
     );
 
-    shotInProgress = false;
+    shotInProgress =
+      false;
 
     return;
+
   }
+
 
   /*
     MAUVAISE REPONSE
@@ -2352,25 +3099,24 @@ function handleAnswer(ball) {
 
   wrongAnswers++;
 
-  /*
-    On retire exactement
-    une étoile.
-  */
-
   stars--;
+
+  if (
+    stars < 0
+  ) {
+    stars = 0;
+  }
 
   updateStats();
 
+
   /*
-    Si les 5 étoiles sont perdues,
-    la partie est terminée.
+    Plus d'étoiles.
   */
 
-  if (stars <= 0) {
-
-    stars = 0;
-
-    updateStars();
+  if (
+    stars === 0
+  ) {
 
     finishGame(
       'Plus d’étoiles'
@@ -2380,9 +3126,9 @@ function handleAnswer(ball) {
 
   }
 
+
   /*
     La question reste la même.
-    Le joueur peut refaire un tir.
   */
 
   messageEl.textContent =
@@ -2410,10 +3156,6 @@ function continueToNextQuestion() {
 
   currentQuestionIndex++;
 
-  /*
-    Toutes les questions sont terminées.
-  */
-
   if (
     currentQuestionIndex >=
     gameQuestions.length
@@ -2427,11 +3169,14 @@ function continueToNextQuestion() {
 
   }
 
-  answerLocked = false;
+  answerLocked =
+    false;
 
-  answerHitThisShot = false;
+  answerHitThisShot =
+    false;
 
-  shotInProgress = false;
+  shotInProgress =
+    false;
 
   loadCurrentQuestion();
 
@@ -2481,10 +3226,6 @@ function shootFromDrag() {
 
   }
 
-  /*
-    Puissance maximale raisonnable.
-  */
-
   const maxPower =
     Math.min(
       30,
@@ -2513,25 +3254,30 @@ function shootFromDrag() {
     dy / length;
 
   whiteBall.vx =
-    directionX * power;
+    directionX *
+    power;
 
   whiteBall.vy =
-    directionY * power;
+    directionY *
+    power;
 
-  answerHitThisShot = false;
+  answerHitThisShot =
+    false;
 
-  shotInProgress = true;
+  shotInProgress =
+    true;
 
   messageEl.textContent =
     'La bille roule...';
 
-  dragging = false;
+  dragging =
+    false;
 
 }
 
 
 /* =========================================================
-   POSITION SOURIS / DOIGT
+   POSITION POINTER
 ========================================================= */
 
 function getCanvasPosition(event) {
@@ -2540,6 +3286,7 @@ function getCanvasPosition(event) {
     canvas.getBoundingClientRect();
 
   let clientX;
+
   let clientY;
 
   if (
@@ -2612,22 +3359,28 @@ function pointerDown(event) {
   const d =
     Math.hypot(
       position.x -
-      whiteBall.x,
+        whiteBall.x,
 
       position.y -
-      whiteBall.y
+        whiteBall.y
     );
+
+  /*
+    Zone tactile légèrement
+    plus grande autour de la boule.
+  */
 
   if (
     d >
-    whiteBall.radius * 1.8
+    whiteBall.radius * 2.1
   ) {
     return;
   }
 
   event.preventDefault();
 
-  dragging = true;
+  dragging =
+    true;
 
   dragStartX =
     position.x;
@@ -2650,7 +3403,9 @@ function pointerDown(event) {
 
 function pointerMove(event) {
 
-  if (!dragging) {
+  if (
+    !dragging
+  ) {
     return;
   }
 
@@ -2676,7 +3431,9 @@ function pointerMove(event) {
 
 function pointerUp(event) {
 
-  if (!dragging) {
+  if (
+    !dragging
+  ) {
     return;
   }
 
@@ -2699,12 +3456,14 @@ function pointerUp(event) {
 
 
 /* =========================================================
-   BOUCLE DU JEU
+   BOUCLE
 ========================================================= */
 
 function gameLoop() {
 
-  if (!gameRunning) {
+  if (
+    !gameRunning
+  ) {
     return;
   }
 
@@ -2721,22 +3480,27 @@ function gameLoop() {
 
 
 /* =========================================================
-   FIN DE PARTIE
+   FIN
 ========================================================= */
 
 function finishGame(
   title = 'Partie terminée'
 ) {
 
-  gameRunning = false;
+  gameRunning =
+    false;
 
-  shotInProgress = false;
+  shotInProgress =
+    false;
 
-  dragging = false;
+  dragging =
+    false;
 
-  answerLocked = true;
+  answerLocked =
+    true;
 
-  answerHitThisShot = true;
+  answerHitThisShot =
+    true;
 
   answerResult.classList.remove(
     'show'
@@ -2781,13 +3545,16 @@ function finishGame(
   bestScoreEl.textContent =
     best;
 
-  if (animationFrame) {
+  if (
+    animationFrame
+  ) {
 
     cancelAnimationFrame(
       animationFrame
     );
 
-    animationFrame = null;
+    animationFrame =
+      null;
 
   }
 
@@ -2799,18 +3566,21 @@ function finishGame(
 
 
 /* =========================================================
-   DEMARRER UNE PARTIE
+   NOUVELLE PARTIE
 ========================================================= */
 
 function startGame() {
 
-  if (animationFrame) {
+  if (
+    animationFrame
+  ) {
 
     cancelAnimationFrame(
       animationFrame
     );
 
-    animationFrame = null;
+    animationFrame =
+      null;
 
   }
 
@@ -2820,21 +3590,33 @@ function startGame() {
 
   wrongAnswers = 0;
 
-  stars = MAX_STARS;
+  /*
+    5 nouvelles étoiles
+  */
 
-  currentQuestionIndex = 0;
+  stars =
+    MAX_STARS;
 
-  currentQuestion = null;
+  currentQuestionIndex =
+    0;
 
-  answerLocked = false;
+  currentQuestion =
+    null;
 
-  answerHitThisShot = false;
+  answerLocked =
+    false;
 
-  shotInProgress = false;
+  answerHitThisShot =
+    false;
 
-  dragging = false;
+  shotInProgress =
+    false;
 
-  gameRunning = true;
+  dragging =
+    false;
+
+  gameRunning =
+    true;
 
   answerResult.classList.remove(
     'show'
@@ -2879,6 +3661,9 @@ restartSmall.addEventListener(
   startGame
 );
 
+
+/* SOURIS */
+
 canvas.addEventListener(
   'mousedown',
   pointerDown
@@ -2893,6 +3678,9 @@ window.addEventListener(
   'mouseup',
   pointerUp
 );
+
+
+/* TACTILE */
 
 canvas.addEventListener(
   'touchstart',
