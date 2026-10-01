@@ -202,6 +202,7 @@ body {
 
 .answer-card {
     min-height: 62px;
+
     border: 1px solid #ded8e7;
     background: #faf9fb;
     border-radius: 13px;
@@ -272,8 +273,11 @@ body {
 
 canvas {
     display: block;
+
     width: 100%;
     height: auto;
+
+    aspect-ratio: 1100 / 600;
 
     border-radius: 11px;
 
@@ -610,6 +614,145 @@ canvas {
 }
 
 /* =====================================================
+   TELEPHONE EN PAYSAGE
+===================================================== */
+
+@media (max-width: 900px) and (orientation: landscape) {
+
+    .top {
+        min-height: 48px;
+        padding: 6px 12px;
+    }
+
+    .brand {
+        font-size: 14px;
+    }
+
+    .back {
+        font-size: 11px;
+    }
+
+    .game-wrapper {
+        width: calc(100% - 18px);
+        margin: 8px auto 20px;
+    }
+
+    .game-title {
+        margin-bottom: 8px;
+    }
+
+    .game-title h1 {
+        font-size: 25px;
+        margin-bottom: 2px;
+    }
+
+    .game-title p {
+        font-size: 10px;
+    }
+
+    .hud {
+        padding: 6px;
+        margin-bottom: 8px;
+    }
+
+    .hud-top {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 5px;
+        margin-bottom: 6px;
+    }
+
+    .hud-item {
+        padding: 5px;
+    }
+
+    .hud-item strong {
+        font-size: 15px;
+    }
+
+    .hud-item span {
+        font-size: 8px;
+    }
+
+    .progress-container {
+        height: 6px;
+    }
+
+    .question-box {
+        padding: 8px 10px;
+        margin-bottom: 8px;
+    }
+
+    .question-label {
+        font-size: 9px;
+        margin-bottom: 3px;
+    }
+
+    .question {
+        font-size: 14px;
+    }
+
+    .game-board {
+        padding: 7px;
+    }
+
+    .answers-title {
+        font-size: 9px;
+        margin-bottom: 5px;
+    }
+
+    .answers-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 5px;
+        margin-bottom: 7px;
+    }
+
+    .answer-card {
+        min-height: 42px;
+        padding: 4px;
+        gap: 5px;
+    }
+
+    .answer-letter {
+        width: 27px;
+        height: 27px;
+        flex-basis: 27px;
+        font-size: 10px;
+    }
+
+    .answer-text {
+        font-size: 9px;
+    }
+
+    .table-container {
+        padding: 4px;
+    }
+
+    .table-info {
+        font-size: 8px;
+        padding-bottom: 3px;
+    }
+
+    .message {
+        margin-top: 7px;
+        min-height: 34px;
+        padding: 6px;
+        font-size: 9px;
+    }
+
+    .instructions {
+        margin-top: 7px;
+        padding: 8px;
+        font-size: 9px;
+        line-height: 1.4;
+    }
+
+    .controls {
+        margin-top: 7px;
+    }
+
+}
+
+/* =====================================================
    TRES PETIT TELEPHONE
 ===================================================== */
 
@@ -642,23 +785,15 @@ canvas {
 </style>
 </head>
 
-
 <body>
-
 
 <header class="top">
 
-    <a
-        href="index.html"
-        class="brand"
-    >
+    <a href="index.html" class="brand">
         ExamQuiz Haiti
     </a>
 
-    <a
-        href="baccalaureat.html"
-        class="back"
-    >
+    <a href="baccalaureat.html" class="back">
         ← Retour aux jeux
     </a>
 
@@ -666,11 +801,6 @@ canvas {
 
 
 <main class="game-wrapper">
-
-
-    <!-- =================================================
-         TITRE
-    ================================================== -->
 
     <div class="game-title">
 
@@ -685,67 +815,31 @@ canvas {
     </div>
 
 
-    <!-- =================================================
-         HUD
-    ================================================== -->
-
     <section class="hud">
 
         <div class="hud-top">
 
             <div class="hud-item">
-
-                <strong id="score">
-                    0
-                </strong>
-
-                <span>
-                    Points
-                </span>
-
+                <strong id="score">0</strong>
+                <span>Points</span>
             </div>
 
-
             <div class="hud-item">
-
-                <strong id="questionCounter">
-                    1 / 10
-                </strong>
-
-                <span>
-                    Question
-                </span>
-
+                <strong id="questionCounter">1 / 10</strong>
+                <span>Question</span>
             </div>
 
-
             <div class="hud-item">
-
-                <strong id="correctCount">
-                    0
-                </strong>
-
-                <span>
-                    Bonnes réponses
-                </span>
-
+                <strong id="correctCount">0</strong>
+                <span>Bonnes réponses</span>
             </div>
 
-
             <div class="hud-item">
-
-                <strong id="bestScore">
-                    0
-                </strong>
-
-                <span>
-                    Meilleur score
-                </span>
-
+                <strong id="bestScore">0</strong>
+                <span>Meilleur score</span>
             </div>
 
         </div>
-
 
         <div class="progress-container">
 
@@ -758,10 +852,6 @@ canvas {
 
     </section>
 
-
-    <!-- =================================================
-         QUESTION
-    ================================================== -->
 
     <section class="question-box">
 
@@ -782,45 +872,25 @@ canvas {
     </section>
 
 
-    <!-- =================================================
-         JEU
-    ================================================== -->
-
     <section class="game-board">
-
 
         <div class="answers-title">
             Choisis une réponse en frappant la bille correspondante
         </div>
 
 
-        <!-- =============================================
-             CARTES REPONSES
-        ============================================== -->
-
         <div
             class="answers-grid"
             id="answersGrid"
-        >
+        ></div>
 
-            <!-- Remplies automatiquement par JavaScript -->
-
-        </div>
-
-
-        <!-- =============================================
-             BILLARD
-        ============================================== -->
 
         <div class="table-container">
 
             <div class="table-info">
-
                 Fais glisser depuis la bille blanche,
                 puis relâche pour tirer.
-
             </div>
-
 
             <div class="canvas-wrapper">
 
@@ -834,13 +904,8 @@ canvas {
 
         </div>
 
-
     </section>
 
-
-    <!-- =================================================
-         MESSAGE
-    ================================================== -->
 
     <div
         class="message"
@@ -850,15 +915,9 @@ canvas {
     </div>
 
 
-    <!-- =================================================
-         INSTRUCTIONS
-    ================================================== -->
-
     <section class="instructions">
 
-        <strong>
-            Comment jouer ?
-        </strong>
+        <strong>Comment jouer ?</strong>
 
         <br>
 
@@ -901,13 +960,8 @@ canvas {
 
     </div>
 
-
 </main>
 
-
-<!-- =====================================================
-     FIN DE PARTIE
-===================================================== -->
 
 <div
     class="overlay"
@@ -924,14 +978,12 @@ canvas {
             Tu as terminé les 10 questions.
         </p>
 
-
         <div
             class="final-score"
             id="finalScore"
         >
             0 points
         </div>
-
 
         <div class="final-stats">
 
@@ -947,7 +999,6 @@ canvas {
 
             </div>
 
-
             <div class="final-stat">
 
                 <strong id="finalWrong">
@@ -959,7 +1010,6 @@ canvas {
                 </span>
 
             </div>
-
 
             <div class="final-stat">
 
@@ -974,7 +1024,6 @@ canvas {
             </div>
 
         </div>
-
 
         <div class="controls">
 
@@ -1001,7 +1050,6 @@ canvas {
 
 <script type="module">
 
-
 /* =========================================================
    CONFIGURATION
 ========================================================= */
@@ -1024,95 +1072,69 @@ const BEST_SCORE_KEY =
 ========================================================= */
 
 const canvas =
-    document.getElementById(
-        'gameCanvas'
-    );
+    document.getElementById('gameCanvas');
 
 const ctx =
     canvas.getContext('2d');
 
 
 const scoreEl =
-    document.getElementById(
-        'score'
-    );
+    document.getElementById('score');
 
 const questionCounterEl =
-    document.getElementById(
-        'questionCounter'
-    );
+    document.getElementById('questionCounter');
 
 const correctCountEl =
-    document.getElementById(
-        'correctCount'
-    );
+    document.getElementById('correctCount');
 
 const bestScoreEl =
-    document.getElementById(
-        'bestScore'
-    );
+    document.getElementById('bestScore');
 
 const questionEl =
-    document.getElementById(
-        'question'
-    );
+    document.getElementById('question');
 
 const levelLabelEl =
-    document.getElementById(
-        'levelLabel'
-    );
+    document.getElementById('levelLabel');
 
 const progressBarEl =
-    document.getElementById(
-        'progressBar'
-    );
+    document.getElementById('progressBar');
 
 const messageEl =
-    document.getElementById(
-        'message'
-    );
+    document.getElementById('message');
 
 const answersGrid =
-    document.getElementById(
-        'answersGrid'
-    );
+    document.getElementById('answersGrid');
 
 const endOverlay =
-    document.getElementById(
-        'endOverlay'
-    );
+    document.getElementById('endOverlay');
 
 const finalScoreEl =
-    document.getElementById(
-        'finalScore'
-    );
+    document.getElementById('finalScore');
 
 const finalCorrectEl =
-    document.getElementById(
-        'finalCorrect'
-    );
+    document.getElementById('finalCorrect');
 
 const finalWrongEl =
-    document.getElementById(
-        'finalWrong'
-    );
+    document.getElementById('finalWrong');
 
 const finalBestEl =
-    document.getElementById(
-        'finalBest'
-    );
+    document.getElementById('finalBest');
 
 const restartBtn =
-    document.getElementById(
-        'restartBtn'
-    );
+    document.getElementById('restartBtn');
 
 
 /* =========================================================
-   ETAT
+   ETAT DU JEU
 ========================================================= */
 
 let biologyQuestions = [];
+
+/*
+ * Les questions utilisées pour cette partie.
+ * Elles sont mélangées une seule fois au début.
+ */
+let gameQuestions = [];
 
 let currentQuestionIndex = 0;
 
@@ -1150,6 +1172,8 @@ let tableWidth =
 let tableHeight =
     canvas.height;
 
+let gameRunning = false;
+
 
 /* =========================================================
    UTILITAIRES
@@ -1157,8 +1181,7 @@ let tableHeight =
 
 function shuffle(array) {
 
-    const result =
-        [...array];
+    const result = [...array];
 
     for (
         let i = result.length - 1;
@@ -1168,15 +1191,13 @@ function shuffle(array) {
 
         const j =
             Math.floor(
-                Math.random() *
-                (i + 1)
+                Math.random() * (i + 1)
             );
 
         [
             result[i],
             result[j]
-        ] =
-        [
+        ] = [
             result[j],
             result[i]
         ];
@@ -1198,20 +1219,53 @@ function distance(a, b) {
 }
 
 
-function randomItem(array) {
+function cleanText(value) {
 
-    return array[
-        Math.floor(
-            Math.random() *
-            array.length
-        )
-    ];
+    return String(
+        value ?? ''
+    )
+    .replace(/\s+/g, ' ')
+    .trim();
+
+}
+
+
+function uniqueTexts(array) {
+
+    const seen = new Set();
+
+    const result = [];
+
+    for (
+        const item of array
+    ) {
+
+        const text =
+            cleanText(item);
+
+        if (!text) {
+            continue;
+        }
+
+        const key =
+            text.toLowerCase();
+
+        if (seen.has(key)) {
+            continue;
+        }
+
+        seen.add(key);
+        result.push(text);
+
+    }
+
+    return result;
 
 }
 
 
 /* =========================================================
-   CHARGEMENT QUESTIONS
+   CHARGEMENT DES QUESTIONS
 ========================================================= */
 
 async function loadQuestions() {
@@ -1272,7 +1326,49 @@ async function loadQuestions() {
         biologyQuestions =
             source
                 .map(normalizeQuestion)
-                .filter(Boolean);
+                .filter(
+                    question =>
+                        question &&
+                        question.question &&
+                        question.answer
+                );
+
+
+        /*
+         * Supprime les questions exactement identiques.
+         */
+        const uniqueQuestions = [];
+
+        const questionKeys =
+            new Set();
+
+        for (
+            const question of biologyQuestions
+        ) {
+
+            const key =
+                question.question
+                    .toLowerCase()
+                    .trim();
+
+            if (
+                questionKeys.has(key)
+            ) {
+
+                continue;
+
+            }
+
+            questionKeys.add(key);
+
+            uniqueQuestions.push(
+                question
+            );
+
+        }
+
+        biologyQuestions =
+            uniqueQuestions;
 
 
         if (
@@ -1280,7 +1376,7 @@ async function loadQuestions() {
         ) {
 
             throw new Error(
-                'Pas assez de questions.'
+                'Pas assez de questions valides.'
             );
 
         }
@@ -1323,29 +1419,36 @@ function normalizeQuestion(q) {
 
     let options = [];
 
+    let level = null;
+
 
     if (
         typeof q === 'string'
     ) {
 
         question =
-            q;
+            cleanText(q);
 
     } else {
 
         question =
-            q.question ??
-            q.q ??
-            q.text ??
-            q.enonce ??
-            '';
+            cleanText(
+                q.question ??
+                q.q ??
+                q.text ??
+                q.enonce ??
+                ''
+            );
+
 
         answer =
-            q.answer ??
-            q.reponse ??
-            q.correct ??
-            q.correctAnswer ??
-            '';
+            cleanText(
+                q.answer ??
+                q.reponse ??
+                q.correct ??
+                q.correctAnswer ??
+                ''
+            );
 
 
         if (
@@ -1363,10 +1466,10 @@ function normalizeQuestion(q) {
                 q.choices;
 
         } else if (
-            q.a &&
-            q.b &&
-            q.c &&
-            q.d
+            q.a !== undefined &&
+            q.b !== undefined &&
+            q.c !== undefined &&
+            q.d !== undefined
         ) {
 
             options = [
@@ -1379,61 +1482,133 @@ function normalizeQuestion(q) {
         }
 
 
+        options =
+            uniqueTexts(options);
+
+
+        /*
+         * Si la bonne réponse n'est pas directement
+         * donnée, on essaie de la retrouver dans
+         * les options.
+         */
+
         if (
             !answer &&
             options.length
         ) {
 
             if (
-                typeof q.correctIndex === 'number'
+                typeof q.correctIndex === 'number' &&
+                options[q.correctIndex]
             ) {
 
                 answer =
-                    options[
-                        q.correctIndex
-                    ];
+                    cleanText(
+                        options[q.correctIndex]
+                    );
 
             } else if (
-                typeof q.answerIndex === 'number'
+                typeof q.answerIndex === 'number' &&
+                options[q.answerIndex]
             ) {
 
                 answer =
-                    options[
-                        q.answerIndex
-                    ];
+                    cleanText(
+                        options[q.answerIndex]
+                    );
 
             }
 
         }
 
+
+        level =
+            q.level ??
+            q.niveau ??
+            q.difficulty ??
+            null;
+
     }
 
 
-    if (!question) {
+    if (
+        !question ||
+        !answer
+    ) {
+
         return null;
+
     }
 
 
     return {
 
-        question:
-            String(question),
+        question,
 
-        answer:
-            String(answer),
+        answer,
 
-        options:
-            options
-                .filter(Boolean)
-                .map(String),
+        options,
 
-        level:
-            q?.level ??
-            q?.niveau ??
-            q?.difficulty ??
-            null
+        level
 
     };
+
+}
+
+
+/* =========================================================
+   PREPARATION DE LA PARTIE
+========================================================= */
+
+function prepareGameQuestions() {
+
+    /*
+     * Mélange toutes les questions.
+     * On prend ensuite les 10 premières.
+     */
+    gameQuestions =
+        shuffle(
+            biologyQuestions
+        )
+        .slice(
+            0,
+            Math.min(
+                TOTAL_QUESTIONS,
+                biologyQuestions.length
+            )
+        );
+
+
+    /*
+     * Sécurité supplémentaire :
+     * aucune question ne doit être répétée.
+     */
+    const used =
+        new Set();
+
+    gameQuestions =
+        gameQuestions.filter(
+            question => {
+
+                const key =
+                    question.question
+                        .toLowerCase()
+                        .trim();
+
+                if (
+                    used.has(key)
+                ) {
+
+                    return false;
+
+                }
+
+                used.add(key);
+
+                return true;
+
+            }
+        );
 
 }
 
@@ -1445,67 +1620,92 @@ function normalizeQuestion(q) {
 function buildAnswers(question) {
 
     const correct =
-        String(
+        cleanText(
             question.answer
-        ).trim();
+        );
 
 
-    let wrongAnswers =
-        question.options
-            .map(String)
-            .map(x => x.trim())
-            .filter(
-                x =>
-                    x &&
-                    x !== correct
-            );
+    const correctKey =
+        correct.toLowerCase();
 
 
     /*
-     * Si la question n'a pas 3 mauvaises
-     * réponses, on utilise les réponses
-     * d'autres questions de biologie.
+     * On commence par les options fournies
+     * directement avec la question.
      */
+    let candidates =
+        uniqueTexts(
+            question.options
+        )
+        .filter(
+            answer =>
+                answer.toLowerCase() !==
+                correctKey
+        );
 
+
+    /*
+     * Ensuite, si nécessaire, on utilise les réponses
+     * correctes d'autres questions.
+     */
     const otherAnswers =
-        biologyQuestions
-            .map(
-                q =>
-                    String(q.answer).trim()
-            )
-            .filter(
-                answer =>
-                    answer &&
-                    answer !== correct &&
-                    !wrongAnswers.includes(answer)
-            );
+        shuffle(
+            biologyQuestions
+                .map(
+                    q =>
+                        cleanText(q.answer)
+                )
+        );
 
 
-    wrongAnswers = [
-        ...wrongAnswers,
-        ...shuffle(otherAnswers)
-    ];
+    candidates.push(
+        ...otherAnswers
+    );
 
 
-    wrongAnswers =
-        wrongAnswers.slice(0, 3);
+    candidates =
+        uniqueTexts(
+            candidates
+        )
+        .filter(
+            answer =>
+                answer.toLowerCase() !==
+                correctKey
+        );
 
 
-    return shuffle([
+    /*
+     * On prend exactement 3 mauvaises réponses.
+     */
+    const wrong =
+        candidates.slice(0, 3);
 
+
+    /*
+     * La bonne réponse est ajoutée une seule fois.
+     */
+    const finalAnswers = [
         {
             text: correct,
             correct: true
         },
 
-        ...wrongAnswers.map(
+        ...wrong.map(
             text => ({
                 text,
                 correct: false
             })
         )
+    ];
 
-    ]).map(
+
+    /*
+     * Mélange final des positions A/B/C/D.
+     */
+    return shuffle(
+        finalAnswers
+    )
+    .map(
         (answer, index) => ({
 
             label:
@@ -1534,61 +1734,47 @@ function renderAnswerCards() {
     answersGrid.innerHTML = '';
 
 
-    currentQuestion.answers
-        .forEach(
-            answer => {
+    currentQuestion.answers.forEach(
+        answer => {
 
-                const card =
-                    document.createElement(
-                        'div'
-                    );
+            const card =
+                document.createElement('div');
 
-                card.className =
-                    'answer-card';
+            card.className =
+                'answer-card';
 
-                card.dataset.label =
-                    answer.label;
+            card.dataset.label =
+                answer.label;
 
 
-                const letter =
-                    document.createElement(
-                        'div'
-                    );
+            const letter =
+                document.createElement('div');
 
-                letter.className =
-                    'answer-letter';
+            letter.className =
+                'answer-letter';
 
-                letter.textContent =
-                    answer.label;
+            letter.textContent =
+                answer.label;
 
 
-                const text =
-                    document.createElement(
-                        'div'
-                    );
+            const text =
+                document.createElement('div');
 
-                text.className =
-                    'answer-text';
+            text.className =
+                'answer-text';
 
-                text.textContent =
-                    answer.text;
+            text.textContent =
+                answer.text;
 
 
-                card.appendChild(
-                    letter
-                );
+            card.appendChild(letter);
 
-                card.appendChild(
-                    text
-                );
+            card.appendChild(text);
 
+            answersGrid.appendChild(card);
 
-                answersGrid.appendChild(
-                    card
-                );
-
-            }
-        );
+        }
+    );
 
 }
 
@@ -1655,6 +1841,13 @@ function startGame() {
     answerLocked = false;
 
 
+    /*
+     * NOUVEAU :
+     * on prépare les 10 questions une seule fois.
+     */
+    prepareGameQuestions();
+
+
     endOverlay.classList.remove(
         'show'
     );
@@ -1675,21 +1868,14 @@ function startGame() {
 
 
 /* =========================================================
-   VARIABLE JEU
-========================================================= */
-
-let gameRunning = false;
-
-
-/* =========================================================
-   QUESTION
+   QUESTION ACTUELLE
 ========================================================= */
 
 function loadCurrentQuestion() {
 
     if (
         currentQuestionIndex >=
-        TOTAL_QUESTIONS
+        gameQuestions.length
     ) {
 
         finishGame();
@@ -1699,10 +1885,16 @@ function loadCurrentQuestion() {
     }
 
 
+    /*
+     * IMPORTANT :
+     * on prend la question à l'index actuel.
+     * On ne choisit plus une question au hasard
+     * à chaque tour.
+     */
     currentQuestion =
-        randomItem(
-            biologyQuestions
-        );
+        gameQuestions[
+            currentQuestionIndex
+        ];
 
 
     currentQuestion.answers =
@@ -1721,15 +1913,19 @@ function loadCurrentQuestion() {
         );
 
 
+    const total =
+        gameQuestions.length;
+
+
     questionCounterEl.textContent =
-        `${currentQuestionIndex + 1} / ${TOTAL_QUESTIONS}`;
+        `${currentQuestionIndex + 1} / ${total}`;
 
 
     progressBarEl.style.width =
         `${
             (
                 (currentQuestionIndex + 1) /
-                TOTAL_QUESTIONS
+                total
             ) * 100
         }%`;
 
@@ -1801,10 +1997,6 @@ function resetTable() {
         );
 
 
-    /*
-     * Bille blanche.
-     */
-
     whiteBall = {
 
         x:
@@ -1833,10 +2025,6 @@ function resetTable() {
     ];
 
 
-    /*
-     * Positions des 4 réponses.
-     */
-
     const positions = [
 
         [0.62, 0.25],
@@ -1850,49 +2038,48 @@ function resetTable() {
     ];
 
 
-    currentQuestion.answers
-        .forEach(
-            (answer, index) => {
+    currentQuestion.answers.forEach(
+        (answer, index) => {
 
-                const position =
-                    positions[index];
+            const position =
+                positions[index];
 
 
-                balls.push({
+            balls.push({
 
-                    x:
-                        tableWidth *
-                        position[0],
+                x:
+                    tableWidth *
+                    position[0],
 
-                    y:
-                        tableHeight *
-                        position[1],
+                y:
+                    tableHeight *
+                    position[1],
 
-                    vx: 0,
+                vx: 0,
 
-                    vy: 0,
+                vy: 0,
 
-                    radius,
+                radius,
 
-                    type:
-                        'answer',
+                type:
+                    'answer',
 
-                    label:
-                        answer.label,
+                label:
+                    answer.label,
 
-                    correct:
-                        answer.correct,
+                correct:
+                    answer.correct,
 
-                    text:
-                        answer.text,
+                text:
+                    answer.text,
 
-                    active:
-                        true
+                active:
+                    true
 
-                });
+            });
 
-            }
-        );
+        }
+    );
 
 
     shotInProgress =
@@ -1921,10 +2108,6 @@ function drawTable() {
     );
 
 
-    /*
-     * Tapis.
-     */
-
     ctx.fillStyle =
         '#27704c';
 
@@ -1935,10 +2118,6 @@ function drawTable() {
         tableHeight
     );
 
-
-    /*
-     * Bordure.
-     */
 
     ctx.strokeStyle =
         'rgba(255,255,255,.18)';
@@ -1952,10 +2131,6 @@ function drawTable() {
         tableHeight - 32
     );
 
-
-    /*
-     * Poches.
-     */
 
     const pocketRadius =
         Math.max(
@@ -2007,7 +2182,6 @@ function drawTable() {
     /*
      * Ligne de visée.
      */
-
     if (
         dragging &&
         whiteBall
@@ -2044,10 +2218,6 @@ function drawTable() {
     }
 
 
-    /*
-     * Boules.
-     */
-
     balls.forEach(
         drawBall
     );
@@ -2069,10 +2239,6 @@ function drawBall(ball) {
     ctx.save();
 
 
-    /*
-     * Ombre.
-     */
-
     ctx.beginPath();
 
     ctx.arc(
@@ -2088,10 +2254,6 @@ function drawBall(ball) {
 
     ctx.fill();
 
-
-    /*
-     * Boule.
-     */
 
     ctx.beginPath();
 
@@ -2129,11 +2291,6 @@ function drawBall(ball) {
 
     ctx.stroke();
 
-
-    /*
-     * Lettres uniquement sur
-     * les boules de réponse.
-     */
 
     if (
         ball.type === 'answer'
@@ -2229,10 +2386,6 @@ function updatePhysics() {
             }
 
 
-            /*
-             * Gauche.
-             */
-
             if (
                 ball.x -
                 ball.radius < 0
@@ -2246,10 +2399,6 @@ function updatePhysics() {
 
             }
 
-
-            /*
-             * Droite.
-             */
 
             if (
                 ball.x +
@@ -2267,10 +2416,6 @@ function updatePhysics() {
             }
 
 
-            /*
-             * Haut.
-             */
-
             if (
                 ball.y -
                 ball.radius < 0
@@ -2284,10 +2429,6 @@ function updatePhysics() {
 
             }
 
-
-            /*
-             * Bas.
-             */
 
             if (
                 ball.y +
@@ -2312,10 +2453,11 @@ function updatePhysics() {
 
 
     /*
-     * Vérification de collision
-     * entre la blanche et les réponses.
+     * Détection de collision avec une réponse.
+     *
+     * La petite marge supplémentaire permet
+     * de rendre les tirs courts beaucoup plus fiables.
      */
-
     if (
         whiteBall &&
         !answerLocked
@@ -2341,7 +2483,8 @@ function updatePhysics() {
                     ball
                 ) <=
                 whiteBall.radius +
-                ball.radius
+                ball.radius +
+                4
             ) {
 
                 handleAnswer(
@@ -2356,11 +2499,6 @@ function updatePhysics() {
 
     }
 
-
-    /*
-     * Vérifie si toutes les boules
-     * ont arrêté de bouger.
-     */
 
     const moving =
         balls.some(
@@ -2549,12 +2687,6 @@ function getPointerPosition(event) {
     let clientY;
 
 
-    /*
-     * IMPORTANT :
-     * pour touchend, on utilisera la dernière
-     * position enregistrée et non event.touches.
-     */
-
     if (
         event.touches &&
         event.touches.length > 0
@@ -2632,19 +2764,15 @@ function pointerDown(event) {
 
     const d =
         Math.hypot(
-            point.x -
-                whiteBall.x,
-
-            point.y -
-                whiteBall.y
+            point.x - whiteBall.x,
+            point.y - whiteBall.y
         );
 
 
     /*
-     * Zone de sélection plus grande
-     * sur téléphone.
+     * Zone de sélection assez grande
+     * pour les écrans tactiles.
      */
-
     if (
         d >
         whiteBall.radius * 2.5
@@ -2667,7 +2795,6 @@ function pointerDown(event) {
 
     dragStartY =
         point.y;
-
 
     currentPointerX =
         point.x;
@@ -2729,12 +2856,6 @@ function pointerUp(event) {
     event.preventDefault();
 
 
-    /*
-     * Pour touchend, changedTouches est utilisé.
-     * Si rien n'est disponible, on utilise la dernière
-     * position connue.
-     */
-
     let point;
 
 
@@ -2780,25 +2901,39 @@ function pointerUp(event) {
 
 
     /*
-     * Petite distance = petit tir.
-     * Grande distance = tir plus puissant.
+     * CORRECTION :
+     *
+     * Avant :
+     * > 8 pixels seulement
+     *
+     * Maintenant :
+     * même un petit recul permet de tirer.
      */
-
     if (
-        dragDistance > 8
+        dragDistance > 1.5
     ) {
 
         const directionLength =
-            Math.hypot(
-                dx,
-                dy
+            Math.max(
+                dragDistance,
+                0.001
             );
 
 
+        /*
+         * Petite puissance minimale.
+         *
+         * Ainsi, un tir très proche
+         * peut quand même atteindre
+         * une réponse située juste devant.
+         */
         const power =
             Math.min(
                 19,
-                dragDistance * .13
+                Math.max(
+                    4.5,
+                    dragDistance * .13
+                )
             );
 
 
@@ -2830,6 +2965,7 @@ function pointerUp(event) {
 
     dragging =
         false;
+
 
     currentPointerX =
         0;
@@ -2914,10 +3050,6 @@ function handleAnswer(ball) {
         false;
 
 
-    /*
-     * Trouve la carte correspondante.
-     */
-
     const cards =
         answersGrid.querySelectorAll(
             '.answer-card'
@@ -2983,7 +3115,7 @@ function handleAnswer(ball) {
 
             if (
                 currentQuestionIndex >=
-                TOTAL_QUESTIONS
+                gameQuestions.length
             ) {
 
                 finishGame();
@@ -3077,6 +3209,62 @@ restartBtn.addEventListener(
     'click',
     startGame
 );
+
+
+/* =========================================================
+   ROTATION / REDIMENSIONNEMENT
+========================================================= */
+
+function refreshAfterResize() {
+
+    /*
+     * Le canvas garde ses dimensions internes
+     * 1100 x 600.
+     *
+     * Le CSS l'adapte à la largeur de l'écran.
+     * Cela évite de casser la physique du jeu
+     * lorsqu'on tourne le téléphone.
+     */
+    requestAnimationFrame(
+        () => {
+
+            drawTable();
+
+        }
+    );
+
+}
+
+
+window.addEventListener(
+    'resize',
+    refreshAfterResize
+);
+
+
+window.addEventListener(
+    'orientationchange',
+    () => {
+
+        setTimeout(
+            refreshAfterResize,
+            150
+        );
+
+    }
+);
+
+
+if (
+    window.visualViewport
+) {
+
+    window.visualViewport.addEventListener(
+        'resize',
+        refreshAfterResize
+    );
+
+}
 
 
 /* =========================================================
