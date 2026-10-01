@@ -2,23 +2,28 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+>
 
 <title>Course Quiz — ExamQuiz Haiti</title>
 
 <style>
+
 :root{
     --purple:#24113f;
     --purple2:#4b2481;
     --blue:#1764c0;
     --blue2:#2f80ed;
-    --green:#16834b;
-    --red:#c62828;
+    --white:#ffffff;
     --bg:#f5f5f7;
-    --white:#fff;
     --text:#171717;
     --muted:#707070;
-    --border:#e3e3e7;
+    --border:#e4e4e7;
+    --green:#16834b;
+    --red:#c62828;
 }
 
 *{
@@ -28,7 +33,7 @@
 }
 
 body{
-    font-family:Arial,Helvetica,sans-serif;
+    font-family:Arial, Helvetica, sans-serif;
     background:var(--bg);
     color:var(--text);
     min-height:100vh;
@@ -36,6 +41,7 @@ body{
 
 button{
     font:inherit;
+    border:none;
     cursor:pointer;
 }
 
@@ -46,424 +52,749 @@ button{
     padding:12px;
 }
 
+/* RETOUR */
+
+.back-button{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    width:100%;
+    min-height:46px;
+
+    margin-bottom:12px;
+    padding:10px 14px;
+
+    border:1px solid var(--border);
+    border-radius:13px;
+
+    background:var(--white);
+    color:var(--purple);
+
+    text-decoration:none;
+
+    font-size:14px;
+    font-weight:800;
+
+    transition:.15s;
+}
+
+.back-button:hover{
+    border-color:var(--purple2);
+}
+
+.back-button:active{
+    transform:scale(.98);
+}
+
+
 /* HEADER */
 
 .topbar{
     background:var(--white);
+
     border:1px solid var(--border);
     border-radius:16px;
+
     padding:14px 16px;
+
     display:flex;
     justify-content:space-between;
     align-items:center;
-    margin-bottom:12px;
+
+    gap:12px;
+
+    margin-bottom:14px;
 }
 
 .logo{
-    color:var(--purple);
     font-size:18px;
-    font-weight:900;
+    font-weight:800;
+    color:var(--purple);
 }
 
-.course-info{
+.race-label{
+    font-size:14px;
     color:var(--muted);
-    font-size:13px;
     font-weight:700;
 }
 
-/* PLAYERS */
 
-.players{
+/* SCORE */
+
+.scoreboard{
+
     display:grid;
-    grid-template-columns:1fr 1fr;
+
+    grid-template-columns:1fr auto 1fr;
+
     gap:10px;
-    margin-bottom:12px;
+
+    align-items:center;
+
+    margin-bottom:14px;
 }
 
 .player{
-    background:white;
+
+    background:var(--white);
+
     border:2px solid var(--border);
-    border-radius:15px;
+
+    border-radius:16px;
+
     padding:12px;
+
+    text-align:center;
+
+    transition:.2s;
 }
 
 .player.active{
-    border-color:var(--blue2);
-}
 
-.player-head{
-    display:flex;
-    justify-content:space-between;
-    gap:8px;
-    margin-bottom:10px;
+    border-color:var(--blue2);
+
+    box-shadow:
+        0 0 0 3px rgba(47,128,237,.10);
 }
 
 .player-name{
-    font-weight:800;
-}
 
-.player-position{
-    color:var(--muted);
     font-size:13px;
+
     font-weight:700;
+
+    color:var(--muted);
 }
 
-/* TRACK */
+.player-score{
+
+    font-size:30px;
+
+    font-weight:800;
+
+    color:var(--purple);
+
+    margin-top:3px;
+}
+
+.vs{
+
+    font-size:13px;
+
+    font-weight:900;
+
+    color:var(--muted);
+}
+
+
+/* COURSE */
+
+.race-card{
+
+    background:var(--white);
+
+    border:1px solid var(--border);
+
+    border-radius:18px;
+
+    padding:18px;
+
+    margin-bottom:14px;
+}
+
+.track-title{
+
+    text-align:center;
+
+    font-size:14px;
+
+    font-weight:800;
+
+    color:var(--muted);
+
+    margin-bottom:14px;
+}
 
 .track{
+
     position:relative;
-    height:48px;
-    border-radius:25px;
-    background:#ececef;
-    overflow:hidden;
+
+    height:70px;
+
+    background:#f0f0f2;
+
     border:1px solid var(--border);
+
+    border-radius:16px;
+
+    margin-bottom:12px;
+
+    overflow:hidden;
+}
+
+.track:last-child{
+    margin-bottom:0;
 }
 
 .track-line{
+
     position:absolute;
-    left:5%;
-    right:5%;
+
+    left:16px;
+    right:16px;
+
     top:50%;
+
     height:4px;
+
+    background:#d5d5d8;
+
     transform:translateY(-50%);
-    background:#d1d1d6;
 }
 
 .runner{
+
     position:absolute;
+
     top:50%;
-    left:5%;
-    width:34px;
-    height:34px;
-    transform:translate(-50%,-50%);
+
+    left:16px;
+
+    width:38px;
+    height:38px;
+
     border-radius:50%;
+
     background:var(--purple2);
+
     color:white;
+
     display:flex;
+
     align-items:center;
     justify-content:center;
-    font-size:14px;
+
     font-weight:900;
-    transition:left .35s ease;
-    z-index:2;
+
+    transform:
+        translateY(-50%);
+
+    transition:
+        left .35s ease;
+}
+
+.runner.player2{
+    background:var(--blue);
 }
 
 .finish{
+
     position:absolute;
-    right:3%;
-    top:50%;
-    transform:translateY(-50%);
-    font-size:18px;
-    font-weight:900;
-    color:var(--purple);
+
+    right:10px;
+
+    top:8px;
+    bottom:8px;
+
+    width:4px;
+
+    background:var(--purple);
 }
+
 
 /* QUESTION */
 
-.game{
-    background:white;
+.game-card{
+
+    background:var(--white);
+
     border:1px solid var(--border);
+
     border-radius:18px;
+
     padding:20px;
 }
 
 .turn{
+
     text-align:center;
-    color:var(--blue);
+
     font-size:14px;
-    font-weight:900;
+
+    color:var(--blue);
+
+    font-weight:800;
+
     margin-bottom:10px;
 }
 
-.progress{
-    height:7px;
-    background:#ededf0;
-    border-radius:10px;
-    overflow:hidden;
-    margin-bottom:18px;
-}
-
-.progress-bar{
-    width:0%;
-    height:100%;
-    background:var(--blue2);
-    transition:width .25s ease;
-}
-
 .question-number{
+
     text-align:center;
+
     color:var(--muted);
+
     font-size:13px;
-    margin-bottom:9px;
+
+    margin-bottom:10px;
 }
 
 .question{
-    text-align:center;
+
     font-size:22px;
+
     line-height:1.35;
-    font-weight:900;
+
+    font-weight:800;
+
+    text-align:center;
+
     max-width:720px;
-    margin:0 auto 20px;
+
+    margin:0 auto 22px;
 }
+
 
 /* OPTIONS */
 
 .options{
+
     display:grid;
+
     grid-template-columns:1fr 1fr;
-    gap:11px;
+
+    gap:12px;
 }
 
 .option{
-    min-height:62px;
-    padding:12px;
+
+    min-height:64px;
+
     border:2px solid var(--border);
+
     border-radius:14px;
+
     background:white;
-    text-align:left;
+
+    padding:12px;
+
     font-weight:700;
+
+    text-align:left;
+
     transition:.15s;
 }
 
 .option:hover{
+
     border-color:var(--blue2);
 }
 
 .option:active{
+
     transform:scale(.98);
 }
 
 .option.correct{
-    background:#edf8f1;
+
     border-color:var(--green);
+
+    background:#eef9f2;
+
     color:var(--green);
 }
 
 .option.wrong{
-    background:#fff0f0;
+
     border-color:var(--red);
+
+    background:#fff0f0;
+
     color:var(--red);
 }
 
 .option:disabled{
+
     cursor:default;
 }
+
 
 /* FEEDBACK */
 
 .feedback{
-    display:none;
-    margin-top:13px;
-    padding:13px;
+
+    margin-top:16px;
+
+    padding:14px;
+
     border-radius:12px;
+
     text-align:center;
-    font-size:14px;
-    font-weight:800;
+
+    font-weight:700;
+
+    display:none;
 }
 
 .feedback.show{
+
     display:block;
 }
 
 .feedback.correct{
-    background:#edf8f1;
+
+    background:#eef9f2;
+
     color:var(--green);
 }
 
 .feedback.wrong{
+
     background:#fff0f0;
+
     color:var(--red);
 }
 
-.next{
-    display:none;
+
+/* NEXT */
+
+.next-btn{
+
     width:100%;
+
+    margin-top:12px;
+
     min-height:52px;
-    margin-top:10px;
-    border:0;
+
     border-radius:13px;
+
     background:var(--purple2);
+
     color:white;
-    font-weight:900;
+
+    font-weight:800;
+
+    display:none;
 }
 
-.next.show{
+.next-btn.show{
+
     display:block;
 }
 
-.category{
-    text-align:center;
-    color:var(--muted);
-    font-size:12px;
-    margin-top:13px;
+.next-btn:active{
+
+    transform:scale(.98);
 }
+
+
+/* CATEGORY */
+
+.category{
+
+    margin-top:14px;
+
+    text-align:center;
+
+    color:var(--muted);
+
+    font-size:13px;
+}
+
 
 /* OVERLAY */
 
 .overlay{
+
     position:fixed;
+
     inset:0;
+
     background:rgba(20,12,30,.72);
+
     display:none;
+
     align-items:center;
+
     justify-content:center;
-    padding:18px;
-    z-index:20;
+
+    padding:20px;
+
+    z-index:50;
 }
 
 .overlay.show{
+
     display:flex;
 }
 
-.result{
+.result-box{
+
     width:100%;
-    max-width:440px;
+
+    max-width:450px;
+
     background:white;
+
     border-radius:20px;
-    padding:24px 18px;
+
+    padding:26px 20px;
+
     text-align:center;
 }
 
 .result-title{
-    color:var(--purple);
+
     font-size:27px;
+
     font-weight:900;
-}
 
-.result-text{
-    margin:12px 0 18px;
-    font-size:18px;
-    font-weight:800;
-}
-
-.result-scores{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-    margin-bottom:16px;
-}
-
-.result-player{
-    border:1px solid var(--border);
-    border-radius:14px;
-    padding:13px;
-}
-
-.result-player strong{
-    display:block;
-    color:var(--muted);
-    font-size:13px;
-    margin-bottom:5px;
-}
-
-.result-player span{
     color:var(--purple);
-    font-size:28px;
-    font-weight:900;
+
+    margin-bottom:10px;
 }
 
-.result-button{
-    width:100%;
-    min-height:52px;
-    border:0;
-    border-radius:13px;
-    background:var(--purple2);
-    color:white;
+.result-winner{
+
+    font-size:19px;
+
+    font-weight:800;
+
+    margin:16px 0;
+}
+
+.final-score{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:10px;
+
+    margin:18px 0;
+}
+
+.final-player{
+
+    border:1px solid var(--border);
+
+    border-radius:14px;
+
+    padding:14px;
+}
+
+.final-player strong{
+
+    display:block;
+
+    color:var(--muted);
+
+    margin-bottom:6px;
+}
+
+.final-player span{
+
+    font-size:30px;
+
     font-weight:900;
+
+    color:var(--purple);
+}
+
+.action-btn{
+
+    width:100%;
+
+    min-height:52px;
+
+    border-radius:13px;
+
+    background:var(--purple2);
+
+    color:white;
+
+    font-weight:800;
+
     margin-top:8px;
 }
 
-.result-button.secondary{
-    background:#ededf0;
+.action-btn:active{
+
+    transform:scale(.98);
+}
+
+.secondary-btn{
+
+    background:#eeeef1;
+
     color:var(--text);
 }
+
 
 /* MOBILE */
 
 @media(max-width:600px){
 
     .page{
-        padding:8px;
+
+        padding:9px;
+    }
+
+    .back-button{
+
+        min-height:44px;
+
+        font-size:13px;
+
+        margin-bottom:9px;
     }
 
     .topbar{
-        padding:11px 12px;
+
         border-radius:13px;
+
+        padding:12px;
     }
 
     .logo{
+
         font-size:16px;
     }
 
-    .course-info{
-        font-size:11px;
+    .race-label{
+
+        font-size:12px;
     }
 
-    .players{
-        gap:7px;
+    .scoreboard{
+
+        gap:6px;
     }
 
     .player{
-        padding:9px;
+
+        padding:10px 6px;
+
         border-radius:13px;
     }
 
     .player-name{
-        font-size:13px;
-    }
 
-    .player-position{
-        font-size:11px;
-    }
-
-    .track{
-        height:42px;
-    }
-
-    .runner{
-        width:30px;
-        height:30px;
         font-size:12px;
     }
 
-    .game{
-        padding:14px 10px;
+    .player-score{
+
+        font-size:27px;
+    }
+
+    .vs{
+
+        font-size:11px;
+    }
+
+    .race-card{
+
+        padding:12px;
+
         border-radius:15px;
     }
 
-    .turn{
-        font-size:13px;
+    .track{
+
+        height:58px;
+
+        border-radius:13px;
+    }
+
+    .runner{
+
+        width:32px;
+        height:32px;
+
+        font-size:12px;
+
+        left:10px;
+    }
+
+    .track-line{
+
+        left:12px;
+        right:12px;
+    }
+
+    .finish{
+
+        right:7px;
+    }
+
+    .game-card{
+
+        padding:14px 10px;
+
+        border-radius:15px;
     }
 
     .question{
-        font-size:18px;
+
+        font-size:19px;
+
+        line-height:1.35;
+
+        margin-bottom:18px;
     }
 
     .options{
+
         grid-template-columns:1fr;
-        gap:8px;
+
+        gap:9px;
     }
 
     .option{
-        min-height:57px;
+
+        min-height:58px;
+
+        padding:11px;
+
         font-size:14px;
+    }
+
+    .result-box{
+
+        padding:22px 15px;
+    }
+
+    .result-title{
+
+        font-size:24px;
+    }
+
+    .result-winner{
+
+        font-size:18px;
     }
 }
 
 @media(max-width:360px){
 
     .question{
+
         font-size:17px;
     }
 
-    .player-name{
-        font-size:12px;
+    .player-score{
+
+        font-size:24px;
     }
 
     .option{
+
         font-size:13px;
     }
 }
+
 </style>
 </head>
 
@@ -471,80 +802,76 @@ button{
 
 <div class="page">
 
+    <!-- RETOUR -->
+
+    <a
+        href="baccalaureat.html"
+        class="back-button"
+    >
+        ← Retour aux jeux
+    </a>
+
+
+    <!-- HEADER -->
+
     <header class="topbar">
 
         <div class="logo">
             ExamQuiz
         </div>
 
-        <div class="course-info" id="courseInfo">
+        <div
+            class="race-label"
+            id="raceLabel"
+        >
             Course 1 / 20
         </div>
 
     </header>
 
 
-    <!-- JOUEURS -->
+    <!-- SCORE -->
 
-    <section class="players">
+    <section class="scoreboard">
 
-        <div class="player active" id="player1">
+        <div
+            class="player active"
+            id="player1Card"
+        >
 
-            <div class="player-head">
-
-                <div class="player-name">
-                    Joueur 1
-                </div>
-
-                <div class="player-position" id="position1">
-                    0 / 10
-                </div>
-
+            <div class="player-name">
+                Joueur 1
             </div>
 
-            <div class="track">
-
-                <div class="track-line"></div>
-
-                <div class="runner" id="runner1">
-                    1
-                </div>
-
-                <div class="finish">
-                    FIN
-                </div>
-
+            <div
+                class="player-score"
+                id="score1"
+            >
+                0
             </div>
 
         </div>
 
 
-        <div class="player" id="player2">
+        <div class="vs">
+            VS
+        </div>
 
-            <div class="player-head">
 
-                <div class="player-name">
-                    Joueur 2
-                </div>
+        <div
+            class="player"
+            id="player2Card"
+        >
 
-                <div class="player-position" id="position2">
-                    0 / 10
-                </div>
-
+            <div class="player-name">
+                Joueur 2
             </div>
 
-            <div class="track">
-
-                <div class="track-line"></div>
-
-                <div class="runner" id="runner2">
-                    2
-                </div>
-
-                <div class="finish">
-                    FIN
-                </div>
-
+            <div
+                class="player-score"
+                id="score2"
+            >
+                0
             </div>
 
         </div>
@@ -552,46 +879,106 @@ button{
     </section>
 
 
-    <!-- QUESTION -->
+    <!-- COURSE -->
 
-    <main class="game">
+    <section class="race-card">
 
-        <div class="turn" id="turn">
+        <div class="track-title">
+            Course
+        </div>
+
+
+        <!-- JOUEUR 1 -->
+
+        <div class="track">
+
+            <div class="track-line"></div>
+
+            <div
+                class="runner"
+                id="runner1"
+            >
+                1
+            </div>
+
+            <div class="finish"></div>
+
+        </div>
+
+
+        <!-- JOUEUR 2 -->
+
+        <div class="track">
+
+            <div class="track-line"></div>
+
+            <div
+                class="runner player2"
+                id="runner2"
+            >
+                2
+            </div>
+
+            <div class="finish"></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- JEU -->
+
+    <main class="game-card">
+
+        <div
+            class="turn"
+            id="turnLabel"
+        >
             Tour de Joueur 1
         </div>
 
 
-        <div class="progress">
-            <div class="progress-bar" id="progressBar"></div>
-        </div>
-
-
-        <div class="question-number" id="questionNumber">
+        <div
+            class="question-number"
+            id="questionNumber"
+        >
             Question 1 / 10
         </div>
 
 
-        <div class="question" id="question">
+        <div
+            class="question"
+            id="question"
+        >
             Chargement...
         </div>
 
 
-        <div class="options" id="options"></div>
+        <div
+            class="options"
+            id="options"
+        ></div>
 
 
-        <div class="feedback" id="feedback"></div>
+        <div
+            class="feedback"
+            id="feedback"
+        ></div>
 
 
         <button
             type="button"
-            class="next"
-            id="nextButton"
+            class="next-btn"
+            id="nextBtn"
         >
-            Continuer
+            Question suivante
         </button>
 
 
-        <div class="category" id="category"></div>
+        <div
+            class="category"
+            id="category"
+        ></div>
 
     </main>
 
@@ -600,40 +987,49 @@ button{
 
 <!-- RESULTAT -->
 
-<div class="overlay" id="overlay">
+<div
+    class="overlay"
+    id="resultOverlay"
+>
 
-    <div class="result">
+    <div class="result-box">
 
-        <div class="result-title" id="resultTitle">
+        <div
+            class="result-title"
+            id="resultTitle"
+        >
             Course terminée
         </div>
 
 
-        <div class="result-text" id="resultText"></div>
+        <div
+            class="result-winner"
+            id="winnerText"
+        ></div>
 
 
-        <div class="result-scores">
+        <div class="final-score">
 
-            <div class="result-player">
+            <div class="final-player">
 
                 <strong>
                     Joueur 1
                 </strong>
 
-                <span id="final1">
+                <span id="finalScore1">
                     0
                 </span>
 
             </div>
 
 
-            <div class="result-player">
+            <div class="final-player">
 
                 <strong>
                     Joueur 2
                 </strong>
 
-                <span id="final2">
+                <span id="finalScore2">
                     0
                 </span>
 
@@ -644,8 +1040,8 @@ button{
 
         <button
             type="button"
-            class="result-button"
-            id="nextRace"
+            class="action-btn"
+            id="nextRaceBtn"
         >
             Course suivante
         </button>
@@ -653,10 +1049,10 @@ button{
 
         <button
             type="button"
-            class="result-button secondary"
-            id="restart"
+            class="action-btn secondary-btn"
+            id="restartBtn"
         >
-            Nouvelle partie
+            Recommencer
         </button>
 
     </div>
@@ -666,75 +1062,80 @@ button{
 
 <script type="module">
 
-import { jeuxQuestions } from "./src/jeuxQuestions.js";
+import {
+    jeuxQuestions
+} from "./src/jeuxQuestions.js";
 
 
-/* =========================
-   CONFIGURATION
-========================= */
+/* CONFIGURATION */
 
 const QUESTIONS_PER_RACE = 10;
+
 const MAX_RACES = 20;
 
 
-/* =========================
-   ETAT
-========================= */
+/* ETAT */
 
-let questions = [];
+let allQuestions = [];
 
-let questionIndex = 0;
+let currentQuestions = [];
+
+let currentQuestionIndex = 0;
 
 let currentPlayer = 1;
 
 let raceNumber = 1;
 
-let player1Progress = 0;
-let player2Progress = 0;
+let score1 = 0;
 
-let totalScore1 = 0;
-let totalScore2 = 0;
+let score2 = 0;
+
+let progress1 = 0;
+
+let progress2 = 0;
 
 let answered = false;
+
 let gameFinished = false;
 
 
-/* =========================
-   ELEMENTS
-========================= */
+/* ELEMENTS */
 
-const courseInfo =
-    document.getElementById("courseInfo");
+const questionElement =
+    document.getElementById("question");
 
-const turn =
-    document.getElementById("turn");
+const optionsElement =
+    document.getElementById("options");
+
+const feedbackElement =
+    document.getElementById("feedback");
+
+const nextBtn =
+    document.getElementById("nextBtn");
+
+const turnLabel =
+    document.getElementById("turnLabel");
 
 const questionNumber =
     document.getElementById("questionNumber");
 
-const question =
-    document.getElementById("question");
-
-const options =
-    document.getElementById("options");
-
-const feedback =
-    document.getElementById("feedback");
-
-const nextButton =
-    document.getElementById("nextButton");
-
-const progressBar =
-    document.getElementById("progressBar");
-
-const category =
+const categoryElement =
     document.getElementById("category");
 
-const player1 =
-    document.getElementById("player1");
+const score1Element =
+    document.getElementById("score1");
 
-const player2 =
-    document.getElementById("player2");
+const score2Element =
+    document.getElementById("score2");
+
+const player1Card =
+    document.getElementById("player1Card");
+
+const player2Card =
+    document.getElementById("player2Card");
+
+const raceLabel =
+    document.getElementById("raceLabel");
 
 const runner1 =
     document.getElementById("runner1");
@@ -742,37 +1143,29 @@ const runner1 =
 const runner2 =
     document.getElementById("runner2");
 
-const position1 =
-    document.getElementById("position1");
-
-const position2 =
-    document.getElementById("position2");
-
-const overlay =
-    document.getElementById("overlay");
+const resultOverlay =
+    document.getElementById("resultOverlay");
 
 const resultTitle =
     document.getElementById("resultTitle");
 
-const resultText =
-    document.getElementById("resultText");
+const winnerText =
+    document.getElementById("winnerText");
 
-const final1 =
-    document.getElementById("final1");
+const finalScore1 =
+    document.getElementById("finalScore1");
 
-const final2 =
-    document.getElementById("final2");
+const finalScore2 =
+    document.getElementById("finalScore2");
 
-const nextRace =
-    document.getElementById("nextRace");
+const nextRaceBtn =
+    document.getElementById("nextRaceBtn");
 
-const restart =
-    document.getElementById("restart");
+const restartBtn =
+    document.getElementById("restartBtn");
 
 
-/* =========================
-   MELANGE
-========================= */
+/* MELANGE */
 
 function shuffle(array){
 
@@ -802,105 +1195,138 @@ function shuffle(array){
 }
 
 
-/* =========================
-   CHARGER COURSE
-========================= */
+/* PREPARER UNE COURSE */
 
-function loadRace(){
+function prepareRace(){
 
     if(
         !Array.isArray(jeuxQuestions) ||
         jeuxQuestions.length === 0
     ){
 
-        question.textContent =
+        questionElement.textContent =
             "Aucune question disponible.";
+
+        optionsElement.innerHTML = "";
 
         return false;
     }
 
 
-    questions =
-        shuffle(jeuxQuestions)
+    allQuestions =
+        [...jeuxQuestions];
+
+
+    currentQuestions =
+        shuffle(allQuestions)
         .slice(
             0,
             Math.min(
                 QUESTIONS_PER_RACE,
-                jeuxQuestions.length
+                allQuestions.length
             )
         );
 
 
-    questionIndex = 0;
-
-    currentPlayer = 1;
-
-    player1Progress = 0;
-
-    player2Progress = 0;
-
-    updateRaceDisplay();
-
-    return true;
+    return currentQuestions.length > 0;
 }
 
 
-/* =========================
-   POSITION JOUEURS
-========================= */
+/* SCORE */
 
-function updateRaceDisplay(){
+function updateScore(){
 
-    position1.textContent =
-        `${player1Progress} / ${QUESTIONS_PER_RACE}`;
+    score1Element.textContent =
+        score1;
 
-    position2.textContent =
-        `${player2Progress} / ${QUESTIONS_PER_RACE}`;
+    score2Element.textContent =
+        score2;
 
 
-    const percent1 =
-        5 +
-        (
-            player1Progress /
-            QUESTIONS_PER_RACE
-        ) * 90;
-
-
-    const percent2 =
-        5 +
-        (
-            player2Progress /
-            QUESTIONS_PER_RACE
-        ) * 90;
-
-
-    runner1.style.left =
-        `${Math.min(percent1,95)}%`;
-
-    runner2.style.left =
-        `${Math.min(percent2,95)}%`;
-
-
-    player1.classList.toggle(
+    player1Card.classList.toggle(
         "active",
         currentPlayer === 1
     );
 
-    player2.classList.toggle(
+
+    player2Card.classList.toggle(
         "active",
         currentPlayer === 2
     );
 }
 
 
-/* =========================
-   AFFICHER QUESTION
-========================= */
+/* POSITION DES JOUEURS */
+
+function updateRunners(){
+
+    const trackWidth =
+        document.querySelector(".track")
+        .clientWidth;
+
+
+    const runnerWidth =
+        runner1.offsetWidth;
+
+
+    const start = 10;
+
+
+    const finish =
+        Math.max(
+            start,
+            trackWidth -
+            runnerWidth -
+            14
+        );
+
+
+    const maxProgress =
+        Math.max(
+            1,
+            QUESTIONS_PER_RACE
+        );
+
+
+    const position1 =
+        start +
+        (
+            progress1 /
+            maxProgress
+        ) *
+        (
+            finish -
+            start
+        );
+
+
+    const position2 =
+        start +
+        (
+            progress2 /
+            maxProgress
+        ) *
+        (
+            finish -
+            start
+        );
+
+
+    runner1.style.left =
+        `${position1}px`;
+
+    runner2.style.left =
+        `${position2}px`;
+}
+
+
+/* AFFICHER QUESTION */
 
 function displayQuestion(){
 
     if(
-        questionIndex >= questions.length
+        currentQuestionIndex >=
+        currentQuestions.length
     ){
 
         endRace();
@@ -913,109 +1339,100 @@ function displayQuestion(){
 
 
     const currentQuestion =
-        questions[questionIndex];
+        currentQuestions[
+            currentQuestionIndex
+        ];
 
 
     questionNumber.textContent =
         `Question ${
-            questionIndex + 1
+            currentQuestionIndex + 1
         } / ${
-            questions.length
+            currentQuestions.length
         }`;
 
 
-    question.textContent =
+    questionElement.textContent =
         currentQuestion.question;
 
 
-    turn.textContent =
+    turnLabel.textContent =
         `Tour de Joueur ${currentPlayer}`;
 
 
-    category.textContent =
+    categoryElement.textContent =
         currentQuestion.category
         ? `Catégorie : ${currentQuestion.category}`
         : "";
 
 
-    progressBar.style.width =
-        `${
-            (
-                questionIndex /
-                questions.length
-            ) * 100
-        }%`;
-
-
-    feedback.className =
+    feedbackElement.className =
         "feedback";
 
-    feedback.textContent =
+    feedbackElement.textContent =
         "";
 
 
-    nextButton.className =
-        "next";
+    nextBtn.className =
+        "next-btn";
 
 
-    options.innerHTML =
+    optionsElement.innerHTML =
         "";
 
 
-    const shuffledOptions =
+    const options =
         shuffle(
             currentQuestion.options || []
         );
 
 
-    shuffledOptions.forEach(
-        optionText => {
+    options.forEach(option => {
 
-            const button =
-                document.createElement(
-                    "button"
+        const button =
+            document.createElement("button");
+
+
+        button.type =
+            "button";
+
+
+        button.className =
+            "option";
+
+
+        button.textContent =
+            option;
+
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                answerQuestion(
+                    button,
+                    option,
+                    currentQuestion
                 );
 
-
-            button.type =
-                "button";
-
-            button.className =
-                "option";
-
-            button.textContent =
-                optionText;
+            }
+        );
 
 
-            button.addEventListener(
-                "click",
-                () => {
+        optionsElement.appendChild(
+            button
+        );
 
-                    answerQuestion(
-                        button,
-                        optionText,
-                        currentQuestion
-                    );
-
-                }
-            );
+    });
 
 
-            options.appendChild(
-                button
-            );
+    updateScore();
 
-        }
-    );
-
-
-    updateRaceDisplay();
+    updateRunners();
 }
 
 
-/* =========================
-   REPONSE
-========================= */
+/* REPONDRE */
 
 function answerQuestion(
     clickedButton,
@@ -1030,7 +1447,7 @@ function answerQuestion(
 
 
     const buttons =
-        options.querySelectorAll(
+        optionsElement.querySelectorAll(
             ".option"
         );
 
@@ -1054,12 +1471,12 @@ function answerQuestion(
     });
 
 
-    const correct =
+    const isCorrect =
         selectedAnswer ===
         currentQuestion.answer;
 
 
-    if(correct){
+    if(isCorrect){
 
         clickedButton.classList.add(
             "correct"
@@ -1068,101 +1485,67 @@ function answerQuestion(
 
         if(currentPlayer === 1){
 
-            player1Progress++;
+            score1 += 10;
 
-            totalScore1 += 10;
+            progress1++;
 
-        }else{
+        }
+        else{
 
-            player2Progress++;
+            score2 += 10;
 
-            totalScore2 += 10;
+            progress2++;
 
         }
 
 
-        feedback.textContent =
+        feedbackElement.textContent =
             `Bonne réponse ! Joueur ${
                 currentPlayer
-            } avance d'une position.`;
+            } avance de 1 position et gagne 10 points.`;
 
 
-        feedback.className =
+        feedbackElement.className =
             "feedback show correct";
 
-    }else{
+
+        updateScore();
+
+        updateRunners();
+
+    }
+    else{
 
         clickedButton.classList.add(
             "wrong"
         );
 
 
-        feedback.textContent =
+        feedbackElement.textContent =
             `Mauvaise réponse. La bonne réponse était : ${
                 currentQuestion.answer
             }`;
 
 
-        feedback.className =
+        feedbackElement.className =
             "feedback show wrong";
 
     }
 
 
-    updateRaceDisplay();
-
-
-    /*
-       Si un joueur atteint la ligne
-       d'arrivée, la course est terminée.
-    */
-
-    if(
-        player1Progress >=
-        QUESTIONS_PER_RACE ||
-        player2Progress >=
-        QUESTIONS_PER_RACE
-    ){
-
-        nextButton.textContent =
-            "Voir le résultat";
-
-    }else{
-
-        nextButton.textContent =
-            "Continuer";
-
-    }
-
-
-    nextButton.className =
-        "next show";
+    nextBtn.className =
+        "next-btn show";
 }
 
 
-/* =========================
-   QUESTION SUIVANTE
-========================= */
+/* QUESTION SUIVANTE */
 
 function nextQuestion(){
 
     if(!answered) return;
 
 
-    if(
-        player1Progress >=
-        QUESTIONS_PER_RACE ||
-        player2Progress >=
-        QUESTIONS_PER_RACE
-    ){
-
-        endRace();
-
-        return;
-    }
-
-
-    questionIndex++;
+    currentQuestionIndex++;
 
 
     currentPlayer =
@@ -1175,47 +1558,39 @@ function nextQuestion(){
 }
 
 
-/* =========================
-   FIN COURSE
-========================= */
+/* FIN DE COURSE */
 
 function endRace(){
 
-    final1.textContent =
-        player1Progress;
+    finalScore1.textContent =
+        score1;
 
-    final2.textContent =
-        player2Progress;
-
-
-    if(
-        player1Progress >
-        player2Progress
-    ){
-
-        resultText.textContent =
-            "Joueur 1 remporte la course !";
-
-    }
-    else if(
-        player2Progress >
-        player1Progress
-    ){
-
-        resultText.textContent =
-            "Joueur 2 remporte la course !";
-
-    }
-    else{
-
-        resultText.textContent =
-            "La course se termine par une égalité !";
-
-    }
+    finalScore2.textContent =
+        score2;
 
 
     resultTitle.textContent =
         `Course ${raceNumber} terminée`;
+
+
+    if(progress1 > progress2){
+
+        winnerText.textContent =
+            "Joueur 1 atteint la meilleure position.";
+
+    }
+    else if(progress2 > progress1){
+
+        winnerText.textContent =
+            "Joueur 2 atteint la meilleure position.";
+
+    }
+    else{
+
+        winnerText.textContent =
+            "Les deux joueurs terminent à égalité.";
+
+    }
 
 
     if(
@@ -1228,19 +1603,17 @@ function endRace(){
     }
 
 
-    nextRace.textContent =
+    nextRaceBtn.textContent =
         "Course suivante";
 
 
-    overlay.classList.add(
+    resultOverlay.classList.add(
         "show"
     );
 }
 
 
-/* =========================
-   FIN DES 20 COURSES
-========================= */
+/* FIN DES 20 COURSES */
 
 function endGame(){
 
@@ -1248,60 +1621,47 @@ function endGame(){
 
 
     resultTitle.textContent =
-        "Championnat terminé";
+        "Course Quiz terminée";
 
 
-    if(
-        totalScore1 >
-        totalScore2
-    ){
+    if(score1 > score2){
 
-        resultText.textContent =
+        winnerText.textContent =
             "Joueur 1 termine avec le plus de points.";
 
     }
-    else if(
-        totalScore2 >
-        totalScore1
-    ){
+    else if(score2 > score1){
 
-        resultText.textContent =
+        winnerText.textContent =
             "Joueur 2 termine avec le plus de points.";
 
     }
     else{
 
-        resultText.textContent =
-            "Les deux joueurs terminent à égalité.";
+        winnerText.textContent =
+            "La partie se termine par une égalité.";
 
     }
 
 
-    /*
-       À la fin du championnat,
-       on affiche les points totaux.
-    */
+    finalScore1.textContent =
+        score1;
 
-    final1.textContent =
-        totalScore1;
-
-    final2.textContent =
-        totalScore2;
+    finalScore2.textContent =
+        score2;
 
 
-    nextRace.textContent =
+    nextRaceBtn.textContent =
         "Nouvelle partie";
 
 
-    overlay.classList.add(
+    resultOverlay.classList.add(
         "show"
     );
 }
 
 
-/* =========================
-   COURSE SUIVANTE
-========================= */
+/* COURSE SUIVANTE */
 
 function startNextRace(){
 
@@ -1313,19 +1673,43 @@ function startNextRace(){
     }
 
 
+    if(
+        raceNumber >= MAX_RACES
+    ){
+
+        endGame();
+
+        return;
+    }
+
+
     raceNumber++;
 
+    currentQuestionIndex = 0;
 
-    courseInfo.textContent =
-        `Course ${raceNumber} / ${MAX_RACES}`;
+    currentPlayer = 1;
+
+    progress1 = 0;
+
+    progress2 = 0;
 
 
-    overlay.classList.remove(
+    raceLabel.textContent =
+        `Course ${
+            raceNumber
+        } / ${
+            MAX_RACES
+        }`;
+
+
+    resultOverlay.classList.remove(
         "show"
     );
 
 
-    if(loadRace()){
+    if(prepareRace()){
+
+        updateRunners();
 
         displayQuestion();
 
@@ -1333,45 +1717,46 @@ function startNextRace(){
 }
 
 
-/* =========================
-   RECOMMENCER
-========================= */
+/* RECOMMENCER */
 
 function restartGame(){
 
     raceNumber = 1;
 
-    questionIndex = 0;
+    currentQuestionIndex = 0;
 
     currentPlayer = 1;
 
-    player1Progress = 0;
+    score1 = 0;
 
-    player2Progress = 0;
+    score2 = 0;
 
-    totalScore1 = 0;
+    progress1 = 0;
 
-    totalScore2 = 0;
+    progress2 = 0;
 
     answered = false;
 
     gameFinished = false;
 
 
-    courseInfo.textContent =
+    raceLabel.textContent =
         `Course 1 / ${MAX_RACES}`;
 
 
-    overlay.classList.remove(
+    resultOverlay.classList.remove(
         "show"
     );
 
 
-    nextRace.textContent =
+    nextRaceBtn.textContent =
         "Course suivante";
 
 
-    if(loadRace()){
+    updateRunners();
+
+
+    if(prepareRace()){
 
         displayQuestion();
 
@@ -1379,31 +1764,35 @@ function restartGame(){
 }
 
 
-/* =========================
-   EVENEMENTS
-========================= */
+/* EVENEMENTS */
 
-nextButton.addEventListener(
+nextBtn.addEventListener(
     "click",
     nextQuestion
 );
 
-nextRace.addEventListener(
+
+nextRaceBtn.addEventListener(
     "click",
     startNextRace
 );
 
-restart.addEventListener(
+
+restartBtn.addEventListener(
     "click",
     restartGame
 );
 
 
-/* =========================
-   DEMARRAGE
-========================= */
+window.addEventListener(
+    "resize",
+    updateRunners
+);
 
-if(loadRace()){
+
+/* DEMARRAGE */
+
+if(prepareRace()){
 
     displayQuestion();
 
