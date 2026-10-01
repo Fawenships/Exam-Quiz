@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Memory Quiz — ExamQuiz Haiti</title>
+
+<style>
+:root {
+    --purple: #24113f;
+    --purple2: #4b2481;
+    --blue: #1764c0;
+    --blue2: #2f80ed;
+    --white: #ffffff;
+    --bg: #f6f7fb;
+    --text: #18181b;
+    --muted: #6b7280;
+    --green: #16803c;
+    --red: #c62828;
+    --border: #e5e7eb;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+}
+
+button {
+    font: inherit;
+}
+
+.header {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 20px;
+}
+
+.header-inner {
+    max-width: 1050px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.logo {
+    color: var(--purple);
+    font-size: 21px;
+    font-weight: 800;
+}
+
+.logo span {
+    color: var(--blue2);
+}
+
+.back-btn {
+    border: 1px solid var(--border);
+    background: white;
+    color: var(--purple);
+    padding: 10px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.back-btn:hover {
+    background: #f5f3f8;
+}
+
+.container {
+    width: min(100% - 28px, 1050px);
+    margin: auto;
+    padding: 25px 0 40px;
+}
+
+.hero {
+    text-align: center;
+    margin-bottom: 22px;
+}
+
+.hero h1 {
+    font-size: clamp(27px, 5vw, 42px);
+    color: var(--purple);
+    margin-bottom: 8px;
+}
+
+.hero p {
+    color: var(--muted);
+    font-size: 15px;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 22px;
+}
+
+.stat {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 14px;
+    text-align: center;
+}
+
+.stat-label {
+    color: var(--muted);
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.stat-value {
+    color: var(--purple);
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.game-panel {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 18px;
+}
+
+.progress-area {
+    margin-bottom: 18px;
+}
+
+.progress-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 7px;
+}
+
+.progress {
+    width: 100%;
+    height: 8px;
+    background: #e9eaf0;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: var(--blue2);
+    transition: width .3s ease;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 13px;
+    max-width: 760px;
+    margin: auto;
+}
+
+.card {
+    aspect-ratio: 1 / 1;
+    perspective: 800px;
+    cursor: pointer;
+    border: 0;
+    background: transparent;
+    min-width: 0;
+}
+
+.card-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition: transform .45s ease;
+    transform-style: preserve-3d;
+}
+
+.card.flipped .card-inner,
+.card.matched .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-face {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 12px;
+}
+
+.card-front {
+    background: linear-gradient(135deg, var(--purple), var(--purple2));
+    color: white;
+    font-size: 30px;
+    font-weight: 800;
+    border: 2px solid #5d3694;
+}
+
+.card-back {
+    background: white;
+    color: var(--purple);
+    border: 2px solid #d8d3e2;
+    transform: rotateY(180deg);
+    font-size: clamp(12px, 1.7vw, 16px);
+    line-height: 1.35;
+    font-weight: 700;
+}
+
+.card.matched .card-back {
+    border-color: #69b47e;
+    background: #f1fbf4;
+    color: var(--green);
+}
+
+.card:disabled {
+    cursor: default;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    margin-top: 22px;
+}
+
+.restart-btn {
+    border: none;
+    background: var(--purple);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.restart-btn:hover {
+    background: var(--purple2);
+}
+
+.message {
+    text-align: center;
+    min-height: 24px;
+    margin-top: 14px;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(20, 12, 35, .72);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 100;
+}
+
+.overlay.show {
+    display: flex;
+}
+
+.result-box {
+    width: min(100%, 420px);
+    background: white;
+    border-radius: 20px;
+    padding: 30px 22px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,.25);
+}
+
+.result-box h2 {
+    color: var(--purple);
+    font-size: 29px;
+    margin-bottom: 10px;
+}
+
+.result-box p {
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.result-score {
+    font-size: 34px;
+    font-weight: 800;
+    color: var(--blue2);
+    margin-bottom: 20px;
+}
+
+.result-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.result-buttons button {
+    flex: 1;
+    border: 0;
+    padding: 13px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.play-again {
+    background: var(--purple);
+    color: white;
+}
+
+.exit-game {
+    background: #eeeef2;
+    color: var(--purple);
+}
+
+@media (max-width: 700px) {
+    .container {
+        width: min(100% - 18px, 560px);
+        padding-top: 18px;
+    }
+
+    .header {
+        padding: 12px;
+    }
+
+    .header-inner {
+        flex-direction: row;
+    }
+
+    .logo {
+        font-size: 18px;
+    }
+
+    .back-btn {
+        padding: 9px 11px;
+        font-size: 13px;
+    }
+
+    .hero {
+        margin-bottom: 16px;
+    }
+
+    .hero h1 {
+        font-size: 29px;
+    }
+
+    .hero p {
+        font-size: 13px;
+    }
+
+    .stats {
+        gap: 8px;
+        margin-bottom: 15px;
+    }
+
+    .stat {
+        padding: 10px 6px;
+        border-radius: 11px;
+    }
+
+    .stat-label {
+        font-size: 10px;
+    }
+
+    .stat-value {
+        font-size: 19px;
+    }
+
+    .game-panel {
+        padding: 11px;
+        border-radius: 15px;
+    }
+
+    .cards {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+    }
+
+    .card-face {
+        padding: 7px;
+        border-radius: 11px;
+    }
+
+    .card-front {
+        font-size: 23px;
+    }
+
+    .card-back {
+        font-size: 10px;
+        line-height: 1.25;
+    }
+
+    .restart-btn {
+        width: 100%;
+        padding: 12px;
+    }
+}
+
+@media (max-width: 380px) {
+    .cards {
+        gap: 6px;
+    }
+
+    .card-front {
+        font-size: 20px;
+    }
+
+    .card-back {
+        font-size: 9px;
+    }
+
+    .game-panel {
+        padding: 8px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+    <div class="header-inner">
+        <div class="logo">
+            ExamQuiz <span>Haiti</span>
+        </div>
+
+        <button class="back-btn" id="backBtn">
+            ← Retour
+        </button>
+    </div>
+</header>
+
+<main class="container">
+
+    <section class="hero">
+        <h1>Memory Quiz</h1>
+        <p>Retourne les cartes et retrouve les bonnes paires.</p>
+    </section>
+
+    <section class="stats">
+
+        <div class="stat">
+            <div class="stat-label">Coups</div>
+            <div class="stat-value" id="moves">0</div>
+        </div>
+
+        <div class="stat">
+            <div class="stat-label">Paires</div>
+            <div class="stat-value">
+                <span id="pairs">0</span>/<span id="totalPairs">6</span>
+            </div>
+        </div>
+
+        <div class="stat">
+            <div class="stat-label">Temps</div>
+            <div class="stat-value" id="time">00:00</div>
+        </div>
+
+    </section>
+
+    <section class="game-panel">
+
+        <div class="progress-area">
+            <div class="progress-top">
+                <span>Progression</span>
+                <span id="progressText">0%</span>
+            </div>
+
+            <div class="progress">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+        </div>
+
+        <div class="cards" id="cards"></div>
+
+        <div class="message" id="message">
+            Trouve toutes les paires.
+        </div>
+
+        <div class="controls">
+            <button class="restart-btn" id="restartBtn">
+                Recommencer
+            </button>
+        </div>
+
+    </section>
+
+</main>
+
+<div class="overlay" id="winOverlay">
+
+    <div class="result-box">
+
+        <h2>Partie terminée</h2>
+
+        <p>
+            Tu as retrouvé toutes les paires.
+        </p>
+
+        <div class="result-score" id="finalScore">
+            0 points
+        </div>
+
+        <p id="finalStats"></p>
+
+        <div class="result-buttons">
+
+            <button class="play-again" id="playAgain">
+                Rejouer
+            </button>
+
+            <button class="exit-game" id="exitGame">
+                Quitter
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+"use strict";
+
+/*
+ * QUESTIONS TEMPORAIRES
+ * Nous remplacerons cette partie plus tard par
+ * les nouvelles questions destinées aux jeux.
+ */
+
+const pairsData = [
+    {
+        question: "Quel organe pompe le sang ?",
+        answer: "Le cœur"
+    },
+    {
+        question: "Quelle molécule porte l'information génétique ?",
+        answer: "ADN"
+    },
+    {
+        question: "Quel gaz est utilisé lors de la respiration ?",
+        answer: "Oxygène"
+    },
+    {
+        question: "Quel organe filtre le sang ?",
+        answer: "Rein"
+    },
+    {
+        question: "Quel est le symbole chimique de l'or ?",
+        answer: "Au"
+    },
+    {
+        question: "Combien font 7 × 8 ?",
+        answer: "56"
+    }
+];
+
+const cardsContainer = document.getElementById("cards");
+const movesElement = document.getElementById("moves");
+const pairsElement = document.getElementById("pairs");
+const totalPairsElement = document.getElementById("totalPairs");
+const timeElement = document.getElementById("time");
+const progressBar = document.getElementById("progressBar");
+const progressText = document.getElementById("progressText");
+const messageElement = document.getElementById("message");
+
+const restartBtn = document.getElementById("restartBtn");
+const backBtn = document.getElementById("backBtn");
+
+const winOverlay = document.getElementById("winOverlay");
+const finalScore = document.getElementById("finalScore");
+const finalStats = document.getElementById("finalStats");
+
+const playAgain = document.getElementById("playAgain");
+const exitGame = document.getElementById("exitGame");
+
+let cards = [];
+let firstCard = null;
+let secondCard = null;
+
+let lockBoard = false;
+let moves = 0;
+let matchedPairs = 0;
+
+let seconds = 0;
+let timer = null;
+let gameStarted = false;
+
+const CARD_TYPES = {
+    QUESTION: "question",
+    ANSWER: "answer"
+};
+
+function shuffle(array) {
+    const copy = [...array];
+
+    for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+    }
+
+    return copy;
+}
+
+function createCards() {
+
+    cards = [];
+
+    pairsData.forEach((pair, index) => {
+
+        cards.push({
+            id: index,
+            pairId: index,
+            type: CARD_TYPES.QUESTION,
+            text: pair.question
+        });
+
+        cards.push({
+            id: index + pairsData.length,
+            pairId: index,
+            type: CARD_TYPES.ANSWER,
+            text: pair.answer
+        });
+
+    });
+
+    cards = shuffle(cards);
+
+    renderCards();
+}
+
+function renderCards() {
+
+    cardsContainer.innerHTML = "";
+
+    cards.forEach((cardData, index) => {
+
+        const button = document.createElement("button");
+
+        button.type = "button";
+        button.className = "card";
+
+        button.dataset.index = index;
+
+        button.innerHTML = `
+            <div class="card-inner">
+
+                <div class="card-face card-front">
+                    ?
+                </div>
+
+                <div class="card-face card-back">
+                    ${escapeHTML(cardData.text)}
+                </div>
+
+            </div>
+        `;
+
+        button.addEventListener("click", () => {
+            handleCardClick(button, index);
+        });
+
+        cardsContainer.appendChild(button);
+    });
+}
+
+function escapeHTML(text) {
+
+    const div = document.createElement("div");
+
+    div.textContent = text;
+
+    return div.innerHTML;
+}
+
+function handleCardClick(element, index) {
+
+    if (
+        lockBoard ||
+        element.classList.contains("flipped") ||
+        element.classList.contains("matched")
+    ) {
+        return;
+    }
+
+    if (!gameStarted) {
+        startTimer();
+        gameStarted = true;
+    }
+
+    element.classList.add("flipped");
+
+    if (!firstCard) {
+
+        firstCard = {
+            element,
+            index
+        };
+
+        return;
+    }
+
+    secondCard = {
+        element,
+        index
+    };
+
+    moves++;
+
+    updateStats();
+
+    checkMatch();
+}
+
+function checkMatch() {
+
+    lockBoard = true;
+
+    const first = cards[firstCard.index];
+    const second = cards[secondCard.index];
+
+    const isMatch =
+        first.pairId === second.pairId &&
+        first.type !== second.type;
+
+    if (isMatch) {
+
+        firstCard.element.classList.add("matched");
+        secondCard.element.classList.add("matched");
+
+        matchedPairs++;
+
+        messageElement.textContent = "Bonne paire.";
+
+        updateStats();
+
+        resetSelection();
+
+        if (matchedPairs === pairsData.length) {
+            setTimeout(endGame, 550);
+        }
+
+    } else {
+
+        messageElement.textContent = "Ce n'est pas une paire.";
+
+        setTimeout(() => {
+
+            firstCard.element.classList.remove("flipped");
+            secondCard.element.classList.remove("flipped");
+
+            resetSelection();
+
+        }, 850);
+    }
+}
+
+function resetSelection() {
+
+    firstCard = null;
+    secondCard = null;
+    lockBoard = false;
+}
+
+function startTimer() {
+
+    if (timer) {
+        return;
+    }
+
+    timer = setInterval(() => {
+
+        seconds++;
+
+        updateTime();
+
+    }, 1000);
+}
+
+function stopTimer() {
+
+    if (timer) {
+        clearInterval(timer);
+        timer = null;
+    }
+}
+
+function updateTime() {
+
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+
+    const mm = String(minutes).padStart(2, "0");
+    const ss = String(remainingSeconds).padStart(2, "0");
+
+    timeElement.textContent = `${mm}:${ss}`;
+}
+
+function updateStats() {
+
+    movesElement.textContent = moves;
+    pairsElement.textContent = matchedPairs;
+
+    const percentage =
+        Math.round((matchedPairs / pairsData.length) * 100);
+
+    progressBar.style.width = `${percentage}%`;
+    progressText.textContent = `${percentage}%`;
+}
+
+function calculateScore() {
+
+    /*
+     * Score de base : 1000
+     * Moins de points avec beaucoup de coups et de temps.
+     */
+
+    const movePenalty = moves * 20;
+    const timePenalty = seconds * 2;
+
+    const score =
+        Math.max(100, 1000 - movePenalty - timePenalty);
+
+    return score;
+}
+
+function endGame() {
+
+    stopTimer();
+
+    const score = calculateScore();
+
+    finalScore.textContent = `${score} points`;
+
+    finalStats.textContent =
+        `${moves} coups • ${formatTime(seconds)} • ${matchedPairs} paires`;
+
+    winOverlay.classList.add("show");
+}
+
+function formatTime(totalSeconds) {
+
+    const minutes = Math.floor(totalSeconds / 60);
+    const secs = totalSeconds % 60;
+
+    return `${String(minutes).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+}
+
+function resetGame() {
+
+    stopTimer();
+
+    firstCard = null;
+    secondCard = null;
+
+    lockBoard = false;
+
+    moves = 0;
+    matchedPairs = 0;
+
+    seconds = 0;
+    gameStarted = false;
+
+    updateTime();
+    updateStats();
+
+    messageElement.textContent =
+        "Trouve toutes les paires.";
+
+    winOverlay.classList.remove("show");
+
+    createCards();
+}
+
+restartBtn.addEventListener("click", resetGame);
+
+playAgain.addEventListener("click", resetGame);
+
+backBtn.addEventListener("click", () => {
+    history.back();
+});
+
+exitGame.addEventListener("click", () => {
+    history.back();
+});
+
+totalPairsElement.textContent = pairsData.length;
+
+createCards();
+updateStats();
+updateTime();
+</script>
+
+</body>
+</html>
