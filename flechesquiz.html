@@ -2,1634 +2,896 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-<meta
-    name="viewport"6tyuiop[]
-    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
->
-
-<title>Flèches à réponses — ExamQuiz Haiti</title>
+<title>Mots Croisés — ExamQuiz</title>
 
 <style>
+:root{
+    --purple:#4b2481;
+    --purple-dark:#24113f;
+    --blue:#1764c0;
+    --green:#16a085;
+    --orange:#f39c12;
+    --red:#e74c3c;
 
-/* =========================================================
-   RESET
-==================rtg7hyjukio======================================= */
+    --bg:#f5f6fa;
+    --card:#ffffff;
+    --text:#202124;
+    --muted:#73777d;
+    --border:#e1e4e8;
 
-* {
-    box-sizindrt6gyibhkeg: border-box;
-    margin: 0;
-    padding: 0;
+    --cell-size:42px;
 }
 
-html,
-body {
-    min-height: 100%;
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
-body {
-    font-family:
-        Inter,
-        Arial,
-        Helvetica,
-        sans-serif;
-
-    color: white;
-
+body{
+    font-family:Arial,Helvetica,sans-serif;
     background:
-        radial-gradient(
-            circle aguibjknlm;ceqo,
-    c,
-    [c ucpeiouyiuyfeqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqt 10% 10%,
-            rgba(255, 0, 128, .35),
-            transparent 28%
-        ),
-        radial-gradient(
-            circle at 90% 20%,
-            rgba(0, 200, 255, .35),
-            transparent 28%
-        ),
-        radial-gradient(
-            circle at 50% 100%,
-            rgba(125, 0, 255, .4),
-            transparent 35%
-        ),
-        linear-gradient(
-            135deg,
-            #16002d,
-            #24105b 45%,
-            #081b4d
-        );
-
-    padding: 14px;
-
-    overflow-x: hidden;
+        radial-gradient(circle at 10% 10%, rgba(75,36,129,.08), transparent 25%),
+        radial-gradient(circle at 90% 80%, rgba(23,100,192,.07), transparent 25%),
+        var(--bg);
+    color:var(--text);
+    min-height:100vh;
 }
 
-
-/* =========================================================
-   DECORATION
-========================================================= */
-
-body::before,
-body::after {
-    content: "";
-    position: fixed;
-
-    width: 220px;
-    height: 220px;
-
-    border-radius: 50%;
-
-    filter: blur(70px);
-
-    opacity: .45;
-
-    pointer-events: none;
-
-    z-index: -1;
+button,
+input{
+    font:inherit;
 }
 
-body::before {
-    background: #ff0099;
-
-    top: -80px;
-    left: -70px;
+button{
+    cursor:pointer;
 }
 
-body::after {
-    background: #00c8ff;
+/* HEADER */
 
-    bottom: -80px;
-    right: -70px;
+.header{
+    width:min(1180px, calc(100% - 28px));
+    margin:18px auto 0;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
 }
 
-
-/* =========================================================
-   GAME
-========================================================= */
-
-.game {
-    width: min(100%, 950px);
-    margin: 0 auto;
+.back-button{
+    text-decoration:none;
+    color:var(--purple-dark);
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:11px 15px;
+    font-weight:700;
+    box-shadow:0 4px 14px rgba(0,0,0,.05);
 }
 
-
-/* =========================================================
-   BACK BUTTON
-========================================================= */
-
-.back-button {
-    display: inline-flex;
-
-    align-items: center;
-    gap: 8px;
-
-    text-decoration: none;
-
-    color: white;
-
-    background:
-        rgba(255,255,255,.1);
-
-    border:
-        1px solid rgba(255,255,255,.18);
-
-    backdrop-filter: blur(12px);
-
-    padding: 11px 16px;
-
-    border-radius: 14px;
-
-    font-size: 14px;
-    font-weight: 800;
-
-    margin-bottom: 14px;
-
-    transition:
-        transform .2s ease,
-        background .2s ease;
+.logo{
+    text-align:center;
+    flex:1;
 }
 
-.back-button:hover {
-    background:
-        rgba(255,255,255,.18);
-
-    transform:
-        translateY(-2px);
+.logo small{
+    display:block;
+    color:var(--muted);
+    font-size:11px;
+    letter-spacing:1.4px;
+    text-transform:uppercase;
 }
 
-
-/* =========================================================
-   HEADER
-========================================================= */
-
-.header {
-
-    display: grid;
-
-    grid-template-columns:
-        1fr auto 1fr;
-
-    align-items: center;
-
-    gap: 12px;
-
-    margin-bottom: 14px;
+.logo strong{
+    font-size:21px;
+    color:var(--purple-dark);
 }
 
+/* HUD */
 
-.stat {
+.hud{
+    width:min(1180px, calc(100% - 28px));
+    margin:18px auto 0;
 
-    position: relative;
-
-    overflow: hidden;
-
-    background:
-        rgba(255,255,255,.1);
-
-    border:
-        1px solid rgba(255,255,255,.18);
-
-    backdrop-filter: blur(16px);
-
-    border-radius: 18px;
-
-    padding: 12px 16px;
-
-    box-shadow:
-        0 10px 35px rgba(0,0,0,.18);
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:12px;
 }
 
-.stat::after {
-
-    content: "";
-
-    position: absolute;
-
-    width: 60px;
-    height: 60px;
-
-    border-radius: 50%;
-
-    background:
-        rgba(255,255,255,.12);
-
-    top: -30px;
-    right: -20px;
+.hud-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:15px;
+    padding:13px 16px;
+    box-shadow:0 5px 20px rgba(0,0,0,.045);
 }
 
-.stat-label {
-
-    display: block;
-
-    color:
-        rgba(255,255,255,.65);
-
-    font-size: 11px;
-
-    text-transform: uppercase;
-
-    letter-spacing: 1px;
-
-    margin-bottom: 3px;
+.hud-label{
+    font-size:11px;
+    color:var(--muted);
+    text-transform:uppercase;
+    letter-spacing:.8px;
 }
 
-.stat-value {
-
-    font-size: 22px;
-
-    font-weight: 900;
-
-    color: white;
-
-    text-shadow:
-        0 2px 12px rgba(255,255,255,.2);
+.hud-value{
+    margin-top:4px;
+    font-size:21px;
+    font-weight:800;
+    color:var(--purple-dark);
 }
 
+/* MAIN */
 
-.header-center {
+.game{
+    width:min(1180px, calc(100% - 28px));
+    margin:16px auto 40px;
 
-    text-align: center;
-
-    min-width: 230px;
+    display:grid;
+    grid-template-columns:minmax(0, 1.2fr) minmax(320px, .8fr);
+    gap:18px;
 }
 
-.header-center h1 {
+/* GRID PANEL */
 
-    font-size:
-        clamp(24px, 5vw, 36px);
-
-    font-weight: 1000;
-
-    letter-spacing: -1px;
-
-    background:
-        linear-gradient(
-            90deg,
-            #ffffff,
-            #7de7ff,
-            #ff83d0,
-            #ffffff
-        );
-
-    background-size: 250% auto;
-
-    -webkit-background-clip: text;
-    background-clip: text;
-
-    color: transparent;
-
-    animation:
-        titleGradient 5s linear infinite;
+.grid-panel{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:20px;
+    box-shadow:0 8px 30px rgba(0,0,0,.06);
+    min-width:0;
 }
 
-@keyframes titleGradient {
+.panel-title{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    margin-bottom:15px;
+}
 
-    0% {
-        background-position: 0% center;
+.panel-title h1{
+    font-size:24px;
+    color:var(--purple-dark);
+}
+
+.panel-title span{
+    color:var(--muted);
+    font-size:13px;
+}
+
+.crossword-wrapper{
+    width:100%;
+    overflow:auto;
+    padding:8px 4px 15px;
+    display:flex;
+    justify-content:center;
+}
+
+.crossword{
+    display:grid;
+    gap:2px;
+    background:#161616;
+    padding:2px;
+    border-radius:7px;
+    flex:none;
+}
+
+.cell{
+    width:var(--cell-size);
+    height:var(--cell-size);
+
+    position:relative;
+
+    background:#fff;
+    border:0;
+
+    padding:0;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:20px;
+    font-weight:800;
+    text-transform:uppercase;
+
+    color:#202124;
+}
+
+.cell.black{
+    background:#191919;
+}
+
+.cell.playable{
+    cursor:pointer;
+}
+
+.cell.playable:hover{
+    background:#f0ebfa;
+}
+
+.cell.selected{
+    background:#dcd0f3;
+}
+
+.cell.word-selected{
+    background:#f0ebfa;
+}
+
+.cell.correct{
+    background:#dff6ed;
+    color:#117a58;
+}
+
+.cell.incorrect{
+    background:#fde3e0;
+    color:#c0392b;
+}
+
+.cell-number{
+    position:absolute;
+    top:2px;
+    left:3px;
+
+    font-size:9px;
+    font-weight:700;
+
+    color:#555;
+}
+
+.cell-letter{
+    margin-top:5px;
+}
+
+/* CLUES */
+
+.clues-panel{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.clues-card{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:18px;
+    box-shadow:0 8px 30px rgba(0,0,0,.06);
+}
+
+.clues-card h2{
+    color:var(--purple-dark);
+    font-size:18px;
+    margin-bottom:12px;
+}
+
+.clue-list{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.clue{
+    width:100%;
+    border:1px solid var(--border);
+    background:#fafafa;
+
+    border-radius:11px;
+
+    padding:11px 12px;
+
+    text-align:left;
+
+    display:flex;
+    gap:9px;
+    align-items:flex-start;
+
+    color:var(--text);
+}
+
+.clue:hover{
+    border-color:#b9a8d8;
+    background:#f8f4fc;
+}
+
+.clue.active{
+    border-color:var(--purple);
+    background:#f1ebfa;
+}
+
+.clue.done{
+    border-color:#8ed7bd;
+    background:#effbf6;
+}
+
+.clue-number{
+    min-width:25px;
+    height:25px;
+
+    border-radius:7px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:var(--purple-dark);
+    color:white;
+
+    font-size:12px;
+    font-weight:800;
+}
+
+.clue.done .clue-number{
+    background:var(--green);
+}
+
+.clue-text{
+    font-size:13px;
+    line-height:1.35;
+}
+
+/* ACTIVE CLUE */
+
+.active-clue{
+    background:linear-gradient(135deg,#24113f,#4b2481);
+    color:white;
+    border-radius:17px;
+    padding:16px;
+}
+
+.active-clue-label{
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    opacity:.7;
+}
+
+.active-clue-text{
+    margin-top:6px;
+    font-size:16px;
+    line-height:1.4;
+    font-weight:700;
+}
+
+.answer-info{
+    margin-top:8px;
+    font-size:12px;
+    opacity:.8;
+}
+
+/* INPUT */
+
+.answer-box{
+    display:flex;
+    gap:8px;
+    margin-top:12px;
+}
+
+.answer-input{
+    min-width:0;
+    flex:1;
+
+    border:2px solid var(--border);
+    border-radius:11px;
+
+    padding:12px;
+
+    outline:none;
+
+    text-transform:uppercase;
+    font-weight:700;
+}
+
+.answer-input:focus{
+    border-color:var(--purple);
+}
+
+.check-button{
+    border:0;
+    border-radius:11px;
+
+    padding:0 18px;
+
+    background:var(--purple);
+    color:#fff;
+
+    font-weight:800;
+}
+
+.check-button:hover{
+    background:var(--purple-dark);
+}
+
+/* CONTROLS */
+
+.controls{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:9px;
+    margin-top:12px;
+}
+
+.control-button{
+    border:1px solid var(--border);
+    background:#fff;
+    color:var(--text);
+
+    border-radius:10px;
+
+    padding:11px;
+
+    font-weight:700;
+}
+
+.control-button:hover{
+    background:#f6f6f6;
+}
+
+.control-button.hint{
+    color:var(--orange);
+}
+
+.control-button.skip{
+    color:var(--blue);
+}
+
+/* MESSAGE */
+
+.message{
+    min-height:20px;
+    margin-top:10px;
+
+    font-size:13px;
+    font-weight:700;
+}
+
+.message.success{
+    color:#13805c;
+}
+
+.message.error{
+    color:#c0392b;
+}
+
+.message.info{
+    color:var(--blue);
+}
+
+/* PROGRESS */
+
+.progress-section{
+    margin-top:14px;
+}
+
+.progress-top{
+    display:flex;
+    justify-content:space-between;
+    font-size:12px;
+    color:var(--muted);
+    margin-bottom:7px;
+}
+
+.progress{
+    height:9px;
+    background:#eceef2;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.progress-bar{
+    width:0%;
+    height:100%;
+    background:linear-gradient(90deg,var(--purple),var(--blue));
+    transition:width .3s ease;
+}
+
+/* COMPLETION */
+
+.complete{
+    display:none;
+
+    position:fixed;
+    inset:0;
+
+    background:rgba(25,15,40,.58);
+
+    z-index:100;
+
+    align-items:center;
+    justify-content:center;
+
+    padding:20px;
+}
+
+.complete.show{
+    display:flex;
+}
+
+.complete-card{
+    width:min(440px,100%);
+
+    background:#fff;
+
+    border-radius:24px;
+
+    padding:30px;
+
+    text-align:center;
+
+    box-shadow:0 20px 70px rgba(0,0,0,.25);
+}
+
+.complete-card h2{
+    color:var(--purple-dark);
+    font-size:28px;
+}
+
+.final-score{
+    font-size:48px;
+    font-weight:900;
+    color:var(--purple);
+    margin:13px 0;
+}
+
+.final-detail{
+    color:var(--muted);
+    line-height:1.5;
+}
+
+.restart{
+    width:100%;
+    margin-top:20px;
+
+    border:0;
+    border-radius:12px;
+
+    padding:14px;
+
+    background:var(--purple);
+    color:white;
+
+    font-weight:800;
+}
+
+/* ANIMATIONS */
+
+@keyframes correctFlash{
+    0%{transform:scale(1)}
+    45%{transform:scale(1.07)}
+    100%{transform:scale(1)}
+}
+
+@keyframes wrongShake{
+    0%,100%{transform:translateX(0)}
+    25%{transform:translateX(-5px)}
+    75%{transform:translateX(5px)}
+}
+
+.flash-correct{
+    animation:correctFlash .35s ease;
+}
+
+.flash-wrong{
+    animation:wrongShake .3s ease;
+}
+
+/* MOBILE */
+
+@media(max-width:850px){
+
+    .game{
+        grid-template-columns:1fr;
     }
 
-    100% {
-        background-position: 250% center;
-    }
-}
-
-.header-center p {
-
-    color:
-        rgba(255,255,255,.65);
-
-    font-size: 12px;
-
-    margin-top: 3px;
-}
-
-
-/* =========================================================
-   PROGRESSION
-========================================================= */
-
-.progress-container {
-
-    background:
-        rgba(255,255,255,.09);
-
-    border:
-        1px solid rgba(255,255,255,.15);
-
-    backdrop-filter: blur(15px);
-
-    border-radius: 18px;
-
-    padding: 12px 15px;
-
-    margin-bottom: 15px;
-}
-
-.progress-info {
-
-    display: flex;
-
-    justify-content: space-between;
-
-    gap: 10px;
-
-    font-size: 12px;
-
-    margin-bottom: 8px;
-
-    color:
-        rgba(255,255,255,.7);
-}
-
-.progress-bar {
-
-    width: 100%;
-
-    height: 10px;
-
-    background:
-        rgba(255,255,255,.1);
-
-    border-radius: 999px;
-
-    overflow: hidden;
-}
-
-.progress-fill {
-
-    height: 100%;
-
-    width: 0%;
-
-    border-radius: 999px;
-
-    background:
-        linear-gradient(
-            90deg,
-            #ff2f92,
-            #8b5cff,
-            #00d9ff
-        );
-
-    box-shadow:
-        0 0 18px rgba(0,210,255,.7);
-
-    transition:
-        width .35s ease;
-}
-
-
-/* =========================================================
-   QUESTION
-========================================================= */
-
-.question-card {
-
-    position: relative;
-
-    overflow: hidden;
-
-    background:
-        rgba(255,255,255,.12);
-
-    border:
-        1px solid rgba(255,255,255,.2);
-
-    backdrop-filter: blur(18px);
-
-    border-radius: 26px;
-
-    padding:
-        clamp(22px, 5vw, 42px);
-
-    text-align: center;
-
-    margin-bottom: 10px;
-
-    box-shadow:
-        0 20px 60px rgba(0,0,0,.2);
-}
-
-.question-card::before {
-
-    content: "";
-
-    position: absolute;
-
-    width: 150px;
-    height: 150px;
-
-    border-radius: 50%;
-
-    background:
-        rgba(0,217,255,.15);
-
-    filter: blur(25px);
-
-    top: -80px;
-    right: -60px;
-}
-
-.question-card::after {
-
-    content: "";
-
-    position: absolute;
-
-    width: 130px;
-    height: 130px;
-
-    border-radius: 50%;
-
-    background:
-        rgba(255,40,150,.13);
-
-    filter: blur(25px);
-
-    bottom: -70px;
-    left: -60px;
-}
-
-.question-number {
-
-    position: relative;
-
-    z-index: 1;
-
-    color:
-        #7de7ff;
-
-    font-weight: 900;
-
-    font-size: 12px;
-
-    letter-spacing: 2px;
-
-    margin-bottom: 13px;
-}
-
-.question {
-
-    position: relative;
-
-    z-index: 1;
-
-    font-size:
-        clamp(21px, 4.5vw, 32px);
-
-    line-height: 1.3;
-
-    font-weight: 900;
-
-    color: white;
-
-    text-shadow:
-        0 3px 15px rgba(0,0,0,.25);
-}
-
-
-/* =========================================================
-   ARROWS AREA
-========================================================= */
-
-.arrows-area {
-
-    position: relative;
-
-    width:
-        min(100%, 600px);
-
-    height: 400px;
-
-    margin: 0 auto 10px;
-
-    display: grid;
-
-    grid-template-columns:
-        1fr 1fr 1fr;
-
-    grid-template-rows:
-        1fr 1fr 1fr;
-
-    gap: 12px;
-
-    align-items: center;
-
-    justify-items: center;
-}
-
-
-/* =========================================================
-   ARROW BUTTON
-========================================================= */
-
-.arrow-button {
-
-    position: relative;
-
-    width:
-        clamp(94px, 22vw, 145px);
-
-    height:
-        clamp(94px, 22vw, 145px);
-
-    border: none;
-
-    border-radius: 30px;
-
-    cursor: pointer;
-
-    color: white;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 7px;
-
-    overflow: hidden;
-
-    touch-action: manipulation;
-
-    transition:
-        transform .14s ease,
-        filter .14s ease;
-
-    box-shadow:
-        0 10px 0 rgba(0,0,0,.22),
-        0 18px 35px rgba(0,0,0,.25);
-}
-
-
-/* lumière interne */
-
-.arrow-button::before {
-
-    content: "";
-
-    position: absolute;
-
-    width: 90px;
-    height: 90px;
-
-    border-radius: 50%;
-
-    background:
-        rgba(255,255,255,.22);
-
-    filter: blur(18px);
-
-    top: -35px;
-    left: -25px;
-}
-
-.arrow-button::after {
-
-    content: "";
-
-    position: absolute;
-
-    inset: 0;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(255,255,255,.24),
-            transparent 45%
-        );
-
-    pointer-events: none;
-}
-
-.arrow-button:hover:not(:disabled) {
-
-    transform:
-        translateY(-7px)
-        scale(1.04);
-
-    filter:
-        brightness(1.12);
-}
-
-.arrow-button:active:not(:disabled) {
-
-    transform:
-        translateY(5px)
-        scale(.96);
-
-    box-shadow:
-        0 4px 0 rgba(0,0,0,.22),
-        0 8px 18px rgba(0,0,0,.2);
-}
-
-
-/* =========================================================
-   COULEURS DES FLÈCHES
-========================================================= */
-
-/* HAUT — ROSE */
-
-.arrow-up {
-
-    grid-column: 2;
-    grid-row: 1;
-
-    background:
-        linear-gradient(
-            145deg,
-            #ff3d9a,
-            #c90070
-        );
-
-    box-shadow:
-        0 10px 0 #8d0050,
-        0 18px 35px rgba(255,0,130,.35);
-}
-
-
-/* GAUCHE — BLEU */
-
-.arrow-left {
-
-    grid-column: 1;
-    grid-row: 2;
-
-    background:
-        linear-gradient(
-            145deg,
-            #29d9ff,
-            #0874df
-        );
-
-    box-shadow:
-        0 10px 0 #0552a3,
-        0 18px 35px rgba(0,170,255,.35);
-}
-
-
-/* DROITE — VERT */
-
-.arrow-right {
-
-    grid-column: 3;
-    grid-row: 2;
-
-    background:
-        linear-gradient(
-            145deg,
-            #55ef91,
-            #0aa957
-        );
-
-    box-shadow:
-        0 10px 0 #08783e,
-        0 18px 35px rgba(0,220,100,.35);
-}
-
-
-/* BAS — ORANGE */
-
-.arrow-down {
-
-    grid-column: 2;
-    grid-row: 3;
-
-    background:
-        linear-gradient(
-            145deg,
-            #ffc94d,
-            #f07819
-        );
-
-    box-shadow:
-        0 10px 0 #ad4e0c,
-        0 18px 35px rgba(255,150,0,.35);
-}
-
-
-/* =========================================================
-   ARROW TEXT
-========================================================= */
-
-.arrow-symbol {
-
-    position: relative;
-
-    z-index: 2;
-
-    font-size:
-        clamp(44px, 10vw, 70px);
-
-    line-height: .8;
-
-    font-weight: 1000;
-
-    text-shadow:
-        0 4px 8px rgba(0,0,0,.2);
-}
-
-.arrow-answer {
-
-    position: relative;
-
-    z-index: 2;
-
-    font-size:
-        clamp(11px, 2.7vw, 15px);
-
-    font-weight: 900;
-
-    max-width: 88%;
-
-    line-height: 1.15;
-
-    text-align: center;
-
-    word-break: break-word;
-
-    text-shadow:
-        0 2px 5px rgba(0,0,0,.18);
-}
-
-
-/* =========================================================
-   CENTRE
-========================================================= */
-
-.arrow-center {
-
-    grid-column: 2;
-    grid-row: 2;
-
-    width: 112px;
-    height: 112px;
-
-    border-radius: 50%;
-
-    background:
-        linear-gradient(
-            145deg,
-            #6c3cff,
-            #32128e
-        );
-
-    border:
-        4px solid
-        rgba(255,255,255,.25);
-
-    color: white;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 4px;
-
-    box-shadow:
-        0 0 0 8px
-        rgba(125,70,255,.12),
-
-        0 0 35px
-        rgba(130,70,255,.55),
-
-        inset 0 0 25px
-        rgba(255,255,255,.12);
-
-    animation:
-        centerPulse 2.2s ease-in-out infinite;
-}
-
-@keyframes centerPulse {
-
-    0%,
-    100% {
-        transform: scale(1);
+    .clues-panel{
+        order:2;
     }
 
-    50% {
-        transform: scale(1.06);
+    .grid-panel{
+        order:1;
     }
 }
 
-.center-icon {
+@media(max-width:600px){
 
-    font-size: 32px;
-
-    font-weight: 1000;
-}
-
-.center-text {
-
-    font-size: 9px;
-
-    color:
-        rgba(255,255,255,.7);
-
-    text-transform: uppercase;
-
-    letter-spacing: 1.5px;
-
-    font-weight: 800;
-}
-
-
-/* =========================================================
-   FEEDBACK
-========================================================= */
-
-.feedback {
-
-    min-height: 52px;
-
-    background:
-        rgba(255,255,255,.1);
-
-    border:
-        1px solid rgba(255,255,255,.16);
-
-    backdrop-filter: blur(14px);
-
-    border-radius: 16px;
-
-    padding: 13px 18px;
-
-    text-align: center;
-
-    font-weight: 800;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    margin-bottom: 10px;
-
-    color:
-        rgba(255,255,255,.8);
-}
-
-.feedback.correct {
-
-    background:
-        rgba(20,220,100,.17);
-
-    border-color:
-        rgba(70,255,140,.5);
-
-    color:
-        #6dffa1;
-
-    box-shadow:
-        0 0 25px
-        rgba(30,255,120,.15);
-}
-
-.feedback.wrong {
-
-    background:
-        rgba(255,40,70,.17);
-
-    border-color:
-        rgba(255,80,90,.5);
-
-    color:
-        #ff8c98;
-
-    box-shadow:
-        0 0 25px
-        rgba(255,40,70,.15);
-}
-
-
-/* =========================================================
-   BONNE / MAUVAISE REPONSE
-========================================================= */
-
-.arrow-button.correct {
-
-    animation:
-        correctPop .45s ease;
-
-    filter:
-        brightness(1.25);
-
-    outline:
-        4px solid
-        rgba(90,255,150,.75);
-}
-
-.arrow-button.wrong {
-
-    animation:
-        wrongShake .4s ease;
-
-    filter:
-        brightness(.8);
-
-    outline:
-        4px solid
-        rgba(255,80,90,.75);
-}
-
-.arrow-button.reveal {
-
-    animation:
-        revealPulse 1s ease infinite;
-
-    outline:
-        4px solid
-        rgba(255,255,255,.8);
-}
-
-@keyframes correctPop {
-
-    0% {
-        transform: scale(1);
+    :root{
+        --cell-size:35px;
     }
 
-    45% {
-        transform: scale(1.16);
+    .header{
+        margin-top:10px;
+        width:calc(100% - 18px);
     }
 
-    100% {
-        transform: scale(1);
+    .back-button{
+        padding:9px 10px;
+        font-size:12px;
+    }
+
+    .logo small{
+        font-size:8px;
+    }
+
+    .logo strong{
+        font-size:17px;
+    }
+
+    .hud{
+        width:calc(100% - 18px);
+        margin-top:10px;
+        gap:7px;
+    }
+
+    .hud-card{
+        padding:10px;
+        border-radius:11px;
+    }
+
+    .hud-label{
+        font-size:9px;
+    }
+
+    .hud-value{
+        font-size:17px;
+    }
+
+    .game{
+        width:calc(100% - 18px);
+        margin-top:10px;
+        gap:10px;
+    }
+
+    .grid-panel,
+    .clues-card{
+        border-radius:15px;
+        padding:12px;
+    }
+
+    .panel-title h1{
+        font-size:19px;
+    }
+
+    .panel-title span{
+        font-size:11px;
+    }
+
+    .cell{
+        font-size:16px;
+    }
+
+    .cell-number{
+        font-size:7px;
+    }
+
+    .cell-letter{
+        margin-top:4px;
+    }
+
+    .active-clue{
+        border-radius:13px;
+        padding:13px;
+    }
+
+    .active-clue-text{
+        font-size:14px;
+    }
+
+    .answer-box{
+        flex-direction:column;
+    }
+
+    .check-button{
+        padding:12px;
+    }
+
+    .controls{
+        grid-template-columns:1fr 1fr;
     }
 }
 
-@keyframes wrongShake {
+@media(max-width:360px){
 
-    0%,
-    100% {
-        transform: translateX(0);
+    :root{
+        --cell-size:31px;
     }
 
-    25% {
-        transform: translateX(-9px);
-    }
-
-    75% {
-        transform: translateX(9px);
+    .cell{
+        font-size:14px;
     }
 }
-
-@keyframes revealPulse {
-
-    0%,
-    100% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.08);
-    }
-}
-
-.arrow-button:disabled {
-
-    cursor: default;
-}
-
-
-/* =========================================================
-   OVERLAY
-========================================================= */
-
-.overlay {
-
-    position: fixed;
-
-    inset: 0;
-
-    background:
-        rgba(5,2,20,.76);
-
-    backdrop-filter:
-        blur(10px);
-
-    display: none;
-
-    align-items: center;
-
-    justify-content: center;
-
-    padding: 20px;
-
-    z-index: 100;
-}
-
-.overlay.active {
-
-    display: flex;
-}
-
-
-/* =========================================================
-   RESULT CARD
-========================================================= */
-
-.result-card {
-
-    position: relative;
-
-    overflow: hidden;
-
-    width:
-        min(100%, 500px);
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(58,30,110,.97),
-            rgba(22,9,55,.97)
-        );
-
-    border:
-        1px solid
-        rgba(255,255,255,.2);
-
-    border-radius: 28px;
-
-    padding: 34px 24px;
-
-    text-align: center;
-
-    box-shadow:
-        0 30px 90px
-        rgba(0,0,0,.45);
-}
-
-.result-card::before {
-
-    content: "";
-
-    position: absolute;
-
-    width: 170px;
-    height: 170px;
-
-    border-radius: 50%;
-
-    background:
-        #ff168c;
-
-    filter: blur(65px);
-
-    opacity: .22;
-
-    top: -80px;
-    left: -70px;
-}
-
-.result-card::after {
-
-    content: "";
-
-    position: absolute;
-
-    width: 150px;
-    height: 150px;
-
-    border-radius: 50%;
-
-    background:
-        #00cfff;
-
-    filter: blur(65px);
-
-    opacity: .22;
-
-    bottom: -70px;
-    right: -60px;
-}
-
-.result-card > * {
-
-    position: relative;
-
-    z-index: 2;
-}
-
-.result-card h2 {
-
-    font-size: 29px;
-
-    font-weight: 1000;
-
-    margin-bottom: 8px;
-}
-
-.result-score {
-
-    font-size: 54px;
-
-    font-weight: 1000;
-
-    margin: 14px 0;
-
-    background:
-        linear-gradient(
-            90deg,
-            #ff61b4,
-            #72e9ff,
-            #9d7aff
-        );
-
-    -webkit-background-clip: text;
-    background-clip: text;
-
-    color: transparent;
-}
-
-.result-details {
-
-    color:
-        rgba(255,255,255,.72);
-
-    line-height: 1.7;
-
-    margin-bottom: 20px;
-}
-
-.result-details strong {
-
-    color: white;
-}
-
-.result-button {
-
-    width: 100%;
-
-    border: none;
-
-    border-radius: 15px;
-
-    padding: 15px;
-
-    font-size: 16px;
-
-    font-weight: 900;
-
-    cursor: pointer;
-
-    color: white;
-
-    background:
-        linear-gradient(
-            135deg,
-            #7b45ff,
-            #c523ff
-        );
-
-    box-shadow:
-        0 7px 0 #4b1a96,
-        0 12px 25px
-        rgba(110,50,255,.25);
-
-    transition:
-        transform .15s ease;
-}
-
-.result-button:active {
-
-    transform:
-        translateY(5px);
-
-    box-shadow:
-        0 2px 0 #4b1a96;
-}
-
-.result-button.secondary {
-
-    margin-top: 11px;
-
-    background:
-        rgba(255,255,255,.1);
-
-    box-shadow:
-        none;
-
-    border:
-        1px solid
-        rgba(255,255,255,.15);
-}
-
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media (max-width: 600px) {
-
-    body {
-        padding: 9px;
-    }
-
-    .header {
-
-        grid-template-columns:
-            1fr 1fr;
-
-        gap: 8px;
-    }
-
-    .header-center {
-
-        grid-column: 1 / -1;
-
-        grid-row: 1;
-
-        margin-bottom: 3px;
-    }
-
-    .stat {
-
-        padding: 10px 12px;
-
-        border-radius: 15px;
-    }
-
-    .stat-value {
-
-        font-size: 18px;
-    }
-
-    .arrows-area {
-
-        height: 330px;
-
-        gap: 8px;
-    }
-
-    .arrow-button {
-
-        border-radius: 23px;
-
-        box-shadow:
-            0 7px 0 rgba(0,0,0,.22),
-            0 12px 25px rgba(0,0,0,.22);
-    }
-
-    .arrow-center {
-
-        width: 88px;
-        height: 88px;
-    }
-
-    .arrow-center .center-icon {
-
-        font-size: 25px;
-    }
-
-    .question-card {
-
-        border-radius: 22px;
-
-        padding: 22px 15px;
-    }
-}
-
-
-/* =========================================================
-   PETITS TELEPHONES
-========================================================= */
-
-@media (max-width: 380px) {
-
-    .arrows-area {
-
-        height: 290px;
-
-        gap: 5px;
-    }
-
-    .arrow-button {
-
-        width: 82px;
-        height: 82px;
-
-        border-radius: 19px;
-    }
-
-    .arrow-center {
-
-        width: 73px;
-        height: 73px;
-    }
-
-    .arrow-symbol {
-
-        font-size: 40px;
-    }
-
-    .arrow-answer {
-
-        font-size: 9px;
-    }
-
-    .center-icon {
-
-        font-size: 22px;
-    }
-
-    .center-text {
-
-        font-size: 7px;
-    }
-}
-
-
-/* =========================================================
-   REDUCTION DES ANIMATIONS
-========================================================= */
-
-@media (prefers-reduced-motion: reduce) {
-
-    *,
-    *::before,
-    *::after {
-
-        animation-duration: .01ms !important;
-
-        animation-iteration-count: 1 !important;
-
-        scroll-behavior: auto !important;
-
-        transition-duration: .01ms !important;
-    }
-}
-
 </style>
 </head>
 
-
 <body>
 
-<div class="game">
+<header class="header">
 
-    <a
-        href="baccalaureat.html"
-        class="back-button"
-    >
-        ← Retour aux jeux
+    <a href="baccalaureat.html" class="back-button">
+        ← Jeux
     </a>
 
-
-    <!-- HEADER -->
-
-    <div class="header">
-
-        <div class="stat">
-
-            <span class="stat-label">
-                Score
-            </span>
-
-            <span
-                class="stat-value"
-                id="score"
-            >
-                0
-            </span>
-
-        </div>
-
-
-        <div class="header-center">
-
-            <h1>
-                Flèches à réponses
-            </h1>
-
-            <p>
-                Choisis la bonne direction
-            </p>
-
-        </div>
-
-
-        <div class="stat">
-
-            <span class="stat-label">
-                Manche
-            </span>
-
-            <span
-                class="stat-value"
-                id="round"
-            >
-                1 / 20
-            </span>
-
-        </div>
-
+    <div class="logo">
+        <small>ExamQuiz</small>
+        <strong>Mots Croisés</strong>
     </div>
 
+    <div style="width:70px"></div>
 
-    <!-- PROGRESSION -->
+</header>
 
-    <div class="progress-container">
 
-        <div class="progress-info">
+<section class="hud">
 
-            <span id="questionProgress">
-                Question 1 / 10
-            </span>
+    <div class="hud-card">
+        <div class="hud-label">Score</div>
+        <div class="hud-value" id="score">0</div>
+    </div>
 
-            <span id="correctCount">
-                0 correct
-            </span>
+    <div class="hud-card">
+        <div class="hud-label">Mots</div>
+        <div class="hud-value">
+            <span id="solved">0</span>/<span id="totalWords">0</span>
+        </div>
+    </div>
+
+    <div class="hud-card">
+        <div class="hud-label">Indices</div>
+        <div class="hud-value" id="hints">3</div>
+    </div>
+
+</section>
+
+
+<main class="game">
+
+    <section class="grid-panel">
+
+        <div class="panel-title">
+            <h1>La grille</h1>
+            <span id="categoryLabel">Révision</span>
+        </div>
+
+        <div class="crossword-wrapper">
+            <div id="crossword" class="crossword"></div>
+        </div>
+
+        <div class="progress-section">
+
+            <div class="progress-top">
+                <span>Progression</span>
+                <span id="progressText">0%</span>
+            </div>
+
+            <div class="progress">
+                <div id="progressBar" class="progress-bar"></div>
+            </div>
 
         </div>
 
+    </section>
 
-        <div class="progress-bar">
+
+    <section class="clues-panel">
+
+        <div class="clues-card">
+
+            <div class="active-clue">
+
+                <div class="active-clue-label">
+                    Indice actuel
+                </div>
+
+                <div
+                    id="activeClue"
+                    class="active-clue-text">
+                    Sélectionne une case de la grille.
+                </div>
+
+                <div
+                    id="answerInfo"
+                    class="answer-info">
+                    —
+                </div>
+
+            </div>
+
+            <div class="answer-box">
+
+                <input
+                    id="answerInput"
+                    class="answer-input"
+                    type="text"
+                    autocomplete="off"
+                    autocapitalize="characters"
+                    placeholder="Écris le mot">
+
+                <button
+                    id="checkButton"
+                    class="check-button">
+                    Vérifier
+                </button>
+
+            </div>
 
             <div
-                class="progress-fill"
-                id="progressFill"
-            ></div>
+                id="message"
+                class="message">
+            </div>
 
-        </div>
+            <div class="controls">
 
-    </div>
+                <button
+                    id="hintButton"
+                    class="control-button hint">
+                    Révéler une lettre
+                </button>
 
+                <button
+                    id="skipButton"
+                    class="control-button skip">
+                    Voir l'indice
+                </button>
 
-    <!-- QUESTION -->
-
-    <div class="question-card">
-
-        <div
-            class="question-number"
-            id="questionNumber"
-        >
-            QUESTION 1
-        </div>
-
-
-        <div
-            class="question"
-            id="question"
-        >
-            Chargement de la question...
-        </div>
-
-    </div>
-
-
-    <!-- FLECHES -->
-
-    <div class="arrows-area">
-
-
-        <!-- HAUT -->
-
-        <button
-            class="arrow-button arrow-up"
-            data-direction="up"
-        >
-
-            <span class="arrow-symbol">
-                ↑
-            </span>
-
-            <span class="arrow-answer"></span>
-
-        </button>
-
-
-        <!-- GAUCHE -->
-
-        <button
-            class="arrow-button arrow-left"
-            data-direction="left"
-        >
-
-            <span class="arrow-symbol">
-                ←
-            </span>
-
-            <span class="arrow-answer"></span>
-
-        </button>
-
-
-        <!-- CENTRE -->
-
-        <div class="arrow-center">
-
-            <span class="center-icon">
-                ?
-            </span>
-
-            <span class="center-text">
-                Réponse
-            </span>
+            </div>
 
         </div>
 
 
-        <!-- DROITE -->
+        <div class="clues-card">
 
-        <button
-            class="arrow-button arrow-right"
-            data-direction="right"
-        >
+            <h2>Horizontal</h2>
 
-            <span class="arrow-symbol">
-                →
-            </span>
+            <div
+                id="acrossClues"
+                class="clue-list">
+            </div>
 
-            <span class="arrow-answer"></span>
-
-        </button>
+        </div>
 
 
-        <!-- BAS -->
+        <div class="clues-card">
 
-        <button
-            class="arrow-button arrow-down"
-            data-direction="down"
-        >
+            <h2>Vertical</h2>
 
-            <span class="arrow-symbol">
-                ↓
-            </span>
+            <div
+                id="downClues"
+                class="clue-list">
+            </div>
 
-            <span class="arrow-answer"></span>
+        </div>
 
-        </button>
+    </section>
 
-    </div>
+</main>
 
-
-    <!-- FEEDBACK -->
-
-    <div
-        class="feedback"
-        id="feedback"
-    >
-        Choisis une flèche.
-    </div>
-
-</div>
-
-
-<!-- =====================================================
-     RESULTAT
-===================================================== -->
 
 <div
-    class="overlay"
-    id="resultOverlay"
->
+    id="complete"
+    class="complete">
 
-    <div class="result-card">
+    <div class="complete-card">
 
-        <h2 id="resultTitle">
-            Manche terminée
-        </h2>
-
+        <h2>Grille terminée</h2>
 
         <div
-            class="result-score"
-            id="resultScore"
-        >
+            id="finalScore"
+            class="final-score">
             0
         </div>
 
-
         <div
-            class="result-details"
-            id="resultDetails"
-        >
-            Résultats de la manche
+            id="finalDetail"
+            class="final-detail">
         </div>
 
-
         <button
-            class="result-button"
-            id="nextRoundButton"
-        >
-            Manche suivante
-        </button>
-
-
-        <button
-            class="result-button secondary"
             id="restartButton"
-        >
-            Recommencer
+            class="restart">
+            Nouvelle grille
         </button>
 
     </div>
@@ -1639,612 +901,1395 @@ body::after {
 
 <script type="module">
 
-import {
-    jeuxQuestions
-} from "./src/jeuxQuestions.js";
+import { jeuxQuestions } from "./src/jeuxQuestions.js";
 
 
-/* =========================================================
+/* ==============================
    CONFIGURATION
-========================================================= */
+============================== */
 
-const QUESTIONS_PER_ROUND = 10;
+const WORDS_PER_GAME = 10;
+const GRID_SIZE = 21;
+const MAX_ATTEMPTS = 2;
 
-const MAX_ROUNDS = 20;
 
-
-/* =========================================================
+/* ==============================
    ELEMENTS
-========================================================= */
+============================== */
 
-const scoreElement =
-    document.getElementById("score");
+const crosswordEl = document.getElementById("crossword");
 
-const roundElement =
-    document.getElementById("round");
+const scoreEl = document.getElementById("score");
+const solvedEl = document.getElementById("solved");
+const totalWordsEl = document.getElementById("totalWords");
+const hintsEl = document.getElementById("hints");
 
-const questionProgress =
-    document.getElementById("questionProgress");
+const activeClueEl = document.getElementById("activeClue");
+const answerInfoEl = document.getElementById("answerInfo");
+const answerInput = document.getElementById("answerInput");
 
-const correctCountElement =
-    document.getElementById("correctCount");
+const checkButton = document.getElementById("checkButton");
+const hintButton = document.getElementById("hintButton");
+const skipButton = document.getElementById("skipButton");
 
-const progressFill =
-    document.getElementById("progressFill");
+const messageEl = document.getElementById("message");
 
-const questionNumber =
-    document.getElementById("questionNumber");
+const acrossCluesEl = document.getElementById("acrossClues");
+const downCluesEl = document.getElementById("downClues");
 
-const questionElement =
-    document.getElementById("question");
+const progressBar = document.getElementById("progressBar");
+const progressText = document.getElementById("progressText");
 
-const feedbackElement =
-    document.getElementById("feedback");
+const categoryLabel = document.getElementById("categoryLabel");
 
-const resultOverlay =
-    document.getElementById("resultOverlay");
-
-const resultTitle =
-    document.getElementById("resultTitle");
-
-const resultScore =
-    document.getElementById("resultScore");
-
-const resultDetails =
-    document.getElementById("resultDetails");
-
-const nextRoundButton =
-    document.getElementById("nextRoundButton");
-
-const restartButton =
-    document.getElementById("restartButton");
-
-const arrowButtons =
-    [
-        ...document.querySelectorAll(
-            ".arrow-button"
-        )
-    ];
+const completeEl = document.getElementById("complete");
+const finalScoreEl = document.getElementById("finalScore");
+const finalDetailEl = document.getElementById("finalDetail");
+const restartButton = document.getElementById("restartButton");
 
 
-/* =========================================================
-   ETAT
-========================================================= */
+/* ==============================
+   ÉTAT
+============================== */
 
 let score = 0;
+let hints = 3;
 
-let round = 1;
+let words = [];
 
-let questionIndex = 0;
+let grid = [];
 
-let correctAnswers = 0;
+let placedWords = [];
 
-let roundQuestions = [];
+let selectedWord = null;
+let selectedDirection = null;
+let selectedCell = null;
 
-let currentQuestion = null;
+let solvedWords = new Set();
 
-let questionLocked = false;
+let usedQuestionIds = new Set();
 
 
-/* =========================================================
-   MELANGE
-========================================================= */
+/* ==============================
+   OUTILS
+============================== */
 
-function shuffle(array) {
+function normalizeWord(value){
 
-    return [...array].sort(
-        () => Math.random() - 0.5
-    );
+    return String(value || "")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g,"")
+        .replace(/[^A-Za-z]/g,"")
+        .toUpperCase();
 
 }
 
 
-/* =========================================================
-   QUESTIONS DISPONIBLES
-========================================================= */
+function shuffle(array){
 
-function getQuestions() {
+    return [...array].sort(() => Math.random() - .5);
 
-    if (!Array.isArray(jeuxQuestions)) {
+}
 
-        console.error(
-            "jeuxQuestions n'est pas un tableau."
-        );
 
-        return [];
+function randomItem(array){
+
+    return array[Math.floor(Math.random() * array.length)];
+
+}
+
+
+/* ==============================
+   QUESTIONS
+============================== */
+
+function getQuestions(){
+
+    let available = jeuxQuestions.filter(q => {
+
+        const answer = normalizeWord(q.answer);
+
+        return answer.length >= 3 &&
+               answer.length <= 12 &&
+               q.question &&
+               q.answer;
+
+    });
+
+
+    let unused = available.filter(q =>
+        !usedQuestionIds.has(q.id)
+    );
+
+
+    if(unused.length < WORDS_PER_GAME){
+
+        usedQuestionIds.clear();
+
+        unused = available;
+
     }
 
 
-    return jeuxQuestions.filter(
-        question => {
+    const selected = shuffle(unused)
+        .slice(0, WORDS_PER_GAME);
 
-            return (
-                question &&
-                typeof question.question ===
-                    "string" &&
-                Array.isArray(
-                    question.options
-                ) &&
-                question.options.length >= 4 &&
-                typeof question.answer ===
-                    "string"
-            );
+
+    selected.forEach(q =>
+        usedQuestionIds.add(q.id)
+    );
+
+
+    return selected;
+
+}
+
+
+/* ==============================
+   GRILLE VIDE
+============================== */
+
+function createEmptyGrid(){
+
+    grid = [];
+
+    for(let y = 0; y < GRID_SIZE; y++){
+
+        const row = [];
+
+        for(let x = 0; x < GRID_SIZE; x++){
+
+            row.push({
+                letter:"",
+                number:null,
+                wordIds:[]
+            });
 
         }
+
+        grid.push(row);
+
+    }
+
+}
+
+
+/* ==============================
+   TEST PLACEMENT
+============================== */
+
+function canPlace(word, row, col, direction){
+
+    const len = word.length;
+
+    if(direction === "across"){
+
+        if(col < 0 || col + len > GRID_SIZE)
+            return false;
+
+    }else{
+
+        if(row < 0 || row + len > GRID_SIZE)
+            return false;
+
+    }
+
+
+    let crossings = 0;
+
+
+    for(let i = 0; i < len; i++){
+
+        const r =
+            direction === "across"
+                ? row
+                : row + i;
+
+        const c =
+            direction === "across"
+                ? col + i
+                : col;
+
+
+        const current = grid[r][c];
+
+        if(current.letter &&
+           current.letter !== word[i]){
+
+            return false;
+
+        }
+
+        if(current.letter === word[i]){
+
+            crossings++;
+
+        }
+
+
+        /* Empêcher les mots de se coller
+           parallèlement sans croisement */
+
+        if(!current.letter){
+
+            if(direction === "across"){
+
+                if(r > 0 && grid[r-1][c].letter)
+                    return false;
+
+                if(r < GRID_SIZE-1 && grid[r+1][c].letter)
+                    return false;
+
+            }else{
+
+                if(c > 0 && grid[r][c-1].letter)
+                    return false;
+
+                if(c < GRID_SIZE-1 && grid[r][c+1].letter)
+                    return false;
+
+            }
+
+        }
+
+    }
+
+
+    /* Vérification avant/après du mot */
+
+    if(direction === "across"){
+
+        if(col > 0 && grid[row][col-1].letter)
+            return false;
+
+        if(col + len < GRID_SIZE &&
+           grid[row][col+len].letter)
+            return false;
+
+    }else{
+
+        if(row > 0 && grid[row-1][col].letter)
+            return false;
+
+        if(row + len < GRID_SIZE &&
+           grid[row+len][col].letter)
+            return false;
+
+    }
+
+
+    return crossings > 0;
+
+}
+
+
+/* ==============================
+   PLACEMENT
+============================== */
+
+function placeWord(wordObj, row, col, direction){
+
+    const id = placedWords.length;
+
+    const startRow = row;
+    const startCol = col;
+
+    wordObj.id = id;
+    wordObj.row = row;
+    wordObj.col = col;
+    wordObj.direction = direction;
+
+    for(let i = 0; i < wordObj.answer.length; i++){
+
+        const r =
+            direction === "across"
+                ? row
+                : row + i;
+
+        const c =
+            direction === "across"
+                ? col + i
+                : col;
+
+
+        grid[r][c].letter = wordObj.answer[i];
+
+        if(!grid[r][c].wordIds.includes(id)){
+
+            grid[r][c].wordIds.push(id);
+
+        }
+
+    }
+
+
+    placedWords.push({
+        ...wordObj,
+        startRow,
+        startCol
+    });
+
+}
+
+
+/* ==============================
+   CONSTRUIRE LA GRILLE
+============================== */
+
+function buildCrossword(){
+
+    createEmptyGrid();
+
+    placedWords = [];
+
+
+    const sorted = [...words]
+        .sort((a,b) =>
+            b.answer.length - a.answer.length
+        );
+
+
+    if(!sorted.length)
+        return;
+
+
+    /* Premier mot au centre */
+
+    const first = sorted[0];
+
+    const firstDirection =
+        Math.random() > .5
+            ? "across"
+            : "down";
+
+
+    const firstRow =
+        Math.floor(GRID_SIZE / 2);
+
+    const firstCol =
+        Math.floor(
+            GRID_SIZE / 2 -
+            first.answer.length / 2
+        );
+
+
+    placeWord(
+        first,
+        firstDirection === "across"
+            ? firstRow
+            : firstRow - Math.floor(first.answer.length / 2),
+
+        firstDirection === "across"
+            ? firstCol
+            : firstCol
     );
 
-}
+
+    /* Les autres mots */
+
+    for(let index = 1; index < sorted.length; index++){
+
+        const wordObj = sorted[index];
+
+        let placed = false;
 
 
-/* =========================================================
-   DEMARRER UNE MANCHE
-========================================================= */
+        /* Chercher des croisements */
 
-function startRound() {
+        for(let p = 0; p < 2000 && !placed; p++){
 
-    const questions =
-        getQuestions();
+            const existing =
+                randomItem(placedWords);
 
 
-    if (questions.length < 4) {
+            const direction =
+                existing.direction === "across"
+                    ? "down"
+                    : "across";
 
-        questionElement.textContent =
-            "Pas assez de questions disponibles.";
 
-        arrowButtons.forEach(
-            button => {
-                button.disabled = true;
+            for(
+                let i = 0;
+                i < wordObj.answer.length && !placed;
+                i++
+            ){
+
+                for(
+                    let j = 0;
+                    j < existing.answer.length && !placed;
+                    j++
+                ){
+
+                    if(
+                        wordObj.answer[i] !==
+                        existing.answer[j]
+                    ){
+                        continue;
+                    }
+
+
+                    let row;
+                    let col;
+
+
+                    if(direction === "across"){
+
+                        row =
+                            existing.row + j;
+
+                        col =
+                            existing.col - i;
+
+                    }else{
+
+                        row =
+                            existing.row - i;
+
+                        col =
+                            existing.col + j;
+
+                    }
+
+
+                    if(
+                        canPlace(
+                            wordObj.answer,
+                            row,
+                            col,
+                            direction
+                        )
+                    ){
+
+                        placeWord(
+                            wordObj,
+                            row,
+                            col,
+                            direction
+                        );
+
+                        placed = true;
+
+                    }
+
+                }
+
             }
-        );
 
-        return;
+        }
+
+
+        /* Si aucun croisement,
+           essayer plusieurs positions */
+
+        if(!placed){
+
+            for(
+                let row = 0;
+                row < GRID_SIZE && !placed;
+                row++
+            ){
+
+                for(
+                    let col = 0;
+                    col < GRID_SIZE && !placed;
+                    col++
+                ){
+
+                    for(
+                        const direction of
+                        ["across","down"]
+                    ){
+
+                        if(
+                            canPlace(
+                                wordObj.answer,
+                                row,
+                                col,
+                                direction
+                            )
+                        ){
+
+                            placeWord(
+                                wordObj,
+                                row,
+                                col,
+                                direction
+                            );
+
+                            placed = true;
+
+                            break;
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+
     }
 
 
-    roundQuestions =
-        shuffle(questions).slice(
-            0,
-            Math.min(
-                QUESTIONS_PER_ROUND,
-                questions.length
-            )
-        );
+    /* Numéros */
+
+    let number = 1;
+
+    for(let y = 0; y < GRID_SIZE; y++){
+
+        for(let x = 0; x < GRID_SIZE; x++){
+
+            const cell = grid[y][x];
+
+            if(!cell.letter)
+                continue;
 
 
-    questionIndex = 0;
+            const startsAcross =
+                cell.wordIds.some(id => {
 
-    correctAnswers = 0;
+                    const word = placedWords[id];
 
-    roundElement.textContent =
-        `${round} / ${MAX_ROUNDS}`;
+                    return word.direction === "across" &&
+                        word.row === y &&
+                        word.col === x;
+
+                });
 
 
-    updateScore();
+            const startsDown =
+                cell.wordIds.some(id => {
 
-    loadQuestion();
+                    const word = placedWords[id];
+
+                    return word.direction === "down" &&
+                        word.row === y &&
+                        word.col === x;
+
+                });
+
+
+            if(startsAcross || startsDown){
+
+                cell.number = number++;
+
+            }
+
+        }
+
+    }
 
 }
 
 
-/* =========================================================
-   CHARGER QUESTION
-========================================================= */
+/* ==============================
+   RENDU GRILLE
+============================== */
 
-function loadQuestion() {
+function renderGrid(){
 
-    if (
-        questionIndex >=
-        roundQuestions.length
-    ) {
+    crosswordEl.innerHTML = "";
 
-        finishRound();
-
-        return;
-    }
+    crosswordEl.style.gridTemplateColumns =
+        `repeat(${GRID_SIZE}, var(--cell-size))`;
 
 
-    currentQuestion =
-        roundQuestions[
-            questionIndex
-        ];
+    for(let y = 0; y < GRID_SIZE; y++){
+
+        for(let x = 0; x < GRID_SIZE; x++){
+
+            const cellData = grid[y][x];
+
+            const cell =
+                document.createElement("button");
+
+            cell.type = "button";
+
+            cell.className = "cell";
 
 
-    questionLocked = false;
+            if(!cellData.letter){
+
+                cell.classList.add("black");
+
+            }else{
+
+                cell.classList.add("playable");
+
+                if(cellData.number){
+
+                    const number =
+                        document.createElement("span");
+
+                    number.className =
+                        "cell-number";
+
+                    number.textContent =
+                        cellData.number;
+
+                    cell.appendChild(number);
+
+                }
 
 
-    let options =
-        shuffle(
-            currentQuestion.options
-        ).slice(0, 4);
+                const letter =
+                    document.createElement("span");
+
+                letter.className =
+                    "cell-letter";
 
 
-    /*
-       La bonne réponse doit
-       toujours être présente.
-    */
+                if(
+                    solvedWords.size &&
+                    cellData.wordIds.some(id =>
+                        solvedWords.has(id)
+                    )
+                ){
 
-    if (
-        !options.includes(
-            currentQuestion.answer
-        )
-    ) {
+                    letter.textContent =
+                        cellData.letter;
 
-        options[
-            Math.floor(
-                Math.random() *
-                options.length
-            )
-        ] =
-            currentQuestion.answer;
-    }
+                }else{
 
+                    const userLetter =
+                        cellData.userLetter || "";
 
-    arrowButtons.forEach(
-        (button, index) => {
+                    letter.textContent =
+                        userLetter;
 
-            button.dataset.answer =
-                options[index];
+                }
 
 
-            const answerElement =
-                button.querySelector(
-                    ".arrow-answer"
+                cell.appendChild(letter);
+
+
+                cell.addEventListener(
+                    "click",
+                    () => selectCell(y,x)
                 );
 
-
-            answerElement.textContent =
-                options[index];
+            }
 
 
-            button.disabled = false;
-
-
-            button.classList.remove(
-                "correct",
-                "wrong",
-                "reveal"
-            );
+            crosswordEl.appendChild(cell);
 
         }
-    );
+
+    }
 
 
-    questionElement.textContent =
-        currentQuestion.question;
-
-
-    questionNumber.textContent =
-        `QUESTION ${questionIndex + 1}`;
-
-
-    questionProgress.textContent =
-        `Question ${questionIndex + 1} / ${roundQuestions.length}`;
-
-
-    correctCountElement.textContent =
-        `${correctAnswers} correct`;
-
-
-    progressFill.style.width =
-        `${
-            (
-                questionIndex /
-                roundQuestions.length
-            ) * 100
-        }%`;
-
-
-    feedbackElement.className =
-        "feedback";
-
-
-    feedbackElement.textContent =
-        "Choisis une flèche.";
+    highlightSelection();
 
 }
 
 
-/* =========================================================
-   REPONSE
-========================================================= */
+/* ==============================
+   SÉLECTION
+============================== */
 
-function selectAnswer(button) {
+function selectCell(row,col){
 
-    if (
-        questionLocked ||
-        !currentQuestion
-    ) {
+    const cell = grid[row][col];
+
+    if(!cell.letter)
         return;
-    }
 
 
-    questionLocked = true;
+    selectedCell = {
+        row,
+        col
+    };
 
 
-    const selectedAnswer =
-        button.dataset.answer;
-
-
-    const correctAnswer =
-        currentQuestion.answer;
-
-
-    const isCorrect =
-        selectedAnswer ===
-        correctAnswer;
-
-
-    arrowButtons.forEach(
-        item => {
-            item.disabled = true;
-        }
-    );
-
-
-    if (isCorrect) {
-
-        score += 10;
-
-        correctAnswers++;
-
-
-        button.classList.add(
-            "correct"
+    let possibleWords =
+        cell.wordIds.filter(id =>
+            !solvedWords.has(id)
         );
 
 
-        feedbackElement.className =
-            "feedback correct";
+    if(!possibleWords.length){
 
-
-        feedbackElement.textContent =
-            "Bonne réponse ! +10 points";
-
-
-    } else {
-
-        button.classList.add(
-            "wrong"
-        );
-
-
-        const correctButton =
-            arrowButtons.find(
-                item =>
-                    item.dataset.answer ===
-                    correctAnswer
-            );
-
-
-        if (correctButton) {
-
-            correctButton.classList.add(
-                "reveal"
-            );
-
-        }
-
-
-        feedbackElement.className =
-            "feedback wrong";
-
-
-        feedbackElement.textContent =
-            `Mauvaise réponse. La bonne réponse est : ${correctAnswer}`;
+        possibleWords = cell.wordIds;
 
     }
 
 
-    updateScore();
+    if(
+        selectedWord === null ||
+        !possibleWords.includes(selectedWord)
+    ){
+
+        selectedWord =
+            possibleWords[0];
+
+    }
 
 
-    correctCountElement.textContent =
-        `${correctAnswers} correct`;
+    const word =
+        placedWords[selectedWord];
 
 
-    setTimeout(
-        () => {
+    if(word){
 
-            questionIndex++;
+        selectedDirection =
+            word.direction;
 
-            loadQuestion();
+        showActiveClue(word);
 
-        },
-        1100
-    );
-
-}
+    }
 
 
-/* =========================================================
-   SCORE
-========================================================= */
-
-function updateScore() {
-
-    scoreElement.textContent =
-        score;
+    highlightSelection();
 
 }
 
 
-/* =========================================================
-   FIN DE MANCHE
-========================================================= */
+/* ==============================
+   HIGHLIGHT
+============================== */
 
-function finishRound() {
+function highlightSelection(){
 
-    progressFill.style.width =
-        "100%";
-
-
-    resultOverlay.classList.add(
-        "active"
-    );
+    const cells =
+        crosswordEl.querySelectorAll(".cell");
 
 
-    resultScore.textContent =
-        `${correctAnswers * 10} pts`;
+    cells.forEach((cell,index) => {
+
+        cell.classList.remove(
+            "selected",
+            "word-selected"
+        );
 
 
-    resultTitle.textContent =
-        `Manche ${round} terminée`;
+        const row =
+            Math.floor(index / GRID_SIZE);
+
+        const col =
+            index % GRID_SIZE;
 
 
-    resultDetails.innerHTML =
-        `
-            ${correctAnswers}
-            bonne(s) réponse(s)
-            sur
-            ${roundQuestions.length}
-            <br>
-            Score total :
-            <strong>${score}</strong>
-            points
+        if(!grid[row][col].letter)
+            return;
+
+
+        const cellWordIds =
+            grid[row][col].wordIds;
+
+
+        if(
+            selectedWord !== null &&
+            cellWordIds.includes(selectedWord)
+        ){
+
+            cell.classList.add("word-selected");
+
+        }
+
+
+        if(
+            selectedCell &&
+            selectedCell.row === row &&
+            selectedCell.col === col
+        ){
+
+            cell.classList.add("selected");
+
+        }
+
+    });
+
+}
+
+
+/* ==============================
+   INDICE ACTIF
+============================== */
+
+function showActiveClue(word){
+
+    if(!word)
+        return;
+
+
+    activeClueEl.textContent =
+        word.question;
+
+
+    answerInfoEl.textContent =
+        `${word.answer.length} lettres • ${
+            word.direction === "across"
+                ? "Horizontal"
+                : "Vertical"
+        }`;
+
+
+    answerInput.value = "";
+
+    answerInput.focus();
+
+}
+
+
+/* ==============================
+   LISTE INDICES
+============================== */
+
+function renderClues(){
+
+    acrossCluesEl.innerHTML = "";
+    downCluesEl.innerHTML = "";
+
+
+    placedWords.forEach(word => {
+
+        const button =
+            document.createElement("button");
+
+        button.type = "button";
+
+        button.className = "clue";
+
+
+        if(solvedWords.has(word.id)){
+
+            button.classList.add("done");
+
+        }
+
+
+        const number =
+            grid[word.row][word.col].number;
+
+
+        button.innerHTML = `
+            <span class="clue-number">
+                ${number || "?"}
+            </span>
+            <span class="clue-text">
+                ${escapeHtml(word.question)}
+            </span>
         `;
 
-
-    if (round >= MAX_ROUNDS) {
-
-        nextRoundButton.textContent =
-            "Nouvelle partie";
-
-    } else {
-
-        nextRoundButton.textContent =
-            "Manche suivante";
-
-    }
-
-}
-
-
-/* =========================================================
-   MANCHE SUIVANTE
-========================================================= */
-
-nextRoundButton.addEventListener(
-    "click",
-    () => {
-
-        resultOverlay.classList.remove(
-            "active"
-        );
-
-
-        if (round >= MAX_ROUNDS) {
-
-            round = 1;
-
-            score = 0;
-
-        } else {
-
-            round++;
-
-        }
-
-
-        startRound();
-
-    }
-);
-
-
-/* =========================================================
-   RECOMMENCER
-========================================================= */
-
-restartButton.addEventListener(
-    "click",
-    () => {
-
-        resultOverlay.classList.remove(
-            "active"
-        );
-
-
-        score = 0;
-
-        round = 1;
-
-
-        startRound();
-
-    }
-);
-
-
-/* =========================================================
-   CLIC SUR LES FLECHES
-========================================================= */
-
-arrowButtons.forEach(
-    button => {
 
         button.addEventListener(
             "click",
             () => {
 
-                selectAnswer(button);
+                selectedWord = word.id;
+
+                selectedDirection =
+                    word.direction;
+
+                selectedCell = {
+                    row:word.row,
+                    col:word.col
+                };
+
+                showActiveClue(word);
+
+                highlightSelection();
 
             }
         );
 
+
+        if(word.direction === "across"){
+
+            acrossCluesEl.appendChild(button);
+
+        }else{
+
+            downCluesEl.appendChild(button);
+
+        }
+
+    });
+
+}
+
+
+/* ==============================
+   ÉCHAPPEMENT HTML
+============================== */
+
+function escapeHtml(text){
+
+    return String(text)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+
+}
+
+
+/* ==============================
+   VÉRIFIER MOT
+============================== */
+
+function checkAnswer(){
+
+    if(selectedWord === null){
+
+        showMessage(
+            "Sélectionne d'abord un mot.",
+            "info"
+        );
+
+        return;
+
     }
-);
 
 
-/* =========================================================
+    const word =
+        placedWords[selectedWord];
+
+
+    if(!word)
+        return;
+
+
+    const value =
+        normalizeWord(answerInput.value);
+
+
+    if(!value){
+
+        showMessage(
+            "Écris une réponse.",
+            "info"
+        );
+
+        return;
+
+    }
+
+
+    if(value === word.answer){
+
+        solveWord(word);
+
+    }else{
+
+        showMessage(
+            "Ce n'est pas le bon mot.",
+            "error"
+        );
+
+        crosswordEl.classList.remove(
+            "flash-wrong"
+        );
+
+        void crosswordEl.offsetWidth;
+
+        crosswordEl.classList.add(
+            "flash-wrong"
+        );
+
+    }
+
+}
+
+
+/* ==============================
+   RÉSOUDRE
+============================== */
+
+function solveWord(word){
+
+    if(solvedWords.has(word.id))
+        return;
+
+
+    solvedWords.add(word.id);
+
+
+    word.answer.split("").forEach(
+        (letter,index) => {
+
+            const row =
+                word.direction === "across"
+                    ? word.row
+                    : word.row + index;
+
+            const col =
+                word.direction === "across"
+                    ? word.col + index
+                    : word.col;
+
+
+            grid[row][col].userLetter =
+                letter;
+
+        }
+    );
+
+
+    score += 10;
+
+    updateHud();
+
+    renderGrid();
+
+    renderClues();
+
+
+    showMessage(
+        "+10 points — bonne réponse !",
+        "success"
+    );
+
+
+    answerInput.value = "";
+
+
+    crosswordEl.classList.remove(
+        "flash-correct"
+    );
+
+    void crosswordEl.offsetWidth;
+
+    crosswordEl.classList.add(
+        "flash-correct"
+    );
+
+
+    if(solvedWords.size === placedWords.length){
+
+        setTimeout(
+            finishGame,
+            500
+        );
+
+    }else{
+
+        selectNextWord();
+
+    }
+
+}
+
+
+/* ==============================
+   MOT SUIVANT
+============================== */
+
+function selectNextWord(){
+
+    const next =
+        placedWords.find(
+            word => !solvedWords.has(word.id)
+        );
+
+
+    if(!next)
+        return;
+
+
+    selectedWord = next.id;
+
+    selectedDirection =
+        next.direction;
+
+    selectedCell = {
+        row:next.row,
+        col:next.col
+    };
+
+
+    showActiveClue(next);
+
+    highlightSelection();
+
+}
+
+
+/* ==============================
+   INDICE LETTRE
+============================== */
+
+function revealLetter(){
+
+    if(hints <= 0){
+
+        showMessage(
+            "Tu n'as plus d'indice.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if(selectedWord === null){
+
+        showMessage(
+            "Sélectionne un mot.",
+            "info"
+        );
+
+        return;
+
+    }
+
+
+    const word =
+        placedWords[selectedWord];
+
+
+    const emptyPositions = [];
+
+
+    for(
+        let i = 0;
+        i < word.answer.length;
+        i++
+    ){
+
+        const row =
+            word.direction === "across"
+                ? word.row
+                : word.row + i;
+
+        const col =
+            word.direction === "across"
+                ? word.col + i
+                : word.col;
+
+
+        if(
+            !grid[row][col].userLetter
+        ){
+
+            emptyPositions.push({
+                row,
+                col,
+                letter:word.answer[i]
+            });
+
+        }
+
+    }
+
+
+    if(!emptyPositions.length){
+
+        showMessage(
+            "Cette lettre est déjà remplie.",
+            "info"
+        );
+
+        return;
+
+    }
+
+
+    const position =
+        randomItem(emptyPositions);
+
+
+    grid[position.row][position.col].userLetter =
+        position.letter;
+
+
+    hints--;
+
+    score = Math.max(0,score - 2);
+
+
+    updateHud();
+
+    renderGrid();
+
+
+    showMessage(
+        "Une lettre a été révélée. -2 points.",
+        "info"
+    );
+
+}
+
+
+/* ==============================
+   AFFICHER INDICE
+============================== */
+
+function showFullHint(){
+
+    if(selectedWord === null)
+        return;
+
+
+    const word =
+        placedWords[selectedWord];
+
+
+    showMessage(
+        `Le mot contient ${word.answer.length} lettres.`,
+        "info"
+    );
+
+}
+
+
+/* ==============================
+   MESSAGE
+============================== */
+
+function showMessage(text,type){
+
+    messageEl.textContent = text;
+
+    messageEl.className =
+        `message ${type}`;
+
+}
+
+
+/* ==============================
+   HUD
+============================== */
+
+function updateHud(){
+
+    scoreEl.textContent = score;
+
+    solvedEl.textContent =
+        solvedWords.size;
+
+    totalWordsEl.textContent =
+        placedWords.length;
+
+    hintsEl.textContent =
+        hints;
+
+
+    const percent =
+        placedWords.length
+            ? Math.round(
+                solvedWords.size /
+                placedWords.length *
+                100
+            )
+            : 0;
+
+
+    progressBar.style.width =
+        `${percent}%`;
+
+    progressText.textContent =
+        `${percent}%`;
+
+}
+
+
+/* ==============================
+   FIN
+============================== */
+
+function finishGame(){
+
+    finalScoreEl.textContent =
+        score;
+
+
+    finalDetailEl.innerHTML =
+        `Tu as trouvé <strong>${
+            solvedWords.size
+        }</strong> mots sur <strong>${
+            placedWords.length
+        }</strong>.<br><br>
+        Chaque bonne réponse vaut 10 points.
+        Une lettre révélée coûte 2 points.`;
+
+
+    completeEl.classList.add("show");
+
+}
+
+
+/* ==============================
+   NOUVELLE PARTIE
+============================== */
+
+function startGame(){
+
+    completeEl.classList.remove("show");
+
+    score = 0;
+
+    hints = 3;
+
+    solvedWords.clear();
+
+    selectedWord = null;
+
+    selectedDirection = null;
+
+    selectedCell = null;
+
+
+    words =
+        getQuestions().map(q => ({
+            id:q.id,
+            question:q.question,
+            answer:normalizeWord(q.answer),
+            category:q.category || "Révision"
+        }));
+
+
+    if(!words.length){
+
+        showMessage(
+            "Impossible de charger les questions.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    categoryLabel.textContent =
+        words[0].category || "Révision";
+
+
+    buildCrossword();
+
+    renderGrid();
+
+    renderClues();
+
+    updateHud();
+
+
+    if(placedWords.length){
+
+        selectNextWord();
+
+    }
+
+}
+
+
+/* ==============================
    CLAVIER
-========================================================= */
+============================== */
 
-document.addEventListener(
+answerInput.addEventListener(
     "keydown",
     event => {
 
-        if (questionLocked) {
-            return;
-        }
+        if(event.key === "Enter"){
 
+            event.preventDefault();
 
-        let direction = null;
-
-
-        switch (event.key) {
-
-            case "ArrowUp":
-                direction = "up";
-                break;
-
-            case "ArrowLeft":
-                direction = "left";
-                break;
-
-            case "ArrowRight":
-                direction = "right";
-                break;
-
-            case "ArrowDown":
-                direction = "down";
-                break;
-
-            default:
-                return;
-        }
-
-
-        const button =
-            arrowButtons.find(
-                item =>
-                    item.dataset.direction ===
-                    direction
-            );
-
-
-        if (button) {
-
-            selectAnswer(button);
+            checkAnswer();
 
         }
 
@@ -2252,11 +2297,36 @@ document.addEventListener(
 );
 
 
-/* =========================================================
-   DEMARRAGE
-========================================================= */
+/* ==============================
+   BOUTONS
+============================== */
 
-startRound();
+checkButton.addEventListener(
+    "click",
+    checkAnswer
+);
+
+hintButton.addEventListener(
+    "click",
+    revealLetter
+);
+
+skipButton.addEventListener(
+    "click",
+    showFullHint
+);
+
+restartButton.addEventListener(
+    "click",
+    startGame
+);
+
+
+/* ==============================
+   LANCEMENT
+============================== */
+
+startGame();
 
 </script>
 
