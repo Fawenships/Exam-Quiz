@@ -1,3 +1,622 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#24113f">
+<title>AgroQuiz — Biologie et agronomie — ExamQuiz Haiti</title>
+<meta name="description" content="Support de révision complémentaire en biologie générale et agronomie, avec quiz interactifs et suivi local de la progression.">
+<style>
+:root{
+  --fond:#F3F1FA; --surface:#FFFFFF; --texte:#1E1633; --texte2:#5E5877; --ligne:#DAD5EC;
+  --violet:#5B35A6; --violet-nuit:#24113F; --bleu:#1F5CC0; --bleu-clair:#A9C9FF;
+  --accent:#5B35A6; --ok:#1B8A57; --ko:#C23A4B; --ok-bg:#DDF2E6; --ko-bg:#FADFE3;
+  --degrade:linear-gradient(160deg,#5B35A6 0%,#3B4BB5 48%,#1F5CC0 100%);
+  --ombre:0 6px 22px rgba(36,17,63,.10);
+  --police:"Segoe UI",Arial,Helvetica,sans-serif;
+}
+:root[data-theme="dark"]{
+  --fond:#140A26; --surface:#1F1239; --texte:#EEEAFB; --texte2:#B1A8D1; --ligne:#35275A;
+  --accent:#A58BF0; --ok:#5CC48C; --ko:#F08A97; --ok-bg:#163523; --ko-bg:#3F1D27;
+  --ombre:0 6px 22px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--fond);color:var(--texte);font-family:var(--police);font-size:17px;line-height:1.6;overflow-x:hidden}
+h1,h2,h3,h4{font-weight:700;line-height:1.2;margin:0 0 .5em}
+h1{font-size:clamp(1.9rem,5vw,2.8rem)} h2{font-size:1.5rem} h3{font-size:1.2rem}
+p{margin:0 0 1em}
+a{color:inherit}
+button{font:inherit;cursor:pointer;color:inherit}
+:focus-visible{outline:3px solid #7FB0FF;outline-offset:3px}
+
+/* en-tête */
+.top{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:12px max(24px,calc((100% - 1180px)/2));background:var(--violet-nuit);color:#fff;position:sticky;top:0;z-index:20}
+.wordmark{display:flex;align-items:center;gap:12px;text-decoration:none;color:#fff}
+.logo{width:42px;height:42px;border-radius:11px;background:linear-gradient(135deg,#6A3FC4,#C4325A);display:grid;place-items:center;flex:0 0 42px}
+.wm-text{display:flex;flex-direction:column;line-height:1.05}
+.wm-text b{font-size:1.2rem;color:#7FB0FF;letter-spacing:.01em}
+.wm-text small{font-size:.62rem;font-weight:700;letter-spacing:.2em;color:#F2587A;margin-top:3px}
+.nav{list-style:none;margin:0;padding:0;display:flex;gap:6px}
+.nav a{display:flex;align-items:center;gap:8px;padding:8px 14px;text-decoration:none;color:#fff;border-radius:999px;font-size:1rem}
+.nav a:hover{background:rgba(255,255,255,.12)}
+.nav a[aria-current="page"]{background:rgba(255,255,255,.18);font-weight:700}
+.nav .ic{display:none}
+.main{padding:0}
+.page{max-width:900px;margin:0 auto;padding:40px 24px 96px}
+
+/* bannières */
+.hero-home,.phead,.chead{background:var(--degrade);color:#fff;position:relative;overflow:hidden}
+.hero-home::before,.phead::before,.chead::before{content:"";position:absolute;right:-90px;top:-110px;width:340px;height:340px;border-radius:50%;background:rgba(255,255,255,.07)}
+.hero-home::after{content:"";position:absolute;left:-120px;bottom:-150px;width:360px;height:360px;border-radius:50%;background:rgba(255,255,255,.06)}
+.hero-home .in,.phead .in,.chead .in{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:0 24px}
+.hero-home{padding:56px 0 64px;text-align:center}
+.brand-title{display:inline-block;border-left:3px solid #fff;padding:2px 0 2px 14px;margin:0 0 .5em;font-size:clamp(2.8rem,9vw,4.6rem);font-weight:400;line-height:1.1;letter-spacing:-.01em}
+.tagline{color:var(--bleu-clair);font-weight:700;text-transform:uppercase;letter-spacing:.24em;font-size:clamp(1rem,2.6vw,1.45rem);line-height:1.9;max-width:40rem;margin:0 auto .9em}
+.sub-home{margin:0 0 1em;font-size:1.05rem;opacity:.9}
+.intro-home{max-width:37rem;margin:0 auto 1.8em;font-size:1.1rem}
+.verre{max-width:460px;margin:0 auto;padding:22px 24px 24px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.4);border-radius:20px;box-shadow:0 10px 30px rgba(10,5,40,.25);backdrop-filter:blur(4px)}
+.verre .lbl{display:block;font-size:.72rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;margin-bottom:12px}
+.mini{display:flex;justify-content:space-between;gap:10px;margin-bottom:18px;text-align:center}
+.mini div{flex:1}
+.mini b{display:block;font-size:2rem;line-height:1.1}
+.mini span{font-size:.82rem;opacity:.9}
+.verre .btns{display:flex;flex-direction:column;gap:10px}
+.phead{padding:38px 0 34px}
+.phead h1{margin:0 0 .25em}
+.phead p{margin:0;max-width:36rem;opacity:.92}
+.chead{padding:30px 0 34px}
+.chead .retour{display:inline-block;margin-bottom:16px;color:var(--bleu-clair);font-weight:600}
+.chead .badge{display:inline-flex;align-items:center;gap:10px;font-weight:700;margin-bottom:10px}
+.chead .badge i{width:34px;height:34px;border-radius:9px;background:var(--c);color:var(--on);display:grid;place-items:center;font-style:normal;font-size:1.1rem}
+.chead h1{font-size:clamp(2rem,6vw,3.4rem);line-height:1.08;max-width:14em;margin-bottom:.4em}
+.chead .res{max-width:38rem;font-size:1.1rem;margin:0}
+
+/* boutons : pilules */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1.5px solid var(--violet);background:var(--violet);color:#fff;padding:11px 24px;border-radius:999px;font-weight:600;text-decoration:none;min-height:46px;text-transform:uppercase;letter-spacing:.08em;font-size:.88rem;font-family:var(--police)}
+.btn:hover{background:var(--bleu);border-color:var(--bleu)}
+.btn.sec{background:transparent;color:var(--violet)}
+.btn.sec:hover{background:var(--violet);color:#fff}
+:root[data-theme="dark"] .btn.sec{color:var(--accent);border-color:var(--accent)}
+:root[data-theme="dark"] .btn.sec:hover{background:var(--accent);color:#140A26}
+:root[data-theme="dark"] .btn{background:var(--accent);border-color:var(--accent);color:#140A26}
+.btn.danger{background:transparent;color:var(--ko);border-color:var(--ko)}
+.btn.danger:hover{background:var(--ko);color:#fff;border-color:var(--ko)}
+.btn[disabled]{opacity:.4;cursor:not-allowed;pointer-events:none}
+.btn-row{display:flex;flex-wrap:wrap;gap:12px;margin:22px 0}
+.verre .btn{background:#fff;color:var(--violet-nuit);border-color:#fff}
+.verre .btn:hover{background:var(--bleu-clair);border-color:var(--bleu-clair)}
+.verre .btn.sec{background:transparent;color:#fff;border-color:rgba(255,255,255,.7)}
+.verre .btn.sec:hover{background:rgba(255,255,255,.18);color:#fff}
+
+/* listes de chapitres */
+.titre-liste{margin:40px 0 14px}
+.liste{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+.ch{display:flex;align-items:center;gap:16px;text-decoration:none;color:inherit;background:var(--surface);border:1px solid var(--ligne);border-radius:16px;padding:14px 18px;box-shadow:var(--ombre)}
+.ch:hover{border-color:var(--violet)}
+.ch .n{flex:0 0 46px;height:46px;border-radius:12px;background:var(--c);color:var(--on);display:grid;place-items:center;font-weight:700;font-size:1.3rem}
+.ch .b{flex:1;min-width:0;display:flex;flex-direction:column}
+.ch .t{font-weight:700;font-size:1.1rem;line-height:1.25}
+.ch .d{color:var(--texte2);font-size:.9rem}
+.ch .s{display:flex;align-items:center;gap:6px;font-size:.85rem;font-weight:600;color:var(--texte2);white-space:nowrap}
+.s.fait{color:var(--ok)}
+.vide{border:2px dashed var(--ligne);border-radius:16px;padding:26px;color:var(--texte2)}
+.vide p{margin:0 0 6px}
+.vide a{color:var(--accent)}
+.citation{margin:48px 0 0;font-style:italic;font-size:1.2rem;max-width:30rem;padding-left:18px;border-left:4px solid var(--violet);color:var(--texte2)}
+
+/* page chapitre */
+.prose{max-width:40rem;font-size:1.08rem;line-height:1.75}
+.prose h2{font-size:1.45rem;margin:1.9em 0 .6em;color:var(--accent)}
+.defs{margin:0;max-width:40rem;background:var(--surface);border:1px solid var(--ligne);border-radius:16px;padding:6px 20px;box-shadow:var(--ombre)}
+.defs div{display:grid;grid-template-columns:10rem 1fr;gap:4px 20px;padding:13px 0;border-bottom:1px solid var(--ligne)}
+.defs div:last-child{border-bottom:0}
+.defs dt{font-weight:700;color:var(--accent)}
+.defs dd{margin:0}
+.champs{max-width:40rem;margin:2em 0;padding:18px 22px;background:var(--surface);border-radius:16px;border:1px solid var(--ligne);border-left:8px solid var(--c);box-shadow:var(--ombre)}
+.champs h3{margin-bottom:.4em}
+.champs p{margin:0}
+.fin-chap{max-width:40rem;margin-top:40px;padding:22px;background:var(--surface);border:1px solid var(--ligne);border-radius:16px;box-shadow:var(--ombre)}
+.fin-chap .btn-row{margin-bottom:0}
+.etat{display:inline-flex;align-items:center;gap:6px;font-weight:700;margin-bottom:6px}
+
+/* formulaires */
+.field{margin:0 0 26px;border:0;padding:0}
+.field legend{font-weight:700;font-size:1.1rem;margin-bottom:10px;padding:0}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips input{position:absolute;opacity:0;pointer-events:none}
+.chips label{display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--ligne);border-radius:999px;padding:9px 16px;cursor:pointer;background:var(--surface);min-height:44px;font-weight:500}
+.chips label i{width:12px;height:12px;border-radius:50%;background:var(--c);flex:0 0 12px}
+.chips input:checked+label{background:var(--violet);border-color:var(--violet);color:#fff;font-weight:700}
+:root[data-theme="dark"] .chips input:checked+label{background:var(--accent);border-color:var(--accent);color:#140A26}
+.chips input:focus-visible+label{outline:3px solid #7FB0FF;outline-offset:2px}
+.info-pool{font-size:1.05rem;min-height:2em}
+.note{display:flex;gap:10px;align-items:flex-start;color:var(--texte2);font-size:.95rem;max-width:36rem}
+.note svg{flex:0 0 18px;margin-top:3px}
+.note a{color:var(--accent)}
+
+/* question */
+.qwrap{background:var(--surface);border:1px solid var(--ligne);border-radius:20px;padding:26px;box-shadow:var(--ombre)}
+.qhead{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px 18px;font-size:.95rem;color:var(--texte2);margin-bottom:12px}
+.qhead b{color:var(--texte)}
+.segs{display:flex;gap:4px;margin:0 0 22px;padding:0;list-style:none}
+.segs li{flex:1;height:8px;border-radius:99px;background:var(--ligne)}
+.segs .ok{background:var(--ok)} .segs .ko{background:var(--ko)} .segs .cur{background:var(--violet)}
+:root[data-theme="dark"] .segs .cur{background:var(--accent)}
+.qchap{display:flex;align-items:center;gap:8px;font-weight:600;font-size:.92rem;color:var(--texte2);margin-bottom:8px}
+.qchap i{width:12px;height:12px;border-radius:50%;background:var(--c)}
+.qtext{font-size:clamp(1.3rem,3.4vw,1.75rem);line-height:1.3;margin-bottom:22px}
+.opts{display:flex;flex-direction:column;gap:10px;margin:0 0 20px}
+.opt{display:flex;gap:14px;align-items:center;text-align:left;width:100%;padding:12px 16px;border:1.5px solid var(--ligne);border-radius:14px;background:var(--fond);color:var(--texte);min-height:56px;font-size:1.03rem}
+.opt .k{flex:0 0 32px;height:32px;border:1.5px solid var(--ligne);border-radius:50%;display:grid;place-items:center;font-weight:700;background:var(--surface)}
+.opt:hover:not([disabled]){border-color:var(--violet)}
+.opt.sel{border-color:var(--violet);background:rgba(91,53,166,.1)}
+.opt.sel .k{background:var(--violet);border-color:var(--violet);color:#fff}
+:root[data-theme="dark"] .opt.sel .k{background:var(--accent);border-color:var(--accent);color:#140A26}
+.opt.good{border-color:var(--ok);background:var(--ok-bg)}
+.opt.good .k{background:var(--ok);border-color:var(--ok);color:#fff}
+.opt.bad{border-color:var(--ko);background:var(--ko-bg)}
+.opt.bad .k{background:var(--ko);border-color:var(--ko);color:#fff}
+.opt[disabled]{cursor:default}
+.explain{border-radius:14px;border:1.5px solid var(--ok);background:var(--ok-bg);padding:14px 18px;margin:0 0 20px}
+.explain.bad{border-color:var(--ko);background:var(--ko-bg)}
+.explain .v{display:block;font-size:1.1rem;margin-bottom:2px}
+
+/* fin de quiz */
+.score{display:flex;flex-wrap:wrap;align-items:center;gap:8px 28px;background:var(--surface);border:1px solid var(--ligne);border-radius:20px;padding:22px 26px;box-shadow:var(--ombre)}
+.score .gros{font-size:clamp(3.2rem,12vw,5.5rem);font-weight:700;line-height:1;color:var(--accent)}
+.score p{margin:0}
+.rev{background:var(--surface);border:1px solid var(--ligne);border-radius:16px;padding:16px 20px;margin-bottom:12px}
+.rev h4{font-size:1.05rem;margin-bottom:8px}
+.rev p{margin:2px 0;font-size:.97rem}
+.rev .sttt{display:inline-flex;align-items:center;gap:6px;font-weight:700}
+.rev .sttt.ok{color:var(--ok)} .rev .sttt.ko{color:var(--ko)}
+.rev .why{color:var(--texte2);margin-top:6px}
+
+/* résultats */
+.chiffres{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0 0 30px}
+.chiffres div{background:var(--surface);border:1px solid var(--ligne);border-radius:16px;padding:16px 18px;box-shadow:var(--ombre)}
+.chiffres b{display:block;font-size:2rem;line-height:1.1;color:var(--accent)}
+.chiffres span{font-size:.9rem;color:var(--texte2)}
+.pbar{display:grid;grid-template-columns:minmax(0,15rem) 1fr 8.5rem;gap:6px 16px;align-items:center;padding:10px 0;border-bottom:1px solid var(--ligne)}
+.pbar .t{font-weight:600;line-height:1.3}
+.pbar .b{height:14px;background:var(--ligne);border-radius:99px;position:relative;overflow:hidden}
+.pbar .b i{position:absolute;inset:0 auto 0 0;background:var(--c);border-radius:99px}
+.pbar .p{text-align:right;font-size:.92rem;font-variant-numeric:tabular-nums}
+.pbar .l{grid-column:1/-1;font-size:.82rem;color:var(--texte2);margin-top:-2px}
+.tablewrap{overflow-x:auto;background:var(--surface);border:1px solid var(--ligne);border-radius:16px;padding:6px 16px}
+table.hist{width:100%;border-collapse:collapse;font-size:.95rem}
+table.hist th,table.hist td{text-align:left;padding:10px 12px 10px 0;border-bottom:1px solid var(--ligne);white-space:nowrap}
+table.hist tr:last-child td{border-bottom:0}
+table.hist th{color:var(--accent)}
+
+/* réglages */
+.setrow{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:18px 20px;margin-bottom:12px;max-width:44rem;background:var(--surface);border:1px solid var(--ligne);border-radius:16px;box-shadow:var(--ombre)}
+.setrow strong{font-size:1.08rem}
+.setrow p{margin:2px 0 0;color:var(--texte2);font-size:.93rem}
+.seg{display:inline-flex;border:1.5px solid var(--violet);border-radius:999px;overflow:hidden;flex:0 0 auto}
+.seg button{border:0;background:transparent;padding:9px 18px;font-weight:600;min-height:42px;color:var(--violet)}
+.seg button[aria-pressed="true"]{background:var(--violet);color:#fff}
+:root[data-theme="dark"] .seg{border-color:var(--accent)}
+:root[data-theme="dark"] .seg button{color:var(--accent)}
+:root[data-theme="dark"] .seg button[aria-pressed="true"]{background:var(--accent);color:#140A26}
+
+/* confirmation */
+.modal-bg{position:fixed;inset:0;background:rgba(14,6,34,.65);display:flex;align-items:center;justify-content:center;padding:20px;z-index:50}
+.modal{background:var(--surface);color:var(--texte);max-width:440px;width:100%;padding:26px;border-radius:20px;border:1px solid var(--ligne)}
+.modal .btn-row{margin-bottom:0;justify-content:flex-end}
+
+/* mobile */
+@media (max-width:760px){
+  body{font-size:16.5px}
+  .top{padding:10px 16px}
+  .nav{position:fixed;left:0;right:0;bottom:0;background:var(--violet-nuit);gap:0;z-index:30;padding:0}
+  .nav li{flex:1}
+  .nav a{flex-direction:column;gap:2px;justify-content:center;padding:8px 2px 7px;font-size:.68rem;text-align:center;border-radius:0;min-height:58px}
+  .nav a[aria-current="page"]{background:rgba(255,255,255,.14);box-shadow:inset 0 3px 0 #7FB0FF}
+  .nav .ic{display:block}
+  .page{padding:28px 16px 110px}
+  .hero-home{padding:40px 0 48px}
+  .hero-home .in,.phead .in,.chead .in{padding:0 16px}
+  .tagline{letter-spacing:.14em}
+  .chiffres{grid-template-columns:1fr}
+  .defs div{grid-template-columns:1fr}
+  .pbar{grid-template-columns:1fr auto}
+  .pbar .t{grid-column:1/-1}
+  .btn-row .btn{flex:1 1 100%}
+  .setrow{flex-direction:column;align-items:flex-start}
+  .ch .s{display:none}
+  .qwrap{padding:18px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+.logo-link{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff;font-weight:700;font-size:20px}
+.logo-link img{width:42px;height:42px;object-fit:contain;border-radius:10px}
+.pied{text-align:center;padding:25px 15px 30px;color:var(--texte2);font-size:14px;line-height:1.8}
+.pied a{color:var(--accent)}
+@media (max-width:760px){.pied{padding-bottom:84px}.page{padding-bottom:40px}}
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="logo-link" href="index.html" aria-label="ExamQuiz Haiti, accueil du site">
+    <img src="logo.png" alt="" width="42" height="42">
+    <span>ExamQuiz Haiti</span>
+  </a>
+  <nav aria-label="Navigation AgroQuiz"><ul class="nav" id="nav"></ul></nav>
+</header>
+<main class="main" id="main" tabindex="-1"></main>
+<footer class="pied">© 2026 ExamQuiz • Développé par Ing. Fawenbert Régis<br><a href="index.html">Retour à l'accueil d'ExamQuiz Haiti</a></footer>
+
+<script>
+"use strict";
+/* =====================================================================
+   1. DONNÉES — chapitres et questions
+   ===================================================================== */
+var CHAPITRES = [
+{ id:1, titre:"Introduction à la biologie",
+  resume:"La biologie est la science du vivant. Elle fournit à l'agronome le vocabulaire et les principes pour comprendre comment les plantes, les animaux et les microorganismes vivent, se nourrissent et se reproduisent.",
+  defs:[
+    ["Biologie","Science qui étudie les êtres vivants : leur structure, leur fonctionnement, leur reproduction, leur évolution et leurs relations avec le milieu."],
+    ["Être vivant","Organisme formé d'une ou plusieurs cellules, capable de métabolisme, de croissance, de reproduction et de réaction à son environnement."],
+    ["Métabolisme","Ensemble des réactions chimiques qui se déroulent dans un organisme pour produire de l'énergie et fabriquer ses propres constituants."],
+    ["Écosystème","Ensemble formé par une communauté d'êtres vivants et le milieu physique dans lequel ils vivent."]
+  ],
+  sections:[
+    {t:"Les branches de la biologie", p:[
+      "La biologie est vaste ; on la divise en branches selon l'objet étudié. La <strong>botanique</strong> étudie les plantes, la <strong>zoologie</strong> les animaux et la <strong>microbiologie</strong> les êtres microscopiques (bactéries, champignons microscopiques, virus). La <strong>cytologie</strong> s'intéresse à la cellule, la <strong>génétique</strong> à l'hérédité, la <strong>physiologie</strong> au fonctionnement des organes et l'<strong>écologie</strong> aux relations entre les êtres vivants et leur milieu.",
+      "Ces branches ne sont pas séparées : pour comprendre une maladie du maïs, par exemple, il faut à la fois de la botanique, de la microbiologie et de l'écologie."]},
+    {t:"Caractéristiques du vivant", p:[
+      "Un être vivant est organisé en cellules, échange de la matière et de l'énergie avec son milieu (métabolisme), grandit, se reproduit, réagit aux stimulations (lumière, chaleur, contact) et transmet ses caractères à ses descendants. Il maintient aussi son équilibre interne, ce qu'on appelle l'<strong>homéostasie</strong>.",
+      "Remarque : un être vivant n'a pas besoin de se déplacer. Les plantes sont vivantes, même si elles restent fixées au sol."]},
+    {t:"Les niveaux d'organisation du vivant", p:[
+      "Le vivant s'organise du plus simple au plus complexe : <strong>molécule → organite → cellule → tissu → organe → système d'organes → organisme → population → communauté → écosystème → biosphère</strong>.",
+      "Une <strong>population</strong> est l'ensemble des individus d'une même espèce vivant dans un même lieu. Une <strong>communauté</strong> regroupe les populations de différentes espèces qui vivent ensemble. La <strong>biosphère</strong> est l'ensemble de la Terre habitée par le vivant."]},
+    {t:"Pourquoi la biologie est essentielle en agronomie", p:[
+      "L'agronomie cherche à produire des aliments et des matières premières de façon efficace et durable. Pour cela, il faut savoir comment une plante absorbe l'eau, comment elle fabrique sa matière, comment un insecte ravageur se développe ou comment les microorganismes du sol libèrent les nutriments. Chaque décision au champ (semer, fertiliser, irriguer, traiter, associer des cultures) repose sur des connaissances biologiques."]}
+  ],
+  agri:"Un agriculteur qui observe que ses plants de haricot jaunissent peut se demander : manque-t-il de l'azote dans le sol, y a-t-il un parasite sur les racines, ou le plant manque-t-il d'eau ? Raisonner ainsi, c'est déjà faire de la biologie appliquée à la production." },
+
+{ id:2, titre:"La cellule",
+  resume:"La cellule est l'unité de base de la structure et du fonctionnement des êtres vivants. Chaque organite y joue un rôle précis, comparable à un atelier dans une petite usine.",
+  defs:[
+    ["Cellule","Plus petite unité structurale et fonctionnelle du vivant, délimitée par une membrane."],
+    ["Théorie cellulaire","Tous les êtres vivants sont formés d'une ou plusieurs cellules ; la cellule est l'unité de base du vivant ; toute cellule provient d'une autre cellule."],
+    ["Organite","Structure spécialisée à l'intérieur d'une cellule (noyau, mitochondrie, chloroplaste, vacuole…)."],
+    ["Cellule eucaryote","Cellule possédant un vrai noyau entouré d'une enveloppe. Les cellules animales et végétales sont eucaryotes."],
+    ["Cellule procaryote","Cellule sans vrai noyau ; son ADN est libre dans le cytoplasme. C'est le cas des bactéries."]
+  ],
+  sections:[
+    {t:"La théorie cellulaire", p:[
+      "Elle s'est construite au XIXᵉ siècle grâce au microscope. Elle repose sur trois idées : tout être vivant est fait de cellules ; la cellule est l'unité de base de la structure et de la fonction ; toute cellule naît de la division d'une cellule préexistante."]},
+    {t:"Les structures de la cellule", p:[
+      "<strong>La membrane plasmique</strong> entoure la cellule. Elle est formée d'une double couche de phospholipides contenant des protéines. Elle est à <em>perméabilité sélective</em> : elle laisse passer certaines substances et en bloque d'autres.",
+      "<strong>Le cytoplasme</strong> comprend le cytosol (liquide dans lequel baignent les organites) et les organites. C'est le lieu de nombreuses réactions chimiques.",
+      "<strong>Le noyau</strong> renferme l'ADN, qui contient l'information héréditaire. Il contrôle les activités de la cellule.",
+      "<strong>Les mitochondries</strong> réalisent la respiration cellulaire : elles libèrent l'énergie des nutriments sous forme d'ATP, utilisable par la cellule. Elles existent chez les animaux comme chez les plantes.",
+      "<strong>Les chloroplastes</strong> sont présents dans les cellules végétales vertes (et chez les algues). Ils contiennent de la chlorophylle et réalisent la photosynthèse.",
+      "<strong>La vacuole</strong> des cellules végétales adultes est souvent grande et centrale. Elle stocke de l'eau et des substances dissoutes et maintient la <em>turgescence</em> : la pression de l'eau qui rend les tissus fermes. <strong>La paroi cellulaire</strong>, riche en cellulose, entoure la membrane des cellules végétales : elle protège la cellule et lui donne sa forme. Il ne faut pas la confondre avec la membrane plasmique, qui est beaucoup plus fine et présente dans toutes les cellules."]},
+    {t:"Cellule animale et cellule végétale", p:[
+      "Les deux possèdent une membrane, un cytoplasme, un noyau et des mitochondries. La cellule végétale possède en plus une paroi cellulosique, des chloroplastes (dans les parties vertes) et une grande vacuole. La cellule animale n'a ni paroi, ni chloroplaste ; ses vacuoles, quand elles existent, sont petites."]}
+  ],
+  agri:"Quand une plante manque d'eau, ses vacuoles perdent de l'eau, la pression diminue et les feuilles flétrissent. Après un arrosage ou une pluie, les cellules se remplissent à nouveau et la plante retrouve sa fermeté si les dégâts ne sont pas trop avancés." },
+
+{ id:3, titre:"Les molécules du vivant",
+  resume:"Les êtres vivants sont construits à partir de quelques grandes familles de molécules : l'eau, les glucides, les lipides, les protéines et les acides nucléiques, auxquelles s'ajoutent des éléments minéraux indispensables.",
+  defs:[
+    ["Glucide","Molécule riche en énergie formée de carbone, d'hydrogène et d'oxygène (glucose, amidon, cellulose)."],
+    ["Lipide","Molécule peu soluble dans l'eau (huiles, graisses, phospholipides), utilisée comme réserve d'énergie et comme constituant des membranes."],
+    ["Protéine","Longue chaîne d'acides aminés. Elle peut être structurale, de transport, ou enzymatique."],
+    ["Enzyme","Protéine qui accélère une réaction chimique sans être consommée."],
+    ["Acide nucléique","Molécule formée de nucléotides et porteuse de l'information génétique (ADN, ARN)."],
+    ["Élément minéral","Élément chimique absorbé sous forme d'ions dissous (azote, phosphore, potassium, etc.)."]
+  ],
+  sections:[
+    {t:"L'eau", p:[
+      "L'eau est la molécule la plus abondante dans les cellules. C'est un excellent solvant : la plupart des réactions du vivant se déroulent en solution. Elle transporte les nutriments, participe à des réactions (comme la photosynthèse) et aide à réguler la température. Chez les plantes, elle assure aussi la turgescence."]},
+    {t:"Les glucides", p:[
+      "Le <strong>glucose</strong> est le sucre qui alimente la respiration cellulaire. Les plantes le stockent sous forme d'<strong>amidon</strong> (dans les racines, tubercules et graines) et construisent leurs parois avec de la <strong>cellulose</strong>. Les animaux stockent leur réserve sous forme de glycogène."]},
+    {t:"Les lipides", p:[
+      "Ils fournissent une réserve d'énergie concentrée (huiles des graines d'arachide ou de tournesol), isolent et protègent, et les phospholipides forment la structure des membranes."]},
+    {t:"Les protéines", p:[
+      "Formées par l'assemblage de 20 acides aminés différents, elles remplissent des rôles très variés : enzymes, transport, structure, défense. Leur fonction dépend de leur forme, qui peut être modifiée par la chaleur ou un pH extrême."]},
+    {t:"Les acides nucléiques : ADN et ARN", p:[
+      "L'<strong>ADN</strong> (acide désoxyribonucléique) a deux brins en double hélice, contient le sucre désoxyribose et quatre bases : adénine, thymine, guanine, cytosine. Il conserve l'information génétique.",
+      "L'<strong>ARN</strong> (acide ribonucléique) est en général formé d'un seul brin, contient le sucre ribose et remplace la thymine par l'<strong>uracile</strong>. Il intervient dans la fabrication des protéines à partir de l'information portée par l'ADN."]},
+    {t:"Les éléments minéraux", p:[
+      "Les plantes ont besoin de grandes quantités d'azote (N), de phosphore (P) et de potassium (K), ainsi que de calcium, de magnésium et de soufre. Elles ont aussi besoin, en très petites quantités, de fer, de zinc, de manganèse, de bore et d'autres oligo-éléments.",
+      "<strong>L'azote</strong> entre dans la composition des protéines, des acides nucléiques et de la chlorophylle : il favorise la croissance des feuilles et des tiges. <strong>Le phosphore</strong> entre dans l'ATP et l'ADN et favorise l'enracinement. <strong>Le potassium</strong> intervient dans la régulation de l'eau et l'ouverture des stomates. <strong>Le magnésium</strong> est au centre de la molécule de chlorophylle."]}
+  ],
+  agri:"Un maïs carencé en azote montre en général un jaunissement qui commence par les feuilles les plus âgées, car la plante déplace l'azote vers les jeunes feuilles. Un apport de fumier, de compost ou d'engrais, ou une association avec des légumineuses, peut aider à corriger ce problème." },
+
+{ id:4, titre:"Biologie végétale",
+  resume:"Une plante à fleurs est formée de racines, d'une tige, de feuilles, de fleurs, puis de fruits et de graines. Chaque organe a une fonction précise, et tous sont reliés par des tissus conducteurs.",
+  defs:[
+    ["Xylème","Tissu conducteur qui transporte la sève brute (eau et sels minéraux) des racines vers les feuilles."],
+    ["Phloème","Tissu conducteur qui transporte la sève élaborée (riche en sucres) des feuilles vers les autres organes."],
+    ["Stomate","Petit orifice de l'épiderme des feuilles qui permet les échanges de gaz et la transpiration."],
+    ["Méristème","Tissu formé de cellules qui se divisent activement et assurent la croissance."],
+    ["Pollinisation","Transport du pollen des étamines vers le stigmate du pistil."],
+    ["Germination","Début du développement d'une graine qui donne une jeune plante."]
+  ],
+  sections:[
+    {t:"Les racines", p:[
+      "Elles ancrent la plante, absorbent l'eau et les sels minéraux grâce aux <strong>poils absorbants</strong> de la zone proche de l'extrémité, et peuvent stocker des réserves (manioc, patate douce, carotte)."]},
+    {t:"Les tiges", p:[
+      "Elles soutiennent les feuilles et les fleurs, et contiennent les vaisseaux conducteurs. Le xylème monte l'eau et les sels minéraux ; le phloème distribue les sucres produits par les feuilles. Certaines tiges stockent des réserves (canne à sucre) ou sont souterraines (igname, tubercule de tige)."]},
+    {t:"Les feuilles", p:[
+      "Ce sont les principaux organes de la photosynthèse. Leur surface plate capte la lumière ; les <strong>stomates</strong> laissent entrer le dioxyde de carbone et sortir la vapeur d'eau (transpiration) et l'oxygène."]},
+    {t:"Les fleurs, les fruits et les graines", p:[
+      "La fleur est l'organe reproducteur. Les <strong>étamines</strong> (organes mâles) produisent le pollen ; le <strong>pistil</strong> (organe femelle) contient l'ovaire, qui renferme les ovules. Après pollinisation et fécondation, l'ovule devient une <strong>graine</strong> et l'ovaire se transforme en <strong>fruit</strong>. Le fruit protège les graines et souvent aide à leur dispersion."]},
+    {t:"Les tissus végétaux", p:[
+      "On distingue les tissus de protection (épiderme), les tissus de réserve et d'assimilation (parenchymes), les tissus de soutien, les tissus conducteurs (xylème, phloème) et les tissus de croissance (méristèmes)."]},
+    {t:"Absorption de l'eau et des sels minéraux", p:[
+      "L'eau pénètre dans les poils absorbants par osmose, car leur contenu est plus concentré que la solution du sol. Les sels minéraux entrent souvent par transport actif, ce qui demande de l'énergie. La transpiration des feuilles crée une aspiration qui fait monter la sève brute dans le xylème."]},
+    {t:"Croissance et reproduction", p:[
+      "La croissance en longueur dépend des méristèmes situés aux extrémités des tiges et des racines ; la croissance en épaisseur dépend du cambium chez les arbres. La reproduction peut être <strong>sexuée</strong> (fleur, graine) ou <strong>asexuée</strong> (bouturage, rejets), qui produit des plantes génétiquement identiques à la plante mère."]}
+  ],
+  agri:"Le manioc se multiplie le plus souvent par boutures de tiges, la banane plantain par rejets, la patate douce par boutures de tiges feuillées : ce sont des reproductions asexuées. À l'inverse, le maïs, le haricot et le sorgho se multiplient par graines." },
+
+{ id:5, titre:"Photosynthèse et respiration",
+  resume:"La photosynthèse transforme l'énergie lumineuse en énergie chimique sous forme de sucres ; la respiration cellulaire libère cette énergie pour faire fonctionner la cellule. Les deux processus sont complémentaires.",
+  defs:[
+    ["Photosynthèse","Processus par lequel les organismes chlorophylliens utilisent la lumière, l'eau et le dioxyde de carbone pour fabriquer des glucides et libérer de l'oxygène."],
+    ["Chlorophylle","Pigment vert qui capte l'énergie lumineuse, situé dans les chloroplastes."],
+    ["Respiration cellulaire","Ensemble des réactions qui dégradent le glucose en présence d'oxygène pour produire de l'ATP, du dioxyde de carbone et de l'eau."],
+    ["ATP","Molécule qui fournit l'énergie immédiatement utilisable par la cellule."],
+    ["Autotrophe","Organisme capable de fabriquer sa propre matière organique à partir de matière minérale (plantes vertes, algues)."]
+  ],
+  sections:[
+    {t:"La photosynthèse", p:[
+      "Elle a lieu dans les chloroplastes des cellules vertes. Il lui faut de la <strong>lumière</strong>, de l'<strong>eau</strong> absorbée par les racines et du <strong>dioxyde de carbone</strong> pris dans l'air par les stomates. La chlorophylle capte la lumière.",
+      "Équation simplifiée : <strong>6 CO₂ + 6 H₂O + lumière → C₆H₁₂O₆ (glucose) + 6 O₂</strong>.",
+      "L'oxygène libéré provient de la décomposition de l'<strong>eau</strong>, non du dioxyde de carbone. Dans la première phase, située dans les thylakoïdes, l'énergie lumineuse est convertie en énergie chimique ; dans la seconde (cycle de Calvin, dans le stroma), le CO₂ est transformé en sucres. Le glucose sert à la croissance, est converti en amidon de réserve ou est utilisé pour la respiration."]},
+    {t:"La respiration cellulaire", p:[
+      "Elle a lieu dans toutes les cellules vivantes, <strong>de jour comme de nuit</strong>, en grande partie dans les mitochondries. Équation simplifiée : <strong>C₆H₁₂O₆ + 6 O₂ → 6 CO₂ + 6 H₂O + énergie (ATP)</strong>.",
+      "Les plantes respirent comme les animaux. Pendant le jour, la photosynthèse d'une feuille éclairée produit généralement plus d'oxygène que sa respiration n'en consomme."]},
+    {t:"Comparaison", p:[
+      "La photosynthèse consomme du CO₂ et de l'eau, produit du glucose et de l'O₂, stocke de l'énergie, se déroule seulement en présence de lumière et dans les cellules chlorophylliennes. La respiration consomme du glucose et de l'O₂, produit du CO₂ et de l'eau, libère de l'énergie, se déroule en continu dans toutes les cellules vivantes."]}
+  ],
+  agri:"Le rendement d'une culture dépend en partie de la quantité de lumière interceptée par ses feuilles. C'est pourquoi la densité de semis, l'élagage, la gestion de l'ombrage (par exemple sous les arbres associés au café) et la santé du feuillage ont une influence directe sur la production." },
+
+{ id:6, titre:"Écologie agricole",
+  resume:"Un champ est un écosystème : des plantes, des animaux, des microorganismes et un sol en interaction. Comprendre ces relations permet de produire sans épuiser les ressources.",
+  defs:[
+    ["Écosystème","Biocénose (êtres vivants) + biotope (milieu physique) en interaction."],
+    ["Chaîne alimentaire","Suite d'organismes où chacun se nourrit du précédent : producteur, consommateur, décomposeur."],
+    ["Symbiose","Association durable entre deux espèces qui en tirent toutes deux un bénéfice."],
+    ["Biodiversité","Variété des espèces, des gènes et des écosystèmes."],
+    ["Matière organique du sol","Débris végétaux et animaux en cours de décomposition et humus."],
+    ["Érosion","Entraînement des particules du sol par l'eau ou le vent."]
+  ],
+  sections:[
+    {t:"Sol et eau", p:[
+      "Un sol est formé de particules minérales (sable, limon, argile), de matière organique, d'eau, d'air et d'organismes vivants. La <strong>texture</strong> dépend des proportions de sable, de limon et d'argile ; elle influence l'infiltration et la rétention de l'eau. La matière organique améliore la structure, retient l'eau et les éléments nutritifs, et nourrit les organismes du sol."]},
+    {t:"Chaînes alimentaires et relations entre organismes", p:[
+      "Les <strong>producteurs</strong> (plantes) fabriquent la matière organique par photosynthèse. Les <strong>consommateurs</strong> s'en nourrissent : herbivores (primaires), puis carnivores (secondaires). Les <strong>décomposeurs</strong> (bactéries, champignons, vers de terre, insectes du sol) transforment la matière morte en éléments minéraux réutilisables.",
+      "Les organismes interagissent : <strong>compétition</strong> (pour la lumière, l'eau), <strong>prédation</strong> (une coccinelle mange des pucerons), <strong>parasitisme</strong> (un parasite vit aux dépens de son hôte), <strong>mutualisme</strong> (pollinisation par les abeilles) et <strong>symbiose</strong> (les bactéries Rhizobium dans les nodosités des racines des légumineuses fixent l'azote de l'air et reçoivent des sucres de la plante)."]},
+    {t:"Biodiversité, décomposition et cycle des nutriments", p:[
+      "Une biodiversité élevée rend un système plus stable : elle aide à contrôler les ravageurs, à polliniser les cultures et à entretenir le sol. En se décomposant, les résidus végétaux libèrent azote, phosphore et autres éléments qui seront de nouveau absorbés par les plantes : c'est le <strong>cycle des nutriments</strong>. Brûler systématiquement les résidus ou laisser le sol nu rompt ce cycle."]},
+    {t:"Agriculture durable et conservation des sols", p:[
+      "Une agriculture durable répond aux besoins actuels sans compromettre les ressources futures. Elle s'appuie sur la <strong>rotation des cultures</strong>, l'<strong>association</strong> de plantes (céréales et légumineuses), l'apport de <strong>compost</strong> ou de fumier, la <strong>couverture du sol</strong> (paillage, plantes de couverture) et l'<strong>agroforesterie</strong>.",
+      "Sur les terrains en pente, la conservation des sols repose sur des cultures en <strong>courbes de niveau</strong>, des <strong>haies vives</strong> (par exemple avec du vétiver), des <strong>terrasses</strong> et le reboisement. Ces aménagements ralentissent l'eau de ruissellement, favorisent son infiltration et limitent l'érosion."]}
+  ],
+  agri:"En Haïti, les cultures sur les mornes sont particulièrement exposées à l'érosion lors des fortes pluies. Planter des haies de vétiver en courbes de niveau, associer des arbres fruitiers ou fertilisants et couvrir le sol aide à garder la terre fertile sur place et à protéger les rivières en aval." }
+];
+
+/* Questions : ch = chapitre, lvl = 1 débutant · 2 intermédiaire · 3 révision universitaire,
+   a = index de la bonne réponse dans opts */
+var QUESTIONS = [
+{id:"q01",ch:1,lvl:1,q:"La biologie est la science qui étudie :",opts:["Les roches et les minéraux","Les êtres vivants","Les astres et les planètes","Les climats de la Terre"],a:1,exp:"La biologie (du grec bios, « vie ») étudie les êtres vivants, leur structure, leur fonctionnement et leurs relations avec le milieu."},
+{id:"q02",ch:1,lvl:1,q:"Quelle branche de la biologie étudie spécifiquement les plantes ?",opts:["La zoologie","La botanique","La microbiologie","La génétique"],a:1,exp:"La botanique est la branche consacrée aux plantes. La zoologie étudie les animaux et la microbiologie les microorganismes."},
+{id:"q03",ch:1,lvl:2,q:"Quel est l'ordre correct, du plus simple au plus complexe ?",opts:["Organe → cellule → tissu → organisme","Cellule → tissu → organe → organisme","Tissu → organisme → cellule → organe","Organisme → organe → tissu → cellule"],a:1,exp:"Des cellules semblables forment un tissu ; plusieurs tissus forment un organe ; plusieurs organes forment un organisme."},
+{id:"q04",ch:1,lvl:2,q:"Pourquoi la biologie est-elle indispensable en agronomie ?",opts:["Elle permet de fabriquer des machines agricoles","Elle permet de comprendre le fonctionnement des plantes, du sol et des ravageurs pour améliorer la production","Elle sert uniquement à classer les espèces","Elle remplace le besoin d'eau des cultures"],a:1,exp:"Les décisions agricoles (semis, fertilisation, protection) reposent sur la connaissance du fonctionnement des plantes, du sol et des organismes associés."},
+{id:"q05",ch:1,lvl:3,q:"Comment appelle-t-on l'ensemble des individus d'une même espèce vivant dans un même lieu ?",opts:["Une communauté","Un écosystème","Une population","Une biosphère"],a:2,exp:"Une population regroupe les individus d'une seule espèce dans un lieu donné ; une communauté regroupe plusieurs populations d'espèces différentes."},
+{id:"q06",ch:1,lvl:3,q:"Laquelle de ces propriétés n'est PAS une caractéristique générale des êtres vivants ?",opts:["Le métabolisme","La reproduction","La réaction aux stimulations","La capacité de se déplacer sur de longues distances"],a:3,exp:"Les plantes, les champignons et de nombreux animaux fixés sont vivants sans se déplacer. Le déplacement n'est donc pas une caractéristique universelle du vivant."},
+
+{id:"q07",ch:2,lvl:1,q:"Quelle est l'unité de base de la structure et du fonctionnement des êtres vivants ?",opts:["L'atome","La cellule","L'organe","Le tissu"],a:1,exp:"C'est l'une des idées centrales de la théorie cellulaire."},
+{id:"q08",ch:2,lvl:1,q:"Quel organite réalise la photosynthèse ?",opts:["La mitochondrie","Le noyau","Le chloroplaste","La vacuole"],a:2,exp:"Les chloroplastes contiennent de la chlorophylle et sont le siège de la photosynthèse dans les cellules végétales vertes."},
+{id:"q09",ch:2,lvl:2,q:"Quel ensemble de structures distingue une cellule végétale d'une cellule animale ?",opts:["Noyau, membrane et cytoplasme","Mitochondries et noyau","Paroi cellulosique, chloroplastes et grande vacuole","ADN et ribosomes"],a:2,exp:"Les cellules animales et végétales ont toutes deux noyau, membrane, cytoplasme et mitochondries. Seule la cellule végétale a une paroi, des chloroplastes (parties vertes) et une grande vacuole."},
+{id:"q10",ch:2,lvl:2,q:"Quel est le rôle principal des mitochondries ?",opts:["Stocker l'ADN","Libérer de l'énergie sous forme d'ATP à partir des nutriments","Capter la lumière","Fabriquer la cellulose"],a:1,exp:"Les mitochondries sont le siège principal de la respiration cellulaire, qui produit l'ATP."},
+{id:"q11",ch:2,lvl:3,q:"Que signifie « perméabilité sélective » de la membrane plasmique ?",opts:["Elle laisse passer toutes les substances sans distinction","Elle ne laisse passer que l'eau","Elle laisse passer certaines substances et en limite d'autres","Elle est imperméable à toutes les molécules"],a:2,exp:"La bicouche de phospholipides et ses protéines contrôlent les échanges entre la cellule et son milieu."},
+{id:"q12",ch:2,lvl:3,q:"Un plant flétri retrouve sa fermeté après une pluie. Quel phénomène cellulaire l'explique ?",opts:["La division du noyau","Le remplissage des vacuoles en eau, qui rétablit la turgescence","La disparition de la paroi cellulaire","L'augmentation du nombre de mitochondries"],a:1,exp:"Quand les vacuoles se remplissent d'eau, la pression interne appuie sur la paroi et rend les tissus fermes (turgescence)."},
+
+{id:"q13",ch:3,lvl:1,q:"Quelle molécule est la plus abondante dans les cellules ?",opts:["Les protéines","Les lipides","L'eau","L'ADN"],a:2,exp:"L'eau constitue la plus grande partie de la masse d'une cellule et sert de solvant aux réactions chimiques."},
+{id:"q14",ch:3,lvl:1,q:"Sous quelle forme les plantes stockent-elles principalement leurs réserves de glucides ?",opts:["Glycogène","Amidon","Cholestérol","Cellulose"],a:1,exp:"Les plantes stockent l'amidon dans les racines, les tubercules et les graines. Le glycogène est la réserve des animaux. La cellulose est un constituant de la paroi."},
+{id:"q15",ch:3,lvl:2,q:"Quel est le rôle des enzymes ?",opts:["Stocker l'information génétique","Accélérer les réactions chimiques","Former la paroi cellulaire","Capter la lumière"],a:1,exp:"Les enzymes sont des protéines qui jouent le rôle de catalyseurs biologiques."},
+{id:"q16",ch:3,lvl:2,q:"Quel élément minéral entre dans la composition des protéines et de la chlorophylle (par l'azote) et favorise la croissance foliaire ?",opts:["Le calcium","Le sodium","L'azote","Le fer"],a:2,exp:"L'azote est un constituant des acides aminés, des protéines, des acides nucléiques et de la chlorophylle."},
+{id:"q17",ch:3,lvl:3,q:"Quelle est une différence correcte entre l'ADN et l'ARN ?",opts:["L'ARN contient de l'uracile à la place de la thymine","L'ADN contient du ribose et l'ARN du désoxyribose","L'ADN est toujours simple brin","L'ARN contient de la thymine"],a:0,exp:"L'ARN contient du ribose et de l'uracile ; l'ADN contient du désoxyribose et de la thymine, et se présente en double hélice."},
+{id:"q18",ch:3,lvl:3,q:"Dans une culture carencée en azote, quel symptôme apparaît généralement en premier ?",opts:["Le jaunissement des feuilles les plus âgées","Le noircissement des racines","La chute des fleurs uniquement","Le jaunissement des toutes jeunes feuilles seulement"],a:0,exp:"L'azote est mobile dans la plante : elle le déplace vers les jeunes organes, donc les feuilles âgées jaunissent d'abord."},
+
+{id:"q19",ch:4,lvl:1,q:"Quelle est la fonction principale des poils absorbants des racines ?",opts:["Capter la lumière","Absorber l'eau et les sels minéraux","Produire le pollen","Fabriquer des fruits"],a:1,exp:"Les poils absorbants augmentent fortement la surface d'échange entre la racine et le sol."},
+{id:"q20",ch:4,lvl:1,q:"Quel organe est responsable de la reproduction sexuée chez les plantes à fleurs ?",opts:["La racine","La feuille","La fleur","La tige"],a:2,exp:"La fleur contient les organes reproducteurs : étamines (mâles) et pistil (femelle)."},
+{id:"q21",ch:4,lvl:2,q:"Quel tissu transporte la sève brute des racines vers les feuilles ?",opts:["Le phloème","Le xylème","L'épiderme","Le méristème"],a:1,exp:"Le xylème conduit l'eau et les sels minéraux ; le phloème conduit la sève élaborée, riche en sucres."},
+{id:"q22",ch:4,lvl:2,q:"De quelle partie de la fleur le fruit se développe-t-il généralement ?",opts:["Du pétale","Du sépale","De l'ovaire","De l'étamine"],a:2,exp:"Après la fécondation, l'ovaire se transforme en fruit et les ovules deviennent des graines."},
+{id:"q23",ch:4,lvl:3,q:"Par où se font principalement les échanges gazeux au niveau d'une feuille ?",opts:["Par les nervures","Par les stomates","Par les poils absorbants","Par la cuticule uniquement"],a:1,exp:"Les stomates s'ouvrent et se ferment ; ils permettent l'entrée du CO₂ et la sortie de l'O₂ et de la vapeur d'eau."},
+{id:"q24",ch:4,lvl:3,q:"Le manioc est souvent multiplié à partir de boutures de tiges. De quel type de reproduction s'agit-il ?",opts:["Reproduction sexuée par graines","Reproduction asexuée (végétative)","Pollinisation croisée","Fécondation double"],a:1,exp:"Le bouturage produit des plantes génétiquement identiques à la plante mère, sans fleur ni graine."},
+
+{id:"q25",ch:5,lvl:1,q:"Quel gaz les plantes absorbent-elles pour réaliser la photosynthèse ?",opts:["L'oxygène","L'azote","Le dioxyde de carbone","L'hydrogène"],a:2,exp:"Le CO₂ pénètre dans la feuille par les stomates et sert à fabriquer le glucose."},
+{id:"q26",ch:5,lvl:1,q:"Quel pigment capte l'énergie lumineuse lors de la photosynthèse ?",opts:["La mélanine","La chlorophylle","L'hémoglobine","La cellulose"],a:1,exp:"La chlorophylle est le pigment vert situé dans les chloroplastes."},
+{id:"q27",ch:5,lvl:2,q:"Quels sont les principaux produits de la photosynthèse ?",opts:["Glucose et oxygène","Dioxyde de carbone et eau","Amidon et azote","ATP et dioxyde de carbone uniquement"],a:0,exp:"6 CO₂ + 6 H₂O + lumière → C₆H₁₂O₆ + 6 O₂."},
+{id:"q28",ch:5,lvl:2,q:"Où se déroule l'essentiel de la respiration cellulaire ?",opts:["Dans les chloroplastes","Dans les mitochondries","Dans la paroi","Dans la vacuole"],a:1,exp:"Les mitochondries dégradent le glucose en présence d'oxygène et produisent de l'ATP."},
+{id:"q29",ch:5,lvl:3,q:"D'où provient l'oxygène libéré pendant la photosynthèse ?",opts:["Du dioxyde de carbone","Du glucose","De la molécule d'eau","De la chlorophylle"],a:2,exp:"L'eau est décomposée dans la phase lumineuse ; son oxygène est libéré et ses hydrogènes servent à fabriquer le glucose."},
+{id:"q30",ch:5,lvl:3,q:"Quelle affirmation est correcte ?",opts:["Les plantes respirent seulement la nuit","La respiration a lieu de jour comme de nuit, alors que la photosynthèse nécessite de la lumière","La photosynthèse a lieu dans toutes les cellules, y compris les racines","La respiration produit du glucose"],a:1,exp:"Toutes les cellules vivantes respirent en continu ; la photosynthèse se limite aux cellules chlorophylliennes éclairées."},
+
+{id:"q31",ch:6,lvl:1,q:"Un écosystème est formé :",opts:["Uniquement des animaux d'un lieu","Des êtres vivants et du milieu physique avec lequel ils interagissent","Uniquement du sol et de l'eau","D'une seule espèce de plante"],a:1,exp:"L'écosystème associe la biocénose (êtres vivants) et le biotope (milieu physique)."},
+{id:"q32",ch:6,lvl:1,q:"Quel est le rôle des décomposeurs dans un écosystème ?",opts:["Produire de la matière organique par photosynthèse","Transformer la matière organique morte en éléments minéraux réutilisables","Chasser les herbivores","Retenir l'eau dans le sol uniquement"],a:1,exp:"Bactéries, champignons et vers de terre participent au recyclage des nutriments."},
+{id:"q33",ch:6,lvl:2,q:"Quelle relation unit les légumineuses (haricot, pois congo) et les bactéries Rhizobium ?",opts:["Un parasitisme","Une symbiose qui permet de fixer l'azote de l'air","Une compétition pour la lumière","Une prédation"],a:1,exp:"Les bactéries des nodosités fixent l'azote atmosphérique et reçoivent des sucres de la plante."},
+{id:"q34",ch:6,lvl:2,q:"Quelle pratique aide à réduire l'érosion sur un terrain en pente ?",opts:["Labourer dans le sens de la pente","Laisser le sol nu après la récolte","Planter des haies vives en courbes de niveau","Brûler tous les résidus végétaux"],a:2,exp:"Les haies en courbes de niveau ralentissent le ruissellement et retiennent la terre."},
+{id:"q35",ch:6,lvl:3,q:"Quel est un avantage agronomique de la rotation des cultures ?",opts:["Elle supprime tout besoin d'eau","Elle limite l'épuisement du sol et l'accumulation de ravageurs propres à une culture","Elle empêche toute photosynthèse","Elle remplace la matière organique"],a:1,exp:"Alterner les espèces varie les besoins en nutriments, rompt les cycles de ravageurs et de maladies spécifiques et peut améliorer la fertilité (légumineuses)."},
+{id:"q36",ch:6,lvl:3,q:"Pourquoi la matière organique est-elle bénéfique pour un sol cultivé ?",opts:["Elle rend le sol imperméable","Elle améliore la structure du sol, la rétention d'eau et la réserve de nutriments","Elle empêche la vie microbienne","Elle augmente toujours la salinité"],a:1,exp:"Elle nourrit les organismes du sol, forme des agrégats stables et libère progressivement des éléments minéraux en se décomposant."}
+];
+var NIVEAUX = {1:"Débutant",2:"Intermédiaire",3:"Révision universitaire"};
+
+/* =====================================================================
+   2. STOCKAGE — localStorage sécurisé
+   ===================================================================== */
+var KEY_DATA="agroquiz:v1:data", KEY_SET="agroquiz:v1:settings";
+var memoryFallback={};
+function safeGet(key){ try{ return window.localStorage.getItem(key); }catch(e){ return memoryFallback[key]||null; } }
+function safeSet(key,val){ try{ window.localStorage.setItem(key,val); return true; }catch(e){ memoryFallback[key]=val; return false; } }
+function safeRemove(key){ try{ window.localStorage.removeItem(key); }catch(e){} delete memoryFallback[key]; }
+function parseJSON(raw,fallback){ if(!raw) return fallback; try{ var v=JSON.parse(raw); return (v&&typeof v==="object")?v:fallback; }catch(e){ return fallback; } }
+
+var Store = {
+  defaultsData:function(){ return {attempts:[],studied:{},recent:[],last:null}; },
+  loadData:function(){
+    var d=parseJSON(safeGet(KEY_DATA),null), base=this.defaultsData();
+    if(!d) return base;
+    var out=base;
+    if(Array.isArray(d.attempts)){
+      out.attempts=d.attempts.filter(function(a){
+        return a && typeof a.date==="string" && isFinite(a.total) && isFinite(a.correct) && a.total>0 && a.correct>=0 && a.correct<=a.total && Array.isArray(a.details);
+      }).map(function(a){
+        a.details=a.details.filter(function(x){return x&&typeof x.id==="string";});
+        return a;
+      });
+    }
+    if(d.studied&&typeof d.studied==="object"&&!Array.isArray(d.studied)) out.studied=d.studied;
+    if(Array.isArray(d.recent)) out.recent=d.recent.filter(function(x){return getChapitre(x);}).slice(0,6);
+    if(getChapitre(d.last)) out.last=d.last;
+    return out;
+  },
+  saveData:function(d){ return safeSet(KEY_DATA,JSON.stringify(d)); },
+  loadSettings:function(){
+    var s=parseJSON(safeGet(KEY_SET),{});
+    return { theme:(s.theme==="dark"?"dark":"light"), timer:(s.timer===true) };
+  },
+  saveSettings:function(s){ safeSet(KEY_SET,JSON.stringify(s)); },
+  clearData:function(){ safeRemove(KEY_DATA); }
+};
+
+var data = Store.loadData();
+var settings = Store.loadSettings();
+
+/* =====================================================================
+   3. OUTILS
+   ===================================================================== */
+function $(s,r){ return (r||document).querySelector(s); }
+function esc(s){ return String(s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];}); }
+function getChapitre(id){ id=Number(id); for(var i=0;i<CHAPITRES.length;i++){ if(CHAPITRES[i].id===id) return CHAPITRES[i]; } return null; }
+function getQuestion(id){ for(var i=0;i<QUESTIONS.length;i++){ if(QUESTIONS[i].id===id) return QUESTIONS[i]; } return null; }
+function shuffle(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+function pct(a,b){ return b>0?Math.round(a*100/b):0; }
+function fmtTime(s){ s=Math.max(0,Math.round(s)); var m=Math.floor(s/60), r=s%60; return m+" min "+(r<10?"0":"")+r+" s"; }
+function fmtDate(iso){ var d=new Date(iso); if(isNaN(d)) return "—"; return d.toLocaleDateString("fr-FR",{day:"numeric",month:"short",year:"numeric"})+" "+d.toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"}); }
+function pluriel(n,s,p){ return n+" "+(n>1?(p||s+"s"):s); }
+function applyTheme(){ document.documentElement.setAttribute("data-theme",settings.theme); }
+
+var ICONS={
+  home:'<path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/>',
+  book:'<path d="M4 4h6a3 3 0 013 3v13a2 2 0 00-2-2H4z"/><path d="M20 4h-6a3 3 0 00-3 3v13a2 2 0 012-2h7z"/>',
+  quiz:'<circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 114 2c-.9.6-1.5 1.1-1.5 2"/><path d="M12 17h.01"/>',
+  chart:'<path d="M4 20V4"/><path d="M4 20h16"/><path d="M8 16v-5"/><path d="M12 16V8"/><path d="M16 16v-8"/>',
+  gear:'<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/>',
+  info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><path d="M12 8h.01"/>'
+};
+function icon(n,size){ size=size||20; return '<svg width="'+size+'" height="'+size+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+ICONS[n]+'</svg>'; }
+
+function confirmDialog(title,msg,okLabel){
+  return new Promise(function(resolve){
+    var bg=document.createElement("div"); bg.className="modal-bg";
+    bg.innerHTML='<div class="modal" role="alertdialog" aria-modal="true" aria-labelledby="mt" aria-describedby="mm"><h3 id="mt">'+esc(title)+'</h3><p id="mm">'+esc(msg)+'</p><div class="btn-row"><button class="btn sec" data-r="0">Annuler</button><button class="btn danger" data-r="1">'+esc(okLabel||"Confirmer")+'</button></div></div>';
+    var prev=document.activeElement;
+    function close(v){ document.removeEventListener("keydown",onKey); bg.remove(); if(prev&&prev.focus) prev.focus(); resolve(v); }
+    function onKey(e){ if(e.key==="Escape") close(false); }
+    bg.addEventListener("click",function(e){ var r=e.target.getAttribute&&e.target.getAttribute("data-r"); if(r!==null) close(r==="1"); else if(e.target===bg) close(false); });
+    document.addEventListener("keydown",onKey);
+    document.body.appendChild(bg);
+    bg.querySelector('[data-r="0"]').focus();
+  });
+}
+
+/* =====================================================================
+   4. CALCULS À PARTIR DES DONNÉES RÉELLES
+   ===================================================================== */
+function globalStats(){
+  var answered=0,correct=0;
+  data.attempts.forEach(function(a){ answered+=a.total; correct+=a.correct; });
+  return {quizzes:data.attempts.length, answered:answered, correct:correct, rate:pct(correct,answered)};
+}
+function chapterStats(id){
+  var answered=0,correct=0,last=null,best=null;
+  data.attempts.forEach(function(a){
+    var n=0,c=0;
+    a.details.forEach(function(d){ var q=getQuestion(d.id); if(q&&q.ch===id){ n++; if(d.ok) c++; } });
+    if(n>0){ answered+=n; correct+=c; if(!last||a.date>last) last=a.date; var r=c/n; if(best===null||r>best) best=r; }
+  });
+  return {answered:answered,correct:correct,rate:pct(correct,answered),last:last,best:best};
+}
+function chapterStatus(id){
+  var st=chapterStats(id), studied=!!data.studied[id];
+  if(st.answered>0 && st.best>=0.8 && studied) return {label:"Terminé",cls:"ok"};
+  if(st.answered>0) return {label:"Quiz fait · "+st.rate+" %",cls:"mid"};
+  if(studied) return {label:"Lu",cls:"mid"};
+  return {label:"Non commencé",cls:""};
+}
+function touchChapter(id){
+  data.recent=[id].concat(data.recent.filter(function(x){return x!==id;})).slice(0,6);
+  data.last=id; Store.saveData(data);
+}
+function hasProgress(){ return data.attempts.length>0||data.recent.length>0; }
+
+/* =====================================================================
+   5. MOTEUR DE QUIZ
+   ===================================================================== */
+var setup={ch:"all",lvl:"all",n:"10"};
+var quiz=null, timerHandle=null;
+
+function buildPool(ch,lvl){
+  return QUESTIONS.filter(function(q){ return (ch==="all"||q.ch===Number(ch)) && (lvl==="all"||q.lvl===Number(lvl)); });
+}
+function startQuiz(ch,lvl,n){
+  var pool=shuffle(buildPool(ch,lvl));
+  if(n!=="all") pool=pool.slice(0,Number(n));
+  if(!pool.length) return false;
+  var items=pool.map(function(q){
+    var order=shuffle([0,1,2,3]);
+    return { id:q.id, order:order, correctPos:order.indexOf(q.a), choice:null, validated:false, ok:false };
+  });
+  quiz={ ch:ch, lvl:lvl, items:items, i:0, score:0, start:Date.now(), seconds:0, finished:false, saved:false, selected:null };
+  return true;
+}
+function stopTimer(){ if(timerHandle){ clearInterval(timerHandle); timerHandle=null; } }
+function startTimer(){
+  stopTimer();
+  if(!settings.timer||!quiz||quiz.finished) return;
+  timerHandle=setInterval(function(){
+    var el=$("#qtimer"); if(!el||!quiz||quiz.finished){ stopTimer(); return; }
+    el.textContent=fmtTime((Date.now()-quiz.start)/1000);
+  },1000);
+}
+function validateAnswer(){
+  if(!quiz||quiz.finished) return;
+  var it=quiz.items[quiz.i];
+  if(it.validated||quiz.selected===null) return;
+  it.choice=quiz.selected; it.validated=true;
+  it.ok=(it.choice===it.correctPos);
+  if(it.ok) quiz.score++;
+}
+function nextQuestion(){
+  if(quiz.i<quiz.items.length-1){ quiz.i++; quiz.selected=null; renderQuiz(); }
+  else finishQuiz();
+}
+function finishQuiz(){
+  quiz.finished=true; quiz.seconds=Math.round((Date.now()-quiz.start)/1000);
+  stopTimer();
+  if(!quiz.saved){
+    var correct=quiz.items.filter(function(x){return x.ok;}).length;
+    data.attempts.push({
+      date:new Date().toISOString(), chapter:quiz.ch, level:quiz.lvl,
+      total:quiz.items.length, correct:correct, seconds:quiz.seconds, timed:settings.timer,
+      details:quiz.items.map(function(x){ return {id:x.id,ok:x.ok}; })
+    });
+    if(data.attempts.length>300) data.attempts=data.attempts.slice(-300);
+    if(quiz.ch!=="all"){ touchChapter(Number(quiz.ch)); }
+    Store.saveData(data); quiz.saved=true;
+  }
+  renderQuiz();
+}
+
 /* =====================================================================
    6. VUES
    ===================================================================== */
