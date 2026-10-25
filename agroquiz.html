@@ -1,0 +1,214 @@
+/* =====================================================================
+   6. VUES
+   ===================================================================== */
+var ROUTES=[["accueil","Accueil","home"],["chapitres","Chapitres","book"],["quiz","Quiz","quiz"],["resultats","Résultats","chart"],["parametres","Réglages","gear"]];
+var QUOTE="Comprendre le vivant, c'est apprendre à mieux cultiver la terre.";
+/* Une couleur par chapitre, tirée du monde agricole : feuille, eau, piment, maïs, soleil, terre. */
+var CH_COL={1:["#1E7F4F","#FFFFFF"],2:["#2A6FB0","#FFFFFF"],3:["#D8432B","#FFFFFF"],4:["#F0B323","#14281F"],5:["#E8731F","#14281F"],6:["#8A5A34","#FFFFFF"]};
+ICONS.check='<path d="M5 12.5l4.5 4.5L19 7"/>';
+ICONS.cross='<path d="M6 6l12 12M18 6L6 18"/>';
+function chStyle(id){ var c=CH_COL[id]||CH_COL[1]; return "--c:"+c[0]+";--on:"+c[1]; }
+
+function renderNav(active){
+  $("#nav").innerHTML=ROUTES.map(function(r){
+    return '<li><a href="#'+r[0]+'"'+(r[0]===active?' aria-current="page"':'')+'><span class="ic">'+icon(r[2],22)+'</span><span>'+r[1]+'</span></a></li>';
+  }).join("");
+}
+function phead(t,p){ return '<header class="phead"><div class="in"><h1>'+t+'</h1>'+(p?'<p>'+p+'</p>':'')+'</div></header>'; }
+function setMain(html){ $("#main").innerHTML=html; window.scrollTo(0,0); }
+
+function statutHtml(id){
+  var s=chapterStatus(id);
+  return '<span class="s'+(s.cls==="ok"?' fait':'')+'">'+(s.cls==="ok"?icon("check",18):'')+esc(s.label)+'</span>';
+}
+function ligneChapitre(c,detail){
+  return '<li><a class="ch" style="'+chStyle(c.id)+'" href="#chapitre/'+c.id+'"><span class="n">'+c.id+'</span><span class="b"><span class="t">'+esc(c.titre)+'</span>'+(detail?'<span class="d">'+detail+'</span>':'')+'</span>'+statutHtml(c.id)+'</a></li>';
+}
+
+function viewAccueil(){
+  var g=globalStats(), nq=QUESTIONS.length, nc=CHAPITRES.length;
+  var recents=data.recent.map(getChapitre).filter(Boolean);
+  var h='<section class="hero-home"><div class="in"><h1 class="brand-title">AgroQuiz</h1>'+
+  '<p class="tagline">Révise, apprends et progresse.</p><p class="sub-home">Biologie générale · Agronomie</p>'+
+  '<p class="intro-home">Une plateforme de révision pour les étudiants qui débutent en biologie et en agronomie : lis un chapitre, réponds au quiz, lis la correction. Tout fonctionne sans Internet. C\'est un support complémentaire, pas le cours officiel de l\'AUC.</p>'+
+  '<div class="verre"><span class="lbl">Ton point</span><div class="mini"><div><b>'+nc+'</b><span>chapitres</span></div><div><b>'+nq+'</b><span>questions</span></div><div><b>'+(g.answered?g.rate+' %':'—')+'</b><span>'+(g.answered?'de réussite':'aucun quiz terminé')+'</span></div></div>'+
+  '<div class="btns"><a class="btn" href="#quiz">Commencer un quiz</a>'+
+  (hasProgress()?'<a class="btn sec" href="#'+(data.last?'chapitre/'+data.last:'chapitres')+'">Reprendre mes révisions</a>':'')+'</div></div></div></section>'+
+  '<div class="page"><h2>Chapitres récemment étudiés</h2>';
+  if(recents.length){
+    h+='<ul class="liste">'+recents.map(function(c){ return ligneChapitre(c,""); }).join("")+'</ul>';
+  } else {
+    h+='<div class="vide"><p>Tu n\'as encore ouvert aucun chapitre.</p><a href="#chapitres"><strong>Ouvrir les chapitres</strong></a></div>';
+  }
+  h+='<p class="citation">'+esc(QUOTE)+'</p></div>';
+  setMain(h);
+}
+
+function viewChapitres(){
+  var h=phead('Chapitres','Six chapitres, du vocabulaire du vivant jusqu\'à l\'écologie des champs. Chaque chapitre a sa couleur, que tu retrouves dans les quiz et dans tes résultats.')+'<div class="page"><ul class="liste">';
+  CHAPITRES.forEach(function(c){
+    var n=buildPool(c.id,"all").length;
+    h+=ligneChapitre(c,n+' questions, '+c.sections.length+' parties');
+  });
+  h+='</ul></div>'; setMain(h);
+}
+
+function viewChapitre(id){
+  var c=getChapitre(id); if(!c){ location.hash="#chapitres"; return; }
+  touchChapter(c.id);
+  var st=chapterStats(c.id), studied=!!data.studied[c.id], s=chapterStatus(c.id);
+  var h='<article style="'+chStyle(c.id)+'"><header class="chead"><div class="in"><a class="retour" href="#chapitres">Tous les chapitres</a><p class="badge"><i>'+c.id+'</i>Chapitre '+c.id+' sur '+CHAPITRES.length+'</p><h1>'+esc(c.titre)+'</h1><p class="res">'+c.resume+'</p></div></header><div class="page">';
+  h+='<h2>Définitions essentielles</h2><dl class="defs">'+c.defs.map(function(d){return '<div><dt>'+esc(d[0])+'</dt><dd>'+esc(d[1])+'</dd></div>';}).join("")+'</dl>';
+  h+='<div class="prose">';
+  c.sections.forEach(function(sec){ h+='<h2>'+esc(sec.t)+'</h2>'+sec.p.map(function(p){return '<p>'+p+'</p>';}).join(""); });
+  h+='</div><aside class="champs"><h3>Dans les champs d\'Haïti</h3><p>'+c.agri+'</p></aside>';
+  h+='<section class="fin-chap"><h2>Quiz du chapitre</h2>';
+  h+= st.answered? '<p>Sur ce chapitre, tu as répondu juste à '+st.correct+' questions sur '+st.answered+' ('+st.rate+' %).</p>' : '<p>Tu n\'as pas encore fait le quiz de ce chapitre.</p>';
+  h+='<p class="etat">'+(s.cls==="ok"?icon("check",18):'')+'Statut : '+esc(s.label)+'</p>';
+  h+='<div class="btn-row"><button class="btn" id="goquiz">Lancer le quiz du chapitre</button><button class="btn sec" id="markread" aria-pressed="'+studied+'">'+(studied?'Chapitre étudié : annuler':'Marquer ce chapitre comme étudié')+'</button></div></section></div></article>';
+  setMain(h);
+  $("#goquiz").onclick=function(){ setup={ch:String(c.id),lvl:"all",n:"all"}; startQuiz(setup.ch,setup.lvl,setup.n); startTimerLater(); location.hash="#quiz"; };
+  $("#markread").onclick=function(){ if(data.studied[c.id]) delete data.studied[c.id]; else data.studied[c.id]=new Date().toISOString(); Store.saveData(data); viewChapitre(c.id); };
+}
+function startTimerLater(){ setTimeout(startTimer,0); }
+
+function viewQuiz(){ if(quiz) renderQuiz(); else renderSetup(); }
+
+function chips(name,label,opts,cur){
+  return '<fieldset class="field"><legend>'+label+'</legend><div class="chips">'+opts.map(function(o,i){
+    var idn=name+i;
+    return '<input type="radio" name="'+name+'" id="'+idn+'" value="'+o[0]+'"'+(String(cur)===String(o[0])?' checked':'')+'><label for="'+idn+'"'+(o[2]?' style="'+chStyle(o[2])+'"':'')+'>'+(o[2]?'<i></i>':'')+esc(o[1])+'</label>';
+  }).join("")+'</div></fieldset>';
+}
+function renderSetup(){
+  var chOpts=[["all","Tous les chapitres"]].concat(CHAPITRES.map(function(c){return [String(c.id),c.id+". "+c.titre,c.id];}));
+  var h=phead('Quiz','Choisis ce que tu veux réviser. Pour un quiz général, garde « Tous les chapitres ».')+'<div class="page">'+
+  chips("ch","Chapitre",chOpts,setup.ch)+
+  chips("lvl","Niveau",[["all","Tous les niveaux"],["1","Débutant"],["2","Intermédiaire"],["3","Révision universitaire"]],setup.lvl)+
+  chips("nq","Nombre de questions",[["5","5"],["10","10"],["20","20"],["all","Toutes"]],setup.n)+
+  '<p id="poolinfo" class="info-pool" aria-live="polite"></p>'+
+  '<div class="btn-row"><button class="btn" id="startq">Commencer le quiz</button></div>'+
+  '<p class="note">'+icon("info",18)+'<span>Le chronomètre est '+(settings.timer?'activé':'désactivé')+'. Tu peux le changer dans les <a href="#parametres"><u>réglages</u></a>.</span></p></div>';
+  setMain(h);
+  function upd(){
+    var c=document.querySelector('input[name="ch"]:checked'); if(c) setup.ch=c.value;
+    var l=document.querySelector('input[name="lvl"]:checked'); if(l) setup.lvl=l.value;
+    var n=document.querySelector('input[name="nq"]:checked'); if(n) setup.n=n.value;
+    var avail=buildPool(setup.ch,setup.lvl).length;
+    var real=setup.n==="all"?avail:Math.min(avail,Number(setup.n));
+    $("#poolinfo").textContent=avail? "Tu auras "+pluriel(real,"question")+" ("+avail+" disponibles avec ce choix)." : "Aucune question ne correspond à ce choix. Change le niveau ou le chapitre.";
+    $("#startq").disabled=!avail;
+  }
+  $("#main").querySelectorAll("input").forEach(function(e){ e.addEventListener("change",upd); });
+  $("#startq").onclick=function(){ upd(); if(startQuiz(setup.ch,setup.lvl,setup.n)){ renderQuiz(); startTimer(); } };
+  upd();
+}
+
+function renderQuiz(){
+  if(!quiz){ renderSetup(); return; }
+  if(quiz.finished){ renderQuizEnd(); return; }
+  var it=quiz.items[quiz.i], q=getQuestion(it.id), total=quiz.items.length, done=quiz.i+(it.validated?1:0);
+  var h='<div class="page"><div class="qwrap" style="'+chStyle(q.ch)+'"><div class="qhead"><span>Question <b>'+(quiz.i+1)+'</b> sur '+total+'</span><span>Bonnes réponses : <b id="qscore">'+quiz.score+'</b>'+(settings.timer?' &nbsp; Temps : <b id="qtimer">'+fmtTime((Date.now()-quiz.start)/1000)+'</b>':'')+'</span></div>'+
+  '<ol class="segs" role="progressbar" aria-valuemin="0" aria-valuemax="'+total+'" aria-valuenow="'+done+'" aria-label="Progression du quiz">'+
+  quiz.items.map(function(x,idx){ var c=x.validated?(x.ok?"ok":"ko"):(idx===quiz.i?"cur":""); return '<li class="'+c+'"></li>'; }).join("")+'</ol>'+
+  '<p class="qchap"><i></i>Chapitre '+q.ch+', '+esc(getChapitre(q.ch).titre)+' ('+esc(NIVEAUX[q.lvl].toLowerCase())+')</p><h2 class="qtext">'+esc(q.q)+'</h2><div class="opts" role="group" aria-label="Propositions de réponse">';
+  it.order.forEach(function(orig,pos){
+    var cls="opt", k="ABCD"[pos];
+    if(it.validated){ if(pos===it.correctPos){ cls+=" good"; k=icon("check",18); } else if(pos===it.choice){ cls+=" bad"; k=icon("cross",18); } }
+    else if(quiz.selected===pos) cls+=" sel";
+    h+='<button type="button" class="'+cls+'" data-pos="'+pos+'"'+(it.validated?' disabled':'')+' aria-pressed="'+(quiz.selected===pos)+'"><span class="k">'+k+'</span><span>'+esc(q.opts[orig])+'</span></button>';
+  });
+  h+='</div><div id="fb" aria-live="polite">';
+  if(it.validated){
+    h+='<div class="explain '+(it.ok?'good':'bad')+'"><strong class="v">'+(it.ok?'Bonne réponse':'Mauvaise réponse')+'</strong>'+(it.ok?'':'La bonne réponse : '+esc(q.opts[q.a])+'.<br>')+esc(q.exp)+'</div>';
+  }
+  h+='</div><div class="btn-row">';
+  if(!it.validated) h+='<button class="btn" id="valid"'+(quiz.selected===null?' disabled':'')+'>Valider ma réponse</button>';
+  else h+='<button class="btn" id="next">'+(quiz.i<total-1?'Question suivante':'Voir mon score')+'</button>';
+  h+='<button class="btn sec" id="abandon">Abandonner</button></div></div></div>';
+  setMain(h);
+  $("#main").querySelectorAll(".opt").forEach(function(b){ b.onclick=function(){ if(it.validated) return; quiz.selected=Number(b.getAttribute("data-pos")); renderQuiz(); var nb=$('.opt[data-pos="'+quiz.selected+'"]'); if(nb) nb.focus(); }; });
+  var v=$("#valid"); if(v) v.onclick=function(){ validateAnswer(); renderQuiz(); var n=$("#next"); if(n) n.focus(); };
+  var nx=$("#next"); if(nx) nx.onclick=nextQuestion;
+  $("#abandon").onclick=function(){ confirmDialog("Abandonner le quiz ?","Les réponses de cette série ne seront pas enregistrées dans tes résultats.","Abandonner").then(function(ok){ if(ok){ stopTimer(); quiz=null; renderSetup(); } }); };
+  startTimer();
+}
+
+function renderQuizEnd(){
+  var total=quiz.items.length, ok=quiz.items.filter(function(x){return x.ok;}).length, ko=total-ok, p=pct(ok,total);
+  var h=phead('Quiz terminé','')+'<div class="page"><div class="score"><span class="gros">'+ok+'/'+total+'</span><div><p><strong>'+p+' % de réussite</strong></p><p>'+pluriel(ok,'bonne réponse')+', '+pluriel(ko,'mauvaise réponse')+(settings.timer?'. Temps : '+fmtTime(quiz.seconds):'')+'.</p></div></div>'+
+  '<div class="btn-row"><button class="btn" id="again">Recommencer</button><button class="btn sec" id="other">Choisir un autre chapitre</button><a class="btn sec" href="#resultats">Voir mes résultats</a></div><h2 class="titre-liste">Correction détaillée</h2>';
+  quiz.items.forEach(function(it,idx){
+    var q=getQuestion(it.id);
+    h+='<div class="rev"><h4>'+(idx+1)+'. '+esc(q.q)+'</h4><p><span class="sttt '+(it.ok?'ok':'ko')+'">'+icon(it.ok?"check":"cross",16)+(it.ok?'Correct':'Incorrect')+'</span></p><p>Ta réponse : '+(it.choice===null?'aucune':esc(q.opts[it.order[it.choice]]))+'</p>'+(it.ok?'':'<p>Bonne réponse : <strong>'+esc(q.opts[q.a])+'</strong></p>')+'<p class="why">'+esc(q.exp)+'</p></div>';
+  });
+  h+='</div>'; setMain(h);
+  $("#again").onclick=function(){ var s={ch:quiz.ch,lvl:quiz.lvl,n:String(quiz.items.length)}; if(startQuiz(s.ch,s.lvl,s.n)){ renderQuiz(); startTimer(); } };
+  $("#other").onclick=function(){ stopTimer(); quiz=null; renderSetup(); };
+}
+
+function viewResultats(){
+  var g=globalStats();
+  var h=phead('Résultats','Calculés à partir des quiz que tu as terminés sur cet appareil.')+'<div class="page">';
+  if(!data.attempts.length){
+    h+='<div class="vide"><p>Tu n\'as pas encore terminé de quiz. Tes statistiques apparaîtront ici après le premier.</p><a href="#quiz"><strong>Commencer un quiz</strong></a></div></div>';
+    setMain(h); return;
+  }
+  h+='<div class="chiffres"><div><b>'+g.quizzes+'</b><span>quiz terminés</span></div><div><b>'+g.correct+' sur '+g.answered+'</b><span>bonnes réponses</span></div><div><b>'+g.rate+' %</b><span>de réussite</span></div></div>';
+  h+='<h2>Par chapitre</h2>';
+  CHAPITRES.forEach(function(c){
+    var s=chapterStats(c.id);
+    h+='<div class="pbar" style="'+chStyle(c.id)+'"><span class="t">'+c.id+'. '+esc(c.titre)+'</span><span class="b" role="img" aria-label="'+s.rate+' % de réussite"><i style="width:'+s.rate+'%"></i></span><span class="p">'+(s.answered?s.rate+' % ('+s.correct+'/'+s.answered+')':'pas encore évalué')+'</span>'+(s.last?'<span class="l">Dernière révision : '+fmtDate(s.last)+'</span>':'')+'</div>';
+  });
+  h+='<h2 class="titre-liste">Derniers quiz</h2><div class="tablewrap"><table class="hist"><thead><tr><th>Date</th><th>Portée</th><th>Niveau</th><th>Score</th><th>Temps</th></tr></thead><tbody>';
+  data.attempts.slice(-20).reverse().forEach(function(a){
+    var port=a.chapter==="all"?"Quiz général":("Chapitre "+a.chapter);
+    var niv=a.level==="all"?"Tous":(NIVEAUX[a.level]||"inconnu");
+    h+='<tr><td>'+fmtDate(a.date)+'</td><td>'+esc(port)+'</td><td>'+esc(niv)+'</td><td>'+a.correct+'/'+a.total+' ('+pct(a.correct,a.total)+' %)</td><td>'+(a.timed&&isFinite(a.seconds)?fmtTime(a.seconds):'non mesuré')+'</td></tr>';
+  });
+  h+='</tbody></table></div><div class="btn-row"><button class="btn danger" id="clr">Effacer mes statistiques</button></div></div>';
+  setMain(h);
+  $("#clr").onclick=function(){ resetProgress(); };
+}
+function resetProgress(){
+  confirmDialog("Effacer la progression ?","Tous tes quiz, scores et chapitres étudiés seront supprimés de cet appareil. Cette action est définitive.","Effacer").then(function(ok){
+    if(!ok) return; Store.clearData(); data=Store.defaultsData(); stopTimer(); quiz=null; route();
+  });
+}
+
+function viewParametres(){
+  var h=phead('Réglages','Thème, chronomètre et gestion de tes données.')+'<div class="page">'+
+  '<div class="setrow"><div><strong>Thème</strong><p>Clair pour le jour, sombre pour les révisions du soir.</p></div><div class="seg" role="group" aria-label="Thème"><button type="button" data-theme="light" aria-pressed="'+(settings.theme==="light")+'">Clair</button><button type="button" data-theme="dark" aria-pressed="'+(settings.theme==="dark")+'">Sombre</button></div></div>'+
+  '<div class="setrow"><div><strong>Chronomètre</strong><p>Mesure la durée de chaque quiz et l\'affiche avec ton score.</p></div><div class="seg" role="group" aria-label="Chronomètre"><button type="button" data-timer="on" aria-pressed="'+settings.timer+'">Activé</button><button type="button" data-timer="off" aria-pressed="'+(!settings.timer)+'">Désactivé</button></div></div>'+
+  '<div class="setrow"><div><strong>Réinitialiser la progression</strong><p>Supprime les scores, l\'historique et les chapitres étudiés.</p></div><button class="btn danger" id="rst">Réinitialiser</button></div>'+
+  '<p class="note" style="margin-top:26px">'+icon("info",18)+'<span>Tes données sont enregistrées sur cet appareil, dans ce navigateur. Elles ne sont envoyées nulle part. Si tu vides les données du navigateur, elles disparaissent.</span></p>'+
+  '<h2 class="titre-liste">À propos</h2><p>AgroQuiz est un outil de révision en biologie générale et en agronomie pour les étudiants débutants. C\'est un support complémentaire : il ne remplace ni les cours officiels de l\'AUC ni les enseignants. Il contient '+CHAPITRES.length+' chapitres et '+QUESTIONS.length+' questions, et fonctionne hors ligne une fois le fichier enregistré.</p></div>';
+  setMain(h);
+  $("#main").querySelectorAll("[data-theme]").forEach(function(b){ b.onclick=function(){ settings.theme=b.getAttribute("data-theme"); Store.saveSettings(settings); applyTheme(); viewParametres(); }; });
+  $("#main").querySelectorAll("[data-timer]").forEach(function(b){ b.onclick=function(){ settings.timer=b.getAttribute("data-timer")==="on"; Store.saveSettings(settings); if(quiz&&!quiz.finished){ settings.timer?startTimer():stopTimer(); } viewParametres(); }; });
+  $("#rst").onclick=resetProgress;
+}
+
+/* =====================================================================
+   7. ROUTAGE
+   ===================================================================== */
+function route(){
+  var hash=(location.hash||"#accueil").slice(1), parts=hash.split("/"), page=parts[0];
+  if(page!=="quiz") stopTimer();
+  var active=page==="chapitre"?"chapitres":page;
+  if(!ROUTES.some(function(r){return r[0]===active;})){ active="accueil"; page="accueil"; }
+  renderNav(active);
+  if(page==="accueil") viewAccueil();
+  else if(page==="chapitres") viewChapitres();
+  else if(page==="chapitre") viewChapitre(parts[1]);
+  else if(page==="quiz") viewQuiz();
+  else if(page==="resultats") viewResultats();
+  else if(page==="parametres") viewParametres();
+  var m=$("#main"); if(m) m.focus({preventScroll:true});
+}
+window.addEventListener("hashchange",route);
+applyTheme();
+route();
+</script>
+</body>
+</html>
