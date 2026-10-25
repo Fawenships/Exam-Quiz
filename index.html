@@ -495,6 +495,16 @@
       line-height:1.5;
     }
 
+    @media(min-width:481px){
+
+      .category:last-child:nth-child(odd){
+        grid-column:1 / -1;
+        justify-self:center;
+        width:calc(50% - 10px);
+      }
+
+    }
+
     /* =========================
        KONKOU
     ========================= */
@@ -1224,6 +1234,28 @@
 
         <p>
           Révise en t'amusant avec des jeux basés sur les questions d'ExamQuiz
+        </p>
+
+      </a>
+
+      <!-- UNIVERSITÉ EXAM -->
+
+      <a
+        href="universite.html"
+        class="category"
+        aria-label="Ouvrir la section Université Exam"
+      >
+
+        <div class="emoji">
+          🏛️
+        </div>
+
+        <h3>
+          Université Exam
+        </h3>
+
+        <p>
+          Biologie générale et agronomie : quiz de révision pour les étudiants.
         </p>
 
       </a>
