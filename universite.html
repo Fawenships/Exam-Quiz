@@ -1,388 +1,68 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-
 <meta charset="UTF-8">
-
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
-
-<meta
-  name="theme-color"
-  content="#24113f"
->
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#24113f">
 <title>Université Exam — ExamQuiz Haiti</title>
-
-<meta
-  name="description"
-  content="Quiz et révisions de niveau université sur ExamQuiz Haiti : biologie générale et agronomie."
->
-
+<meta name="description" content="Quiz et révisions de niveau université sur ExamQuiz Haiti : biologie générale et agronomie.">
 <style>
-
-*{
-  box-sizing:border-box;
-}
-
-body{
-  margin:0;
-  font-family:Arial,Helvetica,sans-serif;
-  background:#f5f3f8;
-  color:#222;
-}
-
-/* HEADER */
-
-header{
-  background:#24113f;
-  color:white;
-  padding:14px 20px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  box-shadow:0 3px 10px rgba(0,0,0,.15);
-}
-
-.logo-link{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  text-decoration:none;
-  color:white;
-  font-weight:bold;
-  font-size:20px;
-}
-
-.logo-link img{
-  width:42px;
-  height:42px;
-  object-fit:contain;
-  border-radius:10px;
-}
-
-/* BOUTON RETOUR À L'ACCUEIL */
-
-.home-btn{
-  display:block;
-  width:max-content;
-  margin:20px auto 0;
-  padding:12px 20px;
-  background:#24113f;
-  color:white;
-  text-decoration:none;
-  border-radius:10px;
-  font-weight:bold;
-  transition:.2s;
-}
-
-.home-btn:hover{
-  opacity:.9;
-  transform:translateY(-2px);
-}
-
-/* HERO */
-
-.hero{
-  text-align:center;
-  padding:45px 20px 30px;
-}
-
-.hero h1{
-  margin:0;
-  color:#24113f;
-  font-size:34px;
-}
-
-.hero p{
-  margin-top:12px;
-  color:#666;
-  font-size:17px;
-}
-
-/* CATEGORIES */
-
-.categories{
-  width:min(1100px,92%);
-  margin:20px auto 50px;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-  gap:20px;
-}
-
-.category-btn{
-  border:none;
-  border-radius:18px;
-  padding:28px 20px;
-  min-height:150px;
-  cursor:pointer;
-  background:white;
-  box-shadow:0 5px 18px rgba(0,0,0,.08);
-  transition:.2s;
-  font-size:18px;
-  font-weight:bold;
-  color:#24113f;
-}
-
-.category-btn:hover{
-  transform:translateY(-4px);
-  box-shadow:0 9px 25px rgba(0,0,0,.14);
-}
-
-.category-icon{
-  display:block;
-  font-size:45px;
-  margin-bottom:12px;
-}
-
-/* QUESTIONS PAGE */
-
-#questions-page{
-  display:none;
-  width:min(950px,92%);
-  margin:25px auto 50px;
-}
-
-/* QUESTIONS HEADER */
-
-.questions-header{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:15px;
-  margin-bottom:25px;
-}
-
-.questions-header h2{
-  margin:0;
-  color:#24113f;
-  font-size:28px;
-}
-
-/* BOUTON RETOUR AUX CATÉGORIES */
-
-#backBtn{
-  border:none;
-  background:#24113f;
-  color:white;
-  padding:12px 18px;
-  border-radius:10px;
-  cursor:pointer;
-  font-weight:bold;
-  font-size:15px;
-  transition:.2s;
-}
-
-#backBtn:hover{
-  opacity:.9;
-  transform:translateY(-2px);
-}
-
-/* QUESTION CARD */
-
-.question-card{
-  background:white;
-  border-radius:16px;
-  padding:22px;
-  margin-bottom:20px;
-  box-shadow:0 5px 18px rgba(0,0,0,.08);
-}
-
-.question-number{
-  display:inline-block;
-  background:#24113f;
-  color:white;
-  padding:7px 12px;
-  border-radius:8px;
-  font-size:14px;
-  font-weight:bold;
-  margin-bottom:15px;
-}
-
-.question-text{
-  font-size:18px;
-  font-weight:bold;
-  line-height:1.6;
-}
-
-/* RÉSOLUTION */
-
-.solution{
-  background:#fff8e6;
-  border-radius:12px;
-  padding:18px;
-  margin-top:18px;
-  line-height:1.8;
-  border-left:4px solid #f0a500;
-}
-
-.solution strong{
-  display:block;
-  margin-bottom:10px;
-  font-size:17px;
-}
-
-.solution-steps{
-  white-space:normal;
-  color:#333;
-}
-
-/* RÉPONSE */
-
-.answer{
-  background:#f1f6ff;
-  border-radius:10px;
-  padding:18px;
-  margin-top:15px;
-  line-height:1.7;
-  border-left:4px solid #1764c0;
-}
-
-.answer strong{
-  color:#1764c0;
-}
-
-/* EMPTY */
-
-.empty{
-  background:white;
-  padding:35px;
-  border-radius:15px;
-  text-align:center;
-  box-shadow:0 5px 18px rgba(0,0,0,.08);
-}
-
-.empty h3{
-  color:#24113f;
-}
-
-/* FOOTER */
-
-footer{
-  text-align:center;
-  padding:25px 15px;
-  color:#777;
-  font-size:14px;
-}
-
-/* MOBILE */
-
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f5f3f8;color:#222}
+header{background:#24113f;color:white;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 3px 10px rgba(0,0,0,.15)}
+.logo-link{display:flex;align-items:center;gap:10px;text-decoration:none;color:white;font-weight:bold;font-size:20px}
+.logo-link img{width:42px;height:42px;object-fit:contain;border-radius:10px}
+.home-btn{display:block;width:max-content;margin:20px auto 0;padding:12px 20px;background:#24113f;color:white;text-decoration:none;border-radius:10px;font-weight:bold;transition:.2s}
+.home-btn:hover{opacity:.9;transform:translateY(-2px)}
+.hero{text-align:center;padding:45px 20px 30px}
+.hero h1{margin:0;color:#24113f;font-size:34px}
+.hero p{margin-top:12px;color:#666;font-size:17px}
+.categories{width:min(1100px,92%);margin:20px auto 50px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+.category-btn{border:none;border-radius:18px;padding:28px 20px;min-height:170px;cursor:pointer;background:white;box-shadow:0 5px 18px rgba(0,0,0,.08);transition:.2s;font-size:18px;font-weight:bold;color:#24113f;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;text-decoration:none}
+.category-btn:hover{transform:translateY(-4px);box-shadow:0 9px 25px rgba(0,0,0,.14)}
+.category-icon{display:block;font-size:45px;margin-bottom:12px}
+.category-btn small{font-weight:normal;color:#666;font-size:14px;line-height:1.5;margin-top:5px}
+.category-meta{margin-top:12px;color:#1764c0;font-size:13px;font-weight:bold}
+footer{text-align:center;padding:25px 15px;color:#777;font-size:14px}
 @media(max-width:750px){
-
-  .categories{
-    grid-template-columns:1fr;
-  }
-
-  .hero h1{
-    font-size:28px;
-  }
-
-  .home-btn{
-    width:92%;
-    text-align:center;
-  }
-
-  .questions-header{
-    flex-direction:column;
-    align-items:stretch;
-  }
-
-  #backBtn{
-    width:100%;
-    order:2;
-  }
-
-  .questions-header h2{
-    text-align:center;
-    order:1;
-  }
-
+ .categories{grid-template-columns:1fr}
+ .hero h1{font-size:28px}
+ .home-btn{width:92%;text-align:center}
 }
-
 </style>
-
 </head>
-
 <body>
-
-<!-- HEADER -->
-
 <header>
-
-  <a
-    href="index.html"
-    class="logo-link"
-  >
-
-    <img
-      src="logo.png"
-      alt="ExamQuiz Haiti"
-    >
-
+  <a href="index.html" class="logo-link">
+    <img src="logo.png" alt="ExamQuiz Haiti">
     <span>ExamQuiz Haiti</span>
-
   </a>
-
 </header>
 
-
-<!-- RETOUR À L'ACCUEIL -->
-
-<a
-  href="index.html"
-  class="home-btn"
->
-  ← Retour à l'accueil
-</a>
-
-
-<!-- HERO -->
+<a href="index.html" class="home-btn">← Retour à l'accueil</a>
 
 <section class="hero">
-
   <h1>🎓 Université Exam</h1>
-
-  <p>
-    Quiz interactifs et révisions pour les étudiants de niveau université.
-  </p>
-
+  <p>Quiz interactifs et révisions pour les étudiants de niveau université.</p>
 </section>
 
-
-<!-- CATÉGORIES -->
-
-<section
-  class="categories"
-  id="categories"
->
-
-  <a
-    class="category-btn"
-    href="agroquiz.html"
-    style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-decoration:none"
-  >
-
+<section class="categories" id="categories">
+  <a class="category-btn" href="agroquiz.html">
     <span class="category-icon">🌱</span>
-
-    AgroQuiz<br>
-    <small style="font-weight:normal;color:#666">Biologie générale · Agronomie</small>
-
+    <span>AgroQuiz</span>
+    <small>Biologie générale · Agronomie</small>
   </a>
 
+  <a class="category-btn" href="introduction-agriculture.html">
+    <span class="category-icon">🌾</span>
+    <span>Introduction à l’agriculture</span>
+    <small>Révision du cours · Agronomie</small>
+    <span class="category-meta">15 chapitres · 352 questions</span>
+  </a>
 </section>
 
-
-<!-- FOOTER -->
-
 <footer>
-
-  © 2026 ExamQuiz •
-  Développé par Ing. Fawenbert Régis
-
+  © 2026 ExamQuiz • Développé par Ing. Fawenbert Régis
 </footer>
-
-
 </body>
 </html>
