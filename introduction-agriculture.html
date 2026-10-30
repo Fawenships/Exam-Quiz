@@ -1,0 +1,2355 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<meta
+  name="theme-color"
+  content="#24113f"
+>
+
+<title>Introduction à l'agriculture — ExamQuiz Haiti</title>
+
+<meta
+  name="description"
+  content="Quiz de révision du cours Introduction à l'agriculture (AUC) sur ExamQuiz Haiti : définitions, histoire, types d'agriculture, plantes cultivées et sol."
+>
+
+<style>
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f5f3f8;
+  color:#222;
+}
+
+button{
+  font-family:inherit;
+}
+
+/* HEADER */
+
+header{
+  background:#24113f;
+  color:white;
+  padding:14px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  box-shadow:0 3px 10px rgba(0,0,0,.15);
+}
+
+.logo-link{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  text-decoration:none;
+  color:white;
+  font-weight:bold;
+  font-size:20px;
+}
+
+.logo-link img{
+  width:42px;
+  height:42px;
+  object-fit:contain;
+  border-radius:10px;
+}
+
+/* BOUTON RETOUR */
+
+.home-btn{
+  display:block;
+  width:max-content;
+  margin:20px auto 0;
+  padding:12px 20px;
+  background:#24113f;
+  color:white;
+  text-decoration:none;
+  border-radius:10px;
+  font-weight:bold;
+  transition:.2s;
+}
+
+.home-btn:hover{
+  opacity:.9;
+  transform:translateY(-2px);
+}
+
+/* HERO */
+
+.hero{
+  text-align:center;
+  padding:45px 20px 20px;
+}
+
+.hero h1{
+  margin:0;
+  color:#24113f;
+  font-size:34px;
+}
+
+.hero p{
+  margin:12px auto 0;
+  color:#666;
+  font-size:17px;
+  max-width:640px;
+  line-height:1.6;
+}
+
+.hero-stats{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:20px;
+}
+
+.stat{
+  background:white;
+  border-radius:12px;
+  padding:10px 18px;
+  box-shadow:0 5px 18px rgba(0,0,0,.08);
+  color:#24113f;
+  font-weight:bold;
+  font-size:15px;
+}
+
+.stat span{
+  color:#1764c0;
+}
+
+/* CHAPITRES */
+
+.categories{
+  width:min(1100px,92%);
+  margin:20px auto 50px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:20px;
+}
+
+.category-btn{
+  position:relative;
+  border:none;
+  border-radius:18px;
+  padding:26px 20px 22px;
+  min-height:170px;
+  cursor:pointer;
+  background:white;
+  box-shadow:0 5px 18px rgba(0,0,0,.08);
+  transition:.2s;
+  font-size:17px;
+  font-weight:bold;
+  color:#24113f;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+
+.category-btn:hover{
+  transform:translateY(-4px);
+  box-shadow:0 9px 25px rgba(0,0,0,.14);
+}
+
+.category-icon{
+  display:block;
+  font-size:42px;
+  margin-bottom:10px;
+}
+
+.chap-num{
+  position:absolute;
+  top:12px;
+  left:12px;
+  background:#24113f;
+  color:white;
+  border-radius:8px;
+  padding:5px 10px;
+  font-size:13px;
+}
+
+.chap-desc{
+  font-weight:normal;
+  color:#666;
+  font-size:14px;
+  line-height:1.5;
+  margin-top:6px;
+}
+
+.chap-meta{
+  margin-top:12px;
+  font-size:13px;
+  color:#1764c0;
+}
+
+.chap-best{
+  margin-top:4px;
+  font-size:13px;
+  color:#4b2481;
+  font-weight:normal;
+}
+
+.category-btn.wide{
+  grid-column:1/-1;
+  flex-direction:row;
+  gap:18px;
+  text-align:left;
+  border-left:6px solid #4b2481;
+  min-height:110px;
+}
+
+.category-btn.wide .category-icon{
+  margin:0;
+}
+
+
+.practice-panel{
+  width:min(1100px,92%);margin:24px auto 28px;padding:24px;
+  background:#fff;border:1px solid #ece8f3;border-radius:18px;
+  box-shadow:0 5px 18px rgba(36,17,63,.06);color:#24113f;
+}
+.practice-panel h2{margin:0 0 8px;font-size:22px}
+.practice-panel p{margin:0 0 18px;color:#666;line-height:1.55}
+.practice-controls{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.practice-controls label{font-weight:700}
+.practice-controls select{padding:11px 14px;border:1px solid #d8d1e4;border-radius:10px;background:#fff;color:#24113f;font:inherit}
+.performance{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:22px}
+.performance div{padding:14px;border-radius:12px;background:#f7f5fb;text-align:center;display:flex;flex-direction:column;gap:4px}
+.performance strong{font-size:24px;color:#4b2481}
+.performance span{font-size:13px;color:#666}
+@media(max-width:600px){.practice-panel{padding:18px}.practice-controls{align-items:stretch;flex-direction:column}.practice-controls select,.practice-controls button{width:100%}.performance{grid-template-columns:1fr 1fr}.performance div:last-child{grid-column:1/-1}}
+
+/* QUIZ */
+
+.view{
+  display:none;
+}
+
+.view.active{
+  display:block;
+}
+
+.quiz-wrap{
+  width:min(950px,92%);
+  margin:25px auto 50px;
+}
+
+.questions-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  margin-bottom:20px;
+}
+
+.questions-header h2{
+  margin:0;
+  color:#24113f;
+  font-size:26px;
+  line-height:1.3;
+}
+
+.back-btn{
+  border:none;
+  background:#24113f;
+  color:white;
+  padding:12px 18px;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:bold;
+  font-size:15px;
+  transition:.2s;
+  white-space:nowrap;
+}
+
+.back-btn:hover{
+  opacity:.9;
+  transform:translateY(-2px);
+}
+
+/* PROGRESSION */
+
+.progress-box{
+  background:white;
+  border-radius:16px;
+  padding:16px 20px;
+  margin-bottom:20px;
+  box-shadow:0 5px 18px rgba(0,0,0,.08);
+}
+
+.progress-top{
+  display:flex;
+  justify-content:space-between;
+  font-size:15px;
+  font-weight:bold;
+  color:#24113f;
+  margin-bottom:10px;
+  gap:10px;
+}
+
+.progress-top .score-live{
+  color:#1764c0;
+}
+
+.bar{
+  height:10px;
+  background:#e7e1f1;
+  border-radius:10px;
+  overflow:hidden;
+}
+
+.fill{
+  height:100%;
+  width:0;
+  background:linear-gradient(90deg,#4b2481,#2f80ed);
+  border-radius:10px;
+  transition:width .3s;
+}
+
+/* QUESTION CARD */
+
+.question-card{
+  background:white;
+  border-radius:16px;
+  padding:22px;
+  margin-bottom:20px;
+  box-shadow:0 5px 18px rgba(0,0,0,.08);
+}
+
+.q-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  align-items:center;
+  margin-bottom:15px;
+}
+
+.question-number{
+  display:inline-block;
+  background:#24113f;
+  color:white;
+  padding:7px 12px;
+  border-radius:8px;
+  font-size:14px;
+  font-weight:bold;
+}
+
+.q-type{
+  display:inline-block;
+  background:#f1f6ff;
+  color:#1764c0;
+  padding:7px 12px;
+  border-radius:8px;
+  font-size:13px;
+  font-weight:bold;
+}
+
+.question-text{
+  font-size:18px;
+  font-weight:bold;
+  line-height:1.6;
+}
+
+.hint{
+  margin-top:8px;
+  font-size:14px;
+  color:#666;
+}
+
+/* OPTIONS */
+
+.options{
+  margin-top:18px;
+  display:grid;
+  gap:10px;
+}
+
+.opt{
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  width:100%;
+  text-align:left;
+  background:white;
+  border:2px solid #e4def0;
+  border-radius:12px;
+  padding:13px 14px;
+  font-size:16px;
+  line-height:1.5;
+  color:#222;
+  cursor:pointer;
+  transition:.15s;
+}
+
+.opt:hover:not(:disabled){
+  border-color:#2f80ed;
+  background:#f1f6ff;
+}
+
+.opt .mark{
+  flex:0 0 28px;
+  height:28px;
+  border-radius:8px;
+  background:#f5f3f8;
+  color:#24113f;
+  font-weight:bold;
+  font-size:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.opt.selected{
+  border-color:#4b2481;
+  background:#f3edfb;
+}
+
+.opt.selected .mark{
+  background:#4b2481;
+  color:white;
+}
+
+.opt.correct{
+  border-color:#2e9d5b;
+  background:#e8f7ee;
+}
+
+.opt.correct .mark{
+  background:#2e9d5b;
+  color:white;
+}
+
+.opt.wrong{
+  border-color:#d64545;
+  background:#fdecec;
+}
+
+.opt.wrong .mark{
+  background:#d64545;
+  color:white;
+}
+
+.opt.missed{
+  border:2px dashed #2e9d5b;
+  background:#f4fbf7;
+}
+
+.opt:disabled{
+  cursor:default;
+}
+
+.actions{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:18px;
+}
+
+.btn{
+  border:none;
+  background:#24113f;
+  color:white;
+  padding:13px 22px;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:bold;
+  font-size:16px;
+  transition:.2s;
+}
+
+.btn:hover:not(:disabled){
+  opacity:.9;
+  transform:translateY(-2px);
+}
+
+.btn:disabled{
+  background:#b9b2c6;
+  cursor:not-allowed;
+}
+
+.btn.blue{
+  background:#1764c0;
+}
+
+.btn.violet{
+  background:#4b2481;
+}
+
+.btn.ghost{
+  background:white;
+  color:#24113f;
+  border:2px solid #24113f;
+}
+
+/* CORRECTION */
+
+.verdict{
+  margin-top:20px;
+  font-size:18px;
+  font-weight:bold;
+}
+
+.verdict.ok{
+  color:#2e9d5b;
+}
+
+.verdict.ko{
+  color:#d64545;
+}
+
+.answer{
+  background:#f1f6ff;
+  border-radius:10px;
+  padding:18px;
+  margin-top:15px;
+  line-height:1.7;
+  border-left:4px solid #1764c0;
+}
+
+.answer strong{
+  color:#1764c0;
+}
+
+.solution{
+  background:#fff8e6;
+  border-radius:12px;
+  padding:18px;
+  margin-top:15px;
+  line-height:1.8;
+  border-left:4px solid #f0a500;
+}
+
+.solution strong{
+  display:block;
+  margin-bottom:6px;
+  font-size:17px;
+}
+
+.solution-steps{
+  color:#333;
+}
+
+/* BILAN */
+
+.result-card{
+  background:white;
+  border-radius:16px;
+  padding:30px 22px;
+  text-align:center;
+  box-shadow:0 5px 18px rgba(0,0,0,.08);
+  margin-bottom:20px;
+}
+
+.result-card h3{
+  margin:0 0 6px;
+  color:#24113f;
+  font-size:24px;
+}
+
+.big-score{
+  font-size:54px;
+  font-weight:bold;
+  color:#1764c0;
+  margin:10px 0 0;
+}
+
+.big-percent{
+  font-size:20px;
+  color:#4b2481;
+  font-weight:bold;
+}
+
+.result-msg{
+  margin:14px auto 0;
+  max-width:520px;
+  color:#555;
+  line-height:1.6;
+}
+
+.result-card .actions{
+  justify-content:center;
+  margin-top:24px;
+}
+
+.review-title{
+  color:#24113f;
+  margin:28px 0 14px;
+  font-size:21px;
+}
+
+.review-item{
+  background:white;
+  border-radius:16px;
+  padding:20px;
+  margin-bottom:16px;
+  box-shadow:0 5px 18px rgba(0,0,0,.08);
+  border-left:5px solid #d64545;
+}
+
+.review-item .rq{
+  font-weight:bold;
+  line-height:1.6;
+}
+
+.review-item .yours{
+  margin-top:10px;
+  color:#d64545;
+  font-size:15px;
+  line-height:1.6;
+}
+
+.perfect{
+  background:#e8f7ee;
+  border-radius:16px;
+  padding:22px;
+  color:#1e6b3e;
+  font-weight:bold;
+  text-align:center;
+}
+
+/* FOOTER */
+
+footer{
+  text-align:center;
+  padding:25px 15px;
+  color:#777;
+  font-size:14px;
+}
+
+/* MOBILE */
+
+@media(max-width:750px){
+
+  .categories{
+    grid-template-columns:1fr;
+  }
+
+  .hero h1{
+    font-size:28px;
+  }
+
+  .home-btn{
+    width:92%;
+    text-align:center;
+  }
+
+  .questions-header{
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .back-btn{
+    width:100%;
+    order:2;
+  }
+
+  .questions-header h2{
+    text-align:center;
+    order:1;
+    font-size:22px;
+  }
+
+  .question-text{
+    font-size:17px;
+  }
+
+  .opt{
+    font-size:15px;
+  }
+
+  .btn{
+    width:100%;
+  }
+
+  .category-btn.wide{
+    flex-direction:column;
+    text-align:center;
+  }
+
+  .big-score{
+    font-size:44px;
+  }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header>
+
+  <a
+    href="index.html"
+    class="logo-link"
+  >
+
+    <img
+      src="logo.png"
+      alt="ExamQuiz Haiti"
+    >
+
+    <span>ExamQuiz Haiti</span>
+
+  </a>
+
+</header>
+
+
+<!-- ===== ACCUEIL : LISTE DES CHAPITRES ===== -->
+
+<div
+  id="view-home"
+  class="view active"
+>
+
+  <a
+    href="universite-exam.html"
+    class="home-btn"
+  >
+    ← Retour à Université Exam
+  </a>
+
+  <section class="hero">
+
+    <h1>🚜 Introduction à l'agriculture</h1>
+
+    <p>
+      Révise le cours chapitre par chapitre. Après chaque réponse, tu vois la
+      correction et une explication tirée du cours.
+    </p>
+
+    <div class="hero-stats">
+      <div class="stat"><span id="statChap">0</span> chapitres</div>
+      <div class="stat"><span id="statQ">0</span> questions</div>
+    </div>
+
+  </section>
+
+  <section class="practice-panel">
+    <h2>Entraînement personnalisé</h2>
+    <p>Choisis le nombre de questions pour une révision générale avec des questions mélangées de tous les chapitres.</p>
+    <div class="practice-controls">
+      <label for="revisionCount">Nombre de questions</label>
+      <select id="revisionCount">
+        <option value="10">10 questions</option>
+        <option value="20">20 questions</option>
+        <option value="30" selected>30 questions</option>
+        <option value="50">50 questions</option>
+      </select>
+      <button class="btn violet" id="revisionStart" type="button">Commencer la révision →</button>
+    </div>
+    <div class="performance" id="performance">
+      <div><strong id="statAttempts">0</strong><span>Quiz terminés</span></div>
+      <div><strong id="statCorrect">0</strong><span>Bonnes réponses</span></div>
+      <div><strong id="statRate">0 %</strong><span>Réussite globale</span></div>
+    </div>
+  </section>
+
+  <section
+    class="categories"
+    id="chapterList"
+  ></section>
+
+</div>
+
+
+<!-- ===== QUIZ ===== -->
+
+<div
+  id="view-quiz"
+  class="view"
+>
+  <div class="quiz-wrap">
+
+    <div class="questions-header">
+      <h2 id="quizTitle"></h2>
+      <button
+        class="back-btn"
+        id="quizBack"
+        type="button"
+      >← Chapitres</button>
+    </div>
+
+    <div class="progress-box">
+      <div class="progress-top">
+        <span id="progText"></span>
+        <span class="score-live" id="scoreLive"></span>
+      </div>
+      <div class="bar"><div class="fill" id="fill"></div></div>
+    </div>
+
+    <div
+      class="question-card"
+      id="qCard"
+    ></div>
+
+  </div>
+</div>
+
+
+<!-- ===== BILAN ===== -->
+
+<div
+  id="view-result"
+  class="view"
+>
+  <div class="quiz-wrap">
+
+    <div class="questions-header">
+      <h2 id="resTitle"></h2>
+      <button
+        class="back-btn"
+        id="resBack"
+        type="button"
+      >← Chapitres</button>
+    </div>
+
+    <div id="resBody"></div>
+
+  </div>
+</div>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+  © 2026 ExamQuiz •
+  Développé par Ing. Fawenbert Régis
+
+</footer>
+
+
+<script>
+
+const CHAPITRES = [];
+/* S = choix unique (a = index de la bonne réponse)
+   M = choix multiples (a = tableau d'index des bonnes réponses)
+   V = vrai ou faux (a = true / false) */
+const S = (q, o, a, e) => ({ t: 's', q, o, a, e });
+const M = (q, o, a, e) => ({ t: 'm', q, o, a, e });
+const V = (q, a, e) => ({ t: 'v', q, a, e });
+const CH = (id, titre, icone, desc, q) => CHAPITRES.push({ id, titre, icone, desc, q });
+
+
+/* ===== CHAPITRE 1 ===== */
+CH(1, "Définition de l'agriculture", "🌾", "Étymologie, sens du mot, place de l'élevage et de la pêche", [
+  S("D'où vient le mot « agriculture » ?",
+    ["De deux mots grecs", "De deux mots latins : ager et cultura", "D'un mot arabe", "D'un seul mot latin : agricola"], 1,
+    "Selon le cours, le terme agriculture vient de deux mots latins : « ager » et « cultura »."),
+  S("Que signifie le mot latin « ager » ?",
+    ["Champs", "Culture", "Jardin", "Forêt"], 0,
+    "« Ager » signifie « champs ». Attention : « jardin » se dit « hortus » (horticulture) et « forêt » se dit « silva » (sylviculture)."),
+  S("Que signifie le mot latin « cultura » ?",
+    ["Champs", "Culture", "Récolte", "Élevage"], 1,
+    "« Cultura » signifie « culture ». Ensemble : ager (champs) + cultura (culture)."),
+  S("En bref, le mot « agriculture » signifie :",
+    ["La culture des champs", "L'élevage des animaux", "La pêche en eau douce", "L'étude des roches"], 0,
+    "En assemblant ager (champs) et cultura (culture), on obtient « la culture des champs »."),
+  V("Le mot « ager » signifie « culture » et le mot « cultura » signifie « champs ».", false,
+    "C'est l'inverse : ager = champs et cultura = culture."),
+  S("Selon le cours, le terme « agriculture » désigne la culture des sols et l'ensemble des travaux de transformation du milieu naturel :",
+    ["dans l'intérêt de l'homme", "dans l'intérêt des animaux sauvages", "uniquement à des fins de recherche", "sans aucune intervention humaine"], 0,
+    "La définition précise que ces travaux de transformation du milieu naturel se font « dans l'intérêt de l'homme »."),
+  M("Selon le cours, l'agriculture est à la fois (plusieurs réponses) :",
+    ["Une science", "Un art", "Une activité économique (une entreprise)", "Une religion"], [0, 1, 2],
+    "Le cours dit que l'agriculture est à la fois une science, un art et une activité économique (une entreprise). Ce n'est pas une religion."),
+  V("L'élevage des animaux fait partie intégrante de l'agriculture.", true,
+    "Le cours le précise : l'élevage fait partie intégrante de l'agriculture."),
+  V("La pêche fait partie intégrante de l'agriculture.", false,
+    "Le cours précise que l'élevage fait partie de l'agriculture, ce qui n'est pas le cas pour la pêche."),
+  S("Laquelle de ces activités ne fait PAS partie de l'agriculture selon le cours ?",
+    ["La culture des sols", "L'élevage des animaux", "La pêche", "La transformation du milieu naturel dans l'intérêt de l'homme"], 2,
+    "La pêche est la seule activité exclue de l'agriculture dans le cours."),
+  S("Une ferme produit du maïs et élève des chèvres. Selon le cours, ces deux activités relèvent :",
+    ["Seulement de l'agriculture pour le maïs", "De l'agriculture : la culture et l'élevage en font partie", "De la pêche", "D'aucune de ces réponses"], 1,
+    "La culture des sols et l'élevage des animaux font tous deux partie de l'agriculture."),
+  S("Un pêcheur vend le poisson qu'il capture en mer. Selon le cours, son activité :",
+    ["Fait partie intégrante de l'agriculture", "Ne fait pas partie de l'agriculture", "Est de l'élevage", "Est de la sylviculture"], 1,
+    "Le cours dit que la pêche ne fait pas partie de l'agriculture, contrairement à l'élevage."),
+  V("L'agriculture se limite à la culture des plantes.", false,
+    "Elle inclut aussi l'élevage des animaux. L'agriculture ne se réduit donc pas à la culture des plantes."),
+  S("Dire que l'agriculture est « une entreprise » signifie qu'elle est :",
+    ["Une activité économique", "Une science pure", "Un art décoratif", "Un loisir"], 0,
+    "Le cours écrit : « une activité économique (une entreprise) »."),
+  V("Le terme « agriculture » désigne uniquement la culture des sols, sans aucune transformation du milieu naturel.", false,
+    "La définition comprend la culture des sols ET l'ensemble des travaux de transformation du milieu naturel dans l'intérêt de l'homme."),
+  M("Parmi ces affirmations, lesquelles sont exactes d'après le cours ?",
+    ["Agriculture vient de deux mots latins", "Ager signifie « champs »", "La pêche fait partie de l'agriculture", "L'élevage fait partie de l'agriculture"], [0, 1, 3],
+    "Sont exactes : l'origine latine, ager = champs, et l'élevage inclus. Fausse : la pêche n'est pas comprise dans l'agriculture.")
+]);
+
+/* ===== CHAPITRE 2 ===== */
+CH(2, "Termes et branches de l'agriculture", "🌿", "Agronomie, horticulture, arboriculture, sylviculture, floriculture, viticulture…", [
+  S("Qu'est-ce qu'un agriculteur ?",
+    ["Celui qui cultive la terre", "Celui qui étudie les roches", "Celui qui exploite uniquement les forêts", "Celui qui élève des poissons"], 0,
+    "Le cours définit l'agriculteur comme « celui qui cultive la terre »."),
+  S("L'agronomie est :",
+    ["L'étude scientifique du rapport plantes-sols", "La culture des jardins", "La culture de la vigne", "L'exploitation des forêts"], 0,
+    "Agronomie = étude scientifique du rapport plantes-sols. Elle vient du grec « nomos » (loi, règle)."),
+  S("Le mot grec « nomos » (loi, règle) entre dans la formation du mot :",
+    ["Agronomie", "Horticulture", "Viticulture", "Floriculture"], 0,
+    "Agronomie vient du grec « nomos » : loi, règle. Les autres termes viennent du latin."),
+  S("L'horticulture est :",
+    ["La culture des jardins", "La culture des arbres", "La culture des fleurs uniquement", "L'étude des sols"], 0,
+    "Horticulture = culture des jardins, du latin « hortus » (jardin)."),
+  S("Que signifie le mot latin « hortus » ?",
+    ["Jardin", "Arbre", "Forêt", "Fleur"], 0,
+    "« Hortus » = jardin, d'où horticulture."),
+  S("L'arboriculture est :",
+    ["La culture des arbres", "La culture des jardins", "L'exploitation des forêts", "La culture de la vigne"], 0,
+    "Arboriculture = culture des arbres, du latin « arbor » (arbre)."),
+  S("Que signifie le mot latin « arbor » ?",
+    ["Arbre", "Jardin", "Vigne", "Champ"], 0,
+    "« Arbor » = arbre, d'où arboriculture."),
+  S("La sylviculture (ou foresterie) désigne :",
+    ["L'ensemble des activités liées à l'entretien et à l'exploitation des forêts", "La culture des fleurs", "La culture des jardins", "L'élevage des animaux"], 0,
+    "Sylviculture / foresterie = ensemble des activités liées à l'entretien et à l'exploitation des forêts."),
+  S("Que signifie le mot latin « silva » ?",
+    ["Forêt", "Fleur", "Vigne", "Jardin"], 0,
+    "« Silva » = forêt, d'où sylviculture."),
+  S("L'agroforesterie (ou agro-sylviculture) est :",
+    ["L'exploitation des terres agricoles associant des plantations d'arbres d'une part, des cultures ou des pâturages d'autre part",
+     "L'étude scientifique du rapport plantes-sols",
+     "L'entretien des forêts uniquement",
+     "La culture des plantes ornementales"], 0,
+    "L'agroforesterie associe, sur les terres agricoles, des arbres d'un côté et des cultures ou des pâturages de l'autre."),
+  S("« Agro-sylvo-pastoral » qualifie ce qui est relatif :",
+    ["À l'élevage, à l'agriculture et à la sylviculture", "Aux fleurs et aux jardins", "À la vigne et au raisin", "Aux roches et aux sols"], 0,
+    "Agro (agriculture) + sylvo (forêt) + pastoral (élevage) : le terme couvre ces trois domaines."),
+  S("La floriculture est :",
+    ["La culture des plantes ornementales ou des fleurs", "La culture des arbres", "La culture des céréales", "La culture de la vigne"], 0,
+    "Floriculture = culture des plantes ornementales / des fleurs, du latin « flos » (fleur)."),
+  S("Que signifie le mot latin « flos » ?",
+    ["Fleur", "Forêt", "Arbre", "Jardin"], 0,
+    "« Flos » = fleur, d'où floriculture."),
+  S("La viticulture est :",
+    ["La culture de la vigne (raisin)", "La culture des fleurs", "La culture des jardins", "L'exploitation des forêts"], 0,
+    "Viticulture = culture de la vigne / du raisin, du latin « vitis » (vigne)."),
+  S("Que signifie le mot latin « vitis » ?",
+    ["Vigne", "Fleur", "Forêt", "Champ"], 0,
+    "« Vitis » = vigne, d'où viticulture."),
+  V("L'agronomie est l'étude scientifique du rapport plantes-sols.", true,
+    "C'est exactement la définition donnée dans le cours."),
+  V("Sylviculture et foresterie sont présentées dans le cours comme deux termes désignant la même activité.", true,
+    "Le cours écrit « Sylviculture / Foresterie » : ensemble des activités liées à l'entretien et à l'exploitation des forêts."),
+  V("L'arboriculture est la culture des fleurs.", false,
+    "L'arboriculture est la culture des arbres. La culture des fleurs s'appelle la floriculture."),
+  V("En agroforesterie, on associe des arbres à des cultures ou à des pâturages.", true,
+    "C'est le principe de l'agroforesterie selon le cours."),
+  M("Parmi ces termes, lesquels ont une origine latine d'après le cours ?",
+    ["Horticulture (hortus)", "Arboriculture (arbor)", "Agronomie (nomos)", "Viticulture (vitis)"], [0, 1, 3],
+    "Horticulture, arboriculture et viticulture viennent du latin. Agronomie vient du grec « nomos »."),
+  S("Un étudiant étudie l'effet du type de sol sur la croissance du haricot. Sa discipline est :",
+    ["L'agronomie", "La floriculture", "La viticulture", "La sylviculture"], 0,
+    "Il étudie le rapport plantes-sols : c'est l'agronomie."),
+  S("Une personne cultive des roses ornementales pour les vendre. Elle pratique :",
+    ["La floriculture", "L'arboriculture", "La viticulture", "L'agronomie"], 0,
+    "Les roses ornementales sont des fleurs : floriculture."),
+  S("Un exploitant entretient une forêt de pins et en exploite le bois. Il pratique :",
+    ["La sylviculture", "L'horticulture", "La floriculture", "La viticulture"], 0,
+    "Entretien et exploitation d'une forêt : sylviculture (foresterie)."),
+  S("Un agriculteur cultive du maïs entre des rangées d'arbres plantés sur sa parcelle. Il pratique :",
+    ["L'agroforesterie", "La viticulture", "La floriculture", "L'agronomie"], 0,
+    "Arbres + cultures sur une terre agricole : agroforesterie."),
+  S("Un projet combine élevage, culture et sylviculture. On le qualifie de :",
+    ["Agro-sylvo-pastoral", "Horticole", "Viticole", "Floricole"], 0,
+    "Agro-sylvo-pastoral = relatif à l'élevage, à l'agriculture et à la sylviculture."),
+  S("Un producteur entretient un vignoble pour récolter du raisin. Son activité est :",
+    ["La viticulture", "L'horticulture", "La sylviculture", "La floriculture"], 0,
+    "La culture de la vigne (raisin) s'appelle la viticulture."),
+  S("Quelqu'un entretient un verger de manguiers. Quel terme du cours correspond le mieux à son activité ?",
+    ["L'arboriculture", "La floriculture", "La viticulture", "L'agronomie"], 0,
+    "Les manguiers sont des arbres : arboriculture (culture des arbres).")
+]);
+
+/* ===== CHAPITRE 3 ===== */
+CH(3, "Origine et histoire de l'agriculture", "🏺", "Foyers de naissance, premières plantes, agriculture moderne, révolution verte", [
+  S("Comment vivaient les premiers hommes ?",
+    ["Ils étaient nomades, sans demeure fixe", "Ils vivaient dans des villages permanents", "Ils étaient tous éleveurs", "Ils pratiquaient la révolution verte"], 0,
+    "Le cours dit que les premiers hommes étaient des nomades (sans demeure fixe)."),
+  S("Où les premiers hommes nomades s'établissaient-ils ?",
+    ["Là où il y avait de quoi se nourrir", "Toujours au bord de la mer", "Uniquement en montagne", "Toujours au même endroit"], 0,
+    "Ils s'établissaient là où il y avait de quoi se nourrir."),
+  V("Les premiers hommes vivaient dans des demeures fixes.", false,
+    "Ils étaient nomades, donc sans demeure fixe."),
+  S("Combien de foyers principaux de naissance de l'agriculture les découvertes archéologiques permettent-elles de distinguer ?",
+    ["2", "3", "4", "6"], 2,
+    "Quatre foyers principaux : le Croissant fertile, la Nouvelle-Guinée, la Chine et l'Amérique."),
+  M("Quels sont les foyers principaux de naissance de l'agriculture cités dans le cours ?",
+    ["Le Croissant fertile", "La Nouvelle-Guinée", "La Chine", "L'Amérique", "L'Europe du Nord"], [0, 1, 2, 3],
+    "Les quatre foyers du cours : Croissant fertile, Nouvelle-Guinée, Chine, Amérique. L'Europe du Nord n'est pas citée."),
+  S("Quelle zone fut sans doute la première zone d'apparition de l'agriculture ?",
+    ["Le Croissant fertile", "La Chine", "L'Amérique centrale", "La Nouvelle-Guinée"], 0,
+    "Le Croissant fertile fut sans doute la première zone d'apparition de l'agriculture."),
+  M("Quels pays ou régions le Croissant fertile englobe-t-il selon le cours ?",
+    ["La Palestine", "Le Liban", "La Syrie", "Le golfe Persique", "Le Mexique"], [0, 1, 2, 3],
+    "Le Croissant fertile englobe la Palestine, le Liban, la Syrie et le golfe Persique. Le Mexique relève du foyer américain."),
+  S("À quelle époque l'agriculture est-elle apparue dans le Croissant fertile ?",
+    ["Environ 7500 ans avant J.-C.", "Environ 6500 ans avant J.-C.", "Environ 3000 ans avant J.-C.", "Environ 1500 ans avant J.-C."], 0,
+    "Environ 7500 ans avant J.-C. 6500 av. J.-C. correspond à la Chine, 3000 av. J.-C. au haricot, 1500 av. J.-C. au coton."),
+  S("La Nouvelle-Guinée a connu l'agriculture :",
+    ["Presque à la même époque que le Moyen-Orient", "Bien après la Chine", "Seulement à l'époque moderne", "Avant tous les autres foyers de plusieurs millénaires"], 0,
+    "Le cours indique « presque à la même époque que le Moyen-Orient »."),
+  S("En Chine, l'agriculture est apparue vers :",
+    ["6500 avant J.-C.", "7500 avant J.-C.", "3000 avant J.-C.", "1500 avant J.-C."], 0,
+    "En Chine, les débuts se situent vers 6500 avant J.-C."),
+  S("Quelles furent sans doute les premières plantes domestiquées en Chine ?",
+    ["Le millet et le chou", "Le riz et le soja", "Le blé et l'orge", "Le maïs et le haricot"], 0,
+    "Le millet et le chou furent les premiers ; le riz et le soja n'apparaissent que plus tard."),
+  V("En Chine, le riz et le soja ont été domestiqués avant le millet et le chou.", false,
+    "C'est l'inverse : le millet et le chou d'abord, le riz et le soja plus tard."),
+  S("Quelle région a connu ses premières formes d'agriculture vers 7000 avant J.-C. ?",
+    ["L'Amérique centrale (Yucatán et sud du Mexique)", "La Chine", "Le Croissant fertile", "L'Europe"], 0,
+    "L'Amérique centrale, et plus particulièrement le Yucatán et le sud du Mexique."),
+  S("Quelle est la première plante dont la culture est attestée en Amérique centrale ?",
+    ["La courge (Cucurbita pepo)", "Le maïs", "Le haricot", "Le coton"], 0,
+    "La première plante attestée est la courge, de nom scientifique Cucurbita pepo."),
+  S("Quel est le nom scientifique de la courge citée dans le cours ?",
+    ["Cucurbita pepo", "Zea mays", "Oryza sativa", "Hevea brasiliensis"], 0,
+    "La courge est Cucurbita pepo."),
+  M("Entre les Ve et IIIe millénaires avant J.-C., quelles cultures se développent en Amérique centrale ?",
+    ["D'autres variétés de courges", "Le piment", "L'avocat", "Le haricot", "Le riz"], [0, 1, 2, 3],
+    "Se développent d'autres courges, le piment, l'avocat et le haricot. Le riz n'est pas cité pour l'Amérique."),
+  S("Le haricot a été domestiqué en Amérique vers :",
+    ["3000 avant J.-C.", "7000 avant J.-C.", "1500 avant J.-C.", "6500 avant J.-C."], 0,
+    "Le haricot est domestiqué vers 3000 avant J.-C."),
+  S("Le coton apparaît dans les cultures d'Amérique centrale vers :",
+    ["1500 avant J.-C.", "3000 avant J.-C.", "7000 avant J.-C.", "7500 avant J.-C."], 0,
+    "Le coton apparaît vers 1500 avant J.-C."),
+  S("Le maïs est issu d'une plante sauvage appelée :",
+    ["La téosinte", "Le millet", "La courge", "Le sisal"], 0,
+    "Le maïs est issu d'une plante sauvage, la téosinte."),
+  S("Quelles furent les premières catégories de plantes domestiquées ?",
+    ["Les céréales", "Les plantes ornementales", "Les plantes textiles", "Les plantes à épices"], 0,
+    "Le cours note que les céréales sont les premières catégories de plantes domestiquées."),
+  S("Quelles furent les premières plantes domestiquées d'après le NB du cours ?",
+    ["Le blé et l'orge", "Le riz et le soja", "Le millet et le chou", "Le maïs et la courge"], 0,
+    "Le blé et l'orge sont indiqués comme les premières plantes domestiquées."),
+  S("L'agriculture moderne commence :",
+    ["Au début du 18e siècle (1700-1800), en Angleterre", "Au 20e siècle aux États-Unis", "Vers 7500 avant J.-C.", "Au 12e siècle en Chine"], 0,
+    "L'agriculture moderne commence au début du 18e siècle (1700-1800) en Angleterre."),
+  S("Quel pays est resté leader en agriculture jusqu'à la moitié du 19e siècle ?",
+    ["L'Angleterre", "Les États-Unis", "La Chine", "Le Mexique"], 0,
+    "L'Angleterre est restée leader jusqu'à la moitié du 19e siècle."),
+  S("Quel pays a apporté de grands changements technologiques à partir de la 2e moitié du 19e siècle (années 1850) ?",
+    ["Les États-Unis", "L'Angleterre", "La Chine", "La Syrie"], 0,
+    "Les USA apportent de grands changements technologiques qui aboutiront à la révolution verte."),
+  S("La révolution verte désigne :",
+    ["Une avancée technologique réalisée en agriculture entre 1944 et 1970", "L'apparition de l'agriculture dans le Croissant fertile", "La domestication du blé et de l'orge", "Le début de l'agriculture en Angleterre"], 0,
+    "C'est l'avancée technologique réalisée en agriculture au cours de la période 1944-1970, à la suite de grands progrès scientifiques."),
+  S("La révolution verte a eu lieu durant la période :",
+    ["1944-1970", "1700-1800", "1850-1900", "7500-6500 avant J.-C."], 0,
+    "Période de la révolution verte : 1944-1970."),
+  S("Qui est considéré comme le père de la révolution verte ?",
+    ["Norman Borlaug, agronome américain", "Un agronome anglais du 18e siècle", "Un agronome chinois", "Un archéologue du Croissant fertile"], 0,
+    "L'agronome américain Norman Borlaug est considéré comme le père de la révolution verte."),
+  M("Quels éléments ont contribué à la révolution verte ?",
+    ["Les variétés à haut rendement", "Les engrais chimiques", "La mécanisation", "L'abandon de l'irrigation"], [0, 1, 2],
+    "Ont contribué : nouvelles variétés à haut rendement, sélection variétale, engrais chimiques, pesticides, mécanisation et irrigation. L'irrigation a contribué, elle n'a pas été abandonnée."),
+  S("Quels exemples de variétés à haut rendement le cours cite-t-il ?",
+    ["Le blé et le riz", "Le millet et le chou", "La courge et le piment", "Le coton et le sisal"], 0,
+    "Les variétés à haut rendement citées en exemple sont celles du blé et du riz."),
+  V("La révolution verte a fait monter en flèche la productivité agricole dans le monde en développement.", true,
+    "Grâce aux variétés à haut rendement, aux engrais, aux pesticides, à la mécanisation et à l'irrigation."),
+  S("Quel est l'ordre correct, du plus ancien au plus récent ?",
+    ["Croissant fertile (7500 av. J.-C.), Amérique centrale (7000 av. J.-C.), Chine (6500 av. J.-C.)",
+     "Chine (6500 av. J.-C.), Amérique centrale (7000 av. J.-C.), Croissant fertile (7500 av. J.-C.)",
+     "Amérique centrale (7000 av. J.-C.), Croissant fertile (7500 av. J.-C.), Chine (6500 av. J.-C.)",
+     "Croissant fertile (7500 av. J.-C.), Chine (6500 av. J.-C.), Amérique centrale (7000 av. J.-C.)"], 0,
+    "Plus la date avant J.-C. est grande, plus l'événement est ancien : 7500, puis 7000, puis 6500 avant J.-C.")
+]);
+
+/* ===== CHAPITRE 4 ===== */
+CH(4, "Les différentes formes d'agriculture", "🚜", "Intensive, extensive, diversifiée, de subsistance, monoculture", [
+  S("L'agriculture intensive est pratiquée :",
+    ["Là où la terre fait défaut", "Là où la terre est en abondance", "Uniquement dans les jardins", "Uniquement pour la consommation familiale"], 0,
+    "L'agriculture intensive est pratiquée là où la terre fait défaut (la terre est rare)."),
+  S("L'agriculture intensive est à haute intensité de :",
+    ["Main-d'œuvre", "Jachère", "Terre disponible", "Rendement faible"], 0,
+    "Elle demande beaucoup de main-d'œuvre."),
+  M("Quelles sont les caractéristiques de l'agriculture intensive ?",
+    ["Fortes quantités d'intrants, de qualité améliorée", "Investissements technologiques importants", "Plusieurs récoltes et haut rendement annuel", "Une seule récolte par an avec mise en jachère"], [0, 1, 2],
+    "L'agriculture intensive utilise beaucoup d'intrants de qualité, investit dans la technologie et obtient plusieurs récoltes avec un haut rendement annuel. La jachère relève de l'agriculture extensive."),
+  V("L'agriculture intensive donne plusieurs récoltes et un haut rendement annuel.", true,
+    "C'est l'une de ses caractéristiques principales."),
+  S("Dans un pays où la terre est rare, quelle forme d'agriculture est pratiquée ?",
+    ["L'agriculture intensive", "L'agriculture extensive", "La monoculture uniquement", "L'agriculture de subsistance uniquement"], 0,
+    "Quand la terre fait défaut, on pratique l'agriculture intensive pour produire beaucoup sur peu de surface."),
+  S("L'agriculture extensive est pratiquée :",
+    ["Là où la terre est en abondance", "Là où la terre fait défaut", "Uniquement dans les serres", "Uniquement en zone urbaine"], 0,
+    "L'agriculture extensive est pratiquée là où la terre est en abondance."),
+  S("En agriculture extensive, combien de récoltes obtient-on par année ?",
+    ["Une seule, avec mise en jachère", "Plusieurs récoltes", "Aucune récolte", "Une récolte par mois"], 0,
+    "Une seule récolte par année et mise en jachère."),
+  V("Le rendement annuel de l'agriculture extensive est relativement bas.", true,
+    "C'est une de ses caractéristiques : une seule récolte par an, donc un rendement annuel relativement bas."),
+  S("Dans quelle forme d'agriculture parle-t-on de mise en jachère ?",
+    ["L'agriculture extensive", "L'agriculture intensive", "La floriculture", "L'agriculture diversifiée"], 0,
+    "Le cours associe la mise en jachère à l'agriculture extensive."),
+  M("Quelles sont les caractéristiques de l'agriculture extensive ?",
+    ["Terre en abondance", "Une seule récolte par année", "Rendement annuel relativement bas", "Haute intensité de main-d'œuvre"], [0, 1, 2],
+    "La haute intensité de main-d'œuvre caractérise l'agriculture intensive, pas l'extensive."),
+  V("L'agriculture extensive est pratiquée là où la terre fait défaut.", false,
+    "Là où la terre fait défaut, on pratique l'agriculture intensive. L'extensive suppose une terre abondante."),
+  V("En agriculture extensive, on utilise de fortes quantités d'intrants de qualité améliorée.", false,
+    "C'est une caractéristique de l'agriculture intensive."),
+  S("Une région dispose de beaucoup de terres, avec une seule récolte par an suivie d'une jachère. Quelle forme d'agriculture est pratiquée ?",
+    ["L'agriculture extensive", "L'agriculture intensive", "La monoculture intensive", "L'horticulture"], 0,
+    "Terre abondante, une seule récolte par an, jachère : agriculture extensive."),
+  S("Dans l'agriculture diversifiée :",
+    ["Plusieurs espèces sont cultivées sur une même parcelle ou ferme", "Une seule espèce est cultivée à la fois", "On ne pratique que l'élevage", "On ne cultive que des arbres"], 0,
+    "Plusieurs espèces sont cultivées sur une même parcelle ou ferme."),
+  V("L'élevage des animaux est souvent associé à l'agriculture diversifiée.", true,
+    "Le cours précise que l'élevage y est souvent associé."),
+  S("Une ferme cultive haricot, maïs et banane, et élève des poules sur la même exploitation. Il s'agit surtout d'agriculture :",
+    ["Diversifiée", "Monoculture", "Extensive uniquement", "De floriculture"], 0,
+    "Plusieurs espèces sur la même ferme, avec élevage associé : agriculture diversifiée."),
+  S("Quelle forme d'agriculture est pratiquée pour la consommation locale ou familiale ?",
+    ["L'agriculture de subsistance (ou mouvante)", "L'agriculture intensive", "La monoculture", "L'agriculture diversifiée"], 0,
+    "L'agriculture de subsistance ou mouvante est pratiquée pour la consommation locale ou familiale."),
+  S("L'agriculture de subsistance est pratiquée principalement dans :",
+    ["Les pays moins avancés", "Les pays les plus industrialisés", "Les zones sans terre agricole", "Les serres de recherche"], 0,
+    "Elle est pratiquée principalement dans les pays moins avancés."),
+  V("Le cours présente l'agriculture de subsistance sous le nom d'agriculture « de subsistance ou mouvante ».", true,
+    "Les deux appellations figurent dans le cours."),
+  S("Une famille cultive uniquement pour se nourrir, sans vendre sa production. Quelle forme d'agriculture pratique-t-elle ?",
+    ["De subsistance", "Intensive à but commercial", "Monoculture industrielle", "Floriculture"], 0,
+    "Production pour la consommation familiale : agriculture de subsistance."),
+  S("La monoculture consiste à :",
+    ["Cultiver une seule espèce à la fois sur la même ferme ou portion de terre", "Cultiver plusieurs espèces sur une même parcelle", "Pratiquer seulement l'élevage", "Laisser la terre en jachère"], 0,
+    "Une seule espèce est cultivée à la fois sur la même ferme ou portion de terre."),
+  S("Un agriculteur plante uniquement du riz sur toute sa parcelle. Quelle forme d'agriculture pratique-t-il ?",
+    ["La monoculture", "L'agriculture diversifiée", "L'agriculture de subsistance mouvante", "L'agroforesterie"], 0,
+    "Une seule espèce sur toute la parcelle : monoculture."),
+  V("Monoculture et agriculture diversifiée sont deux termes synonymes.", false,
+    "Ce sont des opposés : une seule espèce pour la monoculture, plusieurs espèces pour l'agriculture diversifiée."),
+  S("Combien de formes d'agriculture le cours présente-t-il ?",
+    ["5", "3", "7", "10"], 0,
+    "Cinq : intensive, extensive, diversifiée, de subsistance (mouvante) et monoculture."),
+  M("Lesquelles de ces formes d'agriculture sont présentées dans le cours ?",
+    ["Intensive", "Extensive", "Diversifiée", "Monoculture", "Spatiale"], [0, 1, 2, 3],
+    "L'agriculture spatiale n'apparaît pas dans le cours. On y trouve aussi l'agriculture de subsistance."),
+  S("Quelle forme d'agriculture exige des investissements technologiques importants ?",
+    ["L'agriculture intensive", "L'agriculture extensive", "L'agriculture de subsistance", "La monoculture"], 0,
+    "Ce sont les investissements technologiques importants qui caractérisent l'agriculture intensive."),
+  S("Quelle est la principale différence entre agriculture intensive et agriculture extensive ?",
+    ["L'intensive se pratique où la terre manque, avec beaucoup d'intrants et plusieurs récoltes ; l'extensive où la terre est abondante, avec une récolte par an",
+     "L'intensive ne produit que du bétail ; l'extensive ne produit que des céréales",
+     "L'intensive se pratique en jachère ; l'extensive jamais",
+     "Il n'y a aucune différence"], 0,
+    "Intensive : terre rare, intrants importants, plusieurs récoltes, haut rendement. Extensive : terre abondante, une récolte par an avec jachère, rendement relativement bas.")
+]);
+
+/* ===== CHAPITRE 5 ===== */
+CH(5, "Catégories de plantes cultivées", "🌽", "Céréales, plantes textiles, fourragères, oléagineuses, tubercules, fruits…", [
+  S("Quelle catégorie de plantes représente à peu près la moitié de la production mondiale et compte parmi les cultures les plus importantes du monde ?",
+    ["Les céréales", "Les plantes textiles", "Les plantes aromatiques", "Les plantes à caoutchouc"], 0,
+    "Les céréales (par exemple le riz et le blé) représentent environ la moitié de la production mondiale."),
+  S("Quels exemples de céréales le cours donne-t-il ?",
+    ["Le riz et le blé", "Le coton et le sisal", "L'olive et l'arachide", "La canne à sucre et la betterave"], 0,
+    "Riz et blé sont les exemples de céréales du cours."),
+  S("Les plantes textiles ou à fibre représentent environ quelle part de la production mondiale ?",
+    ["1/5", "La moitié", "1/10", "Les 3/4"], 0,
+    "Environ 1/5 de la production mondiale."),
+  S("Quels sont les exemples de plantes textiles donnés dans le cours ?",
+    ["Le coton et le sisal (pite)", "Le riz et le blé", "Le neem et l'hévéa", "Le manioc et la carotte"], 0,
+    "Le coton et le sisal (ou pite) sont les exemples cités."),
+  S("À quoi servent les plantes fourragères ?",
+    ["À l'alimentation du bétail", "À la production de parfum", "À la fabrication d'huile", "À la fabrication de pesticides"], 0,
+    "Les plantes fourragères servent à l'alimentation du bétail."),
+  M("Quels sont des exemples de plantes fourragères dans le cours ?",
+    ["Le Napier", "L'herbe étoile africaine", "L'herbe de Guinée", "Le coton"], [0, 1, 2],
+    "Napier, herbe étoile africaine et herbe de Guinée sont des fourragères. Le coton est une plante textile."),
+  S("Quelles plantes sont appelées saccharifères (ou sucrières) ?",
+    ["La canne à sucre et la betterave sucrière", "Le riz et le blé", "Le soya et l'arachide", "Le vétiver et le neem"], 0,
+    "Les plantes saccharifères fournissent le sucre : canne à sucre, betterave sucrière."),
+  S("Les plantes oléagineuses sont cultivées pour la production :",
+    ["D'huile (et de peinture)", "De fibres textiles", "De caoutchouc", "De parfum"], 0,
+    "Elles servent à produire de l'huile, de la peinture. Exemples : olive, soya, arachide."),
+  M("Quels sont des exemples de plantes oléagineuses selon le cours ?",
+    ["L'olive", "Le soya", "L'arachide", "La canne à sucre"], [0, 1, 2],
+    "Olive, soya et arachide sont des oléagineuses. La canne à sucre est saccharifère."),
+  S("À quoi servent les plantes aromatiques ?",
+    ["À la production de parfum", "À l'alimentation du bétail", "À la fabrication d'huile", "À la fabrication de caoutchouc"], 0,
+    "Les plantes aromatiques servent à produire du parfum. Exemple du cours : le vétiver."),
+  S("Quelle plante est citée comme exemple de plante aromatique ?",
+    ["Le vétiver", "Le neem", "L'hévéa", "Le manioc"], 0,
+    "Le vétiver est l'exemple du cours."),
+  S("À quoi servent les plantes à épices ?",
+    ["À l'assaisonnement des aliments", "À l'alimentation du bétail", "À la fabrication de pesticides", "À la production de fibres"], 0,
+    "Les plantes à épices servent à assaisonner les aliments."),
+  S("Les plantes à insecticide servent à :",
+    ["Préparer des pesticides, pour le contrôle des pestes", "Produire du caoutchouc", "Nourrir le bétail", "Produire du sucre"], 0,
+    "Elles servent à préparer des pesticides (contrôle des pestes). Exemple du cours : le neem."),
+  V("Le neem est une plante à caoutchouc.", false,
+    "Le neem est une plante à insecticide. La plante à caoutchouc citée dans le cours est l'hévéa."),
+  S("Quelle plante est citée comme exemple de plante à caoutchouc ?",
+    ["L'hévéa", "Le neem", "Le vétiver", "L'olive"], 0,
+    "L'hévéa est l'exemple de plante à caoutchouc du cours."),
+  S("Quels exemples de tubercules le cours donne-t-il ?",
+    ["Le manioc, la carotte et la pomme de terre", "Le riz, le blé et le maïs", "L'olive, le soya et l'arachide", "Le coton et le sisal"], 0,
+    "Manioc, carotte et pomme de terre sont les exemples donnés pour les tubercules."),
+  S("Dans la liste du cours, quelle catégorie de plantes est aussi appelée « cultures maraîchères » ?",
+    ["Les plantes maraîchères", "Les plantes ornementales", "Les ligneux", "Les plantes textiles"], 0,
+    "La liste mentionne « les plantes maraîchères / cultures maraîchères »."),
+  S("Quelle catégorie regroupe les arbres et les ligneux (cultures forestières) ?",
+    ["Les arbres / ligneux", "Les tubercules", "Les céréales", "Les plantes à épices"], 0,
+    "La catégorie « Les arbres / les ligneux » correspond aux cultures forestières."),
+  S("Les fleurs et plantes ornementales relèvent de quelle activité ?",
+    ["La floriculture", "La viticulture", "La sylviculture", "L'arboriculture"], 0,
+    "La catégorie « fleurs / plantes ornementales » est associée à la floriculture."),
+  V("Les plantes médicinales figurent parmi les catégories de plantes cultivées du cours.", true,
+    "Elles figurent dans la liste des catégories."),
+  V("Les céréales représentent environ la moitié de la production mondiale.", true,
+    "C'est l'une des informations clés du cours sur les céréales."),
+  V("Le vétiver est une plante aromatique.", true,
+    "Il est cité en exemple pour la production de parfum."),
+  S("Le coton appartient à quelle catégorie ?",
+    ["Les plantes textiles ou à fibre", "Les plantes oléagineuses", "Les céréales", "Les plantes saccharifères"], 0,
+    "Le coton est une plante textile (à fibre)."),
+  S("La betterave sucrière appartient à quelle catégorie ?",
+    ["Les plantes saccharifères", "Les tubercules", "Les plantes fourragères", "Les plantes à épices"], 0,
+    "La betterave sucrière est une plante saccharifère (sucrière)."),
+  S("Le soya appartient à quelle catégorie ?",
+    ["Les plantes oléagineuses", "Les plantes textiles", "Les plantes aromatiques", "Les plantes à caoutchouc"], 0,
+    "Le soya est une plante oléagineuse."),
+  S("Le Napier est une plante :",
+    ["Fourragère", "Textile", "Aromatique", "À insecticide"], 0,
+    "Le Napier sert à nourrir le bétail : c'est une plante fourragère."),
+  S("Le riz appartient à quelle catégorie ?",
+    ["Les céréales", "Les tubercules", "Les plantes fourragères", "Les plantes maraîchères"], 0,
+    "Le riz est cité comme exemple de céréale."),
+  M("Parmi ces catégories, lesquelles figurent dans le cours ?",
+    ["Les céréales", "Les fruits", "Les tubercules", "Les plantes médicinales", "Les roches"], [0, 1, 2, 3],
+    "Les roches ne sont pas des plantes. Les quatre autres catégories figurent bien dans la liste."),
+  S("Une plante cultivée pour produire du parfum, comme le vétiver, appartient à la catégorie :",
+    ["Des plantes aromatiques", "Des plantes à épices", "Des plantes textiles", "Des plantes fourragères"], 0,
+    "Parfum = plantes aromatiques. Les épices servent à assaisonner les aliments."),
+  S("Le sisal (ou pite) est classé parmi :",
+    ["Les plantes textiles ou à fibre", "Les céréales", "Les plantes fourragères", "Les tubercules"], 0,
+    "Le sisal est une plante textile (à fibre).")
+]);
+
+/* ===== CHAPITRE 6 ===== */
+CH(6, "Facteurs clés de la production agricole", "⚙️", "Sol, engrais, humidité, lumière, température, vent, pestes, semence…", [
+  S("Combien de facteurs clés affectant la production agricole le cours énumère-t-il ?",
+    ["11", "5", "8", "15"], 0,
+    "Onze : sol, engrais/fertilisant, humidité, lumière, température, vent, pestes, semence, systèmes de production, stockage/transformation/marketing, planification/gestion."),
+  M("Lesquels de ces éléments sont des facteurs clés de la production agricole cités dans le cours ?",
+    ["Le sol", "L'humidité", "La lumière", "Les phases de la lune"], [0, 1, 2],
+    "Sol, humidité et lumière figurent dans la liste. Les phases de la lune n'y figurent pas."),
+  M("Lesquels de ces éléments sont aussi des facteurs clés cités dans le cours ?",
+    ["La température", "Le vent", "Les pestes", "La couleur de la clôture"], [0, 1, 2],
+    "Température, vent et pestes sont des facteurs clés. La couleur de la clôture n'en est pas un."),
+  S("Quel facteur concerne le choix du matériel végétal mis en terre au départ ?",
+    ["La semence", "Le vent", "La lumière", "L'humidité"], 0,
+    "La semence est l'un des facteurs clés de la liste."),
+  S("Quel facteur correspond à l'ajout d'éléments pour rendre un sol fertile ?",
+    ["Engrais / fertilisant", "Vent", "Température", "Lumière"], 0,
+    "Un fertilisant est un engrais ou un autre élément utilisé pour fertiliser un sol."),
+  S("Un agriculteur perd une partie de sa récolte faute de moyens de conservation et de débouchés. Quel facteur est en cause ?",
+    ["Stockage / transformation / marketing", "Température", "Vent", "Semence"], 0,
+    "Conservation, transformation et vente relèvent de ce facteur."),
+  S("Une sécheresse prolongée affecte d'abord quel facteur clé ?",
+    ["L'humidité", "Le vent", "Les pestes", "La semence"], 0,
+    "La sécheresse est un manque d'eau : le facteur humidité."),
+  S("Le neem, plante à insecticide, sert à contrôler quel facteur de production ?",
+    ["Les pestes", "La lumière", "L'humidité", "La température"], 0,
+    "Le neem sert à préparer des pesticides pour le contrôle des pestes."),
+  S("Un agriculteur sème sans calendrier, sans budget et sans organisation. Quel facteur clé est négligé ?",
+    ["Planification / gestion", "Vent", "Lumière", "Semence"], 0,
+    "L'organisation du travail et des ressources relève de la planification et de la gestion."),
+  V("La planification et la gestion font partie des facteurs clés de la production agricole.", true,
+    "Elles figurent à la fin de la liste du cours."),
+  V("Selon le cours, le vent n'est pas un facteur affectant la production agricole.", false,
+    "Le vent figure dans la liste des facteurs clés."),
+  V("Dans la liste du cours, stockage, transformation et marketing forment un seul facteur.", true,
+    "Le cours les regroupe sur une même ligne : « Stockage / Transformation / Marketing »."),
+  S("Quel facteur clé correspond à la couche de terre meuble dans laquelle les plantes enfoncent leurs racines ?",
+    ["Le sol", "Le vent", "La semence", "La lumière"], 0,
+    "Les plantes enfoncent leurs racines dans le sol et y puisent eau et sels minéraux."),
+  S("Quel couple de facteurs de la liste est directement lié au climat ?",
+    ["Température et humidité", "Semence et engrais", "Stockage et marketing", "Planification et gestion"], 0,
+    "Le cours définit le climat par la température et l'humidité (voir la formation du sol).")
+]);
+
+/* ===== CHAPITRE 7 ===== */
+CH(7, "Le sol : définition et fertilité", "🌍", "Définition, sciences du sol, sol fertile, fertilisation", [
+  S("Selon le cours, le sol est :",
+    ["La couche de terre meuble, superficielle, de la croûte terrestre, résultant de l'altération des roches sous-jacentes et de la dégradation des matières organiques",
+     "La roche située en profondeur",
+     "Uniquement le sable présent à la surface",
+     "L'eau retenue entre les roches"], 0,
+    "Le sol est la couche de terre meuble, superficielle, de la croûte terrestre, issue de l'altération des roches sous-jacentes et de la dégradation des matières organiques."),
+  S("Le sol résulte :",
+    ["De l'altération des roches sous-jacentes et de la dégradation des matières organiques", "Uniquement de la pluie", "Uniquement des engrais chimiques", "Du seul travail de l'homme"], 0,
+    "Altération des roches et dégradation des matières organiques."),
+  M("Sous l'influence de quels agents le sol se forme-t-il selon le cours ?",
+    ["Biologiques (végétation, faune du sol…)", "Chimiques", "Physiques", "Magnétiques"], [0, 1, 2],
+    "Le cours cite les agents biologiques, chimiques et physiques."),
+  S("Le sol appartient à quelle partie de la Terre ?",
+    ["À la croûte terrestre, en surface", "Au noyau", "À l'atmosphère", "Aux océans"], 0,
+    "Le sol est la couche superficielle de la croûte terrestre."),
+  S("Où les plantes enfoncent-elles leurs racines pour puiser l'eau et les sels minéraux ?",
+    ["Dans le sol", "Dans l'air", "Dans la roche mère uniquement", "Dans les nuages"], 0,
+    "C'est dans le sol que les plantes enfoncent leurs racines et puisent l'eau et les sels minéraux nécessaires."),
+  V("Le sol est la couche profonde de la croûte terrestre, formée uniquement de roche.", false,
+    "Le sol est une couche meuble et superficielle, issue des roches et des matières organiques."),
+  S("Quelle science étudie le globe terrestre dans son ensemble, en surface et en profondeur ?",
+    ["La géologie", "La pédologie", "La pétrographie", "L'agronomie"], 0,
+    "Géologie : science qui étudie le globe terrestre dans son ensemble."),
+  S("Quelle science étudie les sols ?",
+    ["La pédologie", "La géologie", "La pétrographie", "La viticulture"], 0,
+    "La pédologie est la science qui étudie les sols."),
+  S("Quelle science étudie les roches et l'analyse de leurs caractères structuraux, minéralogiques et chimiques ?",
+    ["La pétrographie", "La pédologie", "La géologie", "La floriculture"], 0,
+    "La pétrographie étudie les roches."),
+  V("La pédologie étudie le globe terrestre dans son ensemble.", false,
+    "C'est la géologie. La pédologie étudie les sols."),
+  S("Un chercheur analyse les caractères minéralogiques et chimiques d'un échantillon de roche. Il fait de la :",
+    ["Pétrographie", "Pédologie", "Floriculture", "Sylviculture"], 0,
+    "L'étude des roches et de leurs caractères est la pétrographie."),
+  S("Un spécialiste étudie les différents types de sols d'une région. Sa science est :",
+    ["La pédologie", "La pétrographie", "La viticulture", "L'arboriculture"], 0,
+    "L'étude des sols relève de la pédologie."),
+  S("Un sol fertile est un sol :",
+    ["Qui contient les éléments nutritifs et a les propriétés physiques et chimiques nécessaires à la nutrition et au développement des plantes", "Qui contient uniquement du sable", "Sans aucune matière organique", "Qui ne retient jamais l'eau"], 0,
+    "Un sol fertile combine éléments nutritifs et propriétés physiques et chimiques adaptées aux plantes."),
+  S("Fertiliser un sol, c'est :",
+    ["Le rendre fertile en y ajoutant les éléments nécessaires", "Le laisser sans culture", "Retirer les éléments nutritifs", "Le transformer en roche"], 0,
+    "Fertiliser un sol, c'est le rendre fertile, y ajouter les éléments nécessaires."),
+  S("Comment appelle-t-on l'action de fertiliser un sol ?",
+    ["La fertilisation", "La pédologie", "La jachère", "L'érosion"], 0,
+    "Fertilisation : action de fertiliser."),
+  S("Qu'est-ce qu'un fertilisant ?",
+    ["Un engrais ou un autre élément utilisé pour fertiliser un sol", "Une roche", "Un type de structure du sol", "Une plante ornementale"], 0,
+    "Fertilisant : engrais ou autres éléments utilisés pour fertiliser un sol."),
+  V("Un sol infertile est un sol qui contient tous les éléments nutritifs nécessaires aux plantes.", false,
+    "C'est l'inverse : un sol infertile ne remplit pas ces conditions, contrairement à un sol fertile."),
+  S("Un sol manque d'éléments nutritifs. L'agriculteur y ajoute un engrais. Cette action est :",
+    ["La fertilisation", "La sylviculture", "La pétrographie", "L'érosion"], 0,
+    "Ajouter des éléments pour rendre un sol fertile = fertiliser (fertilisation)."),
+  M("Pour évaluer la fertilité d'un sol, on considère ses propriétés :",
+    ["Chimiques", "Physiques", "Biologiques", "Politiques"], [0, 1, 2],
+    "Le cours dit : propriétés chimiques, physiques et biologiques."),
+  M("Que le sol apporte-t-il aux plantes d'après le cours ?",
+    ["Un milieu où enfoncer leurs racines", "De l'eau", "Des sels minéraux", "De la lumière du soleil"], [0, 1, 2],
+    "Les plantes enfoncent leurs racines dans le sol et y puisent l'eau et les sels minéraux. La lumière ne vient pas du sol.")
+]);
+
+/* ===== CHAPITRE 8 ===== */
+CH(8, "Formation du sol et facteurs pédologiques", "⛰️", "Roche mère, climat, organismes vivants, relief, temps, sols autochtones et allochtones", [
+  S("D'où provient le sol ?",
+    ["De l'altération des roches qu'il recouvre et des matières organiques décomposées", "De l'eau de mer uniquement", "De l'air", "Des seuls engrais"], 0,
+    "Le sol provient de l'altération des roches qu'il recouvre et des matières organiques décomposées."),
+  S("Comment appelle-t-on les facteurs qui influencent la formation et les caractéristiques d'un sol ?",
+    ["Facteurs pédologiques", "Facteurs géométriques", "Facteurs commerciaux", "Facteurs viticoles"], 0,
+    "Ce sont les facteurs pédologiques."),
+  S("Combien de facteurs pédologiques le cours cite-t-il ?",
+    ["5", "3", "7", "10"], 0,
+    "Cinq : matériel parent, climat, organismes vivants, topographie/relief et temps."),
+  M("Lesquels sont des facteurs pédologiques d'après le cours ?",
+    ["Le matériel parent (roche mère)", "Le climat", "Le temps", "Le prix de la terre"], [0, 1, 2],
+    "Le prix de la terre n'est pas un facteur pédologique."),
+  S("Le matériel parent (ou roche mère) est :",
+    ["La roche dont le sol provient", "Le climat de la région", "Un type de structure", "Un organisme vivant"], 0,
+    "Matériel parent ou roche mère : roche dont le sol provient."),
+  S("Le climat, facteur pédologique, comprend :",
+    ["La température et l'humidité", "Le relief et la pente", "Les microbes et les vers de terre", "Le temps écoulé"], 0,
+    "Climat = température et humidité."),
+  S("Les organismes vivants, facteur pédologique, comprennent :",
+    ["Les organismes microscopiques et macroscopiques", "Uniquement les plantes", "Uniquement les animaux de grande taille", "Uniquement les bactéries"], 0,
+    "Les organismes vivants, microscopiques et macroscopiques, influencent la formation du sol."),
+  S("La topographie ou relief désigne :",
+    ["La forme et la position du sol", "La quantité de pluie", "La durée de décomposition de la roche", "La roche mère"], 0,
+    "Topographie / relief : forme et position du sol."),
+  S("Le facteur « temps » correspond à :",
+    ["La période pendant laquelle la roche est sujette à la décomposition", "L'heure de la journée", "La saison des pluies", "L'âge de l'agriculteur"], 0,
+    "C'est la période pendant laquelle la roche est sujette à la décomposition."),
+  V("Le climat, en tant que facteur de formation du sol, englobe la température et l'humidité.", true,
+    "Le cours définit le climat par ces deux éléments."),
+  V("La topographie désigne la forme et la position du sol.", true,
+    "Le cours écrit : « Topographie / Relief (forme et position du sol) »."),
+  V("Les organismes vivants du sol sont uniquement des organismes microscopiques.", false,
+    "Ils sont à la fois microscopiques et macroscopiques."),
+  S("Un sol est situé sur une forte pente alors qu'un autre est en plaine. Quel facteur pédologique peut expliquer leurs différences ?",
+    ["La topographie / le relief", "Le matériel parent uniquement", "Les fertilisants", "Le marketing"], 0,
+    "La forme et la position du sol (pente, plaine) constituent la topographie ou le relief."),
+  S("Des vers de terre, des champignons et des bactéries participent à la formation d'un sol. Quel facteur pédologique est concerné ?",
+    ["Les organismes vivants", "Le temps", "La roche mère", "Le relief"], 0,
+    "Ce sont des organismes vivants, macroscopiques ou microscopiques."),
+  S("La température et la quantité d'humidité d'une région influencent la formation du sol. Quel facteur est concerné ?",
+    ["Le climat", "Le temps", "La topographie", "La roche mère"], 0,
+    "Climat = température et humidité."),
+  S("Les sols autochtones sont des sols qui :",
+    ["Proviennent de la décomposition de la roche qu'ils recouvrent", "Proviennent d'une autre région", "Sont formés uniquement de sable", "N'ont pas de roche mère"], 0,
+    "Ce sont les sols qui proviennent de la décomposition de la roche qu'ils recouvrent."),
+  S("Les sols allochtones sont des sols qui :",
+    ["Proviennent d'une autre région", "Se forment sur place à partir de la roche sous-jacente", "Ne contiennent aucune particule minérale", "Sont toujours acides"], 0,
+    "Ils proviennent d'une autre région que celle où ils se trouvent."),
+  S("Quel exemple de sols allochtones le cours donne-t-il ?",
+    ["Les sols alluvionnaires", "Les sols prismatiques", "Les sols sableux", "Les sols granulés"], 0,
+    "Les sols alluvionnaires sont apportés d'une autre région (par l'eau)."),
+  V("Un sol alluvionnaire est un sol autochtone.", false,
+    "Il est allochtone : il provient d'une autre région."),
+  S("Un sol s'est formé sur place à partir de la roche située juste en dessous. Il est :",
+    ["Autochtone", "Allochtone", "Alluvionnaire", "Stratifié"], 0,
+    "Formé à partir de la roche qu'il recouvre : sol autochtone."),
+  S("Une rivière dépose sur un champ des sédiments venus d'une autre région. Le sol obtenu est :",
+    ["Allochtone (alluvionnaire)", "Autochtone", "Un horizon R", "Un sol sans origine"], 0,
+    "Un sol dont les matériaux viennent d'une autre région est allochtone ; c'est le cas des sols alluvionnaires."),
+  V("Plusieurs facteurs influencent la formation et les caractéristiques d'un sol.", true,
+    "Roche mère, climat, organismes vivants, relief et temps.")
+]);
+
+/* ===== CHAPITRE 9 ===== */
+CH(9, "Composition du sol", "🧪", "Partie solide, liquide et gazeuse, formes de l'eau, proportions", [
+  S("Le sol est composé d'éléments :",
+    ["Solides, liquides et gazeux", "Seulement solides", "Seulement liquides", "Seulement gazeux"], 0,
+    "On y distingue des éléments solides, liquides et gazeux."),
+  S("La partie solide du sol est constituée par :",
+    ["Des éléments minéraux et organiques", "Uniquement de l'eau", "Uniquement de l'air", "Uniquement des engrais"], 0,
+    "La partie solide comprend des éléments minéraux et des éléments organiques."),
+  S("D'où proviennent les éléments minéraux du sol ?",
+    ["De la décomposition des roches", "Des déchets des êtres vivants", "De l'eau de pluie", "De l'air"], 0,
+    "Ils proviennent de la décomposition des roches et se subdivisent en particules de plus en plus fines."),
+  M("Quels éléments minéraux composent le sol d'après le cours ?",
+    ["Les cailloux et les graviers", "Le sable", "Le limon et l'argile", "Les termites"], [0, 1, 2],
+    "Cailloux, graviers, sable, limon et argile sont des éléments minéraux. Les termites sont des êtres vivants (éléments organiques)."),
+  S("Quels éléments minéraux sont formés de grains plus ou moins épais ?",
+    ["Les cailloux, les graviers et le sable", "Le limon et l'argile", "L'humus", "L'eau"], 0,
+    "Cailloux, graviers et sable : grains plus ou moins épais."),
+  S("Quels éléments minéraux sont formés de particules très fines ?",
+    ["Le limon et l'argile", "Les cailloux", "Les graviers", "Le sable grossier"], 0,
+    "Limon et argile : particules très fines."),
+  S("Les sels minéraux contenus dans les particules du sol constituent entre autres :",
+    ["La nourriture des plantes", "La nourriture des animaux aquatiques", "Des roches", "Des fibres textiles"], 0,
+    "Ils sont une part de la nourriture des plantes."),
+  S("Quels sols sont généralement plus fertiles ?",
+    ["Les sols argileux et limoneux", "Les sols sableux", "Les sols sans argile", "Les sols de roche nue"], 0,
+    "Le limon et l'argile contiennent beaucoup plus de sels minéraux disponibles pour les plantes."),
+  V("Les sols sableux sont généralement plus fertiles que les sols argileux et limoneux.", false,
+    "C'est l'inverse : limon et argile contiennent plus de sels minéraux disponibles."),
+  S("Pourquoi les sols argileux et limoneux sont-ils plus fertiles que les sols sableux ?",
+    ["Parce que le limon et l'argile contiennent beaucoup plus de sels minéraux disponibles pour les plantes", "Parce qu'ils sont plus pauvres en eau", "Parce qu'ils ne contiennent pas de matière organique", "Parce qu'ils sont formés de gros grains"], 0,
+    "Le limon et l'argile contiennent beaucoup plus de sels minéraux disponibles aux plantes."),
+  S("Les éléments organiques du sol proviennent :",
+    ["Des déchets de tout être vivant au-dessus et en dessous du sol", "De la décomposition des roches", "De l'eau d'irrigation", "De l'oxygène"], 0,
+    "Ils proviennent des déchets des êtres vivants (végétaux et animaux) sur et dans le sol."),
+  M("Quels êtres visibles vivant sous la terre le cours cite-t-il (êtres macroscopiques) ?",
+    ["Les vers de terre", "Les termites", "Les champignons et les mousses", "Les êtres visibles seulement au microscope"], [0, 1, 2],
+    "Vers de terre, termites, champignons et mousses sont visibles. Les êtres visibles au microscope sont dits microscopiques."),
+  S("Comment appelle-t-on les êtres du sol invisibles à l'œil nu, mais visibles au microscope ?",
+    ["Êtres microscopiques", "Êtres macroscopiques", "Êtres minéraux", "Êtres alluvionnaires"], 0,
+    "Ce sont les êtres microscopiques."),
+  S("Les termites et les vers de terre sont des êtres :",
+    ["Macroscopiques (visibles à l'œil nu)", "Microscopiques", "Minéraux", "Gazeux"], 0,
+    "Ils sont visibles à l'œil nu : êtres macroscopiques."),
+  S("La partie gazeuse du sol occupe :",
+    ["Les espaces vides du sol non occupés par l'eau", "Les espaces occupés par les cailloux", "Les racines", "La roche mère"], 0,
+    "L'air occupe les espaces vides non occupés par l'eau."),
+  S("L'air du sol est indispensable à :",
+    ["La vie de certains microorganismes", "La formation des roches", "La formation de la nappe phréatique", "La fabrication d'engrais"], 0,
+    "L'air du sol est indispensable à la vie de certains microorganismes."),
+  S("D'où peut venir l'oxygène présent dans le sol ?",
+    ["De l'extérieur, ou de la respiration des racines et des êtres qui vivent dans le sol", "Uniquement de la roche mère", "Uniquement de la pluie", "De nulle part"], 0,
+    "Il peut venir de l'extérieur ou se former dans le sol par la respiration des racines et des êtres vivants."),
+  V("Les espaces vides du sol non occupés par l'eau sont occupés par de l'air.", true,
+    "Cette phrase résume la partie gazeuse du sol."),
+  S("La partie liquide du sol provient surtout :",
+    ["De l'eau des pluies et de l'eau d'irrigation qui pénètrent par les pores", "Uniquement de la nappe phréatique", "De la décomposition des roches", "Du gaz du sol"], 0,
+    "L'eau des pluies et d'irrigation pénètre dans le sol à travers les pores."),
+  M("Parmi les formes d'eau dans le sol, lesquelles sont citées dans le cours ?",
+    ["L'eau d'infiltration (eau libre)", "L'eau fixée", "L'eau de ruissellement", "L'eau de mer"], [0, 1, 2],
+    "Eau d'infiltration, eau fixée et eau de ruissellement. L'eau de mer n'est pas citée."),
+  S("L'eau d'infiltration (eau libre) est celle qui :",
+    ["Descend dans les profondeurs pour agrandir la nappe phréatique", "Est retenue par les grains de limon et d'argile", "Reste à la surface", "Est utilisée par les plantes"], 0,
+    "Elle descend dans les profondeurs pour agrandir la nappe phréatique ; les plantes ne peuvent pas l'utiliser."),
+  V("L'eau d'infiltration (eau libre) peut être utilisée par les plantes.", false,
+    "Le cours précise que cette eau ne peut pas être utilisée par les plantes."),
+  S("L'eau fixée est :",
+    ["L'eau retenue par les grains de sol (limon, argile, matières organiques), utilisée par les plantes", "L'eau qui descend vers la nappe phréatique", "L'eau qui ruisselle en surface", "L'eau de la mer"], 0,
+    "L'eau fixée est retenue par les grains du sol, surtout limon, argile et matières organiques ; les plantes l'utilisent."),
+  S("Quelle forme d'eau les plantes utilisent-elles ?",
+    ["L'eau fixée", "L'eau d'infiltration", "L'eau de la nappe phréatique profonde", "Aucune"], 0,
+    "Les plantes utilisent l'eau fixée dans le sol."),
+  S("Après une forte pluie, de l'eau descend jusqu'à la nappe phréatique sans servir aux plantes. De quelle eau s'agit-il ?",
+    ["L'eau d'infiltration", "L'eau fixée", "L'eau de ruissellement", "L'humus"], 0,
+    "L'eau d'infiltration (eau libre) agrandit la nappe phréatique."),
+  S("Quel type de sol retient beaucoup plus d'eau ?",
+    ["Un sol argileux (à petits pores)", "Un sol sableux (à grands pores)", "Un sol de gravier", "Un sol sans particules"], 0,
+    "Le sol argileux à petits pores retient beaucoup plus d'eau que le sol sableux à grands pores."),
+  V("Un sol sableux retient plus d'eau qu'un sol argileux.", false,
+    "Un sol argileux (petits pores) retient beaucoup plus d'eau qu'un sol sableux (grands pores)."),
+  S("D'après le schéma de la composition du sol, quelle est la proportion de matière minérale ?",
+    ["45 %", "25 %", "5 %", "50 %"], 0,
+    "Matière minérale 45 %, air 25 %, eau 25 %, matière organique 5 %."),
+  S("D'après ce schéma, quelle est la proportion de matière organique ?",
+    ["5 %", "25 %", "45 %", "15 %"], 0,
+    "La matière organique représente 5 % du sol."),
+  S("Quelles parties du sol représentent chacune 25 % dans le schéma ?",
+    ["L'air et l'eau", "La matière minérale et l'air", "L'eau et la matière organique", "La matière minérale et la matière organique"], 0,
+    "L'air (25 %) et l'eau (25 %)."),
+  S("D'après le schéma, quelle partie occupe la plus grande proportion du sol ?",
+    ["La matière minérale", "L'eau", "L'air", "La matière organique"], 0,
+    "La matière minérale (45 %) est la plus importante.")
+]);
+
+/* ===== CHAPITRE 10 ===== */
+CH(10, "Profil et horizons du sol", "📊", "Profil du sol, horizons O, A, B, C et R", [
+  S("Qu'appelle-t-on « profil du sol » ?",
+    ["Une section verticale présentant des couches successives", "Une vue du dessus du champ", "Le pH du sol", "La proportion de sable, limon et argile"], 0,
+    "Le profil d'un sol est la vue verticale de ce sol, avec ses couches successives de couleurs et de compositions différentes."),
+  S("Comment appelle-t-on chaque couche du profil d'un sol ?",
+    ["Un horizon", "Une texture", "Une structure", "Un complexe"], 0,
+    "Chaque couche du profil s'appelle un horizon."),
+  V("Le profil d'un sol est une vue horizontale du sol.", false,
+    "C'est une vue verticale (une section verticale)."),
+  S("L'horizon O est :",
+    ["Une couche superficielle formée de matières organiques partiellement ou non décomposées, contenant des organismes vivants", "La roche mère", "La zone d'accumulation", "La zone de décomposition"], 0,
+    "L'horizon O est la couche superficielle de matières organiques peu ou pas décomposées."),
+  S("L'horizon A est :",
+    ["La zone de décomposition, où des matières organiques en décomposition sont mélangées au sol", "La roche mère", "La zone d'accumulation", "La couche superficielle de feuilles non décomposées"], 0,
+    "Horizon A : zone de décomposition."),
+  S("L'horizon B est :",
+    ["La zone d'accumulation", "La zone de décomposition", "La roche mère", "La couche superficielle"], 0,
+    "Horizon B : zone d'accumulation des matières décomposées en A qui s'infiltrent."),
+  S("L'horizon C est :",
+    ["La zone de sol en formation, à peine formé à partir de la roche mère", "La zone d'accumulation", "La couche superficielle organique", "La roche mère"], 0,
+    "Horizon C : zone de sol en formation."),
+  S("L'horizon R correspond à :",
+    ["La roche mère ou matériel parent", "La zone de décomposition", "La couche des feuilles mortes", "La zone d'accumulation"], 0,
+    "R = roche mère (matériel parent)."),
+  S("Quel horizon est le plus proche de la surface ?",
+    ["O", "A", "C", "R"], 0,
+    "L'horizon O est la couche superficielle."),
+  S("Quel horizon est le plus profond du profil décrit dans le cours ?",
+    ["R", "O", "A", "B"], 0,
+    "R, la roche mère, est tout en bas."),
+  S("Dans quel ordre trouve-t-on les horizons, de la surface vers la profondeur ?",
+    ["O, A, B, C, R", "R, C, B, A, O", "A, O, B, R, C", "O, B, A, C, R"], 0,
+    "O (superficiel), A (décomposition), B (accumulation), C (sol en formation), R (roche mère)."),
+  S("Dans quel horizon trouve-t-on des matières organiques en décomposition mélangées au sol ?",
+    ["A", "B", "C", "R"], 0,
+    "L'horizon A est la zone de décomposition."),
+  S("Dans quel horizon les matières organiques décomposées en A s'infiltrent-elles et s'accumulent-elles ?",
+    ["B", "O", "C", "R"], 0,
+    "Dans l'horizon B, zone d'accumulation."),
+  S("Quel horizon contient des organismes vivants et des matières organiques non ou partiellement décomposées ?",
+    ["O", "B", "C", "R"], 0,
+    "C'est l'horizon O, couche superficielle."),
+  S("Dans quel horizon le sol est-il à peine formé à partir de la roche mère ?",
+    ["C", "A", "O", "B"], 0,
+    "L'horizon C est la zone de sol en formation."),
+  M("Quels horizons sont décrits comme contenant des matières organiques (non décomposées, en décomposition ou accumulées) ?",
+    ["O", "A", "B", "R"], [0, 1, 2],
+    "O (non ou partiellement décomposées), A (en décomposition) et B (matières venues de A). R est la roche mère."),
+  V("L'horizon A est la zone d'accumulation.", false,
+    "A est la zone de décomposition. La zone d'accumulation est l'horizon B."),
+  V("L'horizon R correspond à la roche mère.", true,
+    "R = roche mère ou matériel parent."),
+  V("La profondeur d'un profil de sol est identique dans toutes les régions.", false,
+    "Elle varie d'une fraction de pouce à plusieurs pieds, selon la région."),
+  S("Un agriculteur creuse un trou et observe en surface des feuilles à moitié décomposées. De quel horizon s'agit-il ?",
+    ["O", "B", "C", "R"], 0,
+    "Des matières organiques partiellement décomposées en surface : horizon O.")
+]);
+
+/* ===== CHAPITRE 11 ===== */
+CH(11, "Texture du sol", "🔬", "Sable, limon, argile, types de texture, dimensions des particules, triangle de texture", [
+  S("On appelle texture d'un sol :",
+    ["La proportion des différentes particules (sable, limon, argile) qui composent ce sol", "Le mode de regroupement des particules", "Le niveau d'acidité du sol", "Le nombre de pores par volume"], 0,
+    "Texture = proportion de sable, de limon et d'argile. Le mode de regroupement des particules, c'est la structure."),
+  M("Quelles particules sont prises en compte pour définir la texture d'un sol ?",
+    ["Le sable", "Le limon", "L'argile", "L'humus"], [0, 1, 2],
+    "La texture repose sur sable, limon et argile. L'humus est de la matière organique, une composante distincte."),
+  S("Un sol argileux est un sol formé principalement :",
+    ["D'argile", "De sable", "De limon", "De gravier"], 0,
+    "Sol argileux : formé principalement d'argile."),
+  S("Un sol sableux (ou sabloneux) est formé principalement :",
+    ["De sable", "D'argile", "De limon", "D'humus"], 0,
+    "Sol sableux : formé principalement de sable."),
+  S("Un sol limoneux est formé principalement :",
+    ["De limon (particules intermédiaires entre le sable et l'argile)", "De sable", "D'argile", "De matière organique"], 0,
+    "Le limon est formé de particules intermédiaires entre le sable et l'argile."),
+  S("Un sol sablo-argileux est formé :",
+    ["D'argile et de sable, avec le sable en plus grande quantité", "D'argile et de sable, avec l'argile en plus grande quantité", "Uniquement d'argile", "De limon et d'humus"], 0,
+    "Sablo-argileux : le sable domine, avec de l'argile."),
+  S("Un sol argilo-sableux est formé :",
+    ["D'argile et de sable, avec l'argile en plus grande quantité", "D'argile et de sable, avec le sable en plus grande quantité", "Uniquement de limon", "De gravier"], 0,
+    "Argilo-sableux : l'argile domine, avec du sable."),
+  V("Un sol argilo-sableux contient plus de sable que d'argile.", false,
+    "Dans un sol argilo-sableux, l'argile est en plus grande quantité. Dans le sol sablo-argileux, c'est le sable."),
+  S("Un sol contient surtout du sable, mélangé à un peu d'argile. Comment le qualifie-t-on ?",
+    ["Sablo-argileux", "Argilo-sableux", "Limoneux", "Argileux pur"], 0,
+    "Le sable domine : sablo-argileux."),
+  S("Pour quelle texture la capacité de rétention d'eau est-elle plus grande ?",
+    ["Les textures fines (argileuses ou limoneuses)", "Les textures sableuses", "Les graviers", "Aucune différence"], 0,
+    "La capacité de rétention est plus grande pour les sols à texture fine."),
+  S("Quels sols à texture moyenne sont souvent plus propices au développement des plantes ?",
+    ["Les sols limoneux et argilo-sableux", "Les sols sableux purs", "Les sols de gravier", "Les sols argileux purs"], 0,
+    "Le cours cite les sols limoneux et argilo-sableux."),
+  S("Pourquoi les sols à texture fine sont-ils souvent plus fertiles que les sols sableux ?",
+    ["Ils renferment plus de sels minéraux disponibles pour les plantes", "Ils drainent très vite l'eau", "Ils sont plus faciles à travailler", "Ils contiennent plus de gravier"], 0,
+    "Les sols à texture fine (argileux, limoneux) renferment plus de sels minéraux disponibles."),
+  M("Quelles sont les caractéristiques des sols à texture fine ?",
+    ["Forte capacité de rétention d'eau", "Plus de sels minéraux disponibles", "Plus sujets à la compaction", "Faciles à travailler"], [0, 1, 2],
+    "Ils retiennent l'eau, renferment plus de sels minéraux, se compactent plus souvent, et sont plus difficiles à travailler."),
+  V("Les sols à texture fine sont faciles à travailler et ne se compactent jamais.", false,
+    "Ils sont plus souvent sujets à la compaction, l'eau et l'air s'y déplacent plus lentement et ils sont plus difficiles à travailler."),
+  S("Dans un sol compacté à texture fine, que devient le mouvement de l'eau et de l'air ?",
+    ["Il est ralenti", "Il est accéléré", "Il ne change pas", "Il devient impossible dans tous les sols"], 0,
+    "Dans les sols à texture fine, le mouvement de l'eau et de l'air est ralenti."),
+  S("Qu'est-ce que l'humus ?",
+    ["De la matière organique complètement décomposée", "Un type de roche", "Un type de structure du sol", "Un gaz du sol"], 0,
+    "L'humus est de la matière organique complètement décomposée."),
+  V("En plus du sable, du limon et de l'argile, le sol contient de l'humus.", true,
+    "Le NB du cours le précise."),
+  S("Quelle est la taille des graviers selon le tableau des dimensions du cours ?",
+    ["Supérieure à 2 mm", "Entre 0,05 et 2 mm", "Entre 0,002 et 0,05 mm", "Inférieure à 0,002 mm"], 0,
+    "Gravier : > 2 mm."),
+  S("Quelle est la taille de l'argile ?",
+    ["Inférieure à 0,002 mm (< 2 micromètres)", "Entre 0,002 et 0,05 mm", "Entre 0,05 et 2 mm", "Supérieure à 2 mm"], 0,
+    "L'argile est la plus petite particule : moins de 0,002 mm."),
+  S("Quelle est la taille du limon ?",
+    ["Entre 0,002 et 0,05 mm", "Inférieure à 0,002 mm", "Entre 0,05 et 2 mm", "Supérieure à 2 mm"], 0,
+    "Limon : 0,002 à 0,05 mm."),
+  S("Quelle est la taille du sable (ensemble des sables) ?",
+    ["Entre 0,05 et 2 mm", "Entre 0,002 et 0,05 mm", "Inférieure à 0,002 mm", "Supérieure à 2 mm"], 0,
+    "Sable : 0,05 à 2 mm."),
+  S("Quel est l'ordre croissant de la taille des particules ?",
+    ["Argile < limon < sable < gravier", "Gravier < sable < limon < argile", "Limon < argile < sable < gravier", "Sable < argile < limon < gravier"], 0,
+    "Argile (< 0,002 mm), limon (0,002-0,05 mm), sable (0,05-2 mm), gravier (> 2 mm)."),
+  S("Une particule mesure 0,3 mm. De quelle catégorie s'agit-il ?",
+    ["Sable moyen (0,25-0,5 mm)", "Sable fin (0,1-0,25 mm)", "Limon", "Sable très grossier"], 0,
+    "0,3 mm se situe entre 0,25 et 0,5 mm : sable moyen."),
+  S("Une particule mesure 1,5 mm. De quelle catégorie s'agit-il ?",
+    ["Sable très grossier (1-2 mm)", "Sable grossier (0,5-1 mm)", "Gravier", "Limon"], 0,
+    "1,5 mm est compris entre 1 et 2 mm : sable très grossier."),
+  S("Une particule mesure 0,02 mm. De quelle catégorie s'agit-il ?",
+    ["Limon", "Argile", "Sable très fin", "Gravier"], 0,
+    "0,02 mm est compris entre 0,002 et 0,05 mm : limon."),
+  S("Une particule mesure 0,07 mm. De quelle catégorie s'agit-il ?",
+    ["Sable très fin (0,05-0,1 mm)", "Limon", "Sable fin", "Argile"], 0,
+    "0,07 mm est compris entre 0,05 et 0,1 mm : sable très fin."),
+  S("Une particule mesure 3 mm. De quelle catégorie s'agit-il ?",
+    ["Gravier", "Sable très grossier", "Limon", "Argile"], 0,
+    "Plus de 2 mm : gravier."),
+  S("Une particule mesure 0,7 mm. De quelle catégorie s'agit-il ?",
+    ["Sable grossier (0,5-1 mm)", "Sable moyen", "Sable très grossier", "Limon"], 0,
+    "0,7 mm est compris entre 0,5 et 1 mm : sable grossier."),
+  S("Une particule mesure 0,15 mm. De quelle catégorie s'agit-il ?",
+    ["Sable fin (0,1-0,25 mm)", "Sable très fin", "Limon", "Sable moyen"], 0,
+    "0,15 mm est compris entre 0,1 et 0,25 mm : sable fin."),
+  S("Sur le triangle de texture en anglais, « silt » correspond à :",
+    ["Limon", "Argile", "Sable", "Humus"], 0,
+    "Clay = argile, silt = limon, sand = sable."),
+  S("Exercice (triangle de texture) : un sol contient 28 % d'argile, 17 % de sable et 55 % de limon. Quelle est sa texture ?",
+    ["Limon argileux fin", "Limon", "Argile sableuse", "Limon fin"], 0,
+    "Avec 28 % d'argile, 55 % de limon et 17 % de sable, on se place dans la zone « limon argileux fin » du triangle (silty clay loam)."),
+  S("Exercice (triangle de texture) : 12 % d'argile, 45 % de sable et 43 % de limon. Quelle est la texture ?",
+    ["Limon", "Argile sableuse", "Limon argileux fin", "Limon très fin"], 0,
+    "Les proportions sont équilibrées : on se place dans la zone « limon » du triangle (loam)."),
+  S("Exercice (triangle de texture) : 35 % d'argile, 48 % de sable et 17 % de limon. Quelle est la texture ?",
+    ["Argile sableuse", "Limon", "Limon fin", "Limon sableux"], 0,
+    "Avec 35 % d'argile et 48 % de sable, on est dans la zone « argile sableuse » du triangle (sandy clay). Attention : 35 % d'argile est proche de la limite avec « limon argilo-sableux »."),
+  S("Exercice (triangle de texture) : 5 % d'argile, 38 % de sable et 57 % de limon. Quelle est la texture ?",
+    ["Limon fin", "Limon", "Argile", "Sable limoneux"], 0,
+    "Avec 57 % de limon et seulement 5 % d'argile, on est dans la zone « limon fin » du triangle (silt loam).")
+]);
+
+/* ===== CHAPITRE 12 ===== */
+CH(12, "Structure du sol", "🧱", "Structures granulée, stratifiée, prismatique, en bloc ; influence sur les plantes", [
+  S("On appelle structure d'un sol :",
+    ["Le mode de regroupement des particules de ce sol", "La proportion de sable, limon et argile", "Le niveau d'acidité", "La quantité d'eau retenue"], 0,
+    "Structure = mode de regroupement des particules. La proportion de sable, limon et argile, c'est la texture."),
+  S("Sur quoi se base-t-on pour distinguer les types de structure ?",
+    ["La forme et la disposition des particules", "La couleur du sol", "Le pH du sol", "La quantité de pluie"], 0,
+    "On se base sur la forme et la disposition des particules."),
+  S("Combien de types principaux de structure le cours distingue-t-il ?",
+    ["4", "2", "6", "8"], 0,
+    "Quatre : granulée, stratifiée, prismatique, en bloc (cubique)."),
+  M("Lesquels sont des types de structure du sol ?",
+    ["Granulée", "Stratifiée", "Prismatique", "Gazeuse"], [0, 1, 2],
+    "Les quatre types sont granulée, stratifiée, prismatique et en bloc ou cubique. « Gazeuse » n'en fait pas partie."),
+  S("La structure granulée se trouve :",
+    ["Dans la plupart des sols arables (horizon A), riches en matières organiques et en humus", "Dans le sous-sol des régions arides", "Dans le sous-sol des régions humides", "Uniquement dans la roche mère"], 0,
+    "Structure granulée : sols arables (horizon A), riches en matières organiques et en humus."),
+  S("La structure stratifiée est caractérisée par :",
+    ["Une disposition en couches successives", "Des particules en forme de prisme", "Des particules de dimensions égales", "Des particules sphériques"], 0,
+    "Stratifiée : disposition en couches successives."),
+  V("La structure stratifiée peut se retrouver dans n'importe quel horizon du sol.", true,
+    "Le cours le précise."),
+  S("La structure prismatique est en forme de :",
+    ["Prisme et de cylindre", "Cube", "Grain sphérique", "Couches minces"], 0,
+    "Structure prismatique : en forme de prisme et de cylindre."),
+  S("Où trouve-t-on souvent la structure prismatique ?",
+    ["Dans le sous-sol et les horizons de profondeur des régions arides", "Dans l'horizon A", "Dans le sous-sol des régions humides", "Dans l'horizon O"], 0,
+    "Prismatique : sous-sol et horizons de profondeur des régions arides."),
+  S("La structure en bloc (ou cubique) a :",
+    ["Toutes ses dimensions égales", "Des couches successives", "Une forme de prisme", "Une forme de grain"], 0,
+    "En bloc ou cubique : toutes les dimensions sont égales."),
+  S("Où trouve-t-on principalement la structure en bloc (cubique) ?",
+    ["Dans le sous-sol des régions humides", "Dans le sous-sol des régions arides", "Dans l'horizon A", "Dans l'horizon O"], 0,
+    "Principalement dans le sous-sol des régions humides."),
+  V("La structure granulée se trouve principalement dans le sous-sol des régions arides.", false,
+    "Elle se trouve dans les sols arables (horizon A). Le sous-sol des régions arides est plutôt à structure prismatique."),
+  S("Dans le sous-sol d'une région aride, vous observez des éléments en forme de prismes et de cylindres. La structure est :",
+    ["Prismatique", "Granulée", "Stratifiée", "En bloc"], 0,
+    "Prisme et cylindre dans un sous-sol aride : structure prismatique."),
+  S("Dans un sol arable de l'horizon A, riche en humus, la structure est généralement :",
+    ["Granulée", "Prismatique", "Stratifiée", "En bloc"], 0,
+    "Sols arables (horizon A) riches en matières organiques et en humus : structure granulée."),
+  S("Un sol présente des couches successives superposées. Sa structure est :",
+    ["Stratifiée", "Granulée", "Prismatique", "En bloc"], 0,
+    "Disposition en couches successives : structure stratifiée."),
+  S("Dans le sous-sol d'une région humide, on observe des éléments aux dimensions égales. La structure est :",
+    ["En bloc ou cubique", "Prismatique", "Stratifiée", "Granulée"], 0,
+    "Dimensions égales, sous-sol humide : structure en bloc ou cubique."),
+  V("La structure d'un sol a peu d'influence sur la croissance des plantes.", false,
+    "Le cours dit qu'elle a une grande influence sur la croissance des plantes."),
+  S("Quelle structure est idéale pour le développement des plantes ?",
+    ["Granulée ou sphérique", "Stratifiée", "Prismatique", "Aucune"], 0,
+    "La structure granulée ou sphérique est idéale pour les plantes."),
+  S("Pourquoi la structure granulée est-elle idéale pour les plantes ?",
+    ["Elle offre une porosité adéquate qui favorise l'infiltration de l'eau et l'échange d'air entre le sol et l'atmosphère", "Elle empêche toute infiltration d'eau", "Elle ne contient aucun pore", "Elle rend le sol imperméable"], 0,
+    "Porosité adéquate : bonne infiltration de l'eau et échange d'air entre le sol et l'atmosphère."),
+  S("Peut-on améliorer la structure d'un sol ?",
+    ["Oui, par de bonnes pratiques culturales", "Non, jamais", "Seulement en changeant de climat", "Seulement en ajoutant du gravier"], 0,
+    "On peut améliorer la structure d'un sol par de bonnes pratiques culturales."),
+  V("La texture d'un sol peut être corrigée facilement par de bonnes pratiques culturales.", false,
+    "Le cours précise qu'on peut améliorer la structure, mais pas la texture."),
+  S("Si l'on ne peut corriger ni la structure ni la texture d'un sol, que conseille le cours ?",
+    ["Planter une espèce adaptée", "Abandonner la parcelle", "Ajouter de l'eau tous les jours", "Retirer toute la matière organique"], 0,
+    "Il est conseillé de planter une espèce adaptée au sol."),
+  S("Quelle est la différence entre texture et structure ?",
+    ["La texture est la proportion de sable, limon et argile ; la structure est le mode de regroupement des particules", "La texture concerne le pH ; la structure concerne l'eau", "La texture est le regroupement des particules ; la structure est la proportion de sable, limon et argile", "Il n'y a aucune différence"], 0,
+    "Texture : proportion des particules. Structure : mode de regroupement (forme et disposition).")
+]);
+
+/* ===== CHAPITRE 13 ===== */
+CH(13, "Autres propriétés physiques du sol", "⚖️", "Porosité, stabilité, capacité de rétention, densité", [
+  S("La porosité d'un sol correspond à :",
+    ["Le nombre de pores par volume", "L'adhérence des particules", "Le poids par volume", "La rétention d'eau et de minéraux"], 0,
+    "Porosité : nombre de pores par volume."),
+  S("La stabilité d'un sol correspond à :",
+    ["L'adhérence des particules", "Le nombre de pores par volume", "Le poids par volume", "Le niveau d'acidité"], 0,
+    "Stabilité : adhérence des particules."),
+  S("La capacité de rétention d'un sol correspond à :",
+    ["La rétention d'eau et de minéraux", "Le nombre de pores", "Le poids par volume", "La forme des particules"], 0,
+    "Capacité de rétention : rétention d'eau et de minéraux."),
+  S("La densité d'un sol correspond à :",
+    ["Le poids par volume", "Le nombre de pores par volume", "L'adhérence des particules", "Le pH"], 0,
+    "Densité : poids / volume."),
+  M("Lesquelles sont des propriétés physiques citées dans le cours (en plus de la texture et de la structure) ?",
+    ["La porosité", "La stabilité", "La densité", "Le pH"], [0, 1, 2],
+    "Porosité, stabilité, capacité de rétention et densité sont physiques. Le pH est une propriété chimique."),
+  V("Le pH est une propriété physique du sol.", false,
+    "Le pH est une propriété chimique du sol."),
+  M("Pour évaluer la fertilité d'un sol, on doit considérer ses propriétés :",
+    ["Chimiques", "Physiques", "Biologiques", "Géographiques"], [0, 1, 2],
+    "Propriétés chimiques, physiques et biologiques."),
+  S("Les particules d'un sol restent bien liées entre elles. De quelle propriété s'agit-il ?",
+    ["La stabilité", "La densité", "La porosité", "Le pH"], 0,
+    "L'adhérence des particules est la stabilité."),
+  S("On pèse un volume connu de sol pour calculer son poids par volume. On détermine :",
+    ["La densité", "La porosité", "La stabilité", "La capacité de rétention"], 0,
+    "Densité = poids / volume."),
+  S("On compte le nombre de pores dans un certain volume de sol. On détermine :",
+    ["La porosité", "La densité", "La stabilité", "Le pH"], 0,
+    "Porosité = nombre de pores par volume."),
+  V("La capacité de rétention en eau est plus grande pour les sols à texture fine.", true,
+    "Les sols argileux ou limoneux (texture fine) retiennent davantage l'eau."),
+  S("La texture et la structure sont des propriétés :",
+    ["Physiques", "Chimiques", "Biologiques", "Économiques"], 0,
+    "Elles font partie des propriétés physiques du sol."),
+  S("Un sol à structure granulée a, en général, une porosité :",
+    ["Adéquate, qui favorise l'infiltration de l'eau et l'échange d'air", "Nulle", "Trop faible pour laisser passer l'eau", "Inférieure à celle d'un sol imperméable"], 0,
+    "La structure granulée offre une porosité adéquate pour l'eau et l'air.")
+]);
+
+/* ===== CHAPITRE 14 ===== */
+CH(14, "Propriétés chimiques : le pH du sol", "⚗️", "Acidité, alcalinité, échelle de pH, disponibilité des éléments nutritifs", [
+  S("Que signifie « pH » ?",
+    ["Puissance en hydrogène", "Pression hydraulique", "Poids humide", "Porosité haute"], 0,
+    "pH : puissance en hydrogène."),
+  S("Que mesure le pH d'un sol ?",
+    ["Son niveau d'acidité ou d'alcalinité", "Sa texture", "Sa structure", "Sa densité"], 0,
+    "Le pH est le niveau d'acidité ou d'alcalinité du sol."),
+  S("Un sol est dit alcalin si son pH est :",
+    ["Supérieur à 7", "Inférieur à 7", "Égal à 7", "Égal à 0"], 0,
+    "pH > 7 : sol alcalin."),
+  S("Un sol est dit acide si son pH est :",
+    ["Inférieur à 7", "Supérieur à 7", "Égal à 7", "Égal à 14"], 0,
+    "pH < 7 : sol acide."),
+  S("Un pH de 7 définit un sol :",
+    ["Neutre", "Acide", "Alcalin", "Très acide"], 0,
+    "pH 7 : sol neutre."),
+  S("Selon le cours, l'échelle de pH va de :",
+    ["1 (très acide) à 14 (très alcalin)", "0 à 7", "7 à 14", "1 à 100"], 0,
+    "L'échelle va de 1 (très acide) à 14 (très alcalin)."),
+  S("Certaines plantes se développent mieux dans un sol acide, à forte concentration d'ions :",
+    ["Hydrogène (H+)", "Hydroxyles (OH-)", "Calcium", "Fer"], 0,
+    "Sol acide : forte concentration d'ions hydrogène (H+)."),
+  S("D'autres plantes préfèrent un sol alcalin, à forte concentration d'ions :",
+    ["Hydroxyles (OH-)", "Hydrogène (H+)", "Azote", "Soufre"], 0,
+    "Sol alcalin : forte concentration d'ions hydroxyles (OH-)."),
+  V("Plus le pH est bas, plus le sol est acide.", true,
+    "Le plus bas le pH, le plus acide est le sol."),
+  V("Un sol de pH 9 est plus acide qu'un sol de pH 5.", false,
+    "Au contraire : pH 9 est alcalin ; pH 5 est acide."),
+  S("La plupart des plantes préfèrent des sols neutres dont le pH se situe entre :",
+    ["6,5 et 7,5", "3 et 4", "9 et 10", "1 et 2"], 0,
+    "La plupart des plantes préfèrent un pH entre 6,5 et 7,5."),
+  S("Certaines plantes exigent un sol très acide, de pH :",
+    ["Entre 4 et 6", "8 et plus", "Entre 6,5 et 7,5", "Égal à 14"], 0,
+    "Certaines plantes exigent un sol très acide, de pH entre 4 et 6."),
+  S("D'autres plantes exigent un sol très alcalin, de pH :",
+    ["8 et plus", "Entre 4 et 6", "Entre 6,5 et 7,5", "Égal à 1"], 0,
+    "D'autres plantes exigent un sol très alcalin, de pH 8 et plus."),
+  S("Un pH compris entre 6,5 et 7,5 donne :",
+    ["Une plus grande disponibilité des éléments primaires (NPK) et autres éléments aux plantes", "Une disponibilité nulle des éléments nutritifs", "Une plus grande acidité", "Une texture plus grossière"], 0,
+    "Ce pH favorise la disponibilité des éléments primaires (NPK) et autres éléments."),
+  S("Pourquoi le pH d'un sol est-il important ?",
+    ["Il influence la disponibilité des éléments nutritifs nécessaires aux plantes", "Il détermine la couleur du sol uniquement", "Il détermine la dimension des particules", "Il détermine la profondeur du profil"], 0,
+    "Le pH a une influence sur la disponibilité des éléments nutritifs."),
+  S("Quand le pH baisse d'une unité, l'acidité est :",
+    ["Multipliée par 10", "Divisée par 10", "Multipliée par 2", "Inchangée"], 0,
+    "La baisse d'une unité de pH multiplie l'acidité par 10."),
+  S("Un sol de pH 6 est, par rapport à un sol de pH 7 :",
+    ["Dix fois plus acide", "Dix fois plus alcalin", "100 fois plus acide", "Deux fois plus acide"], 0,
+    "Une unité d'écart = facteur 10."),
+  S("Un sol de pH 5 est, par rapport à un sol de pH 7 :",
+    ["100 fois plus acide", "10 fois plus acide", "100 fois plus alcalin", "1000 fois plus acide"], 0,
+    "Deux unités d'écart = 10 x 10 = 100."),
+  S("Un sol de pH 7 est, par rapport à un sol de pH 5 :",
+    ["100 fois plus alcalin", "10 fois plus alcalin", "100 fois plus acide", "Aussi alcalin"], 0,
+    "Le cours précise qu'un sol de pH 7 est 100 fois plus alcalin qu'un sol de pH 5."),
+  S("Application : combien de fois un sol de pH 4 est-il plus acide qu'un sol de pH 7 ?",
+    ["1000 fois", "100 fois", "10 fois", "30 fois"], 0,
+    "Trois unités d'écart : 10 x 10 x 10 = 1000."),
+  S("Selon le cours, entre quelles valeurs se situent les extrêmes de pH des sols ?",
+    ["3 et 11", "0 et 14", "5 et 9", "6 et 7"], 0,
+    "Les extrêmes de pH des sols se trouvent entre 3 et 11."),
+  S("Pour les sols agricoles, le pH se situe en général entre :",
+    ["5 et 9", "3 et 11", "0 et 3", "12 et 14"], 0,
+    "Pour les sols agricoles, entre 5 et 9."),
+  S("Pour la plupart des espèces cultivées, un pH optimum se situe, selon une diapositive du cours, entre :",
+    ["6 et 7", "2 et 3", "9 et 10", "12 et 14"], 0,
+    "Un pH compris entre 6 et 7 est optimum pour la plupart des espèces cultivées."),
+  S("Dans les régions humides à haute pluviométrie, les sols sont généralement :",
+    ["Acides", "Alcalins", "Toujours neutres", "Sans pH"], 0,
+    "Les sols y sont généralement acides."),
+  S("Pourquoi les sols des régions très pluvieuses sont-ils généralement acides ?",
+    ["Les cations Ca++ et Mg++ sont lessivés par l'eau, laissant des ions H+ (acides) attachés aux particules", "La pluie ajoute du calcaire", "La pluie rend le sol alcalin", "Les roches sont toujours acides"], 0,
+    "L'eau lessive les cations Ca++ et Mg++ ; les ions H+, qui sont acides, restent fixés sur les particules."),
+  S("Dans les régions sèches, les sols sont souvent :",
+    ["Alcalins ou basiques", "Acides", "Très humides", "Toujours de pH 1"], 0,
+    "Dans les régions sèches, les sols sont souvent alcalins/basiques."),
+  S("Un pH bas (légèrement acide) diminue significativement la disponibilité de quel élément ?",
+    ["Le phosphore (P)", "Le fer", "L'azote uniquement", "Aucun élément"], 0,
+    "Un pH bas diminue significativement la disponibilité du phosphore (P)."),
+  M("Un pH bas (légèrement acide) diminue légèrement la disponibilité de quels éléments ?",
+    ["Le potassium (K)", "Le calcium (Ca)", "Le magnésium (Mg)", "Le fer (Fe)"], [0, 1, 2],
+    "K, Ca et Mg sont légèrement moins disponibles. La disponibilité du fer, elle, augmente en sol acide."),
+  S("Un pH bas (acide) fait :",
+    ["Augmenter la disponibilité du fer", "Diminuer la disponibilité du fer", "Supprimer le fer du sol", "Aucun effet"], 0,
+    "Un pH bas augmente la disponibilité du fer."),
+  V("Un pH haut diminue la disponibilité du fer.", true,
+    "C'est ce que dit le cours : pH haut = moins de fer disponible."),
+  S("Un agriculteur en région très pluvieuse constate que son sol est acide. Quelle explication le cours donne-t-il ?",
+    ["Le lessivage des cations (Ca++, Mg++) laisse les ions H+ sur les particules", "Un manque de soleil", "Un excès de sable grossier", "L'absence d'organismes vivants"], 0,
+    "C'est le lessivage des cations par l'eau, qui laisse des ions H+."),
+  S("Un sol a un pH de 8,5. Il est :",
+    ["Alcalin", "Acide", "Neutre", "Très acide"], 0,
+    "pH supérieur à 7 : sol alcalin.")
+]);
+
+/* ===== CHAPITRE 15 ===== */
+CH(15, "Capacité d'échange cationique (CEC)", "🔋", "Complexe adsorbant, sites négatifs, argile et matière organique", [
+  S("Que signifie CEC ?",
+    ["Capacité d'échange cationique", "Concentration en éléments chimiques", "Capacité d'eau en couche", "Complexe des éléments du carbone"], 0,
+    "CEC = capacité d'échange cationique."),
+  S("La CEC d'un sol est :",
+    ["La quantité de cations que ce sol peut retenir sur son complexe adsorbant, à un pH donné", "Le niveau d'acidité du sol", "La proportion de sable, limon et argile", "Le nombre de pores par volume"], 0,
+    "C'est la quantité de cations que le sol peut retenir sur son complexe adsorbant à un pH donné."),
+  S("Le complexe adsorbant du sol est aussi appelé :",
+    ["Complexe argilo-humique", "Complexe sablo-limoneux", "Complexe prismatique", "Complexe aquifère"], 0,
+    "Complexe adsorbant = complexe argilo-humique."),
+  S("La CEC correspond au nombre de :",
+    ["Sites négatifs offerts à l'adsorption par l'argile et l'humus du sol", "Pores par volume", "Particules de sable", "Horizons du profil"], 0,
+    "La CEC correspond au nombre de sites négatifs proposés à l'adsorption par l'argile et l'humus."),
+  V("Chaque sol a une CEC précise, qui correspond à la quantité de cations qu'il peut fixer à un pH donné.", true,
+    "Le cours le précise."),
+  V("Tous les sols ont exactement la même CEC.", false,
+    "Chaque sol a une CEC bien précise."),
+  S("Les cations retenus par le sol peuvent être :",
+    ["Des acides faibles ou des acides forts", "Uniquement des bases", "Uniquement du sable", "Des gaz"], 0,
+    "Ces cations peuvent être des acides faibles ou des acides forts."),
+  S("Plus un sol est riche en argile et en matière organique, plus sa CEC est :",
+    ["Grande", "Petite", "Nulle", "Égale à celle du sable"], 0,
+    "Plus il y a d'argile et de matière organique (partie colloïdale), plus la CEC est grande."),
+  S("Quelle est la partie colloïdale du sol ?",
+    ["L'argile et la matière organique", "Le sable et le gravier", "L'eau et l'air", "La roche mère"], 0,
+    "Le cours désigne l'argile et la matière organique comme la partie colloïdale du sol."),
+  S("Un sol A est argileux et riche en matière organique ; un sol B est sableux et pauvre en matière organique. Lequel a la CEC la plus grande ?",
+    ["Le sol A", "Le sol B", "Les deux ont la même CEC", "Aucun des deux"], 0,
+    "Le sol A est plus riche en argile et en matière organique : sa CEC est plus grande."),
+  M("Quels éléments augmentent la CEC d'un sol ?",
+    ["L'argile", "La matière organique", "Le gravier", "Le sable grossier"], [0, 1],
+    "Seules l'argile et la matière organique (complexe argilo-humique) sont citées comme augmentant la CEC."),
+  S("Les sites d'adsorption du complexe argilo-humique sont de charge :",
+    ["Négative", "Positive", "Neutre", "Variable selon le gravier"], 0,
+    "Les sites sont négatifs : ils retiennent les cations, de charge positive.")
+]);
+
+
+/* ===== PARAMÈTRES ===== */
+
+var NB_REVISION = 30;
+var STORAGE_KEY = "examquiz_intro_agriculture_v1";
+var LETTRES = ["A", "B", "C", "D", "E", "F"];
+
+/* ===== OUTILS ===== */
+
+function $(id){ return document.getElementById(id); }
+
+function el(tag, cls, text){
+  var e = document.createElement(tag);
+  if(cls){ e.className = cls; }
+  if(text !== undefined){ e.textContent = text; }
+  return e;
+}
+
+function shuffle(arr){
+  var a = arr.slice();
+  for(var i = a.length - 1; i > 0; i--){
+    var j = Math.floor(Math.random() * (i + 1));
+    var t = a[i]; a[i] = a[j]; a[j] = t;
+  }
+  return a;
+}
+
+function loadBest(){
+  try{
+    return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+  }catch(e){
+    return {};
+  }
+}
+
+function saveBest(id, score, total){
+  try{
+    var best = loadBest();
+    var old = best[id];
+    if(!old || score / total > old.score / old.total){
+      best[id] = { score: score, total: total };
+    }
+    best._history = Array.isArray(best._history) ? best._history : [];
+    best._history.push({ key:id, score:score, total:total, date:new Date().toISOString() });
+    if(best._history.length > 100) best._history = best._history.slice(-100);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(best));
+  }catch(e){}
+}
+
+function renderPerformance(){
+  var best = loadBest(), history = Array.isArray(best._history) ? best._history : [];
+  var attempts = history.length, correct = 0, total = 0;
+  history.forEach(function(a){ correct += Number(a.score)||0; total += Number(a.total)||0; });
+  if($("statAttempts")) $("statAttempts").textContent = attempts;
+  if($("statCorrect")) $("statCorrect").textContent = correct;
+  if($("statRate")) $("statRate").textContent = total ? Math.round(correct*100/total)+" %" : "0 %";
+}
+
+function showView(name){
+  ["home", "quiz", "result"].forEach(function(v){
+    $("view-" + v).classList.toggle("active", v === name);
+  });
+  window.scrollTo(0, 0);
+}
+
+/* ===== ÉTAT ===== */
+
+var state = null;
+
+/* ===== ACCUEIL ===== */
+
+function totalQuestions(){
+  var n = 0;
+  CHAPITRES.forEach(function(c){ n += c.q.length; });
+  return n;
+}
+
+function renderHome(){
+  var box = $("chapterList");
+  box.innerHTML = "";
+  var best = loadBest();
+  renderPerformance();
+
+  $("statChap").textContent = CHAPITRES.length;
+  $("statQ").textContent = totalQuestions();
+
+  CHAPITRES.forEach(function(c){
+    var b = el("button", "category-btn");
+    b.type = "button";
+    b.appendChild(el("span", "chap-num", "Chapitre " + c.id));
+    b.appendChild(el("span", "category-icon", c.icone));
+    b.appendChild(el("span", "", c.titre));
+    b.appendChild(el("span", "chap-desc", c.desc));
+    b.appendChild(el("span", "chap-meta", c.q.length + " questions"));
+    if(best[c.id]){
+      b.appendChild(el("span", "chap-best",
+        "Meilleur score : " + best[c.id].score + "/" + best[c.id].total));
+    }
+    b.addEventListener("click", function(){ startChapter(c.id); });
+    box.appendChild(b);
+  });
+
+  var r = el("button", "category-btn wide");
+  r.type = "button";
+  r.appendChild(el("span", "category-icon", "🎯"));
+  var txt = el("span", "");
+  txt.appendChild(el("span", "", "Révision générale"));
+  txt.appendChild(document.createElement("br"));
+  txt.appendChild(el("span", "chap-desc",
+    NB_REVISION + " questions tirées au hasard dans tous les chapitres"));
+  if(best.revision){
+    txt.appendChild(document.createElement("br"));
+    txt.appendChild(el("span", "chap-best",
+      "Meilleur score : " + best.revision.score + "/" + best.revision.total));
+  }
+  r.appendChild(txt);
+  r.addEventListener("click", startRevision);
+  box.appendChild(r);
+}
+
+/* ===== PRÉPARATION DES QUESTIONS ===== */
+
+function prepare(q, chapTitre){
+  var p = { t: q.t, q: q.q, e: q.e, chap: chapTitre };
+  if(q.t === "v"){
+    p.opts = [
+      { text: "Vrai", ok: q.a === true },
+      { text: "Faux", ok: q.a === false }
+    ];
+  }else{
+    var list = q.o.map(function(text, i){
+      var ok = (q.t === "s") ? (i === q.a) : (q.a.indexOf(i) !== -1);
+      return { text: text, ok: ok };
+    });
+    p.opts = shuffle(list);
+  }
+  return p;
+}
+
+/* ===== DÉMARRER ===== */
+
+function startChapter(id){
+  var c = CHAPITRES.filter(function(x){ return x.id === id; })[0];
+  state = {
+    key: id,
+    titre: "Chapitre " + c.id + " · " + c.titre,
+    chapId: c.id,
+    items: c.q.map(function(q){ return prepare(q, null); }),
+    i: 0, score: 0, answered: false, wrong: []
+  };
+  openQuiz();
+}
+
+function startRevision(){
+  var all = [];
+  CHAPITRES.forEach(function(c){
+    c.q.forEach(function(q){ all.push({ q: q, chap: c.titre }); });
+  });
+  var requested = $("revisionCount") ? Number($("revisionCount").value) : NB_REVISION;
+  var count = Math.min(all.length, Math.max(1, requested || NB_REVISION));
+  var pick = shuffle(all).slice(0, count);
+  state = {
+    key: "revision",
+    titre: "Révision générale · " + count + " questions",
+    chapId: null,
+    items: pick.map(function(x){ return prepare(x.q, x.chap); }),
+    i: 0, score: 0, answered: false, wrong: []
+  };
+  openQuiz();
+}
+
+function openQuiz(){
+  $("quizTitle").textContent = state.titre;
+  showView("quiz");
+  try{ history.pushState({ quiz: true }, ""); }catch(e){}
+  renderQuestion();
+}
+
+/* ===== AFFICHAGE D'UNE QUESTION ===== */
+
+var TYPE_LABEL = {
+  s: "Choix unique",
+  m: "Choix multiples",
+  v: "Vrai ou faux"
+};
+
+function renderQuestion(){
+  var it = state.items[state.i];
+  var total = state.items.length;
+  state.answered = false;
+  state.selected = [];
+
+  $("progText").textContent = "Question " + (state.i + 1) + " / " + total;
+  $("scoreLive").textContent = "Score : " + state.score;
+  $("fill").style.width = (state.i / total * 100) + "%";
+
+  var card = $("qCard");
+  card.innerHTML = "";
+
+  var tags = el("div", "q-tags");
+  tags.appendChild(el("span", "question-number", "Question " + (state.i + 1)));
+  var lbl = TYPE_LABEL[it.t];
+  if(it.chap){ lbl = it.chap + " · " + lbl; }
+  tags.appendChild(el("span", "q-type", lbl));
+  card.appendChild(tags);
+
+  card.appendChild(el("div", "question-text", it.q));
+
+  if(it.t === "m"){
+    card.appendChild(el("div", "hint", "Plusieurs réponses sont possibles. Coche-les toutes, puis valide."));
+  }
+
+  var opts = el("div", "options");
+  it.opts.forEach(function(o, idx){
+    var b = el("button", "opt");
+    b.type = "button";
+    b.appendChild(el("span", "mark", it.t === "v" ? (idx === 0 ? "V" : "F") : LETTRES[idx]));
+    b.appendChild(el("span", "otxt", o.text));
+    b.addEventListener("click", function(){ onPick(idx); });
+    opts.appendChild(b);
+  });
+  card.appendChild(opts);
+
+  var actions = el("div", "actions");
+  actions.id = "actions";
+  if(it.t === "m"){
+    var v = el("button", "btn violet", "Valider ma réponse");
+    v.type = "button";
+    v.id = "validateBtn";
+    v.disabled = true;
+    v.addEventListener("click", function(){ validate(); });
+    actions.appendChild(v);
+  }
+  card.appendChild(actions);
+
+  var top = card.getBoundingClientRect().top + window.pageYOffset - 80;
+  window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+}
+
+function optButtons(){
+  return $("qCard").querySelectorAll(".opt");
+}
+
+function onPick(idx){
+  if(state.answered){ return; }
+  var it = state.items[state.i];
+  var btns = optButtons();
+
+  if(it.t === "m"){
+    var pos = state.selected.indexOf(idx);
+    if(pos === -1){ state.selected.push(idx); } else { state.selected.splice(pos, 1); }
+    btns[idx].classList.toggle("selected");
+    $("validateBtn").disabled = state.selected.length === 0;
+  }else{
+    state.selected = [idx];
+    validate();
+  }
+}
+
+/* ===== VALIDATION ET CORRECTION ===== */
+
+function validate(){
+  if(state.answered){ return; }
+  state.answered = true;
+
+  var it = state.items[state.i];
+  var btns = optButtons();
+  var good = true;
+
+  it.opts.forEach(function(o, idx){
+    var picked = state.selected.indexOf(idx) !== -1;
+    var b = btns[idx];
+    b.disabled = true;
+    b.classList.remove("selected");
+    if(o.ok && picked){ b.classList.add("correct"); }
+    else if(o.ok && !picked){ b.classList.add("missed"); good = false; }
+    else if(!o.ok && picked){ b.classList.add("wrong"); good = false; }
+  });
+
+  if(good){ state.score++; }
+  else{
+    state.wrong.push({
+      q: it.q,
+      chap: it.chap,
+      yours: state.selected.map(function(i){ return it.opts[i].text; }),
+      right: it.opts.filter(function(o){ return o.ok; }).map(function(o){ return o.text; }),
+      e: it.e
+    });
+  }
+
+  $("scoreLive").textContent = "Score : " + state.score;
+  $("fill").style.width = ((state.i + 1) / state.items.length * 100) + "%";
+
+  var card = $("qCard");
+  var vd = el("div", "verdict " + (good ? "ok" : "ko"),
+    good ? "✅ Bonne réponse !" : "❌ Réponse incorrecte");
+  card.appendChild(vd);
+
+  var right = it.opts.filter(function(o){ return o.ok; }).map(function(o){ return o.text; });
+  var ans = el("div", "answer");
+  ans.appendChild(el("strong", "", it.t === "m" ? "Bonnes réponses : " : "Bonne réponse : "));
+  ans.appendChild(document.createTextNode(right.join("  •  ")));
+  card.appendChild(ans);
+
+  var sol = el("div", "solution");
+  sol.appendChild(el("strong", "", "💡 Explication"));
+  sol.appendChild(el("div", "solution-steps", it.e));
+  card.appendChild(sol);
+
+  var actions = $("actions");
+  var vb = $("validateBtn");
+  if(vb){ vb.remove(); }
+  var last = state.i === state.items.length - 1;
+  var next = el("button", "btn blue", last ? "Voir mon bilan →" : "Question suivante →");
+  next.type = "button";
+  next.addEventListener("click", function(){
+    if(last){ showResult(); }
+    else{ state.i++; renderQuestion(); }
+  });
+  actions.appendChild(next);
+
+  vd.scrollIntoView({ behavior: "smooth", block: "nearest" });
+}
+
+/* ===== BILAN ===== */
+
+function showResult(){
+  var total = state.items.length;
+  var pct = Math.round(state.score / total * 100);
+  saveBest(state.key, state.score, total);
+
+  $("resTitle").textContent = "Bilan · " + state.titre;
+  var body = $("resBody");
+  body.innerHTML = "";
+
+  var msg;
+  if(pct >= 80){ msg = "Excellent travail ! Tu maîtrises bien cette partie du cours."; }
+  else if(pct >= 60){ msg = "Bon résultat. Relis les corrections ci-dessous pour consolider."; }
+  else if(pct >= 40){ msg = "Tu progresses. Relis cette partie du cours, puis recommence le quiz."; }
+  else{ msg = "Cette partie demande plus de révision. Relis le cours et reprends le quiz, tu vas t'améliorer."; }
+
+  var card = el("div", "result-card");
+  card.appendChild(el("h3", "", state.score === total ? "Score parfait 🎉" : "Ton résultat"));
+  card.appendChild(el("div", "big-score", state.score + " / " + total));
+  card.appendChild(el("div", "big-percent", pct + " %"));
+  card.appendChild(el("p", "result-msg", msg));
+
+  var actions = el("div", "actions");
+
+  var again = el("button", "btn", "🔄 Recommencer ce quiz");
+  again.type = "button";
+  again.addEventListener("click", function(){
+    if(state.key === "revision"){ startRevision(); } else{ startChapter(state.chapId); }
+  });
+  actions.appendChild(again);
+
+  if(state.chapId){
+    var idx = -1;
+    CHAPITRES.forEach(function(c, i){ if(c.id === state.chapId){ idx = i; } });
+    if(idx > -1 && idx < CHAPITRES.length - 1){
+      var nextC = CHAPITRES[idx + 1];
+      var nb = el("button", "btn blue", "Chapitre suivant →");
+      nb.type = "button";
+      nb.addEventListener("click", function(){ startChapter(nextC.id); });
+      actions.appendChild(nb);
+    }
+  }
+
+  var home = el("button", "btn ghost", "📚 Tous les chapitres");
+  home.type = "button";
+  home.addEventListener("click", goHome);
+  actions.appendChild(home);
+
+  card.appendChild(actions);
+  body.appendChild(card);
+
+  body.appendChild(el("h3", "review-title", "À revoir (" + state.wrong.length + ")"));
+
+  if(state.wrong.length === 0){
+    body.appendChild(el("div", "perfect", "Aucune erreur : toutes tes réponses sont correctes. Bravo !"));
+  }else{
+    state.wrong.forEach(function(w, i){
+      var item = el("div", "review-item");
+      item.appendChild(el("div", "rq", (i + 1) + ". " + w.q));
+      var yours = w.yours.length ? w.yours.join("  •  ") : "—";
+      item.appendChild(el("div", "yours", "Ta réponse : " + yours));
+      var ans = el("div", "answer");
+      ans.appendChild(el("strong", "", "Bonne réponse : "));
+      ans.appendChild(document.createTextNode(w.right.join("  •  ")));
+      item.appendChild(ans);
+      var sol = el("div", "solution");
+      sol.appendChild(el("strong", "", "💡 Explication"));
+      sol.appendChild(el("div", "solution-steps", w.e));
+      item.appendChild(sol);
+      body.appendChild(item);
+    });
+  }
+
+  $("fill").style.width = "100%";
+  showView("result");
+}
+
+/* ===== NAVIGATION ===== */
+
+function goHome(){
+  state = null;
+  renderHome();
+  showView("home");
+}
+
+$("quizBack").addEventListener("click", function(){
+  if(state && state.i > 0 || (state && state.answered)){
+    if(!confirm("Quitter ce quiz ? Ta progression en cours sera perdue.")){ return; }
+  }
+  goHome();
+});
+
+$("resBack").addEventListener("click", goHome);
+
+window.addEventListener("popstate", function(){
+  if($("view-home").classList.contains("active")){ return; }
+  goHome();
+});
+
+if($("revisionStart")) $("revisionStart").addEventListener("click", startRevision);
+renderHome();
+
+</script>
+
+</body>
+</html>
